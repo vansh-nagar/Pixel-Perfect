@@ -4,8 +4,8 @@
   "files": [
     {
       "type": "registry:file",
-      "path": "components/ui/1st-one.tsx",
-      "target": "components/pixel-perfect/1st-one.tsx"
+      "path": "components/pixel-perfect/1st-one.tsx",
+      "target": "components/ui/1st-one.tsx"
     }
   ]
 }

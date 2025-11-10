@@ -1,0 +1,10 @@
+{
+  "name": "button",
+  "type": "component",
+  "files": [
+    {
+      "path": "components/pixel-perfect/1st-one.tsx",
+      "content": "import React from 'react';\n\nconst StOne = () => {\n  return <div>StOne</div>;\n};\n\nexport default StOne;"
+    }
+  ]
+}

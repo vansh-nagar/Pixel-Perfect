@@ -32,7 +32,7 @@ const Navbar = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
   return (
-    <div className="  fixed top-0 inset-x-0 flex justify-between items-center px-10 py-4 font-pixelify bg-background/10  border-b backdrop-blur-lg  z-50  ">
+    <div className="  fixed top-0 inset-x-0 flex justify-between items-center px-10 py-4 font-pixelify bg-background/10   backdrop-blur-lg  z-50  ">
       <div className=" flex items-center gap-6">
         <Link href={"/"}>
           <img

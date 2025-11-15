@@ -1,11 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 export const HeroSection = () => {
+  const container = useRef(null);
   return (
     <div className="  grid-cols-2 grid pt-[75px] h-screen w-full">
       <div className="  flex  flex-col items-start justify-center  ">
@@ -27,11 +28,16 @@ export const HeroSection = () => {
           </Button>
         </div>
       </div>
-      <div className=" border relative my-4  font-pixelify p-2">
+      <div
+        ref={container}
+        className=" border relative my-4  font-pixelify p-2 "
+      >
         <motion.div
           animate={{ x: 200 }}
           transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
           className=" h-20 w-20"
+          drag
+          dragConstraints={container}
         >
           components preview
         </motion.div>

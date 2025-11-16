@@ -5,7 +5,7 @@
     {
       "type": "registry:file",
       "path": "components/pixel-perfect/button.tsx",
-      "target": "components/pixel-perfect/button.tsx"
+      "target": "components/pixel-perfect-components/button.tsx"
     }
   ]
 }

@@ -3,8 +3,9 @@
   "type": "registry:component",
   "files": [
     {
+      "type": "registry:file",
       "path": "pixel-perfect/button.tsx",
-      "target": "components/pixel-perfect-components/button.tsx"
+      "target": "components/pixel-perfect/button.tsx"
     }
   ]
 }

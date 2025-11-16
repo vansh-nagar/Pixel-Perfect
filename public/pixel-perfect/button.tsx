@@ -1,4 +1,4 @@
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 const Button1 = () => {
   return <Button>NININIGIIIA</Button>;

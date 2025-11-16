@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description:
     "A reusable UI component library built with React and TypeScript, providing customizable components for modern web applications.",
   icons: {
-    icon: "/logo/final-light.png",
+    icon: "/logo/bg-less.png",
   },
 };
 

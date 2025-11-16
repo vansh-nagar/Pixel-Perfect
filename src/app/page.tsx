@@ -4,7 +4,7 @@ import { Sec1 } from "@/components/mine/landing-page/sec1";
 
 const page = () => {
   return (
-    <div className="px-10 overflow-hidden">
+    <div className="px-20 overflow-hidden">
       <Navbar />
       <HeroSection />
       <Sec1 />

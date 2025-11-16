@@ -20,7 +20,7 @@ export const HeroSection = () => {
           React component library for modern web apps.
         </span>
         <div className=" flex gap-3 mt-10">
-          <Link href={"/dashboard"}>
+          <Link href={"https://pixelperfect.mintlify.app/"}>
             <Button className="font-pixelify">Browse Components</Button>
           </Link>
           <Button variant={"outline"} className="font-pixelify">

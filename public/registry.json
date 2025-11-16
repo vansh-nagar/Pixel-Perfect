@@ -2,5 +2,5 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "pixel-perfect",
   "homepage": "https://pixel-perfect-01.vercel.app",
-  "items": ["registry/1st-one.json"]
+  "items": ["registry/test-button.json"]
 }

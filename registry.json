@@ -4,14 +4,14 @@
   "homepage": "https://pixel-perfect-01.vercel.app",
   "items": [
     {
-      "name": "button",
-      "description": "just a button",
+      "name": "navbar1",
+      "description": "cool nav bar",
       "type": "registry:block",
       "files": [
         {
           "type": "registry:component",
-          "path": "registry/new-york/button/button.tsx",
-          "target": "components/pixel-perfect/button.tsx"
+          "path": "registry/new-york/navbars/navbar1.tsx",
+          "target": "components/pixel-perfect/navbar1.tsx"
         }
       ]
     }

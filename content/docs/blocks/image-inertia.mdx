@@ -1,0 +1,60 @@
+---
+title: Image Inertia
+description: Image component with inertial scrolling effects
+---
+
+import ImageInertia from "@/pixels/image-inertia";
+import { Preview } from "@/components/mine/pixels/preview";
+
+## Image Inertia
+
+Display images with smooth inertial scrolling animations for an engaging user experience.
+
+### Features
+
+- Inertial scroll effects
+- Smooth image transitions
+- Performance optimized
+- Responsive images
+
+### Preview
+
+<Preview
+  title="Image Inertia Component"
+  description="Smooth inertial scrolling effects on images"
+>
+  <ImageInertia
+    className=" w-[40vw]"
+    gap={10}
+    type={1}
+    images={[
+      "https://cdn.cosmos.so/9beb0a06-e008-4b95-a5b8-15c2d255a4c4?format=jpeg",
+      "https://cdn.cosmos.so/6a854a1b-5c06-45b1-b055-4a4652ba4e21?format=jpeg",
+      "https://cdn.cosmos.so/3c35a1b1-717b-4219-9282-881a762724f2?format=jpeg",
+      "https://cdn.cosmos.so/8a6998b4-fce7-48c4-b40c-9b90bcf0007c?format=jpeg",
+      "https://cdn.cosmos.so/f798acc8-6bc8-4f2c-ace2-2440f2be4795?format=jpeg",
+      "https://cdn.cosmos.so/39a80b7b-29fb-4079-a251-176df0fa15eb?format=jpeg",
+      "https://cdn.cosmos.so/dfa2ba1c-97b6-44ba-a68b-7c619c9d416b?format=jpeg",
+      "https://cdn.cosmos.so/97de8d7c-f9c0-4625-838f-3aaf8c286cdb?format=jpeg",
+      "https://cdn.cosmos.so/71e10d8f-c92d-4761-96ce-4b6cc9eedcbe?format=jpeg",
+      "https://cdn.cosmos.so/0cff1394-f353-4c9e-87f7-37c63d165bf9?format=jpeg",
+      "https://cdn.cosmos.so/15a7b84c-ba74-470f-8813-25eb0a0d8ba2?format=jpeg",
+    ]}
+  />
+</Preview>
+
+### Usage
+
+```tsx
+import ImageInertia from "@/pixels/image-inertia";
+
+export default function Page() {
+  return <ImageInertia />;
+}
+```
+
+### Props
+
+- `src` - Image source URL
+- `alt` - Alternative text
+- `className` - Custom styling

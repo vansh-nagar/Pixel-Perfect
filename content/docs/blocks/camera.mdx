@@ -1,0 +1,41 @@
+---
+title: Camera
+description: Interactive 3D camera component with smooth animations
+---
+
+import Camera from "@/pixels/camera";
+import { Preview } from "@/components/mine/pixels/preview";
+
+## Camera
+
+An interactive 3D camera component that provides smooth animations and perspective effects.
+
+### Features
+
+- Real-time 3D rendering
+- Smooth camera transitions
+- Interactive controls
+- Responsive design
+
+### Preview
+
+<Preview
+  title="Camera Component"
+  description="Interactive 3D camera with smooth animations"
+>
+  <Camera printOut="https://i.pinimg.com/1200x/d3/c6/15/d3c6158b44a3d587adf7b0260ee58ca1.jpg" />
+</Preview>
+
+### Usage
+
+```tsx
+import { Camera } from "@/src/pixels/camera";
+
+export default function Page() {
+  return <Camera />;
+}
+```
+
+### Code
+
+See the [source code](/src/pixels/camera.tsx) for implementation details.

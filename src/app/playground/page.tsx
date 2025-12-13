@@ -1,12 +1,12 @@
-import React from "react";
-import { Navbar1 } from "../../../registry/new-york/navbars/navbar1";
+import { Navbar } from "@/components/mine/landing-page/navbar";
+import { LightDarkMode } from "@/components/ui/light-dark-mode";
 
 const Page = () => {
   return (
-    <div className="h-[500vh]">
-      {" "}
-      <Navbar1></Navbar1>
-      <div className=" text-[400px]">HIHI</div>
+    <div className=" min-h-screen">
+      <div className=" fixed top-4 right-4">
+        <LightDarkMode />
+      </div>{" "}
     </div>
   );
 };

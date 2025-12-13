@@ -1,0 +1,5 @@
+{
+  "icon": "📚",
+  "title": "Documentation",
+  "pages": ["index", "installation", "blocks"]
+}

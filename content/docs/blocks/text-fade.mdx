@@ -1,0 +1,43 @@
+---
+title: Text Fade
+description: Text component with fade-in and fade-out animations
+---
+
+import TextFade from "@/pixels/text-fade";
+import { Preview } from "@/components/mine/pixels/preview";
+
+## Text Fade
+
+Create beautiful text animations with smooth fade effects for engaging typography.
+
+### Features
+
+- Smooth fade animations
+- Customizable speed
+- Word-by-word effects
+- Responsive text sizing
+
+### Preview
+
+<Preview
+  title="Text Fade Component"
+  description="Beautiful text animations with smooth fade effects"
+>
+  <TextFade />
+</Preview>
+
+### Usage
+
+```tsx
+import TextFade from "@/pixels/text-fade";
+
+export default function Page() {
+  return <TextFade />;
+}
+```
+
+### Options
+
+- `text` - Text content
+- `speed` - Animation speed
+- `delay` - Stagger delay between words

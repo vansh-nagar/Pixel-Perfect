@@ -5,7 +5,7 @@ import { Navbar } from "@/components/mine/landing-page/navbar";
 const page = () => {
   return (
     <div className="px-2 pt-2 flex flex-col gap-2 overflow-hidden noScrollbar">
-      <Navbar />
+      <Navbar className=" sm:p-2" />
       <HeroSection />
       <Footer />
     </div>

@@ -1,0 +1,43 @@
+---
+title: Text Inertia
+description: Text component with inertial scrolling effects
+---
+
+import TextInertia from "@/pixels/text-inertia";
+import { Preview } from "@/components/mine/pixels/preview";
+
+## Text Inertia
+
+Display text with inertial scrolling animations for smooth, interactive typography effects.
+
+### Features
+
+- Inertial scroll effects
+- Smooth text transitions
+- Interactive animations
+- Performance optimized
+
+### Preview
+
+<Preview
+  title="Text Inertia Component"
+  description="Smooth text animations with inertial scrolling effects"
+>
+  <TextInertia />
+</Preview>
+
+### Usage
+
+```tsx
+import TextInertia from "@/pixels/text-inertia";
+
+export default function Page() {
+  return <TextInertia />;
+}
+```
+
+### Configuration
+
+```tsx
+<TextInertia text="Your text here" friction={0.9} velocity={1} />
+```

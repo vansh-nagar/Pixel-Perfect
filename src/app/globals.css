@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
 
 @custom-variant dark (&:is(.dark *));
@@ -204,4 +204,56 @@ body,
 .noScrollbar::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+/* Remove all scrollbars globally */
+html,
+body,
+#__next {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#__next::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Remove scrollbars from all scrollable elements */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.logo-glow {
+  filter: blur(18px);
+  opacity: 0.7;
+  background: radial-gradient(circle, #8b5cf6, transparent 60%);
+  animation: glowCycle 4s ease-in-out infinite;
+}
+
+@keyframes glowCycle {
+  0% {
+    background: radial-gradient(circle, #8b5cf6, transparent 60%);
+    opacity: 0.6;
+  }
+  33% {
+    background: radial-gradient(circle, #22d3ee, transparent 60%);
+    opacity: 0.8;
+  }
+  66% {
+    background: radial-gradient(circle, #f97316, transparent 60%);
+    opacity: 0.7;
+  }
+  100% {
+    background: radial-gradient(circle, #8b5cf6, transparent 60%);
+    opacity: 0.6;
+  }
 }

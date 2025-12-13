@@ -26,7 +26,7 @@ export function HeroSection() {
 
         <div className="flex  flex-row flex-wrap  justify-center   gap-3 sm:gap-4 items-center mt-10 w-full ">
           <Link href="/docs">
-            <Button className=" rounded-md" size="default">
+            <Button className=" rounded-md rounmd" size="default">
               Browse Components
             </Button>
           </Link>
@@ -38,7 +38,7 @@ export function HeroSection() {
         </div>
         <LogoCloud />
       </div>
-      <div className="dark:block hidden opacity-30">
+      <div className="dark:block hidden opacity-30  ">
         <Model3D
           path="/model/Untitled.glb"
           className=" absolute inset-0  blur-[3px]  "

@@ -155,7 +155,7 @@ export function Footer() {
             </div>
 
             <div className=" flex flex-col  gap-2 mt-2">
-              <div className="flex gap-1.5 mt-5">
+              <div className="flex gap-1.5">
                 <TooltipProvider>
                   {socialLinks.map((social, index) => {
                     const IconComponent = social.icon;
@@ -181,25 +181,6 @@ export function Footer() {
                   })}
                 </TooltipProvider>
               </div>
-              <span className=" flex  items-center flex-wrap gap-1 text-xs text-muted-foreground z-40">
-                Made with{" "}
-                <Heart
-                  size={10}
-                  className=" cursor-pointer   animate-pulse hover:text-red-600 transition-all duration-200"
-                />
-                by
-                <span className="group relative">
-                  <div className="w-10 sm:w-12 object-cover absolute bottom-5 rotate-12 opacity-0 group-hover:opacity-100 duration-150 transition-all hidden sm:block  pointer-events-none">
-                    <img
-                      src="https://res.cloudinary.com/dz12pywzs/image/upload/v1762336185/Gemini_Generated_Image_qxos2hqxos2hqxos_rlosmn.png"
-                      alt="Vansh"
-                    />
-                  </div>
-                  <span className="cursor-pointer hover:text-accent-foreground transition-colors">
-                    Vansh Nagar
-                  </span>
-                </span>
-              </span>{" "}
             </div>
           </div>
 

@@ -1,0 +1,45 @@
+---
+title: Mouse Follower 2
+description: Advanced cursor following animation with enhanced effects
+---
+
+import MouseFollower2 from "@/pixels/mouse-follower-2";
+import { Preview } from "@/components/mine/pixels/preview";
+
+## Mouse Follower 2
+
+An enhanced version of the mouse follower with additional visual effects and customization options.
+
+### Features
+
+- Advanced cursor tracking
+- Multiple trailing effects
+- Customizable particle effects
+- Enhanced animations
+
+### Preview
+
+<Preview
+  title="Mouse Follower 2 Component"
+  description="Advanced cursor tracking with multiple trailing effects"
+>
+  <MouseFollower2 />
+</Preview>
+
+### Usage
+
+```tsx
+import MouseFollower2 from "@/pixels/mouse-follower-2";
+
+export default function Page() {
+  return <MouseFollower2 />;
+}
+```
+
+### Customization
+
+Adjust the animation behavior and visual style:
+
+```tsx
+<MouseFollower2 trailLength={10} particleCount={5} color="gradient" />
+```

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CommandPalette } from "@/components/ui/command-palette";
 import { FlaskConical, GithubIcon } from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
+import { StarsCount } from "@/components/mine/stars-count";
 
 export function Navbar() {
   return (
@@ -16,7 +17,7 @@ export function Navbar() {
       }}
     >
       <Link href={"/"} className=" flex items-center gap-2 -ml-1">
-        <div className="text-3xl font-pixelify flex items-center">
+        <div className="text-3xl font-pixelify  font-medium flex items-center">
           <Image
             src="/logo/static/logo.svg"
             alt="Pixel Perfect Logo"
@@ -38,11 +39,10 @@ export function Navbar() {
       </div>
 
       <div className="flex items-center gap-2">
-        <Link href={"https://github.com/Nexvyn/pro-pixel-perfect"}>
+        <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>
           <Button variant="ghost" aria-label="GitHub">
             <GithubIcon />
-            {/* <StarsCount /> */}
-            ??
+            <StarsCount />
           </Button>
         </Link>
         <Link href={"/playground"}>

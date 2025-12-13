@@ -136,18 +136,16 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row w-full justify-between gap-10 z-10">
           <div className="  flex flex-col justify-between">
             <div>
-              <Link href={"/"} className=" flex items-center gap-2 -ml-1">
-                <div className="text-3xl font-pixelify flex items-center">
-                  <Image
-                    src="/logo/static/logo.svg"
-                    alt="Pixel Perfect Logo"
-                    width={50}
-                    height={50}
-                    className="w-12 sm:w-8 aspect-square dark:invert -mr-1"
-                  />
-                  <span className="hidden sm:inline">ixel Perfect</span>
-                </div>
-              </Link>
+              <div className="text-3xl font-pixelify flex items-center">
+                <Image
+                  src="/logo/static/logo.svg"
+                  alt="Pixel Perfect Logo"
+                  width={50}
+                  height={50}
+                  className="w-12 sm:w-8 aspect-square dark:invert -mr-1"
+                />
+                <span className="hidden sm:inline">ixel Perfect</span>
+              </div>
               <div className="text-xs text-muted-foreground">
                 <div className="text-xs text-muted-foreground">
                   Build beautiful, responsive interfaces in minutes. <br /> A
@@ -230,9 +228,7 @@ export function Footer() {
         </div>
       </footer>{" "}
       <div className="flex flex-col items-center  -gap-2">
-        <div className="w-full rounded-2xl h-2 animate-rainbow bg-[linear-gradient(90deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] blur-sm" />
-        <div className="w-[70vw] rounded-2xl h-2 animate-rainbow bg-[linear-gradient(90deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] blur-md" />
-        <div className="w-[40vw] rounded-2xl h-2 animate-rainbow bg-[linear-gradient(90deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] blur-lg" />
+        <div className="w-full rounded-2xl h-2 animate-rainbow bg-[linear-gradient(90deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] blur-xl" />
       </div>
     </>
   );

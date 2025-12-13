@@ -30,7 +30,7 @@ export function HeroSection() {
               Browse Components
             </Button>
           </Link>
-          <Link href={"https://github.com/Nexvyn/pixel-perfect"}>
+          <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>
             <Button variant={"secondary"} size="default">
               Custom Components
             </Button>

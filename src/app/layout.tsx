@@ -18,11 +18,10 @@ const pixelify = Pixelify_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Pixel Perfect",
-  description:
-    "A reusable UI component library built with React and TypeScript, providing customizable components for modern web applications.",
+  title: "Pixel Perfect UI",
+  description: "Pixel Perfect UI — a lightweight documentation UI library",
   icons: {
-    icon: "/logo/bg-less.png",
+    icon: "/logo/static/logo.svg",
   },
 };
 

@@ -1,90 +1,239 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-import {
-  FileText,
-  Github,
-  Instagram,
-  LinkedinIcon,
-  Twitter,
-} from "lucide-react";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Heart, LucideGithub } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { FaDiscord, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
-const Footer = () => {
+const socialLinks = [
+  {
+    icon: LucideGithub,
+    label: "GitHub",
+    href: "#",
+  },
+  {
+    icon: FaXTwitter,
+    label: "Twitter",
+    href: "#",
+  },
+  {
+    icon: FaLinkedinIn,
+    label: "LinkedIn",
+    href: "#",
+  },
+  {
+    icon: FaDiscord,
+    label: "Discord",
+    href: "#",
+  },
+];
+
+const links = [
+  {
+    group: "Resources",
+    items: [
+      {
+        title: "Features",
+        href: "#",
+      },
+      {
+        title: "Solution",
+        href: "#",
+      },
+      {
+        title: "Customers",
+        href: "#",
+      },
+      {
+        title: "Pricing",
+        href: "#",
+      },
+      {
+        title: "Help",
+        href: "#",
+      },
+      {
+        title: "About",
+        href: "#",
+      },
+    ],
+  },
+  {
+    group: "Developer",
+    items: [
+      {
+        title: "Startup",
+        href: "#",
+      },
+      {
+        title: "Freelancers",
+        href: "#",
+      },
+      {
+        title: "Organizations",
+        href: "#",
+      },
+      {
+        title: "Students",
+        href: "#",
+      },
+      {
+        title: "Collaboration",
+        href: "#",
+      },
+      {
+        title: "Design",
+        href: "#",
+      },
+      {
+        title: "Management",
+        href: "#",
+      },
+    ],
+  },
+  {
+    group: "Company",
+    items: [
+      {
+        title: "About",
+        href: "#",
+      },
+      {
+        title: "Careers",
+        href: "#",
+      },
+      {
+        title: "Blog",
+        href: "#",
+      },
+      {
+        title: "Press",
+        href: "#",
+      },
+      {
+        title: "Contact",
+        href: "#",
+      },
+      {
+        title: "Help",
+        href: "#",
+      },
+    ],
+  },
+];
+
+export function Footer() {
   return (
-    <div className=" flex justify-center relative ">
-      <section className=" w-7xl mx-4 ">
-        <div className="  grid md:grid-cols-[350px_1fr]  grid-cols-1 gap-3">
-          <img
-            className=" rounded-xl border object-cover h-full w-full  shadow z-30"
-            src="https://res.cloudinary.com/dz12pywzs/image/upload/v1762336185/Gemini_Generated_Image_qxos2hqxos2hqxos_rlosmn.png"
-            alt="Vansh Nagar"
-          />
-          <Card className=" h-full  bg-background flex justify-between relative  z-30">
-            <CardHeader>
-              {" "}
-              <div className=" text-4xl font-medium"> Vansh Nagar</div>
-              <div className="text-muted-foreground text-sm mt-2 text-justify">
-                Take your imagination to real production web & app with me.
-                Full-Stack/App Dev || DevOps & Deployment ||  Production AI
-                Agent || UI/UX || Creative Engineer || Blender || 2D/3D
-                Experiences (Three.js/R3F , GSAP) ✨
-              </div>
-            </CardHeader>
-            <CardContent className=" flex flex-wrap justify-center mt-6">
-              {[
-                {
-                  icon: Instagram,
-                  link: "https://www.instagram.com/epitome0.0/",
-                },
-                {
-                  icon: LinkedinIcon,
-                  link: "https://www.linkedin.com/in/vansh-nagar-469648346/",
-                },
-                { icon: Twitter, link: "#" },
-                { icon: Github, link: "https://github.com/vansh-nagar" },
-                { icon: FileText, link: "https://vanshnagar.me/resume" },
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="group border-0 shadow-none cursor-pointer"
-                >
-                  <Link href={item.link} target="_blank">
-                    <CardDecorator>
-                      <item.icon className="size-6" aria-hidden />
-                    </CardDecorator>
-                  </Link>
+    <>
+      <footer className=" border  border-dashed p-3  relative rounded-xl z-0 overflow-hidden ">
+        <div className="flex flex-col sm:flex-row w-full justify-between gap-10 z-10">
+          <div className="  flex flex-col justify-between">
+            <div>
+              <Link href={"/"} className=" flex items-center gap-2 -ml-1">
+                <div className="text-3xl font-pixelify flex items-center">
+                  <Image
+                    src="/logo/static/logo.svg"
+                    alt="Pixel Perfect Logo"
+                    width={50}
+                    height={50}
+                    className="w-12 sm:w-8 aspect-square dark:invert -mr-1"
+                  />
+                  <span className="hidden sm:inline">ixel Perfect</span>
                 </div>
-              ))}
-            </CardContent>
-            <CardFooter className=" flex justify-end">
-              <Link href="https://vanshnagar.me" target="_blank">
-                <InteractiveHoverButton>Portfolio</InteractiveHoverButton>
               </Link>
-            </CardFooter>
-          </Card>
+              <div className="text-xs text-muted-foreground">
+                <div className="text-xs text-muted-foreground">
+                  Build beautiful, responsive interfaces in minutes. <br /> A
+                  pixel-perfect React component library for modern web apps.
+                </div>{" "}
+              </div>{" "}
+            </div>
+
+            <div className=" flex flex-col  gap-2 mt-2">
+              <div className="flex gap-1.5 mt-5">
+                <TooltipProvider>
+                  {socialLinks.map((social, index) => {
+                    const IconComponent = social.icon;
+                    return (
+                      <Tooltip key={index}>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="size-7"
+                            asChild
+                          >
+                            <Link href={social.href}>
+                              <IconComponent />
+                            </Link>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{social.label}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    );
+                  })}
+                </TooltipProvider>
+              </div>
+              <span className=" flex  items-center flex-wrap gap-1 text-xs text-muted-foreground z-40">
+                Made with{" "}
+                <Heart
+                  size={10}
+                  className=" cursor-pointer   animate-pulse hover:text-red-600 transition-all duration-200"
+                />
+                by
+                <span className="group relative">
+                  <div className="w-10 sm:w-12 object-cover absolute bottom-5 rotate-12 opacity-0 group-hover:opacity-100 duration-150 transition-all hidden sm:block  pointer-events-none">
+                    <img
+                      src="https://res.cloudinary.com/dz12pywzs/image/upload/v1762336185/Gemini_Generated_Image_qxos2hqxos2hqxos_rlosmn.png"
+                      alt="Vansh"
+                    />
+                  </div>
+                  <span className="cursor-pointer hover:text-accent-foreground transition-colors">
+                    Vansh Nagar
+                  </span>
+                </span>
+              </span>{" "}
+            </div>
+          </div>
+
+          <div className="flex gap-24 flex-wrap mx-3 z-40">
+            {links.map((link, index) => (
+              <div key={index} className="space-y-3">
+                <span className="block font-medium font-pixelify  ">
+                  {link.group}
+                </span>
+                {link.items.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className="text-muted-foreground hover:text-primary block duration-150 text-xs"
+                  >
+                    <span>{item.title}</span>
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-      </section>
-    </div>
+
+        <div className="font-pixelify  absolute bottom-0 left-0 right-0 pointer-events-none mx-auto translate-y-[5%] select-none text-center font-bold leading-none tracking-tighter text-muted text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[140px] z-0">
+          pixel perfect
+        </div>
+      </footer>{" "}
+      <div className="flex flex-col items-center  -gap-2">
+        <div className="w-full rounded-2xl h-2 animate-rainbow bg-[linear-gradient(90deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] blur-sm" />
+        <div className="w-[70vw] rounded-2xl h-2 animate-rainbow bg-[linear-gradient(90deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] blur-md" />
+        <div className="w-[40vw] rounded-2xl h-2 animate-rainbow bg-[linear-gradient(90deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] blur-lg" />
+      </div>
+    </>
   );
-};
-
-export default Footer;
-
-const CardDecorator = ({ children }: { children: ReactNode }) => (
-  <div className="mask-radial-from-40% mask-radial-to-60% relative mx-auto size-36 duration-200 [--color-border:color-mix(in_oklab,var(--color-zinc-950)10%,transparent)] group-hover:text-primary dark:[--color-border:color-mix(in_oklab,var(--color-white)15%,transparent)] dark:group-hover:[--color-border:color-mix(in_oklab,var(--color-white)20%,transparent)]">
-    <div
-      aria-hidden
-      className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px] dark:opacity-50"
-    />
-
-    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">
-      {children}
-    </div>
-  </div>
-);
+}

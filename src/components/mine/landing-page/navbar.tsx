@@ -1,78 +1,58 @@
 "use client";
+
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { GithubIcon, Moon, Sun, TwitterIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
+import { CommandPalette } from "@/components/ui/command-palette";
+import { FlaskConical, GithubIcon } from "lucide-react";
+import { LightDarkMode } from "@/components/ui/light-dark-mode";
 
-const links = [
-  {
-    name: "Components",
-    href: "/components",
-  },
-  {
-    name: "Templates",
-    href: "/templates",
-  },
-  {
-    name: "Pricing",
-    href: "/pricing",
-  },
-  {
-    name: "Playground",
-    href: "/playground",
-  },
-];
-
-const Navbar = () => {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+export function Navbar() {
   return (
-    <div className="  fixed top-0 inset-x-0 flex justify-between items-center px-20 py-4 font-pixelify bg-background z-50  ">
-      <div className=" flex items-center gap-6">
-        <Link href={"/"}>
-          <img
-            src="/logo/final-light.png"
-            alt="PIXEL PERFECT"
-            className="w-10 dark:hidden block "
+    <header
+      className=" font-pixelify      w-full  sm:p-2 flex items-center justify-between z-50   h-12     "
+      style={{
+        transformStyle: "preserve-3d",
+      }}
+    >
+      <Link href={"/"} className=" flex items-center gap-2 -ml-1">
+        <div className="text-3xl font-pixelify flex items-center">
+          <Image
+            src="/logo/static/logo.svg"
+            alt="Pixel Perfect Logo"
+            width={50}
+            height={50}
+            className="w-12 sm:w-8 aspect-square dark:invert -mr-1"
           />
-          <img
-            src="/logo/final-dark.png"
-            alt="PIXEL PERFECT"
-            className="w-10 hidden dark:block "
-          />
-        </Link>
-        <div>
-          {links.map((link) => (
-            <a key={link.name} href={link.href} className="mx-4">
-              {link.name}
-            </a>
-          ))}
+          <span className="hidden sm:inline">ixel Perfect</span>
+        </div>
+      </Link>
+
+      <div className="hidden md:flex gap-1">
+        <Button variant={"ghost"}>Docs</Button>
+        <Button variant={"ghost"}>Components</Button>
+        <Button variant={"ghost"}>Blocks</Button>
+        <div className="hidden lg:block  ml-2">
+          <CommandPalette />
         </div>
       </div>
-      <div className=" flex items-center gap-1">
-        <Button variant="ghost" size="icon">
-          <TwitterIcon size={16} />
-        </Button>
-        <Button variant="ghost">
-          <GithubIcon size={16} /> 1.1k
-        </Button>
-        <Button variant="ghost" size="icon" onClick={toggleTheme}>
-          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </div>
-    </div>
-  );
-};
 
-export default Navbar;
+      <div className="flex items-center gap-2">
+        <Link href={"https://github.com/Nexvyn/pro-pixel-perfect"}>
+          <Button variant="ghost" aria-label="GitHub">
+            <GithubIcon />
+            {/* <StarsCount /> */}
+            ??
+          </Button>
+        </Link>
+        <Link href={"/playground"}>
+          <Button variant={"ghost"} size={"icon"}>
+            <FlaskConical />
+          </Button>
+        </Link>
+
+        <LightDarkMode />
+      </div>
+    </header>
+  );
+}

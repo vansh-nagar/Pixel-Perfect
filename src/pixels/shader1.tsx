@@ -317,7 +317,7 @@ const Shader1 = () => {
 
     // Try to load image after material is created
     textureLoader.load(
-      "https://i.pinimg.com/736x/ca/c5/73/cac57323ed40dc96703cf219977408d0.jpg",
+      "https://cdn.cosmos.so/ad0d7459-9e2e-4a31-9f70-db9b76d13792?format=jpeg",
       (loadedTexture) => {
         loadedTexture.minFilter = THREE.LinearFilter;
         loadedTexture.magFilter = THREE.LinearFilter;

@@ -38,7 +38,7 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
             <img
               src="https://i.pinimg.com/originals/bd/7f/ce/bd7fce6d5fa8013333b1777ada8485c9.gif"
               alt="Banner"
-              className=" h-15 object-cover object-center border rounded-xl border-dashed dark:bg-background bg-accent"
+              className=" h-15 object-cover object-center border rounded-xl border-dashed "
             />
           ),
           tabs: [

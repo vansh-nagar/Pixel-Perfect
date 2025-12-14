@@ -3,6 +3,7 @@ import { Inter_Tight, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { RootProvider } from "fumadocs-ui/provider/next";
+import LenisProvider from "@/components/providers/lenis-provider";
 
 // Default font
 const interTight = Inter_Tight({
@@ -36,7 +37,7 @@ export default function RootLayout({
       >
         <RootProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
+            <LenisProvider>{children} </LenisProvider>
           </ThemeProvider>
         </RootProvider>
       </body>

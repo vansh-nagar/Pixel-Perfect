@@ -44,7 +44,7 @@ export function Preview({
   githubUrl,
 }: PreviewProps) {
   return (
-    <div className={`my-6 ${className}`}>
+    <div className={`my-6  ${className}`}>
       <div className="flex items-center justify-between mb-2">
         {title && (
           <h3 className="text-sm font-semibold text-foreground">{title}</h3>

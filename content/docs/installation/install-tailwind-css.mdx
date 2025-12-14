@@ -1,0 +1,186 @@
+---
+title: Install Tailwind CSS
+description: Set up Tailwind CSS v3 or v4 with Next.js
+---
+
+## Install Tailwind CSS
+
+Set up Tailwind CSS in your Next.js project. Choose between the latest v4 or legacy v3.
+
+## Tailwind CSS v4 Installation
+
+### Create your project
+
+```bash
+npx create-next-app@latest my-project --typescript --eslint
+cd my-project
+```
+
+### Install Tailwind CSS
+
+```bash
+npm install tailwindcss @tailwindcss/postcss @tailwindcss/cli
+```
+
+### Create your CSS file
+
+Create a new CSS file (e.g., `app/globals.css`) and add the Tailwind import:
+
+**app/globals.css**
+
+```css
+@import "tailwindcss";
+
+@theme inline {
+  /* Configure your theme variables here */
+  --font-display: "Inter", "sans-serif";
+  --color-primary-500: oklch(0.84 0.18 117.33);
+  --spacing: 0.25rem;
+}
+```
+
+### Configure PostCSS
+
+Update your PostCSS configuration:
+
+**postcss.config.js**
+
+```js
+module.exports = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+### Start your build process
+
+```bash
+npm run dev
+```
+
+### Start using Tailwind
+
+**app/page.tsx**
+
+```tsx
+export default function Home() {
+  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+}
+```
+
+---
+
+## Tailwind CSS v3 Installation (Legacy)
+
+### Create your project
+
+```bash
+npx create-next-app@latest my-project --typescript --eslint
+cd my-project
+```
+
+### Install Tailwind CSS
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+### Configure your template paths
+
+**tailwind.config.ts**
+
+```ts
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+
+    // Or if using `src` directory:
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+### Add the Tailwind directives to your CSS
+
+**globals.css**
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Start your build process
+
+```bash
+npm run dev
+```
+
+### Start using Tailwind
+
+**index.tsx**
+
+```tsx
+export default function Home() {
+  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+}
+```
+
+---
+
+## Key Differences in v4
+
+### CSS-First Configuration
+
+Theme configuration is now done in CSS using the `@theme inline` directive instead of `tailwind.config.js`
+
+### New Import Syntax
+
+Use `@import "tailwindcss"` instead of the three `@tailwind` directives
+
+### Package Changes
+
+- PostCSS plugin is now `@tailwindcss/postcss`
+- CLI is now `@tailwindcss/cli`
+
+### Native CSS Cascade Layers
+
+Uses real CSS `@layer` instead of Tailwind's custom implementation
+
+### CSS Variables
+
+All design tokens are available as CSS variables (e.g., `--color-blue-500`, `--font-sans`)
+
+### Advanced Configuration
+
+For more advanced configuration options in v4:
+
+```css
+/* Custom utilities */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+/* Custom variants */
+@variant dark (&:where(.dark, .dark *));
+
+/* Add plugins */
+@plugin "@tailwindcss/typography";
+```
+
+### Next steps
+
+Once Tailwind CSS is installed, proceed to:
+
+- [Add utilities](/docs/installation/add-utilities)
+- [Use the CLI](/docs/installation/cli)

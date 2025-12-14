@@ -43,7 +43,6 @@ const TextFade = ({
   });
   return (
     <>
-      <div className=" h-screen"></div>
       <div ref={container} className=" h-full w-full ">
         <span
           ref={text}
@@ -53,7 +52,6 @@ const TextFade = ({
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim harum cupiditate provident nostrum temporibus officiis! Nostrum alias exercitationem molestiae dolorem quo natus iure deserunt magni ea dicta. Temporibus, totam doloribus!"}
         </span>
       </div>
-      <div className=" h-screen"></div>
     </>
   );
 };

@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(InertiaPlugin, SplitText);
 
-const TextInertiaCards = ({
-  text,
+const TextInertia = ({
+  text = "hello  bro how are you",
   className,
   ...props
 }: {
@@ -65,7 +65,7 @@ const TextInertiaCards = ({
   });
 
   return (
-    <div className="flex justify-center items-center h-screen w-full overflow-hidden">
+    <div className="flex justify-center items-center overflow-hidden">
       <div className={cn("text-inertia", className)} {...props}>
         {text}
       </div>
@@ -73,4 +73,5 @@ const TextInertiaCards = ({
   );
 };
 
-export default TextInertiaCards;
+export default TextInertia;
+

@@ -44,9 +44,7 @@ export function Preview({
   githubUrl,
 }: PreviewProps) {
   return (
-    <div
-      className={` ${className} overflow-hidden  rounded-xl border border-dashed`}
-    >
+    <div className={` ${className}  rounded-xl border border-dashed p-3`}>
       {children}
     </div>
   );

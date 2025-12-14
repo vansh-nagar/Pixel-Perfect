@@ -1,5 +1,13 @@
 {
-  "icon": "📚",
   "title": "Documentation",
-  "pages": ["index", "installation", "blocks"]
+  "pages": [
+    "index",
+    "installation",
+    "blocks",
+    "mouse follower",
+    "shader animation",
+    "text animation",
+    "infinite scrollers",
+    "special ones"
+  ]
 }

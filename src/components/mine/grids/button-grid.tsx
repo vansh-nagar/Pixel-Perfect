@@ -1,17 +1,20 @@
 import { Button } from "@/components/ui/button";
+import { Copy } from "lucide-react";
+import MorphButton from "../pixels/buttons/morph-button";
+import MorphImageButton from "../pixels/buttons/morph-image-button";
 
 const Buttons = [
   {
-    name: "Buttons",
-    description:
-      "Enim et enim nulla duis elit esse ex dolor sunt sit veniam proident. ",
-    component: <Button>press me</Button>,
+    name: "Morph Button",
+    description: "A button that morphs its shape on hover using GSAP.",
+    component: <MorphButton />,
+    link: "https://arclabs.space/",
   },
   {
-    name: "Buttons",
-    description:
-      "Enim et enim nulla duis elit esse ex dolor sunt sit veniam proident. ",
-    component: <Button>press me</Button>,
+    name: "Morph Image Button",
+    description: "A button that morphs an image mask on hover using GSAP.",
+    component: <MorphImageButton />,
+    link: "https://arclabs.space/",
   },
 ];
 
@@ -32,6 +35,16 @@ const ButtonGrid = () => {
               {item.description}
             </p>
           </div>
+
+          <Button
+            size={"sm"}
+            variant={"ghost"}
+            className="text-xs absolute   border border-dashed right-1 top-1  rounded-none "
+          >
+            <Copy className=" size-3" /> Copy
+            <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed"></span>
+            <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
+          </Button>
         </div>
       ))}
     </div>
@@ -47,6 +60,8 @@ const BorderDecorator = () => {
       <span className="border-muted-foreground absolute -right-px -top-px block size-2 border-r-2 border-t-2 z-30"></span>
       <span className="border-muted-foreground absolute -bottom-px -left-px block size-2 border-b-2 border-l-2 z-30"></span>
       <span className="border-muted-foreground absolute -bottom-px -right-px block size-2 border-b-2 border-r-2 z-30"></span>
+
+      <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px]  border-dashed"></span>
 
       {/* Circular border */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>

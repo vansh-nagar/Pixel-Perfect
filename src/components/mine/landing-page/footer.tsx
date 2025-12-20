@@ -132,7 +132,7 @@ const links = [
 export function Footer() {
   return (
     <>
-      <footer className=" border  border-dashed p-3  relative rounded-xl z-0 overflow-hidden ">
+      <footer className=" border  border-dashed p-3 shadow  relative rounded-xl z-0 overflow-hidden ">
         <div className="flex flex-col sm:flex-row w-full justify-between gap-10 z-10">
           <div className="  flex flex-col justify-between">
             <div>

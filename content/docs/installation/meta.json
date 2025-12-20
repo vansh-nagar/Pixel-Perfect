@@ -1,9 +1,0 @@
-{
-  "title": "Installation",
-  "pages": [
-    "getting-started",
-    "install-nextjs",
-    "install-tailwind-css",
-    "add-utilities"
-  ]
-}

@@ -25,7 +25,7 @@ export function HeroSection() {
         </p>
 
         <div className="flex  flex-row flex-wrap  justify-center   gap-3 sm:gap-4 items-center mt-10 w-full ">
-          <Link href="/docs">
+          <Link href="/blocks">
             <Button className=" rounded-md rounmd" size="default">
               Browse Components
             </Button>

@@ -273,21 +273,7 @@ const Ring = () => {
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
-      {/* Canvas */}
       <div ref={containerRef} className="w-full h-full" />
-
-      {/* Hero Section */}
-      <div className="hero-dom fixed inset-0 opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none visible">
-        <div className="text-center">
-          <div className="text-xl font-bold">Pixel Perfect</div>
-        </div>
-      </div>
-
-      <style>{`
-        .hero-dom.visible {
-          opacity: 1 !important;
-        }
-      `}</style>
     </div>
   );
 };

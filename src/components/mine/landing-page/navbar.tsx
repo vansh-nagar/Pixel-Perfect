@@ -29,7 +29,7 @@ export function Navbar({ className = "" }: { className?: string }) {
             <span className="hidden sm:inline">ixel Perfect</span>
           </div>
         </Link>{" "}
-        <div className="flex items-end ml-4">
+        {/* <div className="flex items-end ml-4">
           <Link href={"/docs"}>
             <Button variant={"ghost"} size={"sm"}>
               Components
@@ -40,7 +40,7 @@ export function Navbar({ className = "" }: { className?: string }) {
               Blocks
             </Button>
           </Link>
-        </div>
+        </div> */}
       </div>
       <div className="flex items-center gap-2">
         <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>

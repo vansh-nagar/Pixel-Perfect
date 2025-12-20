@@ -1,6 +1,7 @@
 import { Footer } from "@/components/mine/landing-page/footer";
 import { HeroSection } from "@/components/mine/landing-page/herosection";
 import { Navbar } from "@/components/mine/landing-page/navbar";
+import Preview from "@/pixels/Preview";
 
 const page = () => {
   return (

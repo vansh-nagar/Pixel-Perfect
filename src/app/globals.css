@@ -193,7 +193,7 @@ body,
   body {
     @apply bg-background text-foreground;
   }
-}
+}ay
 
 /* Hide all scrollbars (visual only) across browsers) */
 .noScrollbar {

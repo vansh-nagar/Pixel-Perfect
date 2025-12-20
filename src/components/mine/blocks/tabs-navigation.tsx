@@ -1,45 +1,35 @@
-"use client";
-
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import ButtonGrid from "../grids/button-grid";
 
 const navItems = [
-  "Hero Section",
-  "Logo Cloud",
-  "Button",
-  "Navbar",
-  "Gradients",
-  "Features",
-  "Integrations",
-  "Content",
-  "Stats",
-  "Team",
-  "Testimonials",
-  "Call To Action",
-  "Footer",
-  "Pricing",
-  "Comparator",
-  "Faqs",
-  "Login",
-  "Sign Up",
+  {
+    name: "Buttons",
+    component: <ButtonGrid />,
+  },
+  {
+    name: "Border",
+    component: <ButtonGrid />,
+  },
 ];
 
 export function TabsNavigation() {
   return (
-    <Tabs defaultValue="Hero Section" className="w-full overflow-hidden ">
-      <TabsList className="flex gap-4 pl-12 bg-background overflow-x-auto overflow-y-hidden   w-full mask-r-from-98%">
+    <Tabs defaultValue="Buttons" className="w-full ">
+      <TabsList className="flex gap-4   bg-background overflow-x-auto overflow-y-hidden   w-full mask-r-from-98%">
         {navItems.map((item) => (
-          <TabsTrigger key={item} value={item}>
-            {item}
+          <TabsTrigger
+            className="z-50 cursor-pointer"
+            key={item.name}
+            value={item.name}
+          >
+            {item.name}
           </TabsTrigger>
         ))}
       </TabsList>
-
+      <div className=" border-t border-dashed mask-x-from-95%"></div>
       {navItems.map((item) => (
-        <TabsContent key={item} value={item} className="mt-6">
-          <h2 className="text-2xl font-bold mb-4">{item}</h2>
-          <p className="text-muted-foreground">
-            Content for {item} section goes here
-          </p>
+        <TabsContent key={item.name} value={item.name}>
+          {item.component}
         </TabsContent>
       ))}
     </Tabs>

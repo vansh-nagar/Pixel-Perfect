@@ -20,11 +20,11 @@ const Buttons = [
 
 const ButtonGrid = () => {
   return (
-    <div className="grid grid-cols-5 gap-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
       {Buttons.map((item, index) => (
         <div
           key={index}
-          className="relative border border-dashed  aspect-square flex items-center justify-center "
+          className="relative border-b border-l border-dashed  aspect-square flex items-center justify-center "
         >
           <BorderDecorator />
           <div className=" z-30">{item.component}</div>
@@ -36,15 +36,20 @@ const ButtonGrid = () => {
             </p>
           </div>
 
-          <Button
-            size={"sm"}
-            variant={"ghost"}
-            className="text-xs absolute   border border-dashed right-1 top-1  rounded-none "
-          >
-            <Copy className=" size-3" /> Copy
-            <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed"></span>
-            <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-          </Button>
+          <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
+            <div className=" border-t border-dashed "></div>
+            <Button
+              size={"sm"}
+              variant={"ghost"}
+              className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
+            >
+              <Copy className=" size-3" /> Copy
+              <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed"></span>
+              <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
+            </Button>
+            <div />
+            <div className=" border-r border-dashed h-full -mr-[0.5px] " />
+          </div>
         </div>
       ))}
     </div>
@@ -53,15 +58,15 @@ const ButtonGrid = () => {
 
 export default ButtonGrid;
 
-const BorderDecorator = () => {
+export const BorderDecorator = () => {
   return (
     <>
-      <span className="border-muted-foreground absolute -left-px -top-px block size-2 border-l-2 border-t-2 z-30"></span>
-      <span className="border-muted-foreground absolute -right-px -top-px block size-2 border-r-2 border-t-2 z-30"></span>
-      <span className="border-muted-foreground absolute -bottom-px -left-px block size-2 border-b-2 border-l-2 z-30"></span>
-      <span className="border-muted-foreground absolute -bottom-px -right-px block size-2 border-b-2 border-r-2 z-30"></span>
+      <span className="border-muted-foreground absolute -left-[0.5px] -top-[0px] block size-6   border-dashed border-l-1 border-t-1 z-30"></span>
+      <span className="border-muted-foreground absolute -right-px -top-px block size-6 border-dashed border-r-1 border-t-1 z-30"></span>
+      <span className="border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-dashed border-b-1 border-l-1 z-30 "></span>
+      <span className="border-muted-foreground absolute -bottom-px -right-px block size-6 border-b-1 border-r-1 border-dashed z-30"></span>
 
-      <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px]  border-dashed"></span>
+      <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px] mt-[1px]  border-dashed"></span>
 
       {/* Circular border */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>

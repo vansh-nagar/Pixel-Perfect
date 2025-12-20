@@ -8,7 +8,7 @@ import { Model3D } from "@/components/ui/3dmodel";
 
 export function HeroSection() {
   return (
-    <section className="w-full h-[calc(100vh-72px)] shadow border-dashed border relative  overflow-hidden  md:overflow-clip overscroll-none flex flex-col items-center justify-end  relative px-4 sm:px-6 md:px-8  rounded-xl">
+    <section className="w-full h-[calc(100vh-98px)] rounded-xl  shadow border-dashed border relative  md:overflow-clip overscroll-none flex flex-col items-center justify-end  px-4 sm:px-6 md:px-8">
       <div className="flex flex-col justify-center items-center w-full max-w-[280px] sm:max-w-[350px] md:max-w-[550px] lg:max-w-[750px] xl:max-w-[850px] z-10 relative pointer-events-auto mb-[6vh]">
         <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl   text-center w-full justify-center items-center flex-col flex whitespace-pre leading-tight tracking-tight font-medium">
           <span> Build Stunning </span>

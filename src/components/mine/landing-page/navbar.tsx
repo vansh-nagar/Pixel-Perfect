@@ -44,13 +44,21 @@ export function Navbar({ className = "" }: { className?: string }) {
       </div>
       <div className="flex items-center gap-2">
         <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>
-          <Button variant="ghost" aria-label="GitHub">
+          <Button
+            variant="outline"
+            className="border-dashed rounded-none"
+            aria-label="GitHub"
+          >
             <GithubIcon />
             <StarsCount />
           </Button>
         </Link>
         <Link href={"/playground"}>
-          <Button variant={"ghost"} size={"icon"}>
+          <Button
+            variant={"outline"}
+            className="border-dashed rounded-none"
+            size={"icon"}
+          >
             <FlaskConical />
           </Button>
         </Link>

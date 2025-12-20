@@ -12,7 +12,12 @@ export function LightDarkMode() {
   };
 
   return (
-    <Button variant="ghost" size="icon" onClick={handleThemeToggle}>
+    <Button
+      variant="outline"
+      className="border-dashed rounded-none"
+      size="icon"
+      onClick={handleThemeToggle}
+    >
       <Sun className=" dark:hidden block" />
       <Moon className=" hidden dark:block" />
     </Button>

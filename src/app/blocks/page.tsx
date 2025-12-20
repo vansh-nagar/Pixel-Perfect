@@ -1,4 +1,3 @@
-import React from "react";
 import { TabsNavigation } from "@/components/mine/blocks/tabs-navigation";
 import { Navbar } from "@/components/mine/landing-page/navbar";
 

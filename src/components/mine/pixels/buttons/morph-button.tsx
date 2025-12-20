@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 gsap.registerPlugin(MorphSVGPlugin);
 
-const MorphButton = () => {
+const MorphButton = ({ children }: { children: React.ReactNode }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   useGSAP(
     () => {

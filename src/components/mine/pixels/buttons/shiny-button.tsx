@@ -40,7 +40,7 @@ const ShinyButton = () => {
       `}</style>
 
       <div className="shiny-wrapper">
-        <Button className="relative z-0 ">Hover Me</Button>
+        <Button className="relative z-0 ">Click Me</Button>
         <span className="shiny-mask"></span>
       </div>
     </div>

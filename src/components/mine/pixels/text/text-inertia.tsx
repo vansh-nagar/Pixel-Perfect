@@ -65,7 +65,7 @@ const TextInertia = ({
   });
 
   return (
-    <div className="flex justify-center items-center overflow-hidden">
+    <div className="flex justify-center items-center ">
       <div className={cn("text-inertia", className)} {...props}>
         {text}
       </div>
@@ -74,4 +74,3 @@ const TextInertia = ({
 };
 
 export default TextInertia;
-

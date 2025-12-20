@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const SastaLando = () => {
+const LandoNorrisEffect = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -405,4 +405,4 @@ const SastaLando = () => {
   );
 };
 
-export default SastaLando;
+export default LandoNorrisEffect;

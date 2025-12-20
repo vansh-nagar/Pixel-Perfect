@@ -1,51 +1,43 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
-import MorphButton from "../pixels/buttons/morph-button";
-import MorphImageButton from "../pixels/buttons/morph-image-button";
-import ThreedButton from "../pixels/buttons/3d-button";
-import ShinyButton from "../pixels/buttons/shiny-button";
+
+import TextFade from "../pixels/text/text-fade";
+import TextInertia from "../pixels/text/text-inertia";
 
 const Buttons = [
   {
-    name: "Morph Button",
-    description: "A button that morphs its shape on hover using GSAP.",
-    component: <MorphButton />,
+    name: "Text Fade Effect",
+    description: "A text component that fades in and out using GSAP.",
+    component: (
+      <TextFade textContent="I design and build pixel-perfect digital experiences where precision, performance, and aesthetics work together seamlessly." />
+    ),
     link: "https://arclabs.space/",
   },
   {
-    name: "Morph Image Button",
-    description: "A button that morphs an image mask on hover using GSAP.",
-    component: <MorphImageButton />,
-    link: "https://arclabs.space/",
-  },
-  {
-    name: "3D Button",
-    description: "A 3D button with press and hover effects.",
-    component: <ThreedButton />,
-    link: "https://arclabs.space/",
-  },
-  {
-    name: "Shiny Button",
-    description: "A shiny button with hover effects.",
-    component: <ShinyButton />,
+    name: "Text Inertia Effect",
+    description:
+      "A text component that moves with inertia based on mouse movement using GSAP.",
+    component: (
+      <TextInertia text="Crafting refined, pixel-perfect web experiences that balance design clarity with technical excellence." />
+    ),
     link: "https://arclabs.space/",
   },
 ];
 
-const ButtonGrid = () => {
+const TextGrid = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
       {Buttons.map((item, index) => (
         <div
           key={index}
-          className="relative border-b border-l border-dashed  aspect-square flex items-center justify-center "
+          className="relative border-b border-l border-dashed  aspect-square flex items-center justify-center p-2 "
         >
           <BorderDecorator />
           <div className=" z-30">{item.component}</div>
 
           <div className=" leading-1 absolute left-1.5  bottom-1.5">
             <p className="text-xs ">{item.name}</p>
-            <p className="text-[8px] text-muted-foreground">
+            <p className="text-[8px] text-muted-foreground leading-2">
               {item.description}
             </p>
           </div>
@@ -70,7 +62,7 @@ const ButtonGrid = () => {
   );
 };
 
-export default ButtonGrid;
+export default TextGrid;
 
 export const BorderDecorator = () => {
   return (

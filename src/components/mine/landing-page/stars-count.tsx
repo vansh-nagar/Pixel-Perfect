@@ -1,3 +1,4 @@
+import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function StarsCount() {
@@ -26,5 +27,5 @@ export function StarsCount() {
     return <span>??</span>;
   }
 
-  return <span>{stars}</span>;
+  return <span className=" flex  gap-1 items-center">{stars}</span>;
 }

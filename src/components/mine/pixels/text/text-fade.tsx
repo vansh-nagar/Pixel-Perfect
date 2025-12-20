@@ -30,29 +30,29 @@ const TextFade = ({
 
     gsap.to(split.words, {
       opacity: 1,
-      stagger: 2,
+      stagger: 0.1,
       color: "#f3efe6",
       filter: "blur(0px)",
-      scrollTrigger: {
-        trigger: container.current,
-        start: "bottom bottom",
-        end: "top 20%",
-        scrub: 1,
-      },
+      repeat: -1,
+
+      // scrollTrigger: {
+      //   trigger: container.current,
+      //   start: "bottom bottom",
+      //   end: "top 20%",
+      //   scrub: 1,
+      // },
     });
   });
   return (
-    <>
-      <div ref={container} className=" h-full w-full ">
-        <span
-          ref={text}
-          className={`${className} flex  items-center justify-start gap-x-1.5 flex-wrap mix-blend-difference`}
-        >
-          {textContent ||
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim harum cupiditate provident nostrum temporibus officiis! Nostrum alias exercitationem molestiae dolorem quo natus iure deserunt magni ea dicta. Temporibus, totam doloribus!"}
-        </span>
-      </div>
-    </>
+    <div ref={container} className=" h-full w-full ">
+      <span
+        ref={text}
+        className={`${className} flex  items-center justify-start gap-x-1.5 flex-wrap`}
+      >
+        {textContent ||
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim harum cupiditate provident nostrum temporibus officiis! Nostrum alias exercitationem molestiae dolorem quo natus iure deserunt magni ea dicta. Temporibus, totam doloribus!"}
+      </span>
+    </div>
   );
 };
 

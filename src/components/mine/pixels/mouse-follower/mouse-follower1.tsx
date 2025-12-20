@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 interface MousePos {
@@ -8,7 +8,7 @@ interface MousePos {
   y: number;
 }
 
-const FLAIR_IMAGES = [
+const Image = [
   "https://cdn.cosmos.so/9beb0a06-e008-4b95-a5b8-15c2d255a4c4?format=jpeg",
   "https://cdn.cosmos.so/6a854a1b-5c06-45b1-b055-4a4652ba4e21?format=jpeg",
   "https://cdn.cosmos.so/3c35a1b1-717b-4219-9282-881a762724f2?format=jpeg",
@@ -22,7 +22,7 @@ const FLAIR_IMAGES = [
   "https://cdn.cosmos.so/15a7b84c-ba74-470f-8813-25eb0a0d8ba2?format=jpeg",
 ];
 
-const MouseFollower = () => {
+const MouseFollower1 = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const flairRefs = useRef<(HTMLImageElement | null)[]>([]);
   const mousePosRef = useRef<MousePos>({ x: 0, y: 0 });
@@ -30,16 +30,44 @@ const MouseFollower = () => {
   const cachedMousePosRef = useRef<MousePos>({ x: 0, y: 0 });
   const indexRef = useRef(0);
   const gapRef = useRef(100);
+  const isHoveringRef = useRef(false);
+  const boundsRef = useRef({ left: 0, right: 0, top: 0, bottom: 0 });
 
   useEffect(() => {
-    const wrapper = gsap.utils.wrap(0, FLAIR_IMAGES.length);
+    const wrapper = gsap.utils.wrap(0, Image.length);
 
     // Handle mouse movement
     const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+
       mousePosRef.current = {
         x: e.clientX,
         y: e.clientY,
       };
+
+      // Check if mouse is within container bounds
+      const rect = containerRef.current.getBoundingClientRect();
+      boundsRef.current = {
+        left: rect.left,
+        right: rect.right,
+        top: rect.top,
+        bottom: rect.bottom,
+      };
+
+      const isInContainer =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
+
+      isHoveringRef.current = isInContainer;
+
+      // Hide all particles when outside container
+      if (!isInContainer) {
+        flairRefs.current.forEach((img) => {
+          if (img) img.style.opacity = "0";
+        });
+      }
     };
 
     // Animation timeline for each flair
@@ -70,6 +98,9 @@ const MouseFollower = () => {
 
     // Animate image at current mouse position
     const animateImage = () => {
+      // Only animate if hovering over container
+      if (!isHoveringRef.current) return;
+
       const wrappedIndex = wrapper(indexRef.current);
       const img = flairRefs.current[wrappedIndex];
 
@@ -81,10 +112,21 @@ const MouseFollower = () => {
         clearProps: "all",
       });
 
+      // Clamp position to container bounds
+      const bounds = boundsRef.current;
+      const clampedX = Math.max(
+        bounds.left,
+        Math.min(mousePosRef.current.x, bounds.right)
+      );
+      const clampedY = Math.max(
+        bounds.top,
+        Math.min(mousePosRef.current.y, bounds.bottom)
+      );
+
       gsap.set(img, {
         opacity: 1,
-        left: mousePosRef.current.x,
-        top: mousePosRef.current.y,
+        left: clampedX,
+        top: clampedY,
         xPercent: -50,
         yPercent: -50,
       });
@@ -133,13 +175,11 @@ const MouseFollower = () => {
   return (
     <div
       ref={containerRef}
-      className="h-screen w-full overflow-hidden flex items-center justify-center bg-background"
+      className="overflow-hidden h-96 w-96 flex items-center justify-center "
     >
-      <h1 className="text-8xl font-bold text-center">Pixel Perfect</h1>
-
       {/* Flair images container */}
       <div className="fixed inset-0 pointer-events-none">
-        {FLAIR_IMAGES.concat(FLAIR_IMAGES).map((img, i) => (
+        {Image.concat(Image).map((img, i) => (
           <img
             key={i}
             ref={(el) => {
@@ -158,4 +198,4 @@ const MouseFollower = () => {
   );
 };
 
-export default MouseFollower;
+export default MouseFollower1;

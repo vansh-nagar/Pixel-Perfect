@@ -1,40 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
-import MorphButton from "../pixels/buttons/morph-button";
-import MorphImageButton from "../pixels/buttons/morph-image-button";
-import ThreedButton from "../pixels/buttons/3d-button";
-import ShinyButton from "../pixels/buttons/shiny-button";
+import MouseFollower1 from "../pixels/mouse-follower/mouse-follower1";
+import MouseFollower2 from "../pixels/mouse-follower/mouse-follower2";
 
 const Buttons = [
   {
-    name: "Morph Button",
-    description: "A button that morphs its shape on hover using GSAP.",
-    component: <MorphButton />,
+    name: "Mouse Follower 1",
+    description: "A mouse follower effect using GSAP.",
+    component: <MouseFollower1 />,
     link: "https://arclabs.space/",
   },
   {
-    name: "Morph Image Button",
-    description: "A button that morphs an image mask on hover using GSAP.",
-    component: <MorphImageButton />,
-    link: "https://arclabs.space/",
-  },
-  {
-    name: "3D Button",
-    description: "A 3D button with press and hover effects.",
-    component: <ThreedButton />,
-    link: "https://arclabs.space/",
-  },
-  {
-    name: "Shiny Button",
-    description: "A shiny button with hover effects.",
-    component: <ShinyButton />,
+    name: "Mouse Follower 2",
+    description: "A mouse follower effect using GSAP.",
+    component: <MouseFollower2 />,
     link: "https://arclabs.space/",
   },
 ];
 
-const ButtonGrid = () => {
+const MouseFollower = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
+    <div className="grid grid-cols-1 sm:grid-cols-3  gap-2">
       {Buttons.map((item, index) => (
         <div
           key={index}
@@ -70,7 +56,7 @@ const ButtonGrid = () => {
   );
 };
 
-export default ButtonGrid;
+export default MouseFollower;
 
 export const BorderDecorator = () => {
   return (

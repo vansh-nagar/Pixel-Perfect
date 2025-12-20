@@ -148,25 +148,6 @@ const MouseFollower2 = () => {
   return (
     <>
       <style>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-
-        body {
-          background: #000;
-          overflow: hidden;
-        }
-
-        .hero-section {
-          position: relative;
-          width: 100vw;
-          height: 100vh;
-          background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-          overflow: hidden;
-        }
-
         .trail-img {
           position: absolute;
           pointer-events: none;
@@ -175,7 +156,7 @@ const MouseFollower2 = () => {
         }
       `}</style>
 
-      <section className="hero-section" ref={containerRef}></section>
+      <div className="h-96 w-96" ref={containerRef}></div>
     </>
   );
 };

@@ -1,5 +1,10 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import ButtonGrid from "../grids/button-grid";
+import BorderGrid from "../grids/border-grid";
+import BackgroundGrid from "../grids/background-grid";
+import TextGrid from "../grids/text-grid";
+import ImageGrid from "../grids/image-grid";
+import MouseFollower from "../grids/mouse-follower-grid";
 
 const navItems = [
   {
@@ -7,12 +12,24 @@ const navItems = [
     component: <ButtonGrid />,
   },
   {
-    name: "Border",
-    component: (
-      <>
-        <div>border</div>
-      </>
-    ),
+    name: "Borders & Intersections",
+    component: <BorderGrid />,
+  },
+  {
+    name: "Background Gradients, Patterns & Masks",
+    component: <BackgroundGrid />,
+  },
+  {
+    name: "Text Effects",
+    component: <TextGrid />,
+  },
+  // {
+  //   name: "Image Effects",
+  //   component: <ImageGrid />,
+  // },
+  {
+    name: "Mouse Followers",
+    component: <MouseFollower />,
   },
 ];
 
@@ -22,7 +39,7 @@ export function TabsNavigation() {
       <TabsList className="flex gap-4  overflow-x-auto overflow-y-hidden   w-full mask-r-from-98%">
         {navItems.map((item) => (
           <TabsTrigger
-            className="z-50 cursor-pointer group"
+            className="z-50 cursor-pointer group text-xs"
             key={item.name}
             value={item.name}
           >

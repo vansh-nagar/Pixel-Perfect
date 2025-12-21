@@ -3,6 +3,7 @@ import { Copy } from "lucide-react";
 
 import TextFade from "../pixels/text/text-fade";
 import TextInertia from "../pixels/text/text-inertia";
+import { Badge } from "@/components/ui/badge";
 
 const Buttons = [
   {
@@ -12,6 +13,7 @@ const Buttons = [
       <TextFade textContent="I design and build pixel-perfect digital experiences where precision, performance, and aesthetics work together seamlessly." />
     ),
     link: "https://arclabs.space/",
+    tag: "On Scroll",
   },
   {
     name: "Text Inertia Effect",
@@ -21,6 +23,7 @@ const Buttons = [
       <TextInertia text="Crafting refined, pixel-perfect web experiences that balance design clarity with technical excellence." />
     ),
     link: "https://arclabs.space/",
+    tag: "Hover me",
   },
 ];
 
@@ -34,11 +37,18 @@ const TextGrid = () => {
            justify-center p-2 "
         >
           <BorderDecorator />
-          <div className=" z-30">{item.component}</div>
+          <div className=" z-30   text-justify">{item.component}</div>
 
           <div className=" leading-1 absolute left-1.5  bottom-1.5">
-            <p className="text-xs ">{item.name}</p>
-            <p className="text-[8px] text-muted-foreground leading-2">
+            <p className="text-xs ">
+              {item.name}{" "}
+              {item.tag && (
+                <span className="text-[8px] rounded-sm border-dashed">
+                  {item.tag}
+                </span>
+              )}
+            </p>
+            <p className="text-[8px] text-muted-foreground leading-2.5">
               {item.description}
             </p>
           </div>

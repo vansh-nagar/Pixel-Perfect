@@ -4,7 +4,7 @@ import { Navbar } from "@/components/mine/landing-page/navbar";
 const Page = () => {
   return (
     <div className="relative w-full grid min-h-screen grid-cols-[1fr_1rem_auto_1rem_1fr] grid-rows-[auto_auto_1px_1fr] [--pattern-fg:var(--color-gray-950)]/5 dark:bg-black dark:[--pattern-fg:var(--color-white)]/10">
-      <div className="col-start-3 row-start-1 flex w-[90vw] px-6  py-3 flex-col relative">
+      <div className="col-start-3 row-start-1 flex w-[90vw] px-4  py-3 flex-col relative">
         <Navbar />
       </div>
       <div className="col-start-3 row-start-2 w-[90vw] p-3">

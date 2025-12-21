@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "Gradient 1",
+  "type": "registry:block",
+  "description": "A simple radial gradient background.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/background/gradient1.tsx",
+      "content": "const Gradient1 = () => {\r\n  return (\r\n    <div\r\n      aria-hidden\r\n      className=\"absolute z-30 inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,var(--color-blue-600),var(--color-white)_100%)]\"\r\n    />\r\n  );\r\n};\r\n\r\nexport default Gradient1;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/gradient1.tsx"
+    }
+  ]
+}

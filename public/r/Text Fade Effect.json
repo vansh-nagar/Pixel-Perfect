@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "Text Fade Effect",
+  "type": "registry:block",
+  "description": "Text fades in/out on scroll using GSAP.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/text/text-fade.tsx",
+      "content": "\"use client\";\r\nimport { useRef } from \"react\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport gsap from \"gsap\";\r\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\r\nimport { SplitText } from \"gsap/SplitText\";\r\n\r\ngsap.registerPlugin(ScrollTrigger);\r\n\r\nconst TextFade = ({\r\n  className,\r\n  textContent,\r\n}: {\r\n  className?: string;\r\n  textContent?: string;\r\n}) => {\r\n  const text = useRef(null);\r\n  const container = useRef(null);\r\n\r\n  useGSAP(() => {\r\n    const split = new SplitText(text.current, {\r\n      type: \"words\",\r\n    });\r\n\r\n    gsap.set(split.words, {\r\n      opacity: 0.3,\r\n      filter: \"blur(1.3px)\",\r\n      color: \"#b5cab7\",\r\n    });\r\n\r\n    gsap.to(split.words, {\r\n      opacity: 1,\r\n      stagger: 0.1,\r\n      color: \"#f3efe6\",\r\n      filter: \"blur(0px)\",\r\n      repeat: -1,\r\n\r\n      // scrollTrigger: {\r\n      //   trigger: container.current,\r\n      //   start: \"bottom bottom\",\r\n      //   end: \"top 20%\",\r\n      //   scrub: 1,\r\n      // },\r\n    });\r\n  });\r\n  return (\r\n    <div ref={container} className=\" h-full w-full \">\r\n      <span\r\n        ref={text}\r\n        className={`${className} flex  items-center justify-start gap-x-1.5 flex-wrap`}\r\n      >\r\n        {textContent ||\r\n          \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim harum cupiditate provident nostrum temporibus officiis! Nostrum alias exercitationem molestiae dolorem quo natus iure deserunt magni ea dicta. Temporibus, totam doloribus!\"}\r\n      </span>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TextFade;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/text-fade.tsx"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "Border 1",
+  "type": "registry:block",
+  "description": "A dashed border design with corner elements.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/borders/border1.tsx",
+      "content": "\r\nconst Border1 = () => {\r\n  return (\r\n    <>\r\n      <span className=\"border-muted-foreground absolute -left-[0.5px] -top-[0px] block size-6   border-dashed border-l-1 border-t-1 z-30\"></span>\r\n      <span className=\"border-muted-foreground absolute -right-px -top-px block size-6 border-dashed border-r-1 border-t-1 z-30\"></span>\r\n      <span className=\"border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-dashed border-b-1 border-l-1 z-30 \"></span>\r\n      <span className=\"border-muted-foreground absolute -bottom-px -right-px block size-6 border-b-1 border-r-1 border-dashed z-30\"></span>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default Border1;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/border1.tsx"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "Text Inertia Effect",
+  "type": "registry:block",
+  "description": "Text follows mouse with inertia using GSAP.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/text/text-inertia.tsx",
+      "content": "\"use client\";\r\nimport { useEffect, useRef } from \"react\";\r\nimport { gsap } from \"gsap\";\r\nimport { InertiaPlugin } from \"gsap/InertiaPlugin\";\r\nimport { SplitText } from \"gsap/SplitText\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ngsap.registerPlugin(InertiaPlugin, SplitText);\r\n\r\nconst TextInertia = ({\r\n  text = \"hello  bro how are you\",\r\n  className,\r\n  ...props\r\n}: {\r\n  text: string;\r\n  className?: string;\r\n}) => {\r\n  const deltaX = useRef(0);\r\n  const deltaY = useRef(0);\r\n\r\n  useEffect(() => {\r\n    let oldX = 0;\r\n    let oldY = 0;\r\n\r\n    const handleMouseMove = (e: MouseEvent) => {\r\n      deltaX.current = e.clientX - oldX;\r\n      deltaY.current = e.clientY - oldY;\r\n\r\n      oldX = e.clientX;\r\n      oldY = e.clientY;\r\n    };\r\n\r\n    window.addEventListener(\"mousemove\", handleMouseMove);\r\n    return () => window.removeEventListener(\"mousemove\", handleMouseMove);\r\n  }, []);\r\n\r\n  useGSAP(() => {\r\n    const textEl = document.querySelector(\".text-inertia\");\r\n    if (!textEl) return;\r\n\r\n    const split = new SplitText(textEl, { type: \"words\" });\r\n    const words = split.words;\r\n\r\n    words.forEach((word) => {\r\n      const handleEnter = () => {\r\n        gsap.to(word, {\r\n          rotation: 0,\r\n          y: 0,\r\n          opacity: 1,\r\n          inertia: {\r\n            x: { velocity: deltaX.current * 20, end: 0 },\r\n            y: { velocity: deltaY.current * 20, end: 0 },\r\n            rotation: { velocity: (Math.random() - 0.5) * 300, end: 0 },\r\n          },\r\n        });\r\n      };\r\n\r\n      word.addEventListener(\"mouseenter\", handleEnter);\r\n\r\n      return () => {\r\n        word.removeEventListener(\"mouseenter\", handleEnter);\r\n      };\r\n    });\r\n  });\r\n\r\n  return (\r\n    <div className=\"flex justify-center items-center \">\r\n      <div className={cn(\"text-inertia\", className)} {...props}>\r\n        {text}\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TextInertia;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/text-inertia.tsx"
+    }
+  ]
+}

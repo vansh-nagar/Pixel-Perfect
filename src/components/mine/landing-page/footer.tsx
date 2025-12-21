@@ -38,7 +38,7 @@ const socialLinks = [
 export function Footer() {
   return (
     <>
-      <footer className="  p-2  relative z-0 h-52 overflow-hidden ">
+      <footer className=" relative z-0 h-52 overflow-hidden ">
         <div className="flex flex-col  h-full w-full justify-between gap-10 z-10">
           <div>
             <div className="text-3xl -ml-1 font-pixelify flex items-center">
@@ -85,10 +85,6 @@ export function Footer() {
               })}
             </TooltipProvider>
           </div>
-        </div>
-
-        <div className="font-pixelify  text-shadow-2xs  absolute bottom-10  inset-x-0 pointer-events-none mx-auto translate-y-[5%] select-none text-center font-bold leading-none tracking-tighter text-muted text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] xl:text-[140px] z-0">
-          pixel perfect
         </div>
       </footer>{" "}
     </>

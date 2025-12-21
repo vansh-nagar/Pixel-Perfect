@@ -33,9 +33,13 @@ export function CanvasGridBackground() {
     };
 
     const drawGrid = () => {
+      const isDark =
+        document.documentElement.classList.contains("dark") ||
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
       const lineColor = "rgba(200, 200, 200, 0.1)";
+      const starColor = "rgba(200, 200, 200, 0.25)";
 
-      ctx.fillStyle = "white";
+      ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.strokeStyle = lineColor;
@@ -55,7 +59,7 @@ export function CanvasGridBackground() {
         ctx.stroke();
       }
 
-      ctx.fillStyle = "rgba(200, 200, 200, 0.25)";
+      ctx.fillStyle = starColor;
 
       const drawStar = (
         cx: number,
@@ -92,15 +96,15 @@ export function CanvasGridBackground() {
       for (const tile of glowingTilesRef.current) {
         const opacity = tile.opacity;
 
-        ctx.shadowColor = `rgba(255, 87, 34, ${0.3 * opacity})`;
+        ctx.shadowColor = `rgba(0, 0, 0, ${0.3 * opacity})`;
         ctx.shadowBlur = 30 * opacity;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
 
-        ctx.fillStyle = `rgba(255, 87, 34, ${0.06 * opacity})`;
+        ctx.fillStyle = `rgba(0, 0, 0, ${0.02 * opacity})`;
         ctx.fillRect(tile.x * gridSize, tile.y * gridSize, gridSize, gridSize);
 
-        ctx.strokeStyle = `rgba(255, 87, 34, ${0.15 * opacity})`;
+        ctx.strokeStyle = `rgba(0, 0, 0, ${0.15 * opacity})`;
         ctx.lineWidth = 1;
         ctx.strokeRect(
           tile.x * gridSize,
@@ -114,7 +118,7 @@ export function CanvasGridBackground() {
           const centerY = tile.y * gridSize + gridSize / 2;
           const logoSize = 10 * opacity;
 
-          ctx.fillStyle = `rgba(255, 87, 34, ${0.7 * opacity})`;
+          ctx.fillStyle = `#a3a3a3`;
 
           ctx.fillRect(
             centerX - logoSize / 2,
@@ -218,7 +222,7 @@ export function CanvasGridBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full dark:invert-[0.95]"
+      className="absolute inset-0 w-full h-full dark:invert "
     />
   );
 }

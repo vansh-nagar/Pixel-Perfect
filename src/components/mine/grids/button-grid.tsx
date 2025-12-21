@@ -1,34 +1,36 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
-import MorphButton from "../pixels/buttons/morph-button";
-import MorphImageButton from "../pixels/buttons/morph-image-button";
-import ThreedButton from "../pixels/buttons/3d-button";
-import ShinyButton from "../pixels/buttons/shiny-button";
+import MorphButton from "../../../../registry/new-york/buttons/morph-button";
+import MorphImageButton from "../../../../registry/new-york/buttons/morph-image-button";
+import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
+import ShinyButton from "../../../../registry/new-york/buttons/shiny-button";
+import { toast } from "sonner";
 
 const Buttons = [
   {
     name: "Morph Button",
     description: "A button that morphs its shape on hover using GSAP.",
     component: <MorphButton />,
-    link: "https://arclabs.space/",
+    link: "https://www.pixel-perfect.space/r/Morph%20Button.json",
   },
   {
     name: "Morph Image Button",
     description: "A button that morphs an image mask on hover using GSAP.",
     component: <MorphImageButton />,
-    link: "https://arclabs.space/",
+    link: "https://www.pixel-perfect.space/r/Morph%20Image%20Button.json",
   },
   {
     name: "3D Button",
     description: "A 3D button with press and hover effects.",
     component: <ThreedButton />,
-    link: "https://arclabs.space/",
+    link: "https://www.pixel-perfect.space/r/3D%20Button.json",
   },
   {
     name: "Shiny Button",
     description: "A shiny button with hover effects.",
     component: <ShinyButton />,
-    link: "https://arclabs.space/",
+    link: "https://www.pixel-perfect.space/r/Shiny%20Button.json",
   },
 ];
 
@@ -54,7 +56,11 @@ const ButtonGrid = () => {
             <div className=" border-t border-dashed "></div>
             <Button
               size={"sm"}
-              variant={"ghost"}
+              variant={"copy"}
+              onClick={() => {
+                navigator.clipboard.writeText(item.link);
+                toast.success("Link copied to clipboard!");
+              }}
               className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
             >
               <Copy className=" size-3" /> Copy

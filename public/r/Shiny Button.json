@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "Shiny Button",
+  "type": "registry:block",
+  "description": "A button with a shiny hover effect.",
+  "dependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/shiny-button.tsx",
+      "content": "\"use client\";\r\nimport { Button } from \"@/components/ui/button\";\r\n\r\nconst ShinyButton = () => {\r\n  return (\r\n    <div className=\"overflow-hidden rounded-md\">\r\n      <style>{`\r\n\r\n        .shiny-wrapper {\r\n          position: relative;\r\n          display: inline-block;\r\n          overflow: hidden;\r\n        }\r\n\r\n        .shiny-wrapper .shiny-mask {\r\n          display: block;\r\n          position: absolute;\r\n          top: 0;\r\n          left: 0;\r\n          right: 0;\r\n          bottom: 0;\r\n          background: rgba(255, 255, 255, 0.6);\r\n          transform: translateX(-100%) rotate(45deg);\r\n          pointer-events: none;\r\n          z-index: 10;\r\n        }\r\n\r\n        .shiny-wrapper:hover .shiny-mask {\r\n          animation: shiny-mask 0.4s ease-out;\r\n        }\r\n\r\n        @keyframes shiny-mask {\r\n          0% {\r\n            transform: translateX(-100%) rotate(45deg);\r\n          }\r\n          100% {\r\n            transform: translateX(100%) rotate(45deg);\r\n          }\r\n        }\r\n      `}</style>\r\n\r\n      <div className=\"shiny-wrapper\">\r\n        <Button className=\"relative z-0 \">Click Me</Button>\r\n        <span className=\"shiny-mask\"></span>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default ShinyButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/shiny-button.tsx"
+    }
+  ]
+}

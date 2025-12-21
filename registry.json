@@ -4,14 +4,54 @@
   "homepage": "https://pixel-perfect-01.vercel.app",
   "items": [
     {
-      "name": "navbar1",
-      "description": "cool nav bar",
+      "name": "3D Button",
+      "description": "A 3D button component.",
       "type": "registry:block",
+      "dependencies": ["button"],
       "files": [
         {
           "type": "registry:component",
-          "path": "registry/new-york/navbars/navbar1.tsx",
-          "target": "components/pixel-perfect/navbar1.tsx"
+          "path": "registry/new-york/buttons/3d-button.tsx",
+          "target": "components/pixel-perfect/3d-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Morph Button",
+      "description": "A button that morphs its shape on hover using GSAP.",
+      "type": "registry:block",
+      "dependencies": ["button"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/morph-button.tsx",
+          "target": "components/pixel-perfect/morph-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Morph Image Button",
+      "description": "A button that morphs with an image on hover.",
+      "type": "registry:block",
+      "dependencies": ["button"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/morph-image-button.tsx",
+          "target": "components/pixel-perfect/morph-image-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Shiny Button",
+      "description": "A button with a shiny hover effect.",
+      "type": "registry:block",
+      "dependencies": ["button"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/shiny-button.tsx",
+          "target": "components/pixel-perfect/shiny-button.tsx"
         }
       ]
     }

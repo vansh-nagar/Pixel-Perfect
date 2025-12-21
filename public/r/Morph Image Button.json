@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "Morph Image Button",
+  "type": "registry:block",
+  "description": "A button that morphs with an image on hover.",
+  "dependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/morph-image-button.tsx",
+      "content": "\"use client\";\r\nimport { useRef } from \"react\";\r\nimport { gsap } from \"gsap\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport MorphSVGPlugin from \"gsap/MorphSVGPlugin\";\r\nimport { Button } from \"@/components/ui/button\";\r\n\r\ngsap.registerPlugin(MorphSVGPlugin);\r\n\r\nconst MorphImageMaskButton = () => {\r\n  const buttonRef = useRef<HTMLButtonElement>(null);\r\n  useGSAP(\r\n    () => {\r\n      const start = \"M 0 100 V 50 Q 50 0 100 50 V 100 z\";\r\n      const end = \"M 0 100 V 0 Q 50 0 100 0 V 100 z\";\r\n\r\n      const tl = gsap.timeline({ paused: true });\r\n\r\n      tl.to(\".path\", {\r\n        morphSVG: start,\r\n        ease: \"power2.in\",\r\n      }).to(\".path\", {\r\n        morphSVG: end,\r\n        ease: \"power2.out\",\r\n      });\r\n\r\n      if (!buttonRef.current) return;\r\n\r\n      buttonRef.current?.addEventListener(\"mouseenter\", () => {\r\n        tl.play();\r\n      });\r\n      buttonRef.current?.addEventListener(\"mouseleave\", () => {\r\n        tl.reverse();\r\n      });\r\n    },\r\n    { scope: buttonRef }\r\n  );\r\n  return (\r\n    <Button\r\n      ref={buttonRef}\r\n      variant=\"ghost\"\r\n      className=\"relative button cursor-pointer   rounded-md m-2  overflow-hidden\"\r\n    >\r\n      <div className=\"absolute inset-0 z-30\">\r\n        <svg\r\n          viewBox=\"0 0 100 100\"\r\n          preserveAspectRatio=\"xMidYMid slice\"\r\n          style={{\r\n            width: \"100%\",\r\n            height: \"100%\",\r\n          }}\r\n          className=\"absolute inset-0 \"\r\n        >\r\n          <defs>\r\n            <mask id=\"waveMask\">\r\n              <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"black\" />\r\n              <path\r\n                className=\"path\"\r\n                fill=\"white\"\r\n                d=\"M 0 100 V 100 Q 50 100 100 100 V 100 z\"\r\n              />\r\n            </mask>\r\n          </defs>\r\n\r\n          <image\r\n            href=\"https://i.pinimg.com/1200x/ba/04/b5/ba04b5b6de06babfd39cb0346fe94d1c.jpg\"\r\n            preserveAspectRatio=\"xMidYMid slice\"\r\n            height={\"100\"}\r\n            width={\"100\"}\r\n            x=\"0\"\r\n            y=\"0\"\r\n            mask=\"url(#waveMask)\"\r\n          />\r\n        </svg>\r\n      </div>\r\n      <img\r\n        src=\"https://i.pinimg.com/736x/8f/3c/69/8f3c69cbae64cc1af6d6cc33acec50e3.jpg\"\r\n        alt=\"\"\r\n        className=\" absolute object-top\"\r\n      />\r\n      <div className=\" z-40  scale-100  text text-white\">hover me</div>\r\n    </Button>\r\n  );\r\n};\r\n\r\nexport default MorphImageMaskButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/morph-image-button.tsx"
+    }
+  ]
+}

@@ -54,6 +54,123 @@
           "target": "components/pixel-perfect/shiny-button.tsx"
         }
       ]
+    },
+    {
+      "name": "Border 1",
+      "description": "A dashed border design with corner elements.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/border1.tsx",
+          "target": "components/pixel-perfect/border1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Border 2",
+      "description": "A solid border design with corner elements.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/border2.tsx",
+          "target": "components/pixel-perfect/border2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Intersection 1",
+      "description": "A circular border with gradient intersection lines.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/intersection1.tsx",
+          "target": "components/pixel-perfect/intersection1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Intersection 2",
+      "description": "A scoped intersection design with patterned borders.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/intersection2.tsx",
+          "target": "components/pixel-perfect/intersection2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Gradient 1",
+      "description": "A simple radial gradient background.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/background/gradient1.tsx",
+          "target": "components/pixel-perfect/gradient1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Mouse Follower 1",
+      "description": "Image trail mouse follower using GSAP.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mouse-follower1.tsx",
+          "target": "components/pixel-perfect/mouse-follower1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Mouse Follower 2",
+      "description": "Mouse follower image trail with pure DOM.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mouse-follower2.tsx",
+          "target": "components/pixel-perfect/mouse-follower2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Text Fade Effect",
+      "description": "Text fades in/out on scroll using GSAP.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-fade.tsx",
+          "target": "components/pixel-perfect/text-fade.tsx"
+        }
+      ]
+    },
+    {
+      "name": "Text Inertia Effect",
+      "description": "Text follows mouse with inertia using GSAP.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-inertia.tsx",
+          "target": "components/pixel-perfect/text-inertia.tsx"
+        }
+      ]
     }
   ]
 }

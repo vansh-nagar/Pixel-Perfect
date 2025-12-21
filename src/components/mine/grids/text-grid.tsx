@@ -1,28 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
+import { toast } from "sonner";
 
-import TextFade from "../pixels/text/text-fade";
-import TextInertia from "../pixels/text/text-inertia";
+import TextFade from "../../../../registry/new-york/text/text-fade";
+import TextInertia from "../../../../registry/new-york/text/text-inertia";
 import { Badge } from "@/components/ui/badge";
 
 const Buttons = [
   {
     name: "Text Fade Effect",
-    description: "A text component that fades in and out using GSAP.",
+    description: "Text fades in/out on scroll using GSAP.",
     component: (
       <TextFade textContent="I design and build pixel-perfect digital experiences where precision, performance, and aesthetics work together seamlessly." />
     ),
-    link: "https://arclabs.space/",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Fade%20Effect.json",
     tag: "On Scroll",
   },
   {
     name: "Text Inertia Effect",
-    description:
-      "A text component that moves with inertia based on mouse movement using GSAP.",
+    description: "Text follows mouse with inertia using GSAP.",
     component: (
       <TextInertia text="Crafting refined, pixel-perfect web experiences that balance design clarity with technical excellence." />
     ),
-    link: "https://arclabs.space/",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Inertia%20Effect.json",
     tag: "Hover me",
   },
 ];
@@ -58,6 +58,10 @@ const TextGrid = () => {
             <Button
               size={"sm"}
               variant={"ghost"}
+              onClick={() => {
+                navigator.clipboard.writeText(item.link);
+                toast.success("Link copied to clipboard!");
+              }}
               className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
             >
               <Copy className=" size-3" /> Copy

@@ -11,26 +11,26 @@ const Buttons = [
   {
     name: "Morph Button",
     description: "A button that morphs its shape on hover using GSAP.",
-    component: <MorphButton />,
-    link: "https://www.pixel-perfect.space/r/Morph%20Button.json",
+    component: <MorphButton>Hover Me</MorphButton>,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Morph%20Button.json",
   },
   {
     name: "Morph Image Button",
     description: "A button that morphs an image mask on hover using GSAP.",
-    component: <MorphImageButton />,
-    link: "https://www.pixel-perfect.space/r/Morph%20Image%20Button.json",
+    component: <MorphImageButton>Hover Me</MorphImageButton>,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Morph%20Image%20Button.json",
   },
   {
     name: "3D Button",
     description: "A 3D button with press and hover effects.",
-    component: <ThreedButton />,
-    link: "https://www.pixel-perfect.space/r/3D%20Button.json",
+    component: <ThreedButton>Click Me</ThreedButton>,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/3D%20Button.json",
   },
   {
     name: "Shiny Button",
     description: "A shiny button with hover effects.",
     component: <ShinyButton />,
-    link: "https://www.pixel-perfect.space/r/Shiny%20Button.json",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Shiny%20Button.json",
   },
 ];
 

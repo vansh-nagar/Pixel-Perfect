@@ -1,10 +1,8 @@
-import type { Metadata } from "next";
-import { Inter_Tight, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { RootProvider } from "fumadocs-ui/provider/next";
-import LenisProvider from "@/components/providers/lenis-provider";
+import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
+import { Inter_Tight, Pixelify_Sans } from "next/font/google";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 // Default font
 const interTight = Inter_Tight({
@@ -36,14 +34,10 @@ export default function RootLayout({
       <body
         className={`${interTight.variable} ${pixelify.variable} antialiased`}
       >
-        <RootProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <LenisProvider>
-              {children}
-              <Toaster />
-            </LenisProvider>
-          </ThemeProvider>
-        </RootProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

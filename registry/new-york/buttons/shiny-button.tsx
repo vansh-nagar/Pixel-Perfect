@@ -1,10 +1,40 @@
 "use client";
+import React from "react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
 
-const ShinyButton = () => {
-  return (
-    <div className="overflow-hidden rounded-md">
-      <style>{`
+type ButtonVariant =
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
+
+type ButtonSize = "default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg";
+
+interface ShinyButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  children?: React.ReactNode;
+}
+
+const ShinyButton = React.forwardRef<HTMLButtonElement, ShinyButtonProps>(
+  (
+    {
+      className,
+      variant = "default",
+      size = "default",
+      disabled = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <div className="overflow-hidden rounded-md">
+        <style>{`
 
         .shiny-wrapper {
           position: relative;
@@ -39,12 +69,24 @@ const ShinyButton = () => {
         }
       `}</style>
 
-      <div className="shiny-wrapper">
-        <Button className="relative z-0 ">Click Me</Button>
-        <span className="shiny-mask"></span>
+        <div className="shiny-wrapper">
+          <Button
+            ref={ref}
+            variant={variant}
+            size={size}
+            disabled={disabled}
+            className={cn("relative z-0", className)}
+            {...props}
+          >
+            {children ?? "Click Me"}
+          </Button>
+          <span className="shiny-mask"></span>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
+
+ShinyButton.displayName = "ShinyButton";
 
 export default ShinyButton;

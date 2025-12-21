@@ -1,8 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "fumadocs-ui/css/black.css";
-@import "fumadocs-ui/css/preset.css";
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -193,7 +190,8 @@ body,
   body {
     @apply bg-background text-foreground;
   }
-}ay
+}
+ay
 
 /* Hide all scrollbars (visual only) across browsers) */
 .noScrollbar {

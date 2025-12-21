@@ -1,13 +1,32 @@
 "use client";
 import React, { useState } from "react";
+import { cn } from "@/lib/cn";
 
-const ThreedButton = () => {
-  const [isPressed, setIsPressed] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+type ButtonVariant =
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
 
-  return (
-    <div className="flex items-center justify-cente">
-      <style>{`
+type ButtonSize = "default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg";
+
+interface ThreedButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  children?: React.ReactNode;
+}
+
+const ThreedButton = React.forwardRef<HTMLButtonElement, ThreedButtonProps>(
+  ({ className, disabled = false, children, ...props }, ref) => {
+    const [isPressed, setIsPressed] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+      <div className="flex items-center justify-cente">
+        <style>{`
         @import url('https://fonts.googleapis.com/css?family=Rubik:700&display=swap');
         
         .btn-3d {
@@ -16,7 +35,7 @@ const ThreedButton = () => {
           cursor: pointer;
           outline: none;
           border: 2px solid #d97706;
-          vertical-align: middle;
+          vertical-align: middle; 
           font-size: 1rem;
           font-weight: 600;
           color: #78350f;
@@ -67,20 +86,26 @@ const ThreedButton = () => {
         }
       `}</style>
 
-      <button
-        className="btn-3d relative"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          setIsPressed(false);
-        }}
-        onMouseDown={() => setIsPressed(true)}
-        onMouseUp={() => setIsPressed(false)}
-      >
-        <span className="relative z-10">Hover Me</span>
-      </button>
-    </div>
-  );
-};
+        <button
+          ref={ref}
+          className={cn("btn-3d relative", className)}
+          disabled={disabled}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => {
+            setIsHovered(false);
+            setIsPressed(false);
+          }}
+          onMouseDown={() => setIsPressed(true)}
+          onMouseUp={() => setIsPressed(false)}
+          {...props}
+        >
+          <span className="relative z-10">{children ?? "Hover Me"}</span>
+        </button>
+      </div>
+    );
+  }
+);
+
+ThreedButton.displayName = "ThreedButton";
 
 export default ThreedButton;

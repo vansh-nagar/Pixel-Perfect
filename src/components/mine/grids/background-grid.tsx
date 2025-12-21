@@ -2,15 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Copy } from "lucide-react";
-import Gradient1 from "../pixels/background/gradient1";
+import Gradient1 from "../../../../registry/new-york/background/gradient1";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const Buttons = [
   {
-    name: "Morph Button",
-    description: "A button that morphs its shape on hover using GSAP.",
+    name: "Gradient 1",
+    description: "A simple radial gradient background.",
     component: <Gradient1 />,
-    link: "https://arclabs.space/",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Gradient%201.json",
   },
 ];
 
@@ -19,17 +20,14 @@ const BackgroundGrid = () => {
     {}
   );
 
-  // Calculate angle from each box to top-right corner
   const getArrowRotation = (index: number, totalItems: number) => {
-    const cols = 5; // xl:grid-cols-5
+    const cols = 5;
     const col = index % cols;
     const row = Math.floor(index / cols);
 
-    // Position of box center
     const boxX = col;
     const boxY = row;
 
-    // Calculate angle to top-right (assuming top-right is at col=4, row=-1)
     const dx = 4 - boxX;
     const dy = -1 - boxY;
     const angle = Math.atan2(dy, dx) * (180 / Math.PI);
@@ -52,6 +50,10 @@ const BackgroundGrid = () => {
                 size={"sm"}
                 variant={"secondary"}
                 className="text-xs  cursor-pointer rounded-none z-30 "
+                onClick={() => {
+                  navigator.clipboard.writeText(item.link);
+                  toast.success("Link copied to clipboard!");
+                }}
               >
                 <Copy className="size-3" /> Copy
               </Button>

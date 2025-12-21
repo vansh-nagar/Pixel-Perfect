@@ -1,16 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
-import LandoNorrisEffect from "../pixels/image/sasta-lando";
-import ImageInertia from "../pixels/image/image-inertia";
+import { toast } from "sonner";
+import ImageInertia from "../../../../registry/new-york/image/image-inertia";
 
 const Buttons = [
-  {
-    name: "Lando Norris Effect",
-    description: "A fluid simulation effect inspired by Lando Norris.",
-    component: <LandoNorrisEffect />,
-    image: "",
-    link: "https://arclabs.space/",
-  },
   {
     name: "Image Inertia Effect",
     description:
@@ -70,6 +63,10 @@ const ImageGrid = () => {
             size={"sm"}
             variant={"secondary"}
             className="text-xs  absolute cursor-pointer z-30  right-1 top-1 "
+            onClick={() => {
+              navigator.clipboard.writeText(item.link);
+              toast.success("Link copied to clipboard!");
+            }}
           >
             <Copy className=" size-3" /> Copy
           </Button>

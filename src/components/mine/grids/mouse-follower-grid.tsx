@@ -1,20 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
-import MouseFollower1 from "../pixels/mouse-follower/mouse-follower1";
-import MouseFollower2 from "../pixels/mouse-follower/mouse-follower2";
+import { toast } from "sonner";
+import MouseFollower1 from "../../../../registry/new-york/mouse-follower/mouse-follower1";
+import MouseFollower2 from "../../../../registry/new-york/mouse-follower/mouse-follower2";
 
 const Buttons = [
   {
     name: "Mouse Follower 1",
-    description: "A mouse follower effect using GSAP.",
+    description: "Image trail mouse follower using GSAP.",
     component: <MouseFollower1 />,
-    link: "https://arclabs.space/",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%201.json",
   },
   {
     name: "Mouse Follower 2",
-    description: "A mouse follower effect using GSAP.",
+    description: "Mouse follower image trail with pure DOM.",
     component: <MouseFollower2 />,
-    link: "https://arclabs.space/",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%202.json",
   },
 ];
 
@@ -42,6 +43,10 @@ const MouseFollower = () => {
               size={"sm"}
               variant={"ghost"}
               className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
+              onClick={() => {
+                navigator.clipboard.writeText(item.link);
+                toast.success("Link copied to clipboard!");
+              }}
             >
               <Copy className=" size-3" /> Copy
               <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>

@@ -1,31 +1,30 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
-import Border1 from "../pixels/borders/border1";
-import Border2 from "../pixels/borders/border2";
-import Intersection1 from "../pixels/borders/intersection1";
-import Intersection2 from "../pixels/borders/intersection2";
+import { toast } from "sonner";
+import Border1 from "../../../../registry/new-york/borders/border1";
+import Border2 from "../../../../registry/new-york/borders/border2";
+import Intersection1 from "../../../../registry/new-york/borders/intersection1";
+import Intersection2 from "../../../../registry/new-york/borders/intersection2";
 
 const Buttons = [
   {
     name: "Border 1",
     description: "A dashed border design using CSS.",
     component: <Border1 />,
-    image: "",
-    link: "https://arclabs.space/",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Border%201.json",
   },
   {
     name: "Border 2",
     description: "A border design using CSS.",
     component: <Border2 />,
-    image: "",
-    link: "https://arclabs.space/",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Border%202.json",
   },
   {
     name: "Intersection (Scope)",
     description: "An intersection design using CSS.",
     component: <Intersection1 />,
-    image: "",
-    link: "https://arclabs.space/",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%201.json",
   },
   {
     name: "Intersection (Scope)",
@@ -38,7 +37,7 @@ const Buttons = [
       </Intersection2>
     ),
     image: "",
-    link: "https://arclabs.space/",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%202.json",
   },
 ];
 
@@ -51,13 +50,6 @@ const BorderGrid = () => {
           className="relative border-dashed  aspect-square flex items-center justify-center "
         >
           {item.component}
-          {item.image && (
-            <img
-              src={item.image}
-              alt={item.name}
-              className=" aspect-square  object-cover"
-            />
-          )}
 
           <div className="absolute  inset-x-0   bottom-0 bg-background/10 backdrop-blur-sm p-1.5">
             <div className=" leading-1 ">
@@ -71,7 +63,11 @@ const BorderGrid = () => {
           <Button
             size={"sm"}
             variant={"secondary"}
-            className="text-xs  absolute cursor-pointer z-30  right-1 top-1 "
+            onClick={() => {
+              navigator.clipboard.writeText(item.link);
+              toast.success("Link copied to clipboard!");
+            }}
+            className="text-xs  absolute cursor-pointer z-30  right-1 top-1 active:bg-orange-500 "
           >
             <Copy className=" size-3" /> Copy
           </Button>

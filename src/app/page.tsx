@@ -11,7 +11,7 @@ const page = () => {
       </div>
 
       {/* Row 2: Hero Section */}
-      <div className="col-start-3 row-start-2 flex flex-col w-[90vw] p-2  gap-2">
+      <div className="col-start-3 row-start-2 flex flex-col w-[90vw]  gap-2">
         <HeroSection />
       </div>
 
@@ -19,7 +19,7 @@ const page = () => {
       <div className="pointer-events-none  relative -top-px col-span-full col-start-1 row-start-4 mask-x-from-99% border-b border-dashed"></div>
 
       {/* Row 4: Footer (row 3 is border, row 5 is border) */}
-      <div className="col-start-3 row-start-4 flex flex-col w-[90vw] p-3 gap-2">
+      <div className="col-start-3 row-start-4 flex flex-col w-[90vw] gap-2">
         <Footer />
       </div>
 

@@ -38,7 +38,7 @@ const socialLinks = [
 export function Footer() {
   return (
     <>
-      <footer className=" border  border-dashed p-2 shadow-inner relative z-0 h-52 overflow-hidden ">
+      <footer className="  p-2  relative z-0 h-52 overflow-hidden ">
         <div className="flex flex-col  h-full w-full justify-between gap-10 z-10">
           <div>
             <div className="text-3xl -ml-1 font-pixelify flex items-center">
@@ -66,13 +66,18 @@ export function Footer() {
                 return (
                   <Tooltip key={index}>
                     <TooltipTrigger asChild>
-                      <Button variant="outline" size="icon" asChild>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        asChild
+                        className=" rounded-none "
+                      >
                         <Link href={social.href}>
                           <IconComponent />
                         </Link>
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>
+                    <TooltipContent className=" rounded-none">
                       <p>{social.label}</p>
                     </TooltipContent>
                   </Tooltip>

@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo/static/logo.svg",
   },
+  openGraph: {
+    images: [
+      "https://res.cloudinary.com/dz12pywzs/image/upload/v1766372535/Copy_of_Copy_of_Webinar_Keynote_Presentation_1_ljemzi.jpg",
+    ],
+  },
 };
 
 export default function RootLayout({

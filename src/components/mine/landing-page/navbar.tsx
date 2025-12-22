@@ -3,14 +3,14 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { FlaskConical, GithubIcon, Star } from "lucide-react";
+import { FlaskConical, GithubIcon } from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { StarsCount } from "@/components/mine/landing-page/stars-count";
 
 export function Navbar({ className = "" }: { className?: string }) {
   return (
     <header
-      className={` font-pixelify      w-full   flex items-center justify-between  z-50   h-12     ${className}`}
+      className={` font-pixelify w-full flex items-center justify-between  z-50 h-12 ${className}`}
       style={{
         transformStyle: "preserve-3d",
       }}

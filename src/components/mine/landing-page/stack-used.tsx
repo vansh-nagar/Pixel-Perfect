@@ -4,7 +4,7 @@ import StarBorder from "./star-border";
 const StackUsed = () => {
   return (
     <div className=" flex flex-row overflow-hidden ">
-      <div className="border-r border-muted h-32 w-52 flex items-center justify-center relative overflow-hidden">
+      <div className="border-r border-muted h-32 w-52 max-sm:h-20 max-sm:text-xs flex items-center justify-center relative overflow-hidden">
         Built With <br /> Modern Stack
         <StarBorder />
       </div>

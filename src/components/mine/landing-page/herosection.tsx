@@ -70,19 +70,19 @@ export function HeroSection() {
     <section className="w-full h-[calc(100vh-100px)] cursor-crosshair  relative  md:overflow-clip overscroll-none flex flex-col items-center justify-center  px-4 sm:px-6 md:px-8">
       <HeroGrid />
       <>
-        <div className="absolute top-8 left-8 text-xs text-muted-foreground font-mono">
+        <div className="absolute sm:top-8 sm:left-8 top-4 left-4 text-xs text-muted-foreground font-mono">
           x:{mousePos.x}, y:{mousePos.y}
           <br /> fps: {fps} | ms: {ms}
         </div>
-        <div className="absolute bottom-8 right-8 text-xs text-muted-foreground font-mono">
+        <div className="absolute sm:bottom-8 sm:right-8 right-4 bottom-4 border-4 text-xs text-muted-foreground font-mono">
           {" "}
           cell:{gx},{gy}
         </div>
-        <div className="absolute top-8 right-8 text-xs text-gray-400 font-mono">
+        <div className="absolute sm:top-8 sm:right-8 right-4 top-4 text-xs text-gray-400 font-mono">
           v:{velocity} a:{velocity - lastVelocity > 0 ? "↑" : "↓"}
         </div>
-        <div className="absolute bottom-8 left-8 text-xs font-mono text-muted-foreground">
-          {/* θ:{angle.toFixed(1)}° */}
+        <div className="absolute sm:bottom-8 sm:left-8 left-4 bottom-4 text-xs font-mono text-muted-foreground">
+          θ:{angle.toFixed(1)}°
         </div>
 
         <div

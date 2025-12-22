@@ -6,7 +6,7 @@ import { Circle } from "lucide-react";
 const ComponentsShowcase = () => {
   return (
     <>
-      <div className="flex justify-between relative overflow-hidden px-6 py-3 border-b border-muted">
+      <div className="flex justify-between relative overflow-hidden px-6 py-3 max-sm:px-3 border-b border-muted">
         <div className="flex gap-2">
           <Circle
             strokeWidth={1}
@@ -24,9 +24,7 @@ const ComponentsShowcase = () => {
             className="text-muted-foreground/30"
           />
         </div>
-        <div className="text-xs text-muted-foreground/30">
-          ✿ PIXEL PERFECT COMPONENTS ✿
-        </div>
+        <div className="text-xs text-muted-foreground/30">COMPONENTS</div>
         <StarBorder />
       </div>
       <div className="grid grid-cols-[50px_1fr_50px] ">

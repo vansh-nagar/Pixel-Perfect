@@ -90,7 +90,7 @@ export const InfiniteMovingComponents = ({
         {componentArr.map((item, index) => (
           <div
             key={index}
-            className="relative w-72 border-r border-muted aspect-square flex items-center justify-center "
+            className="relative w-72 max-sm:w-40 border-r border-muted aspect-square flex items-center justify-center "
           >
             <BorderDecorator />
             <div className=" z-30">{item.component}</div>

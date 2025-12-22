@@ -109,13 +109,13 @@ export const InfiniteMovingStack = ({
         {logos.map((item, idx) => (
           <div
             key={idx}
-            className="w-[200px] h-32 border-r border-muted flex items-center justify-center shrink-0"
+            className="w-[200px] h-32 max-sm:h-20 border-r border-muted flex items-center justify-center shrink-0"
           >
             <li className="flex flex-col items-center justify-center">
               <img
                 src={item.src}
                 alt={item.alt}
-                className="h-12 w-12 object-contain dark:invert"
+                className="aspect-square w-12 max-sm:w-8 object-contain dark:invert"
               />
             </li>
           </div>

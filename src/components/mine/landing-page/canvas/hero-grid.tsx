@@ -9,7 +9,7 @@ interface GlowingTile {
   targetOpacity: number;
 }
 
-export function CanvasGridBackground() {
+export function HeroGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const glowingTilesRef = useRef<GlowingTile[]>([]);
   const animationIdRef = useRef<number | null>(null);

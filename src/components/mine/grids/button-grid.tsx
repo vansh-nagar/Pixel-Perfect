@@ -7,7 +7,7 @@ import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
 import ShinyButton from "../../../../registry/new-york/buttons/shiny-button";
 import { toast } from "sonner";
 
-const Buttons = [
+export const ButtonsArr = [
   {
     name: "Morph Button",
     description: "A button that morphs its shape on hover using GSAP.",
@@ -37,7 +37,7 @@ const Buttons = [
 const ButtonGrid = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
-      {Buttons.map((item, index) => (
+      {ButtonsArr.map((item, index) => (
         <div
           key={index}
           className="relative border-b border-l border-dashed  aspect-square flex items-center justify-center "

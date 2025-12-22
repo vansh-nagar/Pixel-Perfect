@@ -7,7 +7,7 @@ import Border2 from "../../../../registry/new-york/borders/border2";
 import Intersection1 from "../../../../registry/new-york/borders/intersection1";
 import Intersection2 from "../../../../registry/new-york/borders/intersection2";
 
-const Buttons = [
+export const BorderArr = [
   {
     name: "Border 1",
     description: "A dashed border design using CSS.",
@@ -44,7 +44,7 @@ const Buttons = [
 const BorderGrid = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
-      {Buttons.map((item, index) => (
+      {BorderArr.map((item, index) => (
         <div
           key={index}
           className="relative border-dashed  aspect-square flex items-center justify-center "

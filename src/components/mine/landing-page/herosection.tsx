@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 
 import { Model3D } from "@/components/ui/3dmodel";
-import { CanvasGridBackground } from "./canvas-grid-background";
+import { HeroGrid } from "./canvas/hero-grid";
 
 export function HeroSection() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -67,8 +67,8 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="w-full h-[calc(100vh-85px)] cursor-crosshair  relative  md:overflow-clip overscroll-none flex flex-col items-center justify-center  px-4 sm:px-6 md:px-8">
-      <CanvasGridBackground />
+    <section className="w-full h-[calc(100vh-100px)] cursor-crosshair  relative  md:overflow-clip overscroll-none flex flex-col items-center justify-center  px-4 sm:px-6 md:px-8">
+      <HeroGrid />
       <>
         <div className="absolute top-8 left-8 text-xs text-muted-foreground font-mono">
           x:{mousePos.x}, y:{mousePos.y}

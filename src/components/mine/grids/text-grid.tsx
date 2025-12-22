@@ -5,9 +5,8 @@ import { toast } from "sonner";
 
 import TextFade from "../../../../registry/new-york/text/text-fade";
 import TextInertia from "../../../../registry/new-york/text/text-inertia";
-import { Badge } from "@/components/ui/badge";
 
-const Buttons = [
+export const TextArr = [
   {
     name: "Text Fade Effect",
     description: "Text fades in/out on scroll using GSAP.",
@@ -31,7 +30,7 @@ const Buttons = [
 const TextGrid = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
-      {Buttons.map((item, index) => (
+      {TextArr.map((item, index) => (
         <div
           key={index}
           className="relative border-b border-l border-dashed  aspect-square flex items-center text-xs

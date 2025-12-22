@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/mine/landing-page/navbar";
+import MouseFollower2 from "@/components/pixel-perfect/mouse-follower2";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 
 const Page = () => {
@@ -6,7 +6,8 @@ const Page = () => {
     <div className=" min-h-screen">
       <div className=" fixed top-4 right-4">
         <LightDarkMode />
-      </div>{" "}
+      </div>
+      <MouseFollower2 />
     </div>
   );
 };

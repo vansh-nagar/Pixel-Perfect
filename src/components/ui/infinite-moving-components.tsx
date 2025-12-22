@@ -74,7 +74,7 @@ export const InfiniteMovingComponents = ({
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20  overflow-hidden border-b border-muted",
+        "scroller relative z-20  overflow-hidden border-y border-muted",
         className
       )}
     >
@@ -111,14 +111,9 @@ export const InfiniteMovingComponents = ({
 export const BorderDecorator = () => {
   return (
     <>
-      {/* Circular border */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-muted border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>
-
-      {/* Horizontal line */}
-      <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-y-1/2 z-10 pointer-events-none"></div>
-
-      {/* Vertical line */}
-      <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-x-1/2 z-10 pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-muted rounded-full z-10 pointer-events-none"></div>
+      <div className="absolute top-1/2 left-0 right-0 h-px bg-muted"></div>
+      <div className="absolute top-0 bottom-0 left-1/2 w-px bg-muted"></div>
     </>
   );
 };

@@ -82,7 +82,7 @@ export function HeroSection() {
           v:{velocity} a:{velocity - lastVelocity > 0 ? "↑" : "↓"}
         </div>
         <div className="absolute bottom-8 left-8 text-xs font-mono text-muted-foreground">
-          θ:{angle.toFixed(1)}°
+          {/* θ:{angle.toFixed(1)}° */}
         </div>
 
         <div
@@ -102,7 +102,7 @@ export function HeroSection() {
       </>
 
       <div className="flex flex-col justify-center items-center w-full max-w-[280px] sm:max-w-[350px] md:max-w-[550px] lg:max-w-[750px] xl:max-w-[850px] z-10 relative pointer-events-auto mb-[6vh]">
-        <h1 className="text-3xl font-mono  sm:text-4xl md:text-6xl lg:text-7xl   text-center w-full justify-center items-center flex-col flex whitespace-pre leading-tight tracking-tight font-medium">
+        <h1 className="text-3xl font-mono  sm:text-4xl md:text-6xl lg:text-8xl   text-center w-full justify-center items-center flex-col flex whitespace-pre leading-tight tracking-tight font-medium">
           <span> Build Stunning </span>
           <span className="flex whitespace-pre">
             <span className="flex  transition-all   duration-200">
@@ -110,7 +110,7 @@ export function HeroSection() {
             </span>
           </span>
         </h1>
-        <p className="text-xs  sm:text-sm md:text-md lg:text-lg text-center mt-2 sm:mt-3 md:mt-4 px-2 sm:px-4 leading-relaxed">
+        <p className="text-xs  sm:text-sm md:text-md lg:text-lg xl:text-xl text-center mt-2 sm:mt-3 md:mt-4 px-2 sm:px-4 leading-relaxed">
           A pixel-perfect React component library for{" "}
           <br className=" hidden md:block" />
           modern web apps. And

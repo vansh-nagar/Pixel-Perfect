@@ -266,3 +266,17 @@ body::-webkit-scrollbar,
   animation: scroll var(--animation-duration, 40s)
     var(--animation-direction, forwards) linear infinite;
 }
+
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll-vertical {
+  animation: scroll-vertical var(--animation-duration, 40s)
+    var(--animation-direction, forwards) linear infinite;
+}

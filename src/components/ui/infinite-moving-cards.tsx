@@ -1,44 +1,20 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import React, { useEffect, useState } from "react";
 
-const logos = [
-  {
-    src: "/logo/cloud/react.svg",
-    alt: "React Logo",
-    name: "React",
-    showName: true,
-    width: "w-8",
-  },
-  {
-    src: "/logo/cloud/nextdotjs.svg",
-    alt: "Next.js Logo",
-    width: "w-8",
-  },
-  {
-    src: "/logo/cloud/tailwindcss.svg",
-    alt: "Tailwind CSS Logo",
-    width: "w-8",
-  },
-  {
-    src: "/logo/cloud/framer.svg",
-    alt: "Framer Logo",
-    width: "w-8",
-  },
-  {
-    src: "/logo/cloud/gsap.svg",
-    alt: "GSAP Logo",
-    width: "w-12",
-  },
-];
-
-export const InfiniteMovingStack = ({
+export const InfiniteMovingCards = ({
+  items,
   direction = "left",
   speed = "fast",
   pauseOnHover = true,
   className,
 }: {
+  items: {
+    quote: string;
+    name: string;
+    title: string;
+  }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
@@ -96,29 +72,44 @@ export const InfiniteMovingStack = ({
   return (
     <div
       ref={containerRef}
-      className={cn("scroller relative overflow-hidden", className)}
+      className={cn(
+        "scroller relative z-20 max-w-7xl overflow-hidden ",
+        className
+      )}
     >
       <ul
         ref={scrollerRef}
         className={cn(
-          "flex w-max shrink-0 flex-nowrap gap-4 ",
+          "flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4",
           start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {logos.map((item, idx) => (
-          <div
-            key={idx}
-            className="w-[200px] h-32 border-r border-muted flex items-center justify-center shrink-0"
+        {items.map((item, idx) => (
+          <li
+            className="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,#fafafa,#f5f5f5)] px-8 py-6 md:w-[450px] dark:border-zinc-700 dark:bg-[linear-gradient(180deg,#27272a,#18181b)]"
+            key={item.name}
           >
-            <li className="flex flex-col items-center justify-center">
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="h-12 w-12 object-contain dark:invert"
-              />
-            </li>
-          </div>
+            <blockquote>
+              <div
+                aria-hidden="true"
+                className="user-select-none pointer-events-none absolute -top-0.5 -left-0.5 -z-1 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
+              ></div>
+              <span className="relative z-20 text-sm leading-[1.6] font-normal text-neutral-800 dark:text-gray-100">
+                {item.quote}
+              </span>
+              <div className="relative z-20 mt-6 flex flex-row items-center">
+                <span className="flex flex-col gap-1">
+                  <span className="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                    {item.name}
+                  </span>
+                  <span className="text-sm leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
+                    {item.title}
+                  </span>
+                </span>
+              </div>
+            </blockquote>
+          </li>
         ))}
       </ul>
     </div>

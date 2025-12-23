@@ -54,7 +54,7 @@ const MorphButton = React.forwardRef<HTMLButtonElement, MorphButtonProps>(
         });
 
         const tl2 = gsap.timeline({ paused: true });
-        tl2.from(".text", { color: "#000000", scale: 1 }).to(".text", {
+        tl2.from(".text", { color: "#000000" }).to(".text", {
           color: "#ffffff",
           duration: 0.5,
           scale: 1.02,
@@ -104,7 +104,7 @@ const MorphButton = React.forwardRef<HTMLButtonElement, MorphButtonProps>(
             />
           </svg>
         </div>
-        <div className=" z-40  scale-100  text">{children ?? "Hover Me"}</div>
+        <div className="z-40 scale-100 text">{children ?? "Hover Me"}</div>
       </Button>
     );
   }

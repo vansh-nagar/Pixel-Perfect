@@ -64,9 +64,8 @@ const page = () => {
       <div className="pointer-events-none  relative  col-span-full col-start-1 row-start-14 mask-x-from-99% border-b z-50 " />
 
       {/* Row 6: Footer */}
-      <div className="col-start-3 row-start-15 flex flex-col w-[90vw] gap-2 relative overflow-hidden">
+      <div className="col-start-3 row-start-15 flex flex-col w-[90vw]">
         <Footer />
-        <StarBorder />
       </div>
 
       {/* Decorative borders - row span full */}

@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/new-york/borders/border2.tsx",
-      "content": "const Border2 = () => {\r\n  return (\r\n    <>\r\n      <span className=\"border-muted-foreground absolute -left-[0.5px] -top-[0px] block size-6   border-l-1 border-t-1 z-30\"></span>\r\n      <span className=\"border-muted-foreground absolute -right-px -top-px block size-6 border-r-1 border-t-1 z-30\"></span>\r\n      <span className=\"border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-b-1 border-l-1 z-30 \"></span>\r\n      <span className=\"border-muted-foreground absolute -bottom-px -right-px block size-6 border-b-1 border-r-1 z-30\"></span>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default Border2;\r\n",
+      "content": "const Border2 = () => (\r\n  <div className=\"relative w-full h-full\">\r\n    {/* Top left corner */}\r\n    <span className=\"absolute -top-0 -left-[0.5px] block size-6 border-t-1 border-l-1 border-muted-foreground z-30\" />\r\n    {/* Top right corner */}\r\n    <span className=\"absolute -top-px -right-px block size-6 border-t-1 border-r-1 border-muted-foreground z-30\" />\r\n    {/* Bottom left corner */}\r\n    <span className=\"absolute -bottom-px -left-[0.5px] block size-6 border-b-1 border-l-1 border-muted-foreground z-30\" />\r\n    {/* Bottom right corner */}\r\n    <span className=\"absolute -bottom-px -right-px block size-6 border-b-1 border-r-1 border-muted-foreground z-30\" />\r\n  </div>\r\n);\r\n\r\nexport default Border2;\r\n",
       "type": "registry:component",
       "target": "components/pixel-perfect/border2.tsx"
     }

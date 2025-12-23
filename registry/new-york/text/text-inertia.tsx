@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { SplitText } from "gsap/SplitText";
@@ -65,7 +65,7 @@ const TextInertia = ({
   });
 
   return (
-    <div className="flex justify-center items-center ">
+    <div className="flex items-center justify-center">
       <div className={cn("text-inertia", className)} {...props}>
         {text}
       </div>

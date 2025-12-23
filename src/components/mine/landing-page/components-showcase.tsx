@@ -27,7 +27,7 @@ const ComponentsShowcase = () => {
         <div className="text-xs text-muted-foreground/30">COMPONENTS</div>
         <StarBorder />
       </div>
-      <div className="grid grid-cols-[50px_1fr_50px] ">
+      <div className="grid grid-cols-[50px_1fr_50px] max-sm:grid-cols-[30px_1fr_30px] ">
         <div className=" border-r border-muted relative overflow-hidden">
           <StarBorder />
         </div>

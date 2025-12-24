@@ -17,7 +17,6 @@ export function HeroSection() {
   const last = useRef({ x: 0, y: 0 });
   const lastFrameTime = useRef(performance.now());
 
-  // Arrow is at bottom-left corner, calculate angle from arrow to mouse
   const arrowX = 32;
   const arrowY = typeof window !== "undefined" ? window.innerHeight - 32 : 0;
   const angle =
@@ -67,14 +66,14 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="w-full h-[calc(100vh-100px)] cursor-crosshair  relative  md:overflow-clip overscroll-none flex flex-col items-center justify-center  px-4 sm:px-6 md:px-8">
+    <section className="w-full h-[calc(100vh-100px)] cursor-none   relative  md:overflow-clip overscroll-none flex flex-col items-center justify-center  px-4 sm:px-6 md:px-8">
       <HeroGrid />
       <>
         <div className="absolute sm:top-8 sm:left-8 top-4 left-4 text-xs text-muted-foreground font-mono">
           x:{mousePos.x}, y:{mousePos.y}
           <br /> fps: {fps} | ms: {ms}
         </div>
-        <div className="absolute sm:bottom-8 sm:right-8 right-4 bottom-4 border-4 text-xs text-muted-foreground font-mono">
+        <div className="absolute sm:bottom-8 sm:right-8 right-4 bottom-4 text-xs text-muted-foreground font-mono">
           {" "}
           cell:{gx},{gy}
         </div>
@@ -88,14 +87,14 @@ export function HeroSection() {
         <div
           className="absolute h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent z-10 pointer-events-none w-full transition-opacity duration-200"
           style={{
-            top: `${mousePos.y - 72}px`,
+            top: `${mousePos.y - 75}px`,
             opacity: showIntersection ? 1 : 0,
           }}
         />
         <div
           className="absolute left-0 w-px bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-700 to-transparent z-10 pointer-events-none h-full transition-opacity duration-200"
           style={{
-            left: `${mousePos.x - 77}px`,
+            left: `${mousePos.x - 95}px`,
             opacity: showIntersection ? 1 : 0,
           }}
         />
@@ -121,7 +120,7 @@ export function HeroSection() {
 
         <div className="flex  flex-row flex-wrap  justify-center   gap-3 sm:gap-4 items-center mt-10 w-full ">
           <Link href="/blocks">
-            <Button className="  cursor-crosshair rounded-none" size="default">
+            <Button className="rounded-none" size="default">
               Browse Components
             </Button>
           </Link>
@@ -143,7 +142,6 @@ export function HeroSection() {
           className=" absolute inset-0 blur-[3px]   "
         />
       </div>
-      {/* <InfiniteImageScroller /> */}
     </section>
   );
 }

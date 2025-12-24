@@ -76,7 +76,7 @@ export function Footer() {
               </div>{" "}
             </div>
           </div>
-          <div className=" border-t border-muted  relative overflow-hidden flex flex-col p-3 gap-2">
+          <div className=" border-t border-b border-muted  relative overflow-hidden flex flex-col p-3 gap-2">
             <StarBorder />
             <div className="text-xs flex gap-1">
               STAR ON GITHUB [<StarsCount />]
@@ -94,10 +94,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className=" border-b border-r border-muted max-sm:hidden">
-          <div className="text-9xl font-pixelify  relative text-muted flex justify-center items-center overflow-hidden w-full">
-            pixel perfect <StarBorder />
-          </div>
+        <div className=" border-b border-r border-muted max-sm:hidden overflow-hidden relative flex justify-center items-center text-9xl font-pixelify text-muted ">
+          <StarBorder />
+          pixel perfect
         </div>
       </div>
     </>

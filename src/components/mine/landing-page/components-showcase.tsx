@@ -1,7 +1,9 @@
-import { InfiniteMovingComponents } from "@/components/ui/infinite-moving-components";
+import { ComponentTransition } from "@/components/ui/infinite-moving-components";
 import { ButtonsArr } from "../grids/button-grid";
 import StarBorder from "./star-border";
 import { Circle } from "lucide-react";
+import { BorderArr } from "../grids/border-grid";
+import { TextArr } from "../grids/text-grid";
 
 const ComponentsShowcase = () => {
   return (
@@ -32,17 +34,15 @@ const ComponentsShowcase = () => {
           <StarBorder />
         </div>
         <div className=" overflow-hidden">
-          <div className="relative p-3 text-xs text-muted-foreground/30">
-            BUTTONS : [{ButtonsArr.length}]
+          <div className="relative h-10 text-xs text-muted-foreground/30">
             <StarBorder />
           </div>
-          <InfiniteMovingComponents
-            componentArr={ButtonsArr}
-            speed={"slow"}
-            direction="right"
-          />
-          <div className="relative p-3 text-xs text-muted-foreground/30">
-            BUTTONS : [{ButtonsArr.length}]
+          <div className=" flex border-y border-muted">
+            <ComponentTransition componentArr={ButtonsArr} />
+            <ComponentTransition componentArr={BorderArr} />
+            <ComponentTransition componentArr={TextArr} />
+          </div>{" "}
+          <div className="relative h-10 text-xs text-muted-foreground/30">
             <StarBorder />
           </div>
         </div>

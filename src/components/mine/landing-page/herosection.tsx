@@ -73,7 +73,7 @@ export function HeroSection() {
           x:{mousePos.x}, y:{mousePos.y}
           <br /> fps: {fps} | ms: {ms}
         </div>
-        <div className="absolute sm:bottom-8 sm:right-8 right-4 bottom-4 text-xs text-muted-foreground font-mono">
+        <div className="absolute sm:bottom-8 sm:right-8 right-4 bottom-4 border- text-xs text-muted-foreground font-mono">
           {" "}
           cell:{gx},{gy}
         </div>

@@ -5,10 +5,11 @@ import { Navbar } from "@/components/mine/landing-page/navbar";
 import SocialProof from "@/components/mine/landing-page/social-proof";
 import StackUsed from "@/components/mine/landing-page/stack-used";
 import StarBorder from "@/components/mine/landing-page/star-border";
+import Pricing from "@/components/pricing";
 
 const page = () => {
   return (
-    <div className="relative w-full grid min-h-screen grid-cols-[1fr_1rem_auto_1rem_1fr] grid-rows-[auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px] [--pattern-fg:var(--color-gray-950)]/5 dark:bg-black dark:[--pattern-fg:var(--color-white)]/10">
+    <div className="relative w-full grid min-h-screen grid-cols-[1fr_1rem_auto_1rem_1fr] grid-rows-[auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto] [--pattern-fg:var(--color-gray-950)]/5 dark:bg-black dark:[--pattern-fg:var(--color-white)]/10">
       {/* Row 1: Navbar */}
       <div className="col-start-3 row-start-1 flex w-[90vw] px-3 sm:px-6 py-3 flex-col relative overflow-hidden">
         <Navbar />
@@ -52,19 +53,24 @@ const page = () => {
 
       <div className="pointer-events-none  relative  col-span-full col-start-1 row-start-12 mask-x-from-99% border-b z-50 " />
 
-      {/* <div className="col-start-3 row-start-13 flex flex-col w-[90vw]">
+      <div className="col-start-3 row-start-13 flex flex-col w-[90vw]">
         <SocialProof />
-      </div> */}
-
-      {/* Filler Section 2 */}
-      <div className="col-start-3 row-start-13 py-6 relative overflow-hidden">
-        <StarBorder />
       </div>
 
+      {/* New Section Above Footer */}
       <div className="pointer-events-none  relative  col-span-full col-start-1 row-start-14 mask-x-from-99% border-b z-50 " />
 
-      {/* Row 6: Footer */}
       <div className="col-start-3 row-start-15 flex flex-col w-[90vw]">
+        {/* Add your content for the new section here */}
+        <div className="text-center text-lg font-semibold">
+          <Pricing />
+        </div>
+      </div>
+
+      <div className="pointer-events-none  relative  col-span-full col-start-1 row-start-16 mask-x-from-99% border-b z-50 " />
+
+      {/* Row 6: Footer */}
+      <div className="col-start-3 row-start-17 flex flex-col w-[90vw]">
         <Footer />
       </div>
 

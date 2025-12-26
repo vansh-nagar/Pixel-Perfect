@@ -1,7 +1,6 @@
 import { Circle } from "lucide-react";
-import React from "react";
-import { InfiniteMovingTweets } from "@/components/ui/infinite-moving-tweets";
 import StarBorder from "./star-border";
+import { TweetCard } from "@/components/ui/tweet-card";
 
 const tweets = [
   {
@@ -51,6 +50,21 @@ const tweets = [
   },
 ];
 
+const TweetId = [
+  "2002690740145815768",
+  "2002733494146138119",
+  "2002733761440694703",
+  "2003190350769483865",
+  "2002779757772235197",
+  "2003013537430716554",
+  "2002718212031643957",
+  "2003001934463258679",
+  "2003165560675377431",
+  "2002760959069422071",
+  "2002677500263182741",
+  "2002726077362528574",
+];
+
 const SocialProof = () => {
   return (
     <div>
@@ -72,17 +86,14 @@ const SocialProof = () => {
             className="text-muted-foreground/30"
           />
         </div>
-        <div className="text-xs text-muted-foreground/30">
-          ✿ LOVED BY MANY ✿
-        </div>
+        <div className="text-xs text-muted-foreground/30">LOVED BY MANY</div>
         <StarBorder />
       </div>
-      <div className="grid h-[calc(100vh-100px)] grid-cols-[200px_auto_50px_auto_200px] overflow-hidden border-t border-muted">
-        <div className="relative overflow-hidden col-start-1 border-r border-muted">
-          <StarBorder />
-        </div>
-        <div className="relative overflow-hidden col-span-4 border-muted p-4">
-          SOCIAL PROOF INCOMMING
+      <div className="overflow-hidden border-t border-muted">
+        <div className="overflow-hidden grid grid-cols-3  ">
+          {TweetId.map((id) => (
+            <TweetCard key={id} id={id} />
+          ))}
           <StarBorder />
         </div>
       </div>

@@ -38,8 +38,8 @@ const ComponentsShowcase = () => {
             <StarBorder />
           </div>
           <div className=" flex border-y border-muted">
-            <ComponentTransition componentArr={ButtonsArr} />
-            <ComponentTransition componentArr={BorderArr} />
+            <ComponentTransition componentArr={ButtonsArr} className="  border-r border-muted" />
+            <ComponentTransition componentArr={BorderArr}  className="  border-r border-muted"/>
             <ComponentTransition componentArr={TextArr} />
           </div>{" "}
           <div className="relative h-10 text-xs text-muted-foreground/30">

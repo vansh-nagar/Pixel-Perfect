@@ -31,21 +31,22 @@ export default function Pricing() {
       <div className="mx-auto grid grid-rows-[auto_auto] ">
         <div className=" text-center relative overflow-hidden w-full py-10">
           <StarBorder />
-          <h2 className="text-balance text-3xl font-bold md:text-4xl lg:text-5xl">
+          <h2 className="text-balance text-3xl font-semibold md:text-4xl lg:text-5xl">
             Unlock Pixel Perfect UI Library
           </h2>
         </div>
         <div className="overflow-hidden relative">
-          <StarBorder />
 
           <div className="relative border-t  border-muted">
-            <div className="grid items-center gap-12 divide-y p-12 md:grid-cols-2 md:divide-x md:divide-y-0">
-              <div className="pb-12 text-center md:pb-0 md:pr-12">
+            <div className="grid items-center divide-y md:grid-cols-2 md:divide-x md:divide-y-0">
+              <div className="pb-12 text-center md:py-10 md:pr-12  border-muted relative overflow-hidden">
+                <StarBorder />
+
                 <h3 className="text-2xl font-semibold">Pixel Perfect Pro</h3>
                 <p className="mt-2 text-lg">
                   For designers, developers, and creators
                 </p>
-                <span className="mb-6 mt-12 inline-block text-6xl font-bold">
+                <span className="mb-6 mt-12 inline-block text-6xl">
                   <span className="text-4xl">$</span>3
                 </span>
 
@@ -59,8 +60,9 @@ export default function Pricing() {
                   Includes: All UI components, lifetime updates, commercial{" "}
                   <br /> use, and priority support
                 </p>
-              </div>
-              <div className="relative">
+              </div> 
+              <div className="relative h-full flex  justify-center items-pacenter overflow-hidden">
+                <StarBorder />
                 <ul role="list" className="space-y-4">
                   {[
                     "Access to 50+ pixel-perfect components",
@@ -70,7 +72,7 @@ export default function Pricing() {
                     "Priority email support",
                   ].map((item, index) => (
                     <li key={index} className="flex items-center gap-2">
-                      <Check className="size-3" />
+                      <Check className="size-6" />
                       <span>{item}</span>
                     </li>
                   ))}

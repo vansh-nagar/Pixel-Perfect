@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { Inter_Tight, Pixelify_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import LenisProvider from "@/components/providers/lenis-provider";
 
 // Default font
 const interTight = Inter_Tight({
@@ -36,14 +37,16 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <LenisProvider>
       <body
         className={`${interTight.variable} ${pixelify.variable} antialiased`}
-      >
+        >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
           <Toaster />
         </ThemeProvider>
       </body>
+        </LenisProvider>
     </html>
   );
 }

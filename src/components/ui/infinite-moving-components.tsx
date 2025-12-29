@@ -7,7 +7,7 @@ import StarBorder from "../mine/landing-page/star-border";
 
 export const ComponentTransition = ({
   componentArr,
-  interval = 3000,
+  interval = 5000,
   className,
 }: {
   componentArr: {
@@ -19,16 +19,21 @@ export const ComponentTransition = ({
   className?: string;
 }) => {
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [fade, setFade] = useState(true);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      let nextIdx = Math.floor(Math.random() * componentArr.length);
-      if (nextIdx === currentIdx && componentArr.length > 1) {
-        nextIdx = (nextIdx + 1) % componentArr.length;
-      }
-      setCurrentIdx(nextIdx);
+      setFade(false);
+      setTimeout(() => {
+        let nextIdx = Math.floor(Math.random() * componentArr.length);
+        if (nextIdx === currentIdx && componentArr.length > 1) {
+          nextIdx = (nextIdx + 1) % componentArr.length;
+        }
+        setCurrentIdx(nextIdx);
+        setFade(true);
+      }, 300); // fade out duration
     }, interval);
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -38,13 +43,21 @@ export const ComponentTransition = ({
   return (
     <div
       className={cn(
-        "relative z-20 w-full aspect-square border  overflow-hidden border-r  border-muted flex flex-col items-center justify-center",
+        "relative z-20 w-full aspect-square  overflow-hidden flex flex-col items-center justify-center",
         className
       )}
     >
       <StarBorder />
-      <div className="z-30 flex flex-col items-center justify-center w-full h-full p-2">
-        {componentArr[currentIdx].component}
+      <div className="z-30  w-full h-full p-2">
+        <div
+          key={currentIdx}
+          className={cn(
+            "transition-opacity duration-300 w-full h-full flex items-center justify-center",
+            fade ? "opacity-100" : "opacity-0"
+          )}
+        >
+          {componentArr[currentIdx].component}
+        </div>
         <div className="leading-2 absolute left-3 bottom-3">
           <p className="text-xs ">{componentArr[currentIdx].name}</p>
           <p className="text-[8px] text-muted-foreground">

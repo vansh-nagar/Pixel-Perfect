@@ -31,6 +31,10 @@ const navItems = [
     name: "Mouse Followers",
     component: <MouseFollower />,
   },
+  {
+    name: "Link Hover Effects",
+    component: <MouseFollower />,
+  },
 ];
 
 export function TabsNavigation() {

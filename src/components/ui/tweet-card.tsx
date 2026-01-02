@@ -9,14 +9,6 @@ interface TwitterIconProps {
   className?: string;
   [key: string]: unknown;
 }
-const Twitter = ({ className, ...props }: TwitterIconProps) => (
- <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" className="bi bi-twitter-x dark:invert" viewBox="0 0 16 16" id="Twitter-X--Streamline-Bootstrap" height="16" width="16">
-  <desc>
-    Twitter X Streamline Icon: https://streamlinehq.com
-  </desc>
-  <path d="M12.6 0.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867 -5.07 -4.425 5.07H0.316l5.733 -6.57L0 0.75h5.063l3.495 4.633L12.601 0.75Zm-0.86 13.028h1.36L4.323 2.145H2.865z" strokeWidth="1"></path>
-</svg>
-);
 
 const Verified = ({ className, ...props }: TwitterIconProps) => (
   <svg
@@ -125,7 +117,6 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
     </div>
     <a href={tweet.url} target="_blank" rel="noreferrer">
       <span className="sr-only">Link to tweet</span>
-      <Twitter className="text-muted-foreground hover:text-foreground size-5 items-start transition-all ease-in-out hover:scale-105" />
     </a>
   </div>
 );

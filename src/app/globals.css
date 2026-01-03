@@ -280,3 +280,4 @@ body::-webkit-scrollbar,
   animation: scroll-vertical var(--animation-duration, 40s)
     var(--animation-direction, forwards) linear infinite;
 }
+

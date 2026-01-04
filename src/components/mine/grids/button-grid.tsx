@@ -7,6 +7,7 @@ import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
 import ShinyButton from "../../../../registry/new-york/buttons/shiny-button";
 import { toast } from "sonner";
 import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
+import BorderGradientButton from "registry/new-york/buttons/border-gradient-button";
 
 export const ButtonsArr = [
   {
@@ -38,6 +39,12 @@ export const ButtonsArr = [
     description: "A button that follows the mouse cursor with hover effects.",
     component: <MouseFollowerButton />,
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%20Button.json",
+  },
+  {
+    name: "Border Gradient Button",
+    description: "A button with a gradient border effect.",
+    component: <BorderGradientButton />,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Border%20Gradient%20Button.json",
   },
 ];
 

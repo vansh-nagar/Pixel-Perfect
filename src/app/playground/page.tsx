@@ -84,7 +84,7 @@ const Page = () => {
         <div className="h-20 bg-white w-1 -rotate-45 origin-top left-16  top-0 absolute blur-md"></div>
       </Button>
 
-      {/* <div className="bg-[radial-gradient(circle_at_center,rgba(34,211,238,1),rgba(139,92,246,1))] bg-clip-text text-transparent">
+      <div className="bg-[radial-gradient(circle_at_center,rgba(34,211,238,1),rgba(139,92,246,1))] bg-clip-text text-transparent">
         Hello How Are You
       </div>
 
@@ -92,7 +92,7 @@ const Page = () => {
         <span className="relative z-10 bg-background w-full h-full rounded-md px-2 flex justify-center items-center text-white text-xs font-light ">
           Gradient Border
         </span>
-      </Button> */}
+      </Button>
     </div>
   );
 };

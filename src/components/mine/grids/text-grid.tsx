@@ -5,6 +5,7 @@ import { toast } from "sonner";
 
 import TextFade from "../../../../registry/new-york/text/text-fade";
 import TextInertia from "../../../../registry/new-york/text/text-inertia";
+import TextGradient from "registry/new-york/text/text-gradient";
 
 export const TextArr = [
   {
@@ -24,6 +25,13 @@ export const TextArr = [
     ),
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Inertia%20Effect.json",
     tag: "Hover me",
+  },
+  {
+    name: "Text Gradient Effect",
+    description: "Gradient text effect using CSS.",
+    component: <TextGradient />,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Gradient%20Effect.json",
+    tag: "Example",
   },
 ];
 

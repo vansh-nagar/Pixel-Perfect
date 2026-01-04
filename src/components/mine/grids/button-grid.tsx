@@ -6,6 +6,7 @@ import MorphImageButton from "../../../../registry/new-york/buttons/morph-image-
 import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
 import ShinyButton from "../../../../registry/new-york/buttons/shiny-button";
 import { toast } from "sonner";
+import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
 
 export const ButtonsArr = [
   {
@@ -31,6 +32,12 @@ export const ButtonsArr = [
     description: "A shiny button with hover effects.",
     component: <ShinyButton />,
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Shiny%20Button.json",
+  },
+  {
+    name: "Mouse Follower Button",
+    description: "A button that follows the mouse cursor with hover effects.",
+    component: <MouseFollowerButton />,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%20Button.json",
   },
 ];
 

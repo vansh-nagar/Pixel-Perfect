@@ -36,10 +36,9 @@ export default function Pricing() {
           </h2>
         </div>
         <div className="overflow-hidden relative">
-
           <div className="relative border-t  border-muted">
             <div className="grid items-center divide-y md:grid-cols-2 md:divide-x md:divide-y-0">
-              <div className="pb-12 text-center md:py-10 md:pr-12  border-muted relative overflow-hidden">
+              <div className="pb-12 text-center md:py-10 md:pr-12  border-muted relative overflow-hidden p-4 ">
                 <StarBorder />
 
                 <h3 className="text-2xl font-semibold">Pixel Perfect Pro</h3>
@@ -60,8 +59,8 @@ export default function Pricing() {
                   Includes: All UI components, lifetime updates, commercial{" "}
                   <br /> use, and priority support
                 </p>
-              </div> 
-              <div className="relative h-full flex  justify-center items-pacenter overflow-hidden">
+              </div>
+              <div className="relative h-full flex  justify-center items-center overflow-hidden p-4">
                 <StarBorder />
                 <ul role="list" className="space-y-4">
                   {[
@@ -73,7 +72,7 @@ export default function Pricing() {
                   ].map((item, index) => (
                     <li key={index} className="flex items-center gap-2">
                       <Check className="size-6" />
-                      <span>{item}</span>
+                      <span className=" max-sm:text-xs text-left">{item}</span>
                     </li>
                   ))}
                 </ul>

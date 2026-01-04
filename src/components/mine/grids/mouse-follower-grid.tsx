@@ -2,8 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
-import MouseFollower1 from "../../../../registry/new-york/mouse-follower/mouse-follower1";
-import MouseFollower2 from "../../../../registry/new-york/mouse-follower/mouse-follower2";
+import MouseFollower2 from "registry/new-york/mouse-follower/mouse-follower2";
+import MouseFollower1 from "registry/new-york/mouse-follower/mouse-follower1";
 
 const Buttons = [
   {
@@ -14,7 +14,7 @@ const Buttons = [
   },
   {
     name: "Mouse Follower 2",
-    description: "Mouse follower image trail with pure DOM.",
+    description: "Image trail mouse follower using GSAP.",
     component: <MouseFollower2 />,
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%202.json",
   },
@@ -26,10 +26,10 @@ const MouseFollower = () => {
       {Buttons.map((item, index) => (
         <div
           key={index}
-          className="relative border-b border-l border-dashed  aspect-square flex items-center justify-center "
+          className="relative border-b border-l border-dashed  aspect-square flex justify-center items-center "
         >
           <BorderDecorator />
-          <div className=" z-30">{item.component}</div>
+          {item.component}
 
           <div className=" leading-1 absolute left-1.5  bottom-1.5">
             <p className="text-xs ">{item.name}</p>

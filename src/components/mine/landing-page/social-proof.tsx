@@ -90,7 +90,7 @@ const SocialProof = () => {
         <StarBorder />
       </div>
       <div className="overflow-hidden border-t border-muted">
-        <div className="overflow-hidden grid grid-cols-3  ">
+        <div className="overflow-hidden grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3   ">
           {TweetId.map((id) => (
             <TweetCard key={id} id={id} />
           ))}

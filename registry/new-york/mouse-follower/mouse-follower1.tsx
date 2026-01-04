@@ -175,7 +175,7 @@ const MouseFollower1 = () => {
   return (
     <div
       ref={containerRef}
-      className="overflow-hidden h-96 w-96 flex items-center justify-center "
+      className="overflow-hidden h-full w-full flex items-center justify-center border "
     >
       {/* Flair images container */}
       <div className="fixed inset-0 pointer-events-none">

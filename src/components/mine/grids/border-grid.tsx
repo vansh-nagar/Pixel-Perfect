@@ -7,6 +7,9 @@ import Border2 from "../../../../registry/new-york/borders/border2";
 import Intersection1 from "../../../../registry/new-york/borders/intersection1";
 import Intersection2 from "../../../../registry/new-york/borders/intersection2";
 
+import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
+import StarBorders from "registry/new-york/borders/star-border";
+
 export const BorderArr = [
   {
     name: "Border 1",
@@ -27,7 +30,7 @@ export const BorderArr = [
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%201.json",
   },
   {
-    name: "Intersection (Scope)",
+    name: "Section Intersection",
     description: "An intersection design using CSS.",
     component: (
       <Intersection2>
@@ -35,6 +38,17 @@ export const BorderArr = [
           Your Content <br /> Here
         </div>
       </Intersection2>
+    ),
+    image: "",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%202.json",
+  },
+  {
+    name: "Intersection (Scope)",
+    description: "An intersection design using CSS.",
+    component: (
+      <StarBorders>
+        <MouseFollowerButton />
+      </StarBorders>
     ),
     image: "",
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%202.json",

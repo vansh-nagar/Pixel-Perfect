@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-const Page = () => {
+const MouseFollower2 = () => {
   const followerRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isButtonHovering, setisButtonHovering] = useState(false);
@@ -93,4 +93,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default MouseFollower2;

@@ -23,9 +23,10 @@ const page = () => {
     gsap.from(split.chars, {
       duration: 1,
       opacity: 0,
-      y: 50,
+      y: 300,
       ease: "back.out(1.7)",
       stagger: 0.05,
+      delay: 0.5,
     });
 
     gsap.from(".container", {
@@ -52,12 +53,17 @@ const page = () => {
     <div className=" bg-accent-foreground">
       <div className="container overflow-hidden  bg-background h-screen hero-section">
         <Navbar />
-        <section className="flex flex-col w-full  h-full justify-start items-center">
-          <span className={`text-[400px] ${anton.className}`}>RUNE</span>
-          <span className={`text-6xl -mt-24 font-light`}>
+        <FloatingIcons />
+        <section className="flex flex-col w-full  h-full justify-start items-center ">
+          <span
+            className={`text-[400px] ${anton.className} z-50 gsap-text overflow-hidden`}
+          >
+            RUNE
+          </span>
+          <span className={`text-6xl -mt-24 font-light z-50`}>
             Icons for every screen.{" "}
           </span>
-          <div className=" mt-10 flex gap-4">
+          <div className=" mt-10 flex gap-4 z-50">
             <ShinyCtaButton />
             <ShinyCtaButton />
           </div>

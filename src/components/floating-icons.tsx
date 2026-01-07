@@ -31,14 +31,7 @@ const iconNames = [
   "TrendingUp",
 ];
 
-const colors = [
-  "#3b82f6",
-  "#8b5cf6",
-  "#ec4899",
-  "#f59e0b",
-  "#10b981",
-  "#06b6d4",
-];
+const mutedColor = "#9ca3af"; // Muted gray
 
 export function FloatingIcons() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,9 +42,11 @@ export function FloatingIcons() {
 
     // Animate each icon
     iconsRef.current.forEach((icon, index) => {
+      const iconData = randomIcons[index];
+      if (!iconData) return;
+
       const timeline = gsap.timeline({ repeat: -1 });
       const randomY = gsap.utils.random(-20, 20);
-      const randomRotation = gsap.utils.random(-10, 10);
       const randomDuration = gsap.utils.random(4, 8);
 
       timeline
@@ -59,7 +54,7 @@ export function FloatingIcons() {
           icon,
           {
             y: randomY,
-            rotation: randomRotation,
+            rotation: iconData.rotation,
             duration: randomDuration,
             ease: "sine.inOut",
           },
@@ -68,7 +63,7 @@ export function FloatingIcons() {
         .to(
           icon,
           {
-            opacity: gsap.utils.random(0.3, 0.8),
+            opacity: iconData.opacity,
             duration: randomDuration / 2,
             ease: "sine.inOut",
           },
@@ -81,23 +76,84 @@ export function FloatingIcons() {
     };
   }, []);
 
-  const getIcon = (iconName: string, color: string) => {
+  const getIcon = (iconName: string, size: number, strokeWidth: number) => {
     const IconComponent = Icons[
       iconName as keyof typeof Icons
     ] as React.ComponentType<any>;
     if (IconComponent) {
-      return <IconComponent size={40} strokeWidth={1.5} style={{ color }} />;
+      return (
+        <IconComponent
+          size={size}
+          strokeWidth={strokeWidth}
+          style={{ color: mutedColor }}
+        />
+      );
     }
     return null;
   };
 
-  const randomIcons = Array.from({ length: 12 }).map((_, i) => ({
-    id: i,
-    name: iconNames[Math.floor(Math.random() * iconNames.length)],
-    top: `${Math.random() * 80 + 10}%`,
-    left: `${Math.random() * 80 + 10}%`,
-    color: colors[Math.floor(Math.random() * colors.length)],
-  }));
+  const randomIcons = [
+    {
+      id: 0,
+      name: "Rocket",
+      top: "10%",
+      left: "20%",
+      size: 300,
+      strokeWidth: 2,
+      rotation: 15,
+      opacity: 0.6,
+    },
+    {
+      id: 2,
+      name: "Heart",
+      top: "25%",
+      left: "72%",
+      size: 100,
+      strokeWidth: 2,
+      rotation: -10,
+      opacity: 0.5,
+    },
+    {
+      id: 3,
+      name: "Zap",
+      top: "50%",
+      left: "60%",
+      size: 200,
+      strokeWidth: 2,
+      rotation: 25,
+      opacity: 0.7,
+    },
+    {
+      id: 4,
+      name: "Code",
+      top: "50%",
+      left: "2%",
+      size: 150,
+      strokeWidth: 2,
+      rotation: -20,
+      opacity: 0.4,
+    },
+    {
+      id: 9,
+      name: "Smile",
+      top: "60%",
+      left: "88%",
+      size: 300,
+      strokeWidth: 2,
+      rotation: 10,
+      opacity: 0.6,
+    },
+    {
+      id: 10,
+      name: "Settings",
+      top: "85%",
+      left: "15%",
+      size: 100,
+      strokeWidth: 2,
+      rotation: 360,
+      opacity: 0.5,
+    },
+  ];
 
   return (
     <div
@@ -116,7 +172,7 @@ export function FloatingIcons() {
             left: icon.left,
           }}
         >
-          {getIcon(icon.name, icon.color)}
+          {getIcon(icon.name, icon.size, icon.strokeWidth)}
         </div>
       ))}
     </div>

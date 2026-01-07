@@ -44,7 +44,7 @@ const TextFade = ({
     <div ref={container} className="h-full w-full">
       <span
         ref={text}
-        className={`flex items-center justify-start gap-x-1.5 flex-wrap${
+        className={`flex items-center justify-start gap-x-1.5 flex-wrap  ${
           className ? ` ${className}` : ""
         }`}
       >

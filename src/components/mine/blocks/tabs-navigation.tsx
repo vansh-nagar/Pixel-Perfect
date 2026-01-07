@@ -31,15 +31,15 @@ const navItems = [
     name: "Mouse Followers",
     component: <MouseFollower />,
   },
-  {
-    name: "Link Hover Effects",
-    component: <MouseFollower />,
-  },
+  // {
+  //   name: "Link Hover Effects",
+  //   component: <MouseFollower />,
+  // },
 ];
 
 export function TabsNavigation() {
   return (
-    <Tabs defaultValue="Buttons" className="w-full ">
+    <Tabs defaultValue="Text Effects" className="w-full ">
       <TabsList className="flex gap-4  overflow-x-auto overflow-y-hidden   w-full mask-r-from-98%">
         {navItems.map((item) => (
           <TabsTrigger

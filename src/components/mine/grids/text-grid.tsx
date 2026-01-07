@@ -2,17 +2,22 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
+import { useState } from "react";
 
 import TextFade from "../../../../registry/new-york/text/text-fade";
 import TextInertia from "../../../../registry/new-york/text/text-inertia";
 import TextGradient from "registry/new-york/text/text-gradient";
+import TextAssemble from "registry/new-york/text/text-assemble";
 
 export const TextArr = [
   {
     name: "Text Fade Effect",
     description: "Text fades in/out on scroll using GSAP.",
     component: (
-      <TextFade textContent="I design and build pixel-perfect digital experiences where precision, performance, and aesthetics work together seamlessly." />
+      <TextFade
+        className="text-7xl"
+        textContent="I design and build pixel-perfect digital experiences where precision, performance, and aesthetics work together seamlessly."
+      />
     ),
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Fade%20Effect.json",
     tag: "On Scroll",
@@ -21,7 +26,10 @@ export const TextArr = [
     name: "Text Inertia Effect",
     description: "Text follows mouse with inertia using GSAP.",
     component: (
-      <TextInertia text="Crafting refined, pixel-perfect web experiences that balance design clarity with technical excellence." />
+      <TextInertia
+        className="text-7xl"
+        text="Crafting refined, pixel-perfect web experiences that balance design clarity with technical excellence."
+      />
     ),
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Inertia%20Effect.json",
     tag: "Hover me",
@@ -29,73 +37,106 @@ export const TextArr = [
   {
     name: "Text Gradient Effect",
     description: "Gradient text effect using CSS.",
-    component: <TextGradient />,
+    component: (
+      <TextGradient>
+        Labore excepteur est et Lorem mollit duis ea esse officia. Irure
+        incididunt incididunt nostrud esse cillum enim. Nisi excepteur dolor
+        incididunt cupidatat.
+      </TextGradient>
+    ),
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Gradient%20Effect.json",
     tag: "Example",
+  },
+  {
+    name: "Text Assemble Effect",
+    description: "Assemble text effect using GSAP.",
+    component: <TextAssemble />,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Assemble%20Effect.json",
+    tag: "On Scroll",
   },
 ];
 
 const TextGrid = () => {
+  const [selected, setSelected] = useState<number>(0);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
-      {TextArr.map((item, index) => (
-        <div
-          key={index}
-          className="relative border-b border-l border-dashed  aspect-square flex items-center text-xs
-           justify-center p-2 "
-        >
-          <BorderDecorator />
-          <div className=" z-30   text-justify">{item.component}</div>
+    <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-3 md:gap-4 h-[85vh]">
+      <aside className="border-r border-dashed overflow-y-auto pr-2 -mr-[0.5px]">
+        <div className="sticky top-0 bg-background z-10 py-2 md:py-3 border-dashed border mb-1 ">
+          <p className="text-xs uppercase text-muted-foreground tracking-wider px-2">
+            Text Effects
+          </p>
+        </div>
+        <ul className="space-y-1 pb-8">
+          {TextArr.map((item, idx) => {
+            const active = idx === selected;
+            return (
+              <li key={idx}>
+                <button
+                  onClick={() => setSelected(idx)}
+                  className={`w-full text-left px-2 py-2 rounded-none border border-dashed ${
+                    active
+                      ? "bg-muted/30 text-foreground"
+                      : "hover:bg-muted/20 text-muted-foreground"
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-medium">{item.name}</span>
+                    {item.tag && (
+                      <span className="text-[9px] border border-dashed px-1 py-0.5">
+                        {item.tag}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[10px] mt-1 line-clamp-2">
+                    {item.description}
+                  </p>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </aside>
 
-          <div className=" leading-1 absolute left-1.5  bottom-1.5">
-            <p className="text-xs ">
-              {item.name}{" "}
-              {item.tag && (
-                <span className="text-[8px] rounded-sm border-dashed">
-                  {item.tag}
-                </span>
-              )}
-            </p>
-            <p className="text-[8px] text-muted-foreground leading-2.5">
-              {item.description}
-            </p>
-          </div>
-
-          <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
-            <div className=" border-t border-dashed "></div>
+      <main className="relative h-full overflow-y-auto">
+        <div className="relative h-full w-full border border-dashed p-3 md:p-4">
+          <div className="absolute right-3 top-3 z-30">
             <Button
-              size={"sm"}
-              variant={"ghost"}
+              size="sm"
+              variant="ghost"
               onClick={() => {
-                navigator.clipboard.writeText(item.link);
+                navigator.clipboard.writeText(TextArr[selected].link);
                 toast.success("Link copied to clipboard!");
               }}
-              className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
+              className="text-xs border border-dashed rounded-none"
             >
-              <Copy className=" size-3" /> Copy
-              <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-              <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
+              <Copy className="size-3 mr-1" /> Copy
             </Button>
-            <div />
-            <div className=" border-r border-dashed h-full -mr-[0.5px] " />
+          </div>
+
+          <div className="relative z-20 h-full w-full">
+            <div className="mb-3">
+              <h2 className="text-sm font-semibold">
+                {TextArr[selected].name}
+                {TextArr[selected].tag && (
+                  <span className="ml-2 align-middle text-[10px] border border-dashed px-1 py-0.5">
+                    {TextArr[selected].tag}
+                  </span>
+                )}
+              </h2>
+              <p className="text-[11px] text-muted-foreground">
+                {TextArr[selected].description}
+              </p>
+            </div>
+
+            <div className="h-[calc(100%-56px)] w-full overflow-hidden  overflow-y-auto">
+              {TextArr[selected].component}
+            </div>
           </div>
         </div>
-      ))}
+      </main>
     </div>
   );
 };
 
 export default TextGrid;
-
-export const BorderDecorator = () => {
-  return (
-    <>
-      <span className="border-muted-foreground absolute -left-[0.5px] -top-[0px] block size-6   border-dashed border-l-1 border-t-1 z-30"></span>
-      <span className="border-muted-foreground absolute -right-px -top-px block size-6 border-dashed border-r-1 border-t-1 z-30"></span>
-      <span className="border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-dashed border-b-1 border-l-1 z-30 "></span>
-      <span className="border-muted-foreground absolute -bottom-px -right-px block size-6 border-b-1 border-r-1 border-dashed z-30"></span>
-
-      <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px] mt-[1px]  border-dashed"></span>
-    </>
-  );
-};

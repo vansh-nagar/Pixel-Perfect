@@ -36,7 +36,6 @@ const MouseFollower1 = () => {
   useEffect(() => {
     const wrapper = gsap.utils.wrap(0, Image.length);
 
-    // Handle mouse movement
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
 
@@ -45,7 +44,6 @@ const MouseFollower1 = () => {
         y: e.clientY,
       };
 
-      // Check if mouse is within container bounds
       const rect = containerRef.current.getBoundingClientRect();
       boundsRef.current = {
         left: rect.left,
@@ -62,7 +60,6 @@ const MouseFollower1 = () => {
 
       isHoveringRef.current = isInContainer;
 
-      // Hide all particles when outside container
       if (!isInContainer) {
         flairRefs.current.forEach((img) => {
           if (img) img.style.opacity = "0";
@@ -70,7 +67,6 @@ const MouseFollower1 = () => {
       }
     };
 
-    // Animation timeline for each flair
     const playAnimation = (shape: HTMLImageElement) => {
       const tl = gsap.timeline();
       tl.from(shape, {
@@ -96,9 +92,7 @@ const MouseFollower1 = () => {
         );
     };
 
-    // Animate image at current mouse position
     const animateImage = () => {
-      // Only animate if hovering over container
       if (!isHoveringRef.current) return;
 
       const wrappedIndex = wrapper(indexRef.current);
@@ -112,7 +106,6 @@ const MouseFollower1 = () => {
         clearProps: "all",
       });
 
-      // Clamp position to container bounds
       const bounds = boundsRef.current;
       const clampedX = Math.max(
         bounds.left,
@@ -135,14 +128,12 @@ const MouseFollower1 = () => {
       indexRef.current++;
     };
 
-    // Main ticker function
     const imageTrail = () => {
       const travelDistance = Math.hypot(
         lastMousePosRef.current.x - mousePosRef.current.x,
         lastMousePosRef.current.y - mousePosRef.current.y
       );
 
-      // Interpolate mouse position for smoothness
       cachedMousePosRef.current.x = gsap.utils.interpolate(
         cachedMousePosRef.current.x || mousePosRef.current.x,
         mousePosRef.current.x,
@@ -160,10 +151,8 @@ const MouseFollower1 = () => {
       }
     };
 
-    // Add event listener
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Add ticker
     gsap.ticker.add(imageTrail);
 
     return () => {
@@ -177,7 +166,6 @@ const MouseFollower1 = () => {
       ref={containerRef}
       className="overflow-hidden h-full w-full flex items-center justify-center border "
     >
-      {/* Flair images container */}
       <div className="fixed inset-0 pointer-events-none">
         {Image.concat(Image).map((img, i) => (
           <img

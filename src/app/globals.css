@@ -289,3 +289,44 @@ body::-webkit-scrollbar,
   border-radius: 8px;
 }
 
+
+
+.shader {
+  position: relative;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.shader-layer {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+}
+
+.specular {
+  mix-blend-mode: color-dodge;
+  background-attachment: fixed;
+}
+
+.mask {
+  mix-blend-mode: multiply;
+}
+
+.gradient-sparrow {
+  background-image: linear-gradient(
+    0deg,
+    hsl(359, 60%, 40%),
+    hsl(16, 60%, 45%),
+    hsl(33, 60%, 50%),
+    hsl(45, 60%, 55%),
+    hsl(58, 60%, 60%),
+    hsl(58, 60%, 65%),
+    hsl(58, 60%, 70%),
+    hsl(96, 60%, 65%),
+    hsl(146, 60%, 60%),
+    hsl(183, 60%, 55%),
+    hsl(225, 60%, 50%),
+    hsl(265, 60%, 45%),
+    hsl(303, 60%, 40%)
+  );
+}

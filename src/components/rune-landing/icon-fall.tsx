@@ -43,7 +43,6 @@ const IconFall = () => {
   const isHoveringRef = useRef(false);
   const boundsRef = useRef({ left: 0, right: 0, top: 0, bottom: 0 });
 
-  // Get icon component by name
   const getIcon = (iconName: string) => {
     const IconComponent = Icons[
       iconName as keyof typeof Icons
@@ -57,7 +56,6 @@ const IconFall = () => {
   useEffect(() => {
     const wrapper = gsap.utils.wrap(0, IconList.length);
 
-    // Handle mouse movement
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
 
@@ -66,7 +64,6 @@ const IconFall = () => {
         y: e.clientY,
       };
 
-      // Check if mouse is within container bounds
       const rect = containerRef.current.getBoundingClientRect();
       boundsRef.current = {
         left: rect.left,
@@ -83,7 +80,6 @@ const IconFall = () => {
 
       isHoveringRef.current = isInContainer;
 
-      // Hide all particles when outside container
       if (!isInContainer) {
         flairRefs.current.forEach((img) => {
           if (img) img.style.opacity = "0";
@@ -91,7 +87,6 @@ const IconFall = () => {
       }
     };
 
-    // Animation timeline for each flair
     const playAnimation = (shape: HTMLDivElement) => {
       const tl = gsap.timeline();
       tl.from(shape, {
@@ -117,9 +112,7 @@ const IconFall = () => {
         );
     };
 
-    // Animate icon at current mouse position
     const animateImage = () => {
-      // Only animate if hovering over container
       if (!isHoveringRef.current) return;
 
       const wrappedIndex = wrapper(indexRef.current);
@@ -133,7 +126,6 @@ const IconFall = () => {
         clearProps: "all",
       });
 
-      // Clamp position to container bounds
       const bounds = boundsRef.current;
       const clampedX = Math.max(
         bounds.left,
@@ -156,14 +148,12 @@ const IconFall = () => {
       indexRef.current++;
     };
 
-    // Main ticker function
     const imageTrail = () => {
       const travelDistance = Math.hypot(
         lastMousePosRef.current.x - mousePosRef.current.x,
         lastMousePosRef.current.y - mousePosRef.current.y
       );
 
-      // Interpolate mouse position for smoothness
       cachedMousePosRef.current.x = gsap.utils.interpolate(
         cachedMousePosRef.current.x || mousePosRef.current.x,
         mousePosRef.current.x,
@@ -181,10 +171,8 @@ const IconFall = () => {
       }
     };
 
-    // Add event listener
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Add ticker
     gsap.ticker.add(imageTrail);
 
     return () => {
@@ -198,7 +186,6 @@ const IconFall = () => {
       ref={containerRef}
       className="overflow-hidden absolute inset-0 h-full w-full flex items-center justify-center border pointer-events-none "
     >
-      {/* Flair icons container */}
       <div className="fixed inset-0 pointer-events-none">
         {IconList.concat(IconList).map((iconName, i) => (
           <div

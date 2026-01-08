@@ -9,7 +9,7 @@ import { X } from "lucide-react";
 import TextGradient from "registry/new-york/text/text-gradient";
 gsap.registerPlugin(Flip);
 
-const page = () => {
+const LegionsDev = () => {
   const Box = useRef<HTMLDivElement>(null);
   const tl2 = useRef<GSAPTimeline | null>(null);
 
@@ -187,4 +187,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default LegionsDev;

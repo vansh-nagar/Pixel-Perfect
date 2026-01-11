@@ -9,7 +9,7 @@ import { X, Layers } from "lucide-react";
 
 gsap.registerPlugin(MotionPathPlugin);
 
-const Page = () => {
+const MotionPath = () => {
   const layerTl = useRef<GSAPTimeline | null>(null);
   const [isExploded, setIsExploded] = useState(false);
 
@@ -124,8 +124,8 @@ const Page = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center items-center h-screen perspective-distant overflow-hidden bg-background">
-      <div className="fixed top-4 right-4 flex flex-col gap-2 z-50">
+    <div className="relative flex flex-col justify-center items-center perspective-distant overflow-hidden bg-background w-full h-screen">
+      <div className="fixed top-11 right-1 flex flex-col gap-2 z-50">
         <LightDarkMode />
         <Button
           size="icon"
@@ -237,4 +237,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default MotionPath;

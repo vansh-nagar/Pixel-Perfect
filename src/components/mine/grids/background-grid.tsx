@@ -5,31 +5,18 @@ import { Copy } from "lucide-react";
 import Gradient1 from "../../../../registry/new-york/background/gradient1";
 import { toast } from "sonner";
 import Gradient2 from "registry/new-york/background/gradient2";
-import Gradient3 from "registry/new-york/background/gradient3";
 import Gradient4 from "registry/new-york/background/gradient4";
 
 const Buttons = [
   {
-    name: "Gradient 1",
-    description: "A simple radial gradient background.",
     component: <Gradient1 />,
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Gradient%201.json",
   },
   {
-    name: "Gradient 2",
-    description: "A simple radial gradient background.",
     component: <Gradient2 />,
     link: "",
   },
   {
-    name: "Gradient 3",
-    description: "A simple radial gradient background.",
-    component: <Gradient3 />,
-    link: "",
-  },
-  {
-    name: "Gradient 2",
-    description: "A simple radial gradient background.",
     component: <Gradient4 />,
     link: "",
   },

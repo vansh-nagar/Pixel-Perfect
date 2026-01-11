@@ -3,8 +3,8 @@ import ButtonGrid from "../grids/button-grid";
 import BorderGrid from "../grids/border-grid";
 import BackgroundGrid from "../grids/background-grid";
 import TextGrid from "../grids/text-grid";
-import ImageGrid from "../grids/image-grid";
 import MouseFollower from "../grids/mouse-follower-grid";
+import SvgPathEffectGrid from "../grids/svg-path-effect-grid";
 
 const navItems = [
   {
@@ -30,6 +30,10 @@ const navItems = [
   {
     name: "Mouse Followers",
     component: <MouseFollower />,
+  },
+  {
+    name: "SVG Path Effects",
+    component: <SvgPathEffectGrid />,
   },
   // {
   //   name: "Link Hover Effects",

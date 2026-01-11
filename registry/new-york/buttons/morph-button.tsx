@@ -74,13 +74,11 @@ const MorphButton = React.forwardRef<HTMLButtonElement, MorphButtonProps>(
       { scope: buttonRef }
     );
     return (
-      <Button
+      <button
         ref={buttonRef}
-        variant={variant}
-        size={size}
         disabled={disabled}
         className={cn(
-          "relative button cursor-pointer overflow-hidden",
+          "relative button cursor-pointer overflow-hidden bg-white text-black hover:bg-white px-3 py-1.5 rounded-md text-sm font-medium border",
           className
         )}
         {...props}
@@ -97,7 +95,7 @@ const MorphButton = React.forwardRef<HTMLButtonElement, MorphButtonProps>(
           >
             <path
               className="path"
-              fill="#000000 "
+              fill="#000000"
               strokeWidth="0px"
               vectorEffect="non-scaling-stroke"
               d="M 0 100 V 100 Q 50 100 100 100 V 100 z"
@@ -105,7 +103,7 @@ const MorphButton = React.forwardRef<HTMLButtonElement, MorphButtonProps>(
           </svg>
         </div>
         <div className="z-40 scale-100 text">{children ?? "Hover Me"}</div>
-      </Button>
+      </button>
     );
   }
 );

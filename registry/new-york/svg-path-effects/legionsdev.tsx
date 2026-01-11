@@ -92,9 +92,8 @@ const LegionsDev = () => {
   }, []);
 
   return (
-    <div className=" flex flex-col justify-center items-center gap-10 py-4 perspective-distant">
-      <div className=" fixed top-4 right-4 flex flex-col gap-2 z-50">
-        <LightDarkMode />
+    <div className=" flex flex-col justify-center items-center gap-10 py-4 perspective-distant w-full h-full">
+      <div className=" fixed top-11 right-1 flex flex-col gap-2 z-50">
         <Button
           size={"icon"}
           className=" rounded-none border-dashed "
@@ -107,10 +106,7 @@ const LegionsDev = () => {
         </Button>
       </div>
       <div className="c1 h-[30vh] border w-[50vw] rounded-md border-dashed overflow-hidden p-2 blur-sm">
-        <TextGradient>
-          {" "}
-          LIKE • FOLLOW • STAY TUNED ✦ Building cool things every day
-        </TextGradient>
+        <TextGradient> LIKE • FOLLOW • STAY</TextGradient>
       </div>
       <div className="w-[50vw] flex gap-32 items-center  ">
         <Button
@@ -118,7 +114,7 @@ const LegionsDev = () => {
             tl2.current?.play();
           }}
           variant={"ghost"}
-          className="-rotate-45 text-xs absolute  right-40"
+          className="-rotate-45 text-xs absolute  right-40 z-50"
         >
           Click To See <br /> Magiccccc
         </Button>
@@ -180,7 +176,6 @@ const LegionsDev = () => {
       <div className="c2 h-screen border w-[50vw] rounded-md border-dashed p-2 blur-sm">
         <TextGradient>
           Code • Ship • Repeat ★ Don’t just watch — build with me ★ ☆ Real
-          projects. Real progress. No noise. ✧ ꕤ ✱ ✧ ✦ ✫ ✬ ✭ ✮ ✯ ✰ ★ ☆ ✵ ✶ ✷ ✸
         </TextGradient>
       </div>
     </div>

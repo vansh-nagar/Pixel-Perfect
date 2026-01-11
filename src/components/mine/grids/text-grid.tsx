@@ -98,9 +98,22 @@ const TextGrid = () => {
         </ul>
       </aside>
 
-      <main className="relative h-full overflow-y-auto">
-        <div className="relative h-full w-full border border-dashed p-3 md:p-4">
-          <div className="absolute right-3 top-3 z-30">
+      <main className="relative h-full overflow-hidden">
+        <div className="relative h-full w-full border border-dashed flex flex-col">
+          <div className="flex items-center justify-between px-3 md:px-4 py-2 border-b border-dashed shrink-0">
+            <div>
+              <h2 className="text-sm font-semibold">
+                {TextArr[selected].name}
+                {TextArr[selected].tag && (
+                  <span className="ml-2 align-middle text-[10px] border border-dashed px-1 py-0.5">
+                    {TextArr[selected].tag}
+                  </span>
+                )}
+              </h2>
+              <p className="text-[11px] text-muted-foreground">
+                {TextArr[selected].description}
+              </p>
+            </div>
             <Button
               size="sm"
               variant="ghost"
@@ -114,24 +127,23 @@ const TextGrid = () => {
             </Button>
           </div>
 
-          <div className="relative z-20 h-full w-full">
-            <div className="mb-3">
-              <h2 className="text-sm font-semibold">
-                {TextArr[selected].name}
-                {TextArr[selected].tag && (
-                  <span className="ml-2 align-middle text-[10px] border border-dashed px-1 py-0.5">
-                    {TextArr[selected].tag}
-                  </span>
-                )}
-              </h2>
-              <p className="text-[11px] text-muted-foreground">
-                {TextArr[selected].description}
-              </p>
-            </div>
-
-            <div className="h-[calc(100%-56px)] w-full overflow-hidden  overflow-y-auto">
-              {TextArr[selected].component}
-            </div>
+          <div
+            className="flex-1 overflow-y-auto overflow-x-hidden"
+            id="scroll-container"
+          >
+            {selected === 0 || selected === 3 ? (
+              // For scroll-based animations, provide scrollable space
+              <div className="min-h-[300vh] w-full">
+                <div className="h-screen flex items-center justify-center p-4">
+                  {TextArr[selected].component}
+                </div>
+              </div>
+            ) : (
+              // For other effects, just center them
+              <div className="h-full flex items-center justify-center p-4">
+                {TextArr[selected].component}
+              </div>
+            )}
           </div>
         </div>
       </main>

@@ -12,13 +12,13 @@ import StarBorders from "registry/new-york/borders/star-border";
 
 export const BorderArr = [
   {
-    name: "Border 1",
+    name: "Square Border",
     description: "A dashed border design using CSS.",
     component: <Border1 />,
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Border%201.json",
   },
   {
-    name: "Border 2",
+    name: "Simple Dashed Border",
     description: "A border design using CSS.",
     component: <Border2 />,
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Border%202.json",
@@ -30,7 +30,7 @@ export const BorderArr = [
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%201.json",
   },
   {
-    name: "Section Intersection",
+    name: "Star Borders",
     description: "An intersection design using CSS.",
     component: (
       <Intersection2>
@@ -45,11 +45,7 @@ export const BorderArr = [
   {
     name: "Intersection (Scope)",
     description: "An intersection design using CSS.",
-    component: (
-      <StarBorders>
-        <MouseFollowerButton />
-      </StarBorders>
-    ),
+    component: <StarBorders />,
     image: "",
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%202.json",
   },

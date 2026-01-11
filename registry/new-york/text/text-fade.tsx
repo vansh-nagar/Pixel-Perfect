@@ -29,14 +29,12 @@ const TextFade = ({
       stagger: 0.1,
       color: "#f3efe6",
       filter: "blur(0px)",
-      repeat: -1,
-      // Uncomment below to enable scroll trigger
-      // scrollTrigger: {
-      //   trigger: container.current,
-      //   start: "bottom bottom",
-      //   end: "top 20%",
-      //   scrub: 1,
-      // },
+      scrollTrigger: {
+        trigger: container.current,
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: 1,
+      },
     });
   });
 

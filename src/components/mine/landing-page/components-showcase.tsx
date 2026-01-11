@@ -3,7 +3,7 @@ import { ButtonsArr } from "../grids/button-grid";
 import StarBorder from "./star-border";
 import { Circle } from "lucide-react";
 import { BorderArr } from "../grids/border-grid";
-import { TextArr } from "../grids/text-grid";
+import { MouseFollowerArr } from "../grids/mouse-follower-grid";
 
 const ComponentsShowcase = () => {
   return (
@@ -46,7 +46,7 @@ const ComponentsShowcase = () => {
               componentArr={BorderArr}
               className="  border-r max-md:border-b border-muted"
             />
-            <ComponentTransition componentArr={TextArr} />
+            <ComponentTransition componentArr={MouseFollowerArr} />
           </div>{" "}
           <div className="relative h-10 text-xs text-muted-foreground/30">
             <StarBorder />

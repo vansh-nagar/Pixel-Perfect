@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import MouseFollower1 from "registry/new-york/mouse-follower/mouse-follower1";
 import IconFall from "@/components/rune-landing/icon-fall";
 
-const Buttons = [
+export const MouseFollowerArr = [
   {
     name: "Image Fall",
     description: "Image trail mouse follower using GSAP.",
@@ -29,7 +29,7 @@ const Buttons = [
 const MouseFollower = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2  gap-2">
-      {Buttons.map((item, index) => (
+      {MouseFollowerArr.map((item, index) => (
         <div
           key={index}
           className="relative border-b border-l border-dashed  aspect-square flex justify-center items-center "

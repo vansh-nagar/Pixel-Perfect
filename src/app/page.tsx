@@ -9,7 +9,7 @@ import Pricing from "@/components/pricing";
 
 const page = () => {
   return (
-    <div className="relative w-full grid min-h-screen grid-cols-[1fr_1rem_auto_1rem_1fr] grid-rows-[auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto] [--pattern-fg:var(--color-gray-950)]/5 dark:bg-black dark:[--pattern-fg:var(--color-white)]/10">
+    <div className="relative w-full grid min-h-screen grid-cols-[1fr_1rem_auto_1rem_1fr] grid-rows-[auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto_1px_auto] [--pattern-fg:var(--color-gray-950)]/5 dark:bg-black dark:[--pattern-fg:var(--color-white)]/10 overflow-hidden">
       {/* Row 1: Navbar */}
       <div className="col-start-3 row-start-1 flex w-[90vw] px-3 sm:px-6 py-3 flex-col relative overflow-hidden">
         <Navbar />

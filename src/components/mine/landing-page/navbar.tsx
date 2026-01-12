@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { FlaskConical, GithubIcon } from "lucide-react";
+import { FlaskConical, GithubIcon, Rainbow } from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { StarsCount } from "@/components/mine/landing-page/stars-count";
+import { ShaderAnimation } from "@/components/shader-animation";
 
 export function Navbar({ className = "" }: { className?: string }) {
   return (
@@ -33,11 +34,14 @@ export function Navbar({ className = "" }: { className?: string }) {
         <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>
           <Button
             variant="outline"
-            className="border-dashed rounded-none"
+            className="border-dashed rounded-none relative overflow-hidden group animate-rainbow bg-[linear-gradient(45deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] active:scale-[0.95]  group"
             aria-label="GitHub"
           >
-            <GithubIcon />
-            <StarsCount />
+            <div className="z-0 absolute inset-[1.5px] bg-background/95 group-hover:bg-background/40  backdrop-blur-lg transition-all saturate-200" />
+            <span className="z-10 text-foreground pointer-events-none flex gap-2 justify-center items-center">
+              <GithubIcon />
+              <StarsCount />
+            </span>
           </Button>
         </Link>
         <Link href={"/playground"}>

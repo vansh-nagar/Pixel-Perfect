@@ -4,6 +4,7 @@ import React, { useRef, useCallback } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/mine/landing-page/navbar";
 
 const STRING_FREQUENCIES = [82.41, 110.0, 146.83, 196.0, 246.94, 329.63];
 
@@ -233,6 +234,7 @@ const GuitarString = ({
 
   return (
     <g ref={containerRef}>
+      <Navbar />
       <defs>
         <linearGradient
           id={`grad-${index}`}

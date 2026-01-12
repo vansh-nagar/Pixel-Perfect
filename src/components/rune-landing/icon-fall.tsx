@@ -184,7 +184,7 @@ const IconFall = () => {
   return (
     <div
       ref={containerRef}
-      className="overflow-hidden absolute inset-0 h-full w-full flex items-center justify-center border pointer-events-none "
+      className="overflow-hidden absolute inset-0 h-full w-full flex items-center justify-center pointer-events-none "
     >
       <div className="fixed inset-0 pointer-events-none">
         {IconList.concat(IconList).map((iconName, i) => (

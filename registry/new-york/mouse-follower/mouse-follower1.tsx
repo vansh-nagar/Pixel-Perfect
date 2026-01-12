@@ -164,7 +164,7 @@ const MouseFollower1 = () => {
   return (
     <div
       ref={containerRef}
-      className="overflow-hidden h-full w-full flex items-center justify-center border "
+      className="overflow-hidden h-full w-full flex items-center justify-center "
     >
       <div className="fixed inset-0 pointer-events-none">
         {Image.concat(Image).map((img, i) => (

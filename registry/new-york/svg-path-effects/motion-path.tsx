@@ -124,7 +124,7 @@ const MotionPath = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center items-center perspective-distant overflow-hidden bg-background w-full h-screen">
+    <div className="relative flex flex-col justify-center items-center perspective-distant overflow-hidden w-full h-screen">
       <div className="fixed top-11 right-1 flex flex-col gap-2 z-50">
         <LightDarkMode />
         <Button
@@ -226,12 +226,6 @@ const MotionPath = () => {
             Layer 1: Base Path
           </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-8 text-center text-sm text-muted-foreground">
-        <p className="opacity-60">
-          Click the layers button to explode the animation layers
-        </p>
       </div>
     </div>
   );

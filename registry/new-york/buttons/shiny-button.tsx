@@ -69,7 +69,7 @@ const ShinyButton = React.forwardRef<HTMLButtonElement, ShinyButtonProps>(
             className={cn("relative z-0", className)}
             {...props}
           >
-            {children ?? "Click Me"}
+            {children ?? "Hover Me"}
           </Button>
           <span className="shiny-mask"></span>
         </div>

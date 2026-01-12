@@ -22,7 +22,7 @@ const Buttons = [
 
 const SvgPathEffectGrid = () => {
   return (
-    <div className="grid grid-cols-1  gap-2">
+    <div className="grid grid-cols-1  gap-0">
       {Buttons.map((item, index) => (
         <div
           key={index}

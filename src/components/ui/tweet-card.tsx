@@ -4,6 +4,7 @@ import { getTweet, type Tweet } from "react-tweet/api";
 
 import { cn } from "@/lib/utils";
 import StarBorder from "../mine/landing-page/star-border";
+import { FaTwitter } from "react-icons/fa6";
 
 interface TwitterIconProps {
   className?: string;
@@ -80,20 +81,23 @@ export const TweetNotFound = ({
 export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
   <div className="flex flex-row items-start justify-between tracking-normal">
     <div className="flex items-center space-x-3">
-      <a href={tweet.user.url} target="_blank" rel="noreferrer">
+      {/* <a href={tweet.user.url} target="_blank" rel="noreferrer"> */}
+      <div className="p-[1px] relative ">
         <img
           title={`Profile picture of ${tweet.user.name}`}
           alt={tweet.user.screen_name}
           height={48}
           width={48}
           src={tweet.user.profile_image_url_https}
-          className="border-border/50 overflow-hidden rounded-full border"
+          className="border-border/50 overflow-hidden rounded-full border z-20 relative"
         />
-      </a>
+        <div className=" absolute inset-0 animate-rainbow bg-[linear-gradient(45deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] aspect-square border rounded-full blur-[4px] z-10" />
+      </div>
+      {/* </a> */}
       <div className="flex flex-col gap-0.5">
-        <a
-          href={tweet.user.url}
-          target="_blank"
+        <div
+          // href={tweet.user.url}
+          // target="_blank"
           rel="noreferrer"
           className="text-foreground flex items-center font-medium whitespace-nowrap transition-opacity hover:opacity-80"
         >
@@ -102,22 +106,23 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
             (tweet.user.is_blue_verified && (
               <Verified className="ml-1 inline size-4 text-blue-500" />
             ))}
-        </a>
+        </div>
         <div className="flex items-center space-x-1">
-          <a
-            href={tweet.user.url}
-            target="_blank"
+          <div
+            // href={tweet.user.url}
+            // target="_blank"
             rel="noreferrer"
             className="text-muted-foreground hover:text-foreground text-sm transition-colors"
           >
             @{truncate(tweet.user.screen_name, 16)}
-          </a>
+          </div>
         </div>
       </div>
     </div>
-    <a href={tweet.url} target="_blank" rel="noreferrer">
-      <span className="sr-only">Link to tweet</span>
-    </a>
+    {/* <a href={tweet.url} target="_blank" rel="noreferrer"> */}
+
+    <span className="sr-only">Link to tweet</span>
+    {/* </a> */}
   </div>
 );
 

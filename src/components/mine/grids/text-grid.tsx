@@ -24,6 +24,18 @@ import TextScatter from "registry/new-york/text/text-scatter";
 import TextScatter1 from "registry/new-york/text/text-scatter1";
 import TextZRotate from "registry/new-york/text/text-z-rotate";
 import TextZRotate2 from "registry/new-york/text/text-z-rotate2";
+import TextVideo from "registry/new-york/text/text-video";
+import TextXDisplacement from "registry/new-york/text/text-x-displacement";
+import TextReveal from "registry/new-york/text/text-reveal";
+import TextReveal2 from "registry/new-york/text/text-reveal2";
+import TextBlackHole from "registry/new-york/text/text-black-hole";
+import TextBurnNeon from "registry/new-york/text/text-burn-neon";
+import TextDnaWave from "registry/new-york/text/text-dna-wave";
+import TextBrokenGlass from "registry/new-york/text/text-broken-glass";
+import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
+import TextGlitchPortal from "registry/new-york/text/text-glitch-portal";
+import TextScannerBeam from "registry/new-york/text/text-scanner-beam";
+import TextTypewriterGlitch from "registry/new-york/text/text-typewriter-glitch";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
 
@@ -33,6 +45,78 @@ const TextGrid = () => {
   const itemsPerPage = 6;
 
   const TextArr = [
+    {
+      name: "Broken Glass Assemble",
+      description: "Letters start shattered & rotated → snap into place.",
+      component: (
+        <TextBrokenGlass className="text-2xl font-bold">
+          JUST GIVE IT A STAR
+        </TextBrokenGlass>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Broken%20Glass.json",
+      hasStagger: false,
+    },
+    {
+      name: "Matrix Rain Decode",
+      description: "Columns of random symbols fall → lock into real text.",
+      component: (
+        <TextMatrixRain className="text-2xl font-bold font-mono">
+          JUST GIVE IT A STAR
+        </TextMatrixRain>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Matrix%20Rain.json",
+      hasStagger: false,
+    },
+    {
+      name: "Glitch Warp Portal",
+      description: "RGB split + scale blur → collapse into clean text.",
+      component: (
+        <TextGlitchPortal className="text-2xl font-bold">
+          JUST GIVE IT A STAR
+        </TextGlitchPortal>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Glitch%20Portal.json",
+      hasStagger: false,
+    },
+    {
+      name: "Scanner Beam Reveal",
+      description: "Horizontal glowing beam reveals text as it moves.",
+      component: (
+        <TextScannerBeam className="text-2xl font-bold">
+          JUST GIVE IT A STAR
+        </TextScannerBeam>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scanner%20Beam.json",
+      hasStagger: false,
+    },
+    {
+      name: "Typewriter Malfunction",
+      description: "Types → deletes → types wrong → finally correct.",
+      component: (
+        <TextTypewriterGlitch className="text-2xl font-bold font-mono">
+          JUST GIVE IT A STAR
+        </TextTypewriterGlitch>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Typewriter%20Glitch.json",
+      hasStagger: false,
+    },
+    {
+      name: "Text Y Animation 2",
+      description: "Variant Y-axis animation effect.",
+      component: (
+        <TextReveal className="text-xl">JUST GIVE IT A STAR</TextReveal>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      hasStagger: false,
+    },
+
+    {
+      name: "Text Y Animation 2",
+      description: "Variant Y-axis animation effect.",
+      component: <TextVideo>JUST GIVE IT A STAR</TextVideo>,
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      hasStagger: false,
+    },
     {
       name: "Text Y Animation 2",
       description: "Variant Y-axis animation effect.",
@@ -46,6 +130,15 @@ const TextGrid = () => {
       component: <TextZRotate staggerFrom={staggerFrom} />,
       link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
       hasStagger: true,
+    },
+    {
+      name: "Text Y Animation 2",
+      description: "Variant Y-axis animation effect.",
+      component: (
+        <TextReveal2 className="text-xl">JUST GIVE IT A STAR</TextReveal2>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      hasStagger: false,
     },
     {
       name: "Text Y Animation 2",
@@ -133,6 +226,39 @@ const TextGrid = () => {
       link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Y%20Animation4.json",
       hasStagger: true,
     },
+    {
+      name: "Black Hole Reveal",
+      description: "Letters come from center, stretched & sucked outward.",
+      component: (
+        <TextBlackHole className="text-2xl font-bold">
+          JUST GIVE IT A STAR
+        </TextBlackHole>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Black%20Hole.json",
+      hasStagger: false,
+    },
+    {
+      name: "Burn-In Neon",
+      description: "Random flicker → letters glow red → turn white.",
+      component: (
+        <TextBurnNeon className="text-2xl font-bold">
+          JUST GIVE IT A STAR
+        </TextBurnNeon>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Burn%20Neon.json",
+      hasStagger: false,
+    },
+    {
+      name: "DNA Wave Reveal",
+      description: "Letters move in sine wave while revealing.",
+      component: (
+        <TextDnaWave className="text-2xl font-bold">
+          JUST GIVE IT A STAR
+        </TextDnaWave>
+      ),
+      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20DNA%20Wave.json",
+      hasStagger: false,
+    },
   ];
 
   const totalPages = Math.ceil(TextArr.length / itemsPerPage);
@@ -140,7 +266,7 @@ const TextGrid = () => {
   const paginatedItems = TextArr.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 overflow-hidden">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
         {paginatedItems.map((item, index) => (
           <div

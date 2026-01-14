@@ -1,5 +1,5 @@
-import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
+import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
 
 export function StarsCount() {
   const [stars, setStars] = useState<number | null>(null);
@@ -27,5 +27,9 @@ export function StarsCount() {
     return <span>??</span>;
   }
 
-  return <span className=" flex  gap-1 items-center">{stars}</span>;
+  return (
+    <TextMatrixRain className=" flex  gap-1 items-center">
+      {String(stars)}
+    </TextMatrixRain>
+  );
 }

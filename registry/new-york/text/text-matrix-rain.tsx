@@ -8,12 +8,14 @@ interface TextMatrixRainProps {
   children: string;
   className?: string;
   duration?: number;
+  repeat?: boolean;
 }
 
 export default function TextMatrixRain({
   children,
   className = "",
   duration = 2,
+  repeat = true,
 }: TextMatrixRainProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -82,18 +84,22 @@ export default function TextMatrixRain({
       };
 
       runAnimation();
-      const repeatInterval = setInterval(() => {
-        intervals.forEach(clearInterval);
-        intervals.length = 0;
-        runAnimation();
-      }, (duration + 1) * 1000);
+
+      let repeatInterval: NodeJS.Timeout | undefined;
+      if (repeat) {
+        repeatInterval = setInterval(() => {
+          intervals.forEach(clearInterval);
+          intervals.length = 0;
+          runAnimation();
+        }, (duration + 1) * 1000);
+      }
 
       return () => {
-        clearInterval(repeatInterval);
+        if (repeatInterval) clearInterval(repeatInterval);
         intervals.forEach(clearInterval);
       };
     },
-    { scope: containerRef, dependencies: [children, duration] }
+    { scope: containerRef, dependencies: [children, duration, repeat] }
   );
 
   return (

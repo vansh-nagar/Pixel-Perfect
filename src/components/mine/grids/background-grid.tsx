@@ -6,17 +6,30 @@ import Gradient1 from "../../../../registry/new-york/background/gradient1";
 import { toast } from "sonner";
 import Gradient2 from "registry/new-york/background/gradient2";
 import Gradient4 from "registry/new-york/background/gradient4";
+import Gradient3 from "registry/new-york/background/gradient3";
 
-const Buttons = [
+export const BackgroudArr = [
   {
+    name: "Gradient 1",
+    description: "A smooth gradient background design.",
     component: <Gradient1 />,
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Gradient%201.json",
   },
   {
+    name: "Gradient 2",
+    description: "A vibrant gradient background design.",
     component: <Gradient2 />,
     link: "",
   },
   {
+    name: "Gradient 3",
+    description: "A colorful gradient background design.",
+    component: <Gradient3 />,
+    link: "",
+  },
+  {
+    name: "Gradient 4",
+    description: "A colorful gradient background design.",
     component: <Gradient4 />,
     link: "",
   },
@@ -25,7 +38,7 @@ const Buttons = [
 const BackgroundGrid = () => {
   return (
     <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-2 `}>
-      {Buttons.map((item, index) => (
+      {BackgroudArr.map((item, index) => (
         <div
           key={index}
           className={`relative border-dashed aspect-video border`}

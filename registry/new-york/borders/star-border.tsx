@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 const StarBorders = () => {
   return (
-    <div className="relative h-full w-full flex justify-center items-center border-dashed border">
+    <div className="relative h-full w-full flex justify-center items-center border-dashed border overflow-hidden">
       <Star className="absolute -top-[7.9px] -right-[7.6px] z-50" />
       <Star className="absolute -bottom-[8px] -right-[7.8px] z-50" />
       <Star className="absolute -top-[7.9px] -left-[7.8px] z-50" />

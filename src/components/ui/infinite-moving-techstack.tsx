@@ -109,7 +109,7 @@ export const InfiniteMovingStack = ({
         {logos.map((item, idx) => (
           <div
             key={idx}
-            className="w-[200px] h-32 max-sm:h-20 border-r border-muted flex items-center justify-center shrink-0"
+            className="w-[200px] max-sm:w-[100px] h-32 max-sm:h-20 border-r border-muted flex items-center justify-center shrink-0"
           >
             <li className="flex flex-col items-center justify-center">
               <img

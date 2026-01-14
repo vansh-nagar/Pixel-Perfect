@@ -55,7 +55,7 @@ export function Footer() {
         <div className="text-xs text-muted-foreground/30">FOOTER</div>
         <StarBorder />
       </div>
-      <div className="flex-col w-full justify-between grid sm:grid-cols-[auto_1fr] grid-col-1 ">
+      <div className="flex-col w-full justify-between grid grid-cols-[auto_1fr]  grid-col-1  ">
         <div className="border-r  border-muted grid grid-rows-[auto_auto]">
           <div className="p-3 relative overflow-hidden">
             <StarBorder />
@@ -94,7 +94,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className=" border-b border-r border-muted max-sm:hidden overflow-hidden relative flex justify-center items-center text-9xl font-pixelify text-muted ">
+        <div className=" border-b border-r border-muted  overflow-hidden relative flex justify-center items-center text-9xl  max-sm:text-6xl font-pixelify text-muted ">
           <StarBorder />
           pixel perfect
         </div>

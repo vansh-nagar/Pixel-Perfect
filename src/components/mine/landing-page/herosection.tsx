@@ -1,13 +1,20 @@
 "use client";
 
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import { Model3D } from "@/components/ui/3dmodel";
 import { HeroGrid } from "./canvas/hero-grid";
+import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
+import TextTypewriterGlitch from "registry/new-york/text/text-typewriter-glitch";
 
-function DebugOverlay({ mouse, velocity, lastVelocity, fps, ms }: {
+function DebugOverlay({
+  mouse,
+  velocity,
+  lastVelocity,
+  fps,
+  ms,
+}: {
   mouse: React.RefObject<{ x: number; y: number }>;
   velocity: React.RefObject<number>;
   lastVelocity: React.RefObject<number>;
@@ -35,7 +42,8 @@ function DebugOverlay({ mouse, velocity, lastVelocity, fps, ms }: {
         cell:{gx},{gy}
       </div>
       <div className="absolute sm:top-8 sm:right-8 right-4 top-4 text-xs text-gray-400 font-mono">
-        v:{velocity.current.toFixed(1)} a:{velocity.current - lastVelocity.current > 0 ? "↑" : "↓"}
+        v:{velocity.current.toFixed(1)} a:
+        {velocity.current - lastVelocity.current > 0 ? "↑" : "↓"}
       </div>
       <div className="absolute sm:bottom-8 sm:left-8 left-4 bottom-4 text-xs font-mono text-muted-foreground">
         θ:{angle.toFixed(1)}°
@@ -52,7 +60,9 @@ export function HeroSection() {
   const [fps, setFps] = useState<number>(0);
   const [ms, setMs] = useState<number>(0);
   const last = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const lastFrameTime = useRef<number>(typeof performance !== 'undefined' ? performance.now() : 0);
+  const lastFrameTime = useRef<number>(
+    typeof performance !== "undefined" ? performance.now() : 0
+  );
   const sectionRef = useRef<HTMLElement | null>(null);
   const isActive = useRef<boolean>(true);
 
@@ -69,7 +79,7 @@ export function HeroSection() {
         lastVelocity.current = velocity.current;
         velocity.current = Math.hypot(dx, dy);
         mouse.current = { x: e.clientX, y: e.clientY };
-        forceRender(v => v + 1);
+        forceRender((v) => v + 1);
       });
     };
     const handleMouseEnter = () => {
@@ -94,11 +104,11 @@ export function HeroSection() {
     };
   }, []);
 
-
   useEffect(() => {
     let animationFrameId: number;
     const measureFrame = () => {
-      const currentTime = typeof performance !== 'undefined' ? performance.now() : 0;
+      const currentTime =
+        typeof performance !== "undefined" ? performance.now() : 0;
       const deltaTime = currentTime - lastFrameTime.current;
       const currentFps = deltaTime > 0 ? Math.round(1000 / deltaTime) : 0;
       setFps(currentFps);
@@ -136,9 +146,11 @@ export function HeroSection() {
         <p className="text-xs  sm:text-sm md:text-md lg:text-lg xl:text-xl text-center mt-2 sm:mt-3 md:mt-4 px-2 sm:px-4 leading-relaxed">
           A pixel-perfect React component library for{" "}
           <br className=" hidden md:block" />
-          modern web apps. And
-          <span className="mx-1  p-0.5 px-1 bg-muted rounded-none ">
-            It's also open source.
+          <span className="flex items-center">
+            modern web apps. And
+            <TextTypewriterGlitch className="mx-1  p-0.5 px-1 bg-muted rounded-none ">
+              It's also open source.
+            </TextTypewriterGlitch>
           </span>
         </p>
 

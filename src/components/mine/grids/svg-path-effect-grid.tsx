@@ -1,11 +1,18 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Copy, Guitar } from "lucide-react";
+import { Copy } from "lucide-react";
 import { toast } from "sonner";
 import LegionsDev from "registry/new-york/svg-path-effects/legionsdev";
 import MotionPath from "registry/new-york/svg-path-effects/motion-path";
+import Guitar from "registry/new-york/svg-path-effects/guitar";
 
 const Buttons = [
+  {
+    name: "Guitar",
+    description: "Motion path effect using SVG.",
+    component: <Guitar />,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%202.json",
+  },
   {
     name: "Svg Path Effect",
     description: "",
@@ -14,14 +21,8 @@ const Buttons = [
   },
   {
     name: "Beam Motion Path",
-    description: "Motion path effect using SVG.",
+    description: "Motio n path effect using SVG.",
     component: <MotionPath />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%202.json",
-  },
-  {
-    name: "Guitar",
-    description: "Motion path effect using SVG.",
-    component: <Guitar />,
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%202.json",
   },
 ];

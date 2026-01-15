@@ -275,7 +275,7 @@ const Guitar = () => {
   const startYOffset = 100;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full p-8 bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950">
+    <div className="flex flex-col items-center justify-center min-h-screen w-full p-8 bg-gradient-to-b from-[#1e1e1e] to-[#121212]">
       <div className="relative w-full max-w-4xl">
         <div
           className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-[450px] z-10 rounded-l-md"

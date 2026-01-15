@@ -5,6 +5,7 @@ import BackgroundGrid from "../grids/background-grid";
 import TextGrid from "../grids/text-grid";
 import MouseFollower from "../grids/mouse-follower-grid";
 import SvgPathEffectGrid from "../grids/svg-path-effect-grid";
+import MotionAnimationsGrid from "../grids/motion-animations-grid";
 
 const navItems = [
   {
@@ -35,6 +36,10 @@ const navItems = [
     name: "SVG Path Effects",
     component: <SvgPathEffectGrid />,
   },
+  {
+    name: "Motion (Framer)",
+    component: <MotionAnimationsGrid />,
+  },
   // {
   //   name: "Link Hover Effects",
   //   component: <MouseFollower />,
@@ -43,7 +48,7 @@ const navItems = [
 
 export function TabsNavigation() {
   return (
-    <Tabs defaultValue="Text Effects" className="w-full ">
+    <Tabs defaultValue="Motion (Framer)" className="w-full ">
       <TabsList className="flex gap-4  overflow-x-auto overflow-y-hidden   w-full mask-r-from-98%">
         {navItems.map((item) => (
           <TabsTrigger

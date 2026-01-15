@@ -11,12 +11,14 @@ interface TextBurnNeonProps {
   children: string;
   className?: string;
   duration?: number;
+  repeat?: boolean;
 }
 
 export default function TextBurnNeon({
   children,
   className = "",
   duration = 2,
+  repeat = true,
 }: TextBurnNeonProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -26,7 +28,10 @@ export default function TextBurnNeon({
       const split = new SplitText(textRef.current, { type: "chars" });
       const chars = split.chars;
 
-      const masterTl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+      const masterTl = gsap.timeline({
+        repeat: repeat ? -1 : 0,
+        repeatDelay: 1,
+      });
 
       masterTl.set(chars, {
         opacity: 0,

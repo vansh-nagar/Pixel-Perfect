@@ -34,7 +34,6 @@ import TextDnaWave from "registry/new-york/text/text-dna-wave";
 import TextBrokenGlass from "registry/new-york/text/text-broken-glass";
 import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
 import TextGlitchPortal from "registry/new-york/text/text-glitch-portal";
-import TextScannerBeam from "registry/new-york/text/text-scanner-beam";
 import TextTypewriterGlitch from "registry/new-york/text/text-typewriter-glitch";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
@@ -42,7 +41,7 @@ type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
 const TextGrid = () => {
   const [staggerFrom, setStaggerFrom] = useState<StaggerFrom>("start");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 3;
 
   const TextArr = [
     {
@@ -78,17 +77,17 @@ const TextGrid = () => {
       link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Glitch%20Portal.json",
       hasStagger: false,
     },
-    {
-      name: "Scanner Beam Reveal",
-      description: "Horizontal glowing beam reveals text as it moves.",
-      component: (
-        <TextScannerBeam className="text-2xl font-bold">
-          JUST GIVE IT A STAR
-        </TextScannerBeam>
-      ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scanner%20Beam.json",
-      hasStagger: false,
-    },
+    // {
+    //   name: "Scanner Beam Reveal",
+    //   description: "Horizontal glowing beam reveals text as it moves.",
+    //   component: (
+    //     <TextScannerBeam className="text-2xl font-bold">
+    //       JUST GIVE IT A STAR
+    //     </TextScannerBeam>
+    //   ),
+    //   link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scanner%20Beam.json",
+    //   hasStagger: false,
+    // },
     {
       name: "Typewriter Malfunction",
       description: "Types → deletes → types wrong → finally correct.",

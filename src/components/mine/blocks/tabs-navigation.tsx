@@ -6,11 +6,24 @@ import TextGrid from "../grids/text-grid";
 import MouseFollower from "../grids/mouse-follower-grid";
 import SvgPathEffectGrid from "../grids/svg-path-effect-grid";
 import MotionAnimationsGrid from "../grids/motion-animations-grid";
+import GsapStaggerGrid from "../grids/gsap-grid";
 
 const navItems = [
   {
     name: "Buttons",
     component: <ButtonGrid />,
+  },
+  {
+    name: "Motion (Framer)",
+    component: <MotionAnimationsGrid />,
+  },
+  {
+    name: "GSAP Animations",
+    component: <GsapStaggerGrid />,
+  },
+  {
+    name: "Text Effects",
+    component: <TextGrid />,
   },
   {
     name: "Borders & Intersections",
@@ -20,10 +33,7 @@ const navItems = [
     name: "Background Gradients, Patterns & Masks",
     component: <BackgroundGrid />,
   },
-  {
-    name: "Text Effects",
-    component: <TextGrid />,
-  },
+
   // {
   //   name: "Image Effects",
   //   component: <ImageGrid />,
@@ -36,10 +46,7 @@ const navItems = [
     name: "SVG Path Effects",
     component: <SvgPathEffectGrid />,
   },
-  {
-    name: "Motion (Framer)",
-    component: <MotionAnimationsGrid />,
-  },
+
   // {
   //   name: "Link Hover Effects",
   //   component: <MouseFollower />,
@@ -48,7 +55,7 @@ const navItems = [
 
 export function TabsNavigation() {
   return (
-    <Tabs defaultValue="Motion (Framer)" className="w-full ">
+    <Tabs defaultValue="GSAP Animations" className="w-full ">
       <TabsList className="flex gap-4  overflow-x-auto overflow-y-hidden   w-full mask-r-from-98%">
         {navItems.map((item) => (
           <TabsTrigger

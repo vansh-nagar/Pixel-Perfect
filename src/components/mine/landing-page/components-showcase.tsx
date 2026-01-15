@@ -6,7 +6,6 @@ import { BorderArr } from "../grids/border-grid";
 import { MouseFollowerArr } from "../grids/mouse-follower-grid";
 import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
 import TextGlitchPortal from "registry/new-york/text/text-glitch-portal";
-import TextScannerBeam from "registry/new-york/text/text-scanner-beam";
 import TextTypewriterGlitch from "registry/new-york/text/text-typewriter-glitch";
 import TextReveal from "registry/new-york/text/text-reveal";
 import TextVideo from "registry/new-york/text/text-video";

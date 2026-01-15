@@ -62,7 +62,7 @@ const page = () => {
 
       <div className="col-start-3 row-start-15 flex flex-col w-[90vw]">
         {/* Add your content for the new section here */}
-        <div className="text-center text-lg font-semibold">
+        <div className="text-center text-lg">
           <Pricing />
         </div>
       </div>

@@ -2,7 +2,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-const MouseFollowerButton = () => {
+const MouseFollowerButton = ({
+  children = "Shiny Button",
+}: {
+  children: React.ReactNode;
+}) => {
   const [isButtonHovering, setisButtonHovering] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -53,7 +57,7 @@ const MouseFollowerButton = () => {
       }}
       className="shiny relative overflow-hidden bg-black text-white z-10 shadow-[inset_1px_1px_4px_0.1px_white,inset_-1px_-1px_4px_0.1px_white] rounded-full hover:bg-black/60"
     >
-      <span className="z-30">Shiny Button</span>
+      <span className="z-30">{children}</span>
       <div className="h-20 bg-gradient-to-tr from-white to-black w-3 -rotate-45 origin-top left-0  top-0 absolute blur-sm "></div>
       <div className="h-20 bg-white w-1 -rotate-45 origin-top left-16  top-0 absolute blur-md"></div>
     </Button>

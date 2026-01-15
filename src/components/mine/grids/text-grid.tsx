@@ -14,7 +14,6 @@ import {
 import TextFade from "../../../../registry/new-york/text/text-fade";
 import TextInertia from "../../../../registry/new-york/text/text-inertia";
 import TextGradient from "registry/new-york/text/text-gradient";
-import TextAssemble from "registry/new-york/text/text-assemble";
 import TextXRotate from "registry/new-york/text/text-x-rotate";
 import TextYAnimation from "registry/new-york/text/text-y-animation";
 import TextYAnimation2 from "registry/new-york/text/text-y-animation2";
@@ -25,12 +24,10 @@ import TextScatter1 from "registry/new-york/text/text-scatter1";
 import TextZRotate from "registry/new-york/text/text-z-rotate";
 import TextZRotate2 from "registry/new-york/text/text-z-rotate2";
 import TextVideo from "registry/new-york/text/text-video";
-import TextXDisplacement from "registry/new-york/text/text-x-displacement";
 import TextReveal from "registry/new-york/text/text-reveal";
 import TextReveal2 from "registry/new-york/text/text-reveal2";
 import TextBlackHole from "registry/new-york/text/text-black-hole";
 import TextBurnNeon from "registry/new-york/text/text-burn-neon";
-import TextDnaWave from "registry/new-york/text/text-dna-wave";
 import TextBrokenGlass from "registry/new-york/text/text-broken-glass";
 import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
 import TextGlitchPortal from "registry/new-york/text/text-glitch-portal";
@@ -77,17 +74,6 @@ const TextGrid = () => {
       link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Glitch%20Portal.json",
       hasStagger: false,
     },
-    // {
-    //   name: "Scanner Beam Reveal",
-    //   description: "Horizontal glowing beam reveals text as it moves.",
-    //   component: (
-    //     <TextScannerBeam className="text-2xl font-bold">
-    //       JUST GIVE IT A STAR
-    //     </TextScannerBeam>
-    //   ),
-    //   link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scanner%20Beam.json",
-    //   hasStagger: false,
-    // },
     {
       name: "Typewriter Malfunction",
       description: "Types → deletes → types wrong → finally correct.",
@@ -245,17 +231,6 @@ const TextGrid = () => {
         </TextBurnNeon>
       ),
       link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Burn%20Neon.json",
-      hasStagger: false,
-    },
-    {
-      name: "DNA Wave Reveal",
-      description: "Letters move in sine wave while revealing.",
-      component: (
-        <TextDnaWave className="text-2xl font-bold">
-          JUST GIVE IT A STAR
-        </TextDnaWave>
-      ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20DNA%20Wave.json",
       hasStagger: false,
     },
   ];

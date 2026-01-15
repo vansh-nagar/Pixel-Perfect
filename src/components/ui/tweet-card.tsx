@@ -82,7 +82,7 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
   <div className="flex flex-row items-start justify-between tracking-normal">
     <div className="flex items-center space-x-3">
       {/* <a href={tweet.user.url} target="_blank" rel="noreferrer"> */}
-      <div className="p-[1px] relative ">
+      <div className="p-[0px] relative ">
         <img
           title={`Profile picture of ${tweet.user.name}`}
           alt={tweet.user.screen_name}

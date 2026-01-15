@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Check, Circle } from "lucide-react";
 import Link from "next/link";
 import StarBorder from "./mine/landing-page/star-border";
+import ShinyButton from "registry/new-york/buttons/shiny-button";
+import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
 
 export default function Pricing() {
   return (
@@ -31,7 +33,7 @@ export default function Pricing() {
       <div className="mx-auto grid grid-rows-[auto_auto] ">
         <div className=" text-center relative overflow-hidden w-full py-10">
           <StarBorder />
-          <h2 className="text-balance text-3xl font-semibold md:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-medium md:text-4xl lg:text-5xl">
             Unlock Pixel Perfect UI Library
           </h2>
         </div>
@@ -41,23 +43,22 @@ export default function Pricing() {
               <div className="pb-12 text-center md:py-10 md:pr-12  border-muted relative overflow-hidden p-4 ">
                 <StarBorder />
 
-                <h3 className="text-2xl font-semibold">Pixel Perfect Pro</h3>
-                <p className="mt-2 text-lg">
+                <h3 className="text-3xl font-semibold">Pixel Perfect Pro</h3>
+                <p className="mt-1 text-xs text-muted-foreground">
                   For designers, developers, and creators
                 </p>
-                <span className="mb-6 mt-12 inline-block text-6xl">
-                  <span className="text-4xl">$</span>3
+
+                <span className="mb-6 mt-6 inline-block text-6xl">
+                  <span className="text-2xl">$</span>3
                 </span>
 
                 <div className="flex justify-center">
-                  <Button asChild size="lg">
-                    <Link href="#">Get Pixel Perfect</Link>
-                  </Button>
+                  <MouseFollowerButton>Get Pixel Perfect</MouseFollowerButton>
                 </div>
 
-                <p className="text-muted-foreground mt-12 text-sm">
-                  Includes: All UI components, lifetime updates, commercial{" "}
-                  <br /> use, and priority support
+                <p className="text-muted-foreground mt-6 text-xs">
+                  Includes: All UI components, lifetime updates, <br />
+                  commercial use, and priority support
                 </p>
               </div>
               <div className="relative h-full flex  justify-center items-center overflow-hidden p-4">
@@ -70,9 +71,9 @@ export default function Pricing() {
                     "Commercial license included",
                     "Priority email support",
                   ].map((item, index) => (
-                    <li key={index} className="flex items-center gap-2">
-                      <Check className="size-6" />
-                      <span className=" max-sm:text-xs text-left">{item}</span>
+                    <li key={index} className="flex items-center gap-3">
+                      <Check size={16} />
+                      <span className=" max-sm:text-xs text-sm">{item}</span>
                     </li>
                   ))}
                 </ul>

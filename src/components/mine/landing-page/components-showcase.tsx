@@ -112,17 +112,6 @@ const TextArr = [
     hasStagger: false,
   },
   {
-    name: "Scanner Beam Reveal",
-    description: "Horizontal glowing beam reveals text as it moves.",
-    component: (
-      <TextScannerBeam className="text-2xl font-bold">
-        JUST GIVE IT A STAR
-      </TextScannerBeam>
-    ),
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scanner%20Beam.json",
-    hasStagger: false,
-  },
-  {
     name: "Typewriter Malfunction",
     description: "Types → deletes → types wrong → finally correct.",
     component: (

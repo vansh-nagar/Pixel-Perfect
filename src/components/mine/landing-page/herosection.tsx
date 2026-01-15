@@ -143,16 +143,16 @@ export function HeroSection() {
             </span>
           </span>
         </h1>
-        <p className="text-xs  sm:text-sm md:text-md lg:text-lg xl:text-xl text-center mt-2 sm:mt-3 md:mt-4 px-2 sm:px-4 leading-relaxed">
+        <div className="text-xs  sm:text-sm md:text-md lg:text-lg xl:text-xl text-center mt-2 sm:mt-3 md:mt-4 px-2 sm:px-4 leading-relaxed">
           A pixel-perfect React component library for{" "}
-          <br className=" hidden md:block" />
-          <span className="flex items-center">
+          <div className=" hidden md:block" />
+          <div className="flex items-center">
             modern web apps. And
             <TextTypewriterGlitch className="mx-1  p-0.5 px-1 bg-muted rounded-none ">
               It's also open source.
             </TextTypewriterGlitch>
-          </span>
-        </p>
+          </div>
+        </div>
 
         <div className="flex  flex-row flex-wrap  justify-center   gap-3 sm:gap-4 items-center mt-10 w-full ">
           <Link href="/blocks">

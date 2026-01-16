@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import Gradient2 from "registry/new-york/background/gradient2";
 import Gradient4 from "registry/new-york/background/gradient4";
 import Gradient3 from "registry/new-york/background/gradient3";
+import Gradient5 from "registry/new-york/background/gradient5";
 
 export const BackgroudArr = [
   {
@@ -31,6 +32,12 @@ export const BackgroudArr = [
     name: "Gradient 4",
     description: "A colorful gradient background design.",
     component: <Gradient4 />,
+    link: "",
+  },
+  {
+    name: "Gradient 5",
+    description: "A colorful gradient background design.",
+    component: <Gradient5 />,
     link: "",
   },
 ];

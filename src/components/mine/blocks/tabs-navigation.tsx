@@ -7,6 +7,7 @@ import MouseFollower from "../grids/mouse-follower-grid";
 import SvgPathEffectGrid from "../grids/svg-path-effect-grid";
 import MotionAnimationsGrid from "../grids/motion-animations-grid";
 import GsapStaggerGrid from "../grids/gsap-grid";
+import SvgAssetsGrid from "../grids/svg-grid";
 
 const navItems = [
   {
@@ -20,6 +21,10 @@ const navItems = [
   {
     name: "GSAP Animations",
     component: <GsapStaggerGrid />,
+  },
+  {
+    name: "SVG Assets",
+    component: <SvgAssetsGrid />,
   },
   {
     name: "Text Effects",
@@ -45,7 +50,7 @@ const navItems = [
 
 export function TabsNavigation() {
   return (
-    <Tabs defaultValue="GSAP Animations" className="w-full ">
+    <Tabs defaultValue="Buttons" className="w-full ">
       <TabsList className="flex gap-4  overflow-x-auto overflow-y-hidden   w-full mask-r-from-98%">
         {navItems.map((item) => (
           <TabsTrigger

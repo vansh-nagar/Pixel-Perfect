@@ -275,7 +275,7 @@ const Guitar = () => {
   const startYOffset = 100;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full p-8 bg-gradient-to-b from-[#1e1e1e] to-[#121212]">
+    <div className="flex flex-col items-center justify-center min-h-screen w-full p-8">
       <div className="relative w-full max-w-4xl">
         <div
           className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-[450px] z-10 rounded-l-md"
@@ -285,7 +285,7 @@ const Guitar = () => {
               "inset -2px 0 4px rgba(0,0,0,0.5), 2px 0 8px rgba(0,0,0,0.3)",
           }}
         >
-          <div className="absolute right-0 top-0 w-1 h-full bg-gradient-to-b from-amber-200/20 via-amber-100/10 to-amber-200/20" />
+          <div className="absolute right-0 top-0 w-1 h-full" />
         </div>
         <div
           className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-[450px] z-10 rounded-r-md"
@@ -402,9 +402,6 @@ const Guitar = () => {
             />
           ))}
         </svg>
-        <div className="flex justify-center mt-4">
-          <Button>Click To Listen</Button>
-        </div>
       </div>
     </div>
   );

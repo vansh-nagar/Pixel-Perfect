@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { Flip } from "gsap/src/Flip";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
+import { Sparkles, X } from "lucide-react";
 import TextGradient from "registry/new-york/text/text-gradient";
 gsap.registerPlugin(Flip);
 
@@ -92,7 +92,7 @@ const LegionsDev = () => {
   }, []);
 
   return (
-    <div className=" flex flex-col justify-center items-center gap-10 py-4 perspective-distant w-full h-full">
+    <div className=" flex flex-col justify-center items-center gap-10 py-4 perspective-normal w-full h-full">
       <div className=" fixed top-11 right-1 flex flex-col gap-2 z-50">
         <Button
           size={"icon"}
@@ -104,20 +104,22 @@ const LegionsDev = () => {
         >
           <X />
         </Button>
-      </div>
-      <div className="c1 h-[30vh] border w-[50vw] rounded-md border-dashed overflow-hidden p-2 blur-sm">
-        <TextGradient> LIKE • FOLLOW • STAY</TextGradient>
-      </div>
-      <div className="w-[50vw] flex gap-32 items-center  ">
         <Button
+          size={"icon"}
+          className=" rounded-none border-dashed "
+          variant={"outline"}
           onClick={() => {
             tl2.current?.play();
           }}
-          variant={"ghost"}
-          className="-rotate-45 text-xs absolute  right-40 z-50"
         >
-          Click To See <br /> Magiccccc
+          <Sparkles />
         </Button>
+      </div>
+      <div className="c1 h-[30vh] border w-[50vw] rounded-md border-dashed overflow-hidden p-2 text-4xl">
+        LIKE • FOLLOW • STAY TUNED ★ Join the Dev Legion ★ ☆ Code along with me
+        ★
+      </div>
+      <div className="w-[50vw] flex gap-32 items-center  ">
         <div className="container transform-style-preserve-3d will-change-transform grid  grid-cols-[repeat(auto-fit,minmax(200px,1fr))] rtl-grid grid-rows-2 gap-x-auto  gap-y-20">
           <div className="target col-start-3  border w-12 h-12 rounded-sm absolute">
             <div
@@ -173,10 +175,11 @@ const LegionsDev = () => {
           </div>
         </div>
       </div>
-      <div className="c2 h-screen border w-[50vw] rounded-md border-dashed p-2 blur-sm">
-        <TextGradient>
-          Code • Ship • Repeat ★ Don’t just watch — build with me ★ ☆ Real
-        </TextGradient>
+      <div className="c2 h-screen border w-[50vw] rounded-md border-dashed p-2 text-4xl">
+        Code • Ship • Repeat ★ Don’t just watch build with me ★ ☆ Real world
+        projects ☆ Code • Ship • Repeat ★ Don’t just watch build with me ★ ☆
+        Real world projects ☆ Code • Ship • Repeat ★ Don’t just watch build with
+        me ★ ☆ Real world projects ☆ Code • Ship • Repeat ★ Don’t just watch
       </div>
     </div>
   );

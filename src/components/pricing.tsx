@@ -1,8 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Check, Circle } from "lucide-react";
-import Link from "next/link";
 import StarBorder from "./mine/landing-page/star-border";
-import ShinyButton from "registry/new-york/buttons/shiny-button";
 import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
 
 export default function Pricing() {

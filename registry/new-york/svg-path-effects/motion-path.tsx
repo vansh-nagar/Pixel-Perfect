@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import MotionPathPlugin from "gsap/src/MotionPathPlugin";
 import { Button } from "@/components/ui/button";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
-import { X, Layers } from "lucide-react";
+import { X, Layers, Sparkles } from "lucide-react";
 
 gsap.registerPlugin(MotionPathPlugin);
 
@@ -135,15 +135,15 @@ const MotionPath = () => {
         >
           {isExploded ? <X /> : <Layers />}
         </Button>
+        <Button
+          size={"icon"}
+          className=" rounded-none border-dashed "
+          variant={"outline"}
+          onClick={handleToggle}
+        >
+          <Sparkles />
+        </Button>
       </div>
-
-      <Button
-        onClick={handleToggle}
-        variant="ghost"
-        className="-rotate-12 text-xs absolute top-20 right-20 opacity-70 hover:opacity-100 transition-opacity"
-      >
-        Click To See <br /> Layer Magic ✨
-      </Button>
 
       <div className="layer-container transform-style-preserve-3d will-change-transform relative">
         <div className="layer-3 absolute inset-0 transform-style-preserve-3d">

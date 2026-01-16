@@ -71,7 +71,7 @@ const Stagger1 = () => {
           onClick={handleRipple}
           disabled={animating}
         >
-          +1
+          +1 Ripple
         </ThreedButton>
       </div>
     </div>

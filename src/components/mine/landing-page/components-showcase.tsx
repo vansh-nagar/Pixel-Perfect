@@ -15,6 +15,7 @@ import TextReveal2 from "registry/new-york/text/text-reveal2";
 import TextBlackHole from "registry/new-york/text/text-black-hole";
 import TextBurnNeon from "registry/new-york/text/text-burn-neon";
 import { BackgroudArr } from "../grids/background-grid";
+import { SvgArr } from "../grids/svg-grid";
 
 const ComponentsShowcase = () => {
   return (
@@ -54,7 +55,7 @@ const ComponentsShowcase = () => {
               className="  border  border-muted"
             />
             <ComponentTransition
-              componentArr={TextArr}
+              componentArr={SvgArr}
               className="  border  border-muted"
             />
             <ComponentTransition

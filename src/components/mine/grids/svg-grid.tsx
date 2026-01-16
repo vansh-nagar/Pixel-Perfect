@@ -10,7 +10,7 @@ import Svg5 from "registry/new-york/svg/svg5";
 import Svg6 from "registry/new-york/svg/svg6";
 import Svg7 from "registry/new-york/svg/svg7";
 
-export const ButtonsArr = [
+export const SvgArr = [
   {
     name: "Svg Asset 1",
     description: "A button that morphs its shape on hover using GSAP.",
@@ -41,17 +41,17 @@ export const ButtonsArr = [
     description: "A button that morphs its shape on hover using GSAP.",
     component: <Svg6 />,
   },
-  {
-    name: "Svg Asset 2",
-    description: "A button that morphs its shape on hover using GSAP.",
-    component: <Svg7 />,
-  },
+  // {
+  //   name: "Svg Asset 2",
+  //   description: "A button that morphs its shape on hover using GSAP.",
+  //   component: <Svg7 />,
+  // },
 ];
 
 const SvgAssetsGrid = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
-      {ButtonsArr.map((item, index) => (
+      {SvgArr.map((item, index) => (
         <div
           key={index}
           className="relative border-b border-l border-dashed  aspect-square flex items-center justify-center "

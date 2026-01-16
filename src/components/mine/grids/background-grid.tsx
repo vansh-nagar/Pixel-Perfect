@@ -52,16 +52,29 @@ const BackgroundGrid = () => {
         >
           {item.component}
           <div className="right-1 top-1 absolute gap-1 flex">
+            {/* Copy Background Button */}
             <Button
               size={"sm"}
               variant={"secondary"}
-              className="text-xs  cursor-pointer rounded-none z-30 "
+              className="text-xs cursor-pointer rounded-none z-30 ml-1"
               onClick={() => {
-                navigator.clipboard.writeText(item.link);
-                toast.success("Link copied to clipboard!");
+                const gridItem =
+                  document.querySelectorAll(".aspect-video")[index];
+                if (gridItem) {
+                  // Get the first child (the background component)
+                  const innerChild = gridItem.firstElementChild;
+                  if (innerChild) {
+                    navigator.clipboard.writeText(innerChild.outerHTML);
+                    toast.success("Background HTML copied!");
+                  } else {
+                    toast.error("No inner child found.");
+                  }
+                } else {
+                  toast.error("Grid item not found.");
+                }
               }}
             >
-              <Copy className="size-3" /> Copy
+              <Copy className="size-3" /> Copy Background
             </Button>
           </div>
         </div>

@@ -41,11 +41,11 @@ export const SvgArr = [
     description: "A button that morphs its shape on hover using GSAP.",
     component: <Svg6 />,
   },
-  // {
-  //   name: "Svg Asset 2",
-  //   description: "A button that morphs its shape on hover using GSAP.",
-  //   component: <Svg7 />,
-  // },
+  {
+    name: "Svg Asset 2",
+    description: "A button that morphs its shape on hover using GSAP.",
+    component: <Svg7 />,
+  },
 ];
 
 const SvgAssetsGrid = () => {

@@ -1,26 +1,19 @@
+"use client";
+import { BadgeDollarSign } from "lucide-react";
 import React from "react";
-import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
 
-const CardAnimation = () => {
+const page = () => {
   return (
-    <div className=" max-w-md w-full border rounded-3xl p-7 ">
-      <TextMatrixRain className="text-xs"> AI SAAS CARD</TextMatrixRain>
-      <h1 className="mt-2 text-xl  font-light">
-        Built for Pros AI Orchestrators
-      </h1>
-      <h2 className="mt-3 text-sm">
-        Officia pariatur id occaecat dolore ea amet nostrud enim. Officia non
-        elit proident non veniam proident. Elit deserunt irure nisi ullamco.
-        Elit mollit do irure.
-      </h2>
-
-      <section className="mt-10">
-        <div className=" w-[90%] h-40 border rounded-2xl"></div>
-        <div></div>
-        <div></div>
-      </section>
+    <div className=" flex justify-center items-center h-screen">
+      <div className=" flex justify-center items-center relative perspective-normal">
+        <div className="h-40 aspect-square bg-red-600 rounded-xl rotate-x-45 rotate-z-45 blur-2xl translate-y-8"></div>
+        <div className="h-40 aspect-square bg-red-600/20 rounded-xl rotate-x-45 rotate-z-45 absolute"></div>
+        <div className="h-40 aspect-square bg-red-600/70 rounded-xl rotate-x-45 absolute -translate-y-4 rotate-z-45 flex justify-center items-center">
+          <BadgeDollarSign size={90} className="text-white" />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default CardAnimation;
+export default page;

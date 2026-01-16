@@ -33,11 +33,6 @@ const navItems = [
     name: "Background Gradients, Patterns & Masks",
     component: <BackgroundGrid />,
   },
-
-  // {
-  //   name: "Image Effects",
-  //   component: <ImageGrid />,
-  // },
   {
     name: "Mouse Followers",
     component: <MouseFollower />,
@@ -46,11 +41,6 @@ const navItems = [
     name: "SVG Path Effects",
     component: <SvgPathEffectGrid />,
   },
-
-  // {
-  //   name: "Link Hover Effects",
-  //   component: <MouseFollower />,
-  // },
 ];
 
 export function TabsNavigation() {

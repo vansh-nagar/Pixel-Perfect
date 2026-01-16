@@ -8,39 +8,45 @@ const Stagger1 = () => {
   const gridno: [number, number] = [8, 8];
 
   const handleRipple = () => {
-    const blocks = gsap.utils.toArray(".blocks") as HTMLElement[];
-    gsap.set(blocks, { scale: 1, backgroundColor: "" });
-    gsap.to(blocks, {
-      scale: 0.6,
-      backgroundColor: "#f59e0b",
-      duration: 0.6,
-      borderRadius: "30px",
-      stagger: {
-        each: 0.06,
-        grid: gridno,
-        from: fromIndex,
-      },
-      onComplete: () => {
-        setTimeout(() => {
-          gsap.to(blocks, {
-            scale: 1,
-            backgroundColor: "",
-            duration: 0.6,
-            borderRadius: "8px",
-            stagger: {
-              each: 0.06,
-              grid: gridno,
-              from: fromIndex + 1,
-            },
-            onComplete: () => {
-              setAnimating(false);
-            },
-          });
-        }, 400);
-      },
-    });
+    if (animating) return;
     setAnimating(true);
-    setFromIndex((prev) => (prev + 1) % 64);
+
+    const nextIndex = (fromIndex + 1) % 64;
+    setFromIndex(nextIndex);
+
+    const blocks = gsap.utils.toArray<HTMLElement>(".blocks");
+
+    gsap.to(blocks, {
+      scale: 1,
+      duration: 0.18,
+      stagger: {
+        each: 0.05,
+        grid: gridno,
+        from: fromIndex, // ⬅ start from current block index
+        onStart() {
+          const el = this.targets()[0] as HTMLElement;
+          gsap.fromTo(
+            el,
+            { scale: 1, filter: "brightness(1)" },
+            {
+              scale: 0.7,
+              filter: "brightness(1.5)",
+              duration: 0.6,
+              ease: "elastic.out(1, 0.3)",
+              repeat: 3,
+              yoyo: true,
+            }
+          );
+
+          gsap.to(el, {
+            scale: 1,
+            duration: 0.18,
+            ease: "back.inOut",
+          });
+        },
+      },
+      onComplete: () => setAnimating(false),
+    });
   };
 
   return (
@@ -50,7 +56,7 @@ const Stagger1 = () => {
           <div
             key={index}
             className={`blocks h-10 aspect-square rounded-md cursor-pointer ${
-              index <= fromIndex ? "bg-[#f59e0b]" : "bg-accent-foreground"
+              index <= fromIndex ? "bg-[#f59e0b]" : "bg-accent"
             }`}
             onClick={() => setFromIndex(index)}
             title={`Set as ripple center (${index})`}
@@ -65,7 +71,7 @@ const Stagger1 = () => {
           onClick={handleRipple}
           disabled={animating}
         >
-          +1 task
+          +1
         </ThreedButton>
       </div>
     </div>

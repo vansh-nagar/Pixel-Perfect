@@ -9,6 +9,9 @@ import Svg4 from "registry/new-york/svg/svg-4";
 import Svg5 from "registry/new-york/svg/svg5";
 import Svg6 from "registry/new-york/svg/svg6";
 import Svg7 from "registry/new-york/svg/svg7";
+import Svg8 from "registry/new-york/svg/svg8";
+import Svg9 from "registry/new-york/svg/svg-9";
+import Svg10 from "registry/new-york/svg/svg-10";
 
 export const SvgArr = [
   {
@@ -45,6 +48,21 @@ export const SvgArr = [
     name: "Svg Asset 2",
     description: "A button that morphs its shape on hover using GSAP.",
     component: <Svg7 />,
+  },
+  {
+    name: "Svg Asset 2",
+    description: "A button that morphs its shape on hover using GSAP.",
+    component: <Svg8 />,
+  },
+  {
+    name: "Svg Asset 2",
+    description: "A button that morphs its shape on hover using GSAP.",
+    component: <Svg9 />,
+  },
+  {
+    name: "Svg Asset 2",
+    description: "A button that morphs its shape on hover using GSAP.",
+    component: <Svg10 />,
   },
 ];
 

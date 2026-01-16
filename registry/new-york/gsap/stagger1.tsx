@@ -23,14 +23,14 @@ const Stagger1 = () => {
         each: 0.05,
         grid: gridno,
         from: fromIndex, // ⬅ start from current block index
-        onStart() {
+        onStart(this: gsap.core.Tween) {
           const el = this.targets()[0] as HTMLElement;
           gsap.fromTo(
             el,
             { scale: 1, filter: "brightness(1)" },
             {
               scale: 0.7,
-              filter: "brightness(1.5)",
+              filter: "brightness(1.2)",
               duration: 0.6,
               ease: "elastic.out(1, 0.3)",
               repeat: 3,

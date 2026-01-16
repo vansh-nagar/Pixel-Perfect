@@ -7,6 +7,7 @@ import { Model3D } from "@/components/ui/3dmodel";
 import { HeroGrid } from "./canvas/hero-grid";
 import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
 import TextTypewriterGlitch from "registry/new-york/text/text-typewriter-glitch";
+import { FaGithub } from "react-icons/fa6";
 
 function DebugOverlay({
   mouse,
@@ -160,13 +161,16 @@ export function HeroSection() {
               Browse Components
             </Button>
           </Link>
-          <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>
+          <Link
+            target="_blank"
+            href={"https://github.com/vansh-nagar/Pixel-Perfect"}
+          >
             <Button
               variant={"secondary"}
               className="rounded-none cursor-crosshair"
               size="default"
             >
-              Custom Components
+              Star On Github <FaGithub />
             </Button>
           </Link>
         </div>

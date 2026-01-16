@@ -28,7 +28,7 @@ export function StarsCount() {
   }
 
   return (
-    <TextMatrixRain className=" flex  gap-1 items-center">
+    <TextMatrixRain repeat={false} className=" flex  gap-1 items-center">
       {String(stars)}
     </TextMatrixRain>
   );

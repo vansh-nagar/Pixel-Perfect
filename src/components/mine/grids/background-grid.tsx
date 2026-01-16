@@ -2,43 +2,73 @@
 
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
-import Gradient1 from "../../../../registry/new-york/background/gradient1";
 import { toast } from "sonner";
-import Gradient2 from "registry/new-york/background/gradient2";
-import Gradient4 from "registry/new-york/background/gradient4";
-import Gradient3 from "registry/new-york/background/gradient3";
-import Gradient5 from "registry/new-york/background/gradient5";
+
+// Additional gradients (reuse with different props or names)
+const Gradient1 = () => (
+  <div
+    aria-hidden
+    className="absolute z-30 inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,var(--color-blue-600),var(--color-white)_100%)]"
+  />
+);
+const Gradient2 = () => (
+  <div className="bg-[radial-gradient(circle_at_bottom,var(--color-1),var(--color-2))] absolute inset-0" />
+);
+const Gradient3 = () => (
+  <div className="bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] h-full w-full absolute inset-0"></div>
+);
+const Gradient4 = () => (
+  <div className="h-full w-full relative">
+    {/* Light mode grid - dark lines */}
+    <div
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px)`,
+        backgroundSize: "100px 100px, 100px 100px, 20px 20px, 20px 20px",
+        backgroundPosition: "-2px -2px, -2px -2px, -1px -1px, -1px -1px",
+      }}
+      className="absolute inset-0 dark:hidden"
+    ></div>
+
+    {/* Dark mode grid - white lines */}
+    <div
+      style={{
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px)`,
+        backgroundSize: "100px 100px, 100px 100px, 20px 20px, 20px 20px",
+        backgroundPosition: "-2px -2px, -2px -2px, -1px -1px, -1px -1px",
+      }}
+      className="absolute inset-0 hidden dark:block"
+    ></div>
+  </div>
+);
+const Gradient5 = () => (
+  <div className=" absolute inset-0 after:pointer-events-none after:inset-0 after:rounded-lg after:inset-ring after:inset-ring-gray-950/5 dark:after:inset-ring-white/10 bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10" />
+);
 
 export const BackgroudArr = [
   {
     name: "Gradient 1",
-    description: "A smooth gradient background design.",
+    description: "Radial glow fade",
     component: <Gradient1 />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Gradient%201.json",
   },
   {
     name: "Gradient 2",
-    description: "A vibrant gradient background design.",
+    description: "Bottom radial bloom",
     component: <Gradient2 />,
-    link: "",
   },
   {
     name: "Gradient 3",
-    description: "A colorful gradient background design.",
+    description: "Diagonal micro pattern",
     component: <Gradient3 />,
-    link: "",
   },
   {
     name: "Gradient 4",
-    description: "A colorful gradient background design.",
+    description: "Dual grid system",
     component: <Gradient4 />,
-    link: "",
   },
   {
     name: "Gradient 5",
-    description: "A colorful gradient background design.",
+    description: "Dot mesh texture",
     component: <Gradient5 />,
-    link: "",
   },
 ];
 

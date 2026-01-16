@@ -82,17 +82,15 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
   <div className="flex flex-row items-start justify-between tracking-normal">
     <div className="flex items-center space-x-3">
       {/* <a href={tweet.user.url} target="_blank" rel="noreferrer"> */}
-      <div className="p-[0px] relative ">
-        <img
-          title={`Profile picture of ${tweet.user.name}`}
-          alt={tweet.user.screen_name}
-          height={48}
-          width={48}
-          src={tweet.user.profile_image_url_https}
-          className="border-border/50 overflow-hidden rounded-full border z-20 relative"
-        />
-        <div className=" absolute inset-0 animate-rainbow bg-[linear-gradient(45deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] aspect-square border rounded-full blur-[4px] z-10" />
-      </div>
+      <img
+        title={`Profile picture of ${tweet.user.name}`}
+        alt={tweet.user.screen_name}
+        height={48}
+        width={48}
+        src={tweet.user.profile_image_url_https}
+        className="border-border/50 overflow-hidden rounded-full border z-20 relative"
+      />
+
       {/* </a> */}
       <div className="flex flex-col gap-0.5">
         <div

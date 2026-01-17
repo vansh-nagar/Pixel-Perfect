@@ -12,6 +12,7 @@ import Svg7 from "registry/new-york/svg/svg7";
 import Svg8 from "registry/new-york/svg/svg8";
 import Svg9 from "registry/new-york/svg/svg-9";
 import Svg10 from "registry/new-york/svg/svg-10";
+import Svg11 from "registry/new-york/svg/svg11";
 
 export const SvgArr = [
   {
@@ -27,6 +28,11 @@ export const SvgArr = [
   {
     name: "Svg Asset 2",
     description: "A button that morphs its shape on hover using GSAP.",
+    component: <Svg11 />,
+  },
+  {
+    name: "Svg Asset 2",
+    description: "A button that morphs its shape on hover using GSAP.",
     component: <Svg3 />,
   },
   {
@@ -38,11 +44,6 @@ export const SvgArr = [
     name: "Svg Asset 2",
     description: "A button that morphs its shape on hover using GSAP.",
     component: <Svg5 />,
-  },
-  {
-    name: "Svg Asset 2",
-    description: "A button that morphs its shape on hover using GSAP.",
-    component: <Svg6 />,
   },
   {
     name: "Svg Asset 2",
@@ -64,6 +65,11 @@ export const SvgArr = [
     description: "A button that morphs its shape on hover using GSAP.",
     component: <Svg10 />,
   },
+  {
+    name: "Svg Asset 2",
+    description: "A button that morphs its shape on hover using GSAP.",
+    component: <Svg6 />,
+  },
 ];
 
 const SvgAssetsGrid = () => {
@@ -72,7 +78,7 @@ const SvgAssetsGrid = () => {
       {SvgArr.map((item, index) => (
         <div
           key={index}
-          className="relative border-b border-l border-dashed  aspect-square flex items-center justify-center "
+          className="relative border-b bg-black border-l border-dashed  aspect-square flex items-center justify-center "
         >
           <BorderDecorator />
           <div className=" z-30 flex flex-col items-center gap-2">
@@ -80,7 +86,7 @@ const SvgAssetsGrid = () => {
           </div>
 
           <div className=" leading-1 absolute left-1.5  bottom-1.5">
-            <p className="text-xs ">{item.name}</p>
+            <p className="text-xs text-white">{item.name}</p>
             <p className="text-[8px] text-muted-foreground">
               {item.description}
             </p>
@@ -102,7 +108,7 @@ const SvgAssetsGrid = () => {
                   toast.error("SVG not found.");
                 }
               }}
-              className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
+              className="text-xs text-white cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
             >
               <Copy className=" size-3" /> Copy
               <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>

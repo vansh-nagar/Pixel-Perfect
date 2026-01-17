@@ -27,10 +27,8 @@ export const ComponentTransition = ({
     timeoutRef.current = setTimeout(() => {
       setFade(false);
       setTimeout(() => {
-        let nextIdx = Math.floor(Math.random() * componentArr.length);
-        if (nextIdx === currentIdx && componentArr.length > 1) {
-          nextIdx = (nextIdx + 1) % componentArr.length;
-        }
+        const nextIdx = (currentIdx + 1) % componentArr.length;
+
         setCurrentIdx(nextIdx);
         setFade(true);
       }, 300); // fade out duration

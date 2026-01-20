@@ -22,10 +22,10 @@ const navItems = [
     name: "GSAP Animations",
     component: <GsapStaggerGrid />,
   },
-  // {
-  //   name: "SVG Assets",
-  //   component: <SvgAssetsGrid />,
-  // },
+  {
+    name: "SVG Assets",
+    component: <SvgAssetsGrid />,
+  },
   {
     name: "Text Effects",
     component: <TextGrid />,

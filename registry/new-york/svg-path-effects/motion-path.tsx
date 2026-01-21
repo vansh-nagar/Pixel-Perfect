@@ -53,7 +53,7 @@ const MotionPath = () => {
         duration: 1.2,
         ease: "power2.out",
       },
-      "-=0.5"
+      "-=0.5",
     );
 
     layerTl.current.to(
@@ -64,7 +64,7 @@ const MotionPath = () => {
         duration: 1.2,
         ease: "power2.out",
       },
-      "<"
+      "<",
     );
 
     layerTl.current.to(
@@ -77,7 +77,7 @@ const MotionPath = () => {
         duration: 1.2,
         ease: "power2.out",
       },
-      "<"
+      "<",
     );
 
     layerTl.current.to(
@@ -88,7 +88,7 @@ const MotionPath = () => {
         duration: 0.8,
         ease: "power2.out",
       },
-      "-=1"
+      "-=1",
     );
 
     layerTl.current.to(
@@ -100,7 +100,7 @@ const MotionPath = () => {
         stagger: 0.15,
         ease: "power2.out",
       },
-      "-=0.8"
+      "-=0.8",
     );
 
     layerTl.current.to(
@@ -110,7 +110,7 @@ const MotionPath = () => {
         duration: 0.8,
         ease: "power2.out",
       },
-      "-=1"
+      "-=1",
     );
   }, []);
 

@@ -1,9 +1,12 @@
-import React from 'react'
+"use client";
+
 
 const page = () => {
   return (
-    <div>HI</div>
-  )
-}
+    <div className=" w-full flex flex-col gap-10 py-96 justify-center items-center">
+   hi
+    </div>
+  );
+};
 
-export default page
+export default page;

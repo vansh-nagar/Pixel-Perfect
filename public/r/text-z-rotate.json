@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-z-rotate",
+  "type": "registry:block",
+  "description": "Z-axis rotation text animation.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/text/text-z-rotate.tsx",
+      "content": "\"use client\";\r\nimport { useRef } from \"react\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport gsap from \"gsap\";\r\nimport SplitText from \"gsap/src/SplitText\";\r\n\r\ngsap.registerPlugin(SplitText);\r\n\r\nexport type StaggerFrom = \"start\" | \"center\" | \"edges\" | \"random\" | \"end\";\r\n\r\ninterface TextXRotateProps {\r\n  staggerFrom?: StaggerFrom;\r\n  text?: string;\r\n  className?: string;\r\n}\r\n\r\nconst TextZRotate = ({\r\n  staggerFrom = \"start\",\r\n  text = \"JUST GIVE IT A STAR\",\r\n  className,\r\n}: TextXRotateProps) => {\r\n  const containerRef = useRef<HTMLDivElement>(null);\r\n\r\n  useGSAP(\r\n    () => {\r\n      if (!containerRef.current) return;\r\n      const split = new SplitText(containerRef.current, { type: \"chars\" });\r\n      gsap.from(split.chars, {\r\n        rotateZ: 180,\r\n        ease: \"back.out\",\r\n        transformOrigin: \"50% 0%\",\r\n        duration: 0.5,\r\n        stagger: {\r\n          each: 0.09,\r\n          from: staggerFrom,\r\n        },\r\n        repeat: -1,\r\n        repeatDelay: 1,\r\n      });\r\n\r\n      return () => {\r\n        split.revert();\r\n      };\r\n    },\r\n    { scope: containerRef, dependencies: [staggerFrom, text] }\r\n  );\r\n\r\n  return (\r\n    <div\r\n      ref={containerRef}\r\n      className={`text-4xl perspective-distant ${className ?? \"\"}`}\r\n    >\r\n      {text}\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TextZRotate;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/text-z-rotate.tsx"
+    }
+  ]
+}

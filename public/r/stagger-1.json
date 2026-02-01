@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stagger-1",
+  "type": "registry:block",
+  "description": "GSAP stagger animation component.",
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/gsap/stagger1.tsx",
+      "content": "import { useState } from \"react\";\r\nimport { gsap } from \"gsap\";\r\nimport ThreedButton from \"../buttons/3d-button\";\r\n\r\nconst Stagger1 = () => {\r\n  const [fromIndex, setFromIndex] = useState<number>(0);\r\n  const [animating, setAnimating] = useState(false);\r\n  const gridno: [number, number] = [8, 8];\r\n\r\n  const handleRipple = () => {\r\n    if (animating) return;\r\n    setAnimating(true);\r\n\r\n    const nextIndex = (fromIndex + 1) % 64;\r\n    setFromIndex(nextIndex);\r\n\r\n    const blocks = gsap.utils.toArray<HTMLElement>(\".blocks\");\r\n\r\n    gsap.to(blocks, {\r\n      scale: 1,\r\n      duration: 0.18,\r\n      stagger: {\r\n        each: 0.05,\r\n        grid: gridno,\r\n        from: fromIndex, // ⬅ start from current block index\r\n        onStart(this: gsap.core.Tween) {\r\n          const el = this.targets()[0] as HTMLElement;\r\n          gsap.fromTo(\r\n            el,\r\n            { scale: 1, filter: \"brightness(1)\" },\r\n            {\r\n              scale: 0.7,\r\n              filter: \"brightness(1.2)\",\r\n              duration: 0.6,\r\n              ease: \"elastic.out(1, 0.3)\",\r\n              repeat: 3,\r\n              yoyo: true,\r\n            }\r\n          );\r\n\r\n          gsap.to(el, {\r\n            scale: 1,\r\n            duration: 0.18,\r\n            ease: \"back.inOut\",\r\n          });\r\n        },\r\n      },\r\n      onComplete: () => setAnimating(false),\r\n    });\r\n  };\r\n\r\n  return (\r\n    <div>\r\n      <div className=\" w-[400px] flex flex-wrap gap-2\">\r\n        {Array.from({ length: 64 }).map((_, index) => (\r\n          <div\r\n            key={index}\r\n            className={`blocks h-10 aspect-square rounded-md cursor-pointer ${\r\n              index <= fromIndex ? \"bg-[#f59e0b]\" : \"bg-accent\"\r\n            }`}\r\n            onClick={() => setFromIndex(index)}\r\n            title={`Set as ripple center (${index})`}\r\n          ></div>\r\n        ))}\r\n      </div>\r\n      <div className=\"flex justify-center\">\r\n        <ThreedButton\r\n          variant={\"outline\"}\r\n          size={\"sm\"}\r\n          className=\" mt-6 text-xs active:scale-[0.94] transition-all  duration-200\"\r\n          onClick={handleRipple}\r\n          disabled={animating}\r\n        >\r\n          +1 Ripple\r\n        </ThreedButton>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default Stagger1;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/stagger1.tsx"
+    }
+  ]
+}

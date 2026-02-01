@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Border 1",
+  "name": "border-1",
   "type": "registry:block",
   "description": "A dashed border design with corner elements.",
   "dependencies": [],

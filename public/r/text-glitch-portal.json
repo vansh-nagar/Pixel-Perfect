@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-glitch-portal",
+  "type": "registry:block",
+  "description": "RGB split plus scale blur then collapse into clean text.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/text/text-glitch-portal.tsx",
+      "content": "\"use client\";\r\n\r\nimport { useRef } from \"react\";\r\nimport gsap from \"gsap\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport SplitText from \"gsap/SplitText\";\r\n\r\ngsap.registerPlugin(SplitText);\r\n\r\ninterface TextGlitchPortalProps {\r\n  children: string;\r\n  className?: string;\r\n  duration?: number;\r\n}\r\n\r\nexport default function TextGlitchPortal({\r\n  children,\r\n  className = \"\",\r\n  duration = 1.5,\r\n}: TextGlitchPortalProps) {\r\n  const containerRef = useRef<HTMLDivElement>(null);\r\n  const textRef = useRef<HTMLSpanElement>(null);\r\n\r\n  useGSAP(\r\n    () => {\r\n      const split = new SplitText(textRef.current, { type: \"chars\" });\r\n      const chars = split.chars;\r\n\r\n      gsap.set(chars, {\r\n        opacity: 0,\r\n        scale: 3,\r\n        filter: \"blur(20px)\",\r\n      });\r\n\r\n      const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });\r\n\r\n      tl.set(chars, {\r\n        opacity: 0,\r\n        scale: 3,\r\n        filter: \"blur(20px)\",\r\n      });\r\n\r\n      tl.to(chars, {\r\n        opacity: 1,\r\n        scale: 1.5,\r\n        filter: \"blur(10px)\",\r\n        textShadow: \"-5px 0 #ff0000, 5px 0 #00ffff\",\r\n        duration: duration * 0.3,\r\n        ease: \"power2.out\",\r\n        stagger: {\r\n          each: 0.02,\r\n          from: \"random\",\r\n        },\r\n      });\r\n\r\n      tl.to(chars, {\r\n        textShadow: \"3px 0 #ff0000, -3px 0 #00ffff\",\r\n        x: \"random(-5, 5)\",\r\n        duration: 0.05,\r\n        repeat: 6,\r\n        yoyo: true,\r\n        ease: \"none\",\r\n        stagger: {\r\n          each: 0.01,\r\n          from: \"random\",\r\n        },\r\n      });\r\n\r\n      tl.to(chars, {\r\n        scale: 1,\r\n        filter: \"blur(0px)\",\r\n        textShadow: \"0 0 0 transparent\",\r\n        x: 0,\r\n        duration: duration * 0.4,\r\n        ease: \"elastic.out(1, 0.5)\",\r\n        stagger: {\r\n          each: 0.02,\r\n          from: \"center\",\r\n        },\r\n      });\r\n    },\r\n    { scope: containerRef, dependencies: [children, duration] }\r\n  );\r\n\r\n  return (\r\n    <div ref={containerRef} className={className}>\r\n      <span ref={textRef}>{children}</span>\r\n    </div>\r\n  );\r\n}\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/text-glitch-portal.tsx"
+    }
+  ]
+}

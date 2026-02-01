@@ -1,10 +1,11 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Morph Button",
+  "name": "morph-button",
   "type": "registry:block",
   "description": "A button that morphs its shape on hover using GSAP.",
   "dependencies": [
-    "button"
+    "gsap",
+    "@gsap/react"
   ],
   "files": [
     {

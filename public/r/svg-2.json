@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "svg-2",
+  "type": "registry:block",
+  "description": "Animated SVG asset.",
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/svg/svg-2.tsx",
+      "content": "const Svg2 = () => {\r\n  return (\r\n    <svg\r\n      width=\"200\"\r\n      height=\"120\"\r\n      viewBox=\"0 0 200 120\"\r\n      fill=\"none\"\r\n      xmlns=\"http://www.w3.org/2000/svg\"\r\n    >\r\n      <rect\r\n        y=\"0.5\"\r\n        width=\"114.47\"\r\n        height=\"114.47\"\r\n        rx=\"15.5\"\r\n        transform=\"matrix(0.866025 0.5 -0.866025 0.5 100.433 4.03613)\"\r\n        fill=\"black\"\r\n      />\r\n      <rect\r\n        y=\"0.5\"\r\n        width=\"114.47\"\r\n        height=\"114.47\"\r\n        rx=\"15.5\"\r\n        transform=\"matrix(0.866025 0.5 -0.866025 0.5 100.433 4.03613)\"\r\n        fill=\"black\"\r\n      />\r\n      <rect\r\n        y=\"0.5\"\r\n        width=\"114.47\"\r\n        height=\"114.47\"\r\n        rx=\"15.5\"\r\n        transform=\"matrix(0.866025 0.5 -0.866025 0.5 100.433 4.03613)\"\r\n        fill=\"black\"\r\n      />\r\n      <rect\r\n        y=\"0.5\"\r\n        width=\"114.47\"\r\n        height=\"114.47\"\r\n        rx=\"15.5\"\r\n        transform=\"matrix(0.866025 0.5 -0.866025 0.5 100.433 4.03613)\"\r\n        stroke=\"white\"\r\n      />\r\n      <rect\r\n        y=\"0.5\"\r\n        width=\"114.47\"\r\n        height=\"114.47\"\r\n        rx=\"15.5\"\r\n        transform=\"matrix(0.866025 0.5 -0.866025 0.5 100.433 0.25)\"\r\n        fill=\"black\"\r\n      />\r\n      <rect\r\n        y=\"0.5\"\r\n        width=\"114.47\"\r\n        height=\"114.47\"\r\n        rx=\"15.5\"\r\n        transform=\"matrix(0.866025 0.5 -0.866025 0.5 100.433 0.25)\"\r\n        fill=\"black\"\r\n      />\r\n      <rect\r\n        y=\"0.5\"\r\n        width=\"114.47\"\r\n        height=\"114.47\"\r\n        rx=\"15.5\"\r\n        transform=\"matrix(0.866025 0.5 -0.866025 0.5 100.433 0.25)\"\r\n        fill=\"black\"\r\n      />\r\n      <rect\r\n        y=\"0.5\"\r\n        width=\"114.47\"\r\n        height=\"114.47\"\r\n        rx=\"15.5\"\r\n        transform=\"matrix(0.866025 0.5 -0.866025 0.5 100.433 0.25)\"\r\n        stroke=\"white\"\r\n      />\r\n      <path\r\n        d=\"M80.9013 11.9614L159.4 57.2825L81.1859 102.439\"\r\n        stroke=\"#474747\"\r\n        strokeWidth=\"0.8\"\r\n        strokeDasharray=\"2 2\"\r\n      />\r\n      <path\r\n        d=\"M64.4345 22.697L125.866 58.1647L64.1193 93.8144\"\r\n        stroke=\"#474747\"\r\n        strokeWidth=\"0.8\"\r\n        strokeDasharray=\"2 2\"\r\n      />\r\n      <path\r\n        d=\"M48.9248 31.0275L95.165 57.7243L48.6875 84.5581\"\r\n        stroke=\"#474747\"\r\n        strokeWidth=\"0.8\"\r\n        strokeDasharray=\"2 2\"\r\n      />\r\n    </svg>\r\n  );\r\n};\r\n\r\nexport default Svg2;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/svg-2.tsx"
+    }
+  ]
+}

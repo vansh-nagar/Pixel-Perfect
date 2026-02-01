@@ -1,10 +1,11 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "3D Button",
+  "name": "3d-button",
   "type": "registry:block",
-  "description": "A 3D button component.",
+  "description": "A 3D button with press and hover effects.",
   "dependencies": [
-    "button"
+    "gsap",
+    "@gsap/react"
   ],
   "files": [
     {

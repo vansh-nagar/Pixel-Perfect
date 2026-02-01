@@ -13,27 +13,29 @@ import {
 
 import TextFade from "../../../../registry/new-york/text/text-fade";
 import TextInertia from "../../../../registry/new-york/text/text-inertia";
-import TextGradient from "registry/new-york/text/text-gradient";
-import TextXRotate from "registry/new-york/text/text-x-rotate";
-import TextYAnimation from "registry/new-york/text/text-y-animation";
-import TextYAnimation2 from "registry/new-york/text/text-y-animation2";
-import TextYAnimation3 from "registry/new-york/text/text-y-animation3";
-import TextYAnimation4 from "registry/new-york/text/text-y-animation4";
-import TextScatter from "registry/new-york/text/text-scatter";
-import TextScatter1 from "registry/new-york/text/text-scatter1";
-import TextZRotate from "registry/new-york/text/text-z-rotate";
-import TextZRotate2 from "registry/new-york/text/text-z-rotate2";
-import TextVideo from "registry/new-york/text/text-video";
-import TextReveal from "registry/new-york/text/text-reveal";
-import TextReveal2 from "registry/new-york/text/text-reveal2";
-import TextBlackHole from "registry/new-york/text/text-black-hole";
-import TextBurnNeon from "registry/new-york/text/text-burn-neon";
-import TextBrokenGlass from "registry/new-york/text/text-broken-glass";
-import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
-import TextGlitchPortal from "registry/new-york/text/text-glitch-portal";
-import TextTypewriterGlitch from "registry/new-york/text/text-typewriter-glitch";
+import TextGradient from "../../../../registry/new-york/text/text-gradient";
+import TextXRotate from "../../../../registry/new-york/text/text-x-rotate";
+import TextYAnimation from "../../../../registry/new-york/text/text-y-animation";
+import TextYAnimation2 from "../../../../registry/new-york/text/text-y-animation2";
+import TextYAnimation3 from "../../../../registry/new-york/text/text-y-animation3";
+import TextYAnimation4 from "../../../../registry/new-york/text/text-y-animation4";
+import TextScatter from "../../../../registry/new-york/text/text-scatter";
+import TextScatter1 from "../../../../registry/new-york/text/text-scatter1";
+import TextZRotate from "../../../../registry/new-york/text/text-z-rotate";
+import TextZRotate2 from "../../../../registry/new-york/text/text-z-rotate2";
+import TextVideo from "../../../../registry/new-york/text/text-video";
+import TextReveal from "../../../../registry/new-york/text/text-reveal";
+import TextReveal2 from "../../../../registry/new-york/text/text-reveal2";
+import TextBlackHole from "../../../../registry/new-york/text/text-black-hole";
+import TextBurnNeon from "../../../../registry/new-york/text/text-burn-neon";
+import TextBrokenGlass from "../../../../registry/new-york/text/text-broken-glass";
+import TextMatrixRain from "../../../../registry/new-york/text/text-matrix-rain";
+import TextGlitchPortal from "../../../../registry/new-york/text/text-glitch-portal";
+import TextTypewriterGlitch from "../../../../registry/new-york/text/text-typewriter-glitch";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
+
+const BASE_URL = "https://www.pixel-perfect.space/r";
 
 const TextGrid = () => {
   const [staggerFrom, setStaggerFrom] = useState<StaggerFrom>("start");
@@ -49,7 +51,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextBrokenGlass>
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Broken%20Glass.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-broken-glass.json`,
       hasStagger: false,
     },
     {
@@ -60,7 +62,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextMatrixRain>
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Matrix%20Rain.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-matrix-rain.json`,
       hasStagger: false,
     },
     {
@@ -71,7 +73,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextGlitchPortal>
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Glitch%20Portal.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-glitch-portal.json`,
       hasStagger: false,
     },
     {
@@ -82,61 +84,60 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextTypewriterGlitch>
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Typewriter%20Glitch.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-typewriter-glitch.json`,
       hasStagger: false,
     },
     {
-      name: "Text Y Animation 2",
-      description: "Variant Y-axis animation effect.",
+      name: "Text Reveal",
+      description: "Text reveal animation effect.",
       component: (
         <TextReveal className="text-xl">JUST GIVE IT A STAR</TextReveal>
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-reveal.json`,
       hasStagger: false,
     },
-
     {
-      name: "Text Y Animation 2",
-      description: "Variant Y-axis animation effect.",
+      name: "Text Video",
+      description: "Video masked text effect.",
       component: <TextVideo>JUST GIVE IT A STAR</TextVideo>,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-video.json`,
       hasStagger: false,
     },
     {
-      name: "Text Y Animation 2",
-      description: "Variant Y-axis animation effect.",
+      name: "Text Z Rotate 2",
+      description: "Z-axis rotation text animation variant.",
       component: <TextZRotate2 staggerFrom={staggerFrom} />,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-z-rotate2.json`,
       hasStagger: true,
     },
     {
-      name: "Text Y Animation 2",
-      description: "Variant Y-axis animation effect.",
+      name: "Text Z Rotate",
+      description: "Z-axis rotation text animation.",
       component: <TextZRotate staggerFrom={staggerFrom} />,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-z-rotate.json`,
       hasStagger: true,
     },
     {
-      name: "Text Y Animation 2",
-      description: "Variant Y-axis animation effect.",
+      name: "Text Reveal 2",
+      description: "Text reveal animation variant.",
       component: (
         <TextReveal2 className="text-xl">JUST GIVE IT A STAR</TextReveal2>
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-reveal2.json`,
       hasStagger: false,
     },
     {
-      name: "Text Y Animation 2",
-      description: "Variant Y-axis animation effect.",
+      name: "Text Scatter 1",
+      description: "Text scatter variant animation.",
       component: <TextScatter1 staggerFrom={staggerFrom} />,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-scatter1.json`,
       hasStagger: true,
     },
     {
-      name: "Text Y Animation 2",
-      description: "Variant Y-axis animation effect.",
+      name: "Text Scatter",
+      description: "Text scatters and assembles with animation.",
       component: <TextScatter staggerFrom={staggerFrom} />,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-scatter.json`,
       hasStagger: true,
     },
     {
@@ -148,7 +149,7 @@ const TextGrid = () => {
           textContent="I design and build pixel-perfect digital experiences where precision, performance, and aesthetics work together seamlessly."
         />
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Fade%20Effect.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-fade.json`,
       hasStagger: false,
     },
     {
@@ -160,7 +161,7 @@ const TextGrid = () => {
           text="Crafting refined, pixel-perfect web experiences that balance design clarity with technical excellence."
         />
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Inertia%20Effect.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-inertia.json`,
       hasStagger: false,
     },
     {
@@ -173,42 +174,42 @@ const TextGrid = () => {
           incididunt cupidatat.
         </TextGradient>
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Gradient%20Effect.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-gradient.json`,
       hasStagger: false,
     },
     {
       name: "Text X Rotate",
       description: "3D X-axis rotation effect with stagger.",
       component: <TextXRotate staggerFrom={staggerFrom} />,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20X%20Rotate.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-x-rotate.json`,
       hasStagger: true,
     },
     {
       name: "Text Y Animation",
       description: "Y-axis slide animation with stagger.",
       component: <TextYAnimation staggerFrom={staggerFrom} />,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Y%20Animation.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-y-animation.json`,
       hasStagger: true,
     },
     {
       name: "Text Y Animation 2",
       description: "Variant Y-axis animation effect.",
       component: <TextYAnimation2 staggerFrom={staggerFrom} />,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Y%20Animation2.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-y-animation2.json`,
       hasStagger: true,
     },
     {
-      name: "Text Y Animation 2",
+      name: "Text Y Animation 3",
       description: "Variant Y-axis animation effect.",
       component: <TextYAnimation3 staggerFrom={staggerFrom} />,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Y%20Animation3.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-y-animation3.json`,
       hasStagger: true,
     },
     {
-      name: "Text Y Animation 2",
+      name: "Text Y Animation 4",
       description: "Variant Y-axis animation effect.",
       component: <TextYAnimation4 staggerFrom={staggerFrom} />,
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Y%20Animation4.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-y-animation4.json`,
       hasStagger: true,
     },
     {
@@ -219,7 +220,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextBlackHole>
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Black%20Hole.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-black-hole.json`,
       hasStagger: false,
     },
     {
@@ -230,7 +231,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextBurnNeon>
       ),
-      link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Burn%20Neon.json",
+      link: `npx shadcn@latest add ${BASE_URL}/text-burn-neon.json`,
       hasStagger: false,
     },
   ];

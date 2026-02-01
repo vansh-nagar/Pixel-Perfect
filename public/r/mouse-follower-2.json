@@ -1,9 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Mouse Follower 2",
+  "name": "mouse-follower-2",
   "type": "registry:block",
   "description": "Mouse follower image trail with pure DOM.",
-  "dependencies": [],
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
   "files": [
     {
       "path": "registry/new-york/mouse-follower/mouse-follower2.tsx",

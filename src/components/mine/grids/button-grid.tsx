@@ -6,45 +6,61 @@ import MorphImageButton from "../../../../registry/new-york/buttons/morph-image-
 import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
 import ShinyButton from "../../../../registry/new-york/buttons/shiny-button";
 import { toast } from "sonner";
-import BorderGradientButton from "registry/new-york/buttons/border-gradient-button";
-import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
+import BorderGradientButton from "../../../../registry/new-york/buttons/border-gradient-button";
+import MouseFollowerButton from "../../../../registry/new-york/buttons/mouse-follower-button";
+import PremiumButton from "../../../../registry/new-york/buttons/premium-button";
+import OrangePremiumButton from "../../../../registry/new-york/buttons/orange-premium-button";
+
+const BASE_URL = "https://www.pixel-perfect.space/r";
 
 export const ButtonsArr = [
   {
     name: "Morph Button",
     description: "A button that morphs its shape on hover using GSAP.",
     component: <MorphButton>Hover Me</MorphButton>,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Morph%20Button.json",
+    link: `npx shadcn@latest add ${BASE_URL}/morph-button.json`,
   },
   {
     name: "Morph Image Button",
     description: "A button that morphs an image mask on hover using GSAP.",
     component: <MorphImageButton>Hover Me</MorphImageButton>,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Morph%20Image%20Button.json",
+    link: `npx shadcn@latest add ${BASE_URL}/morph-image-button.json`,
   },
   {
     name: "3D Button",
     description: "A 3D button with press and hover effects.",
     component: <ThreedButton>Click Me</ThreedButton>,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/3D%20Button.json",
+    link: `npx shadcn@latest add ${BASE_URL}/3d-button.json`,
   },
   {
     name: "Shiny Button",
     description: "A shiny button with hover effects.",
     component: <ShinyButton />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Shiny%20Button.json",
+    link: `npx shadcn@latest add ${BASE_URL}/shiny-button.json`,
   },
   {
     name: "Mouse Follower Button",
     description: "A button that follows the mouse cursor with hover effects.",
     component: <MouseFollowerButton>Mouse follower</MouseFollowerButton>,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%20Button.json",
+    link: `npx shadcn@latest add ${BASE_URL}/mouse-follower-button.json`,
   },
   {
     name: "Border Gradient Button",
     description: "A button with a gradient border effect.",
     component: <BorderGradientButton />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Border%20Gradient%20Button.json",
+    link: `npx shadcn@latest add ${BASE_URL}/border-gradient-button.json`,
+  },
+  {
+    name: "Premium Button",
+    description: "A button with elaborate shadows and premium feel.",
+    component: <PremiumButton>Hover Me</PremiumButton>,
+    link: `npx shadcn@latest add ${BASE_URL}/premium-button.json`,
+  },
+  {
+    name: "Orange Premium Button",
+    description: "A button with vibrant gradients and soft shadows.",
+    component: <OrangePremiumButton>Hover Me</OrangePremiumButton>,
+    link: `npx shadcn@latest add ${BASE_URL}/orange-premium-button.json`,
   },
 ];
 

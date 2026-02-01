@@ -2,28 +2,24 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
-import MouseFollower1 from "registry/new-york/mouse-follower/mouse-follower1";
+import MouseFollower1 from "../../../../registry/new-york/mouse-follower/mouse-follower1";
 import IconFall from "@/components/rune-landing/icon-fall";
+
+const BASE_URL = "https://www.pixel-perfect.space/r";
 
 export const MouseFollowerArr = [
   {
     name: "Image Fall",
     description: "Image trail mouse follower using GSAP.",
     component: <MouseFollower1 />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%201.json",
+    link: `npx shadcn@latest add ${BASE_URL}/mouse-follower-1.json`,
   },
   {
     name: "Icon Fall",
     description: "Icon trail mouse follower using GSAP.",
     component: <IconFall />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%202.json",
+    link: `npx shadcn@latest add ${BASE_URL}/mouse-follower-2.json`,
   },
-  // {
-  //   name: "Mouse Follower 2",
-  //   description: "Image trail mouse follower using GSAP.",
-  //   component: <MouseFollower2 />,
-  //   link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%202.json",
-  // },
 ];
 
 const MouseFollower = () => {

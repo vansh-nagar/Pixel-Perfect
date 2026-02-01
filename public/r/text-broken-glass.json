@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-broken-glass",
+  "type": "registry:block",
+  "description": "Letters start shattered and rotated then snap into place.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/text/text-broken-glass.tsx",
+      "content": "\"use client\";\r\n\r\nimport { useRef } from \"react\";\r\nimport gsap from \"gsap\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport SplitText from \"gsap/SplitText\";\r\n\r\ngsap.registerPlugin(SplitText);\r\n\r\ninterface TextBrokenGlassProps {\r\n  children: string;\r\n  className?: string;\r\n  duration?: number;\r\n}\r\n\r\nexport default function TextBrokenGlass({\r\n  children,\r\n  className = \"\",\r\n  duration = 1.5,\r\n}: TextBrokenGlassProps) {\r\n  const containerRef = useRef<HTMLDivElement>(null);\r\n  const textRef = useRef<HTMLSpanElement>(null);\r\n\r\n  useGSAP(\r\n    () => {\r\n      const split = new SplitText(textRef.current, { type: \"chars\" });\r\n      const chars = split.chars;\r\n\r\n      const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });\r\n\r\n      tl.add(() => {\r\n        chars.forEach((char) => {\r\n          gsap.set(char, {\r\n            opacity: 0.3,\r\n            x: gsap.utils.random(-100, 100),\r\n            y: gsap.utils.random(-80, 80),\r\n            rotation: gsap.utils.random(-180, 180),\r\n            scale: gsap.utils.random(0.5, 1.5),\r\n            filter: \"blur(3px)\",\r\n          });\r\n        });\r\n      });\r\n\r\n      tl.to(chars, {\r\n        opacity: 1,\r\n        x: 0,\r\n        y: 0,\r\n        rotation: 0,\r\n        scale: 1,\r\n        filter: \"blur(0px)\",\r\n        duration: duration,\r\n        ease: \"back.out(1.7)\",\r\n        stagger: {\r\n          each: 0.02,\r\n          from: \"random\",\r\n        },\r\n      });\r\n    },\r\n    { scope: containerRef, dependencies: [children, duration] }\r\n  );\r\n\r\n  return (\r\n    <div ref={containerRef} className={className}>\r\n      <span ref={textRef}>{children}</span>\r\n    </div>\r\n  );\r\n}\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/text-broken-glass.tsx"
+    }
+  ]
+}

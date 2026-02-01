@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "orange-premium-button",
+  "type": "registry:block",
+  "description": "A button with vibrant gradients and soft shadows.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/orange-premium-button.tsx",
+      "content": "import React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface OrangePremiumButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}\r\n\r\nconst OrangePremiumButton = React.forwardRef<HTMLButtonElement, OrangePremiumButtonProps>(\r\n  ({ className, children, ...props }, ref) => {\r\n    return (\r\n      <button\r\n        ref={ref}\r\n        className={cn(\r\n          \"bg-muted px-4 py-3 rounded-3xl cursor-pointer font-medium text-white transition-all active:scale-95\",\r\n          className\r\n        )}\r\n        style={{\r\n          background:\r\n            \"linear-gradient(0.1deg, rgba(255, 74, 74, 0) 0.09%, rgba(255, 36, 36, 0.2) 76.39%), linear-gradient(360deg, #FFF16E 2.67%, #FF8A33 30.48%, #FF4A4A 51.8%), #FF4A4A\",\r\n          backgroundBlendMode: \"soft-light, normal, normal, normal\",\r\n          boxShadow:\r\n            \"0px 7.25px 7.5px rgba(255, 245, 153, 0.3), 0px 5px 7.5px rgba(255, 197, 128, 0.56), inset 1px -1px 5px rgba(255, 255, 255, 0.4), inset -1px -1px 5px rgba(255, 255, 255, 0.4), inset -2px -2px 5px rgba(255, 255, 255, 0.4), inset 2px -2px 5px rgba(255, 255, 255, 0.4)\",\r\n        }}\r\n        {...props}\r\n      >\r\n        {children || \"Cool Button\"}\r\n      </button>\r\n    );\r\n  }\r\n);\r\n\r\nOrangePremiumButton.displayName = \"OrangePremiumButton\";\r\n\r\nexport default OrangePremiumButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/orange-premium-button.tsx"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-video",
+  "type": "registry:block",
+  "description": "Video masked text effect.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/text/text-video.tsx",
+      "content": "const TextVideo = ({ children }: { children: React.ReactNode }) => {\r\n  return (\r\n    <div\r\n      className=\"text-7xl font-extrabold bg-clip-text text-transparent\"\r\n      style={{\r\n        backgroundImage: `url('https://i.pinimg.com/originals/80/b7/5e/80b75eb774b647c67b2efa531b57ba13.gif')`,\r\n        backgroundSize: \"cover\",\r\n        backgroundPosition: \"center\",\r\n      }}\r\n    >\r\n      {children}\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TextVideo;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/text-video.tsx"
+    }
+  ]
+}

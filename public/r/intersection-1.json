@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Intersection 1",
+  "name": "intersection-1",
   "type": "registry:block",
   "description": "A circular border with gradient intersection lines.",
   "dependencies": [],

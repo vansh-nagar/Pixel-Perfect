@@ -1,9 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Text Fade Effect",
+  "name": "text-fade",
   "type": "registry:block",
   "description": "Text fades in/out on scroll using GSAP.",
-  "dependencies": [],
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
   "files": [
     {
       "path": "registry/new-york/text/text-fade.tsx",

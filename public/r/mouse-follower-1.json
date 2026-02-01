@@ -1,9 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Mouse Follower 1",
+  "name": "mouse-follower-1",
   "type": "registry:block",
   "description": "Image trail mouse follower using GSAP.",
-  "dependencies": [],
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
   "files": [
     {
       "path": "registry/new-york/mouse-follower/mouse-follower1.tsx",

@@ -1,13 +1,13 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "pixel-perfect",
-  "homepage": "https://pixel-perfect-01.vercel.app",
+  "homepage": "https://www.pixel-perfect.space",
   "items": [
     {
-      "name": "3D Button",
-      "description": "A 3D button component.",
+      "name": "3d-button",
+      "description": "A 3D button with press and hover effects.",
       "type": "registry:block",
-      "dependencies": ["button"],
+      "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {
           "type": "registry:component",
@@ -17,10 +17,10 @@
       ]
     },
     {
-      "name": "Morph Button",
+      "name": "morph-button",
       "description": "A button that morphs its shape on hover using GSAP.",
       "type": "registry:block",
-      "dependencies": ["button"],
+      "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {
           "type": "registry:component",
@@ -30,10 +30,10 @@
       ]
     },
     {
-      "name": "Morph Image Button",
-      "description": "A button that morphs with an image on hover.",
+      "name": "morph-image-button",
+      "description": "A button that morphs an image mask on hover using GSAP.",
       "type": "registry:block",
-      "dependencies": ["button"],
+      "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {
           "type": "registry:component",
@@ -43,10 +43,10 @@
       ]
     },
     {
-      "name": "Shiny Button",
-      "description": "A button with a shiny hover effect.",
+      "name": "shiny-button",
+      "description": "A shiny button with hover effects.",
       "type": "registry:block",
-      "dependencies": ["button"],
+      "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {
           "type": "registry:component",
@@ -56,7 +56,59 @@
       ]
     },
     {
-      "name": "Border 1",
+      "name": "mouse-follower-button",
+      "description": "A button that follows the mouse cursor with hover effects.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/mouse-follower-button.tsx",
+          "target": "components/pixel-perfect/mouse-follower-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "border-gradient-button",
+      "description": "A button with a gradient border effect.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/border-gradient-button.tsx",
+          "target": "components/pixel-perfect/border-gradient-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "premium-button",
+      "description": "A button with elaborate shadows and premium feel.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/premium-button.tsx",
+          "target": "components/pixel-perfect/premium-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "orange-premium-button",
+      "description": "A button with vibrant gradients and soft shadows.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/orange-premium-button.tsx",
+          "target": "components/pixel-perfect/orange-premium-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "border-1",
       "description": "A dashed border design with corner elements.",
       "type": "registry:block",
       "dependencies": [],
@@ -69,7 +121,7 @@
       ]
     },
     {
-      "name": "Border 2",
+      "name": "border-2",
       "description": "A solid border design with corner elements.",
       "type": "registry:block",
       "dependencies": [],
@@ -82,7 +134,7 @@
       ]
     },
     {
-      "name": "Intersection 1",
+      "name": "intersection-1",
       "description": "A circular border with gradient intersection lines.",
       "type": "registry:block",
       "dependencies": [],
@@ -95,7 +147,7 @@
       ]
     },
     {
-      "name": "Intersection 2",
+      "name": "intersection-2",
       "description": "A scoped intersection design with patterned borders.",
       "type": "registry:block",
       "dependencies": [],
@@ -108,23 +160,23 @@
       ]
     },
     {
-      "name": "Gradient 1",
-      "description": "A simple radial gradient background.",
+      "name": "star-border",
+      "description": "Star border decorator with animated corners.",
       "type": "registry:block",
       "dependencies": [],
       "files": [
         {
           "type": "registry:component",
-          "path": "registry/new-york/background/gradient1.tsx",
-          "target": "components/pixel-perfect/gradient1.tsx"
+          "path": "registry/new-york/borders/star-border.tsx",
+          "target": "components/pixel-perfect/star-border.tsx"
         }
       ]
     },
     {
-      "name": "Mouse Follower 1",
+      "name": "mouse-follower-1",
       "description": "Image trail mouse follower using GSAP.",
       "type": "registry:block",
-      "dependencies": [],
+      "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {
           "type": "registry:component",
@@ -134,10 +186,10 @@
       ]
     },
     {
-      "name": "Mouse Follower 2",
+      "name": "mouse-follower-2",
       "description": "Mouse follower image trail with pure DOM.",
       "type": "registry:block",
-      "dependencies": [],
+      "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {
           "type": "registry:component",
@@ -147,10 +199,10 @@
       ]
     },
     {
-      "name": "Text Fade Effect",
+      "name": "text-fade",
       "description": "Text fades in/out on scroll using GSAP.",
       "type": "registry:block",
-      "dependencies": [],
+      "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {
           "type": "registry:component",
@@ -160,15 +212,431 @@
       ]
     },
     {
-      "name": "Text Inertia Effect",
+      "name": "text-inertia",
       "description": "Text follows mouse with inertia using GSAP.",
       "type": "registry:block",
-      "dependencies": [],
+      "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {
           "type": "registry:component",
           "path": "registry/new-york/text/text-inertia.tsx",
           "target": "components/pixel-perfect/text-inertia.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-gradient",
+      "description": "Gradient text effect using CSS.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-gradient.tsx",
+          "target": "components/pixel-perfect/text-gradient.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-x-rotate",
+      "description": "3D X-axis rotation effect with stagger.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-x-rotate.tsx",
+          "target": "components/pixel-perfect/text-x-rotate.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-y-animation",
+      "description": "Y-axis slide animation with stagger.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-y-animation.tsx",
+          "target": "components/pixel-perfect/text-y-animation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-y-animation2",
+      "description": "Variant Y-axis animation effect.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-y-animation2.tsx",
+          "target": "components/pixel-perfect/text-y-animation2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-y-animation3",
+      "description": "Variant Y-axis animation effect.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-y-animation3.tsx",
+          "target": "components/pixel-perfect/text-y-animation3.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-y-animation4",
+      "description": "Variant Y-axis animation effect.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-y-animation4.tsx",
+          "target": "components/pixel-perfect/text-y-animation4.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-scatter",
+      "description": "Text scatters and assembles with animation.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-scatter.tsx",
+          "target": "components/pixel-perfect/text-scatter.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-scatter1",
+      "description": "Text scatter variant animation.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-scatter1.tsx",
+          "target": "components/pixel-perfect/text-scatter1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-z-rotate",
+      "description": "Z-axis rotation text animation.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-z-rotate.tsx",
+          "target": "components/pixel-perfect/text-z-rotate.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-z-rotate2",
+      "description": "Z-axis rotation text animation variant.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-z-rotate2.tsx",
+          "target": "components/pixel-perfect/text-z-rotate2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-video",
+      "description": "Video masked text effect.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-video.tsx",
+          "target": "components/pixel-perfect/text-video.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-reveal",
+      "description": "Text reveal animation effect.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-reveal.tsx",
+          "target": "components/pixel-perfect/text-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-reveal2",
+      "description": "Text reveal animation variant.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-reveal2.tsx",
+          "target": "components/pixel-perfect/text-reveal2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-black-hole",
+      "description": "Letters come from center, stretched and sucked outward.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-black-hole.tsx",
+          "target": "components/pixel-perfect/text-black-hole.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-burn-neon",
+      "description": "Random flicker then letters glow red and turn white.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-burn-neon.tsx",
+          "target": "components/pixel-perfect/text-burn-neon.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-broken-glass",
+      "description": "Letters start shattered and rotated then snap into place.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-broken-glass.tsx",
+          "target": "components/pixel-perfect/text-broken-glass.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-matrix-rain",
+      "description": "Columns of random symbols fall then lock into real text.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-matrix-rain.tsx",
+          "target": "components/pixel-perfect/text-matrix-rain.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-glitch-portal",
+      "description": "RGB split plus scale blur then collapse into clean text.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-glitch-portal.tsx",
+          "target": "components/pixel-perfect/text-glitch-portal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-typewriter-glitch",
+      "description": "Types then deletes then types wrong then finally correct.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-typewriter-glitch.tsx",
+          "target": "components/pixel-perfect/text-typewriter-glitch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-assemble",
+      "description": "Text assembles from scattered pieces.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-assemble.tsx",
+          "target": "components/pixel-perfect/text-assemble.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg-1",
+      "description": "Animated SVG asset with GSAP.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg-1.tsx",
+          "target": "components/pixel-perfect/svg-1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg-2",
+      "description": "Animated SVG asset.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg-2.tsx",
+          "target": "components/pixel-perfect/svg-2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg-4",
+      "description": "Animated SVG asset.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg-4.tsx",
+          "target": "components/pixel-perfect/svg-4.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg-5",
+      "description": "Animated SVG asset.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg5.tsx",
+          "target": "components/pixel-perfect/svg5.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg-6",
+      "description": "Animated SVG asset.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg6.tsx",
+          "target": "components/pixel-perfect/svg6.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg-8",
+      "description": "Animated SVG asset.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg8.tsx",
+          "target": "components/pixel-perfect/svg8.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg-9",
+      "description": "Animated SVG asset.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg-9.tsx",
+          "target": "components/pixel-perfect/svg-9.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stagger-1",
+      "description": "GSAP stagger animation component.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/stagger1.tsx",
+          "target": "components/pixel-perfect/stagger1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card-animation",
+      "description": "Framer Motion card animation.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/card-animation.tsx",
+          "target": "components/pixel-perfect/card-animation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "guitar-svg",
+      "description": "Guitar SVG path effect animation.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg-path-effects/guitar.tsx",
+          "target": "components/pixel-perfect/guitar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "legionsdev-svg",
+      "description": "Legions Dev SVG path effect.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg-path-effects/legionsdev.tsx",
+          "target": "components/pixel-perfect/legionsdev.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-path",
+      "description": "Motion path SVG animation.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg-path-effects/motion-path.tsx",
+          "target": "components/pixel-perfect/motion-path.tsx"
         }
       ]
     }

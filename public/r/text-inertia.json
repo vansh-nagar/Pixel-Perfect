@@ -1,9 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Text Inertia Effect",
+  "name": "text-inertia",
   "type": "registry:block",
   "description": "Text follows mouse with inertia using GSAP.",
-  "dependencies": [],
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
   "files": [
     {
       "path": "registry/new-york/text/text-inertia.tsx",

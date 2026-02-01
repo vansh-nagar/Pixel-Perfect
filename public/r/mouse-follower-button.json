@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mouse-follower-button",
+  "type": "registry:block",
+  "description": "A button that follows the mouse cursor with hover effects.",
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/mouse-follower-button.tsx",
+      "content": "\"use client\";\r\nimport { useEffect, useRef, useState } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\n\r\nconst MouseFollowerButton = ({\r\n  children = \"Shiny Button\",\r\n  className = \"\",\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) => {\r\n  const [isButtonHovering, setisButtonHovering] = useState(false);\r\n  const buttonRef = useRef<HTMLButtonElement | null>(null);\r\n\r\n  useEffect(() => {\r\n    const mouseMove = (e: MouseEvent) => {\r\n      if (!buttonRef.current) return;\r\n\r\n      const rect = buttonRef.current.getBoundingClientRect();\r\n      console.log(rect);\r\n\r\n      const x = e.clientX - rect.left - rect.width / 2;\r\n      const y = e.clientY - rect.top - rect.height / 2;\r\n\r\n      const maxMove = 8;\r\n\r\n      const clampedX = Math.max(-maxMove, Math.min(maxMove, x / 2));\r\n      const clampedY = Math.max(-maxMove, Math.min(maxMove, y / 2));\r\n\r\n      buttonRef.current.animate(\r\n        {\r\n          transform: isButtonHovering\r\n            ? `translate(${clampedX}px, ${clampedY}px)`\r\n            : `translate(0px, 0px)`,\r\n        },\r\n        {\r\n          duration: 3000,\r\n          fill: \"forwards\",\r\n          easing: \"ease-out\",\r\n        },\r\n      );\r\n    };\r\n\r\n    window.addEventListener(\"mousemove\", mouseMove);\r\n\r\n    return () => {\r\n      window.removeEventListener(\"mousemove\", mouseMove);\r\n    };\r\n  }, [isButtonHovering]);\r\n\r\n  return (\r\n    <Button\r\n      ref={buttonRef}\r\n      onMouseEnter={() => {\r\n        setisButtonHovering(true);\r\n      }}\r\n      onMouseLeave={() => {\r\n        setisButtonHovering(false);\r\n      }}\r\n      className={`shiny relative overflow-hidden bg-black text-white z-10 shadow-[inset_1px_1px_4px_0.1px_white,inset_-1px_-1px_4px_0.1px_white] rounded-full hover:bg-black/60 ${className}`}\r\n    >\r\n      <span className=\"z-30\">{children}</span>\r\n      <div className=\"h-20 bg-gradient-to-tr from-white to-black w-3 -rotate-45 origin-top left-0  top-0 absolute blur-sm \"></div>\r\n      <div className=\"h-20 bg-white w-1 -rotate-45 origin-top left-16  top-0 absolute blur-md\"></div>\r\n    </Button>\r\n  );\r\n};\r\n\r\nexport default MouseFollowerButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/mouse-follower-button.tsx"
+    }
+  ]
+}

@@ -6,28 +6,28 @@ import Border1 from "../../../../registry/new-york/borders/border1";
 import Border2 from "../../../../registry/new-york/borders/border2";
 import Intersection1 from "../../../../registry/new-york/borders/intersection1";
 import Intersection2 from "../../../../registry/new-york/borders/intersection2";
+import StarBorders from "../../../../registry/new-york/borders/star-border";
 
-import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
-import StarBorders from "registry/new-york/borders/star-border";
+const BASE_URL = "https://www.pixel-perfect.space/r";
 
 export const BorderArr = [
   {
     name: "Square Border",
     description: "A dashed border design using CSS.",
     component: <Border1 />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Border%201.json",
+    link: `npx shadcn@latest add ${BASE_URL}/border-1.json`,
   },
   {
     name: "Simple Dashed Border",
     description: "A border design using CSS.",
     component: <Border2 />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Border%202.json",
+    link: `npx shadcn@latest add ${BASE_URL}/border-2.json`,
   },
   {
     name: "Intersection (Scope)",
     description: "An intersection design using CSS.",
     component: <Intersection1 />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%201.json",
+    link: `npx shadcn@latest add ${BASE_URL}/intersection-1.json`,
   },
   {
     name: "Star Borders",
@@ -40,14 +40,14 @@ export const BorderArr = [
       </Intersection2>
     ),
     image: "",
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%202.json",
+    link: `npx shadcn@latest add ${BASE_URL}/intersection-2.json`,
   },
   {
-    name: "Intersection (Scope)",
-    description: "An intersection design using CSS.",
+    name: "Star Border",
+    description: "Star border with animated corners.",
     component: <StarBorders />,
     image: "",
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Intersection%202.json",
+    link: `npx shadcn@latest add ${BASE_URL}/star-border.json`,
   },
 ];
 

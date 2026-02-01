@@ -2,52 +2,58 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
-import Svg1 from "registry/new-york/svg/svg-1";
-import Svg2 from "registry/new-york/svg/svg-2";
-import Svg4 from "registry/new-york/svg/svg-4";
-import Svg5 from "registry/new-york/svg/svg5";
-import Svg6 from "registry/new-york/svg/svg6";
-import Svg8 from "registry/new-york/svg/svg8";
-import Svg9 from "registry/new-york/svg/svg-9";
+import Svg1 from "../../../../registry/new-york/svg/svg-1";
+import Svg2 from "../../../../registry/new-york/svg/svg-2";
+import Svg4 from "../../../../registry/new-york/svg/svg-4";
+import Svg5 from "../../../../registry/new-york/svg/svg5";
+import Svg6 from "../../../../registry/new-york/svg/svg6";
+import Svg8 from "../../../../registry/new-york/svg/svg8";
+import Svg9 from "../../../../registry/new-york/svg/svg-9";
+
+const BASE_URL = "https://www.pixel-perfect.space/r";
 
 export const SvgArr = [
   {
     name: "Svg Asset 1",
-    description: "A button that morphs its shape on hover using GSAP.",
+    description: "Animated SVG asset with GSAP.",
     component: <Svg1 />,
+    link: `npx shadcn@latest add ${BASE_URL}/svg-1.json`,
   },
   {
     name: "Svg Asset 2",
-    description: "A button that morphs its shape on hover using GSAP.",
+    description: "Animated SVG asset.",
     component: <Svg2 />,
+    link: `npx shadcn@latest add ${BASE_URL}/svg-2.json`,
   },
-
   {
-    name: "Svg Asset 2",
-    description: "A button that morphs its shape on hover using GSAP.",
+    name: "Svg Asset 4",
+    description: "Animated SVG asset.",
     component: <Svg4 />,
+    link: `npx shadcn@latest add ${BASE_URL}/svg-4.json`,
   },
   {
-    name: "Svg Asset 2",
-    description: "A button that morphs its shape on hover using GSAP.",
+    name: "Svg Asset 5",
+    description: "Animated SVG asset.",
     component: <Svg5 />,
+    link: `npx shadcn@latest add ${BASE_URL}/svg-5.json`,
   },
-
   {
-    name: "Svg Asset 2",
-    description: "A button that morphs its shape on hover using GSAP.",
+    name: "Svg Asset 8",
+    description: "Animated SVG asset.",
     component: <Svg8 />,
+    link: `npx shadcn@latest add ${BASE_URL}/svg-8.json`,
   },
   {
-    name: "Svg Asset 2",
-    description: "A button that morphs its shape on hover using GSAP.",
+    name: "Svg Asset 9",
+    description: "Animated SVG asset.",
     component: <Svg9 />,
+    link: `npx shadcn@latest add ${BASE_URL}/svg-9.json`,
   },
-
   {
-    name: "Svg Asset 2",
-    description: "A button that morphs its shape on hover using GSAP.",
+    name: "Svg Asset 6",
+    description: "Animated SVG asset.",
     component: <Svg6 />,
+    link: `npx shadcn@latest add ${BASE_URL}/svg-6.json`,
   },
 ];
 
@@ -77,15 +83,8 @@ const SvgAssetsGrid = () => {
               size={"sm"}
               variant={"copy"}
               onClick={() => {
-                const svg = document.querySelectorAll(".z-30 svg")[index];
-                if (svg) {
-                  const serializer = new XMLSerializer();
-                  const svgString = serializer.serializeToString(svg);
-                  navigator.clipboard.writeText(svgString);
-                  toast.success("SVG copied to clipboard!");
-                } else {
-                  toast.error("SVG not found.");
-                }
+                navigator.clipboard.writeText(item.link);
+                toast.success("Link copied to clipboard!");
               }}
               className="text-xs text-white cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
             >

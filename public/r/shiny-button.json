@@ -1,10 +1,11 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Shiny Button",
+  "name": "shiny-button",
   "type": "registry:block",
-  "description": "A button with a shiny hover effect.",
+  "description": "A shiny button with hover effects.",
   "dependencies": [
-    "button"
+    "gsap",
+    "@gsap/react"
   ],
   "files": [
     {

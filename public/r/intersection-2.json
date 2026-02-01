@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Intersection 2",
+  "name": "intersection-2",
   "type": "registry:block",
   "description": "A scoped intersection design with patterned borders.",
   "dependencies": [],

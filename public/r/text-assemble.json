@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-assemble",
+  "type": "registry:block",
+  "description": "Text assembles from scattered pieces.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/text/text-assemble.tsx",
+      "content": "\"use client\";\r\nimport SplitText from \"gsap/src/SplitText\";\r\nimport ScrollTrigger from \"gsap/src/ScrollTrigger\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport gsap from \"gsap\";\r\nimport { useRef } from \"react\";\r\n\r\ngsap.registerPlugin(SplitText, ScrollTrigger);\r\n\r\nconst TextAssemble = () => {\r\n  const containerRef = useRef<HTMLDivElement>(null);\r\n\r\n  useGSAP(\r\n    () => {\r\n      const split = new SplitText(\".st\", { type: \"chars\" });\r\n\r\n      const scrollTween = gsap.to(\".con\", {\r\n        xPercent: -100,\r\n        ease: \"none\",\r\n        scrollTrigger: {\r\n          trigger: \".wrapper\",\r\n          pin: true,\r\n          scrub: true,\r\n          end: () => \"+=10000px\",\r\n        },\r\n      });\r\n\r\n      split.chars.forEach((char) => {\r\n        gsap.from(char, {\r\n          x: gsap.utils.random(0, 500),\r\n          y: gsap.utils.random(-200, 200),\r\n          rotate: gsap.utils.random(-20, 20),\r\n          scrollTrigger: {\r\n            containerAnimation: scrollTween,\r\n            trigger: char,\r\n            start: \"left 100%\",\r\n            end: \"left 80%\",\r\n            scrub: 1,\r\n          },\r\n        });\r\n      });\r\n    },\r\n    { scope: containerRef }\r\n  );\r\n\r\n  return (\r\n    <div ref={containerRef}>\r\n      <div className=\" h-screen \"></div>\r\n      <div className=\"wrapper h-screen flex items-center\">\r\n        <div className=\"con px-4\">\r\n          <span className=\"st text-xs text-nowrap \">\r\n            LIKE • FOLLOW • STAY TUNED ✦ Building cool things every day ✦\r\n            Sharing what actually works ✦ From bugs → breakthroughs ✦ Design •\r\n            Code • Ship • Repeat ★ Don’t just watch — build with me ★ ☆ Real\r\n            projects. Real progress. No noise. ✧ ꕤ ✱ ✧ ✦ ✫ ✬ ✭ ✮ ✯ ✰ ★ ☆ ✵ ✶ ✷ ✸\r\n            ✹ ✺ ✻ ✼ ✽ ✾ ✿ ✧ ꕤ FOLLOW FOR: → clean UI ideas → dev experiments →\r\n            behin\r\n          </span>\r\n        </div>\r\n      </div>\r\n      <div className=\"wrapper h-screen flex items-center bg-red-200\"></div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TextAssemble;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/text-assemble.tsx"
+    }
+  ]
+}

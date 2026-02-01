@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "border-gradient-button",
+  "type": "registry:block",
+  "description": "A button with a gradient border effect.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/border-gradient-button.tsx",
+      "content": "import { Button } from \"@/components/ui/button\";\r\n\r\nconst BorderGradientButton = () => {\r\n  return (\r\n    <Button className=\"relative rounded-md animate-rainbow bg-[linear-gradient(45deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] active:scale-[0.95]  group\">\r\n      <div className=\"z-0 absolute inset-[1.5px] bg-background/95 group-hover:bg-background/40  backdrop-blur-3xl rounded-sm transition-all saturate-200\" />\r\n      <span className=\"z-10 text-foreground pointer-events-none\">\r\n        Gradient Border\r\n      </span>\r\n    </Button>\r\n  );\r\n};\r\n\r\nexport default BorderGradientButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/border-gradient-button.tsx"
+    }
+  ]
+}

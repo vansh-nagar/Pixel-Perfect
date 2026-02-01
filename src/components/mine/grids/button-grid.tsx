@@ -10,6 +10,7 @@ import BorderGradientButton from "../../../../registry/new-york/buttons/border-g
 import MouseFollowerButton from "../../../../registry/new-york/buttons/mouse-follower-button";
 import PremiumButton from "../../../../registry/new-york/buttons/premium-button";
 import OrangePremiumButton from "../../../../registry/new-york/buttons/orange-premium-button";
+import StripeButton from "../../../../registry/new-york/buttons/stripe-button";
 
 const BASE_URL = "https://www.pixel-perfect.space/r";
 
@@ -62,6 +63,12 @@ export const ButtonsArr = [
     component: <OrangePremiumButton>Hover Me</OrangePremiumButton>,
     link: `npx shadcn@latest add ${BASE_URL}/orange-premium-button.json`,
   },
+  {
+    name: "Stripe Button",
+    description: "A Stripe-inspired button with inset shadow effect.",
+    component: <StripeButton>Abhinav</StripeButton>,
+    link: `npx shadcn@latest add ${BASE_URL}/stripe-button.json`,
+  },
 ];
 
 const ButtonGrid = () => {
@@ -70,7 +77,7 @@ const ButtonGrid = () => {
       {ButtonsArr.map((item, index) => (
         <div
           key={index}
-          className="relative border-b border-l border-dashed  aspect-square flex items-center justify-center "
+          className="relative group border-b border-l border-dashed  aspect-square flex items-center justify-center "
         >
           <BorderDecorator />
           <div className=" z-30">{item.component}</div>
@@ -119,7 +126,7 @@ export const BorderDecorator = () => {
       <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px] mt-[1px]  border-dashed"></span>
 
       {/* Circular border */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>
+      <div className="absolute group-hover:animate-spin top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>
 
       {/* Horizontal line */}
       <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-y-1/2 z-10 pointer-events-none"></div>

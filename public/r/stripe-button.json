@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stripe-button",
+  "type": "registry:block",
+  "description": "A Stripe-inspired button with inset shadow effect.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/stripe-button.tsx",
+      "content": "import React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface StripeButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}\r\n\r\nconst StripeButton = React.forwardRef<HTMLButtonElement, StripeButtonProps>(\r\n  ({ className, children, ...props }, ref) => {\r\n    return (\r\n      <button\r\n        ref={ref}\r\n        className={cn(\r\n          \"flex flex-row justify-center items-center px-4 py-2 gap-2 rounded-lg cursor-pointer font-medium transition-all active:scale-95 text-white text-sm\",\r\n          className\r\n        )}\r\n        style={{\r\n          background: \"#635CFF\",\r\n          boxShadow: \"inset 0px 2px 0px #7A74FF\",\r\n        }}\r\n        {...props}\r\n      >\r\n        {children || \"Stripe Button\"}\r\n      </button>\r\n    );\r\n  }\r\n);\r\n\r\nStripeButton.displayName = \"StripeButton\";\r\n\r\nexport default StripeButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/stripe-button.tsx"
+    }
+  ]
+}

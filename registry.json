@@ -108,6 +108,19 @@
       ]
     },
     {
+      "name": "stripe-button",
+      "description": "A Stripe-inspired button with inset shadow effect.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/stripe-button.tsx",
+          "target": "components/pixel-perfect/stripe-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "border-1",
       "description": "A dashed border design with corner elements.",
       "type": "registry:block",

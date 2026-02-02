@@ -134,6 +134,19 @@
       ]
     },
     {
+      "name": "toggle-button",
+      "description": "An animated toggle switch with spring physics using Framer Motion.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/toggle-buttion.tsx",
+          "target": "components/pixel-perfect/toggle-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "border-1",
       "description": "A dashed border design with corner elements.",
       "type": "registry:block",

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-button",
+  "type": "registry:block",
+  "description": "An animated toggle switch with spring physics using Framer Motion.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/toggle-buttion.tsx",
+      "content": "\"use client\";\r\nimport React, { useState } from \"react\";\r\nimport { motion } from \"framer-motion\";\r\n\r\nconst ToggleButton = () => {\r\n  const [toggle, setToggle] = useState(false);\r\n  return (\r\n    <div className=\" relative\">\r\n      <div\r\n        className={`h-2 aspect-square rounded-full absolute -top-1 -right-3 ${toggle ? \"bg-green-500\" : \"bg-red-500\"}`}\r\n      ></div>\r\n      <motion.div\r\n        onClick={() => {\r\n          setToggle(!toggle);\r\n        }}\r\n        className=\"rounded-full w-20 flex items-center p-0.5 cursor-pointer\"\r\n        style={{\r\n          background: \"rgba(0, 0, 0, 0.08)\",\r\n          boxShadow:\r\n            \"0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px rgba(0, 0, 0, 0.15)\",\r\n        }}\r\n      >\r\n        <motion.div\r\n          transition={{ type: \"spring\", stiffness: 350, damping: 30 }}\r\n          animate={{ x: toggle ? \"100%\" : \"0%\" }}\r\n          className=\"h-9 w-9 border rounded-full bg-[#F4F4F4]\"\r\n          style={{\r\n            boxShadow:\r\n              \"0.444584px 0.444584px 0.628737px -0.75px rgba(0, 0, 0, 0.26), 1.21072px 1.21072px 1.71222px -1.5px rgba(0, 0, 0, 0.247), 2.6583px 2.6583px 3.75941px -2.25px rgba(0, 0, 0, 0.23), 5.90083px 5.90083px 8.34503px -3px rgba(0, 0, 0, 0.192), 10px 10px 21.2132px -3.75px rgba(0, 0, 0, 0.055), inset 1px 1px 1px #FFFFFF, inset -1px -1px 0px rgba(0, 0, 0, 0.1)\",\r\n          }}\r\n        />\r\n      </motion.div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default ToggleButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/toggle-button.tsx"
+    }
+  ]
+}

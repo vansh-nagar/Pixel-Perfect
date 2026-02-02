@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "learn-more-button",
+  "type": "registry:block",
+  "description": "An animated learn more button with hover effects using Framer Motion.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/learn-more-buttion.tsx",
+      "content": "\"use client\";\r\nimport { ChevronRightIcon } from \"lucide-react\";\r\nimport React from \"react\";\r\nimport { hover, motion } from \"framer-motion\";\r\n\r\nconst LearnMoreButtion = () => {\r\n  return (\r\n    <motion.div\r\n      initial=\"rest\"\r\n      animate=\"rest\"\r\n      whileHover=\"hover\"\r\n      transition={{\r\n        type: \"spring\",\r\n        stiffness: 1000,\r\n        damping: 20,\r\n        mass: 10,\r\n      }}\r\n      className=\"flex items-center gap-2 relative cursor-pointer\"\r\n    >\r\n      <motion.div\r\n        variants={{\r\n          rest: {\r\n            width: 40,\r\n          },\r\n          hover: {\r\n            width: 175,\r\n          },\r\n        }}\r\n        className=\"h-10 rounded-full flex origin-left justify-start items-center absolute -left-12\"\r\n        style={{\r\n          background: \"linear-gradient(180deg, #0073FF 0%, #0DA2FF 100%)\",\r\n          boxShadow:\r\n            \"0px 42px 107px rgba(87, 177, 255, 0.34), 0px 24.7206px 32.2574px rgba(87, 177, 255, 0.1867), 0px 10.2677px 13.3981px rgba(87, 177, 255, 0.22), 0px 3.71362px 4.84582px rgba(87, 177, 255, 0.153301), inset 0px 1px 18px 2px #D2EAFF, inset 0px 1px 4px 2px #D2EAFF\",\r\n        }}\r\n      >\r\n        <motion.svg\r\n          variants={{\r\n            rest: {\r\n              x: 0,\r\n              scale: 1,\r\n            },\r\n            hover: {\r\n              x: 10,\r\n              scale: 1.05,\r\n            },\r\n          }}\r\n          xmlns=\"http://www.w3.org/2000/svg\"\r\n          width=\"24\"\r\n          height=\"24\"\r\n          viewBox=\"0 0 24 24\"\r\n          fill=\"none\"\r\n          stroke=\"currentColor\"\r\n          strokeWidth=\"2\"\r\n          strokeLinecap=\"round\"\r\n          strokeLinejoin=\"round\"\r\n          className=\"lucide lucide-arrow-right ml-1.5 text-white\"\r\n        >\r\n          <motion.path\r\n            transition={{ duration: 0.15, delay: 0.05 }}\r\n            variants={{\r\n              rest: {\r\n                opacity: 0,\r\n              },\r\n              hover: {\r\n                opacity: 1,\r\n              },\r\n            }}\r\n            d=\"M5 12h14\"\r\n          ></motion.path>\r\n          <path d=\"m12 5 7 7-7 7\"></path>\r\n        </motion.svg>\r\n      </motion.div>\r\n      <motion.span\r\n        transition={{\r\n          delay: 0.1,\r\n          duration: 1,\r\n        }}\r\n        variants={{\r\n          rest: {\r\n            color: \"black\",\r\n          },\r\n          hover: {\r\n            color: \"white\",\r\n          },\r\n        }}\r\n        className=\" font-medium z-20\"\r\n      >\r\n        WATCH MORE\r\n      </motion.span>\r\n    </motion.div>\r\n  );\r\n};\r\n\r\nexport default LearnMoreButtion;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/learn-more-button.tsx"
+    }
+  ]
+}

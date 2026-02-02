@@ -121,6 +121,19 @@
       ]
     },
     {
+      "name": "learn-more-button",
+      "description": "An animated learn more button with hover effects using Framer Motion.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/learn-more-buttion.tsx",
+          "target": "components/pixel-perfect/learn-more-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "border-1",
       "description": "A dashed border design with corner elements.",
       "type": "registry:block",

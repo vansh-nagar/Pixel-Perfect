@@ -11,6 +11,7 @@ import MouseFollowerButton from "../../../../registry/new-york/buttons/mouse-fol
 import PremiumButton from "../../../../registry/new-york/buttons/premium-button";
 import OrangePremiumButton from "../../../../registry/new-york/buttons/orange-premium-button";
 import StripeButton from "../../../../registry/new-york/buttons/stripe-button";
+import LearnMoreButtion from "../../../../registry/new-york/buttons/learn-more-buttion";
 
 const BASE_URL = "https://www.pixel-perfect.space/r";
 
@@ -68,6 +69,12 @@ export const ButtonsArr = [
     description: "A Stripe-inspired button with inset shadow effect.",
     component: <StripeButton>Abhinav</StripeButton>,
     link: `npx shadcn@latest add ${BASE_URL}/stripe-button.json`,
+  },
+  {
+    name: "Learn More Button",
+    description: "An animated learn more button with hover effects.",
+    component: <LearnMoreButtion />,
+    link: `npx shadcn@latest add ${BASE_URL}/learn-more-button.json`,
   },
 ];
 

@@ -43,6 +43,110 @@ const Gradient4 = () => (
 const Gradient5 = () => (
   <div className=" absolute inset-0 after:pointer-events-none after:inset-0 after:rounded-lg after:inset-ring after:inset-ring-gray-950/5 dark:after:inset-ring-white/10 bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10" />
 );
+const Gradient6 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background: "linear-gradient(115.43deg, #1A00FF 0%, #9D00FF 100%)",
+    }}
+  />
+);
+const Gradient7 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "conic-gradient(from 135deg at 50% 50%, rgba(0, 0, 0, 0) 0deg, #000000 360deg), conic-gradient(from 44.87deg at 50% 50%, rgba(0, 0, 0, 0) 0deg, #000000 360deg), conic-gradient(from -89.88deg at 50% 50%, #FFFFFF 0deg, #999999 360deg)",
+    }}
+  />
+);
+const Gradient8 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(0.1deg, rgba(255, 74, 74, 0) 0.09%, rgba(255, 36, 36, 0.2) 76.39%), linear-gradient(360deg, #FFF16E 2.67%, #FF8A33 30.48%, #FF4A4A 51.8%), #FF4A4A",
+      boxShadow:
+        "inset 1px -1px 5px rgba(255, 255, 255, 0.4), inset -1px -1px 5px rgba(255, 255, 255, 0.4), inset -2px -2px 5px rgba(255, 255, 255, 0.4), inset 2px -2px 5px rgba(255, 255, 255, 0.4)",
+    }}
+  />
+);
+const Gradient9 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(137.47deg, #FF6D5E 11.08%, #FF9186 42.04%, #FF5948 95.9%)",
+      boxShadow:
+        "inset -1px -3.25px 9.075px rgba(255, 184, 85, 0.32), inset 0.75px 3px 7.7px rgba(255, 62, 42, 0.43)",
+      backdropFilter: "blur(0.75px)",
+    }}
+  />
+);
+const Gradient10 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "radial-gradient(45.33% 46.43% at 41.69% 50%, #0140FF 0%, rgba(1, 64, 255, 0) 100%), radial-gradient(28.41% 117.96% at 7.72% 28.75%, #A6FDFF 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(37.39% 69.19% at 107.79% 0%, #0075FF 0%, rgba(0, 66, 255, 0) 100%), radial-gradient(54.38% 89.75% at 83.46% 89.75%, #26F9FF 0%, rgba(0, 69, 255, 0.6) 100%), #0140FF",
+    }}
+  />
+);
+const Gradient11 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "radial-gradient(45.33% 46.43% at 41.69% 50%, #FF4001 0%, rgba(255, 64, 1, 0) 100%), radial-gradient(28.41% 117.96% at 7.72% 28.75%, #FFFDA6 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(37.39% 69.19% at 107.79% 0%, #FF7500 0%, rgba(255, 66, 0, 0) 100%), radial-gradient(54.38% 89.75% at 83.46% 89.75%, #FFF926 0%, rgba(255, 69, 0, 0.6) 100%), #FF4001",
+   }}
+  />
+);
+const Gradient12 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(125.94deg, #AE4E00 0%, #B47E11 25%, #EFD983 39.26%, #FEF1A2 44.41%, #EFD983 49.2%, #BC881B 75%, #A54E07 100%)",
+ }}
+  />
+);
+const Gradient14 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(0deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.24)), conic-gradient(from 90deg at 50% 50%, #FDFDFD 0deg, #464646 44.35deg, #2C2C2C 56.43deg, #2C2C2C 63.53deg, #595959 77.78deg, #FDFDFD 101.95deg, #B5B5B5 130.71deg, #2C2C2C 158.9deg, #2F2F2F 170.95deg, #2C2C2C 179.09deg, #595959 197.78deg, #FDFDFD 227.8deg, #CDCDCD 240.9deg, #595959 273.03deg, #696969 300.73deg, #8C8C8C 313.13deg, #FDFDFD 360deg)",
+   }}
+  />
+);
+const Gradient15 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(99.09deg, rgba(211, 212, 213, 0.15) 12.86%, rgba(139, 145, 147, 0.15) 15.34%, rgba(87, 95, 99, 0.15) 17.82%, rgba(55, 65, 69, 0.15) 18.64%, rgba(43, 54, 58, 0.15) 19.47%, rgba(52, 62, 66, 0.15) 22.77%, rgba(77, 85, 89, 0.15) 26.9%, rgba(117, 123, 126, 0.15) 32.68%, rgba(173, 176, 177, 0.15) 38.46%, rgba(205, 205, 206, 0.15) 41.76%, rgba(198, 199, 200, 0.15) 43.41%, rgba(180, 182, 184, 0.15) 45.06%, rgba(151, 156, 158, 0.15) 46.71%, rgba(111, 118, 122, 0.15) 49.19%, rgba(72, 83, 87, 0.15) 50.84%, rgba(76, 86, 90, 0.15) 52.49%, rgba(89, 98, 102, 0.15) 54.97%, rgba(112, 117, 120, 0.15) 57.45%, rgba(143, 144, 146, 0.15) 59.1%, rgba(152, 152, 154, 0.15) 59.92%, rgba(165, 165, 166, 0.15) 63.23%, rgba(199, 199, 200, 0.15) 70.66%, rgba(255, 255, 255, 0.15) 78.91%, rgba(209, 209, 210, 0.15) 81.39%, rgba(79, 79, 83, 0.15) 87.17%, rgba(27, 27, 32, 0.15) 90.47%, rgba(49, 49, 54, 0.15) 91.3%, rgba(77, 77, 81, 0.15) 92.12%, rgba(116, 116, 118, 0.15) 92.95%, rgba(165, 165, 167, 0.15) 94.6%, rgba(233, 233, 233, 0.15) 95.43%), linear-gradient(0deg, #895DEC, #895DEC), #E8E8E8",
+      backgroundBlendMode: "hard-light, normal, normal",
+    }}
+  />
+);
+const Gradient16 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(99.09deg, rgba(211, 212, 213, 0.18) 12.86%, rgba(139, 145, 147, 0.18) 15.34%, rgba(87, 95, 99, 0.18) 17.82%, rgba(55, 65, 69, 0.18) 18.64%, rgba(43, 54, 58, 0.18) 19.47%, rgba(52, 62, 66, 0.18) 22.77%, rgba(77, 85, 89, 0.18) 26.9%, rgba(117, 123, 126, 0.18) 32.68%, rgba(173, 176, 177, 0.18) 38.46%, rgba(205, 205, 206, 0.18) 41.76%, rgba(198, 199, 200, 0.18) 43.41%, rgba(180, 182, 184, 0.18) 45.06%, rgba(151, 156, 158, 0.18) 46.71%, rgba(111, 118, 122, 0.18) 49.19%, rgba(72, 83, 87, 0.18) 50.84%, rgba(76, 86, 90, 0.18) 52.49%, rgba(89, 98, 102, 0.18) 54.97%, rgba(112, 117, 120, 0.18) 57.45%, rgba(143, 144, 146, 0.18) 59.1%, rgba(152, 152, 154, 0.18) 59.92%, rgba(165, 165, 166, 0.18) 63.23%, rgba(199, 199, 200, 0.18) 70.66%, rgba(255, 255, 255, 0.18) 78.91%, rgba(209, 209, 210, 0.18) 81.39%, rgba(79, 79, 83, 0.18) 87.17%, rgba(27, 27, 32, 0.18) 90.47%, rgba(49, 49, 54, 0.18) 91.3%, rgba(77, 77, 81, 0.18) 92.12%, rgba(116, 116, 118, 0.18) 92.95%, rgba(165, 165, 167, 0.18) 94.6%, rgba(233, 233, 233, 0.18) 95.43%), linear-gradient(273.67deg, #E8E8E8 19.03%, #F9F9F9 80.97%)",
+   }}
+  />
+);
+const Gradient17 = () => (
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(137.47deg, rgba(255, 255, 255, 0.3) 11.08%, rgba(248, 250, 255, 0.8) 39.07%, rgba(245, 248, 255, 0.9) 60.7%, rgba(255, 255, 255, 0.2) 95.9%)",
+   }}
+  />
+);
 
 export const BackgroudArr = [
   {
@@ -69,6 +173,61 @@ export const BackgroudArr = [
     name: "Gradient 5",
     description: "Dot mesh texture",
     component: <Gradient5 />,
+  },
+  {
+    name: "Gradient 6",
+    description: "Purple-blue angled gradient",
+    component: <Gradient6 />,
+  },
+  {
+    name: "Gradient 7",
+    description: "Multi-layer conic sweep",
+    component: <Gradient7 />,
+  },
+  {
+    name: "Gradient 8",
+    description: "Sunset glow with inner shadow",
+    component: <Gradient8 />,
+  },
+  {
+    name: "Gradient 9",
+    description: "Coral blur with warm shadows",
+    component: <Gradient9 />,
+  },
+  {
+    name: "Gradient 10",
+    description: "Cool aurora pill glow",
+    component: <Gradient10 />,
+  },
+  {
+    name: "Gradient 11",
+    description: "Fiery aurora radial glow",
+    component: <Gradient11 />,
+  },
+  {
+    name: "Gradient 12",
+    description: "Gold metallic sheen",
+    component: <Gradient12 />,
+  },
+  {
+    name: "Gradient 14",
+    description: "Chrome metallic reflection",
+    component: <Gradient14 />,
+  },
+  {
+    name: "Gradient 15",
+    description: "Purple brushed metal",
+    component: <Gradient15 />,
+  },
+  {
+    name: "Gradient 16",
+    description: "Steel brushed metal",
+    component: <Gradient16 />,
+  },
+  {
+    name: "Gradient 17",
+    description: "White glassmorphism",
+    component: <Gradient17 />,
   },
 ];
 

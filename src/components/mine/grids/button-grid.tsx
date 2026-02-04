@@ -68,7 +68,7 @@ export const ButtonsArr = [
   {
     name: "Stripe Button",
     description: "A Stripe-inspired button with inset shadow effect.",
-    component: <StripeButton>Abhinav</StripeButton>,
+    component: <StripeButton>Click Me</StripeButton>,
     link: `npx shadcn@latest add ${BASE_URL}/stripe-button.json`,
   },
   {

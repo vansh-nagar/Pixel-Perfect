@@ -13,7 +13,7 @@ export const ComponentTransition = ({
   componentArr: {
     name: string;
     description: string;
-    component: React.ReactNode;
+    component?: React.ReactNode;
   }[];
   interval?: number;
   className?: string;

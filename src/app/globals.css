@@ -191,7 +191,7 @@ body,
     @apply bg-background text-foreground;
   }
 }
-ay
+
 
 /* Hide all scrollbars (visual only) across browsers) */
 .noScrollbar {
@@ -219,16 +219,7 @@ body::-webkit-scrollbar,
   height: 0;
 }
 
-/* Remove scrollbars from all scrollable elements */
-* {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-*::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
+/* Removed global scrollbar hide */
 
 .logo-glow {
   filter: blur(18px);

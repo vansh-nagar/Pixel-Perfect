@@ -13,6 +13,8 @@ import OrangePremiumButton from "../../../../registry/new-york/buttons/orange-pr
 import StripeButton from "../../../../registry/new-york/buttons/stripe-button";
 import LearnMoreButtion from "../../../../registry/new-york/buttons/learn-more-buttion";
 import ToggleButton from "../../../../registry/new-york/buttons/toggle-buttion";
+import AbhinavBentoButton from "../../../../registry/new-york/buttons/abhinav-bento-button";
+import { Spinner } from "@/components/ui/spinner";
 
 const BASE_URL = "https://www.pixel-perfect.space/r";
 
@@ -83,6 +85,12 @@ export const ButtonsArr = [
     component: <ToggleButton />,
     link: `npx shadcn@latest add ${BASE_URL}/toggle-button.json`,
   },
+  {
+    name: "Abhinav Bento Button",
+    description: "A large bento-style button.",
+    component: <AbhinavBentoButton ><Spinner/></AbhinavBentoButton>,
+    link: `npx shadcn@latest add ${BASE_URL}/abhinav-bento-button.json`,
+  }
 ];
 
 const ButtonGrid = () => {

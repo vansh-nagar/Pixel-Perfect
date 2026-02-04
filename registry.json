@@ -147,6 +147,19 @@
       ]
     },
     {
+      "name": "abhinav-bento-button",
+      "description": "A large bento-style button.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/abhinav-bento-button.tsx",
+          "target": "components/pixel-perfect/abhinav-bento-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "border-1",
       "description": "A dashed border design with corner elements.",
       "type": "registry:block",

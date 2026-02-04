@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "abhinav-bento-button",
+  "type": "registry:block",
+  "description": "A large bento-style button.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/abhinav-bento-button.tsx",
+      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface BentoButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\r\n  children?: React.ReactNode;\r\n}\r\n\r\nexport default function AbhinavBentoButton({\r\n  className,\r\n  children,\r\n  ...props\r\n}: BentoButtonProps) {\r\n  return (\r\n    <button\r\n      className={cn(\r\n        \"px-4 py-2 rounded-full aspect-square\",\r\n        className\r\n      )}\r\n      {...props}\r\n       style={{\r\n          background: \"linear-gradient(180deg, #FF5700 0%, #EF5200 100%)\",\r\n          backgroundBlendMode: \"plus-lighter, normal\",\r\n          boxShadow:\r\n            \"0px 42px 107px rgba(255, 88, 0, 0.34), 0px 24.7206px 32.2574px rgba(255, 88, 0, 0.1867), 0px 10.2677px 13.3981px rgba(255, 88, 0, 0.22), 0px 3.71362px 4.84582px rgba(255, 88, 0, 0.153301), inset 0px 1px 18px 2px #FFEDDB, inset 0px 1px 4px 2px #FFEDDB\",\r\n        }}\r\n    >\r\n    \r\n        {children || \"Bento\"}\r\n    </button>\r\n  );\r\n}\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/abhinav-bento-button.tsx"
+    }
+  ]
+}

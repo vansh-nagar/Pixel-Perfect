@@ -88,9 +88,13 @@ export const ButtonsArr = [
   {
     name: "Abhinav Bento Button",
     description: "A large bento-style button.",
-    component: <AbhinavBentoButton ><Spinner/></AbhinavBentoButton>,
+    component: (
+      <AbhinavBentoButton>
+        <Spinner />
+      </AbhinavBentoButton>
+    ),
     link: `npx shadcn@latest add ${BASE_URL}/abhinav-bento-button.json`,
-  }
+  },
 ];
 
 const ButtonGrid = () => {
@@ -104,7 +108,7 @@ const ButtonGrid = () => {
           <BorderDecorator />
           <div className=" z-30">{item.component}</div>
 
-          <div className=" leading-1 absolute left-1.5  bottom-1.5">
+          <div className=" leading-1 absolute left-1.5  bottom-1.5 p-0.5">
             <p className="text-xs ">{item.name}</p>
             <p className="text-[8px] text-muted-foreground">
               {item.description}

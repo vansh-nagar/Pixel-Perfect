@@ -51,7 +51,11 @@ export default function Pricing() {
                 </span>
 
                 <div className="flex justify-center">
-                  <Link href="/donate">
+                  <Link
+                    href={
+                      "https://buy.polar.sh/polar_cl_f2wnG1ytyvuNI3PIlhnvmlIm3Z7IKK25YZeqR49IQbB"
+                    }
+                  >
                     <MouseFollowerButton>Donate Now</MouseFollowerButton>
                   </Link>
                 </div>

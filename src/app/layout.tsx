@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/next"
 import { Inter_Tight, Pixelify_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import LenisProvider from "@/components/providers/lenis-provider";

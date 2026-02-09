@@ -79,12 +79,12 @@ export const ButtonsArr = [
     component: <LearnMoreButtion />,
     link: `npx shadcn@latest add ${BASE_URL}/learn-more-button.json`,
   },
-  {
-    name: "Toggle Button",
-    description: "An animated toggle switch with spring physics.",
-    component: <ToggleButton />,
-    link: `npx shadcn@latest add ${BASE_URL}/toggle-button.json`,
-  },
+  // {
+  //   name: "Toggle Button",
+  //   description: "An animated toggle switch with spring physics.",
+  //   component: <ToggleButton />,
+  //   link: `npx shadcn@latest add ${BASE_URL}/toggle-button.json`,
+  // },
   {
     name: "Abhinav Bento Button",
     description: "A large bento-style button.",

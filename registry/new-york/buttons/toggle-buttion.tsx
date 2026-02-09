@@ -2,8 +2,13 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-const ToggleButton = () => {
-  const [toggle, setToggle] = useState(false);
+const ToggleButton = ({
+  toggle = false,
+  setToggle = () => {},
+}: {
+  toggle: boolean;
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <div className=" relative">
       <div

@@ -3,25 +3,36 @@ import { Plus } from "lucide-react";
 import React from "react";
 import { motion } from "framer-motion";
 
+import { useState } from "react";
+
 const GooeyButton = () => {
+  const [hovered, setHovered] = useState(false);
   return (
-    <button className="relative h-12 px-6 rounded-full font-bold flex items-center">
+    <div>
       <GooeyFilter />
       <div
-        className="absolute inset-0 bg-orange-500 rounded-full"
-        style={{ filter: "url(#goo-effect)" }}
-      />
-
-      <span className="relative text-white">Hello</span>
-
-      <motion.div
-        className="relative ml-3 border bg-white text-black rounded-full p-2"
-        animate={{ x: 100 }}
-        transition={{ duration: 1 }}
+        className=" inset-0 flex items-center justify-center"
+        style={{ filter: "url(#goo-effect)", zIndex: 1 }}
       >
-        <Plus />
-      </motion.div>
-    </button>
+        <motion.button
+          className="h-15 px-20 bg-orange-500 rounded-full flex items-center justify-center text-white"
+          initial={{ scale: 1 }}
+          animate={hovered ? { scale: 1.08 } : { scale: 1 }}
+          transition={{ type: "spring", bounce: 0.35, duration: 0.5 }}
+        >
+          Gooey
+        </motion.button>
+        <motion.div
+          drag
+          className=" border absolute  w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center"
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.4, x: 135 }}
+          transition={{ type: "tween", ease: [0.5, 0, 0, 1], duration: 1 }}
+        >
+          <Plus color="#fff" size={24} />
+        </motion.div>
+      </div>
+    </div>
   );
 };
 

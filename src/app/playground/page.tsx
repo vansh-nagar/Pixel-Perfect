@@ -1,10 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import GooeyButton from "registry/new-york/buttons/goe-button";
 import { AnimatePresence, motion, scale, useScroll } from "framer-motion";
 import ToggleButton from "registry/new-york/buttons/toggle-buttion";
 import { Check, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import DrawSVGPlugin from "gsap/src/DrawSVGPlugin";
+
+gsap.registerPlugin(DrawSVGPlugin);
 
 const page = () => {
   const [show, setShow] = useState(true);
@@ -141,6 +145,7 @@ const page = () => {
         </div>
         <ToggleButton toggle={show} setToggle={setShow} />
       </div>
+
       <div className="h-screen w-full flex  justify-center items-center">
         <motion.div
           className="h-10 w-10 bg-orange-500"

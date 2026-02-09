@@ -15,6 +15,14 @@ import LearnMoreButtion from "../../../../registry/new-york/buttons/learn-more-b
 import ToggleButton from "../../../../registry/new-york/buttons/toggle-buttion";
 import AbhinavBentoButton from "../../../../registry/new-york/buttons/abhinav-bento-button";
 import { Spinner } from "@/components/ui/spinner";
+import GooeyButton from "registry/new-york/buttons/goe-button";
+import BlurToggleButton from "../../../../registry/new-york/buttons/blur-toggle-button";
+import { useState } from "react";
+
+const ToggleButtonWrapper = () => {
+  const [toggle, setToggle] = useState(false);
+  return <ToggleButton toggle={toggle} setToggle={setToggle} />;
+};
 
 const BASE_URL = "https://www.pixel-perfect.space/r";
 
@@ -79,12 +87,12 @@ export const ButtonsArr = [
     component: <LearnMoreButtion />,
     link: `npx shadcn@latest add ${BASE_URL}/learn-more-button.json`,
   },
-  // {
-  //   name: "Toggle Button",
-  //   description: "An animated toggle switch with spring physics.",
-  //   component: <ToggleButton />,
-  //   link: `npx shadcn@latest add ${BASE_URL}/toggle-button.json`,
-  // },
+  {
+    name: "Toggle Button",
+    description: "An animated toggle switch with spring physics.",
+    component: <ToggleButtonWrapper />,
+    link: `npx shadcn@latest add ${BASE_URL}/toggle-button.json`,
+  },
   {
     name: "Abhinav Bento Button",
     description: "A large bento-style button.",
@@ -94,6 +102,18 @@ export const ButtonsArr = [
       </AbhinavBentoButton>
     ),
     link: `npx shadcn@latest add ${BASE_URL}/abhinav-bento-button.json`,
+  },
+  {
+    name: "Abhinav Bento Button",
+    description: "A large bento-style button.",
+    component: <GooeyButton />,
+    link: `npx shadcn@latest add ${BASE_URL}/abhinav-bento-button.json`,
+  },
+  {
+    name: "Blur Toggle Button",
+    description: "A button with blur transition effect on toggle.",
+    component: <BlurToggleButton />,
+    link: `npx shadcn@latest add ${BASE_URL}/blur-toggle-button.json`,
   },
 ];
 

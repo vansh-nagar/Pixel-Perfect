@@ -134,6 +134,19 @@
       ]
     },
     {
+      "name": "visit-button",
+      "description": "A compact visit button with label and icon swap on hover.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/visit-button.tsx",
+          "target": "components/pixel-perfect/visit-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "toggle-button",
       "description": "An animated toggle switch with spring physics using Framer Motion.",
       "type": "registry:block",

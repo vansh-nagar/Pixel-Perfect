@@ -14,6 +14,7 @@ import StripeButton from "../../../../registry/new-york/buttons/stripe-button";
 import LearnMoreButtion from "../../../../registry/new-york/buttons/learn-more-buttion";
 import ToggleButton from "../../../../registry/new-york/buttons/toggle-buttion";
 import AbhinavBentoButton from "../../../../registry/new-york/buttons/abhinav-bento-button";
+import VisitButton from "../../../../registry/new-york/buttons/visit-button";
 import { Spinner } from "@/components/ui/spinner";
 import GooeyButton from "registry/new-york/buttons/goe-button";
 import BlurToggleButton from "../../../../registry/new-york/buttons/blur-toggle-button";
@@ -86,6 +87,12 @@ export const ButtonsArr = [
     description: "An animated learn more button with hover effects.",
     component: <LearnMoreButtion />,
     link: `npx shadcn@latest add ${BASE_URL}/learn-more-button.json`,
+  },
+  {
+    name: "Visit Button",
+    description: "A compact button with label and icon swap on hover.",
+    component: <VisitButton />,
+    link: `npx shadcn@latest add ${BASE_URL}/visit-button.json`,
   },
   {
     name: "Toggle Button",

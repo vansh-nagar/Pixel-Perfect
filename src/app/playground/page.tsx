@@ -7,6 +7,7 @@ import ToggleButton from "registry/new-york/buttons/toggle-buttion";
 import { Check, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DrawSVGPlugin from "gsap/src/DrawSVGPlugin";
+import VisitButton from "registry/new-york/buttons/visit-button";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
@@ -17,7 +18,8 @@ const page = () => {
   return (
     <>
       <div className="flex flex-col gap-5 justify-center items-center h-screen">
-        <motion.button
+        <VisitButton />
+        {/* <motion.button
           whileTap={{
             scale: 0.95,
           }}
@@ -143,7 +145,7 @@ const page = () => {
             </div>
           </div>
         </div>
-        <ToggleButton toggle={show} setToggle={setShow} />
+        <ToggleButton toggle={show} setToggle={setShow} /> */}
       </div>
 
       <div className="h-screen w-full flex  justify-center items-center">

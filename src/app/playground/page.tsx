@@ -18,7 +18,17 @@ export default function Page() {
   const [containerHover, setContainerHover] = useState(false);
 
   return (
-    <div className="flex justify-center h-screen items-end">
+    <div className="flex justify-center h-screen items-center">
+      <motion.div
+        animate={{ x: [0, 200, 200, 0, 0], y: [0, 0, 200, 200, 0] }}
+        transition={{
+          duration: 4,
+          times: [0, 0.33, 0.66, 1],
+          ease: "easeInOut",
+          repeat: Infinity,
+        }}
+        className="h-10 w-10 border"
+      ></motion.div>
       <div>
         {/* <div
           onMouseLeave={() => {
@@ -51,7 +61,6 @@ export default function Page() {
             />
           ))}
         </div> */}
-
         {/* 
         <div
           style={{

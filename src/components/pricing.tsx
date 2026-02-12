@@ -28,7 +28,7 @@ export default function Pricing() {
         <div className="text-xs text-muted-foreground/30">SUPPORT</div>
         <StarBorder />
       </div>
-      <div className="mx-auto grid grid-rows-[auto_auto] ">
+      <div className="mx-auto grid grid-rows-[auto_auto]">
         <div className=" text-center relative overflow-hidden w-full py-10">
           <StarBorder />
           <h2 className="text-3xl font-medium md:text-4xl lg:text-5xl">
@@ -38,16 +38,16 @@ export default function Pricing() {
         <div className="overflow-hidden relative">
           <div className="relative border-t  border-muted">
             <div className="grid items-center divide-y md:grid-cols-2 md:divide-x md:divide-y-0">
-              <div className="pb-12 text-center md:py-10 md:pr-12  border-muted relative overflow-hidden p-4 ">
+              <div className=" flex flex-col p-4 justify-center items-center text-center h-full border-muted relative overflow-hidden">
                 <StarBorder />
 
                 <h3 className="text-3xl font-semibold">Support Creator</h3>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Help us keep the library free for everyone
+                  Help me keep the library free for everyone
                 </p>
 
-                <span className="mb-6 mt-6 inline-block text-6xl">
-                  <span className="text-2xl">$</span>3
+                <span className="mb-6 mt-6 inline-block font-medium text-6xl">
+                  <span className="  text-2xl">$</span>3
                 </span>
 
                 <div className="flex justify-center">
@@ -61,26 +61,22 @@ export default function Pricing() {
                 </div>
 
                 <p className="text-muted-foreground mt-6 text-xs">
-                  Your donation helps us maintain the library, <br />
+                  Your donation helps me maintain the library, <br />
                   add new components, and keep it open source
                 </p>
               </div>
-              <div className="relative h-full flex  justify-center items-center overflow-hidden p-4">
+              <div className="relative h-full flex  justify-center items-center overflow-hidden">
                 <StarBorder />
-                <ul role="list" className="space-y-4">
-                  {[
-                    "Support ongoing development & maintenance",
-                    "Keep the library free & open-source",
-                    "Help us create more premium components",
-                    "Contribute to the developer community",
-                    "Get featured as a supporter",
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                      <Check size={16} />
-                      <span className=" max-sm:text-xs text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <video
+                  src={
+                    "https://res.cloudinary.com/dz12pywzs/video/upload/v1768638799/Timeline_1_tykewr.mov"
+                  }
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
               </div>
             </div>
           </div>

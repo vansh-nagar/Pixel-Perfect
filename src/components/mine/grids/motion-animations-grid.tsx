@@ -2,6 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import CardAnimation from "registry/new-york/motion-framer/card-animation";
+import ImageHoverAnimation from "registry/new-york/motion-framer/image-hover-animation";
+import LogoAnimation from "registry/new-york/motion-framer/logo-animation";
+import TabBackgroundAnimation from "registry/new-york/motion-framer/tab-background-animation";
 import { toast } from "sonner";
 
 const MotionComponentArr = [
@@ -9,7 +12,25 @@ const MotionComponentArr = [
     name: "Simple Card",
     description: "A simple card animation using Framer Motion.",
     component: <CardAnimation />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Motion%20Card%201.json",
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/card-animation.json",
+  },
+  {
+    name: "Logo Animation",
+    description: "Logo animation with Framer Motion and custom background.",
+    component: <LogoAnimation />,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/logo-animation.json",
+  },
+  {
+    name: "Tab Background",
+    description: "A tab background animation using Framer Motion.",
+    component: <TabBackgroundAnimation />,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/tab-background-animation.json",
+  },
+  {
+    name: "Image Hover",
+    description: "An image hover animation with scaling and opacity effects.",
+    component: <ImageHoverAnimation />,
+    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/image-hover-animation.json",
   },
 ];
 

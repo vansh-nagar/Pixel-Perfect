@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image-hover-animation",
+  "type": "registry:block",
+  "description": "An image hover animation with scaling and opacity effects.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/motion-framer/image-hover-animation.tsx",
+      "content": "\"use client\";\r\nimport { motion } from \"framer-motion\";\r\nimport { useState } from \"react\";\r\n\r\nconst ImageHoverAnimation = () => {\r\n  const image = [\r\n    \"https://i.pinimg.com/originals/ce/7f/35/ce7f35ec213d896247c7c2e8620d81f9.gif\",\r\n    \"https://i.pinimg.com/originals/3a/a4/6f/3aa46f5701fc6ed92234ea0a9f86e2cd.gif\",\r\n    \"https://i.pinimg.com/736x/64/20/b5/6420b5ba0dd45dc35aae9705c8e275dd.jpg\",\r\n    \"https://i.pinimg.com/originals/f8/ba/9b/f8ba9b7f92fa91361e251c72e213c11a.gif\",\r\n  ];\r\n  const [active, setActive] = useState(100);\r\n  const [containerHover, setContainerHover] = useState(false);\r\n\r\n  return (\r\n    <div className=\"flex justify-center items-center h-full w-full overflow-hidden\">\r\n      <div\r\n        onMouseLeave={() => {\r\n          setActive(100);\r\n          setContainerHover(false);\r\n        }}\r\n        onMouseEnter={() => {\r\n          setContainerHover(true);\r\n        }}\r\n        className=\"flex items-end gap-1\"\r\n      >\r\n        {image.map((item, i) => (\r\n          <motion.img\r\n            key={i}\r\n            layout\r\n            transition={{\r\n              type: \"tween\",\r\n              duration: 0.25,\r\n              ease: \"easeOut\",\r\n            }}\r\n            style={{\r\n              opacity: containerHover ? (active === i ? 1 : 0.5) : 1,\r\n              width: active === i ? \"180px\" : \"120px\",\r\n              height: active === i ? \"150px\" : \"100px\",\r\n            }}\r\n            onMouseEnter={() => {\r\n              setActive(i);\r\n            }}\r\n            src={item}\r\n            className=\"object-cover origin-bottom rounded-lg\"\r\n          />\r\n        ))}\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default ImageHoverAnimation;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/image-hover-animation.tsx"
+    }
+  ]
+}

@@ -667,6 +667,45 @@
       ]
     },
     {
+      "name": "logo-animation",
+      "description": "Logo animation with Framer Motion and custom background.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/logo-animation.tsx",
+          "target": "components/pixel-perfect/logo-animation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-hover-animation",
+      "description": "An image hover animation with scaling and opacity effects.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/image-hover-animation.tsx",
+          "target": "components/pixel-perfect/image-hover-animation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tab-background-animation",
+      "description": "A tab background animation using Framer Motion.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/tab-background-animation.tsx",
+          "target": "components/pixel-perfect/tab-background-animation.tsx"
+        }
+      ]
+    },
+    {
       "name": "guitar-svg",
       "description": "Guitar SVG path effect animation.",
       "type": "registry:block",

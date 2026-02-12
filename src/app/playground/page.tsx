@@ -1,165 +1,98 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import GooeyButton from "registry/new-york/buttons/goe-button";
-import { AnimatePresence, motion, scale, useScroll } from "framer-motion";
-import ToggleButton from "registry/new-york/buttons/toggle-buttion";
-import { Check, Copy } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import DrawSVGPlugin from "gsap/src/DrawSVGPlugin";
-import VisitButton from "registry/new-york/buttons/visit-button";
+import { set } from "date-fns";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
-gsap.registerPlugin(DrawSVGPlugin);
-
-const page = () => {
-  const [show, setShow] = useState(true);
-  const [checked, setChecked] = useState(false);
+export default function Page() {
+  const arr = ["Cool", "Warm", "Hot", "Bloom", "Mild"];
+  const image = [
+    "https://i.pinimg.com/originals/ce/7f/35/ce7f35ec213d896247c7c2e8620d81f9.gif",
+    "https://i.pinimg.com/originals/3a/a4/6f/3aa46f5701fc6ed92234ea0a9f86e2cd.gif",
+    "https://i.pinimg.com/736x/64/20/b5/6420b5ba0dd45dc35aae9705c8e275dd.jpg",
+    "https://i.pinimg.com/originals/f8/ba/9b/f8ba9b7f92fa91361e251c72e213c11a.gif",
+    "https://i.pinimg.com/originals/3a/a4/6f/3aa46f5701fc6ed92234ea0a9f86e2cd.gif",
+    "https://i.pinimg.com/736x/64/20/b5/6420b5ba0dd45dc35aae9705c8e275dd.jpg",
+    "https://i.pinimg.com/originals/f8/ba/9b/f8ba9b7f92fa91361e251c72e213c11a.gif",
+  ];
+  const [active, setActive] = useState(5);
+  const [containerHover, setContainerHover] = useState(false);
 
   return (
-    <>
-      <div className="flex flex-col gap-5 justify-center items-center h-screen">
-        <VisitButton />
-        {/* <motion.button
-          whileTap={{
-            scale: 0.95,
+    <div className="flex justify-center h-screen items-end">
+      <div>
+        {/* <div
+          onMouseLeave={() => {
+            setActive(5);
+            setContainerHover(false);
           }}
-          className=" border p-3 rounded-md"
-          onClick={() => {
-            setChecked(!checked);
+          onMouseEnter={() => {
+            setContainerHover(true);
           }}
+          className="flex items-end gap-3"
         >
-          <AnimatePresence mode="wait">
-            {checked ? <Copy /> : <Check />}
-          </AnimatePresence>
-        </motion.button>
-        <motion.button
-          whileTap={{
-            scale: 0.95,
-          }}
-          className=" border p-4 rounded-md"
-          onClick={() => {
-            setChecked(!checked);
-          }}
-        >
-          <AnimatePresence mode="wait">
-            {checked ? (
-              <motion.div
-                key="copy"
-                initial={{ filter: "blur(1px)", scale: 1 }}
-                animate={{ filter: "blur(0px)", scale: 1.2 }}
-                exit={{ filter: "blur(1px)", scale: 0.8 }}
-                transition={{ duration: 0.05 }}
-              >
-                <Copy />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="check"
-                initial={{ filter: "blur(1px)", scale: 1 }}
-                animate={{ filter: "blur(0px)", scale: 1.2 }}
-                exit={{ filter: "blur(1px)", scale: 0.8 }}
-                transition={{ duration: 0.05 }}
-              >
-                <Check />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.button>
-        <div className="flex gap-3">
-          <div className="flex flex-col items-center">
-            <span className="text-xs mb-1">Spring</span>
-            <div className="h-10 w-10 rounded-full flex items-center justify-center">
-              <AnimatePresence>
-                {show && (
-                  <motion.div
-                    exit={{ scale: 0, opacity: 0 }}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    onHoverStart={() => {
-                      console.log("hello");
-                    }}
-                    whileHover={{
-                      scale: 1.1,
-                      transition: {
-                        type: "tween",
-                        duration: 0.3,
-                        ease: "easeInOut",
-                      },
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 100,
-                      damping: 10,
-                      mass: 1,
-                    }}
-                    className="h-10 w-10 bg-[#ff00ff] rounded-full relative overflow-hidden"
-                  >
-                    <div
-                      className="absolute inset-0 rounded-full cursor-pointer"
-                      style={{
-                        background:
-                          "radial-gradient(45.33% 46.43% at 41.69% 50%, #FF4001 0%, rgba(255, 64, 1, 0) 100%), radial-gradient(28.41% 117.96% at 7.72% 28.75%, #FFFDA6 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(37.39% 69.19% at 107.79% 0%, #FF7500 0%, rgba(255, 66, 0, 0) 100%), radial-gradient(54.38% 89.75% at 83.46% 89.75%, #FFF926 0%, rgba(255, 69, 0, 0.6) 100%), #FF4001",
-                      }}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-xs mb-1">Default</span>
-            <div className="h-10 w-10 rounded-full flex items-center justify-center">
-              <AnimatePresence>
-                {show && (
-                  <motion.div
-                    drag="x"
-                    dragDirectionLock
-                    whileDrag={{
-                      scale: 1.5,
-                    }}
-                    dragTransition={{
-                      bounceStiffness: 1000,
-                      bounceDamping: 10,
-                    }}
-                    dragConstraints={{
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      bottom: 0,
-                    }}
-                    exit={{ scale: 0, opacity: 0 }}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="h-10 w-10 bg-[#ff00ff] rounded-full relative overflow-hidden"
-                  >
-                    <div
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background:
-                          "radial-gradient(45.33% 46.43% at 41.69% 50%, #FF4001 0%, rgba(255, 64, 1, 0) 100%), radial-gradient(28.41% 117.96% at 7.72% 28.75%, #FFFDA6 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(37.39% 69.19% at 107.79% 0%, #FF7500 0%, rgba(255, 66, 0, 0) 100%), radial-gradient(54.38% 89.75% at 83.46% 89.75%, #FFF926 0%, rgba(255, 69, 0, 0.6) 100%), #FF4001",
-                      }}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-        <ToggleButton toggle={show} setToggle={setShow} /> */}
-      </div>
+          {image.map((item, i) => (
+            <motion.img
+              layout
+              transition={{
+                type: "tween",
+                duration: 0.2,
+                ease: "easeOut",
+              }}
+              style={{
+                opacity: containerHover ? (active === i ? 1 : 0.5) : 1,
+                width: active === i ? "350px" : "320px ",
+                height: active === i ? "350px" : "320px ",
+              }}
+              onMouseEnter={() => {
+                setActive(i);
+              }}
+              src={item}
+              className="w-80 h-40 object-cover  origin-bottom"
+            />
+          ))}
+        </div> */}
 
-      <div className="h-screen w-full flex  justify-center items-center">
-        <motion.div
-          className="h-10 w-10 bg-orange-500"
-          initial={{ scale: 1 }}
-          whileInView={{ scale: 6, rotate: 360 }}
-          transition={{
-            type: "spring",
+        {/* 
+        <div
+          style={{
+            background: "rgba(0, 0, 0, 0.08)",
+            boxShadow:
+              "0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px rgba(0, 0, 0, 0.15)",
           }}
-        />
+          className="flex gap-8 bg-neutral-800 p-2 rounded-full"
+        >
+          {arr.map((item, i) => (
+            <button
+              key={i}
+              onMouseEnter={() => setActive(i)}
+              className=" relative px-4 py-1 text-white cursor-pointer"
+            >
+              {active === i && (
+                <motion.div
+                  style={{
+                    background: "#F4F4F4",
+                    boxShadow:
+                      "0.222px 0.222px 0.314px -0.5px rgba(0, 0, 0, 0.2), 0.605px 0.605px 0.856px -1px rgba(0, 0, 0, 0.18), 1.329px 1.329px 1.88px -1.5px rgba(0, 0, 0, 0.25), 2.95px 2.95px 4.172px -2px rgba(0, 0, 0, 0.1), 2.5px 2.5px 3px -2.5px rgba(0, 0, 0, 0.15), -0.5px -0.5px 0px rgba(0, 0, 0, 0.1), inset 0.5px 0.5px 1px #FFFFFF, inset -0.5px -0.5px 1px rgba(0, 0, 0, 0.15)",
+                  }}
+                  layoutId="highlight"
+                  className="absolute inset-0 bg-white rounded-full"
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 1.8 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 40,
+                  }}
+                />
+              )}
+
+              <span className="relative z-10 font-extralight mix-blend-difference">
+                {item}
+              </span>
+            </button>
+          ))}
+        </div> */}
       </div>
-    </>
+    </div>
   );
-};
-
-export default page;
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tab-background-animation",
+  "type": "registry:block",
+  "description": "A tab background animation using Framer Motion.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/motion-framer/tab-background-animation.tsx",
+      "content": "\"use client\";\r\nimport { motion } from \"framer-motion\";\r\nimport { useState } from \"react\";\r\n\r\nconst TabBackgroundAnimation = () => {\r\n  const arr = [\"Cool\", \"Warm\", \"Hot\", \"Bloom\", \"Mild\"];\r\n  const [active, setActive] = useState(0);\r\n\r\n  return (\r\n    <div\r\n      style={{\r\n        background: \"rgba(0, 0, 0, 0.08)\",\r\n        boxShadow:\r\n          \"0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px rgba(0, 0, 0, 0.15)\",\r\n      }}\r\n      className=\"flex gap-8 p-2 rounded-full\"\r\n    >\r\n      {arr.map((item, i) => (\r\n        <button\r\n          key={i}\r\n          onMouseEnter={() => setActive(i)}\r\n          className=\" relative px-4 py-1 text-white cursor-pointer\"\r\n        >\r\n          {active === i && (\r\n            <motion.div\r\n              style={{\r\n                background: \"#F4F4F4\",\r\n                boxShadow:\r\n                  \"0.222px 0.222px 0.314px -0.5px rgba(0, 0, 0, 0.2), 0.605px 0.605px 0.856px -1px rgba(0, 0, 0, 0.18), 1.329px 1.329px 1.88px -1.5px rgba(0, 0, 0, 0.25), 2.95px 2.95px 4.172px -2px rgba(0, 0, 0, 0.1), 2.5px 2.5px 3px -2.5px rgba(0, 0, 0, 0.15), -0.5px -0.5px 0px rgba(0, 0, 0, 0.1), inset 0.5px 0.5px 1px #FFFFFF, inset -0.5px -0.5px 1px rgba(0, 0, 0, 0.15)\",\r\n              }}\r\n              layoutId=\"highlight\"\r\n              className=\"absolute inset-0 bg-white rounded-full\"\r\n              initial={{ scale: 1 }}\r\n              animate={{ scale: 1.8 }}\r\n              transition={{\r\n                type: \"spring\",\r\n                stiffness: 500,\r\n                damping: 40,\r\n              }}\r\n            />\r\n          )}\r\n\r\n          <span className=\"relative z-10 font-extralight mix-blend-difference\">\r\n            {item}\r\n          </span>\r\n        </button>\r\n      ))}\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TabBackgroundAnimation;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/tab-background-animation.tsx"
+    }
+  ]
+}

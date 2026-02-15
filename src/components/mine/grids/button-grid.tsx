@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import MorphButton from "../../../../registry/new-york/buttons/morph-button";
 import MorphImageButton from "../../../../registry/new-york/buttons/morph-image-button";
 import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
@@ -19,6 +18,7 @@ import { Spinner } from "@/components/ui/spinner";
 import GooeyButton from "registry/new-york/buttons/goe-button";
 import BlurToggleButton from "../../../../registry/new-york/buttons/blur-toggle-button";
 import { useState } from "react";
+import { Copy, ChevronLeft, ChevronRight } from "lucide-react";
 
 const ToggleButtonWrapper = () => {
   const [toggle, setToggle] = useState(false);
@@ -125,43 +125,97 @@ export const ButtonsArr = [
 ];
 
 const ButtonGrid = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(ButtonsArr.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedItems = ButtonsArr.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
-      {ButtonsArr.map((item, index) => (
-        <div
-          key={index}
-          className="relative group border-b border-l border-dashed  aspect-square flex items-center justify-center "
-        >
-          <BorderDecorator />
-          <div className=" z-30">{item.component}</div>
+    <div className="flex flex-col gap-4 overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
+        {paginatedItems.map((item, index) => (
+          <div
+            key={index}
+            className="relative group border-b border-l border-dashed  aspect-square flex items-center justify-center "
+          >
+            <BorderDecorator />
+            <div className=" z-30">{item.component}</div>
 
-          <div className=" leading-1 absolute left-1.5  bottom-1.5 p-0.5">
-            <p className="text-xs ">{item.name}</p>
-            <p className="text-[8px] text-muted-foreground">
-              {item.description}
-            </p>
+            <div className=" leading-1 absolute left-1.5  bottom-1.5 p-0.5">
+              <p className="text-xs ">{item.name}</p>
+              <p className="text-[8px] text-muted-foreground">
+                {item.description}
+              </p>
+            </div>
+
+            <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
+              <div className=" border-t border-dashed "></div>
+              <Button
+                size={"sm"}
+                variant={"copy"}
+                onClick={() => {
+                  navigator.clipboard.writeText(item.link);
+                  toast.success("Link copied to clipboard!");
+                }}
+                className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
+              >
+                <Copy className=" size-3" /> Copy
+                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
+                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
+              </Button>
+              <div />
+              <div className=" border-r border-dashed h-full -mr-[0.5px] " />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 py-4">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="border-dashed rounded-none"
+          >
+            <ChevronLeft className="size-4" />
+          </Button>
+
+          <div className="flex items-center gap-1">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Button
+                key={page}
+                variant={currentPage === page ? "default" : "outline"}
+                size="sm"
+                onClick={() => setCurrentPage(page)}
+                className={`w-8 h-8 rounded-none border-dashed ${
+                  currentPage === page ? "" : ""
+                }`}
+              >
+                {page}
+              </Button>
+            ))}
           </div>
 
-          <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
-            <div className=" border-t border-dashed "></div>
-            <Button
-              size={"sm"}
-              variant={"copy"}
-              onClick={() => {
-                navigator.clipboard.writeText(item.link);
-                toast.success("Link copied to clipboard!");
-              }}
-              className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
-            >
-              <Copy className=" size-3" /> Copy
-              <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-              <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-            </Button>
-            <div />
-            <div className=" border-r border-dashed h-full -mr-[0.5px] " />
-          </div>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="border-dashed rounded-none"
+          >
+            <ChevronRight className="size-4" />
+          </Button>
         </div>
-      ))}
+      )}
     </div>
   );
 };

@@ -13,13 +13,13 @@ const TabBackgroundAnimation = () => {
         boxShadow:
           "0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px rgba(0, 0, 0, 0.15)",
       }}
-      className="flex gap-8 p-2 rounded-full"
+      className="flex  rounded-full"
     >
       {arr.map((item, i) => (
         <button
           key={i}
           onMouseEnter={() => setActive(i)}
-          className=" relative px-4 py-1 text-white cursor-pointer"
+          className=" relative px-8 py-3 text-white cursor-pointer"
         >
           {active === i && (
             <motion.div
@@ -31,7 +31,7 @@ const TabBackgroundAnimation = () => {
               layoutId="highlight"
               className="absolute inset-0 bg-white rounded-full"
               initial={{ scale: 1 }}
-              animate={{ scale: 1.8 }}
+              animate={{ scale: 1.3 }}
               transition={{
                 type: "spring",
                 stiffness: 500,

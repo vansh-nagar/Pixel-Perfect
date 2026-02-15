@@ -10,9 +10,6 @@ const LogoAnimation = () => {
 
   return (
     <motion.div
-      style={{
-        boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.8)",
-      }}
       initial="rest"
       whileHover="hover"
       animate="rest"

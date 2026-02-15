@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import Stagger1 from "registry/new-york/gsap/stagger1";
+import F1Racing from "registry/new-york/motion-framer/f1-racing";
 import { toast } from "sonner";
 
 const GsapStaggerGridArr = [
@@ -11,6 +12,12 @@ const GsapStaggerGridArr = [
     component: <Stagger1 />,
     link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Motion%20Card%201.json",
   },
+  // {
+  //   name: "F1 Racing",
+  //   description: "An F1 racing animation with multiple cars.",
+  //   component: <F1Racing />,
+  //   link: "npx shadcn@latest add https://www.pixel-perfect.space/r/f1-racing.json",
+  // },
 ];
 
 const GsapGrid = () => {

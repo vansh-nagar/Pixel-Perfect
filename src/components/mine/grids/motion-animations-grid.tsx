@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import CardAnimation from "registry/new-york/motion-framer/card-animation";
+import F1Racing from "registry/new-york/motion-framer/f1-racing";
 import ImageHoverAnimation from "registry/new-york/motion-framer/image-hover-animation";
 import LogoAnimation from "registry/new-york/motion-framer/logo-animation";
 import TabBackgroundAnimation from "registry/new-york/motion-framer/tab-background-animation";

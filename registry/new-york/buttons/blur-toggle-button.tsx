@@ -11,7 +11,7 @@ const BlurToggleButton = () => {
       whileTap={{
         scale: 0.95,
       }}
-      className="border p-4 rounded-md"
+      className="border p-3 rounded-md bg-background cursor-pointer"
       onClick={() => {
         setChecked(!checked);
       }}
@@ -25,7 +25,7 @@ const BlurToggleButton = () => {
             exit={{ filter: "blur(1px)", scale: 0.8 }}
             transition={{ duration: 0.05 }}
           >
-            <Copy />
+            <Copy size={16} />
           </motion.div>
         ) : (
           <motion.div
@@ -35,7 +35,7 @@ const BlurToggleButton = () => {
             exit={{ filter: "blur(1px)", scale: 0.8 }}
             transition={{ duration: 0.05 }}
           >
-            <Check />
+            <Check size={16} />
           </motion.div>
         )}
       </AnimatePresence>

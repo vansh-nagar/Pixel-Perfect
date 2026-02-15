@@ -15,7 +15,7 @@ const navItems = [
     component: <ButtonGrid />,
   },
   {
-    name: "Motion (Framer)",
+    name: "Motion Animations",
     component: <MotionAnimationsGrid />,
   },
   {
@@ -27,7 +27,7 @@ const navItems = [
     component: <SvgAssetsGrid />,
   },
   {
-    name: "Text Effects",
+    name: "Text Animations",
     component: <TextGrid />,
   },
   {

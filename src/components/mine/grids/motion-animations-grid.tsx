@@ -1,37 +1,34 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import CardAnimation from "registry/new-york/motion-framer/card-animation";
-import F1Racing from "registry/new-york/motion-framer/f1-racing";
 import ImageHoverAnimation from "registry/new-york/motion-framer/image-hover-animation";
 import LogoAnimation from "registry/new-york/motion-framer/logo-animation";
 import TabBackgroundAnimation from "registry/new-york/motion-framer/tab-background-animation";
-import { toast } from "sonner";
+import CopyDropdown from "../copy-dropdown";
 
 const MotionComponentArr = [
   {
     name: "Simple Card",
     description: "A simple card animation using Framer Motion.",
     component: <CardAnimation />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/card-animation.json",
+    registryName: "card-animation",
   },
   {
     name: "Logo Animation",
     description: "Logo animation with Framer Motion and custom background.",
     component: <LogoAnimation />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/logo-animation.json",
+    registryName: "logo-animation",
   },
   {
     name: "Tab Background",
     description: "A tab background animation using Framer Motion.",
     component: <TabBackgroundAnimation />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/tab-background-animation.json",
+    registryName: "tab-background-animation",
   },
   {
     name: "Image Hover",
     description: "An image hover animation with scaling and opacity effects.",
     component: <ImageHoverAnimation />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/image-hover-animation.json",
+    registryName: "image-hover-animation",
   },
 ];
 
@@ -53,19 +50,7 @@ const MotionAnimationsGrid = () => {
           </div>
 
           <div className="absolute top-0 right-0">
-            <Button
-              size={"sm"}
-              variant={"ghost"}
-              className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
-              onClick={() => {
-                navigator.clipboard.writeText(item.link);
-                toast.success("Link copied to clipboard!");
-              }}
-            >
-              <Copy className=" size-3" /> Copy
-              <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-              <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-            </Button>
+            <CopyDropdown registryName={item.registryName} variant="ghost" />
           </div>
         </div>
       ))}

@@ -1,24 +1,20 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
-import { toast } from "sonner";
 import MouseFollower1 from "../../../../registry/new-york/mouse-follower/mouse-follower1";
 import IconFall from "@/components/rune-landing/icon-fall";
-
-const BASE_URL = "https://www.pixel-perfect.space/r";
+import CopyDropdown from "../copy-dropdown";
 
 export const MouseFollowerArr = [
   {
     name: "Image Fall",
     description: "Image trail mouse follower using GSAP.",
     component: <MouseFollower1 />,
-    link: `npx shadcn@latest add ${BASE_URL}/mouse-follower-1.json`,
+    registryName: "mouse-follower-1",
   },
   {
     name: "Icon Fall",
     description: "Icon trail mouse follower using GSAP.",
     component: <IconFall />,
-    link: `npx shadcn@latest add ${BASE_URL}/mouse-follower-2.json`,
+    registryName: "mouse-follower-2",
   },
 ];
 
@@ -42,19 +38,7 @@ const MouseFollower = () => {
 
           <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
             <div className=" border-t border-dashed "></div>
-            <Button
-              size={"sm"}
-              variant={"ghost"}
-              className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
-              onClick={() => {
-                navigator.clipboard.writeText(item.link);
-                toast.success("Link copied to clipboard!");
-              }}
-            >
-              <Copy className=" size-3" /> Copy
-              <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-              <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-            </Button>
+            <CopyDropdown registryName={item.registryName} variant="ghost" />
             <div />
             <div className=" border-r border-dashed h-full -mr-[0.5px] " />
           </div>

@@ -98,7 +98,7 @@ const TextArr = [
         JUST GIVE IT A STAR
       </TextMatrixRain>
     ),
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Matrix%20Rain.json",
+    registryName: "text-matrix-rain",
     hasStagger: false,
   },
   {
@@ -109,7 +109,7 @@ const TextArr = [
         JUST GIVE IT A STAR
       </TextGlitchPortal>
     ),
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Glitch%20Portal.json",
+    registryName: "text-glitch-portal",
     hasStagger: false,
   },
   {
@@ -120,45 +120,45 @@ const TextArr = [
         JUST GIVE IT A STAR
       </TextTypewriterGlitch>
     ),
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Typewriter%20Glitch.json",
+    registryName: "text-typewriter-glitch",
     hasStagger: false,
   },
   {
-    name: "Text Y Animation 2",
-    description: "Variant Y-axis animation effect.",
+    name: "Text Reveal",
+    description: "Text reveal animation effect.",
     component: <TextReveal className="text-xl">JUST GIVE IT A STAR</TextReveal>,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+    registryName: "text-reveal",
     hasStagger: false,
   },
 
   {
-    name: "Text Y Animation 2",
-    description: "Variant Y-axis animation effect.",
+    name: "Text Video",
+    description: "Video masked text effect.",
     component: <TextVideo>JUST GIVE IT A STAR</TextVideo>,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+    registryName: "text-video",
     hasStagger: false,
   },
   {
-    name: "Text Y Animation 2",
-    description: "Variant Y-axis animation effect.",
+    name: "Text Z Rotate 2",
+    description: "Z-axis rotation text animation variant.",
     component: <TextZRotate2 />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+    registryName: "text-z-rotate2",
     hasStagger: true,
   },
   {
-    name: "Text Y Animation 2",
-    description: "Variant Y-axis animation effect.",
+    name: "Text Z Rotate",
+    description: "Z-axis rotation text animation.",
     component: <TextZRotate />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+    registryName: "text-z-rotate",
     hasStagger: true,
   },
   {
-    name: "Text Y Animation 2",
-    description: "Variant Y-axis animation effect.",
+    name: "Text Reveal 2",
+    description: "Text reveal animation variant.",
     component: (
       <TextReveal2 className="text-xl">JUST GIVE IT A STAR</TextReveal2>
     ),
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Scatter.json",
+    registryName: "text-reveal2",
     hasStagger: false,
   },
   {
@@ -169,7 +169,7 @@ const TextArr = [
         JUST GIVE IT A STAR
       </TextBlackHole>
     ),
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Black%20Hole.json",
+    registryName: "text-black-hole",
     hasStagger: false,
   },
   {
@@ -180,7 +180,8 @@ const TextArr = [
         JUST GIVE IT A STAR
       </TextBurnNeon>
     ),
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Text%20Burn%20Neon.json",
+    registryName: "text-burn-neon",
     hasStagger: false,
   },
 ];
+

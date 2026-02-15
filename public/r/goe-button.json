@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "goe-button",
+  "type": "registry:block",
+  "description": "A gooey SVG filter button effect using Framer Motion.",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/goe-button.tsx",
+      "content": "\"use client\";\r\nimport { Plus } from \"lucide-react\";\r\nimport React from \"react\";\r\nimport { motion } from \"framer-motion\";\r\n\r\nimport { useState } from \"react\";\r\n\r\nconst GooeyButton = () => {\r\n  const [hovered, setHovered] = useState(false);\r\n  return (\r\n    <div>\r\n      <GooeyFilter />\r\n      <div\r\n        className=\" inset-0 flex items-center justify-center\"\r\n        style={{ filter: \"url(#goo-effect)\", zIndex: 1 }}\r\n      >\r\n        <motion.button\r\n          className=\"h-15 px-20 bg-orange-500 rounded-full flex items-center justify-center text-white\"\r\n          initial={{ scale: 1 }}\r\n          animate={hovered ? { scale: 1.08 } : { scale: 1 }}\r\n          transition={{ type: \"spring\", bounce: 0.35, duration: 0.5 }}\r\n        >\r\n          Gooey\r\n        </motion.button>\r\n        <motion.div\r\n          drag\r\n          className=\" border absolute  w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center\"\r\n          initial={{ scale: 1 }}\r\n          animate={{ scale: 1.4, x: 135 }}\r\n          transition={{ type: \"tween\", ease: [0.5, 0, 0, 1], duration: 1 }}\r\n        >\r\n          <Plus color=\"#fff\" size={24} />\r\n        </motion.div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nconst GooeyFilter = () => (\r\n  <svg style={{ position: \"absolute\", width: 0, height: 0 }} aria-hidden=\"true\">\r\n    <defs>\r\n      <filter id=\"goo-effect\">\r\n        <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"5\" result=\"blur\" />\r\n        <feColorMatrix\r\n          in=\"blur\"\r\n          type=\"matrix\"\r\n          values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -15\"\r\n          result=\"goo\"\r\n        />\r\n        <feComposite in=\"SourceGraphic\" in2=\"goo\" operator=\"atop\" />\r\n      </filter>\r\n    </defs>\r\n  </svg>\r\n);\r\n\r\nexport default GooeyButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/goe-button.tsx"
+    }
+  ]
+}

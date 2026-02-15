@@ -1,33 +1,29 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
-import { toast } from "sonner";
 import Border1 from "../../../../registry/new-york/borders/border1";
 import Border2 from "../../../../registry/new-york/borders/border2";
 import Intersection1 from "../../../../registry/new-york/borders/intersection1";
 import Intersection2 from "../../../../registry/new-york/borders/intersection2";
 import StarBorders from "../../../../registry/new-york/borders/star-border";
-
-const BASE_URL = "https://www.pixel-perfect.space/r";
+import CopyDropdown from "../copy-dropdown";
 
 export const BorderArr = [
   {
     name: "Square Border",
     description: "A dashed border design using CSS.",
     component: <Border1 />,
-    link: `npx shadcn@latest add ${BASE_URL}/border-1.json`,
+    registryName: "border-1",
   },
   {
     name: "Simple Dashed Border",
     description: "A border design using CSS.",
     component: <Border2 />,
-    link: `npx shadcn@latest add ${BASE_URL}/border-2.json`,
+    registryName: "border-2",
   },
   {
     name: "Intersection (Scope)",
     description: "An intersection design using CSS.",
     component: <Intersection1 />,
-    link: `npx shadcn@latest add ${BASE_URL}/intersection-1.json`,
+    registryName: "intersection-1",
   },
   {
     name: "Star Borders",
@@ -40,14 +36,14 @@ export const BorderArr = [
       </Intersection2>
     ),
     image: "",
-    link: `npx shadcn@latest add ${BASE_URL}/intersection-2.json`,
+    registryName: "intersection-2",
   },
   {
     name: "Star Border",
     description: "Star border with animated corners.",
     component: <StarBorders />,
     image: "",
-    link: `npx shadcn@latest add ${BASE_URL}/star-border.json`,
+    registryName: "star-border",
   },
 ];
 
@@ -70,17 +66,9 @@ const BorderGrid = () => {
             </div>
           </div>
 
-          <Button
-            size={"sm"}
-            variant={"secondary"}
-            onClick={() => {
-              navigator.clipboard.writeText(item.link);
-              toast.success("Link copied to clipboard!");
-            }}
-            className="text-xs  absolute cursor-pointer z-30  right-1 top-1 active:bg-orange-500 "
-          >
-            <Copy className=" size-3" /> Copy
-          </Button>
+          <div className="absolute top-0 right-0">
+            <CopyDropdown registryName={item.registryName} variant="secondary" />
+          </div>
           <div />
         </div>
       ))}

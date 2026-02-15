@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Copy, ChevronLeft, ChevronRight } from "lucide-react";
-import { toast } from "sonner";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import {
   Select,
@@ -32,10 +31,9 @@ import TextBrokenGlass from "../../../../registry/new-york/text/text-broken-glas
 import TextMatrixRain from "../../../../registry/new-york/text/text-matrix-rain";
 import TextGlitchPortal from "../../../../registry/new-york/text/text-glitch-portal";
 import TextTypewriterGlitch from "../../../../registry/new-york/text/text-typewriter-glitch";
+import CopyDropdown from "../copy-dropdown";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
-
-const BASE_URL = "https://www.pixel-perfect.space/r";
 
 const TextGrid = () => {
   const [staggerFrom, setStaggerFrom] = useState<StaggerFrom>("start");
@@ -51,7 +49,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextBrokenGlass>
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-broken-glass.json`,
+      registryName: "text-broken-glass",
       hasStagger: false,
     },
     {
@@ -62,7 +60,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextMatrixRain>
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-matrix-rain.json`,
+      registryName: "text-matrix-rain",
       hasStagger: false,
     },
     {
@@ -73,7 +71,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextGlitchPortal>
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-glitch-portal.json`,
+      registryName: "text-glitch-portal",
       hasStagger: false,
     },
     {
@@ -84,7 +82,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextTypewriterGlitch>
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-typewriter-glitch.json`,
+      registryName: "text-typewriter-glitch",
       hasStagger: false,
     },
     {
@@ -93,28 +91,28 @@ const TextGrid = () => {
       component: (
         <TextReveal className="text-xl">JUST GIVE IT A STAR</TextReveal>
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-reveal.json`,
+      registryName: "text-reveal",
       hasStagger: false,
     },
     {
       name: "Text Video",
       description: "Video masked text effect.",
       component: <TextVideo>JUST GIVE IT A STAR</TextVideo>,
-      link: `npx shadcn@latest add ${BASE_URL}/text-video.json`,
+      registryName: "text-video",
       hasStagger: false,
     },
     {
       name: "Text Z Rotate 2",
       description: "Z-axis rotation text animation variant.",
       component: <TextZRotate2 staggerFrom={staggerFrom} />,
-      link: `npx shadcn@latest add ${BASE_URL}/text-z-rotate2.json`,
+      registryName: "text-z-rotate2",
       hasStagger: true,
     },
     {
       name: "Text Z Rotate",
       description: "Z-axis rotation text animation.",
       component: <TextZRotate staggerFrom={staggerFrom} />,
-      link: `npx shadcn@latest add ${BASE_URL}/text-z-rotate.json`,
+      registryName: "text-z-rotate",
       hasStagger: true,
     },
     {
@@ -123,21 +121,21 @@ const TextGrid = () => {
       component: (
         <TextReveal2 className="text-xl">JUST GIVE IT A STAR</TextReveal2>
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-reveal2.json`,
+      registryName: "text-reveal2",
       hasStagger: false,
     },
     {
       name: "Text Scatter 1",
       description: "Text scatter variant animation.",
       component: <TextScatter1 staggerFrom={staggerFrom} />,
-      link: `npx shadcn@latest add ${BASE_URL}/text-scatter1.json`,
+      registryName: "text-scatter1",
       hasStagger: true,
     },
     {
       name: "Text Scatter",
       description: "Text scatters and assembles with animation.",
       component: <TextScatter staggerFrom={staggerFrom} />,
-      link: `npx shadcn@latest add ${BASE_URL}/text-scatter.json`,
+      registryName: "text-scatter",
       hasStagger: true,
     },
     {
@@ -149,7 +147,7 @@ const TextGrid = () => {
           textContent="I design and build pixel-perfect digital experiences where precision, performance, and aesthetics work together seamlessly."
         />
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-fade.json`,
+      registryName: "text-fade",
       hasStagger: false,
     },
     {
@@ -161,7 +159,7 @@ const TextGrid = () => {
           text="Crafting refined, pixel-perfect web experiences that balance design clarity with technical excellence."
         />
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-inertia.json`,
+      registryName: "text-inertia",
       hasStagger: false,
     },
     {
@@ -174,42 +172,42 @@ const TextGrid = () => {
           incididunt cupidatat.
         </TextGradient>
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-gradient.json`,
+      registryName: "text-gradient",
       hasStagger: false,
     },
     {
       name: "Text X Rotate",
       description: "3D X-axis rotation effect with stagger.",
       component: <TextXRotate staggerFrom={staggerFrom} />,
-      link: `npx shadcn@latest add ${BASE_URL}/text-x-rotate.json`,
+      registryName: "text-x-rotate",
       hasStagger: true,
     },
     {
       name: "Text Y Animation",
       description: "Y-axis slide animation with stagger.",
       component: <TextYAnimation staggerFrom={staggerFrom} />,
-      link: `npx shadcn@latest add ${BASE_URL}/text-y-animation.json`,
+      registryName: "text-y-animation",
       hasStagger: true,
     },
     {
       name: "Text Y Animation 2",
       description: "Variant Y-axis animation effect.",
       component: <TextYAnimation2 staggerFrom={staggerFrom} />,
-      link: `npx shadcn@latest add ${BASE_URL}/text-y-animation2.json`,
+      registryName: "text-y-animation2",
       hasStagger: true,
     },
     {
       name: "Text Y Animation 3",
       description: "Variant Y-axis animation effect.",
       component: <TextYAnimation3 staggerFrom={staggerFrom} />,
-      link: `npx shadcn@latest add ${BASE_URL}/text-y-animation3.json`,
+      registryName: "text-y-animation3",
       hasStagger: true,
     },
     {
       name: "Text Y Animation 4",
       description: "Variant Y-axis animation effect.",
       component: <TextYAnimation4 staggerFrom={staggerFrom} />,
-      link: `npx shadcn@latest add ${BASE_URL}/text-y-animation4.json`,
+      registryName: "text-y-animation4",
       hasStagger: true,
     },
     {
@@ -220,7 +218,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextBlackHole>
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-black-hole.json`,
+      registryName: "text-black-hole",
       hasStagger: false,
     },
     {
@@ -231,7 +229,7 @@ const TextGrid = () => {
           JUST GIVE IT A STAR
         </TextBurnNeon>
       ),
-      link: `npx shadcn@latest add ${BASE_URL}/text-burn-neon.json`,
+      registryName: "text-burn-neon",
       hasStagger: false,
     },
   ];
@@ -282,19 +280,7 @@ const TextGrid = () => {
                   </SelectContent>
                 </Select>
               )}
-              <Button
-                size={"sm"}
-                variant={"copy"}
-                onClick={() => {
-                  navigator.clipboard.writeText(item.link);
-                  toast.success("Link copied to clipboard!");
-                }}
-                className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
-              >
-                <Copy className=" size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-              </Button>
+              <CopyDropdown registryName={item.registryName} />
 
               <div />
               <div />

@@ -173,6 +173,32 @@
       ]
     },
     {
+      "name": "goe-button",
+      "description": "A gooey SVG filter button effect using Framer Motion.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/goe-button.tsx",
+          "target": "components/pixel-perfect/goe-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "blur-toggle-button",
+      "description": "A button with blur transition effect on toggle using Framer Motion.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/blur-toggle-button.tsx",
+          "target": "components/pixel-perfect/blur-toggle-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "border-1",
       "description": "A dashed border design with corner elements.",
       "type": "registry:block",
@@ -537,10 +563,23 @@
       ]
     },
     {
-      "name": "text-assemble",
-      "description": "Text assembles from scattered pieces.",
+      "name": "text-x-rotate2",
+      "description": "Y-axis text animation with blur using GSAP SplitText.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": ["gsap", "@gsap/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-x-rotate2.tsx",
+          "target": "components/pixel-perfect/text-x-rotate2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-assemble",
+      "description": "Text assembles from scattered pieces using GSAP ScrollTrigger.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "@gsap/react"],
       "files": [
         {
           "type": "registry:component",

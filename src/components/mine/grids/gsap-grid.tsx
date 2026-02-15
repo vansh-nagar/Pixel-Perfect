@@ -1,23 +1,14 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import Stagger1 from "registry/new-york/gsap/stagger1";
-import F1Racing from "registry/new-york/motion-framer/f1-racing";
-import { toast } from "sonner";
+import CopyDropdown from "../copy-dropdown";
 
 const GsapStaggerGridArr = [
   {
     name: "Streak counter",
     description: "A Streak counter ripple animation using GSAP.",
     component: <Stagger1 />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Motion%20Card%201.json",
+    registryName: "stagger-1",
   },
-  // {
-  //   name: "F1 Racing",
-  //   description: "An F1 racing animation with multiple cars.",
-  //   component: <F1Racing />,
-  //   link: "npx shadcn@latest add https://www.pixel-perfect.space/r/f1-racing.json",
-  // },
 ];
 
 const GsapGrid = () => {
@@ -38,19 +29,7 @@ const GsapGrid = () => {
           </div>
 
           <div className="absolute top-0 right-0">
-            <Button
-              size={"sm"}
-              variant={"ghost"}
-              className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
-              onClick={() => {
-                navigator.clipboard.writeText(item.link);
-                toast.success("Link copied to clipboard!");
-              }}
-            >
-              <Copy className=" size-3" /> Copy
-              <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-              <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-            </Button>
+            <CopyDropdown registryName={item.registryName} variant="ghost" />
           </div>
         </div>
       ))}

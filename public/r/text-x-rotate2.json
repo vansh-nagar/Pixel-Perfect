@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-x-rotate2",
+  "type": "registry:block",
+  "description": "Y-axis text animation with blur using GSAP SplitText.",
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/text/text-x-rotate2.tsx",
+      "content": "\"use client\";\r\nimport React, { useRef } from \"react\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport gsap from \"gsap\";\r\nimport SplitText from \"gsap/src/SplitText\";\r\n\r\ngsap.registerPlugin(SplitText);\r\n\r\nexport type StaggerFrom = \"start\" | \"center\" | \"edges\" | \"random\" | \"end\";\r\n\r\ninterface TextYAnimationProps {\r\n  staggerFrom?: StaggerFrom;\r\n  text?: string;\r\n  className?: string;\r\n}\r\n\r\nconst TextXRotate2 = ({\r\n  staggerFrom = \"start\",\r\n  text = \"JUST GIVE IT A STAR\",\r\n  className,\r\n}: TextYAnimationProps) => {\r\n  const containerRef = useRef<HTMLDivElement>(null);\r\n  const textRef1 = useRef<HTMLDivElement>(null);\r\n  const textRef2 = useRef<HTMLDivElement>(null);\r\n\r\n  useGSAP(\r\n    () => {\r\n      if (!textRef1.current || !textRef2.current) return;\r\n\r\n      const split1 = new SplitText(textRef1.current, { type: \"chars\" });\r\n      const split2 = new SplitText(textRef2.current, { type: \"chars\" });\r\n\r\n      gsap.from(split1.chars, {\r\n        y: \"100%\",\r\n        ease: \"power4.out\",\r\n        transformOrigin: \"50% 0%\",\r\n        stagger: {\r\n          each: 0.05,\r\n          from: staggerFrom,\r\n        },\r\n        repeat: -1,\r\n        repeatDelay: 1,\r\n        yoyo: true,\r\n        opacity: 0,\r\n        filter: \"blur(4px)\",\r\n      });\r\n      gsap.to(split2.chars, {\r\n        y: \"-100%\",\r\n        ease: \"power4.out\",\r\n        transformOrigin: \"50% 100%\",\r\n        stagger: {\r\n          each: 0.05,\r\n          from: staggerFrom,\r\n        },\r\n        repeat: -1,\r\n        repeatDelay: 1,\r\n        yoyo: true,\r\n        opacity: 0,\r\n        filter: \"blur(4px)\",\r\n      });\r\n\r\n      return () => {\r\n        split1.revert();\r\n        split2.revert();\r\n      };\r\n    },\r\n    { scope: containerRef, dependencies: [staggerFrom, text] }\r\n  );\r\n\r\n  return (\r\n    <div ref={containerRef} className=\"overflow-hidden h-8 relative\">\r\n      <div\r\n        ref={textRef1}\r\n        className={`text-2xl perspective-distant ${className ?? \"\"}`}\r\n      >\r\n        {text}\r\n      </div>\r\n\r\n      <div\r\n        ref={textRef2}\r\n        className={`text-2xl perspective-distant absolute top-0 ${\r\n          className ?? \"\"\r\n        }`}\r\n      >\r\n        {text}\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TextXRotate2;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/text-x-rotate2.tsx"
+    }
+  ]
+}

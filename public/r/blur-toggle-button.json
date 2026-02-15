@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "blur-toggle-button",
+  "type": "registry:block",
+  "description": "A button with blur transition effect on toggle using Framer Motion.",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/blur-toggle-button.tsx",
+      "content": "\"use client\";\r\nimport React, { useState } from \"react\";\r\nimport { AnimatePresence, motion } from \"framer-motion\";\r\nimport { Check, Copy } from \"lucide-react\";\r\n\r\nconst BlurToggleButton = () => {\r\n  const [checked, setChecked] = useState(false);\r\n\r\n  return (\r\n    <motion.button\r\n      whileTap={{\r\n        scale: 0.95,\r\n      }}\r\n      className=\"border p-3 rounded-md bg-background cursor-pointer\"\r\n      onClick={() => {\r\n        setChecked(!checked);\r\n      }}\r\n    >\r\n      <AnimatePresence mode=\"wait\">\r\n        {checked ? (\r\n          <motion.div\r\n            key=\"copy\"\r\n            initial={{ filter: \"blur(1px)\", scale: 1 }}\r\n            animate={{ filter: \"blur(0px)\", scale: 1.2 }}\r\n            exit={{ filter: \"blur(1px)\", scale: 0.8 }}\r\n            transition={{ duration: 0.05 }}\r\n          >\r\n            <Copy size={16} />\r\n          </motion.div>\r\n        ) : (\r\n          <motion.div\r\n            key=\"check\"\r\n            initial={{ filter: \"blur(1px)\", scale: 1 }}\r\n            animate={{ filter: \"blur(0px)\", scale: 1.2 }}\r\n            exit={{ filter: \"blur(1px)\", scale: 0.8 }}\r\n            transition={{ duration: 0.05 }}\r\n          >\r\n            <Check size={16} />\r\n          </motion.div>\r\n        )}\r\n      </AnimatePresence>\r\n    </motion.button>\r\n  );\r\n};\r\n\r\nexport default BlurToggleButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/blur-toggle-button.tsx"
+    }
+  ]
+}

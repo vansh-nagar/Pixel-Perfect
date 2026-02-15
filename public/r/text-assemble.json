@@ -2,9 +2,10 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "text-assemble",
   "type": "registry:block",
-  "description": "Text assembles from scattered pieces.",
+  "description": "Text assembles from scattered pieces using GSAP ScrollTrigger.",
   "dependencies": [
-    "framer-motion"
+    "gsap",
+    "@gsap/react"
   ],
   "files": [
     {

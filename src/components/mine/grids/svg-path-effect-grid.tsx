@@ -1,32 +1,31 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
-import { toast } from "sonner";
 import LegionsDev from "registry/new-york/svg-path-effects/legionsdev";
 import MotionPath from "registry/new-york/svg-path-effects/motion-path";
 import Guitar from "registry/new-york/svg-path-effects/guitar";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import CopyDropdown from "../copy-dropdown";
 
 const Buttons = [
   {
     name: "Guitar",
     description: "Motion path effect using SVG.",
     component: <Guitar />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%202.json",
+    registryName: "guitar-svg",
   },
   {
     name: "Svg Path Effect",
-    description: "",
+    description: "Legions Dev SVG path effect.",
     component: <LegionsDev />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%201.json",
+    registryName: "legionsdev-svg",
   },
   {
     name: "Beam Motion Path",
-    description: "Motio n path effect using SVG.",
+    description: "Motion path effect using SVG.",
     component: <MotionPath />,
-    link: "npx shadcn@latest add https://www.pixel-perfect.space/r/Mouse%20Follower%202.json",
+    registryName: "motion-path",
   },
 ];
 
@@ -55,19 +54,7 @@ const SvgPathEffectGrid = () => {
             </div>
 
             <div className="absolute top-0 right-0">
-              <Button
-                size={"sm"}
-                variant={"ghost"}
-                className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
-                onClick={() => {
-                  navigator.clipboard.writeText(item.link);
-                  toast.success("Link copied to clipboard!");
-                }}
-              >
-                <Copy className=" size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-              </Button>
+              <CopyDropdown registryName={item.registryName} variant="ghost" />
             </div>
           </div>
         ))}

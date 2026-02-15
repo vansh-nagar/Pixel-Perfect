@@ -4,7 +4,6 @@ import MorphButton from "../../../../registry/new-york/buttons/morph-button";
 import MorphImageButton from "../../../../registry/new-york/buttons/morph-image-button";
 import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
 import ShinyButton from "../../../../registry/new-york/buttons/shiny-button";
-import { toast } from "sonner";
 import BorderGradientButton from "../../../../registry/new-york/buttons/border-gradient-button";
 import MouseFollowerButton from "../../../../registry/new-york/buttons/mouse-follower-button";
 import PremiumButton from "../../../../registry/new-york/buttons/premium-button";
@@ -18,87 +17,86 @@ import { Spinner } from "@/components/ui/spinner";
 import GooeyButton from "registry/new-york/buttons/goe-button";
 import BlurToggleButton from "../../../../registry/new-york/buttons/blur-toggle-button";
 import { useState } from "react";
-import { Copy, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import CopyDropdown from "../copy-dropdown";
 
 const ToggleButtonWrapper = () => {
   const [toggle, setToggle] = useState(false);
   return <ToggleButton toggle={toggle} setToggle={setToggle} />;
 };
 
-const BASE_URL = "https://www.pixel-perfect.space/r";
-
 export const ButtonsArr = [
   {
     name: "Morph Button",
     description: "A button that morphs its shape on hover using GSAP.",
     component: <MorphButton>Hover Me</MorphButton>,
-    link: `npx shadcn@latest add ${BASE_URL}/morph-button.json`,
+    registryName: "morph-button",
   },
   {
     name: "Morph Image Button",
     description: "A button that morphs an image mask on hover using GSAP.",
     component: <MorphImageButton>Hover Me</MorphImageButton>,
-    link: `npx shadcn@latest add ${BASE_URL}/morph-image-button.json`,
+    registryName: "morph-image-button",
   },
   {
     name: "3D Button",
     description: "A 3D button with press and hover effects.",
     component: <ThreedButton>Click Me</ThreedButton>,
-    link: `npx shadcn@latest add ${BASE_URL}/3d-button.json`,
+    registryName: "3d-button",
   },
   {
     name: "Shiny Button",
     description: "A shiny button with hover effects.",
     component: <ShinyButton />,
-    link: `npx shadcn@latest add ${BASE_URL}/shiny-button.json`,
+    registryName: "shiny-button",
   },
   {
     name: "Mouse Follower Button",
     description: "A button that follows the mouse cursor with hover effects.",
     component: <MouseFollowerButton>Mouse follower</MouseFollowerButton>,
-    link: `npx shadcn@latest add ${BASE_URL}/mouse-follower-button.json`,
+    registryName: "mouse-follower-button",
   },
   {
     name: "Border Gradient Button",
     description: "A button with a gradient border effect.",
     component: <BorderGradientButton />,
-    link: `npx shadcn@latest add ${BASE_URL}/border-gradient-button.json`,
+    registryName: "border-gradient-button",
   },
   {
     name: "Premium Button",
     description: "A button with elaborate shadows and premium feel.",
     component: <PremiumButton>Hover Me</PremiumButton>,
-    link: `npx shadcn@latest add ${BASE_URL}/premium-button.json`,
+    registryName: "premium-button",
   },
   {
     name: "Orange Premium Button",
     description: "A button with vibrant gradients and soft shadows.",
     component: <OrangePremiumButton>Hover Me</OrangePremiumButton>,
-    link: `npx shadcn@latest add ${BASE_URL}/orange-premium-button.json`,
+    registryName: "orange-premium-button",
   },
   {
     name: "Stripe Button",
     description: "A Stripe-inspired button with inset shadow effect.",
     component: <StripeButton>Click Me</StripeButton>,
-    link: `npx shadcn@latest add ${BASE_URL}/stripe-button.json`,
+    registryName: "stripe-button",
   },
   {
     name: "Learn More Button",
     description: "An animated learn more button with hover effects.",
     component: <LearnMoreButtion />,
-    link: `npx shadcn@latest add ${BASE_URL}/learn-more-button.json`,
+    registryName: "learn-more-button",
   },
   {
     name: "Visit Button",
     description: "A compact button with label and icon swap on hover.",
     component: <VisitButton />,
-    link: `npx shadcn@latest add ${BASE_URL}/visit-button.json`,
+    registryName: "visit-button",
   },
   {
     name: "Toggle Button",
     description: "An animated toggle switch with spring physics.",
     component: <ToggleButtonWrapper />,
-    link: `npx shadcn@latest add ${BASE_URL}/toggle-button.json`,
+    registryName: "toggle-button",
   },
   {
     name: "Abhinav Bento Button",
@@ -108,19 +106,19 @@ export const ButtonsArr = [
         <Spinner />
       </AbhinavBentoButton>
     ),
-    link: `npx shadcn@latest add ${BASE_URL}/abhinav-bento-button.json`,
+    registryName: "abhinav-bento-button",
   },
   {
-    name: "Abhinav Bento Button",
-    description: "A large bento-style button.",
+    name: "Gooey Button",
+    description: "A gooey SVG filter button effect.",
     component: <GooeyButton />,
-    link: `npx shadcn@latest add ${BASE_URL}/abhinav-bento-button.json`,
+    registryName: "goe-button",
   },
   {
     name: "Blur Toggle Button",
     description: "A button with blur transition effect on toggle.",
     component: <BlurToggleButton />,
-    link: `npx shadcn@latest add ${BASE_URL}/blur-toggle-button.json`,
+    registryName: "blur-toggle-button",
   },
 ];
 
@@ -154,19 +152,7 @@ const ButtonGrid = () => {
 
             <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
               <div className=" border-t border-dashed "></div>
-              <Button
-                size={"sm"}
-                variant={"copy"}
-                onClick={() => {
-                  navigator.clipboard.writeText(item.link);
-                  toast.success("Link copied to clipboard!");
-                }}
-                className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
-              >
-                <Copy className=" size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-              </Button>
+              <CopyDropdown registryName={item.registryName} />
               <div />
               <div className=" border-r border-dashed h-full -mr-[0.5px] " />
             </div>

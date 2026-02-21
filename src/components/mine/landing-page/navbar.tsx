@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { FlaskConical, GithubIcon, Rainbow } from "lucide-react";
+import { BookOpen, FlaskConical, GithubIcon, Rainbow } from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { StarsCount } from "@/components/mine/landing-page/stars-count";
 import { ShaderAnimation } from "@/components/shader-animation";
@@ -51,6 +51,15 @@ export function Navbar({ className = "" }: { className?: string }) {
             size={"icon"}
           >
             <FlaskConical />
+          </Button>
+        </Link>
+        <Link href={"/tutorial"}>
+          <Button
+            variant={"outline"}
+            className="border-dashed rounded-none"
+            size={"icon"}
+          >
+            <BookOpen />
           </Button>
         </Link>
 

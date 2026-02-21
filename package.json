@@ -13,6 +13,7 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
+    "@monaco-editor/react": "^4.7.0",
     "@polar-sh/checkout": "^0.2.0",
     "@polar-sh/nextjs": "^0.9.3",
     "@radix-ui/react-accordion": "^1.2.12",

@@ -1,9 +1,67 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus } from "lucide-react";
-import { motion } from "framer-motion";
+import { Plus, Code, Eye } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import ToggleButton from "../../../../../registry/new-york/buttons/toggle-buttion";
+import CopyDropdown from "@/components/mine/copy-dropdown";
+import Editor from "@monaco-editor/react";
+
+const GOOEY_SOURCE = `"use client";
+import { Plus } from "lucide-react";
+import React from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+
+const GooeyButton = () => {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div>
+      <GooeyFilter />
+      <div
+        className="inset-0 flex items-center justify-center"
+        style={{ filter: "url(#goo-effect)", zIndex: 1 }}
+      >
+        <motion.button
+          className="h-15 px-20 bg-orange-500 rounded-full flex items-center justify-center text-white"
+          initial={{ scale: 1 }}
+          animate={hovered ? { scale: 1.08 } : { scale: 1 }}
+          transition={{ type: "spring", bounce: 0.35, duration: 0.5 }}
+        >
+          Gooey
+        </motion.button>
+        <motion.div
+          drag
+          className="border absolute w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center"
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.4, x: 135 }}
+          transition={{ type: "tween", ease: [0.5, 0, 0, 1], duration: 1 }}
+        >
+          <Plus color="#fff" size={24} />
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const GooeyFilter = () => (
+  <svg style={{ position: "absolute", width: 0, height: 0 }} aria-hidden="true">
+    <defs>
+      <filter id="goo-effect">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+        <feColorMatrix
+          in="blur"
+          type="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -15"
+          result="goo"
+        />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>
+  </svg>
+);
+
+export default GooeyButton;`;
 
 const GooeyPreview = ({
   blur,
@@ -262,17 +320,80 @@ export const GooeyButtonTutorial = () => {
   const [blur, setBlur] = useState(true);
   const [colorMatrix, setColorMatrix] = useState(true);
   const [composite, setComposite] = useState(true);
+  const [showCode, setShowCode] = useState(false);
 
   return (
-    <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 min-h-0 h-full overflow-auto">
-      <div className="border-r border-dashed flex flex-col sticky top-0 self-start h-screen max-h-[calc(100vh-60px)] stickey top-0">
-        <div className="px-4 py-2 border-b border-dashed">
+    <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 min-h-0 h-[calc(100vh-120px)]">
+      <div className="border-r border-dashed flex flex-col">
+        <div className="px-4 py-2 border-b border-dashed flex items-center justify-between">
           <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">
             Preview
           </p>
         </div>
-        <div className="flex-1 flex items-center justify-center p-6 relative min-h-[400px]">
-          <GooeyPreview blur={blur} colorMatrix={colorMatrix} composite={composite} />
+        <div className="flex-1 flex items-center justify-center relative min-h-[400px]">
+          <div className="flex bg-background items-center gap-1.5 absolute top-2 right-2 z-50">
+            <button
+              onClick={() => setShowCode(!showCode)}
+              className={`inline-flex items-center gap-1.5 h-8 px-3 text-xs border border-dashed rounded-none transition-colors cursor-pointer ${
+                showCode
+                  ? "bg-foreground/10 text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+              }`}
+            >
+              {showCode ? <Eye className="size-3" /> : <Code className="size-3" />}
+              {showCode ? "Preview" : "Code"}
+            </button>
+            <CopyDropdown registryName="goe-button" className="right-0 top-0" />
+          </div>
+          <AnimatePresence mode="wait">
+            {showCode ? (
+              <motion.div
+                key="code"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="absolute inset-0"
+              >
+                <Editor
+                  height="100%"
+                  defaultLanguage="typescript"
+                  value={GOOEY_SOURCE}
+                  theme="vs-dark"
+                  options={{
+                    readOnly: true,
+                    minimap: { enabled: false },
+                    fontSize: 12,
+                    lineNumbers: "on",
+                    scrollBeyondLastLine: false,
+                    renderLineHighlight: "none",
+                    overviewRulerLanes: 0,
+                    hideCursorInOverviewRuler: true,
+                    scrollbar: {
+                      vertical: "auto",
+                      horizontal: "auto",
+                      verticalScrollbarSize: 6,
+                      horizontalScrollbarSize: 6,
+                    },
+                    padding: { top: 16, bottom: 16 },
+                    domReadOnly: true,
+                    contextmenu: false,
+                  }}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="preview"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className=" relative"
+              >
+                <GooeyPreview blur={blur} colorMatrix={colorMatrix} composite={composite} />
+              </motion.div>
+            )}
+          </AnimatePresence>
           <span className="absolute top-0 left-0 block size-5 border-l border-t border-dashed border-muted-foreground" />
           <span className="absolute top-0 right-0 block size-5 border-r border-t border-dashed border-muted-foreground" />
           <span className="absolute bottom-0 left-0 block size-5 border-l border-b border-dashed border-muted-foreground" />
@@ -280,13 +401,13 @@ export const GooeyButtonTutorial = () => {
         </div>
       </div>
 
-      <div className="flex flex-col">
-        <div className="px-4 py-2 border-b border-dashed">
+      <div className="flex flex-col min-h-0">
+        <div className="px-4 py-2 border-b border-dashed shrink-0">
           <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">
             Tutorial
           </p>
         </div>
-        <div className="p-6">
+        <div className="p-6 overflow-y-auto flex-1">
           <GooeyContent
             blur={blur}
             setBlur={setBlur}

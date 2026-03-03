@@ -16,6 +16,7 @@ import VisitButton from "../../../../registry/new-york/buttons/visit-button";
 import { Spinner } from "@/components/ui/spinner";
 import GooeyButton from "registry/new-york/buttons/goe-button";
 import BlurToggleButton from "../../../../registry/new-york/buttons/blur-toggle-button";
+import BlueChromeButton from "../../../../registry/new-york/buttons/blue-chrome-button";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CopyDropdown from "../copy-dropdown";
@@ -73,6 +74,13 @@ export const ButtonsArr = [
     description: "A button with vibrant gradients and soft shadows.",
     component: <OrangePremiumButton>Hover Me</OrangePremiumButton>,
     registryName: "orange-premium-button",
+  },
+  {
+    name: "Blue Chrome Button",
+    description:
+      "A chrome-style button with layered glow border and smooth motion.",
+    component: <BlueChromeButton>Click Me</BlueChromeButton>,
+    registryName: "blue-chrome-button",
   },
   {
     name: "Stripe Button",

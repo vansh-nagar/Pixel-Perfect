@@ -3,7 +3,7 @@ import ImageHoverAnimation from "registry/new-york/motion-framer/image-hover-ani
 
 const Page = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="h-screen w-full h-screen">
       <ImageHoverAnimation />
     </div>
   );

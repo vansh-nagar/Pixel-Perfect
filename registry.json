@@ -108,6 +108,19 @@
       ]
     },
     {
+      "name": "blue-chrome-button",
+      "description": "A chrome-style button with layered glow border and smooth motion.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/blue-chrome-button.tsx",
+          "target": "components/pixel-perfect/blue-chrome-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "stripe-button",
       "description": "A Stripe-inspired button with inset shadow effect.",
       "type": "registry:block",

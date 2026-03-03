@@ -240,12 +240,12 @@ export const VisitButtonTutorial = () => {
   const [showCode, setShowCode] = useState(false);
 
   return (
-    <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 min-h-0 h-[calc(100vh-120px)]">
-      <div className="border-r border-dashed flex flex-col">
-        <div className="px-4 py-2 border-b border-dashed flex items-center justify-between">
+    <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 min-h-0 lg:min-h-[calc(100vh-120px)]">
+      <div className="border-b border-dashed lg:border-b-0 lg:border-r flex flex-col lg:sticky lg:top-0 lg:h-screen">
+        <div className="px-4 py-2 border-b border-dashed flex items-center justify-between shrink-0 sticky top-0 z-20 bg-background/95 backdrop-blur-sm">
           <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Preview</p>
         </div>
-        <div className="flex-1 flex items-center justify-center relative min-h-[400px]">
+        <div className="flex-1 flex items-center justify-center relative min-h-[280px] sm:min-h-[340px] lg:min-h-0 p-4 sm:p-6">
           <div className="flex bg-background items-center gap-1.5 absolute top-2 right-2 z-50">
             <button onClick={() => setShowCode(!showCode)} className={`inline-flex items-center gap-1.5 h-8 px-3 text-xs border border-dashed rounded-none transition-colors cursor-pointer ${showCode ? "bg-foreground/10 text-foreground" : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"}`}>
               {showCode ? <Eye className="size-3" /> : <Code className="size-3" />}
@@ -270,11 +270,11 @@ export const VisitButtonTutorial = () => {
           <span className="absolute bottom-0 right-0 block size-5 border-r border-b border-dashed border-muted-foreground" />
         </div>
       </div>
-      <div className="flex flex-col min-h-0">
+      <div className="flex flex-col min-h-0 min-w-0">
         <div className="px-4 py-2 border-b border-dashed shrink-0">
           <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Tutorial</p>
         </div>
-        <div className="p-6 overflow-y-auto flex-1">
+        <div className="p-4 sm:p-6 flex-1">
           <VisitContent showLabelSwap={showLabelSwap} setShowLabelSwap={setShowLabelSwap} showIconSwap={showIconSwap} setShowIconSwap={setShowIconSwap} showBlurTransition={showBlurTransition} setShowBlurTransition={setShowBlurTransition} />
         </div>
       </div>
@@ -283,3 +283,5 @@ export const VisitButtonTutorial = () => {
 };
 
 export default VisitButtonTutorial;
+
+

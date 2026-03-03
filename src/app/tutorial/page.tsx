@@ -57,11 +57,13 @@ const categories: Category[] = [
     name: "Buttons",
     icon: <MousePointerClick className="size-4" />,
     slug: "buttons",
-    description: "Interactive button components with hover effects, morphing animations, and premium styling.",
+    description:
+      "Interactive button components with hover effects, morphing animations, and premium styling.",
     items: [
       {
         name: "Gooey Button",
-        description: "Interactive SVG filter breakdown. Toggle each filter primitive to see its effect.",
+        description:
+          "Interactive SVG filter breakdown. Toggle each filter primitive to see its effect.",
         category: "Buttons",
         tags: ["svg", "filter", "gooey", "interactive"],
         registryName: "goe-button",
@@ -69,7 +71,8 @@ const categories: Category[] = [
       },
       {
         name: "Morph Button",
-        description: "GSAP MorphSVG path animation with color transition on hover.",
+        description:
+          "GSAP MorphSVG path animation with color transition on hover.",
         category: "Buttons",
         tags: ["gsap", "morph", "svg", "hover"],
         registryName: "morph-button",
@@ -77,7 +80,8 @@ const categories: Category[] = [
       },
       {
         name: "3D Button",
-        description: "CSS-only 3D press effect with depth layer and hover lift.",
+        description:
+          "CSS-only 3D press effect with depth layer and hover lift.",
         category: "Buttons",
         tags: ["css", "3d", "press", "depth"],
         registryName: "3d-button",
@@ -85,7 +89,8 @@ const categories: Category[] = [
       },
       {
         name: "Shiny Button",
-        description: "CSS keyframe shine sweep with rotation and overflow clipping.",
+        description:
+          "CSS keyframe shine sweep with rotation and overflow clipping.",
         category: "Buttons",
         tags: ["css", "shine", "keyframe", "hover"],
         registryName: "shiny-button",
@@ -93,7 +98,8 @@ const categories: Category[] = [
       },
       {
         name: "Border Gradient Button",
-        description: "Animated rainbow gradient border using inset mask technique.",
+        description:
+          "Animated rainbow gradient border using inset mask technique.",
         category: "Buttons",
         tags: ["gradient", "border", "rainbow", "css"],
         registryName: "border-gradient-button",
@@ -101,7 +107,8 @@ const categories: Category[] = [
       },
       {
         name: "Premium Button",
-        description: "Multi-layer box-shadow system creating depth and bevel effects.",
+        description:
+          "Multi-layer box-shadow system creating depth and bevel effects.",
         category: "Buttons",
         tags: ["shadow", "premium", "depth", "bevel"],
         registryName: "premium-button",
@@ -109,7 +116,8 @@ const categories: Category[] = [
       },
       {
         name: "Orange Premium Button",
-        description: "Stacked gradients, blend modes, and layered shadows for vibrant styling.",
+        description:
+          "Stacked gradients, blend modes, and layered shadows for vibrant styling.",
         category: "Buttons",
         tags: ["gradient", "blend", "shadow", "premium"],
         registryName: "orange-premium-button",
@@ -117,7 +125,8 @@ const categories: Category[] = [
       },
       {
         name: "Stripe Button",
-        description: "Minimalist button with inset top shadow for subtle 3D bevel.",
+        description:
+          "Minimalist button with inset top shadow for subtle 3D bevel.",
         category: "Buttons",
         tags: ["stripe", "inset", "shadow", "minimal"],
         registryName: "stripe-button",
@@ -125,7 +134,8 @@ const categories: Category[] = [
       },
       {
         name: "Visit Button",
-        description: "AnimatePresence label and icon swap with blur transitions.",
+        description:
+          "AnimatePresence label and icon swap with blur transitions.",
         category: "Buttons",
         tags: ["framer", "swap", "blur", "hover"],
         registryName: "visit-button",
@@ -133,21 +143,24 @@ const categories: Category[] = [
       },
       {
         name: "Mouse Follower Button",
-        description: "Button that tracks cursor position with clamped magnetic movement.",
+        description:
+          "Button that tracks cursor position with clamped magnetic movement.",
         category: "Buttons",
         tags: ["mouse", "follow", "magnetic", "animation"],
         registryName: "mouse-follower-button",
       },
       {
         name: "Learn More Button",
-        description: "Expanding pill with arrow reveal using Framer Motion variants.",
+        description:
+          "Expanding pill with arrow reveal using Framer Motion variants.",
         category: "Buttons",
         tags: ["framer", "expand", "pill", "hover"],
         registryName: "learn-more-button",
       },
       {
         name: "Toggle Button",
-        description: "Spring-physics toggle switch with premium shadow styling.",
+        description:
+          "Spring-physics toggle switch with premium shadow styling.",
         category: "Buttons",
         tags: ["toggle", "spring", "switch", "framer"],
         registryName: "toggle-button",
@@ -168,7 +181,8 @@ const categories: Category[] = [
       },
       {
         name: "Abhinav Bento Button",
-        description: "Gradient button with elaborate inner glow and shadow layers.",
+        description:
+          "Gradient button with elaborate inner glow and shadow layers.",
         category: "Buttons",
         tags: ["gradient", "glow", "bento", "shadow"],
         registryName: "abhinav-bento-button",
@@ -179,25 +193,29 @@ const categories: Category[] = [
     name: "Motion Animations",
     icon: <Move3d className="size-4" />,
     slug: "motion-animations",
-    description: "Framer Motion-powered animations for cards, logos, tabs, and image interactions.",
+    description:
+      "Framer Motion-powered animations for cards, logos, tabs, and image interactions.",
     items: [
       {
         name: "Card Animation",
-        description: "Staggered card stack with cursor follower using Framer Motion variants.",
+        description:
+          "Staggered card stack with cursor follower using Framer Motion variants.",
         category: "Motion Animations",
         tags: ["framer", "card", "stagger", "hover"],
         registryName: "card-animation",
       },
       {
         name: "Logo Animation",
-        description: "Logo animation with Framer Motion and custom background effects.",
+        description:
+          "Logo animation with Framer Motion and custom background effects.",
         category: "Motion Animations",
         tags: ["framer", "logo", "animation", "brand"],
         registryName: "logo-animation",
       },
       {
         name: "Tab Background",
-        description: "Animated tab indicator using Framer Motion layoutId for smooth transitions.",
+        description:
+          "Animated tab indicator using Framer Motion layoutId for smooth transitions.",
         category: "Motion Animations",
         tags: ["framer", "tabs", "layoutId", "spring"],
         registryName: "tab-background-animation",
@@ -215,11 +233,13 @@ const categories: Category[] = [
     name: "GSAP Animations",
     icon: <Sparkles className="size-4" />,
     slug: "gsap-animations",
-    description: "GSAP-powered stagger and ripple animations for dynamic UI effects.",
+    description:
+      "GSAP-powered stagger and ripple animations for dynamic UI effects.",
     items: [
       {
         name: "Stagger Ripple",
-        description: "Grid-based ripple animation with stagger effect using GSAP.",
+        description:
+          "Grid-based ripple animation with stagger effect using GSAP.",
         category: "GSAP Animations",
         tags: ["gsap", "stagger", "ripple", "grid"],
         registryName: "stagger-1",
@@ -230,7 +250,8 @@ const categories: Category[] = [
     name: "SVG Assets",
     icon: <PenTool className="size-4" />,
     slug: "svg-assets",
-    description: "Animated SVG assets and illustrations with GSAP-powered motion.",
+    description:
+      "Animated SVG assets and illustrations with GSAP-powered motion.",
     items: [
       {
         name: "SVG Asset 1",
@@ -287,39 +308,45 @@ const categories: Category[] = [
     name: "Text Animations",
     icon: <Type className="size-4" />,
     slug: "text-animations",
-    description: "Advanced text animations like glitch, scatter, reveal, matrix rain, and more.",
+    description:
+      "Advanced text animations like glitch, scatter, reveal, matrix rain, and more.",
     items: [
       {
         name: "Broken Glass",
-        description: "Letters start shattered and rotated, then snap into place using GSAP SplitText.",
+        description:
+          "Letters start shattered and rotated, then snap into place using GSAP SplitText.",
         category: "Text Animations",
         tags: ["gsap", "splittext", "shatter", "assemble"],
         registryName: "text-broken-glass",
       },
       {
         name: "Matrix Rain",
-        description: "Japanese characters scramble and resolve to final text, Matrix-style.",
+        description:
+          "Japanese characters scramble and resolve to final text, Matrix-style.",
         category: "Text Animations",
         tags: ["gsap", "matrix", "scramble", "decode"],
         registryName: "text-matrix-rain",
       },
       {
         name: "Glitch Portal",
-        description: "RGB split, scale blur, and elastic resolve using GSAP SplitText.",
+        description:
+          "RGB split, scale blur, and elastic resolve using GSAP SplitText.",
         category: "Text Animations",
         tags: ["gsap", "glitch", "rgb", "portal"],
         registryName: "text-glitch-portal",
       },
       {
         name: "Typewriter Glitch",
-        description: "Types, deletes, types wrong, then finally resolves to correct text.",
+        description:
+          "Types, deletes, types wrong, then finally resolves to correct text.",
         category: "Text Animations",
         tags: ["gsap", "typewriter", "glitch", "error"],
         registryName: "text-typewriter-glitch",
       },
       {
         name: "Text Reveal",
-        description: "Characters resolve from random symbols to final text progressively.",
+        description:
+          "Characters resolve from random symbols to final text progressively.",
         category: "Text Animations",
         tags: ["gsap", "reveal", "scramble", "decode"],
         registryName: "text-reveal",
@@ -333,7 +360,8 @@ const categories: Category[] = [
       },
       {
         name: "Text Z Rotate",
-        description: "Z-axis rotation animation with configurable stagger direction.",
+        description:
+          "Z-axis rotation animation with configurable stagger direction.",
         category: "Text Animations",
         tags: ["gsap", "rotation", "z-axis", "stagger"],
         registryName: "text-z-rotate",
@@ -354,35 +382,40 @@ const categories: Category[] = [
       },
       {
         name: "Text Scatter",
-        description: "Characters scatter to random positions and reassemble with GSAP.",
+        description:
+          "Characters scatter to random positions and reassemble with GSAP.",
         category: "Text Animations",
         tags: ["gsap", "scatter", "random", "yoyo"],
         registryName: "text-scatter",
       },
       {
         name: "Text Scatter 1",
-        description: "Text scatter variant with different animation parameters.",
+        description:
+          "Text scatter variant with different animation parameters.",
         category: "Text Animations",
         tags: ["gsap", "scatter", "variant", "stagger"],
         registryName: "text-scatter1",
       },
       {
         name: "Text Fade",
-        description: "Text fades in and out on scroll using GSAP ScrollTrigger.",
+        description:
+          "Text fades in and out on scroll using GSAP ScrollTrigger.",
         category: "Text Animations",
         tags: ["gsap", "fade", "scroll", "trigger"],
         registryName: "text-fade",
       },
       {
         name: "Text Inertia",
-        description: "Text follows mouse movement with inertia physics using GSAP.",
+        description:
+          "Text follows mouse movement with inertia physics using GSAP.",
         category: "Text Animations",
         tags: ["gsap", "inertia", "mouse", "physics"],
         registryName: "text-inertia",
       },
       {
         name: "Text Gradient",
-        description: "Animated rainbow gradient text using CSS background-clip.",
+        description:
+          "Animated rainbow gradient text using CSS background-clip.",
         category: "Text Animations",
         tags: ["css", "gradient", "rainbow", "clip"],
         registryName: "text-gradient",
@@ -424,14 +457,16 @@ const categories: Category[] = [
       },
       {
         name: "Black Hole Reveal",
-        description: "Letters emerge from center, stretched and sucked outward.",
+        description:
+          "Letters emerge from center, stretched and sucked outward.",
         category: "Text Animations",
         tags: ["gsap", "blackhole", "stretch", "reveal"],
         registryName: "text-black-hole",
       },
       {
         name: "Burn-In Neon",
-        description: "Random flicker, glow red, then turn white using GSAP SplitText.",
+        description:
+          "Random flicker, glow red, then turn white using GSAP SplitText.",
         category: "Text Animations",
         tags: ["gsap", "neon", "flicker", "glow"],
         registryName: "text-burn-neon",
@@ -442,7 +477,8 @@ const categories: Category[] = [
     name: "Borders & Intersections",
     icon: <Frame className="size-4" />,
     slug: "borders",
-    description: "Decorative border designs, intersection patterns, and animated corner effects.",
+    description:
+      "Decorative border designs, intersection patterns, and animated corner effects.",
     items: [
       {
         name: "Square Border",
@@ -485,18 +521,21 @@ const categories: Category[] = [
     name: "Backgrounds",
     icon: <Palette className="size-4" />,
     slug: "backgrounds",
-    description: "Gradient, pattern, and texture backgrounds including radial, conic, metallic, and more.",
+    description:
+      "Gradient, pattern, and texture backgrounds including radial, conic, metallic, and more.",
     items: [
       {
         name: "Radial Glow",
-        description: "Radial gradient fading from transparent center to blue glow.",
+        description:
+          "Radial gradient fading from transparent center to blue glow.",
         category: "Backgrounds",
         tags: ["radial", "gradient", "glow", "blue"],
         registryName: "gradient-1",
       },
       {
         name: "Bottom Bloom",
-        description: "Radial gradient blooming from the bottom of the container.",
+        description:
+          "Radial gradient blooming from the bottom of the container.",
         category: "Backgrounds",
         tags: ["radial", "gradient", "bloom", "bottom"],
         registryName: "gradient-2",
@@ -517,7 +556,8 @@ const categories: Category[] = [
       },
       {
         name: "Dot Mesh",
-        description: "Dot mesh texture using radial gradient with fixed positioning.",
+        description:
+          "Dot mesh texture using radial gradient with fixed positioning.",
         category: "Backgrounds",
         tags: ["dots", "mesh", "texture", "radial"],
         registryName: "gradient-5",
@@ -531,14 +571,16 @@ const categories: Category[] = [
       },
       {
         name: "Conic Sweep",
-        description: "Multi-layer conic gradient creating a metallic sweep effect.",
+        description:
+          "Multi-layer conic gradient creating a metallic sweep effect.",
         category: "Backgrounds",
         tags: ["conic", "gradient", "sweep", "metallic"],
         registryName: "gradient-7",
       },
       {
         name: "Sunset Glow",
-        description: "Warm sunset gradient from yellow to red with inner shadow.",
+        description:
+          "Warm sunset gradient from yellow to red with inner shadow.",
         category: "Backgrounds",
         tags: ["linear", "gradient", "sunset", "warm"],
         registryName: "gradient-8",
@@ -573,7 +615,8 @@ const categories: Category[] = [
       },
       {
         name: "Chrome Metal",
-        description: "Chrome metallic reflection using conic and linear gradients.",
+        description:
+          "Chrome metallic reflection using conic and linear gradients.",
         category: "Backgrounds",
         tags: ["conic", "chrome", "metallic", "reflection"],
         registryName: "gradient-14",
@@ -612,11 +655,13 @@ const categories: Category[] = [
     name: "Mouse Followers",
     icon: <Waypoints className="size-4" />,
     slug: "mouse-followers",
-    description: "Mouse trail and cursor follower effects using GSAP animations.",
+    description:
+      "Mouse trail and cursor follower effects using GSAP animations.",
     items: [
       {
         name: "Image Fall",
-        description: "Image trail mouse follower with GSAP ticker and elastic animations.",
+        description:
+          "Image trail mouse follower with GSAP ticker and elastic animations.",
         category: "Mouse Followers",
         tags: ["gsap", "trail", "image", "elastic"],
         registryName: "mouse-follower-1",
@@ -634,7 +679,8 @@ const categories: Category[] = [
     name: "SVG Path Effects",
     icon: <Layers className="size-4" />,
     slug: "svg-path-effects",
-    description: "SVG path drawing and motion path animations with beam effects.",
+    description:
+      "SVG path drawing and motion path animations with beam effects.",
     items: [
       {
         name: "Guitar",
@@ -668,7 +714,12 @@ function elasticSearch(query: string, cats: Category[]): Category[] {
     .map((cat) => ({
       ...cat,
       items: cat.items.filter((item) => {
-        const haystack = [item.name, item.description, item.category, ...item.tags]
+        const haystack = [
+          item.name,
+          item.description,
+          item.category,
+          ...item.tags,
+        ]
           .join(" ")
           .toLowerCase();
         return tokens.every((t) => haystack.includes(t));
@@ -683,14 +734,25 @@ const TutorialPage = () => {
   const [selectedItem, setSelectedItem] = useState<TutorialItem | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const visibleCategories = useMemo(() => {
+    const allowed = new Set(["goe-button", "orange-premium-button"]);
+
+    return categories
+      .map((category) => ({
+        ...category,
+        items: category.items.filter((item) => allowed.has(item.registryName)),
+      }))
+      .filter((category) => category.items.length > 0);
+  }, []);
+
   const totalItems = useMemo(
-    () => categories.reduce((acc, c) => acc + c.items.length, 0),
-    []
+    () => visibleCategories.reduce((acc, c) => acc + c.items.length, 0),
+    [visibleCategories],
   );
 
   const filteredCategories = useMemo(
-    () => elasticSearch(query, categories),
-    [query]
+    () => elasticSearch(query, visibleCategories),
+    [query, visibleCategories],
   );
 
   const toggleCategory = (slug: string) => {
@@ -737,8 +799,8 @@ const TutorialPage = () => {
       </div>
 
       <div className="col-start-3 row-start-2 w-[90vw] p-3">
-        <div className="flex gap-0 min-h-[calc(100vh-120px)]">
-          <aside className="w-64 shrink-0 border-r border-dashed hidden md:flex flex-col">
+        <div className="flex flex-col md:flex-row gap-0 min-h-[calc(100vh-120px)]">
+          <aside className="w-full md:w-64 shrink-0 border-b md:border-b-0 md:border-r border-dashed flex flex-col max-h-[45vh] md:max-h-none">
             <div className="p-3 border-b border-dashed">
               <h1 className="text-lg font-semibold  tracking-tight flex items-center gap-2">
                 <BookOpen className="size-5" />
@@ -831,12 +893,15 @@ const TutorialPage = () => {
                                     id={`item-${item.registryName}`}
                                     onClick={() => selectItem(item)}
                                     className={`w-full flex items-center gap-2 px-3 py-1.5 text-[11px] text-left rounded-none transition-all duration-150 ${
-                                      selectedItem?.registryName === item.registryName
+                                      selectedItem?.registryName ===
+                                      item.registryName
                                         ? "bg-foreground/5 text-foreground border-l-2 border-foreground -ml-[1px]"
                                         : "text-muted-foreground hover:text-foreground hover:bg-foreground/[0.02] border-l-2 border-transparent -ml-[1px]"
                                     }`}
                                   >
-                                    <span className="truncate">{item.name}</span>
+                                    <span className="truncate">
+                                      {item.name}
+                                    </span>
                                     {item.tutorial && (
                                       <span className="ml-auto shrink-0 size-1.5 rounded-full bg-green-500" />
                                     )}
@@ -872,7 +937,7 @@ const TutorialPage = () => {
             </ScrollArea>
           </aside>
 
-          <main className="flex-1 min-w-0">
+          <main className="flex-1 min-w-0 min-h-[50vh] md:min-h-0">
             <AnimatePresence mode="wait">
               {selectedItem ? (
                 <motion.div
@@ -883,7 +948,7 @@ const TutorialPage = () => {
                   transition={{ duration: 0.2 }}
                   className="flex flex-col h-full"
                 >
-                  <div className="flex items-center gap-3 p-4 border-b border-dashed">
+                  <div className="flex items-start sm:items-center gap-3 p-4 border-b border-dashed">
                     <Button
                       variant="outline"
                       size="icon"
@@ -900,7 +965,7 @@ const TutorialPage = () => {
                         {selectedItem.category} · {selectedItem.description}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="hidden sm:flex items-center gap-1 flex-wrap justify-end max-w-[45%]">
                       {selectedItem.tags.map((tag) => (
                         <span
                           key={tag}
@@ -934,7 +999,9 @@ const TutorialPage = () => {
                                 Interactive tutorial coming soon
                               </p>
                               <p className="text-[10px] text-muted-foreground/60 max-w-[200px]">
-                                This component is available in the library. Use the copy button on the main page to get the code.
+                                This component is available in the library. Use
+                                the copy button on the main page to get the
+                                code.
                               </p>
                             </div>
                           )}
@@ -959,7 +1026,9 @@ const TutorialPage = () => {
                               <div className="flex flex-col gap-4">
                                 <div className="flex items-center gap-2 text-muted-foreground/50">
                                   <BookOpen className="size-4" />
-                                  <p className="text-xs font-medium">Tutorial content goes here</p>
+                                  <p className="text-xs font-medium">
+                                    Tutorial content goes here
+                                  </p>
                                 </div>
                                 <div className="space-y-3">
                                   <div className="h-3 w-3/4 bg-foreground/[0.04] rounded-sm" />
@@ -969,9 +1038,13 @@ const TutorialPage = () => {
                                 </div>
                                 <div className="border border-dashed p-4 mt-2">
                                   <p className="text-[10px] text-muted-foreground/60">
-                                    Set the <code className="px-1 py-0.5 bg-foreground/5 text-[9px]">content</code> property
-                                    in your tutorial item to add documentation, usage examples,
-                                    code snippets, and more.
+                                    Set the{" "}
+                                    <code className="px-1 py-0.5 bg-foreground/5 text-[9px]">
+                                      content
+                                    </code>{" "}
+                                    property in your tutorial item to add
+                                    documentation, usage examples, code
+                                    snippets, and more.
                                   </p>
                                 </div>
                               </div>
@@ -1003,10 +1076,14 @@ const TutorialPage = () => {
                     </div>
 
                     <div className="mt-2">
-                      <h2 className="text-sm font-semibold">Select a component</h2>
+                      <h2 className="text-sm font-semibold">
+                        Select a component
+                      </h2>
                       <p className="text-[11px] text-muted-foreground mt-1">
-                        Choose a component from the sidebar to explore its interactive tutorial.
-                        Components with a <span className="inline-block size-1.5 rounded-full bg-green-500 mx-0.5 align-middle" /> dot have full interactive tutorials.
+                        Choose a component from the sidebar to explore its
+                        interactive tutorial. Components with a{" "}
+                        <span className="inline-block size-1.5 rounded-full bg-green-500 mx-0.5 align-middle" />{" "}
+                        dot have full interactive tutorials.
                       </p>
                     </div>
 
@@ -1042,3 +1119,8 @@ const TutorialPage = () => {
 };
 
 export default TutorialPage;
+
+
+
+
+

@@ -5,6 +5,7 @@ import Intersection1 from "../../../../registry/new-york/borders/intersection1";
 import Intersection2 from "../../../../registry/new-york/borders/intersection2";
 import StarBorders from "../../../../registry/new-york/borders/star-border";
 import CopyDropdown from "../copy-dropdown";
+import IntersectionGridSvg from "./intersection-grid-svg";
 
 export const BorderArr = [
   {
@@ -45,6 +46,13 @@ export const BorderArr = [
     image: "",
     registryName: "star-border",
   },
+  {
+    name: "Intersection Grid",
+    description: "SVG border and intersection grid pattern.",
+    component: <IntersectionGridSvg />,
+    image: "",
+    registryName: "intersection-grid-svg",
+  },
 ];
 
 const BorderGrid = () => {
@@ -67,7 +75,10 @@ const BorderGrid = () => {
           </div>
 
           <div className="absolute top-0 right-0">
-            <CopyDropdown registryName={item.registryName} variant="secondary" />
+            <CopyDropdown
+              registryName={item.registryName}
+              variant="secondary"
+            />
           </div>
           <div />
         </div>

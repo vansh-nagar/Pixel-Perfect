@@ -1,5 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import MorphButton from "../../../../registry/new-york/buttons/morph-button";
 import MorphImageButton from "../../../../registry/new-york/buttons/morph-image-button";
 import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
@@ -17,9 +24,54 @@ import { Spinner } from "@/components/ui/spinner";
 import GooeyButton from "registry/new-york/buttons/goe-button";
 import BlurToggleButton from "../../../../registry/new-york/buttons/blur-toggle-button";
 import BlueChromeButton from "../../../../registry/new-york/buttons/blue-chrome-button";
+import MatteShadowButton from "../../../../registry/new-york/buttons/matte-shadow-button";
+import MetalButton from "../../../../registry/new-york/buttons/metal-button";
+import type { MetalVariant } from "../../../../registry/new-york/buttons/metal-button";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CopyDropdown from "../copy-dropdown";
+
+const metalVariants: MetalVariant[] = [
+  "silver",
+  "chrome",
+  "gold",
+  "copper",
+  "bronze",
+  "titanium",
+  "rose-gold",
+  "gunmetal",
+];
+
+const MetalButtonWrapper = () => {
+  const [metal, setMetal] = useState<MetalVariant>("silver");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={metal}
+          onValueChange={(v) => setMetal(v as MetalVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {metalVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <MetalButton metal={metal}>
+        {metal.charAt(0).toUpperCase() + metal.slice(1)}
+      </MetalButton>
+    </>
+  );
+};
 
 const ToggleButtonWrapper = () => {
   const [toggle, setToggle] = useState(false);
@@ -127,6 +179,18 @@ export const ButtonsArr = [
     description: "A button with blur transition effect on toggle.",
     component: <BlurToggleButton />,
     registryName: "blur-toggle-button",
+  },
+  {
+    name: "Matte Shadow Button",
+    description: "A dark matte button with layered depth shadow.",
+    component: <MatteShadowButton>Click Me</MatteShadowButton>,
+    registryName: "matte-shadow-button",
+  },
+  {
+    name: "Metal Button",
+    description: "Metallic button with 8 metal variants.",
+    component: <MetalButtonWrapper />,
+    registryName: "metal-button",
   },
 ];
 

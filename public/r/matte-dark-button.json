@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "matte-dark-button",
+  "type": "registry:block",
+  "description": "A matte dark button with #222 base and layered shadow depth.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/matte-dark-button.tsx",
+      "content": "import React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface MatteDarkButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}\r\n\r\nconst MatteDarkButton = React.forwardRef<\r\n  HTMLButtonElement,\r\n  MatteDarkButtonProps\r\n>(({ className, children, ...props }, ref) => {\r\n  return (\r\n    <button\r\n      ref={ref}\r\n      className={cn(\r\n        \"relative inline-flex items-center justify-center px-8 py-3 text-sm font-medium text-zinc-100 transition-transform duration-200 active:scale-[0.98]\",\r\n        className,\r\n      )}\r\n      style={{\r\n        background:\r\n          \"radial-gradient(100% 100% at 0% 0%, #8B8B8B 0%, #E2E1E1 21.88%, #8B8B8B 42.19%, #E2E1E1 60.94%, #8B8B8B 79.17%, #E2E1E1 100%)\",\r\n        borderRadius: \"14px\",\r\n        boxShadow:\r\n          \"0px 9px 4px rgba(0, 0, 0, 0.04), 0px 5px 3px rgba(0, 0, 0, 0.13), 0px 2px 2px rgba(0, 0, 0, 0.23), 0px 1px 1px rgba(0, 0, 0, 0.26)\",\r\n      }}\r\n      {...props}\r\n    >\r\n      <span\r\n        aria-hidden=\"true\"\r\n        className=\"pointer-events-none absolute inset-0 rounded-[12px]\"\r\n        style={{\r\n          background:\r\n            \"repeating-radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.08) 0px, rgba(255, 255, 255, 0.08) 1px, transparent 2px, transparent 6px)\",\r\n          mixBlendMode: \"overlay\",\r\n          opacity: 0.35,\r\n        }}\r\n      />\r\n\r\n      <span\r\n        aria-hidden=\"true\"\r\n        className=\"pointer-events-none absolute inset-[4px] rounded-[10px]\"\r\n        style={{\r\n          background: \"linear-gradient(135deg, #1f2025 0%, #15161a 100%)\",\r\n          boxShadow:\r\n            \"inset 0 1px 1px rgba(255, 255, 255, 0.06), inset 0 -1px 1px rgba(0, 0, 0, 0.4)\",\r\n        }}\r\n      />\r\n\r\n      <span className=\"relative z-10\">{children || \"Matte Dark Button\"}</span>\r\n    </button>\r\n  );\r\n});\r\n\r\nMatteDarkButton.displayName = \"MatteDarkButton\";\r\n\r\nexport default MatteDarkButton;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/matte-dark-button.tsx"
+    }
+  ]
+}

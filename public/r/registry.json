@@ -212,6 +212,45 @@
       ]
     },
     {
+      "name": "matte-shadow-button",
+      "description": "A dark matte button with layered depth shadow.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/matte-shadow-button.tsx",
+          "target": "components/pixel-perfect/matte-shadow-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "matte-dark-button",
+      "description": "A matte dark button with #222 base and layered shadow depth.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/matte-dark-button.tsx",
+          "target": "components/pixel-perfect/matte-dark-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "metal-button",
+      "description": "A metallic button with 8 metal variants: silver, chrome, gold, copper, bronze, titanium, rose-gold, gunmetal.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/metal-button.tsx",
+          "target": "components/pixel-perfect/metal-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "border-1",
       "description": "A dashed border design with corner elements.",
       "type": "registry:block",

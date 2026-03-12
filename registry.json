@@ -251,6 +251,19 @@
       ]
     },
     {
+      "name": "glass-button",
+      "description": "A frosted glass button with gradient border and 10 color variants: blue, purple, emerald, rose, amber, cyan, lime, slate, red, indigo.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/glass-button.tsx",
+          "target": "components/pixel-perfect/glass-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "border-1",
       "description": "A dashed border design with corner elements.",
       "type": "registry:block",

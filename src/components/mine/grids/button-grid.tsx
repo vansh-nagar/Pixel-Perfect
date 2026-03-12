@@ -27,6 +27,8 @@ import BlueChromeButton from "../../../../registry/new-york/buttons/blue-chrome-
 import MatteShadowButton from "../../../../registry/new-york/buttons/matte-shadow-button";
 import MetalButton from "../../../../registry/new-york/buttons/metal-button";
 import type { MetalVariant } from "../../../../registry/new-york/buttons/metal-button";
+import GlassButton from "../../../../registry/new-york/buttons/glass-button";
+import type { GlassVariant } from "../../../../registry/new-york/buttons/glass-button";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CopyDropdown from "../copy-dropdown";
@@ -69,6 +71,50 @@ const MetalButtonWrapper = () => {
       <MetalButton metal={metal}>
         {metal.charAt(0).toUpperCase() + metal.slice(1)}
       </MetalButton>
+    </>
+  );
+};
+
+const glassVariants: GlassVariant[] = [
+  "blue",
+  "purple",
+  "emerald",
+  "rose",
+  "amber",
+  "cyan",
+  "lime",
+  "slate",
+  "red",
+  "indigo",
+];
+
+const GlassButtonWrapper = () => {
+  const [variant, setVariant] = useState<GlassVariant>("blue");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as GlassVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {glassVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <GlassButton variant={variant}>
+        {variant.charAt(0).toUpperCase() + variant.slice(1)}
+      </GlassButton>
     </>
   );
 };
@@ -191,6 +237,13 @@ export const ButtonsArr = [
     description: "Metallic button with 8 metal variants.",
     component: <MetalButtonWrapper />,
     registryName: "metal-button",
+  },
+  {
+    name: "Glass Button",
+    description:
+      "Frosted glass button with gradient border and 10 color variants.",
+    component: <GlassButtonWrapper />,
+    registryName: "glass-button",
   },
 ];
 

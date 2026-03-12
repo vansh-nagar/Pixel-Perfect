@@ -32,6 +32,7 @@ import PremiumButtonTutorial from "./tutorials/premium-button/premium-button-tut
 import BorderGradientButtonTutorial from "./tutorials/border-gradient-button/border-gradient-button-tutorial";
 import StripeButtonTutorial from "./tutorials/stripe-button/stripe-button-tutorial";
 import VisitButtonTutorial from "./tutorials/visit-button/visit-button-tutorial";
+import GlassButtonTutorial from "./tutorials/glass-button/glass-button-tutorial";
 
 type TutorialItem = {
   name: string;
@@ -186,6 +187,15 @@ const categories: Category[] = [
         category: "Buttons",
         tags: ["gradient", "glow", "bento", "shadow"],
         registryName: "abhinav-bento-button",
+      },
+      {
+        name: "Glass Button",
+        description:
+          "Frosted glass button with gradient border trick and 10 color variants.",
+        category: "Buttons",
+        tags: ["glass", "gradient", "border", "backdrop-blur"],
+        registryName: "glass-button",
+        tutorial: GlassButtonTutorial,
       },
     ],
   },
@@ -730,12 +740,18 @@ function elasticSearch(query: string, cats: Category[]): Category[] {
 
 const TutorialPage = () => {
   const [query, setQuery] = useState("");
-  const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(new Set());
+  const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(
+    new Set(["buttons"]),
+  );
   const [selectedItem, setSelectedItem] = useState<TutorialItem | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const visibleCategories = useMemo(() => {
-    const allowed = new Set(["goe-button", "orange-premium-button"]);
+    const allowed = new Set([
+      "goe-button",
+      "orange-premium-button",
+      "glass-button",
+    ]);
 
     return categories
       .map((category) => ({
@@ -1119,8 +1135,3 @@ const TutorialPage = () => {
 };
 
 export default TutorialPage;
-
-
-
-
-

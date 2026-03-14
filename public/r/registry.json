@@ -828,6 +828,19 @@
       ]
     },
     {
+      "name": "success-ripple-animation",
+      "description": "A looping success ripple animation with expanding rings and a checkmark draw.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/success-ripple-animation.tsx",
+          "target": "components/pixel-perfect/success-ripple-animation.tsx"
+        }
+      ]
+    },
+    {
       "name": "guitar-svg",
       "description": "Guitar SVG path effect animation.",
       "type": "registry:block",

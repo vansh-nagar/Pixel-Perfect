@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import CardAnimation from "registry/new-york/motion-framer/card-animation";
 import ImageHoverAnimation from "registry/new-york/motion-framer/image-hover-animation";
 import LogoAnimation from "registry/new-york/motion-framer/logo-animation";
+import SuccessRippleAnimation from "registry/new-york/motion-framer/success-ripple-animation";
 import TabBackgroundAnimation from "registry/new-york/motion-framer/tab-background-animation";
 import CopyDropdown from "../copy-dropdown";
 
@@ -32,6 +33,12 @@ const MotionComponentArr = [
     description: "An image hover animation with scaling and opacity effects.",
     component: <ImageHoverAnimation />,
     registryName: "image-hover-animation",
+  },
+  {
+    name: "Success Ripple",
+    description: "Looping ripple pulses with a springy success check reveal.",
+    component: <SuccessRippleAnimation />,
+    registryName: "success-ripple-animation",
   },
 ];
 

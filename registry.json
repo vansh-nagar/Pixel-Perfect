@@ -758,6 +758,24 @@
       ]
     },
     {
+      "name": "flip-text-reveal",
+      "description": "A GSAP Flip orb transition followed by a staggered word reveal.",
+      "type": "registry:block",
+      "dependencies": ["gsap", "framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/flip-text-reveal.tsx",
+          "target": "components/pixel-perfect/flip-text-reveal.tsx"
+        },
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/gsap-flip.d.ts",
+          "target": "components/pixel-perfect/gsap-flip.d.ts"
+        }
+      ]
+    },
+    {
       "name": "card-animation",
       "description": "Framer Motion card animation.",
       "type": "registry:block",

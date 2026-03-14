@@ -254,6 +254,14 @@ const categories: Category[] = [
         tags: ["gsap", "stagger", "ripple", "grid"],
         registryName: "stagger-1",
       },
+      {
+        name: "Flip Text Reveal",
+        description:
+          "A GSAP Flip orb transition followed by a staggered word reveal.",
+        category: "GSAP Animations",
+        tags: ["gsap", "flip", "text", "reveal"],
+        registryName: "flip-text-reveal",
+      },
     ],
   },
   {

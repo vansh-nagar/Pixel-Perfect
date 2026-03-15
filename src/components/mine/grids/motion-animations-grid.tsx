@@ -7,6 +7,8 @@ import ImageHoverAnimation from "registry/new-york/motion-framer/image-hover-ani
 import LogoAnimation from "registry/new-york/motion-framer/logo-animation";
 import SuccessRippleAnimation from "registry/new-york/motion-framer/success-ripple-animation";
 import TabBackgroundAnimation from "registry/new-york/motion-framer/tab-background-animation";
+import OrbitDotMotion from "registry/new-york/motion-framer/orbit-dot-motion";
+import CoinSpinAnimation from "registry/new-york/motion-framer/coin-spin-animation";
 import CopyDropdown from "../copy-dropdown";
 
 const MotionComponentArr = [
@@ -40,6 +42,21 @@ const MotionComponentArr = [
     component: <SuccessRippleAnimation />,
     registryName: "success-ripple-animation",
   },
+  {
+    name: "Orbit Dot",
+    description:
+      "3D orbiting dot with perspective and constant angular velocity.",
+    component: <OrbitDotMotion />,
+    registryName: "orbit-dot-motion",
+    isNew: true,
+  },
+  {
+    name: "Coin Spin",
+    description: "3D spinning coin with layered faces and side profile.",
+    component: <CoinSpinAnimation />,
+    registryName: "coin-spin-animation",
+    isNew: true,
+  },
 ];
 
 const MotionAnimationsGrid = () => {
@@ -68,6 +85,12 @@ const MotionAnimationsGrid = () => {
                 {item.description}
               </p>
             </div>
+
+            {item.isNew && (
+              <span className="absolute left-1.5 top-1.5 z-40 border border-emerald-500/50 bg-emerald-500/15 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-emerald-600">
+                New
+              </span>
+            )}
 
             <div className="absolute inset-x-0 top-0 grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-2">
               <div className="border-t border-dashed" />

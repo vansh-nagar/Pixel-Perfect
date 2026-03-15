@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "orbit-dot-motion",
+  "type": "registry:block",
+  "description": "A 3D orbiting dot animation with perspective and rotateY motion.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/motion-framer/orbit-dot-motion.tsx",
+      "content": "\"use client\";\r\n\r\nimport { motion } from \"framer-motion\";\r\n\r\nconst OrbitDotMotion = () => {\r\n  return (\r\n    <div\r\n      className=\"relative\"\r\n      style={{ perspective: \"900px\", transformStyle: \"preserve-3d\" }}\r\n    >\r\n      <div className=\"h-24 w-24 rounded-full bg-[#21201C]\" />\r\n\r\n      <motion.div\r\n        className=\"absolute left-1/2 top-1/2 h-8 w-8 rounded-full bg-[#FAD757] will-change-transform\"\r\n        initial={{\r\n          transform:\r\n            \"translate(-50%, -50%) rotateY(0deg) translateZ(74px) rotateY(360deg)\",\r\n        }}\r\n        animate={{\r\n          transform:\r\n            \"translate(-50%, -50%) rotateY(360deg) translateZ(74px)  rotateY(0deg)\",\r\n        }}\r\n        transition={{ duration: 3, ease: \"linear\", repeat: Infinity }}\r\n      />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default OrbitDotMotion;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/orbit-dot-motion.tsx"
+    }
+  ]
+}

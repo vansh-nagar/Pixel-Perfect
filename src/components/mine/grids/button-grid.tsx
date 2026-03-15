@@ -24,6 +24,7 @@ import { Spinner } from "@/components/ui/spinner";
 import GooeyButton from "registry/new-york/buttons/goe-button";
 import BlurToggleButton from "../../../../registry/new-york/buttons/blur-toggle-button";
 import BlueChromeButton from "../../../../registry/new-york/buttons/blue-chrome-button";
+import type { BlueChromeVariant } from "../../../../registry/new-york/buttons/blue-chrome-button";
 import MatteShadowButton from "../../../../registry/new-york/buttons/matte-shadow-button";
 import MetalButton from "../../../../registry/new-york/buttons/metal-button";
 import type { MetalVariant } from "../../../../registry/new-york/buttons/metal-button";
@@ -119,6 +120,48 @@ const GlassButtonWrapper = () => {
   );
 };
 
+const blueChromeVariants: BlueChromeVariant[] = [
+  "blue",
+  "cyan",
+  "indigo",
+  "violet",
+  "emerald",
+  "amber",
+  "rose",
+  "silver",
+];
+
+const BlueChromeButtonWrapper = () => {
+  const [variant, setVariant] = useState<BlueChromeVariant>("blue");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as BlueChromeVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {blueChromeVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <BlueChromeButton variant={variant}>
+        {variant.charAt(0).toUpperCase() + variant.slice(1)}
+      </BlueChromeButton>
+    </>
+  );
+};
+
 const ToggleButtonWrapper = () => {
   const [toggle, setToggle] = useState(false);
   return <ToggleButton toggle={toggle} setToggle={setToggle} />;
@@ -177,7 +220,7 @@ export const ButtonsArr = [
     name: "Blue Chrome Button",
     description:
       "A chrome-style button with layered glow border and smooth motion.",
-    component: <BlueChromeButton>Click Me</BlueChromeButton>,
+    component: <BlueChromeButtonWrapper />,
     registryName: "blue-chrome-button",
   },
   {

@@ -841,6 +841,32 @@
       ]
     },
     {
+      "name": "orbit-dot-motion",
+      "description": "A 3D orbiting dot animation with perspective and rotateY motion.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/orbit-dot-motion.tsx",
+          "target": "components/pixel-perfect/orbit-dot-motion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "coin-spin-animation",
+      "description": "A 3D spinning coin animation with layered faces and side depth.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/coin-spin-animation.tsx",
+          "target": "components/pixel-perfect/coin-spin-animation.tsx"
+        }
+      ]
+    },
+    {
       "name": "guitar-svg",
       "description": "Guitar SVG path effect animation.",
       "type": "registry:block",

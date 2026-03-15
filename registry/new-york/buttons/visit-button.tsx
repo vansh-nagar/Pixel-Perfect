@@ -37,7 +37,7 @@ const VisitButton = React.forwardRef<HTMLButtonElement, VisitButtonProps>(
           onHoverEnd?.(event, info);
         }}
         className={cn(
-          "flex justify-between w-32 gap-2 px-4 py-2.5 rounded-md cursor-pointer font-medium",
+          "flex text-black justify-between w-32 gap-2 px-4 py-2.5 rounded-md cursor-pointer font-medium",
           className,
         )}
         style={{

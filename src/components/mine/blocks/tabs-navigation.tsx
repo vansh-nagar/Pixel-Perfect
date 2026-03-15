@@ -56,7 +56,7 @@ const navItems = [
 export function TabsNavigation() {
   return (
     <Tabs defaultValue="Buttons" className="w-full ">
-      <TabsList className="flex gap-4  overflow-x-auto overflow-y-hidden   w-full mask-r-from-98%">
+      <TabsList className="flex gap-4 overflow-x-auto overflow-y-hidden w-full mask-r-from-98% dark:bg-black">
         {navItems.map((item) => (
           <TabsTrigger
             className="z-50 cursor-pointer group text-xs"

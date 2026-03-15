@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "event-timeline-bento-card",
+  "type": "registry:block",
+  "description": "A bento-style event timeline summary card.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/bento-cards/event-timeline-bento-card.tsx",
+      "content": "const EventTimelineBentoCard = () => {\n  return (\n    <div className=\"w-md border p-4 flex flex-col\">\n      <img src=\"/card.png\" alt=\"Event timeline card preview\" />\n      <h1 className=\"text-md mt-4\">Event Timeline</h1>\n      <span className=\"text-sm text-muted-foreground line-clamp-2 leading-tight\">\n        All signals and events flow into a single timeline, giving you a clear\n        history of everything that happens.\n      </span>\n    </div>\n  );\n};\n\nexport default EventTimelineBentoCard;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/event-timeline-bento-card.tsx"
+    }
+  ]
+}

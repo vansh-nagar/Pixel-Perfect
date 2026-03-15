@@ -8,6 +8,7 @@ import SvgPathEffectGrid from "../grids/svg-path-effect-grid";
 import MotionAnimationsGrid from "../grids/motion-animations-grid";
 import GsapStaggerGrid from "../grids/gsap-grid";
 import SvgAssetsGrid from "../grids/svg-grid";
+import BentoCardsGrid from "../grids/bento-cards-grid";
 
 const navItems = [
   {
@@ -45,6 +46,10 @@ const navItems = [
   {
     name: "SVG Path Effects",
     component: <SvgPathEffectGrid />,
+  },
+  {
+    name: "Bento Cards",
+    component: <BentoCardsGrid />,
   },
 ];
 

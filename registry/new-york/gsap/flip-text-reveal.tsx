@@ -32,7 +32,6 @@ const Page = () => {
     gsap.set(words, {
       opacity: 0,
       filter: "blur(8px)",
-      color: "#b5cab7",
     });
 
     // @ts-ignore
@@ -59,7 +58,6 @@ const Page = () => {
           gsap.to(words, {
             opacity: 1,
             filter: "blur(0px)",
-            color: "#f3efe6",
             stagger: 0.05,
             duration: 0.45,
             ease: "power2.out",

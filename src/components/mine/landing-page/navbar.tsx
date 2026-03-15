@@ -7,6 +7,7 @@ import { BookOpen, FlaskConical, GithubIcon, Rainbow } from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { StarsCount } from "@/components/mine/landing-page/stars-count";
 import { ShaderAnimation } from "@/components/shader-animation";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export function Navbar({ className = "" }: { className?: string }) {
   return (
@@ -44,24 +45,35 @@ export function Navbar({ className = "" }: { className?: string }) {
             </span>
           </Button>
         </Link>
-        <Link href={"/playground"}>
-          <Button
-            variant={"outline"}
-            className="border-dashed rounded-none"
-            size={"icon"}
-          >
-            <FlaskConical />
-          </Button>
-        </Link>
-        <Link href={"/tutorial"}>
-          <Button
-            variant={"outline"}
-            className="border-dashed rounded-none"
-            size={"icon"}
-          >
-            <BookOpen />
-          </Button>
-        </Link>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link href={"/playground"}>
+              <Button
+                variant={"outline"}
+                className="border-dashed rounded-none"
+                size={"icon"}
+              >
+                <FlaskConical />
+              </Button>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent className="font-sans border-dashed rounded-none text-xs px-2 py-1">Playground</TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link href={"/tutorial"}>
+              <Button
+                variant={"outline"}
+                className="border-dashed rounded-none"
+                size={"icon"}
+              >
+                <BookOpen />
+              </Button>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent className="font-sans border-dashed rounded-none text-xs px-2 py-1">Tutorial</TooltipContent>
+        </Tooltip>
 
         <LightDarkMode />
       </div>

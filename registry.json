@@ -186,6 +186,19 @@
       ]
     },
     {
+      "name": "event-timeline-bento-card",
+      "description": "A bento-style event timeline summary card.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/bento-cards/event-timeline-bento-card.tsx",
+          "target": "components/pixel-perfect/event-timeline-bento-card.tsx"
+        }
+      ]
+    },
+    {
       "name": "goe-button",
       "description": "A gooey SVG filter button effect using Framer Motion.",
       "type": "registry:block",

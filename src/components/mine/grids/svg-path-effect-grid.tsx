@@ -1,7 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import LegionsDev from "registry/new-york/svg-path-effects/legionsdev";
-import MotionPath from "registry/new-york/svg-path-effects/motion-path";
 import Guitar from "registry/new-york/svg-path-effects/guitar";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -14,18 +12,6 @@ const Buttons = [
     description: "Motion path effect using SVG.",
     component: <Guitar />,
     registryName: "guitar-svg",
-  },
-  {
-    name: "Svg Path Effect",
-    description: "Legions Dev SVG path effect.",
-    component: <LegionsDev />,
-    registryName: "legionsdev-svg",
-  },
-  {
-    name: "Beam Motion Path",
-    description: "Motion path effect using SVG.",
-    component: <MotionPath />,
-    registryName: "motion-path",
   },
 ];
 

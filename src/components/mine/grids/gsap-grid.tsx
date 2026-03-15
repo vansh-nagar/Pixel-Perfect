@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import FlipTextReveal from "registry/new-york/gsap/flip-text-reveal";
 import Stagger1 from "registry/new-york/gsap/stagger1";
 import CopyDropdown from "../copy-dropdown";
@@ -24,6 +24,11 @@ const GsapStaggerGridArr = [
 
 const GsapGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [refreshKeys, setRefreshKeys] = useState<Record<number, number>>({});
+
+  const handleRefresh = (index: number) => {
+    setRefreshKeys((prev) => ({ ...prev, [index]: (prev[index] || 0) + 1 }));
+  };
   const itemsPerPage = 2;
   const totalPages = Math.ceil(GsapStaggerGridArr.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -40,7 +45,18 @@ const GsapGrid = () => {
             key={startIndex + index}
             className="relative w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
           >
-            <div className="z-30">{item.component}</div>
+            <div className="z-30" key={refreshKeys[startIndex + index] || 0}>
+              {item.component}
+            </div>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute left-1.5 top-1.5 z-40 h-6 w-6 rounded-none text-muted-foreground hover:bg-transparent hover:text-foreground"
+              onClick={() => handleRefresh(startIndex + index)}
+            >
+              <RefreshCcw className="size-3" />
+            </Button>
 
             <div className=" leading-1 absolute left-1.5  bottom-1.5">
               <p className="text-xs ">{item.name}</p>

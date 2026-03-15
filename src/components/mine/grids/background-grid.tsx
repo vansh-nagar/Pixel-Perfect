@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
-import type { JSX, CSSProperties } from "react";
+import { ChevronLeft, ChevronRight, Copy } from "lucide-react";
+import { useState, type JSX, type CSSProperties } from "react";
 import { toast } from "sonner";
 
 const Gradient1 = () => (
@@ -39,7 +39,7 @@ const Gradient4 = () => (
 const Gradient5 = () => (
   <div className="absolute inset-0 after:pointer-events-none after:inset-0 after:inset-ring after:inset-ring-gray-950/5 dark:after:inset-ring-white/10 bg-[radial-gradient(var(--pattern-fg)_1px,transparent_0)] bg-size-[10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10" />
 );
-  
+
 type BackgroundItem = {
   name: string;
   description: string;
@@ -234,84 +234,132 @@ export const BackgroudArr: BackgroundItem[] = [
   },
 ];
 
-
-
-
 const BackgroundGrid = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+  const totalPages = Math.ceil(BackgroudArr.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedItems = BackgroudArr.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-      {BackgroudArr.map((item, index) => (
-        <div
-          key={index}
-          className="relative group border-b border-l border-dashed  aspect-video flex items-center justify-center "
-        >
-          <div className=" z-30 w-full h-full flex items-center justify-center overflow-hidden">
-            {/* Wrap content to prevent overflow and center it, similar to the editor preview but smaller */}
-            {item.component ? (
-              <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50">
-                {item.component}
-              </div>
-            ) : item.style ? (
-              <div className="w-full h-full relative overflow-hidden">
-                <div
-                  className="absolute inset-0"
-                  style={{ ...item.style, borderRadius: "0px" }}
-                />
-              </div>
-            ) : null}
+    <div className="flex flex-col gap-4 overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+        {paginatedItems.map((item, index) => (
+          <div
+            key={startIndex + index}
+            className="relative group border-b border-l border-dashed  aspect-video flex items-center justify-center "
+          >
+            <div className=" z-30 w-full h-full flex items-center justify-center overflow-hidden">
+              {/* Wrap content to prevent overflow and center it, similar to the editor preview but smaller */}
+              {item.component ? (
+                <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50">
+                  {item.component}
+                </div>
+              ) : item.style ? (
+                <div className="w-full h-full relative overflow-hidden">
+                  <div
+                    className="absolute inset-0"
+                    style={{ ...item.style, borderRadius: "0px" }}
+                  />
+                </div>
+              ) : null}
+            </div>
+
+            <div className=" leading-1 absolute left-1.5  bottom-1.5 z-40">
+              <p className="text-xs ">{item.name}</p>
+              <p className="text-[8px] text-muted-foreground">
+                {item.description}
+              </p>
+            </div>
+
+            <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
+              <div className=" border-t border-dashed "></div>
+              <Button
+                size={"sm"}
+                variant={"copy"}
+                onClick={() => {
+                  let code = "";
+                  // Try to extract style from the component if present, or from style
+                  let styleObj: CSSProperties | undefined;
+                  if (
+                    item.component &&
+                    typeof item.component === "object" &&
+                    "props" in item.component &&
+                    item.component.props &&
+                    item.component.props.style
+                  ) {
+                    styleObj = item.component.props.style as CSSProperties;
+                  } else if (item.style) {
+                    styleObj = item.style;
+                  }
+
+                  if (styleObj) {
+                    const props = Object.entries(styleObj)
+                      .map(([k, v]) => `  ${k}: '${v}',`)
+                      .join("\n");
+                    code = `<div className='relative group border-b border-l border-dashed aspect-video flex items-center justify-center'>\n  <div className='w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50'>\n    <div style={{\n${props}\n}} className='absolute inset-0' />\n  </div>\n  <div className='leading-1 absolute left-1.5 bottom-1.5 z-40'>\n    <p className='text-xs'>${item.name}</p>\n    <p className='text-[8px] text-muted-foreground'>${item.description}</p>\n  </div>\n</div>`;
+                  } else {
+                    // Fallback logic for components or generic copy
+                    code = `// Use specific component for ${item.name}`;
+                  }
+                  navigator.clipboard.writeText(code);
+                  toast.success("Code copied to clipboard!");
+                }}
+                className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
+              >
+                <Copy className=" size-3" /> Copy
+                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
+                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
+              </Button>
+              <div />
+              <div className=" border-r border-dashed h-full -mr-[0.5px] " />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 py-4">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="border-dashed rounded-none"
+          >
+            <ChevronLeft className="size-4" />
+          </Button>
+
+          <div className="flex items-center gap-1">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Button
+                key={page}
+                variant={currentPage === page ? "default" : "outline"}
+                size="sm"
+                onClick={() => setCurrentPage(page)}
+                className="w-8 h-8 rounded-none border-dashed"
+              >
+                {page}
+              </Button>
+            ))}
           </div>
 
-          <div className=" leading-1 absolute left-1.5  bottom-1.5 z-40">
-            <p className="text-xs ">{item.name}</p>
-            <p className="text-[8px] text-muted-foreground">
-              {item.description}
-            </p>
-          </div>
-
-          <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
-            <div className=" border-t border-dashed "></div>
-            <Button
-              size={"sm"}
-              variant={"copy"}
-              onClick={() => {
-                let code = "";
-                // Try to extract style from the component if present, or from style
-                let styleObj: CSSProperties | undefined;
-                if (
-                  item.component &&
-                  typeof item.component === "object" &&
-                  "props" in item.component &&
-                  item.component.props &&
-                  item.component.props.style
-                ) {
-                  styleObj = item.component.props.style as CSSProperties;
-                } else if (item.style) {
-                  styleObj = item.style;
-                }
-
-                if (styleObj) {
-                  const props = Object.entries(styleObj)
-                    .map(([k, v]) => `  ${k}: '${v}',`)
-                    .join("\n");
-                  code = `<div className='relative group border-b border-l border-dashed aspect-video flex items-center justify-center'>\n  <div className='w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50'>\n    <div style={{\n${props}\n}} className='absolute inset-0' />\n  </div>\n  <div className='leading-1 absolute left-1.5 bottom-1.5 z-40'>\n    <p className='text-xs'>${item.name}</p>\n    <p className='text-[8px] text-muted-foreground'>${item.description}</p>\n  </div>\n</div>`;
-                } else {
-                  // Fallback logic for components or generic copy
-                  code = `// Use specific component for ${item.name}`;
-                }
-                navigator.clipboard.writeText(code);
-                toast.success("Code copied to clipboard!");
-              }}
-              className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
-            >
-              <Copy className=" size-3" /> Copy
-              <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-              <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-            </Button>
-            <div />
-            <div className=" border-r border-dashed h-full -mr-[0.5px] " />
-          </div>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="border-dashed rounded-none"
+          >
+            <ChevronRight className="size-4" />
+          </Button>
         </div>
-      ))}
+      )}
     </div>
   );
 };

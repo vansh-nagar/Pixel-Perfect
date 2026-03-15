@@ -2,7 +2,7 @@ import React from "react";
 
 export default function IntersectionGridSvg() {
   return (
-    <div className="flex h-full w-full items-center justify-center bg-black/90 p-3">
+    <div className="flex h-full w-full items-center justify-center bg-black/90 p-3 invert dark:invert-0">
       <svg
         width="168"
         height="168"

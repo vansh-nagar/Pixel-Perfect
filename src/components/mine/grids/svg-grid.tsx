@@ -55,14 +55,14 @@ export const SvgArr = [
 
 const SvgAssetsGrid = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
+    <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
       {SvgArr.map((item, index) => (
         <div
           key={index}
-          className="relative border-b bg-black border-l border-dashed  aspect-square flex items-center justify-center "
+          className="relative border-b  border-l border-dashed  aspect-square flex items-center justify-center "
         >
           <BorderDecorator />
-          <div className=" z-30 flex flex-col items-center gap-2">
+          <div className=" z-30 flex flex-col items-center gap-2 invert dark:invert-0">
             {item.component}
           </div>
 
@@ -75,10 +75,7 @@ const SvgAssetsGrid = () => {
 
           <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
             <div className=" border-t border-dashed "></div>
-            <CopyDropdown
-              registryName={item.registryName}
-              className="text-white"
-            />
+            <CopyDropdown registryName={item.registryName} />
             <div />
             <div className=" border-r border-dashed h-full -mr-[0.5px] " />
           </div>

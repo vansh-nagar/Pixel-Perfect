@@ -1,7 +1,12 @@
 import React from "react";
+import PixelCreditsButton from "./pixel-credits-button";
 
-const PixelCreditPlayground = () => {
-  return <div>PixelCreditPlayground</div>;
+const PixelCreditsPlayground = () => {
+  return (
+    <div>
+      <PixelCreditsButton />
+    </div>
+  );
 };
 
-export default PixelCreditPlayground;
+export default PixelCreditsPlayground;

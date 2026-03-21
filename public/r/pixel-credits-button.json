@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pixel-credits-button",
+  "type": "registry:block",
+  "description": "A soft keycap-style button for Pixel Credits.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "src/components/pixel-perfect/pixel-credits-button.tsx",
+      "content": "import React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ntype PixelCreditsButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;\n\nconst PixelCreditsButton = React.forwardRef<\n  HTMLButtonElement,\n  PixelCreditsButtonProps\n>(({ className, children, style, type, ...props }, ref) => {\n  return (\n    <button\n      ref={ref}\n      type={type ?? \"button\"}\n      className={cn(\"px-4 py-3 text-black\", className)}\n      style={{\n        background: \"#FAFAFA\",\n        boxShadow:\n          \"0px 2px 3px rgba(0, 0, 0, 0.3), 0px 3px 4px rgba(0, 0, 0, 0.15), inset 0px 2px 2px rgba(255, 255, 255, 0.8), inset 0px -3px 0px rgba(0, 0, 0, 0.16)\",\n        borderRadius: \"10px\",\n        ...style,\n      }}\n      {...props}\n    >\n      {children || \"Pixel Credits\"}\n    </button>\n  );\n});\n\nPixelCreditsButton.displayName = \"PixelCreditsButton\";\n\nexport default PixelCreditsButton;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/pixel-credits-button.tsx"
+    }
+  ]
+}

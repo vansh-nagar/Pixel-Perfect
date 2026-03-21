@@ -19,6 +19,7 @@ import StripeButton from "../../../../registry/new-york/buttons/stripe-button";
 import LearnMoreButtion from "../../../../registry/new-york/buttons/learn-more-buttion";
 import ToggleButton from "../../../../registry/new-york/buttons/toggle-buttion";
 import AbhinavBentoButton from "../../../../registry/new-york/buttons/abhinav-bento-button";
+import PixelCreditsButton from "@/components/pixel-perfect/pixel-credits-button";
 import VisitButton from "../../../../registry/new-york/buttons/visit-button";
 import { Spinner } from "@/components/ui/spinner";
 import GooeyButton from "registry/new-york/buttons/goe-button";
@@ -168,6 +169,12 @@ const ToggleButtonWrapper = () => {
 };
 
 export const ButtonsArr = [
+  {
+    name: "Pixel Credits Button",
+    description: "A soft keycap-style button for Pixel Credits.",
+    component: <PixelCreditsButton />,
+    registryName: "pixel-credits-button",
+  },
   {
     name: "Morph Button",
     description: "A button that morphs its shape on hover using GSAP.",
@@ -379,21 +386,21 @@ export default ButtonGrid;
 export const BorderDecorator = () => {
   return (
     <>
-      <span className="border-muted-foreground absolute -left-[0.5px] -top-[0px] block size-6   border-dashed border-l-1 border-t-1 z-30"></span>
-      <span className="border-muted-foreground absolute -right-px -top-px block size-6 border-dashed border-r-1 border-t-1 z-30"></span>
-      <span className="border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-dashed border-b-1 border-l-1 z-30 "></span>
-      <span className="border-muted-foreground absolute -bottom-px -right-px block size-6 border-b-1 border-r-1 border-dashed z-30"></span>
+      <span className="border-muted-foreground absolute -left-[0.5px] top-0 block size-6   border-dashed border-l border-t z-30"></span>
+      <span className="border-muted-foreground absolute -right-px -top-px block size-6 border-dashed border-r border-t z-30"></span>
+      <span className="border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-dashed border-b border-l z-30 "></span>
+      <span className="border-muted-foreground absolute -bottom-px -right-px block size-6 border-b border-r border-dashed z-30"></span>
 
-      <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px] mt-[1px]  border-dashed"></span>
+      <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px] mt-px  border-dashed"></span>
 
       {/* Circular border */}
       <div className="absolute group-hover:animate-spin top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>
 
       {/* Horizontal line */}
-      <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-y-1/2 z-10 pointer-events-none"></div>
+      <div className="absolute top-1/2 left-0 right-0 h-px bg-linear-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-y-1/2 z-10 pointer-events-none"></div>
 
       {/* Vertical line */}
-      <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-x-1/2 z-10 pointer-events-none"></div>
+      <div className="absolute top-0 bottom-0 left-1/2 w-px bg-linear-to-b from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-x-1/2 z-10 pointer-events-none"></div>
     </>
   );
 };

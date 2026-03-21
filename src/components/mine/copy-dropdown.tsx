@@ -70,7 +70,10 @@ export default function CopyDropdown({
           <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed"></span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-72 rounded-none border-dashed">
+      <DropdownMenuContent
+        align="end"
+        className="w-72 rounded-none border-dashed"
+      >
         <DropdownMenuLabel className="text-xs text-muted-foreground">
           Copy install command
         </DropdownMenuLabel>

@@ -277,6 +277,32 @@
       ]
     },
     {
+      "name": "cyber-button",
+      "description": "A cyberpunk-style button with neon borders and glitch effects.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/cyber-button.tsx",
+          "target": "components/pixel-perfect/cyber-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pixel-credits-button",
+      "description": "A soft keycap-style button for Pixel Credits.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "src/components/pixel-perfect/pixel-credits-button.tsx",
+          "target": "components/pixel-perfect/pixel-credits-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "border-1",
       "description": "A dashed border design with corner elements.",
       "type": "registry:block",
@@ -893,28 +919,15 @@
       ]
     },
     {
-      "name": "legionsdev-svg",
-      "description": "Legions Dev SVG path effect.",
+      "name": "cd",
+      "description": "An animated ASCII CD render with responsive scaling.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [],
       "files": [
         {
           "type": "registry:component",
-          "path": "registry/new-york/svg-path-effects/legionsdev.tsx",
-          "target": "components/pixel-perfect/legionsdev.tsx"
-        }
-      ]
-    },
-    {
-      "name": "motion-path",
-      "description": "Motion path SVG animation.",
-      "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/svg-path-effects/motion-path.tsx",
-          "target": "components/pixel-perfect/motion-path.tsx"
+          "path": "registry/new-york/ascii/cd.tsx",
+          "target": "components/pixel-perfect/cd.tsx"
         }
       ]
     }

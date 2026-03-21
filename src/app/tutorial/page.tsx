@@ -707,20 +707,6 @@ const categories: Category[] = [
         tags: ["svg", "path", "draw", "guitar"],
         registryName: "guitar-svg",
       },
-      {
-        name: "SVG Path Effect",
-        description: "Legions Dev SVG path effect with drawing animation.",
-        category: "SVG Path Effects",
-        tags: ["svg", "path", "draw", "effect"],
-        registryName: "legionsdev-svg",
-      },
-      {
-        name: "Beam Motion Path",
-        description: "Motion path effect with beam animation along SVG paths.",
-        category: "SVG Path Effects",
-        tags: ["svg", "motion", "path", "beam"],
-        registryName: "motion-path",
-      },
     ],
   },
 ];

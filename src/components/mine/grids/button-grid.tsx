@@ -31,7 +31,9 @@ import MetalButton from "../../../../registry/new-york/buttons/metal-button";
 import type { MetalVariant } from "../../../../registry/new-york/buttons/metal-button";
 import GlassButton from "../../../../registry/new-york/buttons/glass-button";
 import type { GlassVariant } from "../../../../registry/new-york/buttons/glass-button";
-import { useState } from "react";
+import LiquidGradientButton from "../../../../registry/new-york/buttons/liquid-gradient-button";
+import RadialGradientButton from "../../../../registry/new-york/buttons/radial-gradient-button";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CopyDropdown from "../copy-dropdown";
 
@@ -163,6 +165,42 @@ const BlueChromeButtonWrapper = () => {
   );
 };
 
+const LiquidGradientButtonWrapper = () => {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => setLoading(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
+  return (
+    <LiquidGradientButton
+      loading={loading}
+      onClick={() => setLoading(true)}
+    >
+      Login
+    </LiquidGradientButton>
+  );
+};
+
+const RadialGradientButtonWrapper = () => {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => setLoading(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
+  return (
+    <RadialGradientButton
+      loading={loading}
+      onClick={() => setLoading(true)}
+    >
+      Login
+    </RadialGradientButton>
+  );
+};
+
 const ToggleButtonWrapper = () => {
   const [toggle, setToggle] = useState(false);
   return <ToggleButton toggle={toggle} setToggle={setToggle} />;
@@ -181,6 +219,13 @@ export const ButtonsArr = [
     component: <MorphButton>Hover Me</MorphButton>,
     registryName: "morph-button",
   },
+  {
+    name: "Morph Button",
+    description: "A button that morphs its shape on hover using GSAP.",
+    component: <MorphButton>Hover Me</MorphButton>,
+    registryName: "morph-button",
+  },
+
   {
     name: "Morph Image Button",
     description: "A button that morphs an image mask on hover using GSAP.",
@@ -294,6 +339,18 @@ export const ButtonsArr = [
       "Frosted glass button with gradient border and 10 color variants.",
     component: <GlassButtonWrapper />,
     registryName: "glass-button",
+  },
+  {
+    name: "Master Button",
+    description: "Premium gradient button with image overlay and loading animation.",
+    component: <LiquidGradientButtonWrapper />,
+    registryName: "liquid-gradient-button",
+  },
+  {
+    name: "Radial Gradient Button",
+    description: "Deep blue radial gradient button with inset glow.",
+    component: <RadialGradientButtonWrapper />,
+    registryName: "radial-gradient-button",
   },
 ];
 

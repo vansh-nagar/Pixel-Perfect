@@ -930,6 +930,32 @@
           "target": "components/pixel-perfect/cd.tsx"
         }
       ]
+    },
+    {
+      "name": "liquid-gradient-button",
+      "description": "Premium gradient button with image overlay and loading animation.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/liquid-gradient-button.tsx",
+          "target": "components/pixel-perfect/liquid-gradient-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radial-gradient-button",
+      "description": "Deep blue radial gradient button with inset glow.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/radial-gradient-button.tsx",
+          "target": "components/pixel-perfect/radial-gradient-button.tsx"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "liquid-gradient-button",
+  "type": "registry:block",
+  "description": "Premium gradient button with image overlay and loading animation.",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/liquid-gradient-button.tsx",
+      "content": "\"use client\";\nimport React from \"react\";\nimport { AnimatePresence, motion, type HTMLMotionProps } from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\nimport { Spinner } from \"@/components/ui/spinner\";\n\ninterface LiquidGradientButtonProps extends HTMLMotionProps<\"button\"> {\n  loading?: boolean;\n}\n\nconst buttonVar = {\n  hidden: { y: 20, opacity: 0 },\n  visible: { y: 0, opacity: 1 },\n};\n\nconst LiquidGradientButton = React.forwardRef<\n  HTMLButtonElement,\n  LiquidGradientButtonProps\n>(({ className, children, loading, ...props }, ref) => {\n  return (\n    <motion.button\n      ref={ref}\n      whileTap={{ scale: 0.95 }}\n      className={cn(\n        \"relative min-w-28 h-10 px-6 py-2 text-white font-medium rounded-md overflow-hidden transition-all duration-300 active:scale-95\",\n        className,\n      )}\n      style={{\n        background:\n          \"linear-gradient(225deg, #FD97FF 0%, #FC36FF 42.86%, #FD82FF 49.48%, #830086 56.42%, #000000 100%)\",\n      }}\n      {...props}\n    >\n      <img\n        src=\"/bg-png/master.png\"\n        className=\"absolute inset-0 w-full h-full object-cover pointer-events-none mix-blend-overlay\"\n        draggable=\"false\"\n        alt=\"\"\n      />\n      <span className=\"relative z-10 w-full flex items-center justify-center\">\n        <AnimatePresence mode=\"wait\">\n          {loading ? (\n            <motion.div\n              key=\"spinner\"\n              initial=\"hidden\"\n              animate=\"visible\"\n              exit=\"hidden\"\n              variants={buttonVar}\n              transition={{\n                type: \"spring\",\n                stiffness: 300,\n                damping: 30,\n              }}\n            >\n              <Spinner className=\"size-4\" />\n            </motion.div>\n          ) : (\n            <motion.span\n              key=\"content\"\n              initial=\"hidden\"\n              animate=\"visible\"\n              exit=\"hidden\"\n              variants={buttonVar}\n              transition={{\n                type: \"spring\",\n                stiffness: 300,\n                damping: 30,\n              }}\n            >\n              {children || \"Login\"}\n            </motion.span>\n          )}\n        </AnimatePresence>\n      </span>\n    </motion.button>\n  );\n});\n\nLiquidGradientButton.displayName = \"LiquidGradientButton\";\n\nexport default LiquidGradientButton;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/liquid-gradient-button.tsx"
+    }
+  ]
+}

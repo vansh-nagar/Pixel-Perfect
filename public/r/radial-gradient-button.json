@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radial-gradient-button",
+  "type": "registry:block",
+  "description": "Deep blue radial gradient button with inset glow.",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/radial-gradient-button.tsx",
+      "content": "\"use client\";\nimport React from \"react\";\nimport { AnimatePresence, motion, type HTMLMotionProps } from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\nimport { Spinner } from \"@/components/ui/spinner\";\n\ninterface RadialGradientButtonProps extends HTMLMotionProps<\"button\"> {\n  loading?: boolean;\n}\n\nconst buttonVar = {\n  hidden: { y: 20, opacity: 0 },\n  visible: { y: 0, opacity: 1 },\n};\n\nconst RadialGradientButton = React.forwardRef<\n  HTMLButtonElement,\n  RadialGradientButtonProps\n>(({ className, children, loading, ...props }, ref) => {\n  return (\n    <motion.button\n      ref={ref}\n      whileTap={{ scale: 0.95 }}\n      initial=\"hidden\"\n      animate=\"visible\"\n      className={cn(\n        \"relative min-w-28 rounded-xl h-10 px-6 py-2 text-white border-none shadow-lg overflow-hidden transition-all duration-300 active:scale-95\",\n        className,\n      )}\n      style={{\n        background:\n          \"radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #1700E3 100%)\",\n        boxShadow: \"inset 0px 3px 12px -2px #FFFFFF\",\n      }}\n      {...props}\n    >\n      <AnimatePresence mode=\"wait\">\n        {loading ? (\n          <motion.div\n            key=\"spinner\"\n            initial=\"hidden\"\n            animate=\"visible\"\n            exit=\"hidden\"\n            variants={buttonVar}\n            transition={{\n              type: \"spring\",\n              stiffness: 300,\n              damping: 30,\n            }}\n            className=\"flex items-center justify-center h-full\"\n          >\n            <Spinner className=\"size-4\" />\n          </motion.div>\n        ) : (\n          <motion.span\n            key=\"content\"\n            initial=\"hidden\"\n            animate=\"visible\"\n            exit=\"hidden\"\n            variants={buttonVar}\n            transition={{\n              type: \"spring\",\n              stiffness: 300,\n              damping: 30,\n            }}\n            className=\"flex items-center justify-center h-full\"\n          >\n            {children || \"Login\"}\n          </motion.span>\n        )}\n      </AnimatePresence>\n    </motion.button>\n  );\n});\n\nRadialGradientButton.displayName = \"RadialGradientButton\";\n\nexport default RadialGradientButton;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/radial-gradient-button.tsx"
+    }
+  ]
+}

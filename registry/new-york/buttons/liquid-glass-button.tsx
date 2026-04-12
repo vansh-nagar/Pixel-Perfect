@@ -1,4 +1,3 @@
-import PhilosophyButton from "do-not-share/philosophy-button";
 import React from "react";
 import { motion } from "framer-motion";
 

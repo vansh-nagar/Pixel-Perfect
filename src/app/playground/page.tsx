@@ -1,10 +1,8 @@
 "use client";
 
-import BottomMenu from "@/components/ui/bottom-menu";
-import SmallSmoothDropdown from "do-not-share/small-smooth-dropdown";
 import { useState } from "react";
 import useMeasure from "react-use-measure";
-import { motion } from "motion/react";
+import LiquidGlassButton from "registry/new-york/buttons/liquid-glass-button";
 
 const Page = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,8 +15,9 @@ const Page = () => {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen w-full">
-      {/* <SmallSmoothDropdown /> */}
-      <div className="flex justify-end items-start w-md h-[400px] ">
+      <LiquidGlassButton />
+      hi my name is vansh :)
+      {/* <div className="flex justify-center items-start w-md h-[400px] ">
         <motion.div
           transition={{
             type: "spring",
@@ -38,7 +37,7 @@ const Page = () => {
             className="=flex items-center justify-center p-2"
             style={{ pointerEvents: isOpen ? "none" : "auto" }}
           >
-            {isOpen ? "Open" : "Close"}
+            {isOpen ? <FolderOpen /> : <FolderClosed />}
           </motion.div>
 
           <div ref={contentRef}>
@@ -56,8 +55,7 @@ const Page = () => {
             </motion.div>
           </div>
         </motion.div>{" "}
-      </div>
-      {/* <BottomMenu /> */}
+      </div> */}
     </div>
   );
 };

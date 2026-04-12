@@ -36,6 +36,7 @@ import RadialGradientButton from "../../../../registry/new-york/buttons/radial-g
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CopyDropdown from "../copy-dropdown";
+import LiquidGlassButton from "registry/new-york/buttons/liquid-glass-button";
 
 const metalVariants: MetalVariant[] = [
   "silver",
@@ -174,10 +175,7 @@ const LiquidGradientButtonWrapper = () => {
     }
   }, [loading]);
   return (
-    <LiquidGradientButton
-      loading={loading}
-      onClick={() => setLoading(true)}
-    >
+    <LiquidGradientButton loading={loading} onClick={() => setLoading(true)}>
       Login
     </LiquidGradientButton>
   );
@@ -192,10 +190,7 @@ const RadialGradientButtonWrapper = () => {
     }
   }, [loading]);
   return (
-    <RadialGradientButton
-      loading={loading}
-      onClick={() => setLoading(true)}
-    >
+    <RadialGradientButton loading={loading} onClick={() => setLoading(true)}>
       Login
     </RadialGradientButton>
   );
@@ -207,6 +202,13 @@ const ToggleButtonWrapper = () => {
 };
 
 export const ButtonsArr = [
+  {
+    name: "Liquid Glass Button",
+    description:
+      "A frosted glass button with conic gradient border and layered shadows.",
+    component: <LiquidGlassButton />,
+    registryName: "liquid-glass-button",
+  },
   {
     name: "Pixel Credits Button",
     description: "A soft keycap-style button for Pixel Credits.",
@@ -342,7 +344,8 @@ export const ButtonsArr = [
   },
   {
     name: "Master Button",
-    description: "Premium gradient button with image overlay and loading animation.",
+    description:
+      "Premium gradient button with image overlay and loading animation.",
     component: <LiquidGradientButtonWrapper />,
     registryName: "liquid-gradient-button",
   },

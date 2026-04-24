@@ -1,12 +1,10 @@
 "use client";
-
-import LiquidGlassButton from "registry/new-york/buttons/liquid-glass-button";
+import React from "react";
+import { motion } from "framer-motion";
 
 const Page = () => {
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen w-full">
-      <LiquidGlassButton />
-    </div>
+    <div className="flex justify-center items-center h-screen w-full"></div>
   );
 };
 

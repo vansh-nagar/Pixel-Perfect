@@ -7,8 +7,15 @@ import Svg6 from "../../../../registry/new-york/svg/svg6";
 import Svg8 from "../../../../registry/new-york/svg/svg8";
 import Svg9 from "../../../../registry/new-york/svg/svg-9";
 import CopyDropdown from "../copy-dropdown";
+import BarWaveAnimation from "registry/new-york/svg/bar-wave-animation";
 
 export const SvgArr = [
+  {
+    name: "Svg Asset 1",
+    description: "Animated SVG asset with GSAP.",
+    component: <BarWaveAnimation />,
+    registryName: "svg-1",
+  },
   {
     name: "Svg Asset 1",
     description: "Animated SVG asset with GSAP.",

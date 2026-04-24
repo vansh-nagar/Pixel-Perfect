@@ -222,13 +222,6 @@ export const ButtonsArr = [
     registryName: "morph-button",
   },
   {
-    name: "Morph Button",
-    description: "A button that morphs its shape on hover using GSAP.",
-    component: <MorphButton>Hover Me</MorphButton>,
-    registryName: "morph-button",
-  },
-
-  {
     name: "Morph Image Button",
     description: "A button that morphs an image mask on hover using GSAP.",
     component: <MorphImageButton>Hover Me</MorphImageButton>,

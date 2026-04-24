@@ -957,5 +957,19 @@
         }
       ]
     }
+    ,
+    {
+      "name": "barwave-svg-animation",
+      "description": "A bar wave SVG animation with interactive hover, using Framer Motion.",
+      "type": "registry:block",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/barwave-svg-animation.tsx",
+          "target": "components/pixel-perfect/barwave-svg-animation.tsx"
+        }
+      ]
+    }
   ]
 }

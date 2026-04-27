@@ -255,7 +255,6 @@ const TextGrid = () => {
                 {item.description}
               </p>
             </div>
-
             <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto_auto] grid-rows-[auto_1fr] h-full gap-0">
               <div className=" border-t border-dashed "></div>
               {item.hasStagger && (

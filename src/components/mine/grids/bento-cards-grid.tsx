@@ -28,7 +28,6 @@ const BentoCardsGrid = () => {
               {item.description}
             </p>
           </div>
-
           <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
             <div className="border-t border-dashed" />
             <CopyDropdown registryName={item.registryName} variant="ghost" />

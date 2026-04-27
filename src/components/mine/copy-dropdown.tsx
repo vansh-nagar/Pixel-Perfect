@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Code2, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -48,6 +48,8 @@ export default function CopyDropdown({
   className = "",
 }: CopyDropdownProps) {
   const [copiedPm, setCopiedPm] = useState<string | null>(null);
+  const [copyingCode, setCopyingCode] = useState(false);
+  const [codeCopied, setCodeCopied] = useState(false);
 
   const handleCopy = (pm: PackageManager) => {
     const command = getInstallCommand(registryName, pm.name);
@@ -55,6 +57,27 @@ export default function CopyDropdown({
     setCopiedPm(pm.name);
     toast.success(`${pm.label} command copied!`);
     setTimeout(() => setCopiedPm(null), 2000);
+  };
+
+  const handleCopyCode = async () => {
+    setCopyingCode(true);
+    try {
+      const res = await fetch(`${BASE_URL}/${registryName}.json`);
+      const data = await res.json();
+      const code: string = data.files?.[0]?.content ?? "";
+      if (!code) {
+        toast.error("No source code found.");
+        return;
+      }
+      await navigator.clipboard.writeText(code);
+      setCodeCopied(true);
+      toast.success("Code copied!");
+      setTimeout(() => setCodeCopied(false), 2000);
+    } catch {
+      toast.error("Failed to fetch code.");
+    } finally {
+      setCopyingCode(false);
+    }
   };
 
   return (
@@ -84,9 +107,7 @@ export default function CopyDropdown({
             onClick={() => handleCopy(pm)}
             className="cursor-pointer font-mono text-xs gap-3"
           >
-            <span className="font-sans font-medium min-w-[3rem]">
-              {pm.label}
-            </span>
+            <span className="font-sans font-medium min-w-12">{pm.label}</span>
             <span className="text-muted-foreground truncate flex-1">
               {getInstallCommand(registryName, pm.name)}
             </span>
@@ -97,6 +118,29 @@ export default function CopyDropdown({
             )}
           </DropdownMenuItem>
         ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel className="text-xs text-muted-foreground">
+          Copy source code
+        </DropdownMenuLabel>
+        <DropdownMenuItem
+          onClick={handleCopyCode}
+          disabled={copyingCode}
+          className="cursor-pointer font-mono text-xs gap-3"
+        >
+          <span className="font-sans font-medium min-w-12 flex items-center gap-1.5">
+            <Code2 className="size-3" /> code
+          </span>
+          <span className="text-muted-foreground truncate flex-1">
+            {copyingCode ? "Fetching…" : `${registryName}.tsx`}
+          </span>
+          {copyingCode ? (
+            <Loader2 className="size-3 animate-spin shrink-0" />
+          ) : codeCopied ? (
+            <Check className="size-3 text-green-500 shrink-0" />
+          ) : (
+            <Copy className="size-3 shrink-0 opacity-50" />
+          )}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -10,11 +10,14 @@ import {
 import MorphButton from "../../../../registry/new-york/buttons/morph-button";
 import MorphImageButton from "../../../../registry/new-york/buttons/morph-image-button";
 import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
+import type { ThreedVariant } from "../../../../registry/new-york/buttons/3d-button";
 import ShinyButton from "../../../../registry/new-york/buttons/shiny-button";
 import BorderGradientButton from "../../../../registry/new-york/buttons/border-gradient-button";
 import MouseFollowerButton from "../../../../registry/new-york/buttons/mouse-follower-button";
 import PremiumButton from "../../../../registry/new-york/buttons/premium-button";
+import type { PremiumVariant } from "../../../../registry/new-york/buttons/premium-button";
 import OrangePremiumButton from "../../../../registry/new-york/buttons/orange-premium-button";
+import type { OrangePremiumVariant } from "../../../../registry/new-york/buttons/orange-premium-button";
 import StripeButton from "../../../../registry/new-york/buttons/stripe-button";
 import LearnMoreButtion from "../../../../registry/new-york/buttons/learn-more-buttion";
 import ToggleButton from "../../../../registry/new-york/buttons/toggle-buttion";
@@ -32,11 +35,138 @@ import type { MetalVariant } from "../../../../registry/new-york/buttons/metal-b
 import GlassButton from "../../../../registry/new-york/buttons/glass-button";
 import type { GlassVariant } from "../../../../registry/new-york/buttons/glass-button";
 import LiquidGradientButton from "../../../../registry/new-york/buttons/liquid-gradient-button";
+import type { LiquidGradientVariant } from "../../../../registry/new-york/buttons/liquid-gradient-button";
 import RadialGradientButton from "../../../../registry/new-york/buttons/radial-gradient-button";
+import type { RadialGradientVariant } from "../../../../registry/new-york/buttons/radial-gradient-button";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CopyDropdown from "../copy-dropdown";
 import LiquidGlassButton from "registry/new-york/buttons/liquid-glass-button";
+// import FramerCtaButton from "../../../../registry/new-york/buttons/framer-cta-button";
+// import SoftPillButton from "../../../../registry/new-york/buttons/soft-pill-button";
+// import BookDemoButton from "../../../../registry/new-york/buttons/book-demo-button";
+
+const threedVariants: ThreedVariant[] = [
+  "amber",
+  "emerald",
+  "rose",
+  "sky",
+  "violet",
+  "slate",
+  "coral",
+  "mint",
+];
+
+const ThreedButtonWrapper = () => {
+  const [variant, setVariant] = useState<ThreedVariant>("amber");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as ThreedVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {threedVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <ThreedButton threedVariant={variant}>Click Me</ThreedButton>
+    </>
+  );
+};
+
+const premiumVariants: PremiumVariant[] = [
+  "neutral",
+  "dark",
+  "gold",
+  "mint",
+  "rose",
+  "sky",
+  "lavender",
+  "sand",
+];
+
+const PremiumButtonWrapper = () => {
+  const [variant, setVariant] = useState<PremiumVariant>("neutral");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as PremiumVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {premiumVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <PremiumButton premiumVariant={variant}>Hover Me</PremiumButton>
+    </>
+  );
+};
+
+const orangePremiumVariants: OrangePremiumVariant[] = [
+  "orange",
+  "pink",
+  "emerald",
+  "violet",
+  "sky",
+  "ocean",
+  "gold",
+  "magenta",
+];
+
+const OrangePremiumButtonWrapper = () => {
+  const [variant, setVariant] = useState<OrangePremiumVariant>("orange");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as OrangePremiumVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {orangePremiumVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <OrangePremiumButton orangeVariant={variant}>
+        Hover Me
+      </OrangePremiumButton>
+    </>
+  );
+};
 
 const metalVariants: MetalVariant[] = [
   "silver",
@@ -166,8 +296,20 @@ const BlueChromeButtonWrapper = () => {
   );
 };
 
+const liquidGradientVariants: LiquidGradientVariant[] = [
+  "pink",
+  "cyan",
+  "emerald",
+  "amber",
+  "crimson",
+  "violet",
+  "ocean",
+  "sunset",
+];
+
 const LiquidGradientButtonWrapper = () => {
   const [loading, setLoading] = useState(false);
+  const [variant, setVariant] = useState<LiquidGradientVariant>("violet");
   useEffect(() => {
     if (loading) {
       const timer = setTimeout(() => setLoading(false), 2000);
@@ -175,14 +317,52 @@ const LiquidGradientButtonWrapper = () => {
     }
   }, [loading]);
   return (
-    <LiquidGradientButton loading={loading} onClick={() => setLoading(true)}>
-      Login
-    </LiquidGradientButton>
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as LiquidGradientVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {liquidGradientVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <LiquidGradientButton
+        variant={variant}
+        loading={loading}
+        onClick={() => setLoading(true)}
+      >
+        Login
+      </LiquidGradientButton>
+    </>
   );
 };
 
+const radialGradientVariants: RadialGradientVariant[] = [
+  "blue",
+  "purple",
+  "emerald",
+  "crimson",
+  "amber",
+  "cyan",
+  "violet",
+  "rose",
+];
+
 const RadialGradientButtonWrapper = () => {
   const [loading, setLoading] = useState(false);
+  const [variant, setVariant] = useState<RadialGradientVariant>("blue");
   useEffect(() => {
     if (loading) {
       const timer = setTimeout(() => setLoading(false), 2000);
@@ -190,9 +370,35 @@ const RadialGradientButtonWrapper = () => {
     }
   }, [loading]);
   return (
-    <RadialGradientButton loading={loading} onClick={() => setLoading(true)}>
-      Login
-    </RadialGradientButton>
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as RadialGradientVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {radialGradientVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <RadialGradientButton
+        variant={variant}
+        loading={loading}
+        onClick={() => setLoading(true)}
+      >
+        Login
+      </RadialGradientButton>
+    </>
   );
 };
 
@@ -202,6 +408,39 @@ const ToggleButtonWrapper = () => {
 };
 
 export const ButtonsArr = [
+  // {
+  //   name: "Book a Demo Button",
+  //   description:
+  //     "Lime square with dotted chevron animation that expands a dark panel on hover.",
+  //   component: <BookDemoButton>Book a demo</BookDemoButton>,
+  //   registryName: "book-demo-button",
+  // },
+  // {
+  //   name: "Soft Pill Secondary",
+  //   description: "Frosted-glass nav pill with layered highlights and gradient border.",
+  //   component: <SoftPillButton variant="secondary">Philosophy</SoftPillButton>,
+  //   registryName: "soft-pill-button",
+  // },
+  // {
+  //   name: "Soft Pill Primary",
+  //   description: "Dark frosted-glass CTA pill with subtle inner glow and metallic border.",
+  //   component: <SoftPillButton variant="primary">Get in touch</SoftPillButton>,
+  //   registryName: "soft-pill-button",
+  // },
+  // {
+  //   name: "Book a Meeting Button",
+  //   description: "Dark Framer-style CTA pill with Google Meet brand icon.",
+  //   component: <FramerCtaButton variant="dark">Book a meeting</FramerCtaButton>,
+  //   registryName: "framer-cta-button",
+  // },
+  // {
+  //   name: "Send a Message Button",
+  //   description: "Light Framer-style CTA pill with Telegram brand icon.",
+  //   component: (
+  //     <FramerCtaButton variant="light">Send a message</FramerCtaButton>
+  //   ),
+  //   registryName: "framer-cta-button",
+  // },
   {
     name: "Liquid Glass Button",
     description:
@@ -229,8 +468,9 @@ export const ButtonsArr = [
   },
   {
     name: "3D Button",
-    description: "A 3D button with press and hover effects.",
-    component: <ThreedButton>Click Me</ThreedButton>,
+    description:
+      "3D push button with press/hover physics and 8 color variants.",
+    component: <ThreedButtonWrapper />,
     registryName: "3d-button",
   },
   {
@@ -253,14 +493,14 @@ export const ButtonsArr = [
   },
   {
     name: "Premium Button",
-    description: "A button with elaborate shadows and premium feel.",
-    component: <PremiumButton>Hover Me</PremiumButton>,
+    description: "Neumorphic button with layered shadows and 8 color variants.",
+    component: <PremiumButtonWrapper />,
     registryName: "premium-button",
   },
   {
     name: "Orange Premium Button",
-    description: "A button with vibrant gradients and soft shadows.",
-    component: <OrangePremiumButton>Hover Me</OrangePremiumButton>,
+    description: "Glossy gradient button with soft glow and 8 color variants.",
+    component: <OrangePremiumButtonWrapper />,
     registryName: "orange-premium-button",
   },
   {
@@ -338,13 +578,13 @@ export const ButtonsArr = [
   {
     name: "Master Button",
     description:
-      "Premium gradient button with image overlay and loading animation.",
+      "Premium gradient button with image overlay and 8 color variants.",
     component: <LiquidGradientButtonWrapper />,
     registryName: "liquid-gradient-button",
   },
   {
     name: "Radial Gradient Button",
-    description: "Deep blue radial gradient button with inset glow.",
+    description: "Radial gradient button with inset glow and 8 color variants.",
     component: <RadialGradientButtonWrapper />,
     registryName: "radial-gradient-button",
   },

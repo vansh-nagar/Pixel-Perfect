@@ -5,7 +5,7 @@
   "items": [
     {
       "name": "3d-button",
-      "description": "A 3D button with press and hover effects.",
+      "description": "3D push button with press/hover physics and 8 color variants: amber, emerald, rose, sky, violet, slate, coral, mint.",
       "type": "registry:block",
       "dependencies": ["gsap", "@gsap/react"],
       "files": [
@@ -83,7 +83,7 @@
     },
     {
       "name": "premium-button",
-      "description": "A button with elaborate shadows and premium feel.",
+      "description": "Neumorphic premium button with layered shadows and 8 color variants: neutral, dark, gold, mint, rose, sky, lavender, sand.",
       "type": "registry:block",
       "dependencies": [],
       "files": [
@@ -96,7 +96,7 @@
     },
     {
       "name": "orange-premium-button",
-      "description": "A button with vibrant gradients and soft shadows.",
+      "description": "Glossy gradient button with soft glow and 8 color variants: orange, pink, emerald, violet, sky, ocean, gold, magenta.",
       "type": "registry:block",
       "dependencies": [],
       "files": [
@@ -932,8 +932,47 @@
       ]
     },
     {
+      "name": "book-demo-button",
+      "description": "Lime square with animated dotted chevron arrows that expands a dark panel on hover to reveal a label.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/book-demo-button.tsx",
+          "target": "components/pixel-perfect/book-demo-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "soft-pill-button",
+      "description": "Frosted-glass pill button with layered highlights, gradient border, and primary/secondary variants.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/soft-pill-button.tsx",
+          "target": "components/pixel-perfect/soft-pill-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "framer-cta-button",
+      "description": "Framer-style CTA pill button with brand icon and dark/light variants.",
+      "type": "registry:block",
+      "dependencies": ["react-icons"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/framer-cta-button.tsx",
+          "target": "components/pixel-perfect/framer-cta-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "liquid-gradient-button",
-      "description": "Premium gradient button with image overlay and loading animation.",
+      "description": "Premium gradient button with image overlay, loading animation, and 8 color variants: pink, cyan, emerald, amber, crimson, violet, ocean, sunset.",
       "type": "registry:block",
       "dependencies": ["framer-motion", "lucide-react"],
       "files": [
@@ -946,7 +985,7 @@
     },
     {
       "name": "radial-gradient-button",
-      "description": "Deep blue radial gradient button with inset glow.",
+      "description": "Radial gradient button with inset glow and 8 color variants: blue, purple, emerald, crimson, amber, cyan, violet, rose.",
       "type": "registry:block",
       "dependencies": ["framer-motion", "lucide-react"],
       "files": [
@@ -966,8 +1005,8 @@
       "files": [
         {
           "type": "registry:component",
-          "path": "registry/new-york/svg/barwave-svg-animation.tsx",
-          "target": "components/pixel-perfect/barwave-svg-animation.tsx"
+          "path": "registry/new-york/svg/bar-wave-animation.tsx",
+          "target": "components/pixel-perfect/bar-wave-animation.tsx"
         }
       ]
     }

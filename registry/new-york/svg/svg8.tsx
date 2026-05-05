@@ -14,7 +14,7 @@ const Svg8 = () => {
       <path
         d="M310.037 473.5L726.162 713.75L924.049 599.5L1076.04 687.25L723.131 891L155.019 563L310.037 473.5ZM310.037 473.5L155.019 384L556.421 152.25L711.44 241.75M310.037 473.5L711.44 241.75M711.44 241.75L969.082 390.5L765.566 508L921.018 597.75L1100.29 494.25L1104.62 288.25L867.757 151.5L711.44 241.75Z"
         stroke="white"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <rect
         x="1.29904"
@@ -24,7 +24,7 @@ const Svg8 = () => {
         transform="matrix(0.866025 0.5 0 1 712.174 180.35)"
         fill="black"
         stroke="white"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <rect
         x="1.29904"
@@ -34,7 +34,7 @@ const Svg8 = () => {
         transform="matrix(0.866025 0.5 0 1 765.174 447.539)"
         fill="black"
         stroke="white"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <rect
         x="1.29904"
@@ -44,7 +44,7 @@ const Svg8 = () => {
         transform="matrix(0.866025 -0.5 0 1 925.174 533.264)"
         fill="black"
         stroke="white"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <rect
         x="1.29904"
@@ -54,7 +54,7 @@ const Svg8 = () => {
         transform="matrix(0.866025 -0.5 0 1 317.174 409.703)"
         fill="black"
         stroke="white"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <rect
         x="1.29904"
@@ -64,7 +64,7 @@ const Svg8 = () => {
         transform="matrix(0.866025 0.5 0 1 155.174 322.35)"
         fill="black"
         stroke="white"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <path
         d="M723.131 829L155.019 501L310.037 411.5L155.019 322L556.421 90.25L711.44 179.75L867.757 89.5L1104.62 226.25L1100.29 432.25L921.018 535.75L765.566 446L969.082 328.5L711.44 179.75L310.037 411.5L726.162 651.75L924.049 537.5L1076.04 625.25L723.131 829Z"
@@ -73,7 +73,7 @@ const Svg8 = () => {
       <path
         d="M310.037 411.5L726.162 651.75L924.049 537.5L1076.04 625.25L723.131 829L155.019 501L310.037 411.5ZM310.037 411.5L155.019 322L556.421 90.25L711.44 179.75M310.037 411.5L711.44 179.75M711.44 179.75L969.082 328.5L765.566 446L921.018 535.75L1100.29 432.25L1104.62 226.25L867.757 89.5L711.44 179.75Z"
         stroke="white"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <rect
         x="1.29904"
@@ -83,7 +83,7 @@ const Svg8 = () => {
         transform="matrix(0.866025 -0.5 0 1 723.174 830.349)"
         fill="black"
         stroke="white"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <rect
         x="1.29904"
@@ -93,7 +93,7 @@ const Svg8 = () => {
         transform="matrix(0.866025 0.5 0 1 154.174 500.35)"
         fill="black"
         stroke="white"
-        stroke-width="3"
+        strokeWidth="3"
       />
     </svg>
   );

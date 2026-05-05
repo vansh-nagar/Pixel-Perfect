@@ -17,8 +17,6 @@ const MouseFollower2 = () => {
       const mouseX = e.clientX - 20;
       const mouseY = e.clientY - 20;
 
-      console.log(mouseX, mouseY);
-
       followerRef.current.animate(
         {
           transform: `translate(${mouseX}px, ${mouseY}px) scale(${
@@ -35,7 +33,6 @@ const MouseFollower2 = () => {
       if (!buttonRef.current) return;
 
       const rect = buttonRef.current.getBoundingClientRect();
-      console.log(rect);
 
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;

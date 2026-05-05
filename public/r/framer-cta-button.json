@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "framer-cta-button",
+  "type": "registry:block",
+  "description": "Framer-style CTA pill button with brand icon and dark/light variants.",
+  "dependencies": [
+    "react-icons"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/framer-cta-button.tsx",
+      "content": "\"use client\";\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type FramerCtaVariant = \"dark\" | \"light\";\n\ninterface FramerCtaButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: FramerCtaVariant;\n}\n\nconst FramerCtaButton = React.forwardRef<\n  HTMLButtonElement,\n  FramerCtaButtonProps\n>(({ className, children, variant = \"dark\", ...props }, ref) => {\n  const isDark = variant === \"dark\";\n  return (\n    <button\n      ref={ref}\n      className={cn(\n        \"relative inline-flex items-center justify-center gap-2.5 h-11 px-5 rounded-2xl transition-transform duration-200 active:scale-[0.98]\",\n        className,\n      )}\n      style={{\n        background: isDark\n          ? \"linear-gradient(rgb(27, 27, 27) 0%, rgb(0, 0, 0) 100%)\"\n          : \"linear-gradient(rgb(233, 233, 233) 0%, rgb(255, 255, 255) 100%)\",\n        boxShadow: isDark\n          ? \"rgba(255, 255, 255, 0.3) 0px 1px 0px 0px inset, rgba(255, 255, 255, 0.32) 0px 0px 28px 0px inset, rgba(0, 0, 0, 0.03) 0px 8px 16px 0px, rgb(0, 0, 0) 0px 0px 0px 1px\"\n          : \"rgba(0, 0, 0, 0.03) 0px 8px 8px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(255, 255, 255, 0.95) 0px 0px 34px 0px inset\",\n      }}\n      {...props}\n    >\n      <span\n        className=\"font-medium text-[15px] leading-7 tracking-[-0.02em]\"\n        style={{\n          color: isDark ? \"rgb(255, 255, 255)\" : \"rgb(0, 0, 0)\",\n          fontFamily:\n            '\"Geist\", \"Geist Placeholder\", ui-sans-serif, system-ui, sans-serif',\n        }}\n      >\n        {children || (isDark ? \"Book a meeting\" : \"Send a message\")}\n      </span>\n    </button>\n  );\n});\n\nFramerCtaButton.displayName = \"FramerCtaButton\";\n\nexport default FramerCtaButton;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/framer-cta-button.tsx"
+    }
+  ]
+}

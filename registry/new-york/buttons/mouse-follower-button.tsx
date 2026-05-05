@@ -17,7 +17,6 @@ const MouseFollowerButton = ({
       if (!buttonRef.current) return;
 
       const rect = buttonRef.current.getBoundingClientRect();
-      console.log(rect);
 
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;

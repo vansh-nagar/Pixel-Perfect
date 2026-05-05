@@ -24,7 +24,7 @@ const Svg9 = () => {
         transform="matrix(0.866025 0.5 -0.866025 0.5 173.205 7.88184)"
         fill="black"
         stroke="white"
-        stroke-dasharray="6 6"
+        strokeDasharray="6 6"
       />
       <circle
         cx="37.7462"
@@ -41,7 +41,7 @@ const Svg9 = () => {
         transform="matrix(0.866025 0.5 -0.866025 0.5 173.42 76)"
         fill="black"
         stroke="white"
-        stroke-dasharray="4 4"
+        strokeDasharray="4 4"
       />
       <path
         d="M50.7305 102C50.7305 121.526 64.4389 139.204 86.6024 152V192C64.4389 179.204 50.7305 161.526 50.7305 142V102Z"
@@ -63,8 +63,8 @@ const Svg9 = () => {
         fill="black"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M96.4589 57.6908L96.2089 57.2578V57.2578L96.4589 57.6908ZM249.95 57.6908L250.2 57.2578V57.2578L249.95 57.6908ZM249.95 146.309L250.2 146.742V146.742L249.95 146.309ZM96.4589 146.309L96.2089 146.742V146.742L96.4589 146.309ZM207.166 82.3929L207.416 81.9599V81.9599L207.166 82.3929ZM139.243 82.3929L138.993 81.9599L138.993 81.9599L139.243 82.3929ZM139.243 121.608L138.993 122.041V122.041L139.243 121.608ZM207.166 121.608L207.416 122.041V122.041L207.166 121.608ZM96.4589 57.6908L96.7089 58.1238C117.808 45.9424 145.493 39.8374 173.205 39.8374C200.916 39.8374 228.601 45.9424 249.7 58.1238L249.95 57.6908L250.2 57.2578C228.914 44.968 201.045 38.8374 173.205 38.8374C145.364 38.8374 117.496 44.968 96.2089 57.2578L96.4589 57.6908ZM249.95 57.6908L249.7 58.1238C270.802 70.3068 281.239 86.2047 281.239 102C281.239 117.795 270.802 133.693 249.7 145.876L249.95 146.309L250.2 146.742C271.484 134.454 282.239 118.278 282.239 102C282.239 85.7215 271.484 69.546 250.2 57.2578L249.95 57.6908ZM249.95 146.309L249.7 145.876C228.601 158.057 200.916 164.162 173.205 164.162C145.493 164.162 117.808 158.057 96.7089 145.876L96.4589 146.309L96.2089 146.742C117.496 159.032 145.364 165.162 173.205 165.162C201.045 165.162 228.914 159.032 250.2 146.742L249.95 146.309ZM96.4589 146.309L96.7089 145.876C75.6074 133.693 65.1699 117.795 65.1699 102C65.1699 86.2047 75.6073 70.3068 96.7089 58.1238L96.4589 57.6908L96.2089 57.2578C74.9251 69.546 64.1699 85.7215 64.1699 102C64.1699 118.278 74.9252 134.454 96.2089 146.742L96.4589 146.309ZM207.166 82.3929L207.416 81.9599C197.944 76.4913 185.561 73.7713 173.205 73.7713C160.848 73.7713 148.465 76.4913 138.993 81.9599L139.243 82.3929L139.493 82.826C148.777 77.4657 160.977 74.7713 173.205 74.7713C185.432 74.7713 197.632 77.4657 206.916 82.826L207.166 82.3929ZM139.243 82.3929L138.993 81.9599C129.524 87.427 124.676 94.6623 124.676 102C124.676 109.338 129.524 116.574 138.993 122.041L139.243 121.608L139.493 121.175C130.206 115.813 125.676 108.855 125.676 102C125.676 95.1455 130.206 88.1878 139.493 82.826L139.243 82.3929ZM139.243 121.608L138.993 122.041C148.465 127.509 160.848 130.229 173.205 130.229C185.561 130.229 197.944 127.509 207.416 122.041L207.166 121.608L206.916 121.175C197.632 126.535 185.432 129.229 173.205 129.229C160.977 129.229 148.777 126.535 139.493 121.175L139.243 121.608ZM207.166 121.608L207.416 122.041C216.885 116.574 221.733 109.338 221.733 102C221.733 94.6623 216.885 87.427 207.416 81.9599L207.166 82.3929L206.916 82.826C216.203 88.1878 220.733 95.1455 220.733 102C220.733 108.855 216.203 115.813 206.916 121.175L207.166 121.608Z"
         fill="white"
       />
@@ -75,255 +75,255 @@ const Svg9 = () => {
         transform="matrix(0.866025 0.5 -0.866025 0.5 110.122 113)"
         fill="black"
         stroke="white"
-        stroke-dasharray="4 4"
+        strokeDasharray="4 4"
       />
       <path
         d="M163.456 40L166.471 73.6345L166.471 80.5M92.6103 60.0803L135.319 84.1767L135.319 91.5M67.5 114L125 105.5M121.5 156.5L146 125.5M184.056 165L177.5 130M264.449 136.888L212.696 117.309M275 81.6667L219.5 94.5L219 103.5M227.267 48.5341L199.632 78.9348L199.632 85"
         stroke="white"
       />
-      <g clip-path="url(#clip0_192_575)">
+      <g clipPath="url(#clip0_192_575)">
         <path
           d="M186.114 58.5835C186.672 58.9057 187.576 58.9057 188.134 58.5835C188.692 58.2613 188.692 57.739 188.134 57.4168C187.576 57.0947 186.672 57.0947 186.114 57.4168C185.556 57.739 185.556 58.2613 186.114 58.5835Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M187.124 63.8518C189.638 63.8554 191.683 61.2339 191.695 58.0026C191.683 54.7713 189.638 52.1498 187.124 52.1534C184.61 52.1498 182.565 54.7713 182.553 58.0026C182.565 61.2339 184.61 63.8554 187.124 63.8518Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M187.124 60.6419C192.721 60.6348 197.261 59.4542 197.255 58.0026C197.261 56.551 192.721 55.3705 187.124 55.3633C181.527 55.3705 176.987 56.551 176.993 58.0026C176.987 59.4542 181.527 60.6348 187.124 60.6419Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
-      <g clip-path="url(#clip1_192_575)">
+      <g clipPath="url(#clip1_192_575)">
         <path
           d="M225.083 71.5L223.567 72.375"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M229.124 71.5L223.567 74.7083"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M232.66 71.7915L223.567 77.0415"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M232.155 74.4165L228.619 76.4582"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M235.691 74.7085L229.124 78.5002"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M235.187 77.3335L233.671 78.2085"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
-      <g clip-path="url(#clip2_192_575)">
+      <g clipPath="url(#clip2_192_575)">
         <path
           d="M208.588 141.292C210.541 142.419 213.707 142.419 215.66 141.292C217.613 140.164 217.613 138.336 215.66 137.208C213.707 136.081 210.541 136.081 208.588 137.208C206.635 138.336 206.635 140.164 208.588 141.292Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M208.588 144.792C210.541 145.919 213.707 145.919 215.66 144.792C217.613 143.664 217.613 141.836 215.66 140.708C213.707 139.581 210.541 139.581 208.588 140.708C206.635 141.836 206.635 143.664 208.588 144.792Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
-      <g clip-path="url(#clip3_192_575)">
+      <g clipPath="url(#clip3_192_575)">
         <path
           d="M153.093 148.75L159.66 144.958"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M157.134 148.167C156.825 147.841 156.707 147.465 156.798 147.097C156.889 146.729 157.184 146.388 157.64 146.125C157.184 146.388 156.593 146.558 155.956 146.611C155.318 146.663 154.668 146.595 154.103 146.417"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M161.73 147.029C162.048 146.98 162.342 146.889 162.589 146.764C162.836 146.639 163.03 146.482 163.156 146.307C163.282 146.132 163.336 145.942 163.314 145.753C163.293 145.563 163.196 145.379 163.032 145.215C162.867 145.05 162.64 144.91 162.366 144.805C162.093 144.699 161.781 144.631 161.455 144.607C161.129 144.582 160.798 144.601 160.487 144.662C160.175 144.723 159.892 144.824 159.66 144.959C159.892 144.824 160.068 144.661 160.174 144.481C160.28 144.302 160.312 144.11 160.27 143.922C160.227 143.734 160.109 143.554 159.927 143.396C159.744 143.238 159.501 143.107 159.216 143.012C158.931 142.917 158.613 142.861 158.285 142.849C157.957 142.836 157.628 142.868 157.324 142.94C157.021 143.013 156.75 143.125 156.533 143.268C156.316 143.41 156.159 143.58 156.074 143.763"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M162.627 146.744C162.848 146.96 162.98 147.201 163.015 147.451C163.05 147.7 162.986 147.951 162.828 148.184C162.67 148.418 162.423 148.627 162.104 148.797C161.785 148.966 161.403 149.092 160.988 149.164"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M156.124 150.5C156.569 150.757 157.148 150.922 157.772 150.969C158.395 151.017 159.029 150.944 159.573 150.762C160.118 150.581 160.544 150.301 160.785 149.965C161.025 149.629 161.068 149.257 160.905 148.907"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M157.379 150.923C157.14 151.102 156.841 151.25 156.499 151.359C156.157 151.469 155.78 151.536 155.391 151.558C155.003 151.58 154.61 151.555 154.239 151.486C153.867 151.417 153.524 151.304 153.23 151.155C152.937 151.007 152.699 150.825 152.532 150.621C152.365 150.417 152.272 150.195 152.259 149.97C152.247 149.745 152.314 149.52 152.457 149.31C152.601 149.1 152.817 148.91 153.093 148.75C152.816 148.91 152.486 149.034 152.123 149.117C151.759 149.2 151.371 149.239 150.98 149.231C150.59 149.224 150.206 149.17 149.853 149.074C149.5 148.978 149.185 148.84 148.927 148.671C148.669 148.502 148.474 148.303 148.354 148.089C148.235 147.874 148.192 147.648 148.23 147.423C148.268 147.199 148.385 146.981 148.574 146.784C148.763 146.586 149.02 146.413 149.329 146.276"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M150.061 147C149.617 146.743 149.331 146.409 149.249 146.049C149.167 145.688 149.293 145.323 149.607 145.008C149.922 144.694 150.407 144.448 150.989 144.309C151.57 144.17 152.214 144.146 152.822 144.24"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M156.567 143.246C156.194 143.118 155.775 143.042 155.343 143.022C154.911 143.002 154.477 143.038 154.073 143.13C153.669 143.221 153.306 143.364 153.012 143.548C152.718 143.732 152.501 143.952 152.376 144.192"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
-      <g clip-path="url(#clip4_192_575)">
+      <g clipPath="url(#clip4_192_575)">
         <path
           d="M243.547 107.542C242.877 107.929 242.5 108.453 242.5 109C242.5 109.547 242.877 110.072 243.547 110.458C244.217 110.845 245.125 111.063 246.073 111.063C247.02 111.063 247.929 110.845 248.599 110.458C249.993 109.653 249.861 108.271 247.588 108.125C247.336 106.813 244.941 106.737 243.547 107.542Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M248.598 110.458C247.929 110.845 247.552 111.37 247.552 111.917C247.552 112.464 247.929 112.988 248.598 113.375C249.268 113.762 250.177 113.979 251.124 113.979C252.072 113.979 252.98 113.762 253.65 113.375C255.045 112.57 254.913 111.187 252.64 111.042C252.387 109.729 249.993 109.653 248.598 110.458Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M247.588 108.125C250.685 108.215 254.176 106.824 256.176 106.083C255.813 107.262 254.125 110.149 252.64 111.042"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M257.691 111.042C255.524 109.791 255.261 108.28 256.176 106.083C259.06 107.749 258.868 110.362 257.691 111.042Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
-      <g clip-path="url(#clip5_192_575)">
+      <g clipPath="url(#clip5_192_575)">
         <path
           d="M106.692 87.9582L103.66 86.2082C103.381 86.0471 102.929 86.0471 102.65 86.2082L101.64 86.7915C101.361 86.9526 101.361 87.2138 101.64 87.3748L104.671 89.1248C104.95 89.2859 105.402 89.2859 105.681 89.1248L106.692 88.5415C106.971 88.3804 106.971 88.1193 106.692 87.9582Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M106.186 88.8335L107.197 89.4168C107.465 89.5715 107.615 89.7814 107.615 90.0002C107.615 90.219 107.465 90.4288 107.197 90.5835L100.124 94.6668C99.8561 94.8215 99.4926 94.9085 99.1137 94.9085C98.7347 94.9085 98.3713 94.8215 98.1033 94.6668L92.0411 91.1668C91.7732 91.0121 91.6226 90.8023 91.6226 90.5835C91.6226 90.3647 91.7732 90.1549 92.0411 90.0002L99.1137 85.9168C99.3816 85.7621 99.7451 85.6752 100.124 85.6752C100.503 85.6752 100.866 85.7621 101.134 85.9168L102.145 86.5002"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M100.629 89.7085L102.65 90.8752"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M98.1035 91.1665L100.124 92.3332"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M98.6084 88.5415L98.6135 88.5444"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M96.083 90L96.0881 90.0029"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
-      <g clip-path="url(#clip6_192_575)">
+      <g clipPath="url(#clip6_192_575)">
         <path
           d="M142.14 66.4711C142.143 66.5333 142.123 66.5951 142.081 66.6525C142.04 66.71 141.978 66.7618 141.9 66.8046C141.822 66.8475 141.73 66.8804 141.628 66.9014C141.527 66.9223 141.419 66.9307 141.312 66.9261C139.192 66.8065 137.226 66.2358 135.796 65.3252C134.365 64.4146 133.573 63.2292 133.573 61.9999C133.573 60.7705 134.365 59.5851 135.796 58.6745C137.226 57.7639 139.192 57.1933 141.312 57.0736C141.419 57.0698 141.527 57.0789 141.629 57.1003C141.73 57.1216 141.823 57.1548 141.901 57.1978C141.979 57.2408 142.041 57.2926 142.083 57.35C142.125 57.4074 142.146 57.4692 142.145 57.5315L142.14 66.4711Z"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M142.14 65.2988C140.65 65.276 139.234 64.9181 138.195 64.3013C137.156 63.6845 136.575 62.8577 136.576 61.9972C136.577 61.1366 137.161 60.3104 138.202 59.6947C139.243 59.079 140.66 58.7225 142.15 58.7013"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M142.145 62.0002L136.588 62.0002"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M138.179 64.2896L142.144 62L138.179 59.7104"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <path
@@ -445,7 +445,7 @@ const Svg9 = () => {
         r="10.5719"
         transform="matrix(0.866025 0.5 -0.866025 0.5 110.342 113.016)"
         fill="#907D04"
-        fill-opacity="0.51"
+        fillOpacity="0.51"
         stroke="white"
       />
       <path
@@ -522,7 +522,7 @@ const Svg9 = () => {
       />
       <line x1="277.5" y1="139" x2="277.5" y2="179" stroke="white" />
       <line x1="286.5" y1="129" x2="286.5" y2="169" stroke="white" />
-      <g clip-path="url(#clip7_192_575)">
+      <g clipPath="url(#clip7_192_575)">
         <path
           d="M104.76 123.406L109.631 120.594C109.847 120.469 110.139 120.4 110.443 120.4C110.748 120.4 111.04 120.469 111.255 120.594L115.315 122.938C115.401 122.987 115.449 123.055 115.449 123.125C115.449 123.195 115.401 123.263 115.315 123.312L109.469 126.688C109.383 126.737 109.266 126.765 109.144 126.765C109.023 126.765 108.906 126.737 108.82 126.688L104.76 124.344C104.545 124.219 104.424 124.051 104.424 123.875C104.424 123.699 104.545 123.531 104.76 123.406C104.975 123.282 105.267 123.212 105.572 123.212C105.876 123.212 106.169 123.282 106.384 123.406L110.768 125.938"
           fill="black"
@@ -530,9 +530,9 @@ const Svg9 = () => {
         <path
           d="M104.76 123.406L109.631 120.594C109.847 120.469 110.139 120.4 110.443 120.4C110.748 120.4 111.04 120.469 111.255 120.594L115.315 122.938C115.401 122.987 115.449 123.055 115.449 123.125C115.449 123.195 115.401 123.263 115.315 123.312L109.469 126.688C109.383 126.737 109.266 126.765 109.144 126.765C109.023 126.765 108.906 126.737 108.82 126.688L104.76 124.344C104.545 124.219 104.424 124.051 104.424 123.875C104.424 123.699 104.545 123.531 104.76 123.406ZM104.76 123.406C104.975 123.282 105.267 123.212 105.572 123.212C105.876 123.212 106.169 123.282 106.384 123.406L110.768 125.938"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M112.392 121.25L109.794 122.75H111.742V123.875L114.34 122.375"
@@ -541,9 +541,9 @@ const Svg9 = () => {
         <path
           d="M112.392 121.25L109.794 122.75H111.742V123.875L114.34 122.375"
           stroke="white"
-          stroke-width="0.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <g filter="url(#filter0_f_192_575)">
@@ -560,8 +560,8 @@ const Svg9 = () => {
       <path
         d="M109.858 123.002L108.858 16.0015M108.858 16.0015L107 18L110.5 18L108.858 16.0015Z"
         stroke="#FBFD2D"
-        stroke-width="0.2"
-        stroke-linecap="round"
+        strokeWidth="0.2"
+        strokeLinecap="round"
       />
       <g filter="url(#filter1_f_192_575)">
         <line
@@ -570,8 +570,8 @@ const Svg9 = () => {
           x2="109.757"
           y2="102.449"
           stroke="#FBFD2D"
-          stroke-width="6"
-          stroke-linecap="round"
+          strokeWidth="6"
+          strokeLinecap="round"
         />
       </g>
       <defs>
@@ -582,9 +582,9 @@ const Svg9 = () => {
           width="9.41406"
           height="89.0156"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -603,9 +603,9 @@ const Svg9 = () => {
           width="208.485"
           height="226"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"

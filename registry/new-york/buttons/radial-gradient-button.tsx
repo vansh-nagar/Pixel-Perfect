@@ -4,8 +4,35 @@ import { AnimatePresence, motion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/spinner";
 
+export type RadialGradientVariant =
+  | "blue"
+  | "purple"
+  | "emerald"
+  | "crimson"
+  | "amber"
+  | "cyan"
+  | "violet"
+  | "rose";
+
+const radialGradientStyles: Record<RadialGradientVariant, string> = {
+  blue: "radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #1700E3 100%)",
+  purple:
+    "radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #8B00E3 100%)",
+  emerald:
+    "radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #00C97A 100%)",
+  crimson:
+    "radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #E30000 100%)",
+  amber:
+    "radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #E37C00 100%)",
+  cyan: "radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #00C9E3 100%)",
+  violet:
+    "radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #5500E3 100%)",
+  rose: "radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #E30055 100%)",
+};
+
 interface RadialGradientButtonProps extends HTMLMotionProps<"button"> {
   loading?: boolean;
+  variant?: RadialGradientVariant;
 }
 
 const buttonVar = {
@@ -16,7 +43,7 @@ const buttonVar = {
 const RadialGradientButton = React.forwardRef<
   HTMLButtonElement,
   RadialGradientButtonProps
->(({ className, children, loading, ...props }, ref) => {
+>(({ className, children, loading, variant = "blue", ...props }, ref) => {
   return (
     <motion.button
       ref={ref}
@@ -28,8 +55,7 @@ const RadialGradientButton = React.forwardRef<
         className,
       )}
       style={{
-        background:
-          "radial-gradient(74.77% 41.6% at 83.56% 45.09%, #000000 44.14%, #1700E3 100%)",
+        background: radialGradientStyles[variant],
         boxShadow: "inset 0px 3px 12px -2px #FFFFFF",
       }}
       {...props}

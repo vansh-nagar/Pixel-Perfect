@@ -11,49 +11,55 @@ import OrbitDotMotion from "registry/new-york/motion-framer/orbit-dot-motion";
 import CoinSpinAnimation from "registry/new-york/motion-framer/coin-spin-animation";
 import CopyDropdown from "../copy-dropdown";
 
-const MotionComponentArr = [
+const MotionComponentArr: {
+  name: string;
+  description: string;
+  Component: React.ComponentType;
+  registryName: string;
+  isNew?: boolean;
+}[] = [
   {
     name: "Simple Card",
     description: "A simple card animation using Framer Motion.",
-    component: <CardAnimation />,
+    Component: CardAnimation,
     registryName: "card-animation",
   },
   {
     name: "Logo Animation",
     description: "Logo animation with Framer Motion and custom background.",
-    component: <LogoAnimation />,
+    Component: LogoAnimation,
     registryName: "logo-animation",
   },
   {
     name: "Tab Background",
     description: "A tab background animation using Framer Motion.",
-    component: <TabBackgroundAnimation />,
+    Component: TabBackgroundAnimation,
     registryName: "tab-background-animation",
   },
   {
     name: "Image Hover",
     description: "An image hover animation with scaling and opacity effects.",
-    component: <ImageHoverAnimation />,
+    Component: ImageHoverAnimation,
     registryName: "image-hover-animation",
   },
   {
     name: "Success Ripple",
     description: "Looping ripple pulses with a springy success check reveal.",
-    component: <SuccessRippleAnimation />,
+    Component: SuccessRippleAnimation,
     registryName: "success-ripple-animation",
   },
   {
     name: "Orbit Dot",
     description:
       "3D orbiting dot with perspective and constant angular velocity.",
-    component: <OrbitDotMotion />,
+    Component: OrbitDotMotion,
     registryName: "orbit-dot-motion",
     isNew: true,
   },
   {
     name: "Coin Spin",
     description: "3D spinning coin with layered faces and side profile.",
-    component: <CoinSpinAnimation />,
+    Component: CoinSpinAnimation,
     registryName: "coin-spin-animation",
     isNew: true,
   },
@@ -77,13 +83,15 @@ const MotionAnimationsGrid = () => {
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
       <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
-        {paginatedItems.map((item, index) => (
+        {paginatedItems.map((item, index) => {
+          const Component = item.Component;
+          return (
           <div
             key={startIndex + index}
             className="relative w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
           >
             <div className="z-30" key={refreshKeys[startIndex + index] || 0}>
-              {item.component}
+              <Component />
             </div>
 
             <div className="absolute left-1.5 top-1.5 z-40 flex items-center gap-2">
@@ -116,7 +124,8 @@ const MotionAnimationsGrid = () => {
               <div className="h-full border-r border-dashed -mr-[0.5px]" />
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       {totalPages > 1 && (

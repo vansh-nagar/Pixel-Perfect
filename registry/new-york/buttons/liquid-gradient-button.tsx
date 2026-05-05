@@ -4,8 +4,36 @@ import { AnimatePresence, motion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/spinner";
 
+export type LiquidGradientVariant =
+  | "pink"
+  | "cyan"
+  | "emerald"
+  | "amber"
+  | "crimson"
+  | "violet"
+  | "ocean"
+  | "sunset";
+
+const liquidGradientStyles: Record<LiquidGradientVariant, string> = {
+  pink: "linear-gradient(225deg, #FD97FF 0%, #FC36FF 42.86%, #FD82FF 49.48%, #830086 56.42%, #000000 100%)",
+  cyan: "linear-gradient(225deg, #97F0FF 0%, #36E0FF 42.86%, #82EBFF 49.48%, #006B86 56.42%, #000000 100%)",
+  emerald:
+    "linear-gradient(225deg, #97FFB8 0%, #36FF74 42.86%, #82FF9E 49.48%, #008632 56.42%, #000000 100%)",
+  amber:
+    "linear-gradient(225deg, #FFE597 0%, #FFB736 42.86%, #FFD082 49.48%, #864F00 56.42%, #000000 100%)",
+  crimson:
+    "linear-gradient(225deg, #FF9797 0%, #FF3636 42.86%, #FF8282 49.48%, #860000 56.42%, #000000 100%)",
+  violet:
+    "linear-gradient(225deg, #C397FF 0%, #8836FF 42.86%, #B082FF 49.48%, #2D0086 56.42%, #000000 100%)",
+  ocean:
+    "linear-gradient(225deg, #97C5FF 0%, #3680FF 42.86%, #82A8FF 49.48%, #001E86 56.42%, #000000 100%)",
+  sunset:
+    "linear-gradient(225deg, #FFB597 0%, #FF6536 42.86%, #FF9882 49.48%, #861500 56.42%, #000000 100%)",
+};
+
 interface LiquidGradientButtonProps extends HTMLMotionProps<"button"> {
   loading?: boolean;
+  variant?: LiquidGradientVariant;
 }
 
 const buttonVar = {
@@ -16,7 +44,7 @@ const buttonVar = {
 const LiquidGradientButton = React.forwardRef<
   HTMLButtonElement,
   LiquidGradientButtonProps
->(({ className, children, loading, ...props }, ref) => {
+>(({ className, children, loading, variant = "violet", ...props }, ref) => {
   return (
     <motion.button
       ref={ref}
@@ -26,8 +54,7 @@ const LiquidGradientButton = React.forwardRef<
         className,
       )}
       style={{
-        background:
-          "linear-gradient(225deg, #FD97FF 0%, #FC36FF 42.86%, #FD82FF 49.48%, #830086 56.42%, #000000 100%)",
+        background: liquidGradientStyles[variant],
       }}
       {...props}
     >

@@ -9,6 +9,8 @@ import SuccessRippleAnimation from "registry/new-york/motion-framer/success-ripp
 import TabBackgroundAnimation from "registry/new-york/motion-framer/tab-background-animation";
 import OrbitDotMotion from "registry/new-york/motion-framer/orbit-dot-motion";
 import CoinSpinAnimation from "registry/new-york/motion-framer/coin-spin-animation";
+import FreePremiumToggle from "registry/new-york/motion-framer/free-premium-toggle";
+import MilestoneOdometer from "registry/new-york/motion-framer/milestone-odometer";
 import CopyDropdown from "../copy-dropdown";
 
 const MotionComponentArr: {
@@ -18,6 +20,22 @@ const MotionComponentArr: {
   registryName: string;
   isNew?: boolean;
 }[] = [
+  {
+    name: "Milestone Odometer",
+    description:
+      "Animated odometer roller with staggered digit spin reveal.",
+    Component: MilestoneOdometer,
+    registryName: "milestone-odometer",
+    isNew: true,
+  },
+  {
+    name: "Free / Premium Toggle",
+    description:
+      "Pill segmented control with spring-animated dark selector.",
+    Component: FreePremiumToggle,
+    registryName: "free-premium-toggle",
+    isNew: true,
+  },
   {
     name: "Simple Card",
     description: "A simple card animation using Framer Motion.",

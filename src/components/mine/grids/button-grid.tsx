@@ -42,9 +42,12 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CopyDropdown from "../copy-dropdown";
 import LiquidGlassButton from "registry/new-york/buttons/liquid-glass-button";
-// import FramerCtaButton from "../../../../registry/new-york/buttons/framer-cta-button";
-// import SoftPillButton from "../../../../registry/new-york/buttons/soft-pill-button";
-// import BookDemoButton from "../../../../registry/new-york/buttons/book-demo-button";
+import FramerCtaButton from "../../../../registry/new-york/buttons/framer-cta-button";
+import SoftPillButton from "../../../../registry/new-york/buttons/soft-pill-button";
+import BookDemoButton from "../../../../registry/new-york/buttons/book-demo-button";
+import SquircleCounterButton from "../../../../registry/new-york/buttons/squircle-counter-button";
+import PearlToggleButton from "../../../../registry/new-york/buttons/pearl-toggle-button";
+import RecessedStepperButton from "../../../../registry/new-york/buttons/recessed-stepper-button";
 
 const threedVariants: ThreedVariant[] = [
   "amber",
@@ -409,21 +412,44 @@ const ToggleButtonWrapper = () => {
 
 export const ButtonsArr = [
   // {
-  //   name: "Book a Demo Button",
+  //   name: "Recessed Stepper",
   //   description:
-  //     "Lime square with dotted chevron animation that expands a dark panel on hover.",
-  //   component: <BookDemoButton>Book a demo</BookDemoButton>,
-  //   registryName: "book-demo-button",
+  //     "Embossed +/- stepper sitting in a recessed pill cavity with press-to-sink and hold-to-repeat.",
+  //   component: <RecessedStepperButton />,
+  //   registryName: "recessed-stepper-button",
   // },
   // {
+  //   name: "Pearl Toggle",
+  //   description:
+  //     "Cream pill toggle with thin stroke and a glossy pearl thumb.",
+  //   component: <PearlToggleButton />,
+  //   registryName: "pearl-toggle-button",
+  // },
+  // {
+  //   name: "Squircle Counter Button",
+  //   description:
+  //     "Glossy squircle button with spring number transitions on click.",
+  //   component: <SquircleCounterButton />,
+  //   registryName: "squircle-counter-button",
+  // },
+  {
+    name: "Book a Demo Button",
+    description:
+      "Lime square with dotted chevron animation that expands a dark panel on hover.",
+    component: <BookDemoButton>Book a demo</BookDemoButton>,
+    registryName: "book-demo-button",
+  },
+  // {
   //   name: "Soft Pill Secondary",
-  //   description: "Frosted-glass nav pill with layered highlights and gradient border.",
+  //   description:
+  //     "Frosted-glass nav pill with layered highlights and gradient border.",
   //   component: <SoftPillButton variant="secondary">Philosophy</SoftPillButton>,
   //   registryName: "soft-pill-button",
   // },
   // {
   //   name: "Soft Pill Primary",
-  //   description: "Dark frosted-glass CTA pill with subtle inner glow and metallic border.",
+  //   description:
+  //     "Dark frosted-glass CTA pill with subtle inner glow and metallic border.",
   //   component: <SoftPillButton variant="primary">Get in touch</SoftPillButton>,
   //   registryName: "soft-pill-button",
   // },

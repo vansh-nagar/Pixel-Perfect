@@ -1552,6 +1552,37 @@
           "target": "components/pixel-perfect/guitar.tsx"
         }
       ]
+    },
+    {
+      "name": "text-editor-italic",
+      "description": "Soft cream \"Text Editor\" mock with a neumorphic toolbar. The cursor drifts",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/text-editor-italic.tsx",
+          "target": "components/pixel-perfect/text-editor-italic.tsx"
+        }
+      ]
+    },
+    {
+      "name": "yoga-invite-card",
+      "description": "Soft cream invite card with clean subtle micro-animations on mount —",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/yoga-invite-card.tsx",
+          "target": "components/pixel-perfect/yoga-invite-card.tsx"
+        }
+      ]
     }
   ]
 }

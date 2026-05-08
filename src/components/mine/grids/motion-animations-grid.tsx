@@ -11,6 +11,8 @@ import OrbitDotMotion from "registry/new-york/motion-framer/orbit-dot-motion";
 import CoinSpinAnimation from "registry/new-york/motion-framer/coin-spin-animation";
 import FreePremiumToggle from "registry/new-york/motion-framer/free-premium-toggle";
 import MilestoneOdometer from "registry/new-york/motion-framer/milestone-odometer";
+import TextEditorItalic from "registry/new-york/motion-framer/text-editor-italic";
+import YogaInviteCard from "registry/new-york/motion-framer/yoga-invite-card";
 import CopyDropdown from "../copy-dropdown";
 
 const MotionComponentArr: {
@@ -20,6 +22,22 @@ const MotionComponentArr: {
   registryName: string;
   isNew?: boolean;
 }[] = [
+  {
+    name: "Yoga Invite Card",
+    description:
+      "Soft white invite card with staggered fade-up text, springy avatar pop and yoga icon wiggle.",
+    Component: YogaInviteCard,
+    registryName: "yoga-invite-card",
+    isNew: true,
+  },
+  {
+    name: "Text Editor Italic",
+    description:
+      "Cream neumorphic toolbar with cursor drift, tooltip and italic toggle.",
+    Component: TextEditorItalic,
+    registryName: "text-editor-italic",
+    isNew: true,
+  },
   {
     name: "Milestone Odometer",
     description:

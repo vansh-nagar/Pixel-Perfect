@@ -1,0 +1,311 @@
+"use client";
+
+/**
+ * Soft cream "Text Editor" mock with a neumorphic toolbar. Click the toolbar
+ * buttons (Bold, Italic, Align) to apply formatting to the highlighted
+ * "Giovanni Giorgio" text. Hover the italic button to see its tooltip.
+ */
+
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  Play,
+  RotateCcw,
+} from "lucide-react";
+import { useMemo, useState } from "react";
+
+const TOOLBAR_BG = "#ECE9E2";
+const HIGHLIGHT = "#D6D2C8";
+
+const NAME = "Giovanni Giorgio";
+const REST_TEXT =
+  ", known professionally as Giorgio Moroder, is an Italian music producer, songwriter, and DJ who is widely regarded as one of the pioneers of electronic dance music. Born on April 26, 1940, in Italy, Moroder's career spans over five decades, and he is credited with shaping the development of disco";
+const REST_WORDS = REST_TEXT.split(/(\s+)/);
+
+type Align = "left" | "center" | "right";
+
+const TextEditorItalic = () => {
+  const [bold, setBold] = useState(false);
+  const [italic, setItalic] = useState(false);
+  const [align, setAlign] = useState<Align>("center");
+  const [hoverItalic, setHoverItalic] = useState(false);
+  const [playKey, setPlayKey] = useState(0);
+
+  const alignmentClass =
+    align === "left"
+      ? "text-left"
+      : align === "right"
+        ? "text-right"
+        : "text-center";
+
+  const cycleAlign = () =>
+    setAlign((a) => (a === "left" ? "center" : a === "center" ? "right" : "left"));
+
+  const resetFormatting = () => {
+    setBold(false);
+    setItalic(false);
+    setAlign("center");
+  };
+
+  const playAnimation = () => setPlayKey((k) => k + 1);
+
+  // Regenerate scatter offsets each time play is pressed
+  const scatter = useMemo(
+    () =>
+      NAME.split("").map(() => ({
+        x: (Math.random() - 0.5) * 18,
+        y: (Math.random() - 0.5) * 24,
+        rotate: (Math.random() - 0.5) * 60,
+      })),
+    [playKey],
+  );
+
+  return (
+    <div
+      className="relative h-80 w-[420px] overflow-hidden rounded-2xl flex flex-col items-center"
+      style={{ fontFamily: "ui-sans-serif, system-ui" }}
+    >
+      {/* Toolbar */}
+      <div className="relative mt-8">
+        <div
+          className="flex items-center gap-1.5 rounded-full pl-3 pr-1.5 py-1.5"
+          style={{
+            background: TOOLBAR_BG,
+            boxShadow:
+              "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.04) inset, 0 18px 30px -12px rgba(0,0,0,0.16), 0 4px 10px -2px rgba(0,0,0,0.06)",
+          }}
+        >
+          {/* Style 01 */}
+          <button
+            type="button"
+            className="flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium text-neutral-600 transition-colors hover:text-neutral-900"
+          >
+            Style 01
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 12 12"
+              fill="none"
+              className="text-neutral-500"
+            >
+              <path
+                d="M3 3 L9 9"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+              <path
+                d="M9 5 L9 9 L5 9"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          {/* Bold */}
+          <ToolButton
+            active={bold}
+            onClick={() => setBold((b) => !b)}
+            ariaLabel="Toggle bold"
+          >
+            <span className="text-[12px] font-bold text-neutral-800">B</span>
+          </ToolButton>
+
+          {/* Italic — hover shows tooltip */}
+          <div
+            className="relative"
+            onMouseEnter={() => setHoverItalic(true)}
+            onMouseLeave={() => setHoverItalic(false)}
+          >
+            <ToolButton
+              active={italic}
+              onClick={() => setItalic((i) => !i)}
+              ariaLabel="Toggle italic"
+            >
+              <span
+                className="text-[13px] italic text-neutral-800"
+                style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
+              >
+                I
+              </span>
+            </ToolButton>
+
+            {/* Tooltip on hover */}
+            <AnimatePresence>
+              {hoverItalic && (
+                <motion.div
+                  initial={{ opacity: 0, y: 4, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                  transition={{ duration: 0.18, ease: [0.25, 0.8, 0.4, 1] }}
+                  className="absolute -top-9 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
+                >
+                  <div
+                    className="px-2 py-1 text-[10px] font-medium text-neutral-700 rounded-md whitespace-nowrap"
+                    style={{
+                      background: "#F0EDE6",
+                      boxShadow:
+                        "0 1px 0 rgba(255,255,255,0.95) inset, 0 4px 10px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
+                    }}
+                  >
+                    Italic letters
+                  </div>
+                  <div
+                    className="absolute left-1/2 top-full -translate-x-1/2 -mt-[3px] size-1.5 rotate-45"
+                    style={{ background: "#F0EDE6" }}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Align — cycles left/center/right */}
+          <ToolButton
+            active={align !== "center"}
+            onClick={cycleAlign}
+            ariaLabel={`Alignment: ${align}`}
+          >
+            {align === "left" ? (
+              <AlignLeft className="size-3.5 text-neutral-800" strokeWidth={1.8} />
+            ) : align === "right" ? (
+              <AlignRight className="size-3.5 text-neutral-800" strokeWidth={1.8} />
+            ) : (
+              <AlignCenter className="size-3.5 text-neutral-800" strokeWidth={1.8} />
+            )}
+          </ToolButton>
+
+          {/* Spacer */}
+          <div className="w-1" />
+
+          {/* Reset formatting */}
+          <ToolButton
+            active={false}
+            onClick={resetFormatting}
+            ariaLabel="Reset formatting"
+          >
+            <RotateCcw className="size-3.5 text-neutral-700" strokeWidth={1.8} />
+          </ToolButton>
+
+          {/* Play — triggers letter-scatter animation on the body text */}
+          <motion.button
+            type="button"
+            onClick={playAnimation}
+            whileTap={{ scale: 0.92 }}
+            whileHover={{ y: -1 }}
+            transition={{ type: "spring", stiffness: 500, damping: 22 }}
+            className="grid size-7 cursor-pointer place-items-center rounded-full"
+            style={{
+              background:
+                "linear-gradient(180deg, #2a2a2a 0%, #0a0a0a 100%)",
+              boxShadow:
+                "0 1px 0 rgba(255,255,255,0.16) inset, 0 -1px 1px rgba(0,0,0,0.45) inset, 0 2px 5px rgba(0,0,0,0.2)",
+            }}
+            aria-label="Play animation"
+          >
+            <Play className="size-3 fill-white text-white" strokeWidth={0} />
+          </motion.button>
+        </div>
+      </div>
+
+      {/* Body text — re-keyed by playKey so the stagger animation re-runs on play */}
+      <div
+        key={playKey}
+        className={`relative mt-10 px-10 ${alignmentClass}`}
+      >
+        <p
+          className="text-[13px] leading-[1.55] tracking-[-0.005em] text-neutral-700"
+          style={{
+            maskImage:
+              "linear-gradient(180deg, black 0%, black 65%, transparent 95%)",
+            WebkitMaskImage:
+              "linear-gradient(180deg, black 0%, black 65%, transparent 95%)",
+            fontStyle: italic ? "italic" : "normal",
+            fontWeight: bold ? 600 : 400,
+          }}
+        >
+          <span
+            className="px-0.5 py-px"
+            style={{ background: "#DDD8CC", borderRadius: 2 }}
+          >
+            {NAME.split("").map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{
+                  opacity: 0,
+                  x: scatter[i].x,
+                  y: scatter[i].y,
+                  rotate: scatter[i].rotate,
+                }}
+                animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+                transition={{
+                  delay: i * 0.025,
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 22,
+                }}
+                style={{ display: "inline-block" }}
+              >
+                {char === " " ? " " : char}
+              </motion.span>
+            ))}
+          </span>
+          {REST_WORDS.map((word, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 4, filter: "blur(3px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{
+                delay: 0.45 + i * 0.012,
+                duration: 0.35,
+                ease: "easeOut",
+              }}
+              style={{ display: "inline-block", whiteSpace: "pre" }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </p>
+      </div>
+
+    </div>
+  );
+};
+
+function ToolButton({
+  active,
+  onClick,
+  ariaLabel,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  ariaLabel: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      aria-label={ariaLabel}
+      aria-pressed={active}
+      animate={{
+        backgroundColor: active ? HIGHLIGHT : "rgba(0,0,0,0)",
+      }}
+      whileTap={{ scale: 0.92 }}
+      whileHover={{ backgroundColor: active ? HIGHLIGHT : "rgba(0,0,0,0.04)" }}
+      transition={{
+        backgroundColor: { duration: 0.18 },
+        scale: { type: "spring", stiffness: 600, damping: 22 },
+      }}
+      className="grid size-7 cursor-pointer place-items-center rounded-full"
+    >
+      {children}
+    </motion.button>
+  );
+}
+
+export default TextEditorItalic;

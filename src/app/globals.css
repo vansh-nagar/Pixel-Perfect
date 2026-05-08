@@ -192,7 +192,6 @@ body,
   }
 }
 
-
 /* Hide all scrollbars (visual only) across browsers) */
 .noScrollbar {
   -ms-overflow-style: none; /* IE and Edge */
@@ -272,15 +271,12 @@ body::-webkit-scrollbar,
     var(--animation-direction, forwards) linear infinite;
 }
 
-
 .box-slot {
   width: 40px;
   height: 40px;
   border: 1px dashed #555;
   border-radius: 8px;
 }
-
-
 
 .shader {
   position: relative;
@@ -321,8 +317,6 @@ body::-webkit-scrollbar,
     hsl(303, 60%, 40%)
   );
 }
-
-
 
 .Walker {
   transform-box: fill-box;

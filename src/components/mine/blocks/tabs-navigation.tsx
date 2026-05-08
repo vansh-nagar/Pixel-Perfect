@@ -10,6 +10,7 @@ import GsapStaggerGrid from "../grids/gsap-grid";
 import SvgAssetsGrid from "../grids/svg-grid";
 import BentoCardsGrid from "../grids/bento-cards-grid";
 import AsciiAnimationsGrid from "../grids/ascii-animations-grid";
+import SidebarGrid from "../grids/sidebar-grid";
 
 const navItems = [
   {
@@ -55,6 +56,10 @@ const navItems = [
   {
     name: "Bento Cards",
     component: <BentoCardsGrid />,
+  },
+  {
+    name: "Sidebars",
+    component: <SidebarGrid />,
   },
 ];
 

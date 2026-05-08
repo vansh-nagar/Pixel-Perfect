@@ -1009,6 +1009,20 @@
           "target": "components/pixel-perfect/bar-wave-animation.tsx"
         }
       ]
+    },
+    {
+      "name": "claude-sidebar",
+      "description": "Claude-style sidebar built on shadcn/ui's <Sidebar> primitives. Smooth icon-rail collapse animation, playful icon micro-interactions on hover, starred & recent chat lists, user card with auto-tooltips when collapsed. Customizable via props (navItems, starred, recents, user).",
+      "type": "registry:block",
+      "dependencies": [],
+      "registryDependencies": ["sidebar"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/sidebars/claude-sidebar.tsx",
+          "target": "components/pixel-perfect/claude-sidebar.tsx"
+        }
+      ]
     }
   ]
 }

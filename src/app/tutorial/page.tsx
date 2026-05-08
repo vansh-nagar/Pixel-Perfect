@@ -33,6 +33,7 @@ import BorderGradientButtonTutorial from "./tutorials/border-gradient-button/bor
 import StripeButtonTutorial from "./tutorials/stripe-button/stripe-button-tutorial";
 import VisitButtonTutorial from "./tutorials/visit-button/visit-button-tutorial";
 import GlassButtonTutorial from "./tutorials/glass-button/glass-button-tutorial";
+import BookDemoButtonTutorial from "./tutorials/book-demo-button/book-demo-button-tutorial";
 
 type TutorialItem = {
   name: string;
@@ -196,6 +197,15 @@ const categories: Category[] = [
         tags: ["glass", "gradient", "border", "backdrop-blur"],
         registryName: "glass-button",
         tutorial: GlassButtonTutorial,
+      },
+      {
+        name: "Book a Demo Button",
+        description:
+          "Lime square with dotted chevron animation that expands a dark panel on hover.",
+        category: "Buttons",
+        tags: ["lime", "chevron", "hover", "expand"],
+        registryName: "book-demo-button",
+        tutorial: BookDemoButtonTutorial,
       },
     ],
   },
@@ -745,6 +755,7 @@ const TutorialPage = () => {
       "goe-button",
       "orange-premium-button",
       "glass-button",
+      "book-demo-button",
     ]);
 
     return categories

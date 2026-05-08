@@ -411,6 +411,13 @@ const ToggleButtonWrapper = () => {
 };
 
 export const ButtonsArr = [
+  {
+    name: "Book a Demo Button",
+    description:
+      "Lime square with dotted chevron animation that expands a dark panel on hover.",
+    component: <BookDemoButton>Book a demo</BookDemoButton>,
+    registryName: "book-demo-button",
+  },
   // {
   //   name: "Recessed Stepper",
   //   description:
@@ -420,8 +427,7 @@ export const ButtonsArr = [
   // },
   // {
   //   name: "Pearl Toggle",
-  //   description:
-  //     "Cream pill toggle with thin stroke and a glossy pearl thumb.",
+  //   description: "Cream pill toggle with thin stroke and a glossy pearl thumb.",
   //   component: <PearlToggleButton />,
   //   registryName: "pearl-toggle-button",
   // },
@@ -432,13 +438,7 @@ export const ButtonsArr = [
   //   component: <SquircleCounterButton />,
   //   registryName: "squircle-counter-button",
   // },
-  {
-    name: "Book a Demo Button",
-    description:
-      "Lime square with dotted chevron animation that expands a dark panel on hover.",
-    component: <BookDemoButton>Book a demo</BookDemoButton>,
-    registryName: "book-demo-button",
-  },
+
   // {
   //   name: "Soft Pill Secondary",
   //   description:

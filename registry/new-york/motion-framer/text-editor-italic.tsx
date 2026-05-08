@@ -14,15 +14,24 @@ import {
   Play,
   RotateCcw,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
-const TOOLBAR_BG = "#ECE9E2";
-const HIGHLIGHT = "#D6D2C8";
+const TOOLBAR_BG = "#F2F2F1";
+const HIGHLIGHT = "#E2E2E0";
+const NAME_HIGHLIGHT = "#EAEAE8";
+const TOOLTIP_BG = "#F6F6F5";
 
+const FULL_TEXT =
+  "Giovanni Giorgio, known professionally as Giorgio Moroder, is an Italian music producer, songwriter, and DJ who is widely regarded as one of the pioneers of electronic dance music. Born on April 26, 1940, in Italy, Moroder's career spans over five decades, and he is credited with shaping the development of disco";
 const NAME = "Giovanni Giorgio";
-const REST_TEXT =
-  ", known professionally as Giorgio Moroder, is an Italian music producer, songwriter, and DJ who is widely regarded as one of the pioneers of electronic dance music. Born on April 26, 1940, in Italy, Moroder's career spans over five decades, and he is credited with shaping the development of disco";
+const REST_TEXT = FULL_TEXT.slice(NAME.length);
 const REST_WORDS = REST_TEXT.split(/(\s+)/);
+
+const STYLES = [
+  { label: "Style 01", fontFamily: "ui-sans-serif, system-ui, sans-serif" },
+  { label: "Style 02", fontFamily: "Georgia, 'Times New Roman', serif" },
+  { label: "Style 03", fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" },
+] as const;
 
 type Align = "left" | "center" | "right";
 
@@ -32,6 +41,10 @@ const TextEditorItalic = () => {
   const [align, setAlign] = useState<Align>("center");
   const [hoverItalic, setHoverItalic] = useState(false);
   const [playKey, setPlayKey] = useState(0);
+  const [styleIdx, setStyleIdx] = useState(0);
+
+  const cycleStyle = () => setStyleIdx((i) => (i + 1) % STYLES.length);
+  const currentStyle = STYLES[styleIdx];
 
   const alignmentClass =
     align === "left"
@@ -51,17 +64,6 @@ const TextEditorItalic = () => {
 
   const playAnimation = () => setPlayKey((k) => k + 1);
 
-  // Regenerate scatter offsets each time play is pressed
-  const scatter = useMemo(
-    () =>
-      NAME.split("").map(() => ({
-        x: (Math.random() - 0.5) * 18,
-        y: (Math.random() - 0.5) * 24,
-        rotate: (Math.random() - 0.5) * 60,
-      })),
-    [playKey],
-  );
-
   return (
     <div
       className="relative h-80 w-[420px] overflow-hidden rounded-2xl flex flex-col items-center"
@@ -77,12 +79,14 @@ const TextEditorItalic = () => {
               "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.04) inset, 0 18px 30px -12px rgba(0,0,0,0.16), 0 4px 10px -2px rgba(0,0,0,0.06)",
           }}
         >
-          {/* Style 01 */}
+          {/* Style cycler — changes the font of the highlighted name */}
           <button
             type="button"
-            className="flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium text-neutral-600 transition-colors hover:text-neutral-900"
+            onClick={cycleStyle}
+            aria-label={`Font style: ${currentStyle.label}`}
+            className="flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium text-neutral-600 transition-colors hover:text-neutral-900 active:scale-[0.97]"
           >
-            Style 01
+            {currentStyle.label}
             <svg
               width="11"
               height="11"
@@ -147,7 +151,7 @@ const TextEditorItalic = () => {
                   <div
                     className="px-2 py-1 text-[10px] font-medium text-neutral-700 rounded-md whitespace-nowrap"
                     style={{
-                      background: "#F0EDE6",
+                      background: TOOLTIP_BG,
                       boxShadow:
                         "0 1px 0 rgba(255,255,255,0.95) inset, 0 4px 10px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
                     }}
@@ -156,7 +160,7 @@ const TextEditorItalic = () => {
                   </div>
                   <div
                     className="absolute left-1/2 top-full -translate-x-1/2 -mt-[3px] size-1.5 rotate-45"
-                    style={{ background: "#F0EDE6" }}
+                    style={{ background: TOOLTIP_BG }}
                   />
                 </motion.div>
               )}
@@ -229,29 +233,21 @@ const TextEditorItalic = () => {
         >
           <span
             className="px-0.5 py-px"
-            style={{ background: "#DDD8CC", borderRadius: 2 }}
+            style={{
+              background: NAME_HIGHLIGHT,
+              borderRadius: 2,
+              fontFamily: currentStyle.fontFamily,
+            }}
           >
-            {NAME.split("").map((char, i) => (
-              <motion.span
-                key={i}
-                initial={{
-                  opacity: 0,
-                  x: scatter[i].x,
-                  y: scatter[i].y,
-                  rotate: scatter[i].rotate,
-                }}
-                animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
-                transition={{
-                  delay: i * 0.025,
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 22,
-                }}
-                style={{ display: "inline-block" }}
-              >
-                {char === " " ? " " : char}
-              </motion.span>
-            ))}
+            <motion.span
+              key={`name-${styleIdx}-${playKey}`}
+              initial={{ opacity: 0, y: 4, filter: "blur(3px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              style={{ display: "inline-block" }}
+            >
+              {NAME}
+            </motion.span>
           </span>
           {REST_WORDS.map((word, i) => (
             <motion.span
@@ -259,7 +255,7 @@ const TextEditorItalic = () => {
               initial={{ opacity: 0, y: 4, filter: "blur(3px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{
-                delay: 0.45 + i * 0.012,
+                delay: 0.05 + i * 0.012,
                 duration: 0.35,
                 ease: "easeOut",
               }}

@@ -22,14 +22,14 @@ const MotionComponentArr: {
   registryName: string;
   isNew?: boolean;
 }[] = [
-  {
-    name: "Yoga Invite Card",
-    description:
-      "Soft white invite card with staggered fade-up text, springy avatar pop and yoga icon wiggle.",
-    Component: YogaInviteCard,
-    registryName: "yoga-invite-card",
-    isNew: true,
-  },
+  // {
+  //   name: "Yoga Invite Card",
+  //   description:
+  //     "Soft white invite card with staggered fade-up text, springy avatar pop and yoga icon wiggle.",
+  //   Component: YogaInviteCard,
+  //   registryName: "yoga-invite-card",
+  //   isNew: true,
+  // },
   {
     name: "Text Editor Italic",
     description:
@@ -40,16 +40,14 @@ const MotionComponentArr: {
   },
   {
     name: "Milestone Odometer",
-    description:
-      "Animated odometer roller with staggered digit spin reveal.",
+    description: "Animated odometer roller with staggered digit spin reveal.",
     Component: MilestoneOdometer,
     registryName: "milestone-odometer",
     isNew: true,
   },
   {
     name: "Free / Premium Toggle",
-    description:
-      "Pill segmented control with spring-animated dark selector.",
+    description: "Pill segmented control with spring-animated dark selector.",
     Component: FreePremiumToggle,
     registryName: "free-premium-toggle",
     isNew: true,
@@ -122,44 +120,47 @@ const MotionAnimationsGrid = () => {
         {paginatedItems.map((item, index) => {
           const Component = item.Component;
           return (
-          <div
-            key={startIndex + index}
-            className="relative w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
-          >
-            <div className="z-30" key={refreshKeys[startIndex + index] || 0}>
-              <Component />
-            </div>
+            <div
+              key={startIndex + index}
+              className="relative w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
+            >
+              <div className="z-30" key={refreshKeys[startIndex + index] || 0}>
+                <Component />
+              </div>
 
-            <div className="absolute left-1.5 top-1.5 z-40 flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-6 w-6 rounded-none text-muted-foreground hover:bg-transparent hover:text-foreground"
-                onClick={() => handleRefresh(startIndex + index)}
-              >
-                <RefreshCcw className="size-3" />
-              </Button>
+              <div className="absolute left-1.5 top-1.5 z-40 flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 rounded-none text-muted-foreground hover:bg-transparent hover:text-foreground"
+                  onClick={() => handleRefresh(startIndex + index)}
+                >
+                  <RefreshCcw className="size-3" />
+                </Button>
 
-              {item.isNew && (
-                <span className="border border-emerald-500/50 bg-emerald-500/15 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-emerald-600">
-                  New
-                </span>
-              )}
-            </div>
+                {item.isNew && (
+                  <span className="border border-emerald-500/50 bg-emerald-500/15 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-emerald-600">
+                    New
+                  </span>
+                )}
+              </div>
 
-            <div className=" leading-1 absolute left-1.5  bottom-1.5">
-              <p className="text-xs ">{item.name}</p>
-              <p className="text-[8px] text-muted-foreground">
-                {item.description}
-              </p>
+              <div className=" leading-1 absolute left-1.5  bottom-1.5">
+                <p className="text-xs ">{item.name}</p>
+                <p className="text-[8px] text-muted-foreground">
+                  {item.description}
+                </p>
+              </div>
+              <div className="absolute inset-x-0 top-0 grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-2">
+                <div className="border-t border-dashed" />
+                <CopyDropdown
+                  registryName={item.registryName}
+                  variant="ghost"
+                />
+                <div />
+                <div className="h-full border-r border-dashed -mr-[0.5px]" />
+              </div>
             </div>
-            <div className="absolute inset-x-0 top-0 grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-2">
-              <div className="border-t border-dashed" />
-              <CopyDropdown registryName={item.registryName} variant="ghost" />
-              <div />
-              <div className="h-full border-r border-dashed -mr-[0.5px]" />
-            </div>
-          </div>
           );
         })}
       </div>

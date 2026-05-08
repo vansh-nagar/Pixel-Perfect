@@ -4,8 +4,8 @@
   "type": "registry:block",
   "description": "3D push button with press/hover physics and 8 color variants: amber, emerald, rose, sky, violet, slate, coral, mint.",
   "dependencies": [
-    "gsap",
-    "@gsap/react"
+    "@gsap/react",
+    "gsap"
   ],
   "files": [
     {

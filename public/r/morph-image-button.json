@@ -4,8 +4,11 @@
   "type": "registry:block",
   "description": "A button that morphs an image mask on hover using GSAP.",
   "dependencies": [
-    "gsap",
-    "@gsap/react"
+    "@gsap/react",
+    "gsap"
+  ],
+  "registryDependencies": [
+    "button"
   ],
   "files": [
     {

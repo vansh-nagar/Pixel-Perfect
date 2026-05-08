@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mouse-follower2",
+  "type": "registry:block",
+  "description": "Mouse Follower2 component.",
+  "dependencies": [],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/mouse-follower/mouse-follower2.tsx",
+      "content": "\"use client\";\r\nimport { useEffect, useRef, useState } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\n\r\nconst MouseFollower2 = () => {\r\n  const followerRef = useRef<HTMLDivElement | null>(null);\r\n  const containerRef = useRef<HTMLDivElement | null>(null);\r\n  const [isButtonHovering, setisButtonHovering] = useState(false);\r\n\r\n  const buttonRef = useRef<HTMLButtonElement | null>(null);\r\n\r\n  useEffect(() => {\r\n    const mouseMove = (e: MouseEvent) => {\r\n      if (!followerRef.current) return;\r\n      const containerRect = containerRef.current?.getBoundingClientRect();\r\n      if (!containerRect) return;\r\n      const mouseX = e.clientX - 20;\r\n      const mouseY = e.clientY - 20;\r\n\r\n      followerRef.current.animate(\r\n        {\r\n          transform: `translate(${mouseX}px, ${mouseY}px) scale(${\r\n            isButtonHovering ? 1.3 : 1\r\n          })`,\r\n        },\r\n        {\r\n          duration: isButtonHovering ? 3000 : 300,\r\n          fill: \"forwards\",\r\n          easing: \"ease-out\",\r\n        }\r\n      );\r\n\r\n      if (!buttonRef.current) return;\r\n\r\n      const rect = buttonRef.current.getBoundingClientRect();\r\n\r\n      const x = e.clientX - rect.left - rect.width / 2;\r\n      const y = e.clientY - rect.top - rect.height / 2;\r\n\r\n      const maxMove = 8;\r\n\r\n      const clampedX = Math.max(-maxMove, Math.min(maxMove, x / 5));\r\n      const clampedY = Math.max(-maxMove, Math.min(maxMove, y / 5));\r\n\r\n      buttonRef.current.animate(\r\n        {\r\n          transform: isButtonHovering\r\n            ? `translate(${clampedX}px, ${clampedY}px)`\r\n            : `translate(0px, 0px)`,\r\n        },\r\n        {\r\n          duration: 3000,\r\n          fill: \"forwards\",\r\n          easing: \"ease-out\",\r\n        }\r\n      );\r\n    };\r\n\r\n    window?.addEventListener(\"mousemove\", mouseMove);\r\n\r\n    return () => {\r\n      window?.removeEventListener(\"mousemove\", mouseMove);\r\n    };\r\n  }, [isButtonHovering]);\r\n\r\n  return (\r\n    <div\r\n      ref={containerRef}\r\n      className=\"relative h-full w-full flex justify-center items-center cursor-none border  overflow-hidden\"\r\n    >\r\n      <div\r\n        ref={followerRef}\r\n        className=\"w-10 aspect-square rounded-full fixed top-0 left-0 border-dashed border border-white blur-[1px] z-40 pointer-events-none\"\r\n      />\r\n      <Button\r\n        ref={buttonRef}\r\n        onMouseEnter={() => {\r\n          setisButtonHovering(true);\r\n        }}\r\n        onMouseLeave={() => {\r\n          setisButtonHovering(false);\r\n        }}\r\n        className=\"shiny relative overflow-hidden bg-black text-white z-10 shadow-[inset_1px_1px_4px_0.1px_white,inset_-1px_-1px_4px_0.1px_white] rounded-full hover:bg-black/60\"\r\n      >\r\n        <span className=\"z-30\">Shiny Button</span>\r\n        <div className=\"h-20 bg-gradient-to-tr from-white to-black w-3 -rotate-45 origin-top left-0  top-0 absolute blur-sm \"></div>\r\n        <div className=\"h-20 bg-white w-1 -rotate-45 origin-top left-16  top-0 absolute blur-md\"></div>\r\n      </Button>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default MouseFollower2;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/mouse-follower2.tsx"
+    }
+  ]
+}

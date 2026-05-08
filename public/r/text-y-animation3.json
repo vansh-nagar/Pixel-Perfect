@@ -4,7 +4,9 @@
   "type": "registry:block",
   "description": "Variant Y-axis animation effect.",
   "dependencies": [
-    "framer-motion"
+    "@gsap/react",
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

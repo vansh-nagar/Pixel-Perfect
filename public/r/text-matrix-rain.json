@@ -4,7 +4,9 @@
   "type": "registry:block",
   "description": "Columns of random symbols fall then lock into real text.",
   "dependencies": [
-    "framer-motion"
+    "@gsap/react",
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

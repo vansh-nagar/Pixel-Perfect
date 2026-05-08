@@ -4,8 +4,11 @@
   "type": "registry:block",
   "description": "A button that follows the mouse cursor with hover effects.",
   "dependencies": [
-    "gsap",
-    "@gsap/react"
+    "@gsap/react",
+    "gsap"
+  ],
+  "registryDependencies": [
+    "button"
   ],
   "files": [
     {

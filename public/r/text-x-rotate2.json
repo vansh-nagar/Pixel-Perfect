@@ -4,8 +4,8 @@
   "type": "registry:block",
   "description": "Y-axis text animation with blur using GSAP SplitText.",
   "dependencies": [
-    "gsap",
-    "@gsap/react"
+    "@gsap/react",
+    "gsap"
   ],
   "files": [
     {

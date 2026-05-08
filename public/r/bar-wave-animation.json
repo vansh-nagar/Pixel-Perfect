@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bar-wave-animation",
+  "type": "registry:block",
+  "description": "Bar Wave Animation component.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/svg/bar-wave-animation.tsx",
+      "content": "\"use client\";\r\n\r\nimport { motion } from \"framer-motion\";\r\nimport { useState } from \"react\";\r\n\r\nconst TOTAL = 15;\r\n\r\nconst BarWaveAnimation = () => {\r\n  const [hovered, setHovered] = useState<number | null>(null);\r\n\r\n  return (\r\n    <svg\r\n      className=\" invert dark:invert-0 cursor-pointer w-full h-full m-10\"\r\n      viewBox=\"0 0 350 130\"\r\n      overflow={\"visible\"}\r\n    >\r\n      <g transform=\"rotate(180, 175, 65)\">\r\n        {Array.from({ length: TOTAL }).map((_, i) => {\r\n          const baseHeight = 41.5199;\r\n          const distance = hovered === null ? Infinity : Math.abs(hovered - i);\r\n          const influence = Math.max(0, 1 - distance * 0.25);\r\n          const height = baseHeight + influence * 150;\r\n          const opacity = hovered === null ? 1 : 0.2 + influence * 0.8;\r\n\r\n          return (\r\n            <motion.rect\r\n              key={i}\r\n              animate={{ height, filter: `brightness(${opacity})` }}\r\n              transition={{\r\n                type: \"spring\",\r\n                stiffness: 200,\r\n                damping: 20,\r\n              }}\r\n              onHoverStart={() => setHovered(i)}\r\n              onHoverEnd={() => setHovered(null)}\r\n              x={0.4 + i * 15}\r\n              y={0.75 + i * -15}\r\n              width=\"183.071\"\r\n              height={baseHeight}\r\n              rx=\"6.5\"\r\n              transform=\"matrix(0.866025 0.5 0 1 0.0580127 -2.88838)\"\r\n              fill=\"#171717\"\r\n              stroke=\"#626262\"\r\n            />\r\n          );\r\n        })}\r\n      </g>\r\n    </svg>\r\n  );\r\n};\r\n\r\nexport default BarWaveAnimation;\r\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/bar-wave-animation.tsx"
+    }
+  ]
+}

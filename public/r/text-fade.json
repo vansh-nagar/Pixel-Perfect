@@ -4,8 +4,8 @@
   "type": "registry:block",
   "description": "Text fades in/out on scroll using GSAP.",
   "dependencies": [
-    "gsap",
-    "@gsap/react"
+    "@gsap/react",
+    "gsap"
   ],
   "files": [
     {

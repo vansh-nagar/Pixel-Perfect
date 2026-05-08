@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pearl-toggle-button",
+  "type": "registry:block",
+  "description": "Pearl Toggle Button component.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/pearl-toggle-button.tsx",
+      "content": "\"use client\";\nimport React, { useState } from \"react\";\nimport { motion } from \"framer-motion\";\n\nconst PearlToggleButton = () => {\n  const [on, setOn] = useState(true);\n\n  return (\n    <button\n      type=\"button\"\n      onClick={() => setOn((v) => !v)}\n      aria-pressed={on}\n      className=\"relative h-11 w-[88px] cursor-pointer overflow-hidden rounded-full\"\n      style={{\n        background:\n          \"linear-gradient(180deg, #E6E0D6 0%, #EFEAE1 35%, #F4EFE6 70%, #F6F2EA 100%)\",\n        boxShadow: [\n          \"inset 0 0 0 1px rgba(150,140,125,0.35)\",\n          \"inset 0 5px 6px -2px rgba(0,0,0,0.28)\",\n          \"inset 4px 0 6px -3px rgba(0,0,0,0.22)\",\n          \"inset 0 -2px 2px -1px rgba(255,255,255,0.7)\",\n          \"0 1px 0 rgba(255,255,255,0.6)\",\n          \"0 2px 4px rgba(0,0,0,0.06)\",\n        ].join(\", \"),\n      }}\n    >\n      <motion.span\n        animate={{ x: on ? 44 : 0 }}\n        transition={{ type: \"spring\", stiffness: 420, damping: 34 }}\n        className=\"absolute left-1 top-1 block h-9 w-9 rounded-full\"\n        style={{\n          background:\n            \"linear-gradient(135deg, #FFFFFF 0%, #F7F3EC 45%, #E6DFD2 100%)\",\n          boxShadow: [\n            \"inset 0 0 0 0.5px rgba(120,110,95,0.45)\",\n            \"inset 0 1px 0 rgba(255,255,255,0.95)\",\n            \"inset 0 -1px 1px rgba(0,0,0,0.06)\",\n            \"0 1px 1px rgba(0,0,0,0.08)\",\n            \"0 3px 6px -1px rgba(0,0,0,0.18)\",\n            \"0 6px 12px -4px rgba(0,0,0,0.15)\",\n          ].join(\", \"),\n        }}\n      >\n        <span\n          aria-hidden\n          className=\"pointer-events-none absolute inset-0 rounded-full\"\n          style={{\n            background:\n              \"radial-gradient(60% 80% at 80% 50%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%)\",\n          }}\n        />\n      </motion.span>\n    </button>\n  );\n};\n\nexport default PearlToggleButton;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/pearl-toggle-button.tsx"
+    }
+  ]
+}

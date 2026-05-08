@@ -4,7 +4,9 @@
   "type": "registry:block",
   "description": "Y-axis slide animation with stagger.",
   "dependencies": [
-    "framer-motion"
+    "@gsap/react",
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

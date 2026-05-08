@@ -4,7 +4,9 @@
   "type": "registry:block",
   "description": "Text reveal animation effect.",
   "dependencies": [
-    "framer-motion"
+    "@gsap/react",
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

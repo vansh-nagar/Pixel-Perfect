@@ -4,8 +4,8 @@
   "type": "registry:block",
   "description": "Text assembles from scattered pieces using GSAP ScrollTrigger.",
   "dependencies": [
-    "gsap",
-    "@gsap/react"
+    "@gsap/react",
+    "gsap"
   ],
   "files": [
     {

@@ -4,7 +4,9 @@
   "type": "registry:block",
   "description": "Random flicker then letters glow red and turn white.",
   "dependencies": [
-    "framer-motion"
+    "@gsap/react",
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

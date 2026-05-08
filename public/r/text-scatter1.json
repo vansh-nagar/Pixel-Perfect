@@ -4,7 +4,9 @@
   "type": "registry:block",
   "description": "Text scatter variant animation.",
   "dependencies": [
-    "framer-motion"
+    "@gsap/react",
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

@@ -4,7 +4,13 @@
   "type": "registry:block",
   "description": "Framer Motion card animation.",
   "dependencies": [
-    "framer-motion"
+    "framer-motion",
+    "lucide-react",
+    "motion"
+  ],
+  "registryDependencies": [
+    "button",
+    "card"
   ],
   "files": [
     {

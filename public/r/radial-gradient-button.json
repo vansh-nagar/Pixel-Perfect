@@ -7,6 +7,9 @@
     "framer-motion",
     "lucide-react"
   ],
+  "registryDependencies": [
+    "spinner"
+  ],
   "files": [
     {
       "path": "registry/new-york/buttons/radial-gradient-button.tsx",

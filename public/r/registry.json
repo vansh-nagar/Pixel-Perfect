@@ -7,7 +7,10 @@
       "name": "3d-button",
       "description": "3D push button with press/hover physics and 8 color variants: amber, emerald, rose, sky, violet, slate, coral, mint.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -20,52 +23,76 @@
       "name": "morph-button",
       "description": "A button that morphs its shape on hover using GSAP.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
           "path": "registry/new-york/buttons/morph-button.tsx",
           "target": "components/pixel-perfect/morph-button.tsx"
         }
+      ],
+      "registryDependencies": [
+        "button"
       ]
     },
     {
       "name": "morph-image-button",
       "description": "A button that morphs an image mask on hover using GSAP.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
           "path": "registry/new-york/buttons/morph-image-button.tsx",
           "target": "components/pixel-perfect/morph-image-button.tsx"
         }
+      ],
+      "registryDependencies": [
+        "button"
       ]
     },
     {
       "name": "shiny-button",
       "description": "A shiny button with hover effects.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
           "path": "registry/new-york/buttons/shiny-button.tsx",
           "target": "components/pixel-perfect/shiny-button.tsx"
         }
+      ],
+      "registryDependencies": [
+        "button"
       ]
     },
     {
       "name": "mouse-follower-button",
       "description": "A button that follows the mouse cursor with hover effects.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
           "path": "registry/new-york/buttons/mouse-follower-button.tsx",
           "target": "components/pixel-perfect/mouse-follower-button.tsx"
         }
+      ],
+      "registryDependencies": [
+        "button"
       ]
     },
     {
@@ -79,6 +106,9 @@
           "path": "registry/new-york/buttons/border-gradient-button.tsx",
           "target": "components/pixel-perfect/border-gradient-button.tsx"
         }
+      ],
+      "registryDependencies": [
+        "button"
       ]
     },
     {
@@ -111,7 +141,9 @@
       "name": "blue-chrome-button",
       "description": "A chrome-style button with layered glow border and smooth motion.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -137,7 +169,9 @@
       "name": "learn-more-button",
       "description": "An animated learn more button with hover effects using Framer Motion.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -150,7 +184,10 @@
       "name": "visit-button",
       "description": "A compact visit button with label and icon swap on hover.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -163,7 +200,9 @@
       "name": "toggle-button",
       "description": "An animated toggle switch with spring physics using Framer Motion.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -202,7 +241,10 @@
       "name": "goe-button",
       "description": "A gooey SVG filter button effect using Framer Motion.",
       "type": "registry:block",
-      "dependencies": ["framer-motion", "lucide-react"],
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -215,7 +257,10 @@
       "name": "blur-toggle-button",
       "description": "A button with blur transition effect on toggle using Framer Motion.",
       "type": "registry:block",
-      "dependencies": ["framer-motion", "lucide-react"],
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -280,7 +325,9 @@
       "name": "cyber-button",
       "description": "A cyberpunk-style button with neon borders and glitch effects.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -371,7 +418,10 @@
       "name": "mouse-follower-1",
       "description": "Image trail mouse follower using GSAP.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -384,7 +434,10 @@
       "name": "mouse-follower-2",
       "description": "Mouse follower image trail with pure DOM.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -397,7 +450,10 @@
       "name": "text-fade",
       "description": "Text fades in/out on scroll using GSAP.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -410,7 +466,10 @@
       "name": "text-inertia",
       "description": "Text follows mouse with inertia using GSAP.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -436,7 +495,11 @@
       "name": "text-x-rotate",
       "description": "3D X-axis rotation effect with stagger.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -449,7 +512,11 @@
       "name": "text-y-animation",
       "description": "Y-axis slide animation with stagger.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -462,7 +529,11 @@
       "name": "text-y-animation2",
       "description": "Variant Y-axis animation effect.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -475,7 +546,11 @@
       "name": "text-y-animation3",
       "description": "Variant Y-axis animation effect.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -488,7 +563,11 @@
       "name": "text-y-animation4",
       "description": "Variant Y-axis animation effect.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -501,7 +580,11 @@
       "name": "text-scatter",
       "description": "Text scatters and assembles with animation.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -514,7 +597,11 @@
       "name": "text-scatter1",
       "description": "Text scatter variant animation.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -527,7 +614,11 @@
       "name": "text-z-rotate",
       "description": "Z-axis rotation text animation.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -540,7 +631,11 @@
       "name": "text-z-rotate2",
       "description": "Z-axis rotation text animation variant.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -566,7 +661,11 @@
       "name": "text-reveal",
       "description": "Text reveal animation effect.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -579,7 +678,11 @@
       "name": "text-reveal2",
       "description": "Text reveal animation variant.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -592,7 +695,11 @@
       "name": "text-black-hole",
       "description": "Letters come from center, stretched and sucked outward.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -605,7 +712,11 @@
       "name": "text-burn-neon",
       "description": "Random flicker then letters glow red and turn white.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -618,7 +729,11 @@
       "name": "text-broken-glass",
       "description": "Letters start shattered and rotated then snap into place.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -631,7 +746,11 @@
       "name": "text-matrix-rain",
       "description": "Columns of random symbols fall then lock into real text.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -644,7 +763,11 @@
       "name": "text-glitch-portal",
       "description": "RGB split plus scale blur then collapse into clean text.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -657,7 +780,11 @@
       "name": "text-typewriter-glitch",
       "description": "Types then deletes then types wrong then finally correct.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "@gsap/react",
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -670,7 +797,10 @@
       "name": "text-x-rotate2",
       "description": "Y-axis text animation with blur using GSAP SplitText.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -683,7 +813,10 @@
       "name": "text-assemble",
       "description": "Text assembles from scattered pieces using GSAP ScrollTrigger.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -696,7 +829,10 @@
       "name": "svg-1",
       "description": "Animated SVG asset with GSAP.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -709,7 +845,10 @@
       "name": "svg-2",
       "description": "Animated SVG asset.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -722,7 +861,10 @@
       "name": "svg-4",
       "description": "Animated SVG asset.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -735,7 +877,10 @@
       "name": "svg-5",
       "description": "Animated SVG asset.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -748,7 +893,10 @@
       "name": "svg-6",
       "description": "Animated SVG asset.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -761,7 +909,10 @@
       "name": "svg-8",
       "description": "Animated SVG asset.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -774,7 +925,10 @@
       "name": "svg-9",
       "description": "Animated SVG asset.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -787,7 +941,10 @@
       "name": "stagger-1",
       "description": "GSAP stagger animation component.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -800,7 +957,10 @@
       "name": "flip-text-reveal",
       "description": "A GSAP Flip orb transition followed by a staggered word reveal.",
       "type": "registry:block",
-      "dependencies": ["gsap", "framer-motion"],
+      "dependencies": [
+        "framer-motion",
+        "gsap"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -818,20 +978,30 @@
       "name": "card-animation",
       "description": "Framer Motion card animation.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion",
+        "lucide-react",
+        "motion"
+      ],
       "files": [
         {
           "type": "registry:component",
           "path": "registry/new-york/motion-framer/card-animation.tsx",
           "target": "components/pixel-perfect/card-animation.tsx"
         }
+      ],
+      "registryDependencies": [
+        "button",
+        "card"
       ]
     },
     {
       "name": "logo-animation",
       "description": "Logo animation with Framer Motion and custom background.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -844,7 +1014,9 @@
       "name": "image-hover-animation",
       "description": "An image hover animation with scaling and opacity effects.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -857,7 +1029,9 @@
       "name": "tab-background-animation",
       "description": "A tab background animation using Framer Motion.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -870,7 +1044,9 @@
       "name": "success-ripple-animation",
       "description": "A looping success ripple animation with expanding rings and a checkmark draw.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -883,7 +1059,9 @@
       "name": "orbit-dot-motion",
       "description": "A 3D orbiting dot animation with perspective and rotateY motion.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -896,7 +1074,9 @@
       "name": "coin-spin-animation",
       "description": "A 3D spinning coin animation with layered faces and side depth.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -909,7 +1089,10 @@
       "name": "guitar-svg",
       "description": "Guitar SVG path effect animation.",
       "type": "registry:block",
-      "dependencies": ["gsap", "@gsap/react"],
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -961,7 +1144,9 @@
       "name": "framer-cta-button",
       "description": "Framer-style CTA pill button with brand icon and dark/light variants.",
       "type": "registry:block",
-      "dependencies": ["react-icons"],
+      "dependencies": [
+        "react-icons"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -974,34 +1159,47 @@
       "name": "liquid-gradient-button",
       "description": "Premium gradient button with image overlay, loading animation, and 8 color variants: pink, cyan, emerald, amber, crimson, violet, ocean, sunset.",
       "type": "registry:block",
-      "dependencies": ["framer-motion", "lucide-react"],
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
       "files": [
         {
           "type": "registry:component",
           "path": "registry/new-york/buttons/liquid-gradient-button.tsx",
           "target": "components/pixel-perfect/liquid-gradient-button.tsx"
         }
+      ],
+      "registryDependencies": [
+        "spinner"
       ]
     },
     {
       "name": "radial-gradient-button",
       "description": "Radial gradient button with inset glow and 8 color variants: blue, purple, emerald, crimson, amber, cyan, violet, rose.",
       "type": "registry:block",
-      "dependencies": ["framer-motion", "lucide-react"],
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
       "files": [
         {
           "type": "registry:component",
           "path": "registry/new-york/buttons/radial-gradient-button.tsx",
           "target": "components/pixel-perfect/radial-gradient-button.tsx"
         }
+      ],
+      "registryDependencies": [
+        "spinner"
       ]
-    }
-    ,
+    },
     {
       "name": "barwave-svg-animation",
       "description": "A bar wave SVG animation with interactive hover, using Framer Motion.",
       "type": "registry:block",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -1015,12 +1213,343 @@
       "description": "Claude-style sidebar built on shadcn/ui's <Sidebar> primitives. Smooth icon-rail collapse animation, playful icon micro-interactions on hover, starred & recent chat lists, user card with auto-tooltips when collapsed. Customizable via props (navItems, starred, recents, user).",
       "type": "registry:block",
       "dependencies": [],
-      "registryDependencies": ["sidebar"],
+      "registryDependencies": [
+        "sidebar"
+      ],
       "files": [
         {
           "type": "registry:component",
           "path": "registry/new-york/sidebars/claude-sidebar.tsx",
           "target": "components/pixel-perfect/claude-sidebar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "red fire",
+      "description": "Red fire component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/ascii/red fire.tsx",
+          "target": "components/pixel-perfect/red fire.tsx"
+        }
+      ]
+    },
+    {
+      "name": "border1",
+      "description": "Border1 component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/border1.tsx",
+          "target": "components/pixel-perfect/border1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "border2",
+      "description": "Border2 component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/border2.tsx",
+          "target": "components/pixel-perfect/border2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "intersection-grid-svg",
+      "description": "Intersection Grid Svg component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/intersection-grid-svg.tsx",
+          "target": "components/pixel-perfect/intersection-grid-svg.tsx"
+        }
+      ]
+    },
+    {
+      "name": "intersection1",
+      "description": "Intersection1 component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/intersection1.tsx",
+          "target": "components/pixel-perfect/intersection1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "intersection2",
+      "description": "Intersection2 component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/intersection2.tsx",
+          "target": "components/pixel-perfect/intersection2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "learn-more-buttion",
+      "description": "Learn More Buttion component.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/learn-more-buttion.tsx",
+          "target": "components/pixel-perfect/learn-more-buttion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "liquid-glass-button",
+      "description": "Liquid Glass Button component.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/liquid-glass-button.tsx",
+          "target": "components/pixel-perfect/liquid-glass-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pearl-toggle-button",
+      "description": "Pearl Toggle Button component.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/pearl-toggle-button.tsx",
+          "target": "components/pixel-perfect/pearl-toggle-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "recessed-stepper-button",
+      "description": "Recessed Stepper Button component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/recessed-stepper-button.tsx",
+          "target": "components/pixel-perfect/recessed-stepper-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "squircle-counter-button",
+      "description": "Squircle Counter Button component.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/squircle-counter-button.tsx",
+          "target": "components/pixel-perfect/squircle-counter-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-buttion",
+      "description": "Toggle Buttion component.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/toggle-buttion.tsx",
+          "target": "components/pixel-perfect/toggle-buttion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gsap-flip.d",
+      "description": "Gsap Flip.d component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/gsap-flip.d.ts",
+          "target": "components/pixel-perfect/gsap-flip.d.ts"
+        }
+      ]
+    },
+    {
+      "name": "stagger1",
+      "description": "Stagger1 component.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/stagger1.tsx",
+          "target": "components/pixel-perfect/stagger1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "free-premium-toggle",
+      "description": "Free Premium Toggle component.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/free-premium-toggle.tsx",
+          "target": "components/pixel-perfect/free-premium-toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "milestone-odometer",
+      "description": "Milestone Odometer component.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/milestone-odometer.tsx",
+          "target": "components/pixel-perfect/milestone-odometer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mouse-follower1",
+      "description": "Mouse Follower1 component.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mouse-follower1.tsx",
+          "target": "components/pixel-perfect/mouse-follower1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mouse-follower2",
+      "description": "Mouse Follower2 component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mouse-follower2.tsx",
+          "target": "components/pixel-perfect/mouse-follower2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bar-wave-animation",
+      "description": "Bar Wave Animation component.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/bar-wave-animation.tsx",
+          "target": "components/pixel-perfect/bar-wave-animation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg5",
+      "description": "Svg5 component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg5.tsx",
+          "target": "components/pixel-perfect/svg5.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg6",
+      "description": "Svg6 component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg6.tsx",
+          "target": "components/pixel-perfect/svg6.tsx"
+        }
+      ]
+    },
+    {
+      "name": "svg8",
+      "description": "Svg8 component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/svg8.tsx",
+          "target": "components/pixel-perfect/svg8.tsx"
+        }
+      ]
+    },
+    {
+      "name": "guitar",
+      "description": "Guitar component.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg-path-effects/guitar.tsx",
+          "target": "components/pixel-perfect/guitar.tsx"
         }
       ]
     }

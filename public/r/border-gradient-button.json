@@ -4,6 +4,9 @@
   "type": "registry:block",
   "description": "A button with a gradient border effect.",
   "dependencies": [],
+  "registryDependencies": [
+    "button"
+  ],
   "files": [
     {
       "path": "registry/new-york/buttons/border-gradient-button.tsx",

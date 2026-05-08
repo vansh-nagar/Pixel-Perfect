@@ -4,7 +4,9 @@
   "type": "registry:block",
   "description": "Z-axis rotation text animation variant.",
   "dependencies": [
-    "framer-motion"
+    "@gsap/react",
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

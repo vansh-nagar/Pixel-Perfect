@@ -4,7 +4,8 @@
   "type": "registry:block",
   "description": "A compact visit button with label and icon swap on hover.",
   "dependencies": [
-    "framer-motion"
+    "framer-motion",
+    "lucide-react"
   ],
   "files": [
     {

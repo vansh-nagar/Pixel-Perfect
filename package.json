@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "registry:build": "shadcn build",
+    "registry:sync": "node scripts/sync-registry.mjs",
+    "registry:watch": "node scripts/sync-registry.mjs --watch",
     "rbuild": "shadcn build"
   },
   "dependencies": {

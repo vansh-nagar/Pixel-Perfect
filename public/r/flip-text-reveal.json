@@ -4,8 +4,8 @@
   "type": "registry:block",
   "description": "A GSAP Flip orb transition followed by a staggered word reveal.",
   "dependencies": [
-    "gsap",
-    "framer-motion"
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

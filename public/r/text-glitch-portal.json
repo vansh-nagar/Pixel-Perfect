@@ -4,7 +4,9 @@
   "type": "registry:block",
   "description": "RGB split plus scale blur then collapse into clean text.",
   "dependencies": [
-    "framer-motion"
+    "@gsap/react",
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

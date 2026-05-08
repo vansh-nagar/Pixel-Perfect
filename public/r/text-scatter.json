@@ -4,7 +4,9 @@
   "type": "registry:block",
   "description": "Text scatters and assembles with animation.",
   "dependencies": [
-    "framer-motion"
+    "@gsap/react",
+    "framer-motion",
+    "gsap"
   ],
   "files": [
     {

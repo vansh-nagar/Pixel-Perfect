@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chunky-slider",
+  "type": "registry:block",
+  "description": "Skeuomorphic chunky slider with a cream notched track, glossy black fill, and a white pearl thumb with a dark eye center. Soft outer drop shadow gives it lift. Built on Radix UI's Slider primitive.",
+  "dependencies": [
+    "radix-ui"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/sliders/chunky-slider.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Slider as SliderPrimitive } from \"radix-ui\";\n\ninterface ChunkySliderProps {\n  defaultValue?: number;\n  min?: number;\n  max?: number;\n  step?: number;\n  width?: number;\n  onChange?: (v: number) => void;\n  className?: string;\n}\n\nconst TRACK_BG =\n  \"repeating-linear-gradient(90deg, transparent 0 5px, rgba(0,0,0,0.22) 5px 6px), #ece4d0\";\n\nconst RANGE_BG = \"#0a0a0a\";\n\nconst THUMB_BG = \"#fdfaf2\";\n\nconst EYE_BG = \"#000\";\n\nexport default function ChunkySlider({\n  defaultValue = 35,\n  min = 0,\n  max = 100,\n  step = 1,\n  width = 220,\n  onChange,\n  className = \"\",\n}: ChunkySliderProps) {\n  const [value, setValue] = React.useState<number[]>([defaultValue]);\n\n  const handleChange = (next: number[]) => {\n    setValue(next);\n    onChange?.(next[0]);\n  };\n\n  return (\n    <SliderPrimitive.Root\n      value={value}\n      onValueChange={handleChange}\n      min={min}\n      max={max}\n      step={step}\n      style={{ width }}\n      className={`relative flex h-9 touch-none items-center select-none ${className}`}\n    >\n      <SliderPrimitive.Track\n        className=\"relative h-9 w-full grow overflow-hidden rounded-full\"\n        style={{\n          background: TRACK_BG,\n          boxShadow:\n            \"inset 0 2px 3px rgba(0,0,0,0.15), inset 0 -1px 1px rgba(255,255,255,0.85), 0 6px 14px -6px rgba(0,0,0,0.35), 0 2px 3px -2px rgba(0,0,0,0.18)\",\n        }}\n      >\n        <SliderPrimitive.Range\n          className=\"absolute h-full\"\n          style={{\n            background: RANGE_BG,\n            boxShadow:\n              \"inset 0 1px 1px rgba(255,255,255,0.18), inset 0 -2px 4px rgba(0,0,0,0.5)\",\n          }}\n        />\n      </SliderPrimitive.Track>\n\n      <SliderPrimitive.Thumb\n        aria-label=\"Value\"\n        className=\"relative block size-10 shrink-0 cursor-grab rounded-full transition-transform active:cursor-grabbing active:scale-[0.97] focus-visible:outline-hidden\"\n        style={{\n          background: THUMB_BG,\n          boxShadow:\n            \"0 6px 10px rgba(0,0,0,0.32), 0 2px 3px rgba(0,0,0,0.18), inset 0 1px 1px rgba(255,255,255,0.95), inset 0 -2px 3px rgba(0,0,0,0.08)\",\n        }}\n      >\n        <span\n          aria-hidden\n          className=\"absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full\"\n          style={{\n            background: EYE_BG,\n            boxShadow:\n              \"inset 0 1px 1.5px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.55), 0 1px 1px rgba(255,255,255,0.6)\",\n          }}\n        />\n      </SliderPrimitive.Thumb>\n    </SliderPrimitive.Root>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/chunky-slider.tsx"
+    }
+  ]
+}

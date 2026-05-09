@@ -11,6 +11,7 @@ import SvgAssetsGrid from "../grids/svg-grid";
 import BentoCardsGrid from "../grids/bento-cards-grid";
 import AsciiAnimationsGrid from "../grids/ascii-animations-grid";
 import SidebarGrid from "../grids/sidebar-grid";
+import SliderGrid from "../grids/slider-grid";
 
 const navItems = [
   {
@@ -60,6 +61,10 @@ const navItems = [
   {
     name: "Sidebars",
     component: <SidebarGrid />,
+  },
+  {
+    name: "Sliders",
+    component: <SliderGrid />,
   },
 ];
 

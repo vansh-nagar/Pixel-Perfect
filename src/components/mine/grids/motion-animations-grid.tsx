@@ -22,14 +22,6 @@ const MotionComponentArr: {
   registryName: string;
   isNew?: boolean;
 }[] = [
-  // {
-  //   name: "Yoga Invite Card",
-  //   description:
-  //     "Soft white invite card with staggered fade-up text, springy avatar pop and yoga icon wiggle.",
-  //   Component: YogaInviteCard,
-  //   registryName: "yoga-invite-card",
-  //   isNew: true,
-  // },
   {
     name: "Text Editor Italic",
     description:
@@ -38,20 +30,20 @@ const MotionComponentArr: {
     registryName: "text-editor-italic",
     isNew: true,
   },
-  {
-    name: "Milestone Odometer",
-    description: "Animated odometer roller with staggered digit spin reveal.",
-    Component: MilestoneOdometer,
-    registryName: "milestone-odometer",
-    isNew: true,
-  },
-  {
-    name: "Free / Premium Toggle",
-    description: "Pill segmented control with spring-animated dark selector.",
-    Component: FreePremiumToggle,
-    registryName: "free-premium-toggle",
-    isNew: true,
-  },
+  // {
+  //   name: "Milestone Odometer",
+  //   description: "Animated odometer roller with staggered digit spin reveal.",
+  //   Component: MilestoneOdometer,
+  //   registryName: "milestone-odometer",
+  //   isNew: true,
+  // },
+  // {
+  //   name: "Free / Premium Toggle",
+  //   description: "Pill segmented control with spring-animated dark selector.",
+  //   Component: FreePremiumToggle,
+  //   registryName: "free-premium-toggle",
+  //   isNew: true,
+  // },
   {
     name: "Simple Card",
     description: "A simple card animation using Framer Motion.",

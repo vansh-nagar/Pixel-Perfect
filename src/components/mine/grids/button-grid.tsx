@@ -418,55 +418,55 @@ export const ButtonsArr = [
     component: <BookDemoButton>Book a demo</BookDemoButton>,
     registryName: "book-demo-button",
   },
-  // {
-  //   name: "Recessed Stepper",
-  //   description:
-  //     "Embossed +/- stepper sitting in a recessed pill cavity with press-to-sink and hold-to-repeat.",
-  //   component: <RecessedStepperButton />,
-  //   registryName: "recessed-stepper-button",
-  // },
-  // {
-  //   name: "Pearl Toggle",
-  //   description: "Cream pill toggle with thin stroke and a glossy pearl thumb.",
-  //   component: <PearlToggleButton />,
-  //   registryName: "pearl-toggle-button",
-  // },
-  // {
-  //   name: "Squircle Counter Button",
-  //   description:
-  //     "Glossy squircle button with spring number transitions on click.",
-  //   component: <SquircleCounterButton />,
-  //   registryName: "squircle-counter-button",
-  // },
+  {
+    name: "Recessed Stepper",
+    description:
+      "Embossed +/- stepper sitting in a recessed pill cavity with press-to-sink and hold-to-repeat.",
+    component: <RecessedStepperButton />,
+    registryName: "recessed-stepper-button",
+  },
+  {
+    name: "Pearl Toggle",
+    description: "Cream pill toggle with thin stroke and a glossy pearl thumb.",
+    component: <PearlToggleButton />,
+    registryName: "pearl-toggle-button",
+  },
+  {
+    name: "Squircle Counter Button",
+    description:
+      "Glossy squircle button with spring number transitions on click.",
+    component: <SquircleCounterButton />,
+    registryName: "squircle-counter-button",
+  },
 
-  // {
-  //   name: "Soft Pill Secondary",
-  //   description:
-  //     "Frosted-glass nav pill with layered highlights and gradient border.",
-  //   component: <SoftPillButton variant="secondary">Philosophy</SoftPillButton>,
-  //   registryName: "soft-pill-button",
-  // },
-  // {
-  //   name: "Soft Pill Primary",
-  //   description:
-  //     "Dark frosted-glass CTA pill with subtle inner glow and metallic border.",
-  //   component: <SoftPillButton variant="primary">Get in touch</SoftPillButton>,
-  //   registryName: "soft-pill-button",
-  // },
-  // {
-  //   name: "Book a Meeting Button",
-  //   description: "Dark Framer-style CTA pill with Google Meet brand icon.",
-  //   component: <FramerCtaButton variant="dark">Book a meeting</FramerCtaButton>,
-  //   registryName: "framer-cta-button",
-  // },
-  // {
-  //   name: "Send a Message Button",
-  //   description: "Light Framer-style CTA pill with Telegram brand icon.",
-  //   component: (
-  //     <FramerCtaButton variant="light">Send a message</FramerCtaButton>
-  //   ),
-  //   registryName: "framer-cta-button",
-  // },
+  {
+    name: "Soft Pill Secondary",
+    description:
+      "Frosted-glass nav pill with layered highlights and gradient border.",
+    component: <SoftPillButton variant="secondary">Philosophy</SoftPillButton>,
+    registryName: "soft-pill-button",
+  },
+  {
+    name: "Soft Pill Primary",
+    description:
+      "Dark frosted-glass CTA pill with subtle inner glow and metallic border.",
+    component: <SoftPillButton variant="primary">Get in touch</SoftPillButton>,
+    registryName: "soft-pill-button",
+  },
+  {
+    name: "Book a Meeting Button",
+    description: "Dark Framer-style CTA pill with Google Meet brand icon.",
+    component: <FramerCtaButton variant="dark">Book a meeting</FramerCtaButton>,
+    registryName: "framer-cta-button",
+  },
+  {
+    name: "Send a Message Button",
+    description: "Light Framer-style CTA pill with Telegram brand icon.",
+    component: (
+      <FramerCtaButton variant="light">Send a message</FramerCtaButton>
+    ),
+    registryName: "framer-cta-button",
+  },
   {
     name: "Liquid Glass Button",
     description:

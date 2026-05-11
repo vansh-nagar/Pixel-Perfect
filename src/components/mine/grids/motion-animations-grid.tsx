@@ -13,6 +13,11 @@ import FreePremiumToggle from "registry/new-york/motion-framer/free-premium-togg
 import MilestoneOdometer from "registry/new-york/motion-framer/milestone-odometer";
 import TextEditorItalic from "registry/new-york/motion-framer/text-editor-italic";
 import YogaInviteCard from "registry/new-york/motion-framer/yoga-invite-card";
+import ActivityWheelMotion from "registry/new-york/motion-framer/activity-wheel-motion";
+import CarLockDriveMotion from "registry/new-york/motion-framer/car-lock-drive-motion";
+import KeyComboMotion from "registry/new-york/motion-framer/key-combo-motion";
+import FolderStorageMotion from "registry/new-york/motion-framer/folder-storage-motion";
+import DialKnobMotion from "registry/new-york/motion-framer/dial-knob-motion";
 import CopyDropdown from "../copy-dropdown";
 
 const MotionComponentArr: {
@@ -23,6 +28,46 @@ const MotionComponentArr: {
   isNew?: boolean;
 }[] = [
   {
+    name: "Dial Knob",
+    description:
+      "Tactile rotary knob with concentric tick rings and an amber dot-arc indicator.",
+    Component: DialKnobMotion,
+    registryName: "dial-knob-motion",
+    isNew: true,
+  },
+  {
+    name: "Folder Storage",
+    description:
+      "Soft folder card with eased MB counter and staggered storage bars on click.",
+    Component: FolderStorageMotion,
+    registryName: "folder-storage-motion",
+    isNew: true,
+  },
+  {
+    name: "Paste Combo",
+    description:
+      "Control + V keycap pair that depresses on real keypress or click.",
+    Component: KeyComboMotion,
+    registryName: "key-combo-motion",
+    isNew: true,
+  },
+  {
+    name: "Car Lock / Drive",
+    description:
+      "Pill switch toggles lock and drive; the car gently shifts forward on drive.",
+    Component: CarLockDriveMotion,
+    registryName: "car-lock-drive-motion",
+    isNew: true,
+  },
+  {
+    name: "Vibe Wheel",
+    description:
+      "Scrollable arc-curved mood picker with violet active fill and dark indicator.",
+    Component: ActivityWheelMotion,
+    registryName: "activity-wheel-motion",
+    isNew: true,
+  },
+  {
     name: "Text Editor Italic",
     description:
       "Cream neumorphic toolbar with cursor drift, tooltip and italic toggle.",
@@ -30,20 +75,20 @@ const MotionComponentArr: {
     registryName: "text-editor-italic",
     isNew: true,
   },
-  // {
-  //   name: "Milestone Odometer",
-  //   description: "Animated odometer roller with staggered digit spin reveal.",
-  //   Component: MilestoneOdometer,
-  //   registryName: "milestone-odometer",
-  //   isNew: true,
-  // },
-  // {
-  //   name: "Free / Premium Toggle",
-  //   description: "Pill segmented control with spring-animated dark selector.",
-  //   Component: FreePremiumToggle,
-  //   registryName: "free-premium-toggle",
-  //   isNew: true,
-  // },
+  {
+    name: "Milestone Odometer",
+    description: "Animated odometer roller with staggered digit spin reveal.",
+    Component: MilestoneOdometer,
+    registryName: "milestone-odometer",
+    isNew: true,
+  },
+  {
+    name: "Free / Premium Toggle",
+    description: "Pill segmented control with spring-animated dark selector.",
+    Component: FreePremiumToggle,
+    registryName: "free-premium-toggle",
+    isNew: true,
+  },
   {
     name: "Simple Card",
     description: "A simple card animation using Framer Motion.",

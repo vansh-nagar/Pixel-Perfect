@@ -418,13 +418,13 @@ export const ButtonsArr = [
     component: <BookDemoButton>Book a demo</BookDemoButton>,
     registryName: "book-demo-button",
   },
-  {
-    name: "Recessed Stepper",
-    description:
-      "Embossed +/- stepper sitting in a recessed pill cavity with press-to-sink and hold-to-repeat.",
-    component: <RecessedStepperButton />,
-    registryName: "recessed-stepper-button",
-  },
+  // {
+  //   name: "Recessed Stepper",
+  //   description:
+  //     "Embossed +/- stepper sitting in a recessed pill cavity with press-to-sink and hold-to-repeat.",
+  //   component: <RecessedStepperButton />,
+  //   registryName: "recessed-stepper-button",
+  // },
   {
     name: "Pearl Toggle",
     description: "Cream pill toggle with thin stroke and a glossy pearl thumb.",

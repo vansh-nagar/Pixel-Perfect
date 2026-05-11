@@ -34,6 +34,7 @@ import StripeButtonTutorial from "./tutorials/stripe-button/stripe-button-tutori
 import VisitButtonTutorial from "./tutorials/visit-button/visit-button-tutorial";
 import GlassButtonTutorial from "./tutorials/glass-button/glass-button-tutorial";
 import BookDemoButtonTutorial from "./tutorials/book-demo-button/book-demo-button-tutorial";
+import SoftPillButtonTutorial from "./tutorials/soft-pill-button/soft-pill-button-tutorial";
 
 type TutorialItem = {
   name: string;
@@ -206,6 +207,15 @@ const categories: Category[] = [
         tags: ["lime", "chevron", "hover", "expand"],
         registryName: "book-demo-button",
         tutorial: BookDemoButtonTutorial,
+      },
+      {
+        name: "Soft Pill Secondary",
+        description:
+          "Frosted-glass nav pill built from five translucent layers and a mask-composite gradient border.",
+        category: "Buttons",
+        tags: ["glass", "pill", "gradient", "mask-composite"],
+        registryName: "soft-pill-button",
+        tutorial: SoftPillButtonTutorial,
       },
     ],
   },
@@ -756,6 +766,7 @@ const TutorialPage = () => {
       "orange-premium-button",
       "glass-button",
       "book-demo-button",
+      "soft-pill-button",
     ]);
 
     return categories

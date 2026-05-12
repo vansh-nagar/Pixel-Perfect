@@ -116,7 +116,7 @@ const TextEditorItalic = () => {
             onClick={() => setBold((b) => !b)}
             ariaLabel="Toggle bold"
           >
-            <span className="text-[12px] font-bold text-neutral-800">B</span>
+            <span className="text-[12px] font-bold text-black">B</span>
           </ToolButton>
 
           {/* Italic — hover shows tooltip */}
@@ -131,7 +131,7 @@ const TextEditorItalic = () => {
               ariaLabel="Toggle italic"
             >
               <span
-                className="text-[13px] italic text-neutral-800"
+                className="text-[13px] italic text-black"
                 style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
               >
                 I
@@ -174,11 +174,11 @@ const TextEditorItalic = () => {
             ariaLabel={`Alignment: ${align}`}
           >
             {align === "left" ? (
-              <AlignLeft className="size-3.5 text-neutral-800" strokeWidth={1.8} />
+              <AlignLeft className="size-3.5 text-black" strokeWidth={1.8} />
             ) : align === "right" ? (
-              <AlignRight className="size-3.5 text-neutral-800" strokeWidth={1.8} />
+              <AlignRight className="size-3.5 text-black" strokeWidth={1.8} />
             ) : (
-              <AlignCenter className="size-3.5 text-neutral-800" strokeWidth={1.8} />
+              <AlignCenter className="size-3.5 text-black" strokeWidth={1.8} />
             )}
           </ToolButton>
 
@@ -191,7 +191,7 @@ const TextEditorItalic = () => {
             onClick={resetFormatting}
             ariaLabel="Reset formatting"
           >
-            <RotateCcw className="size-3.5 text-neutral-700" strokeWidth={1.8} />
+            <RotateCcw className="size-3.5 text-black" strokeWidth={1.8} />
           </ToolButton>
 
           {/* Play — triggers letter-scatter animation on the body text */}
@@ -204,13 +204,16 @@ const TextEditorItalic = () => {
             className="grid size-7 cursor-pointer place-items-center rounded-full"
             style={{
               background:
-                "linear-gradient(180deg, #2a2a2a 0%, #0a0a0a 100%)",
+                "linear-gradient(180deg, #FFFFFF 0%, #E4E4E7 100%)",
               boxShadow:
-                "0 1px 0 rgba(255,255,255,0.16) inset, 0 -1px 1px rgba(0,0,0,0.45) inset, 0 2px 5px rgba(0,0,0,0.2)",
+                "0 1px 0 rgba(255,255,255,0.9) inset, 0 -1px 1px rgba(0,0,0,0.06) inset, 0 0 0 1px rgba(0,0,0,0.05), 0 2px 5px rgba(0,0,0,0.12)",
             }}
             aria-label="Play animation"
           >
-            <Play className="size-3 fill-white text-white" strokeWidth={0} />
+            <Play
+              className="size-3 fill-black text-black"
+              strokeWidth={0}
+            />
           </motion.button>
         </div>
       </div>

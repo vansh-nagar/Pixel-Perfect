@@ -2,7 +2,9 @@
 
 const Page = () => {
   return (
-    <div className="flex justify-center items-center h-screen w-full"></div>
+    <div className="flex justify-center items-center h-screen w-full text-muted-foreground text-sm">
+      nothin here :)
+    </div>
   );
 };
 

@@ -11,7 +11,6 @@ import SvgAssetsGrid from "../grids/svg-grid";
 import BentoCardsGrid from "../grids/bento-cards-grid";
 import AsciiAnimationsGrid from "../grids/ascii-animations-grid";
 import SidebarGrid from "../grids/sidebar-grid";
-import SliderGrid from "../grids/slider-grid";
 
 const navItems = [
   {
@@ -62,16 +61,12 @@ const navItems = [
     name: "Sidebars",
     component: <SidebarGrid />,
   },
-  {
-    name: "Sliders",
-    component: <SliderGrid />,
-  },
 ];
 
 export function TabsNavigation() {
   return (
     <Tabs defaultValue="Buttons" className="w-full ">
-      <TabsList className="flex gap-4 overflow-x-auto overflow-y-hidden w-full mask-r-from-98% dark:bg-black">
+      <TabsList className="flex gap-4 overflow-x-auto overflow-y-hidden w-full mask-r-from-98% dark:bg-black [scrollbar-width:thin] [&::-webkit-scrollbar]:h-[3px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25 hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 [&::-webkit-scrollbar-thumb]:transition-colors">
         {navItems.map((item) => (
           <TabsTrigger
             className="z-50 cursor-pointer group text-xs"

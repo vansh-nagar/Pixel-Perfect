@@ -114,7 +114,7 @@ const ActivityWheelMotion = () => {
       ref={containerRef}
       className="relative w-[300px] h-[300px] overflow-hidden touch-none"
       style={{
-        background: "#FAFAF7",
+        background: "#FAFAFA",
         borderRadius: "28px",
         boxShadow:
           "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 24px 40px -16px rgba(0,0,0,0.08), 0 4px 12px -2px rgba(0,0,0,0.04)",

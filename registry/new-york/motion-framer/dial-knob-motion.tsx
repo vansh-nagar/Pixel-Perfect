@@ -15,9 +15,9 @@ const INNER_TICKS = 60;
 const DOT_RADIUS = 88;
 
 const ACTIVE = "#2A2A2A";
-const IDLE = "#DFDFDC";
-const TICK_OUTER = "rgba(165,165,160,0.55)";
-const TICK_INNER = "rgba(165,165,160,0.30)";
+const IDLE = "#D4D4D8";
+const TICK_OUTER = "rgba(160,160,170,0.55)";
+const TICK_INNER = "rgba(160,160,170,0.30)";
 
 const DialKnobMotion = () => {
   const [value, setValue] = useState(62);
@@ -73,7 +73,7 @@ const DialKnobMotion = () => {
       className="relative grid w-[320px] place-items-center select-none"
       style={{
         height: 300,
-        background: "#F4F4F2",
+        background: "#FAFAFA",
         borderRadius: 28,
         boxShadow:
           "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 24px 40px -16px rgba(0,0,0,0.07), 0 4px 12px -2px rgba(0,0,0,0.04)",
@@ -101,7 +101,7 @@ const DialKnobMotion = () => {
           style={{
             borderRadius: "50%",
             background:
-              "linear-gradient(180deg, #FAFAF8 0%, #E8E8E5 100%)",
+              "linear-gradient(180deg, #FAFAFA 0%, #E4E4E7 100%)",
             boxShadow:
               "0 1px 0 rgba(255,255,255,0.95) inset, 0 -2px 4px rgba(0,0,0,0.05) inset, 0 14px 28px -10px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.04)",
           }}
@@ -134,7 +134,7 @@ const DialKnobMotion = () => {
                 y1={Math.sin(rad) * r1}
                 x2={Math.cos(rad) * (isMarker ? 102 : r2)}
                 y2={Math.sin(rad) * (isMarker ? 102 : r2)}
-                stroke={isMarker ? "#8A887F" : TICK_OUTER}
+                stroke={isMarker ? "#71717A" : TICK_OUTER}
                 strokeWidth={isMarker ? 1.6 : 1}
                 strokeLinecap="round"
               />
@@ -153,7 +153,7 @@ const DialKnobMotion = () => {
             bottom: 20,
             borderRadius: "50%",
             background:
-              "linear-gradient(180deg, #FFFFFF 0%, #F6F6F4 100%)",
+              "linear-gradient(180deg, #FFFFFF 0%, #F4F4F5 100%)",
             boxShadow:
               "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 0 0 1px rgba(0,0,0,0.03), 0 8px 18px -6px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.04)",
           }}

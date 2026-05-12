@@ -757,7 +757,15 @@ const TutorialPage = () => {
   const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(
     new Set(["buttons"]),
   );
-  const [selectedItem, setSelectedItem] = useState<TutorialItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<TutorialItem | null>(
+    () => {
+      for (const cat of categories) {
+        const found = cat.items.find((i) => i.registryName === "goe-button");
+        if (found) return found;
+      }
+      return null;
+    },
+  );
   const inputRef = useRef<HTMLInputElement>(null);
 
   const visibleCategories = useMemo(() => {

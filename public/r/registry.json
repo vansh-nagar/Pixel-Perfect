@@ -1086,6 +1086,83 @@
       ]
     },
     {
+      "name": "activity-wheel-motion",
+      "description": "Scrollable arc-curved vibe picker with violet active fill and a dark indicator pill.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/activity-wheel-motion.tsx",
+          "target": "components/pixel-perfect/activity-wheel-motion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "car-lock-drive-motion",
+      "description": "Side-view car with a clean lock/drive pill switch that springs the car forward on drive.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/car-lock-drive-motion.tsx",
+          "target": "components/pixel-perfect/car-lock-drive-motion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dial-knob-motion",
+      "description": "Tactile rotary knob with layered bevel discs, two tick rings, and an amber dot-arc indicator. Drag or scroll to change value.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/dial-knob-motion.tsx",
+          "target": "components/pixel-perfect/dial-knob-motion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "folder-storage-motion",
+      "description": "Soft folder-shaped card with an eased MB counter and a staggered 5-bar storage indicator that replays on click.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/folder-storage-motion.tsx",
+          "target": "components/pixel-perfect/folder-storage-motion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "key-combo-motion",
+      "description": "Control + V keycap pair that depresses on real keypress or click, with a Pasted confirm pill.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/key-combo-motion.tsx",
+          "target": "components/pixel-perfect/key-combo-motion.tsx"
+        }
+      ]
+    },
+    {
       "name": "guitar-svg",
       "description": "Guitar SVG path effect animation.",
       "type": "registry:block",
@@ -1221,21 +1298,6 @@
           "type": "registry:component",
           "path": "registry/new-york/sidebars/claude-sidebar.tsx",
           "target": "components/pixel-perfect/claude-sidebar.tsx"
-        }
-      ]
-    },
-    {
-      "name": "chunky-slider",
-      "description": "Skeuomorphic chunky slider with a cream notched track, glossy black fill, and a white pearl thumb with a dark eye center. Soft outer drop shadow gives it lift. Built on Radix UI's Slider primitive.",
-      "type": "registry:block",
-      "dependencies": [
-        "radix-ui"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/sliders/chunky-slider.tsx",
-          "target": "components/pixel-perfect/chunky-slider.tsx"
         }
       ]
     },

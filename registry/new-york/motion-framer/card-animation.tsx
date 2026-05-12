@@ -80,22 +80,22 @@ const CardAnimation = () => {
       animate={isHover ? "hover" : "rest"}
       onHoverStart={() => setIsHover(true)}
       onHoverEnd={() => setIsHover(false)}
-      className=" max-w-md w-full border rounded-3xl p-7"
+      className=" max-w-md w-full border rounded-3xl p-4 sm:p-7"
     >
       <TextMatrixRain repeat={false} className="text-xs">
         AI POWERED
       </TextMatrixRain>
 
-      <h1 className="mt-2 text-xl  font-light">
+      <h1 className="mt-2 text-lg sm:text-xl  font-light">
         Built for Professional AI Workflows
       </h1>
-      <h2 className="mt-3 text-sm">
+      <h2 className="mt-3 text-xs sm:text-sm">
         Streamline your AI operations with powerful orchestration tools.
         Automate complex workflows, manage multiple models, and scale
         effortlessly with our intuitive interface.
       </h2>
 
-      <section className="mt-20 relative h-60 flex justify-center items-start">
+      <section className="mt-10 sm:mt-20 relative h-48 sm:h-60 flex justify-center items-start">
         <motion.div
           variants={pointer2}
           className="flex justify-center items-center h-8 aspect-square z-50 bottom-11 right-12 absolute  rounded-full "

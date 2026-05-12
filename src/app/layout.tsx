@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import LenisProvider from "@/components/providers/lenis-provider";
 import { baseMetadata, defaultViewport } from "@/lib/seo/metadata";
 import { jsonLdSchemas } from "@/lib/seo/schemas";
+import { Agentation } from "agentation";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -45,6 +46,7 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
             <Toaster />
+            {process.env.NODE_ENV === "development" && <Agentation />}
           </ThemeProvider>
           <Analytics />
         </body>

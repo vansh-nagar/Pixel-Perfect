@@ -22,10 +22,10 @@ const USED_MB = 500;
 const TOTAL_BARS = 5;
 const FILLED_BARS = 4;
 const FILLED = "#86C580";
-const EMPTY = "#D9D6CF";
+const EMPTY = "#D4D4D8";
 
 const FOLDER_GRADIENT =
-  "linear-gradient(180deg, #FCFBF8 0%, #F1EFEA 100%)";
+  "linear-gradient(180deg, #FAFAFA 0%, #E4E4E7 100%)";
 const FOLDER_SHADOW =
   "0 1px 0 rgba(255,255,255,0.95) inset, 0 24px 40px -16px rgba(0,0,0,0.07), 0 4px 12px -2px rgba(0,0,0,0.04)";
 
@@ -97,7 +97,7 @@ const FolderStorageMotion = () => {
             right: 0,
             bottom: 0,
             borderRadius: 22,
-            background: "#EEECE5",
+            background: "#E4E4E7",
             boxShadow:
               "inset 0 4px 14px rgba(0,0,0,0.05), 0 1px 0 rgba(255,255,255,0.7) inset",
             padding: "22px 16px 16px",
@@ -158,7 +158,7 @@ const FolderStorageMotion = () => {
             borderTopLeftRadius: 14,
             borderTopRightRadius: 14,
             background:
-              "linear-gradient(180deg, #FFFFFF 0%, #EEECE6 100%)",
+              "linear-gradient(180deg, #FFFFFF 0%, #E4E4E7 100%)",
             boxShadow:
               "0 1px 0 rgba(255,255,255,0.95) inset, 0 4px 8px -3px rgba(0,0,0,0.06)",
             transform: "translateZ(-2px)",

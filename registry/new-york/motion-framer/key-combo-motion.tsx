@@ -53,7 +53,7 @@ const Keycap = ({
       animate={{
         y: pressed ? 1.5 : 0,
         scale: pressed ? 0.96 : 1,
-        backgroundColor: pressed ? "#F4F3EF" : "#FFFFFF",
+        backgroundColor: pressed ? "#F4F4F5" : "#FFFFFF",
         boxShadow: pressed
           ? "inset 0 1px 2px rgba(0,0,0,0.06), 0 0 0 rgba(0,0,0,0)"
           : "0 1px 0 rgba(255,255,255,0.95) inset, 0 1px 2px rgba(0,0,0,0.05), 0 6px 14px -6px rgba(0,0,0,0.10)",
@@ -110,7 +110,7 @@ const KeyComboMotion = () => {
       className="relative grid w-[320px] place-items-center overflow-hidden"
       style={{
         height: 300,
-        background: "#FAFAF7",
+        background: "#FAFAFA",
         borderRadius: 28,
         boxShadow:
           "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 24px 40px -16px rgba(0,0,0,0.08), 0 4px 12px -2px rgba(0,0,0,0.04)",
@@ -121,7 +121,7 @@ const KeyComboMotion = () => {
       <div
         className="flex items-center gap-2 rounded-[20px] p-2.5"
         style={{
-          background: "#ECEBE7",
+          background: "#E4E4E7",
           boxShadow: "inset 0 1px 2px rgba(0,0,0,0.04)",
         }}
       >

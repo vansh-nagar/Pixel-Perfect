@@ -1302,21 +1302,6 @@
       ]
     },
     {
-      "name": "chunky-slider",
-      "description": "Skeuomorphic chunky slider with a cream notched track, glossy black fill, and a white pearl thumb with a dark eye center. Soft outer drop shadow gives it lift. Built on Radix UI's Slider primitive.",
-      "type": "registry:block",
-      "dependencies": [
-        "radix-ui"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/sliders/chunky-slider.tsx",
-          "target": "components/pixel-perfect/chunky-slider.tsx"
-        }
-      ]
-    },
-    {
       "name": "red fire",
       "description": "Red fire component.",
       "type": "registry:block",

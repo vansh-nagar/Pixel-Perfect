@@ -9,6 +9,7 @@ interface TextMatrixRainProps {
   className?: string;
   duration?: number;
   repeat?: boolean;
+  accentColor?: string;
 }
 
 export default function TextMatrixRain({
@@ -16,6 +17,7 @@ export default function TextMatrixRain({
   className = "",
   duration = 2,
   repeat = true,
+  accentColor = "#00ff00",
 }: TextMatrixRainProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -33,11 +35,11 @@ export default function TextMatrixRain({
         const charElements: HTMLSpanElement[] = [];
 
         el.innerHTML = "";
-        finalText.split("").forEach((char, i) => {
+        finalText.split("").forEach((char) => {
           const span = document.createElement("span");
           span.style.display = "inline-block";
-          span.style.color = "#00ff00";
-          span.style.textShadow = "0 0 10px #00ff00";
+          span.style.color = accentColor;
+          span.style.textShadow = `0 0 10px ${accentColor}`;
           span.textContent =
             char === " "
               ? "\u00A0"
@@ -66,19 +68,19 @@ export default function TextMatrixRain({
             clearInterval(scrambleInterval);
             charStates[i] = true;
 
-            gsap.to(span, {
-              duration: 0.2,
-              color: "#ffffff",
-              textShadow: "0 0 20px #00ff00, 0 0 40px #00ff00",
-              onComplete: () => {
-                span.textContent = finalText[i];
-                gsap.to(span, {
-                  duration: 0.5,
-                  textShadow: "0 0 0px transparent",
-                  ease: "power2.out",
-                });
+            span.style.color = "";
+            span.textContent = finalText[i];
+            gsap.fromTo(
+              span,
+              {
+                textShadow: `0 0 20px ${accentColor}, 0 0 40px ${accentColor}`,
               },
-            });
+              {
+                duration: 0.5,
+                textShadow: "0 0 0px transparent",
+                ease: "power2.out",
+              }
+            );
           });
         });
       };

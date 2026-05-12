@@ -51,7 +51,7 @@ const CarLockDriveMotion = () => {
     <div
       className="relative w-[320px] h-[300px] overflow-hidden"
       style={{
-        background: "#FAFAF7",
+        background: "#FAFAFA",
         borderRadius: "28px",
         boxShadow:
           "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 24px 40px -16px rgba(0,0,0,0.08), 0 4px 12px -2px rgba(0,0,0,0.04)",
@@ -92,7 +92,7 @@ const CarLockDriveMotion = () => {
         <div
           className="relative grid grid-cols-2 items-center rounded-full"
           style={{
-            background: "#EFEEEA",
+            background: "#E4E4E7",
             boxShadow:
               "inset 0 1px 2px rgba(0,0,0,0.08), 0 1px 0 rgba(255,255,255,0.8)",
             width: 116,
@@ -129,7 +129,7 @@ const CarLockDriveMotion = () => {
             >
               <Lock
                 className="size-4"
-                style={{ color: !driving ? "#171717" : "#A8A8A2" }}
+                style={{ color: !driving ? "#171717" : "#A1A1AA" }}
                 strokeWidth={2.2}
               />
             </motion.span>
@@ -149,7 +149,7 @@ const CarLockDriveMotion = () => {
             >
               <Power
                 className="size-4"
-                style={{ color: driving ? "#171717" : "#A8A8A2" }}
+                style={{ color: driving ? "#171717" : "#A1A1AA" }}
                 strokeWidth={2.2}
               />
             </motion.span>

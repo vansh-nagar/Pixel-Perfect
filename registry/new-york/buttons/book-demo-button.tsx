@@ -2,9 +2,36 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-interface BookDemoButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export type BookDemoVariant =
+  | "lime"
+  | "sky"
+  | "rose"
+  | "amber"
+  | "emerald"
+  | "violet"
+  | "orange"
+  | "magenta";
 
-const DoubleChevron = ({ index }: { index: number }) => {
+interface BookDemoButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: BookDemoVariant;
+}
+
+const variantStyles: Record<
+  BookDemoVariant,
+  { from: string; to: string; dot: string }
+> = {
+  lime: { from: "#d6f54a", to: "#c5ea2c", dot: "#0f0f0f" },
+  sky: { from: "#a5e0ff", to: "#6bc8f5", dot: "#0a1f3a" },
+  rose: { from: "#ffc4d3", to: "#f590a5", dot: "#3a0a1f" },
+  amber: { from: "#ffd66e", to: "#f5a82e", dot: "#3a210a" },
+  emerald: { from: "#a8efc5", to: "#5fd49a", dot: "#0a2a1a" },
+  violet: { from: "#d4b9ff", to: "#a07bf5", dot: "#1f0a3a" },
+  orange: { from: "#ffb88a", to: "#f57a3a", dot: "#3a190a" },
+  magenta: { from: "#f5a8e0", to: "#e060c5", dot: "#3a0a2a" },
+};
+
+const DoubleChevron = ({ index, color }: { index: number; color: string }) => {
   const base = index * 0.12;
   const dots: { cx: number; cy: number; d: number }[] = [
     { cx: 2, cy: 2, d: 0 },
@@ -25,7 +52,7 @@ const DoubleChevron = ({ index }: { index: number }) => {
       viewBox="0 0 14 16"
       className="shrink-0 overflow-visible"
     >
-      <g fill="#0f0f0f">
+      <g fill={color}>
         {dots.map((p, i) => (
           <circle
             key={i}
@@ -42,7 +69,8 @@ const DoubleChevron = ({ index }: { index: number }) => {
 };
 
 const BookDemoButton = React.forwardRef<HTMLButtonElement, BookDemoButtonProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ className, children, variant = "lime", ...props }, ref) => {
+    const v = variantStyles[variant];
     return (
       <button
         ref={ref}
@@ -76,16 +104,16 @@ const BookDemoButton = React.forwardRef<HTMLButtonElement, BookDemoButtonProps>(
         <span
           className="absolute top-1 left-1 bottom-1 z-10 w-9 group-hover/btn:w-[calc(100%-0.5rem)] flex items-center justify-start overflow-hidden rounded-md pl-3 pr-2.5 gap-2.5 transition-[width,gap] duration-200 ease-[cubic-bezier(0.65,0,0.35,1)]"
           style={{
-            background: "linear-gradient(180deg, #d6f54a 0%, #c5ea2c 100%)",
+            background: `linear-gradient(180deg, ${v.from} 0%, ${v.to} 100%)`,
             boxShadow:
               "inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08)",
           }}
         >
-          <DoubleChevron index={0} />
-          <DoubleChevron index={1} />
-          <DoubleChevron index={2} />
-          <DoubleChevron index={3} />
-          <DoubleChevron index={4} />
+          <DoubleChevron index={0} color={v.dot} />
+          <DoubleChevron index={1} color={v.dot} />
+          <DoubleChevron index={2} color={v.dot} />
+          <DoubleChevron index={3} color={v.dot} />
+          <DoubleChevron index={4} color={v.dot} />
         </span>
       </button>
     );

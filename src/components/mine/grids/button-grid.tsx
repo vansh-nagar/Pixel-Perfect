@@ -45,8 +45,7 @@ import LiquidGlassButton from "registry/new-york/buttons/liquid-glass-button";
 import FramerCtaButton from "../../../../registry/new-york/buttons/framer-cta-button";
 import SoftPillButton from "../../../../registry/new-york/buttons/soft-pill-button";
 import BookDemoButton from "../../../../registry/new-york/buttons/book-demo-button";
-import SquircleCounterButton from "../../../../registry/new-york/buttons/squircle-counter-button";
-import PearlToggleButton from "../../../../registry/new-york/buttons/pearl-toggle-button";
+import type { BookDemoVariant } from "../../../../registry/new-york/buttons/book-demo-button";
 import RecessedStepperButton from "../../../../registry/new-york/buttons/recessed-stepper-button";
 
 const threedVariants: ThreedVariant[] = [
@@ -410,12 +409,89 @@ const ToggleButtonWrapper = () => {
   return <ToggleButton toggle={toggle} setToggle={setToggle} />;
 };
 
+const BorderGradientButtonWrapper = () => {
+  const [colors, setColors] = useState<
+    [string, string, string, string, string]
+  >(["#e64545", "#f5e23d", "#7e9bff", "#4dd4e8", "#a855f7"]);
+
+  const updateColor = (i: number, value: string) => {
+    setColors((prev) => {
+      const next = [...prev] as [string, string, string, string, string];
+      next[i] = value;
+      return next;
+    });
+  };
+
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40 flex gap-1 rounded-none border border-dashed bg-background/80 backdrop-blur px-1 py-0.5">
+        {colors.map((c, i) => (
+          <label
+            key={i}
+            className="relative size-4 cursor-pointer overflow-hidden rounded-sm border border-dashed"
+            style={{ background: c }}
+            title={`Color ${i + 1}`}
+          >
+            <input
+              type="color"
+              value={c}
+              onChange={(e) => updateColor(i, e.target.value)}
+              className="absolute inset-0 size-full cursor-pointer opacity-0"
+            />
+          </label>
+        ))}
+      </div>
+      <BorderGradientButton colors={colors} />
+    </>
+  );
+};
+
+const bookDemoVariants: BookDemoVariant[] = [
+  "lime",
+  "sky",
+  "rose",
+  "amber",
+  "emerald",
+  "violet",
+  "orange",
+  "magenta",
+];
+
+const BookDemoButtonWrapper = () => {
+  const [variant, setVariant] = useState<BookDemoVariant>("lime");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as BookDemoVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {bookDemoVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <BookDemoButton variant={variant}>Book a demo</BookDemoButton>
+    </>
+  );
+};
+
 export const ButtonsArr = [
   {
     name: "Book a Demo Button",
     description:
       "Lime square with dotted chevron animation that expands a dark panel on hover.",
-    component: <BookDemoButton>Book a demo</BookDemoButton>,
+    component: <BookDemoButtonWrapper />,
     registryName: "book-demo-button",
   },
   // {
@@ -425,20 +501,6 @@ export const ButtonsArr = [
   //   component: <RecessedStepperButton />,
   //   registryName: "recessed-stepper-button",
   // },
-  {
-    name: "Pearl Toggle",
-    description: "Cream pill toggle with thin stroke and a glossy pearl thumb.",
-    component: <PearlToggleButton />,
-    registryName: "pearl-toggle-button",
-  },
-  {
-    name: "Squircle Counter Button",
-    description:
-      "Glossy squircle button with spring number transitions on click.",
-    component: <SquircleCounterButton />,
-    registryName: "squircle-counter-button",
-  },
-
   {
     name: "Soft Pill Secondary",
     description:
@@ -514,7 +576,7 @@ export const ButtonsArr = [
   {
     name: "Border Gradient Button",
     description: "A button with a gradient border effect.",
-    component: <BorderGradientButton />,
+    component: <BorderGradientButtonWrapper />,
     registryName: "border-gradient-button",
   },
   {
@@ -639,7 +701,7 @@ const ButtonGrid = () => {
 
             <div className=" leading-1 absolute left-1.5  bottom-1.5 p-0.5">
               <p className="text-xs ">{item.name}</p>
-              <p className="text-[8px] text-muted-foreground">
+              <p className="text-[8px] text-muted-foreground leading-snug">
                 {item.description}
               </p>
             </div>

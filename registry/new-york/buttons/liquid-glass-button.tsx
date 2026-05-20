@@ -1,14 +1,20 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const LiquidGlassButton = () => {
+type LiquidGlassButtonProps = {
+  children?: React.ReactNode;
+};
+
+const LiquidGlassButton = ({
+  children = "Liquid Glass Button",
+}: LiquidGlassButtonProps) => {
   return (
     <>
       <motion.button
         drag
         className="relative px-6 py-3 rounded-full overflow-visible bg-transparent border-none"
       >
-        <span className="relative z-50 text-sm">Liquid Glass Button</span>
+        <span className="relative z-50 text-sm">{children}</span>
         {/* Border gradient mask */}
         <span
           className="pointer-events-none absolute inset-0 rounded-full opacity-50 z-40"

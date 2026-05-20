@@ -47,6 +47,19 @@ import SoftPillButton from "../../../../registry/new-york/buttons/soft-pill-butt
 import BookDemoButton from "../../../../registry/new-york/buttons/book-demo-button";
 import type { BookDemoVariant } from "../../../../registry/new-york/buttons/book-demo-button";
 import RecessedStepperButton from "../../../../registry/new-york/buttons/recessed-stepper-button";
+import GlassyButton from "../../../../registry/new-york/buttons/glassy-button";
+import LiquidButton from "../../../../registry/new-york/buttons/liquid-button";
+import {
+  Home,
+  Heart,
+  Star,
+  Settings,
+  Search,
+  Bell,
+  Camera,
+  Music,
+  type LucideIcon,
+} from "lucide-react";
 
 const threedVariants: ThreedVariant[] = [
   "amber",
@@ -457,6 +470,46 @@ const bookDemoVariants: BookDemoVariant[] = [
   "magenta",
 ];
 
+const glassyIcons: Record<string, LucideIcon> = {
+  home: Home,
+  heart: Heart,
+  star: Star,
+  settings: Settings,
+  search: Search,
+  bell: Bell,
+  camera: Camera,
+  music: Music,
+};
+
+const GlassyButtonWrapper = () => {
+  const [iconKey, setIconKey] = useState<keyof typeof glassyIcons>("home");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={iconKey}
+          onValueChange={(v) => setIconKey(v as keyof typeof glassyIcons)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {Object.keys(glassyIcons).map((k) => (
+              <SelectItem key={k} value={k} className="text-xs capitalize">
+                {k}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <GlassyButton icon={glassyIcons[iconKey]} size={40} />
+    </>
+  );
+};
+
 const BookDemoButtonWrapper = () => {
   const [variant, setVariant] = useState<BookDemoVariant>("lime");
   return (
@@ -487,6 +540,20 @@ const BookDemoButtonWrapper = () => {
 };
 
 export const ButtonsArr = [
+  {
+    name: "Glassy Button",
+    description:
+      "Chunky square glass/metal button with floating shadow stack and pickable icon.",
+    component: <GlassyButtonWrapper />,
+    registryName: "glassy-button",
+  },
+  {
+    name: "Liquid Button",
+    description:
+      "Frosted pill with a gradient ring and a label that slides across on hover.",
+    component: <LiquidButton>Hover Me</LiquidButton>,
+    registryName: "liquid-button",
+  },
   {
     name: "Book a Demo Button",
     description:

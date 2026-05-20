@@ -1205,6 +1205,32 @@
       ]
     },
     {
+      "name": "glassy-button",
+      "description": "Chunky square glass/metal button with vertical gradient ring, layered floating shadow, and animated press state with icon dimming.",
+      "type": "registry:block",
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/glassy-button.tsx",
+          "target": "components/pixel-perfect/glassy-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "liquid-button",
+      "description": "Frosted-glass pill button with gradient ring and a hover slide that swaps two stacked text labels.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/liquid-button.tsx",
+          "target": "components/pixel-perfect/liquid-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "soft-pill-button",
       "description": "Frosted-glass pill button with layered highlights, gradient border, and primary/secondary variants.",
       "type": "registry:block",

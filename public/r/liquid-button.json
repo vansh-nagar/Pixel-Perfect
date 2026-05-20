@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "liquid-button",
+  "type": "registry:block",
+  "description": "Frosted-glass pill button with gradient ring and a hover slide that swaps two stacked text labels.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/liquid-button.tsx",
+      "content": "\"use client\";\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface LiquidButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  textColor?: string;\n}\n\nconst LiquidButton = React.forwardRef<HTMLButtonElement, LiquidButtonProps>(\n  (\n    {\n      className,\n      children = \"Hover Me\",\n      textColor = \"rgb(61, 61, 61)\",\n      ...props\n    },\n    ref,\n  ) => {\n    const textStyle: React.CSSProperties = {\n      color: textColor,\n      letterSpacing: \"-0.05em\",\n      lineHeight: 1.2,\n      textShadow: \"0px 1px 0px rgba(255, 255, 255, 0.46)\",\n    };\n\n    return (\n      <button\n        ref={ref}\n        type=\"button\"\n        className={cn(\n          \"group/lb relative inline-flex items-center justify-center rounded-full p-[2px] text-sm\",\n          className,\n        )}\n        style={{\n          background:\n            \"linear-gradient(180deg, rgb(245, 245, 245) 0%, rgba(101, 104, 111, 0.39) 24%, rgba(255, 255, 255, 0.75) 100%)\",\n          boxShadow:\n            \"inset 0px 4px 6.1px 0px rgba(255, 255, 255, 0.23), 2px 23px 14px 0px rgba(0, 0, 0, 0.02), 1px 10px 10px 0px rgba(0, 0, 0, 0.03), 0px 3px 6px 0px rgba(0, 0, 0, 0.03)\",\n        }}\n        {...props}\n      >\n        <span\n          className=\"flex items-center justify-center rounded-full px-5 py-2\"\n          style={{ background: \"rgba(255, 255, 255, 0.6)\" }}\n        >\n          <span className=\"whitespace-nowrap font-bold\" style={textStyle}>\n            {children}\n          </span>\n        </span>\n      </button>\n    );\n  },\n);\n\nLiquidButton.displayName = \"LiquidButton\";\n\nexport default LiquidButton;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/liquid-button.tsx"
+    }
+  ]
+}

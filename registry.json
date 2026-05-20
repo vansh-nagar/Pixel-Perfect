@@ -1218,6 +1218,19 @@
       ]
     },
     {
+      "name": "rainbow-glowing-button",
+      "description": "Dark pill button with a rainbow glow that auto-cycles through 6 color variants (red, orange, yellow, green, blue, pink) using radial blur and gradient stroke.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/rainbow-glowing-button.tsx",
+          "target": "components/pixel-perfect/rainbow-glowing-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "liquid-button",
       "description": "Frosted-glass pill button with gradient ring and a hover slide that swaps two stacked text labels.",
       "type": "registry:block",

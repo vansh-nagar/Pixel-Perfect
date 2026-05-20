@@ -49,6 +49,7 @@ import type { BookDemoVariant } from "../../../../registry/new-york/buttons/book
 import RecessedStepperButton from "../../../../registry/new-york/buttons/recessed-stepper-button";
 import GlassyButton from "../../../../registry/new-york/buttons/glassy-button";
 import LiquidButton from "../../../../registry/new-york/buttons/liquid-button";
+import RainbowGlowingButton from "../../../../registry/new-york/buttons/rainbow-glowing-button";
 import {
   Home,
   Heart,
@@ -540,6 +541,13 @@ const BookDemoButtonWrapper = () => {
 };
 
 export const ButtonsArr = [
+  {
+    name: "Rainbow Glowing Button",
+    description:
+      "Dark pill with a rainbow glow that auto-cycles through 6 color variants underneath.",
+    component: <RainbowGlowingButton>Book a demo</RainbowGlowingButton>,
+    registryName: "rainbow-glowing-button",
+  },
   {
     name: "Glassy Button",
     description:

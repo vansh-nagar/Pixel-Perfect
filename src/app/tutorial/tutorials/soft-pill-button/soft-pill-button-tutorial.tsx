@@ -252,8 +252,8 @@ const SoftPillContent = ({
           <strong>rounded-full</strong> pill. A frosted white base sets the
           tone, then a top-down white gradient adds a glassy highlight, a
           radial vignette darkens the bottom edge, a diagonal sheen sweeps
-          across the surface, and a gradient stroke — drawn with a{" "}
-          <strong>mask-composite</strong> trick — wraps the whole thing. The
+          across the surface, and a gradient stroke, drawn with a{" "}
+          <strong>mask-composite</strong> trick, wraps the whole thing. The
           drop shadow underneath gives it lift.
         </p>
       </div>
@@ -275,7 +275,7 @@ const SoftPillContent = ({
           <strong>inset-0</strong> and <strong>rounded-full</strong> fills the
           button with a 90% opaque white surface. Combined with{" "}
           <strong>backdrop-filter: blur(6px)</strong> on the parent, this is
-          what makes the pill read as &quot;frosted glass&quot; — anything
+          what makes the pill read as &quot;frosted glass&quot;, anything
           behind the button gets softened, but the surface still feels solid.
         </p>
         <div className="border border-dashed p-3 bg-foreground/[0.02]">
@@ -315,7 +315,7 @@ border-radius: 9999px;`}
         <p className="text-xs text-muted-foreground leading-relaxed">
           A vertical <strong>linear-gradient</strong> from solid white to fully
           transparent, painted at <strong>opacity 0.32</strong>. It brightens
-          the top of the pill and fades into the base — the cue your eye reads
+          the top of the pill and fades into the base, the cue your eye reads
           as &quot;light coming from above.&quot; Without it the pill looks
           flat.
         </p>
@@ -356,7 +356,7 @@ opacity: 0.32;`}
         <p className="text-xs text-muted-foreground leading-relaxed">
           A <strong>radial-gradient</strong> centered at{" "}
           <strong>50% 100%</strong> (bottom-center) that fades black outward.
-          It&apos;s only <strong>0.08</strong> opacity — barely there — but it
+          It&apos;s only <strong>0.08</strong> opacity, barely there, but it
           mirrors the top highlight on the opposite axis, grounding the pill
           and adding subtle depth at the bottom edge.
         </p>
@@ -371,7 +371,7 @@ opacity: 0.08;`}
           </pre>
         </div>
         <p className="text-[10px] text-muted-foreground italic">
-          Toggle off: the difference is subtle — but side-by-side the pill
+          Toggle off: the difference is subtle, but side-by-side the pill
           floats less convincingly without it.
         </p>
       </div>
@@ -391,7 +391,7 @@ opacity: 0.08;`}
         <p className="text-xs text-muted-foreground leading-relaxed">
           A <strong>99deg linear-gradient</strong> with white peaking near the
           middle (60% stop) and fading to transparent on either side. It mimics
-          a soft reflection sliding diagonally across the pill — the detail
+          a soft reflection sliding diagonally across the pill, the detail
           that pushes it from &quot;flat surface&quot; to &quot;polished
           material.&quot;
         </p>
@@ -436,7 +436,7 @@ opacity: 0.08;`}
           gradient as the <strong>background</strong> on a 1px-padded span,
           then subtract the inner content area using{" "}
           <strong>mask-composite: exclude</strong>. What&apos;s left is just a
-          1px ring of gradient — a hairline metallic edge that highlights and
+          1px ring of gradient, a hairline metallic edge that highlights and
           dims around the perimeter.
         </p>
         <div className="border border-dashed p-3 bg-foreground/[0.02]">
@@ -461,7 +461,7 @@ background: linear-gradient(
           </pre>
         </div>
         <p className="text-[10px] text-muted-foreground italic">
-          Toggle off: the pill loses its hairline ring — the silhouette feels
+          Toggle off: the pill loses its hairline ring, the silhouette feels
           softer but less defined against the page.
         </p>
       </div>

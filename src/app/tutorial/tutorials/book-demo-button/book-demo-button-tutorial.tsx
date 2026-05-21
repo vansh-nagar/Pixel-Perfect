@@ -56,12 +56,12 @@ const BookDemoButton = React.forwardRef(({ className, children, ...props }, ref)
         }
       \`}</style>
 
-      {/* Dark layer — label sits on right, panel slides over it */}
+      {/* Dark layer, label sits on right, panel slides over it */}
       <span className="absolute inset-y-0 right-4 flex items-center text-white font-medium text-[14px] tracking-tight">
         {children || "Book a demo"}
       </span>
 
-      {/* Lime panel — w-9 idle, expands on hover */}
+      {/* Lime panel, w-9 idle, expands on hover */}
       <span
         className="absolute top-1 left-1 bottom-1 z-10 w-9 group-hover/btn:w-[calc(100%-0.5rem)]
                    flex items-center justify-start overflow-hidden rounded-md pl-3 pr-2.5 gap-2.5
@@ -317,7 +317,7 @@ box-shadow:
         </div>
         <p className="text-xs text-muted-foreground leading-relaxed">
           Each chevron is an <strong>SVG</strong> with ten circles arranged
-          into two diagonal arms — five points form each side of the V.
+          into two diagonal arms, five points form each side of the V.
           Rendering five chevrons in a row with <strong>gap-2.5</strong>{" "}
           fills the expanded panel with a directional dot pattern.
         </p>
@@ -370,7 +370,7 @@ animationDelay: \`\${index * 0.12 + dotOffset}s\`;`}
           </pre>
         </div>
         <p className="text-[10px] text-muted-foreground italic">
-          Toggle off: dots stay fully opaque and static — useful for seeing
+          Toggle off: dots stay fully opaque and static, useful for seeing
           the chevron geometry without motion.
         </p>
       </div>
@@ -412,7 +412,7 @@ animationDelay: \`\${index * 0.12 + dotOffset}s\`;`}
           </pre>
         </div>
         <p className="text-[10px] text-muted-foreground italic">
-          Toggle off: the panel stays a square — chevrons remain clipped at
+          Toggle off: the panel stays a square, chevrons remain clipped at
           the right edge, no expansion on hover.
         </p>
       </div>

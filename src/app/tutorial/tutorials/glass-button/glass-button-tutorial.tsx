@@ -239,7 +239,7 @@ const GlassContent = ({
         </div>
         <p className="text-xs text-muted-foreground leading-relaxed">
           The outer <strong>button</strong> element has a horizontal gradient as
-          its background — white edges fading into the accent color at the
+          its background, white edges fading into the accent color at the
           center. This gradient is only visible through the 3px gap between the
           button edge and the inner span, creating the illusion of a gradient
           border.
@@ -291,7 +291,7 @@ border-radius: 100px;`}
         <p className="text-xs text-muted-foreground leading-relaxed">
           An absolutely positioned <strong>span</strong> with{" "}
           <strong>inset-[3px]</strong> sits inside the button. Its own gradient
-          gives the frosted glass look — tinted edges with a stronger accent in
+          gives the frosted glass look, tinted edges with a stronger accent in
           the center. The 3px inset is what reveals the outer gradient as a
           &quot;border&quot;.
         </p>
@@ -346,7 +346,7 @@ border-radius: 100px;`}
         <p className="text-xs text-muted-foreground leading-relaxed">
           Four box-shadow layers at different sizes create a soft, natural glow
           beneath the button. Each layer uses the variant&apos;s accent color at
-          decreasing opacities — from 0.02 (widest) to 0.15 (tightest) —
+          decreasing opacities, from 0.02 (widest) to 0.15 (tightest),
           producing the &quot;floating&quot; depth effect.
         </p>
         <div className="border border-dashed p-3 bg-foreground/[0.02]">
@@ -449,9 +449,9 @@ border-radius: 100px;`}
       <div className="border border-dashed p-4">
         <h4 className="text-xs font-semibold mb-3">Variant System</h4>
         <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-          Each variant swaps three values — <strong>border</strong> (outer
+          Each variant swaps three values,<strong>border</strong> (outer
           gradient), <strong>inner</strong> (fill gradient), and{" "}
-          <strong>shadow</strong> (glow color) — while keeping the same
+          <strong>shadow</strong> (glow color), while keeping the same
           structure. This makes it trivial to add new color themes without
           touching layout or animation code.
         </p>

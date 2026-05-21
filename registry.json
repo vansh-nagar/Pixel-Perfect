@@ -322,6 +322,49 @@
       ]
     },
     {
+      "name": "glass-square-button",
+      "description": "A rounded-square frosted glass button with diagonal gradient border and 10 color variants: blue, purple, emerald, rose, amber, cyan, lime, slate, red, indigo.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/glass-square-button.tsx",
+          "target": "components/pixel-perfect/glass-square-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "glass-circle-button",
+      "description": "A circular icon glass button with conic gradient ring and frosted core. 10 color variants and a swappable Lucide icon.",
+      "type": "registry:block",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/glass-circle-button.tsx",
+          "target": "components/pixel-perfect/glass-circle-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "glass-icon-button",
+      "description": "A frosted glass pill button with an embedded icon capsule. 10 color variants and a swappable Lucide icon.",
+      "type": "registry:block",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/glass-icon-button.tsx",
+          "target": "components/pixel-perfect/glass-icon-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "cyber-button",
       "description": "A cyberpunk-style button with neon borders and glitch effects.",
       "type": "registry:block",

@@ -34,6 +34,12 @@ import MetalButton from "../../../../registry/new-york/buttons/metal-button";
 import type { MetalVariant } from "../../../../registry/new-york/buttons/metal-button";
 import GlassButton from "../../../../registry/new-york/buttons/glass-button";
 import type { GlassVariant } from "../../../../registry/new-york/buttons/glass-button";
+import GlassSquareButton from "../../../../registry/new-york/buttons/glass-square-button";
+import type { GlassSquareVariant } from "../../../../registry/new-york/buttons/glass-square-button";
+import GlassCircleButton from "../../../../registry/new-york/buttons/glass-circle-button";
+import type { GlassCircleVariant } from "../../../../registry/new-york/buttons/glass-circle-button";
+import GlassIconButton from "../../../../registry/new-york/buttons/glass-icon-button";
+import type { GlassIconVariant } from "../../../../registry/new-york/buttons/glass-icon-button";
 import LiquidGradientButton from "../../../../registry/new-york/buttons/liquid-gradient-button";
 import type { LiquidGradientVariant } from "../../../../registry/new-york/buttons/liquid-gradient-button";
 import RadialGradientButton from "../../../../registry/new-york/buttons/radial-gradient-button";
@@ -266,6 +272,165 @@ const GlassButtonWrapper = () => {
       <GlassButton variant={variant}>
         {variant.charAt(0).toUpperCase() + variant.slice(1)}
       </GlassButton>
+    </>
+  );
+};
+
+const glassSquareVariants: GlassSquareVariant[] = [
+  "blue",
+  "purple",
+  "emerald",
+  "rose",
+  "amber",
+  "cyan",
+  "lime",
+  "slate",
+  "red",
+  "indigo",
+];
+
+const GlassSquareButtonWrapper = () => {
+  const [variant, setVariant] = useState<GlassSquareVariant>("purple");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as GlassSquareVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {glassSquareVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <GlassSquareButton variant={variant}>
+        {variant.charAt(0).toUpperCase() + variant.slice(1)}
+      </GlassSquareButton>
+    </>
+  );
+};
+
+const glassCircleVariants: GlassCircleVariant[] = [
+  "blue",
+  "purple",
+  "emerald",
+  "rose",
+  "amber",
+  "cyan",
+  "lime",
+  "slate",
+  "red",
+  "indigo",
+];
+
+const glassCircleIcons: Record<string, LucideIcon> = {
+  heart: Heart,
+  star: Star,
+  bell: Bell,
+  search: Search,
+  settings: Settings,
+  home: Home,
+  camera: Camera,
+  music: Music,
+};
+
+const GlassCircleButtonWrapper = () => {
+  const [variant, setVariant] = useState<GlassCircleVariant>("rose");
+  const [iconKey, setIconKey] =
+    useState<keyof typeof glassCircleIcons>("heart");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40 flex gap-1">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as GlassCircleVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {glassCircleVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select
+          value={iconKey}
+          onValueChange={(v) => setIconKey(v as keyof typeof glassCircleIcons)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {Object.keys(glassCircleIcons).map((k) => (
+              <SelectItem key={k} value={k} className="text-xs capitalize">
+                {k}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <GlassCircleButton variant={variant} icon={glassCircleIcons[iconKey]} />
+    </>
+  );
+};
+
+const glassIconVariants: GlassIconVariant[] = [
+  "blue",
+  "purple",
+  "emerald",
+  "rose",
+  "amber",
+  "cyan",
+  "lime",
+  "slate",
+  "red",
+  "indigo",
+];
+
+const GlassIconButtonWrapper = () => {
+  const [variant, setVariant] = useState<GlassIconVariant>("emerald");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={variant}
+          onValueChange={(v) => setVariant(v as GlassIconVariant)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {glassIconVariants.map((v) => (
+              <SelectItem key={v} value={v} className="text-xs capitalize">
+                {v}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <GlassIconButton variant={variant}>Continue</GlassIconButton>
     </>
   );
 };
@@ -737,6 +902,27 @@ export const ButtonsArr = [
       "Frosted glass button with gradient border and 10 color variants.",
     component: <GlassButtonWrapper />,
     registryName: "glass-button",
+  },
+  {
+    name: "Glass Square Button",
+    description:
+      "Rounded-square frosted glass button with diagonal gradient border and 10 color variants.",
+    component: <GlassSquareButtonWrapper />,
+    registryName: "glass-square-button",
+  },
+  {
+    name: "Glass Circle Button",
+    description:
+      "Circular icon button with conic gradient ring and frosted glass core. 10 color variants, swappable icon.",
+    component: <GlassCircleButtonWrapper />,
+    registryName: "glass-circle-button",
+  },
+  {
+    name: "Glass Icon Button",
+    description:
+      "Frosted glass pill with embedded chevron capsule. 10 color variants.",
+    component: <GlassIconButtonWrapper />,
+    registryName: "glass-icon-button",
   },
   {
     name: "Master Button",

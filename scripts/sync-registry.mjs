@@ -6,8 +6,8 @@
  * has a corresponding entry — adding new ones, merging inferred dependencies
  * into existing ones, then runs `shadcn build` to regenerate `public/r/*.json`.
  *
- *   npm run registry:sync           # one-shot
- *   npm run registry:sync -- --watch  # rebuilds on file save
+ *   bun run registry:sync           # one-shot
+ *   bun run registry:sync -- --watch  # rebuilds on file save
  *
  * Drop a JSDoc at the top of any component to set its description:
  *

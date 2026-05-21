@@ -3,7 +3,9 @@
   "name": "glassy-button",
   "type": "registry:block",
   "description": "Chunky square glass/metal button with vertical gradient ring, layered floating shadow, and animated press state with icon dimming.",
-  "dependencies": ["lucide-react"],
+  "dependencies": [
+    "lucide-react"
+  ],
   "files": [
     {
       "path": "registry/new-york/buttons/glassy-button.tsx",

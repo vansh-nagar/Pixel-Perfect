@@ -254,7 +254,7 @@ export const TweetCard = async ({
       })
     : undefined;
 
-  if (!tweet) {
+  if (!tweet || !tweet.entities) {
     const NotFound = components?.TweetNotFound || TweetNotFound;
     return <NotFound {...props} />;
   }

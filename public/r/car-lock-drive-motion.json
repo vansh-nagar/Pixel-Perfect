@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "car-lock-drive-motion",
-  "type": "registry:block",
   "description": "Side-view car with a clean lock/drive pill switch that springs the car forward on drive.",
   "dependencies": [
     "framer-motion",
@@ -14,5 +13,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/car-lock-drive-motion.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

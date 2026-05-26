@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "text-fade",
-  "type": "registry:block",
   "description": "Text fades in/out on scroll using GSAP.",
   "dependencies": [
     "@gsap/react",
@@ -10,9 +9,10 @@
   "files": [
     {
       "path": "registry/new-york/text/text-fade.tsx",
-      "content": "\"use client\";\r\nimport React, { useRef } from \"react\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport gsap from \"gsap\";\r\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\r\nimport { SplitText } from \"gsap/SplitText\";\r\n\r\ngsap.registerPlugin(ScrollTrigger);\r\n\r\nconst TextFade = ({\r\n  className,\r\n  textContent,\r\n}: {\r\n  className?: string;\r\n  textContent?: string;\r\n}) => {\r\n  const text = useRef<HTMLSpanElement>(null);\r\n  const container = useRef<HTMLDivElement>(null);\r\n\r\n  useGSAP(() => {\r\n    const split = new SplitText(text.current, { type: \"words\" });\r\n    gsap.set(split.words, {\r\n      opacity: 0.3,\r\n      filter: \"blur(1.3px)\",\r\n      color: \"#b5cab7\",\r\n    });\r\n    gsap.to(split.words, {\r\n      opacity: 1,\r\n      stagger: 0.1,\r\n      color: \"#f3efe6\",\r\n      filter: \"blur(0px)\",\r\n      repeat: -1,\r\n      // scrollTrigger: {\r\n      //   trigger: container.current,\r\n      //   start: \"top 80%\",\r\n      //   end: \"bottom 20%\",\r\n      //   scrub: 1,\r\n      // },\r\n    });\r\n  });\r\n\r\n  return (\r\n    <div ref={container} className=\"h-full w-full\">\r\n      <span\r\n        ref={text}\r\n        className={`flex items-center justify-start gap-x-1.5 flex-wrap  ${\r\n          className ? ` ${className}` : \"\"\r\n        }`}\r\n      >\r\n        {textContent ||\r\n          \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim harum cupiditate provident nostrum temporibus officiis! Nostrum alias exercitationem molestiae dolorem quo natus iure deserunt magni ea dicta. Temporibus, totam doloribus!\"}\r\n      </span>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TextFade;\r\n",
+      "content": "\"use client\";\nimport React, { useRef } from \"react\";\nimport { useGSAP } from \"@gsap/react\";\nimport gsap from \"gsap\";\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\nimport { SplitText } from \"gsap/SplitText\";\n\ngsap.registerPlugin(ScrollTrigger);\n\nconst TextFade = ({\n  className,\n  textContent,\n}: {\n  className?: string;\n  textContent?: string;\n}) => {\n  const text = useRef<HTMLSpanElement>(null);\n  const container = useRef<HTMLDivElement>(null);\n\n  useGSAP(() => {\n    const split = new SplitText(text.current, { type: \"words\" });\n    gsap.set(split.words, {\n      opacity: 0.3,\n      filter: \"blur(1.3px)\",\n      color: \"#b5cab7\",\n    });\n    gsap.to(split.words, {\n      opacity: 1,\n      stagger: 0.1,\n      color: \"#f3efe6\",\n      filter: \"blur(0px)\",\n      repeat: -1,\n      // scrollTrigger: {\n      //   trigger: container.current,\n      //   start: \"top 80%\",\n      //   end: \"bottom 20%\",\n      //   scrub: 1,\n      // },\n    });\n  });\n\n  return (\n    <div ref={container} className=\"h-full w-full\">\n      <span\n        ref={text}\n        className={`flex items-center justify-start gap-x-1.5 flex-wrap  ${\n          className ? ` ${className}` : \"\"\n        }`}\n      >\n        {textContent ||\n          \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim harum cupiditate provident nostrum temporibus officiis! Nostrum alias exercitationem molestiae dolorem quo natus iure deserunt magni ea dicta. Temporibus, totam doloribus!\"}\n      </span>\n    </div>\n  );\n};\n\nexport default TextFade;\n",
       "type": "registry:component",
       "target": "components/pixel-perfect/text-fade.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

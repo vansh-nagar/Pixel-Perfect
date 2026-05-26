@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "liquid-button",
-  "type": "registry:block",
   "description": "Frosted-glass pill button with gradient ring and a hover slide that swaps two stacked text labels.",
   "dependencies": [],
   "files": [
@@ -11,5 +10,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/liquid-button.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "border-gradient-button",
-  "type": "registry:block",
   "description": "A button with a gradient border effect.",
   "dependencies": [],
   "registryDependencies": [
@@ -14,5 +13,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/border-gradient-button.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

@@ -56,6 +56,8 @@ import RecessedStepperButton from "../../../../registry/new-york/buttons/recesse
 import GlassyButton from "../../../../registry/new-york/buttons/glassy-button";
 import LiquidButton from "../../../../registry/new-york/buttons/liquid-button";
 import RainbowGlowingButton from "../../../../registry/new-york/buttons/rainbow-glowing-button";
+import type { RainbowColors } from "../../../../registry/new-york/buttons/rainbow-glowing-button";
+import BevelButton from "../../../../registry/new-york/buttons/bevel-button";
 import {
   Home,
   Heart,
@@ -676,6 +678,48 @@ const GlassyButtonWrapper = () => {
   );
 };
 
+const RainbowGlowingButtonWrapper = () => {
+  const [colors, setColors] = useState<RainbowColors>([
+    "#fe0002",
+    "#fe7902",
+    "#fffe03",
+    "#13dd17",
+    "#0088ff",
+    "#cf04f5",
+  ]);
+
+  const updateColor = (i: number, value: string) => {
+    setColors((prev) => {
+      const next = [...prev] as RainbowColors;
+      next[i] = value;
+      return next;
+    });
+  };
+
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40 flex gap-1 rounded-none border border-dashed bg-background/80 backdrop-blur px-1 py-0.5">
+        {colors.map((c, i) => (
+          <label
+            key={i}
+            className="relative size-4 cursor-pointer overflow-hidden rounded-sm border border-dashed"
+            style={{ background: c }}
+            title={`Color ${i + 1}`}
+          >
+            <input
+              type="color"
+              value={c}
+              onChange={(e) => updateColor(i, e.target.value)}
+              className="absolute inset-0 size-full cursor-pointer opacity-0"
+            />
+          </label>
+        ))}
+      </div>
+      <RainbowGlowingButton colors={colors}>Book a demo</RainbowGlowingButton>
+    </>
+  );
+};
+
 const BookDemoButtonWrapper = () => {
   const [variant, setVariant] = useState<BookDemoVariant>("lime");
   return (
@@ -707,10 +751,17 @@ const BookDemoButtonWrapper = () => {
 
 export const ButtonsArr = [
   {
+    name: "Bevel Button",
+    description:
+      "Dark button with an animated gradient stroke and inset bevel shadows.",
+    component: <BevelButton>Hello Button :)</BevelButton>,
+    registryName: "bevel-button",
+  },
+  {
     name: "Rainbow Glowing Button",
     description:
-      "Dark pill with a rainbow glow that auto-cycles through 6 color variants underneath.",
-    component: <RainbowGlowingButton>Book a demo</RainbowGlowingButton>,
+      "Dark pill with a customizable 6-color rainbow glow underneath.",
+    component: <RainbowGlowingButtonWrapper />,
     registryName: "rainbow-glowing-button",
   },
   {

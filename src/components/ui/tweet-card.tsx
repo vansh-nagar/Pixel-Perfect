@@ -215,7 +215,21 @@ export const MagicTweet = ({
   tweet: Tweet;
   className?: string;
 }) => {
-  const enrichedTweet = enrichTweet(tweet);
+  // The X syndication API now omits empty entity arrays (only user_mentions is
+  // returned), but enrichTweet iterates each array unconditionally. Backfill the
+  // missing arrays so it doesn't crash on `for (const entity of undefined)`.
+  const e = tweet.entities;
+  const safeTweet: Tweet = {
+    ...tweet,
+    entities: {
+      ...e,
+      hashtags: e?.hashtags ?? [],
+      urls: e?.urls ?? [],
+      user_mentions: e?.user_mentions ?? [],
+      symbols: e?.symbols ?? [],
+    },
+  };
+  const enrichedTweet = enrichTweet(safeTweet);
   return (
     <div
       className={cn(
@@ -254,7 +268,7 @@ export const TweetCard = async ({
       })
     : undefined;
 
-  if (!tweet || !tweet.entities) {
+  if (!tweet) {
     const NotFound = components?.TweetNotFound || TweetNotFound;
     return <NotFound {...props} />;
   }

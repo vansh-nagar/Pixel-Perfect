@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "glass-icon-button",
-  "type": "registry:block",
   "description": "A frosted glass pill button with an embedded icon capsule. 10 color variants and a swappable Lucide icon.",
   "dependencies": [
     "lucide-react"
@@ -13,5 +12,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/glass-icon-button.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

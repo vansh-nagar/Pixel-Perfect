@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "text-x-rotate",
-  "type": "registry:block",
   "description": "3D X-axis rotation effect with stagger.",
   "dependencies": [
     "@gsap/react",
@@ -11,9 +10,10 @@
   "files": [
     {
       "path": "registry/new-york/text/text-x-rotate.tsx",
-      "content": "\"use client\";\r\nimport React, { useRef } from \"react\";\r\nimport { useGSAP } from \"@gsap/react\";\r\nimport gsap from \"gsap\";\r\nimport SplitText from \"gsap/src/SplitText\";\r\n\r\ngsap.registerPlugin(SplitText);\r\n\r\nexport type StaggerFrom = \"start\" | \"center\" | \"edges\" | \"random\" | \"end\";\r\n\r\ninterface TextXRotateProps {\r\n  staggerFrom?: StaggerFrom;\r\n  text?: string;\r\n  className?: string;\r\n}\r\n\r\nconst TextXRotate = ({\r\n  staggerFrom = \"start\",\r\n  text = \"JUST GIVE IT A STAR\",\r\n  className,\r\n}: TextXRotateProps) => {\r\n  const containerRef = useRef<HTMLDivElement>(null);\r\n\r\n  useGSAP(\r\n    () => {\r\n      if (!containerRef.current) return;\r\n      const split = new SplitText(containerRef.current, { type: \"chars\" });\r\n      gsap.from(split.chars, {\r\n        rotateX: 180,\r\n        ease: \"back.out\",\r\n        transformOrigin: \"50% 100%\",\r\n        duration: 1,\r\n        stagger: {\r\n          each: 0.05,\r\n          from: staggerFrom,\r\n        },\r\n        repeat: -1,\r\n        repeatDelay: 1,\r\n        yoyo: true,\r\n      });\r\n\r\n      return () => {\r\n        split.revert();\r\n      };\r\n    },\r\n    { scope: containerRef, dependencies: [staggerFrom, text] }\r\n  );\r\n\r\n  return (\r\n    <div\r\n      ref={containerRef}\r\n      className={`text-4xl perspective-distant ${className ?? \"\"}`}\r\n    >\r\n      {text}\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TextXRotate;\r\n",
+      "content": "\"use client\";\nimport React, { useRef } from \"react\";\nimport { useGSAP } from \"@gsap/react\";\nimport gsap from \"gsap\";\nimport SplitText from \"gsap/src/SplitText\";\n\ngsap.registerPlugin(SplitText);\n\nexport type StaggerFrom = \"start\" | \"center\" | \"edges\" | \"random\" | \"end\";\n\ninterface TextXRotateProps {\n  staggerFrom?: StaggerFrom;\n  text?: string;\n  className?: string;\n}\n\nconst TextXRotate = ({\n  staggerFrom = \"start\",\n  text = \"JUST GIVE IT A STAR\",\n  className,\n}: TextXRotateProps) => {\n  const containerRef = useRef<HTMLDivElement>(null);\n\n  useGSAP(\n    () => {\n      if (!containerRef.current) return;\n      const split = new SplitText(containerRef.current, { type: \"chars\" });\n      gsap.from(split.chars, {\n        rotateX: 180,\n        ease: \"back.out\",\n        transformOrigin: \"50% 100%\",\n        duration: 1,\n        stagger: {\n          each: 0.05,\n          from: staggerFrom,\n        },\n        repeat: -1,\n        repeatDelay: 1,\n        yoyo: true,\n      });\n\n      return () => {\n        split.revert();\n      };\n    },\n    { scope: containerRef, dependencies: [staggerFrom, text] }\n  );\n\n  return (\n    <div\n      ref={containerRef}\n      className={`text-4xl perspective-distant ${className ?? \"\"}`}\n    >\n      {text}\n    </div>\n  );\n};\n\nexport default TextXRotate;\n",
       "type": "registry:component",
       "target": "components/pixel-perfect/text-x-rotate.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

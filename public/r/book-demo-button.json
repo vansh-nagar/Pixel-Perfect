@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "book-demo-button",
-  "type": "registry:block",
   "description": "Lime square with animated dotted chevron arrows that expands a dark panel on hover to reveal a label.",
   "dependencies": [],
   "files": [
@@ -11,5 +10,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/book-demo-button.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "glass-circle-button",
-  "type": "registry:block",
   "description": "A circular icon glass button with conic gradient ring and frosted core. 10 color variants and a swappable Lucide icon.",
   "dependencies": [
     "lucide-react"
@@ -13,5 +12,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/glass-circle-button.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

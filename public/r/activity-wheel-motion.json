@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "activity-wheel-motion",
-  "type": "registry:block",
   "description": "Scrollable arc-curved vibe picker with violet active fill and a dark indicator pill.",
   "dependencies": [
     "framer-motion",
@@ -14,5 +13,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/activity-wheel-motion.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

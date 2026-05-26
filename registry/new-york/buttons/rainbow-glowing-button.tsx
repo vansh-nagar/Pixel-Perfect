@@ -9,6 +9,8 @@ export type RainbowVariant =
   | "blue"
   | "pink";
 
+export type RainbowColors = [string, string, string, string, string, string];
+
 type RainbowGlowingButtonProps = {
   children?: React.ReactNode;
   variant?: RainbowVariant;
@@ -16,6 +18,7 @@ type RainbowGlowingButtonProps = {
   cycleMs?: number;
   transitionMs?: number;
   onClick?: () => void;
+  colors?: RainbowColors;
 };
 
 const order: RainbowVariant[] = [
@@ -64,6 +67,14 @@ const colorVarsFor = (variant: RainbowVariant) => {
   return vars;
 };
 
+const colorVarsFromArray = (colors: RainbowColors) => {
+  const vars: Record<string, string> = {};
+  for (let k = 0; k < 6; k++) {
+    vars[`--rg-c${k + 1}`] = colors[k];
+  }
+  return vars;
+};
+
 const RainbowGlowingButton = ({
   children = "Button text",
   variant: variantProp,
@@ -71,6 +82,7 @@ const RainbowGlowingButton = ({
   cycleMs = 500,
   transitionMs = 500,
   onClick,
+  colors,
 }: RainbowGlowingButtonProps) => {
   const [variant, setVariant] = useState<RainbowVariant>(variantProp ?? "red");
 
@@ -83,18 +95,20 @@ const RainbowGlowingButton = ({
   }, [variantProp]);
 
   useEffect(() => {
-    if (!autoCycle || variantProp) return;
+    if (!autoCycle || variantProp || colors) return;
     const id = window.setInterval(() => {
       setVariant((v) => order[(order.indexOf(v) + 1) % order.length]);
     }, cycleMs);
     return () => window.clearInterval(id);
-  }, [autoCycle, cycleMs, variantProp]);
+  }, [autoCycle, cycleMs, variantProp, colors]);
 
   const colorTransition = Array.from({ length: 6 }, (_, k) =>
     `--rg-c${k + 1} ${transitionMs}ms linear`,
   ).join(", ");
 
-  const colorVars = colorVarsFor(variant) as React.CSSProperties;
+  const colorVars = (colors
+    ? colorVarsFromArray(colors)
+    : colorVarsFor(variant)) as React.CSSProperties;
 
   return (
     <button

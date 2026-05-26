@@ -16,7 +16,6 @@ import YogaInviteCard from "registry/new-york/motion-framer/yoga-invite-card";
 import ActivityWheelMotion from "registry/new-york/motion-framer/activity-wheel-motion";
 import CarLockDriveMotion from "registry/new-york/motion-framer/car-lock-drive-motion";
 import KeyComboMotion from "registry/new-york/motion-framer/key-combo-motion";
-import FolderStorageMotion from "registry/new-york/motion-framer/folder-storage-motion";
 import DialKnobMotion from "registry/new-york/motion-framer/dial-knob-motion";
 import CopyDropdown from "../copy-dropdown";
 
@@ -33,14 +32,6 @@ const MotionComponentArr: {
       "Tactile rotary knob with concentric tick rings and an amber dot-arc indicator.",
     Component: DialKnobMotion,
     registryName: "dial-knob-motion",
-    isNew: true,
-  },
-  {
-    name: "Folder Storage",
-    description:
-      "Soft folder card with eased MB counter and staggered storage bars on click.",
-    Component: FolderStorageMotion,
-    registryName: "folder-storage-motion",
     isNew: true,
   },
   {

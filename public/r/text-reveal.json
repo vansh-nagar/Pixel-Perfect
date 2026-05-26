@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "text-reveal",
-  "type": "registry:block",
   "description": "Text reveal animation effect.",
   "dependencies": [
     "@gsap/react",
@@ -11,9 +10,10 @@
   "files": [
     {
       "path": "registry/new-york/text/text-reveal.tsx",
-      "content": "\"use client\";\r\n\r\nimport { useRef } from \"react\";\r\nimport gsap from \"gsap\";\r\nimport { useGSAP } from \"@gsap/react\";\r\n\r\ninterface TextRevealProps {\r\n  children: string;\r\n  className?: string;\r\n  duration?: number;\r\n  chars?: string;\r\n}\r\n\r\nexport default function TextReveal({\r\n  children,\r\n  className = \"\",\r\n  duration = 1.5,\r\n  chars = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*\",\r\n}: TextRevealProps) {\r\n  const textRef = useRef<HTMLSpanElement>(null);\r\n\r\n  useGSAP(\r\n    () => {\r\n      const el = textRef.current!;\r\n      const finalText = children;\r\n\r\n      const obj = { progress: 0 };\r\n\r\n      gsap.to(obj, {\r\n        progress: finalText.length,\r\n        duration: duration,\r\n        repeat: -1,\r\n        repeatDelay: 1,\r\n        ease: \"none\",\r\n        onUpdate: () => {\r\n          el.innerText = finalText\r\n            .split(\"\")\r\n            .map((char, i) => {\r\n              if (char === \" \") return \" \";\r\n              if (i < obj.progress) return finalText[i];\r\n              return chars[Math.floor(Math.random() * chars.length)];\r\n            })\r\n            .join(\"\");\r\n        },\r\n        onComplete: () => {\r\n          el.innerText = finalText;\r\n        },\r\n      });\r\n    },\r\n    { dependencies: [children, duration, chars] }\r\n  );\r\n\r\n  return (\r\n    <span ref={textRef} className={className}>\r\n      {children}\r\n    </span>\r\n  );\r\n}\r\n",
+      "content": "\"use client\";\n\nimport { useRef } from \"react\";\nimport gsap from \"gsap\";\nimport { useGSAP } from \"@gsap/react\";\n\ninterface TextRevealProps {\n  children: string;\n  className?: string;\n  duration?: number;\n  chars?: string;\n}\n\nexport default function TextReveal({\n  children,\n  className = \"\",\n  duration = 1.5,\n  chars = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*\",\n}: TextRevealProps) {\n  const textRef = useRef<HTMLSpanElement>(null);\n\n  useGSAP(\n    () => {\n      const el = textRef.current!;\n      const finalText = children;\n\n      const obj = { progress: 0 };\n\n      gsap.to(obj, {\n        progress: finalText.length,\n        duration: duration,\n        repeat: -1,\n        repeatDelay: 1,\n        ease: \"none\",\n        onUpdate: () => {\n          el.innerText = finalText\n            .split(\"\")\n            .map((char, i) => {\n              if (char === \" \") return \" \";\n              if (i < obj.progress) return finalText[i];\n              return chars[Math.floor(Math.random() * chars.length)];\n            })\n            .join(\"\");\n        },\n        onComplete: () => {\n          el.innerText = finalText;\n        },\n      });\n    },\n    { dependencies: [children, duration, chars] }\n  );\n\n  return (\n    <span ref={textRef} className={className}>\n      {children}\n    </span>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/pixel-perfect/text-reveal.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

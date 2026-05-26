@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bevel-button",
+  "description": "Compact dark button with a top-light to bottom-dark gradient stroke and layered inset bevel shadows for a tactile chiseled feel.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/buttons/bevel-button.tsx",
+      "content": "\"use client\";\nimport React, { useEffect } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface BevelButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  speedMs?: number;\n}\n\nconst PROPERTY_CSS = `\n@property --bevel-angle {\n  syntax: '<angle>';\n  initial-value: 180deg;\n  inherits: false;\n}\n@keyframes bevel-button-spin {\n  to { --bevel-angle: 540deg; }\n}\n`;\n\nlet propertyStyleInjected = false;\nconst injectPropertyStyles = () => {\n  if (typeof document === \"undefined\" || propertyStyleInjected) return;\n  propertyStyleInjected = true;\n  const style = document.createElement(\"style\");\n  style.setAttribute(\"data-bevel-button\", \"\");\n  style.textContent = PROPERTY_CSS;\n  document.head.appendChild(style);\n};\n\nconst BevelButton = React.forwardRef<HTMLButtonElement, BevelButtonProps>(\n  ({ className, children, speedMs = 3000, style, ...props }, ref) => {\n    useEffect(() => {\n      injectPropertyStyles();\n    }, []);\n\n    return (\n      <button\n        ref={ref}\n        className={cn(\n          \"relative inline-flex items-center justify-center rounded-[8px] border border-solid border-transparent px-[10px] py-[10px] text-[12px] font-normal leading-none text-white outline-none transition-transform active:scale-[0.98]\",\n          className,\n        )}\n        style={{\n          fontFamily:\n            '\"Inter\", ui-sans-serif, system-ui, -apple-system, sans-serif',\n          background:\n            \"linear-gradient(#2d2d2d, #2d2d2d) padding-box, linear-gradient(var(--bevel-angle, 180deg), rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.08) 38%, rgba(0,0,0,1) 100%) border-box\",\n          boxShadow:\n            \"inset 0px -2px 2.6px 0px rgba(0,0,0,0.57), inset 0px 1px 1.7px 0px rgba(255,255,255,0.25)\",\n          animation: `bevel-button-spin ${speedMs}ms linear infinite`,\n          ...style,\n        }}\n        {...props}\n      >\n        {children ?? \"Hello Button :)\"}\n      </button>\n    );\n  },\n);\n\nBevelButton.displayName = \"BevelButton\";\n\nexport default BevelButton;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/bevel-button.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

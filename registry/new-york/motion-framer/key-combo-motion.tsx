@@ -51,12 +51,12 @@ const Keycap = ({
         touchAction: "manipulation",
       }}
       animate={{
-        y: pressed ? 1.5 : 0,
-        scale: pressed ? 0.96 : 1,
-        backgroundColor: pressed ? "#F4F4F5" : "#FFFFFF",
+        y: pressed ? 3 : 0,
+        scale: pressed ? 0.97 : 1,
+        backgroundColor: pressed ? "#F4F4F5" : "#FAFAFA",
         boxShadow: pressed
-          ? "inset 0 1px 2px rgba(0,0,0,0.06), 0 0 0 rgba(0,0,0,0)"
-          : "0 1px 0 rgba(255,255,255,0.95) inset, 0 1px 2px rgba(0,0,0,0.05), 0 6px 14px -6px rgba(0,0,0,0.10)",
+          ? "0px 1px 1px rgba(0,0,0,0.2), 0px 0px 0px rgba(0,0,0,0), inset 0px 2px 3px rgba(0,0,0,0.18), inset 0px -1px 0px rgba(0,0,0,0.06)"
+          : "0px 2px 3px rgba(0,0,0,0.3), 0px 3px 4px rgba(0,0,0,0.15), inset 0px 2px 2px rgba(255,255,255,0.8), inset 0px -3px 0px rgba(0,0,0,0.16)",
       }}
       transition={{
         type: "spring",
@@ -75,7 +75,7 @@ const Keycap = ({
           </span>
         </div>
       ) : (
-        <span className="text-[22px] font-semibold text-neutral-700">
+        <span className="text-[30px] font-semibold text-neutral-700">
           {label}
         </span>
       )}
@@ -110,10 +110,6 @@ const KeyComboMotion = () => {
       className="relative grid w-[320px] place-items-center overflow-hidden"
       style={{
         height: 300,
-        background: "#FAFAFA",
-        borderRadius: 28,
-        boxShadow:
-          "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 24px 40px -16px rgba(0,0,0,0.08), 0 4px 12px -2px rgba(0,0,0,0.04)",
         fontFamily: "ui-sans-serif, system-ui",
       }}
     >
@@ -162,18 +158,7 @@ const KeyComboMotion = () => {
                 Pasted
               </span>
             </motion.div>
-          ) : (
-            <motion.p
-              key="hint"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
-              className="text-[10px] uppercase tracking-[0.14em] text-neutral-400"
-            >
-              Press the combo
-            </motion.p>
-          )}
+          ) : null}
         </AnimatePresence>
       </div>
     </div>

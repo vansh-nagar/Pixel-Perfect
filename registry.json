@@ -1174,22 +1174,6 @@
       ]
     },
     {
-      "name": "folder-storage-motion",
-      "description": "Soft folder-shaped card with an eased MB counter and a staggered 5-bar storage indicator that replays on click.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/motion-framer/folder-storage-motion.tsx",
-          "target": "components/pixel-perfect/folder-storage-motion.tsx"
-        }
-      ]
-    },
-    {
       "name": "key-combo-motion",
       "description": "Control + V keycap pair that depresses on real keypress or click, with a Pasted confirm pill.",
       "type": "registry:block",
@@ -1251,7 +1235,9 @@
       "name": "glassy-button",
       "description": "Chunky square glass/metal button with vertical gradient ring, layered floating shadow, and animated press state with icon dimming.",
       "type": "registry:block",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "type": "registry:component",
@@ -1270,6 +1256,19 @@
           "type": "registry:component",
           "path": "registry/new-york/buttons/rainbow-glowing-button.tsx",
           "target": "components/pixel-perfect/rainbow-glowing-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bevel-button",
+      "description": "Compact dark button with a top-light to bottom-dark gradient stroke and layered inset bevel shadows for a tactile chiseled feel.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/bevel-button.tsx",
+          "target": "components/pixel-perfect/bevel-button.tsx"
         }
       ]
     },

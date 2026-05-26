@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "glassy-button",
-  "type": "registry:block",
   "description": "Chunky square glass/metal button with vertical gradient ring, layered floating shadow, and animated press state with icon dimming.",
   "dependencies": [
     "lucide-react"
@@ -13,5 +12,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/glassy-button.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

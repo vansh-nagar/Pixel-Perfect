@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "glass-square-button",
-  "type": "registry:block",
   "description": "A rounded-square frosted glass button with diagonal gradient border and 10 color variants: blue, purple, emerald, rose, amber, cyan, lime, slate, red, indigo.",
   "dependencies": [],
   "files": [
@@ -11,5 +10,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/glass-square-button.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

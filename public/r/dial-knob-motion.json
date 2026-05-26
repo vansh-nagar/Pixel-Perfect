@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "dial-knob-motion",
-  "type": "registry:block",
   "description": "Tactile rotary knob with layered bevel discs, two tick rings, and an amber dot-arc indicator. Drag or scroll to change value.",
   "dependencies": [],
   "files": [
@@ -11,5 +10,6 @@
       "type": "registry:component",
       "target": "components/pixel-perfect/dial-knob-motion.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

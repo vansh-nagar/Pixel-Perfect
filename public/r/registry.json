@@ -1174,22 +1174,6 @@
       ]
     },
     {
-      "name": "key-combo-motion",
-      "description": "Control + V keycap pair that depresses on real keypress or click, with a Pasted confirm pill.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/motion-framer/key-combo-motion.tsx",
-          "target": "components/pixel-perfect/key-combo-motion.tsx"
-        }
-      ]
-    },
-    {
       "name": "guitar-svg",
       "description": "Guitar SVG path effect animation.",
       "type": "registry:block",

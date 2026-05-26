@@ -67,10 +67,10 @@ const colorVarsFor = (variant: RainbowVariant) => {
   return vars;
 };
 
-const colorVarsFromArray = (colors: RainbowColors) => {
+const colorVarsFromArray = (colors: RainbowColors, shift: number) => {
   const vars: Record<string, string> = {};
   for (let k = 0; k < 6; k++) {
-    vars[`--rg-c${k + 1}`] = colors[k];
+    vars[`--rg-c${k + 1}`] = colors[(shift + k) % 6];
   }
   return vars;
 };
@@ -85,6 +85,7 @@ const RainbowGlowingButton = ({
   colors,
 }: RainbowGlowingButtonProps) => {
   const [variant, setVariant] = useState<RainbowVariant>(variantProp ?? "red");
+  const [shift, setShift] = useState(0);
 
   useEffect(() => {
     injectPropertyStyles();
@@ -95,19 +96,20 @@ const RainbowGlowingButton = ({
   }, [variantProp]);
 
   useEffect(() => {
-    if (!autoCycle || variantProp || colors) return;
+    if (!autoCycle || variantProp) return;
     const id = window.setInterval(() => {
       setVariant((v) => order[(order.indexOf(v) + 1) % order.length]);
+      setShift((s) => (s + 1) % 6);
     }, cycleMs);
     return () => window.clearInterval(id);
-  }, [autoCycle, cycleMs, variantProp, colors]);
+  }, [autoCycle, cycleMs, variantProp]);
 
   const colorTransition = Array.from({ length: 6 }, (_, k) =>
     `--rg-c${k + 1} ${transitionMs}ms linear`,
   ).join(", ");
 
   const colorVars = (colors
-    ? colorVarsFromArray(colors)
+    ? colorVarsFromArray(colors, shift)
     : colorVarsFor(variant)) as React.CSSProperties;
 
   return (

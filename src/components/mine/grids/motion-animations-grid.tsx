@@ -15,7 +15,6 @@ import TextEditorItalic from "registry/new-york/motion-framer/text-editor-italic
 import YogaInviteCard from "registry/new-york/motion-framer/yoga-invite-card";
 import ActivityWheelMotion from "registry/new-york/motion-framer/activity-wheel-motion";
 import CarLockDriveMotion from "registry/new-york/motion-framer/car-lock-drive-motion";
-import KeyComboMotion from "registry/new-york/motion-framer/key-combo-motion";
 import DialKnobMotion from "registry/new-york/motion-framer/dial-knob-motion";
 import CopyDropdown from "../copy-dropdown";
 
@@ -32,14 +31,6 @@ const MotionComponentArr: {
       "Tactile rotary knob with concentric tick rings and an amber dot-arc indicator.",
     Component: DialKnobMotion,
     registryName: "dial-knob-motion",
-    isNew: true,
-  },
-  {
-    name: "Paste Combo",
-    description:
-      "Control + V keycap pair that depresses on real keypress or click.",
-    Component: KeyComboMotion,
-    registryName: "key-combo-motion",
     isNew: true,
   },
   {

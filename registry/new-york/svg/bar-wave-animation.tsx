@@ -10,7 +10,7 @@ const BarWaveAnimation = () => {
 
   return (
     <svg
-      className=" invert dark:invert-0 cursor-pointer w-full h-full m-10"
+      className=" dark:invert-100 invert-0 cursor-pointer w-full h-full m-10"
       viewBox="0 0 350 130"
       overflow={"visible"}
     >

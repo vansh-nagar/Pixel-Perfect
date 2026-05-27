@@ -1,4 +1,5 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { ArrowUpRight } from "lucide-react";
 import ButtonGrid from "../grids/button-grid";
 import BorderGrid from "../grids/border-grid";
 import BackgroundGrid from "../grids/background-grid";
@@ -9,7 +10,6 @@ import MotionAnimationsGrid from "../grids/motion-animations-grid";
 import GsapStaggerGrid from "../grids/gsap-grid";
 import SvgAssetsGrid from "../grids/svg-grid";
 import BentoCardsGrid from "../grids/bento-cards-grid";
-import AsciiAnimationsGrid from "../grids/ascii-animations-grid";
 import SidebarGrid from "../grids/sidebar-grid";
 
 const navItems = [
@@ -32,10 +32,6 @@ const navItems = [
   {
     name: "Text Animations",
     component: <TextGrid />,
-  },
-  {
-    name: "ASCII Animations",
-    component: <AsciiAnimationsGrid />,
   },
   {
     name: "Borders & Intersections",
@@ -77,6 +73,15 @@ export function TabsNavigation() {
             <div className="border-t border-dashed group-data-[state=active]:border-foreground mask-x-to-98%" />
           </TabsTrigger>
         ))}
+        <a
+          href="https://www.asciistudio.space/showcase"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="z-50 cursor-pointer group text-xs px-1 py-1 font-medium text-nowrap inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          ASCII Animations
+          <ArrowUpRight className="size-3" />
+        </a>
       </TabsList>
       <div className=" border-t border-dashed mask-x-from-95%"></div>
       {navItems.map((item) => (

@@ -56,7 +56,9 @@ const Stagger1 = () => {
           <div
             key={index}
             className={`blocks h-10 aspect-square rounded-md cursor-pointer ${
-              index <= fromIndex ? "bg-[#f59e0b]" : "bg-accent"
+              index <= fromIndex
+                ? "bg-[#f59e0b]"
+                : "bg-foreground/10 dark:bg-accent"
             }`}
             onClick={() => setFromIndex(index)}
             title={`Set as ripple center (${index})`}

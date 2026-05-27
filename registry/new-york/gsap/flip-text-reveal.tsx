@@ -74,29 +74,32 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="flex h-full w-full items-center justify-center gap-20">
+    <div className="flex h-full w-full items-center justify-center gap-4 p-4 sm:gap-10 md:gap-20">
       <div
         ref={firstRef}
-        className="flex h-24 w-24 items-center justify-center absolute"
+        className="flex h-12 w-12 items-center justify-center absolute sm:h-20 sm:w-20 md:h-24 md:w-24"
       >
         <motion.div
           ref={boxRef}
           initial={{ opacity: 0, scale: 0.4, filter: "blur(10px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
           transition={{ ease: [0.34, 1.56, 0.64, 1], duration: 0.5 }}
-          className="h-20 w-20 rounded-full"
+          className="h-10 w-10 rounded-full sm:h-16 sm:w-16 md:h-20 md:w-20"
           style={{
             background:
               "radial-gradient(45.33% 46.43% at 41.69% 50%, #0140FF 0%, rgba(1, 64, 255, 0) 100%), radial-gradient(28.41% 117.96% at 7.72% 28.75%, #A6FDFF 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(37.39% 69.19% at 107.79% 0%, #0075FF 0%, rgba(0, 66, 255, 0) 100%), radial-gradient(54.38% 89.75% at 83.46% 89.75%, #26F9FF 0%, rgba(0, 69, 255, 0.6) 100%), #0140FF",
           }}
         />
       </div>
-      <div className="flex flex-col gap-6 text-3xl">
+      <div className="flex min-w-0 flex-col gap-2 text-sm sm:gap-4 sm:text-xl md:gap-6 md:text-3xl">
         <div
           ref={secondRef}
-          className="flex h-24 w-24 items-center justify-center"
+          className="flex h-12 w-12 items-center justify-center sm:h-20 sm:w-20 md:h-24 md:w-24"
         />
-        <span ref={textRef} className="w-md flex flex-wrap gap-x-2">
+        <span
+          ref={textRef}
+          className="flex w-full max-w-md flex-wrap gap-x-2"
+        >
           {textContent.split(" ").map((word, index) => (
             <span key={`${word}-${index}`} data-word>
               {word}

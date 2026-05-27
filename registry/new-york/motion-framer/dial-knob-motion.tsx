@@ -73,10 +73,6 @@ const DialKnobMotion = () => {
       className="relative grid w-[320px] place-items-center select-none"
       style={{
         height: 300,
-        background: "#FAFAFA",
-        borderRadius: 28,
-        boxShadow:
-          "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 24px 40px -16px rgba(0,0,0,0.07), 0 4px 12px -2px rgba(0,0,0,0.04)",
         fontFamily: "ui-sans-serif, system-ui",
       }}
     >

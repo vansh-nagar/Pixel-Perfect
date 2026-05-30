@@ -26,10 +26,11 @@ const variantStyles: Record<
     shadow: string;
   }
 > = {
-  // "Generate" — light silver body, thin 1.5px gradient stroke
+  // "Generate" — light silver body, thin 1.5px stroke whose gradient runs
+  // white → mid-gray → a sage-green bottom rim (exact Figma stroke stops)
   steel: {
     body: "linear-gradient(180deg, #ededed 0%, #9e9e9e 100%)",
-    border: "linear-gradient(180deg, #ffffff 0%, #c4c4c4 50%, #a1a1a1 100%)",
+    border: "linear-gradient(180deg, #ffffff 0%, #7a7a7a 51%, #7bae9e 100%)",
     borderWidth: "1.5px",
     radius: "47px",
     padding: "10px 47px",

@@ -24,16 +24,6 @@ const navItems = [
     Component: lazyGrid(() => import("../grids/button-grid")),
   },
   {
-    name: "Shaders",
-    slug: "shaders",
-    Component: lazyGrid(() => import("../grids/shader-grid")),
-  },
-  {
-    name: "Figma → Code",
-    slug: "figma-to-code",
-    Component: lazyGrid(() => import("../grids/figma-to-code-grid")),
-  },
-  {
     name: "Motion Animations",
     slug: "motion",
     Component: lazyGrid(() => import("../grids/motion-animations-grid")),
@@ -82,6 +72,16 @@ const navItems = [
     name: "Sidebars",
     slug: "sidebars",
     Component: lazyGrid(() => import("../grids/sidebar-grid")),
+  },
+  {
+    name: "Shaders",
+    slug: "shaders",
+    Component: lazyGrid(() => import("../grids/shader-grid")),
+  },
+  {
+    name: "Figma → Code",
+    slug: "figma-to-code",
+    Component: lazyGrid(() => import("../grids/figma-to-code-grid")),
   },
 ];
 

@@ -1,73 +1,115 @@
+"use client";
+
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowUpRight } from "lucide-react";
-import ButtonGrid from "../grids/button-grid";
-import BorderGrid from "../grids/border-grid";
-import BackgroundGrid from "../grids/background-grid";
-import TextGrid from "../grids/text-grid";
-import MouseFollower from "../grids/mouse-follower-grid";
-import SvgPathEffectGrid from "../grids/svg-path-effect-grid";
-import MotionAnimationsGrid from "../grids/motion-animations-grid";
-import GsapStaggerGrid from "../grids/gsap-grid";
-import SvgAssetsGrid from "../grids/svg-grid";
-import BentoCardsGrid from "../grids/bento-cards-grid";
-import SidebarGrid from "../grids/sidebar-grid";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import type { ComponentType } from "react";
+
+function GridSkeleton() {
+  return (
+    <div className="flex h-64 w-full items-center justify-center text-sm text-muted-foreground">
+      Loading…
+    </div>
+  );
+}
+
+const lazyGrid = (loader: () => Promise<{ default: ComponentType }>) =>
+  dynamic(loader, { ssr: false, loading: () => <GridSkeleton /> });
 
 const navItems = [
   {
     name: "Buttons",
-    component: <ButtonGrid />,
+    slug: "buttons",
+    Component: lazyGrid(() => import("../grids/button-grid")),
+  },
+  {
+    name: "Shaders",
+    slug: "shaders",
+    Component: lazyGrid(() => import("../grids/shader-grid")),
+  },
+  {
+    name: "Figma → Code",
+    slug: "figma-to-code",
+    Component: lazyGrid(() => import("../grids/figma-to-code-grid")),
   },
   {
     name: "Motion Animations",
-    component: <MotionAnimationsGrid />,
+    slug: "motion",
+    Component: lazyGrid(() => import("../grids/motion-animations-grid")),
   },
   {
     name: "GSAP Animations",
-    component: <GsapStaggerGrid />,
+    slug: "gsap",
+    Component: lazyGrid(() => import("../grids/gsap-grid")),
   },
   {
     name: "SVG Assets",
-    component: <SvgAssetsGrid />,
+    slug: "svg-assets",
+    Component: lazyGrid(() => import("../grids/svg-grid")),
   },
   {
     name: "Text Animations",
-    component: <TextGrid />,
+    slug: "text",
+    Component: lazyGrid(() => import("../grids/text-grid")),
   },
   {
     name: "Borders & Intersections",
-    component: <BorderGrid />,
+    slug: "borders",
+    Component: lazyGrid(() => import("../grids/border-grid")),
   },
   {
     name: "Background Gradients, Patterns & Masks",
-    component: <BackgroundGrid />,
+    slug: "backgrounds",
+    Component: lazyGrid(() => import("../grids/background-grid")),
   },
   {
     name: "Mouse Followers",
-    component: <MouseFollower />,
+    slug: "mouse-followers",
+    Component: lazyGrid(() => import("../grids/mouse-follower-grid")),
   },
   {
     name: "SVG Path Effects",
-    component: <SvgPathEffectGrid />,
+    slug: "svg-path",
+    Component: lazyGrid(() => import("../grids/svg-path-effect-grid")),
   },
   {
     name: "Bento Cards",
-    component: <BentoCardsGrid />,
+    slug: "bento",
+    Component: lazyGrid(() => import("../grids/bento-cards-grid")),
   },
   {
     name: "Sidebars",
-    component: <SidebarGrid />,
+    slug: "sidebars",
+    Component: lazyGrid(() => import("../grids/sidebar-grid")),
   },
 ];
 
 export function TabsNavigation() {
+  const [active, setActive] = useState(navItems[0].slug);
+
+  useEffect(() => {
+    const tab = new URLSearchParams(window.location.search).get("tab");
+    if (tab && navItems.some((item) => item.slug === tab)) {
+      setActive(tab);
+    }
+  }, []);
+
+  const handleChange = (slug: string) => {
+    setActive(slug);
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", slug);
+    window.history.replaceState(null, "", url);
+  };
+
   return (
-    <Tabs defaultValue="Buttons" className="w-full ">
+    <Tabs value={active} onValueChange={handleChange} className="w-full ">
       <TabsList className="flex gap-4 overflow-x-auto overflow-y-hidden w-full mask-r-from-98% dark:bg-black [scrollbar-width:thin] [&::-webkit-scrollbar]:h-[3px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25 hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 [&::-webkit-scrollbar-thumb]:transition-colors">
         {navItems.map((item) => (
           <TabsTrigger
             className="z-50 cursor-pointer group text-xs"
-            key={item.name}
-            value={item.name}
+            key={item.slug}
+            value={item.slug}
           >
             {item.name}
             <div className="border-t border-dashed group-data-[state=active]:border-foreground mask-x-to-98%" />
@@ -84,9 +126,9 @@ export function TabsNavigation() {
         </a>
       </TabsList>
       <div className=" border-t border-dashed mask-x-from-95%"></div>
-      {navItems.map((item) => (
-        <TabsContent key={item.name} value={item.name}>
-          {item.component}
+      {navItems.map(({ slug, Component }) => (
+        <TabsContent key={slug} value={slug}>
+          <Component />
         </TabsContent>
       ))}
     </Tabs>

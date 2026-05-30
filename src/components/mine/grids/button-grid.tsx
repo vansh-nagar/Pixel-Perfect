@@ -50,6 +50,7 @@ import LiquidButton from "../../../../registry/new-york/buttons/liquid-button";
 import RainbowGlowingButton from "../../../../registry/new-york/buttons/rainbow-glowing-button";
 import type { RainbowColors } from "../../../../registry/new-york/buttons/rainbow-glowing-button";
 import BevelButton from "../../../../registry/new-york/buttons/bevel-button";
+import SilverButton from "../../../../registry/new-york/buttons/silver-button";
 import {
   Home,
   Heart,
@@ -530,6 +531,20 @@ const BookDemoButtonWrapper = () => {
 };
 
 export const ButtonsArr = [
+  {
+    name: "Steel Pill Button",
+    description:
+      "Glossy silver pill with a white-to-gray gradient stroke and faint letterpress label.",
+    component: <SilverButton variant="steel">Generate</SilverButton>,
+    registryName: "silver-button",
+  },
+  {
+    name: "Pearl Pill Button",
+    description:
+      "Chunky pill with a thick gradient stroke and inverted gloss body for a soft 3D lip.",
+    component: <SilverButton variant="pearl">New Button</SilverButton>,
+    registryName: "silver-button",
+  },
   {
     name: "Bevel Button",
     description:

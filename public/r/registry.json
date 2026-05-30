@@ -1725,6 +1725,19 @@
           "target": "components/pixel-perfect/yoga-invite-card.tsx"
         }
       ]
+    },
+    {
+      "name": "silver-button",
+      "description": "Glossy silver pill button with a vertical white-to-gray gradient stroke and embossed letterpress text, in slim steel and chunky pearl variants.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/silver-button.tsx",
+          "target": "components/pixel-perfect/silver-button.tsx"
+        }
+      ]
     }
   ]
 }

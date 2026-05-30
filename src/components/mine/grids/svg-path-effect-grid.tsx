@@ -4,6 +4,7 @@ import Guitar from "registry/new-york/svg-path-effects/guitar";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import CopyDropdown from "../copy-dropdown";
 
 const Buttons = [
@@ -19,6 +20,7 @@ const SvgPathEffectGrid = () => {
   const itemsPerPage = 1;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(Buttons.length / itemsPerPage);
+  usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedItems = Buttons.slice(startIndex, startIndex + itemsPerPage);
 

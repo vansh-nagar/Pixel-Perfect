@@ -37,6 +37,7 @@ import type { GlassVariant } from "../../../../registry/new-york/buttons/glass-b
 import LiquidGradientButton from "../../../../registry/new-york/buttons/liquid-gradient-button";
 import type { LiquidGradientVariant } from "../../../../registry/new-york/buttons/liquid-gradient-button";
 import { useState, useEffect } from "react";
+import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CopyDropdown from "../copy-dropdown";
 import LiquidGlassButton from "registry/new-york/buttons/liquid-glass-button";
@@ -762,6 +763,7 @@ const ButtonGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const totalPages = Math.ceil(ButtonsArr.length / itemsPerPage);
+  usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedItems = ButtonsArr.slice(
     startIndex,

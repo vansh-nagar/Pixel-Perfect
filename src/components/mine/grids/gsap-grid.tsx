@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import FlipTextReveal from "registry/new-york/gsap/flip-text-reveal";
 import Stagger1 from "registry/new-york/gsap/stagger1";
@@ -31,6 +32,7 @@ const GsapGrid = () => {
   };
   const itemsPerPage = 2;
   const totalPages = Math.ceil(GsapStaggerGridArr.length / itemsPerPage);
+  usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedItems = GsapStaggerGridArr.slice(
     startIndex,

@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import CardAnimation from "registry/new-york/motion-framer/card-animation";
 import ImageHoverAnimation from "registry/new-york/motion-framer/image-hover-animation";
@@ -23,7 +24,6 @@ const MotionComponentArr: {
   description: string;
   Component: React.ComponentType;
   registryName: string;
-  isNew?: boolean;
 }[] = [
   {
     name: "Dial Knob",
@@ -31,7 +31,6 @@ const MotionComponentArr: {
       "Tactile rotary knob with concentric tick rings and an amber dot-arc indicator.",
     Component: DialKnobMotion,
     registryName: "dial-knob-motion",
-    isNew: true,
   },
   {
     name: "Car Lock / Drive",
@@ -39,7 +38,6 @@ const MotionComponentArr: {
       "Pill switch toggles lock and drive; the car gently shifts forward on drive.",
     Component: CarLockDriveMotion,
     registryName: "car-lock-drive-motion",
-    isNew: true,
   },
   {
     name: "Vibe Wheel",
@@ -47,7 +45,6 @@ const MotionComponentArr: {
       "Scrollable arc-curved mood picker with violet active fill and dark indicator.",
     Component: ActivityWheelMotion,
     registryName: "activity-wheel-motion",
-    isNew: true,
   },
   {
     name: "Text Editor Italic",
@@ -55,21 +52,18 @@ const MotionComponentArr: {
       "Cream neumorphic toolbar with cursor drift, tooltip and italic toggle.",
     Component: TextEditorItalic,
     registryName: "text-editor-italic",
-    isNew: true,
   },
   {
     name: "Milestone Odometer",
     description: "Animated odometer roller with staggered digit spin reveal.",
     Component: MilestoneOdometer,
     registryName: "milestone-odometer",
-    isNew: true,
   },
   {
     name: "Free / Premium Toggle",
     description: "Pill segmented control with spring-animated dark selector.",
     Component: FreePremiumToggle,
     registryName: "free-premium-toggle",
-    isNew: true,
   },
   {
     name: "Simple Card",
@@ -107,14 +101,12 @@ const MotionComponentArr: {
       "3D orbiting dot with perspective and constant angular velocity.",
     Component: OrbitDotMotion,
     registryName: "orbit-dot-motion",
-    isNew: true,
   },
   {
     name: "Coin Spin",
     description: "3D spinning coin with layered faces and side profile.",
     Component: CoinSpinAnimation,
     registryName: "coin-spin-animation",
-    isNew: true,
   },
 ];
 
@@ -127,6 +119,7 @@ const MotionAnimationsGrid = () => {
   };
   const itemsPerPage = 2;
   const totalPages = Math.ceil(MotionComponentArr.length / itemsPerPage);
+  usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedItems = MotionComponentArr.slice(
     startIndex,
@@ -156,12 +149,6 @@ const MotionAnimationsGrid = () => {
                 >
                   <RefreshCcw className="size-3" />
                 </Button>
-
-                {item.isNew && (
-                  <span className="border border-emerald-500/50 bg-emerald-500/15 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-emerald-600">
-                    New
-                  </span>
-                )}
               </div>
 
               <div className=" leading-1 absolute left-1.5  bottom-1.5">

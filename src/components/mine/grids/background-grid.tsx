@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Copy } from "lucide-react";
 import { useState, type JSX, type CSSProperties } from "react";
+import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { toast } from "sonner";
 
 const Gradient1 = () => (
@@ -238,6 +239,7 @@ const BackgroundGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
   const totalPages = Math.ceil(BackgroudArr.length / itemsPerPage);
+  usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedItems = BackgroudArr.slice(
     startIndex,

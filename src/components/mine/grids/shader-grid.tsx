@@ -7,12 +7,14 @@ import { createPortal } from "react-dom";
 import { toast } from "sonner";
 import ShaderCanvas from "@/components/pixel-perfect/shaders/shader-canvas";
 import { SHADERS, type Shader } from "@/components/pixel-perfect/shaders/registry";
+import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 
 const ShaderGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [active, setActive] = useState<Shader | null>(null);
   const itemsPerPage = 8;
   const totalPages = Math.ceil(SHADERS.length / itemsPerPage);
+  usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedItems = SHADERS.slice(startIndex, startIndex + itemsPerPage);
 

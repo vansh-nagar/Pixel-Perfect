@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import {
   Select,
   SelectContent,
@@ -235,6 +236,7 @@ const TextGrid = () => {
   ];
 
   const totalPages = Math.ceil(TextArr.length / itemsPerPage);
+  usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedItems = TextArr.slice(startIndex, startIndex + itemsPerPage);
 

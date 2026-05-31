@@ -3,11 +3,28 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BookOpen, FlaskConical, GithubIcon, Rainbow } from "lucide-react";
+import {
+  BookOpen,
+  FlaskConical,
+  Gamepad2,
+  GithubIcon,
+  Menu,
+} from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { StarsCount } from "@/components/mine/landing-page/stars-count";
-import { ShaderAnimation } from "@/components/shader-animation";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const NAV_LINKS = [
+  { href: "/tools", label: "Tools", icon: FlaskConical },
+  { href: "/playground", label: "Playground", icon: Gamepad2 },
+  { href: "/tutorial", label: "Tutorial", icon: BookOpen },
+] as const;
 
 export function Navbar({ className = "" }: { className?: string }) {
   return (
@@ -45,35 +62,56 @@ export function Navbar({ className = "" }: { className?: string }) {
             </span>
           </Button>
         </Link>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link href={"/playground"}>
+        {/* Inline icon buttons on larger screens */}
+        <div className="hidden items-center gap-2 sm:flex">
+          {NAV_LINKS.map(({ href, label, icon: Icon }) => (
+            <Tooltip key={href}>
+              <TooltipTrigger asChild>
+                <Link href={href}>
+                  <Button
+                    variant={"outline"}
+                    className="border-dashed rounded-none"
+                    size={"icon"}
+                  >
+                    <Icon />
+                  </Button>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent className="font-sans border-dashed rounded-none text-xs px-2 py-1">
+                {label}
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </div>
+
+        {/* Collapsed menu on mobile */}
+        <div className="sm:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
               <Button
                 variant={"outline"}
                 className="border-dashed rounded-none"
                 size={"icon"}
+                aria-label="Menu"
               >
-                <FlaskConical />
+                <Menu />
               </Button>
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent className="font-sans border-dashed rounded-none text-xs px-2 py-1">Playground</TooltipContent>
-        </Tooltip>
-        
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link href={"/tutorial"}>
-              <Button
-                variant={"outline"}
-                className="border-dashed rounded-none"
-                size={"icon"}
-              >
-                <BookOpen />
-              </Button>
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent className="font-sans border-dashed rounded-none text-xs px-2 py-1">Tutorial</TooltipContent>
-        </Tooltip>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="font-sans border-dashed rounded-none"
+            >
+              {NAV_LINKS.map(({ href, label, icon: Icon }) => (
+                <DropdownMenuItem key={href} asChild className="rounded-none">
+                  <Link href={href}>
+                    <Icon className="size-4" />
+                    {label}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
 
         <LightDarkMode />
       </div>

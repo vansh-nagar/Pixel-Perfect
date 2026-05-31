@@ -7,6 +7,7 @@ import StackUsed from "@/components/mine/landing-page/stack-used";
 import StarBorder from "@/components/mine/landing-page/star-border";
 import Pricing from "@/components/pricing";
 import { LandingGrid } from "@/components/layout/landing-grid";
+import { GradientBlur } from "@/components/mine/landing-page/gradient-blur";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = generatePageMetadata({
@@ -18,6 +19,7 @@ export const metadata = generatePageMetadata({
 
 export default function Home() {
   return (
+    <>
     <LandingGrid>
       <div className="px-3 sm:px-6 py-3 relative overflow-hidden">
         <Navbar />
@@ -40,5 +42,7 @@ export default function Home() {
       </div>
       <Footer />
     </LandingGrid>
+    <GradientBlur className="hidden h-[60px] md:block" />
+    </>
   );
 }

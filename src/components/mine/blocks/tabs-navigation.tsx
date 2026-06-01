@@ -44,6 +44,11 @@ const navItems = [
     Component: lazyGrid(() => import("../grids/button-grid")),
   },
   {
+    name: "SVG Animations",
+    slug: "svg-animations",
+    Component: lazyGrid(() => import("../grids/svg-animations-grid")),
+  },
+  {
     name: "Motion Animations",
     slug: "motion",
     Component: lazyGrid(() => import("../grids/motion-animations-grid")),

@@ -1738,6 +1738,21 @@
           "target": "components/pixel-perfect/silver-button.tsx"
         }
       ]
+    },
+    {
+      "name": "smiley-orb-animation",
+      "description": "Smiley Orb Animation component.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/smiley-orb-animation.tsx",
+          "target": "components/pixel-perfect/smiley-orb-animation.tsx"
+        }
+      ]
     }
   ]
 }

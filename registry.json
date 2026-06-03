@@ -1753,6 +1753,51 @@
           "target": "components/pixel-perfect/smiley-orb-animation.tsx"
         }
       ]
+    },
+    {
+      "name": "orbit-smiley-animation",
+      "description": "Orbit Smiley Animation component.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/orbit-smiley-animation.tsx",
+          "target": "components/pixel-perfect/orbit-smiley-animation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "glow-card-animation",
+      "description": "Glow Card Animation component.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/glow-card-animation.tsx",
+          "target": "components/pixel-perfect/glow-card-animation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "liquid-pause-animation",
+      "description": "Liquid Pause Animation component.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/liquid-pause-animation.tsx",
+          "target": "components/pixel-perfect/liquid-pause-animation.tsx"
+        }
+      ]
     }
   ]
 }

@@ -1,8 +1,5 @@
 import { cn } from "@/lib/utils";
 
-// Each layer: a stronger blur, masked to a gradient band that overlaps the
-// next layer's band. Stacking them ramps the blur smoothly from 0 -> max
-// instead of producing a single hard edge.
 const LAYERS = [
   { blur: 0.5, mask: [0, 12.5, 25, 37.5] },
   { blur: 1, mask: [12.5, 25, 37.5, 50] },

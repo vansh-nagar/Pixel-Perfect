@@ -1,5 +1,8 @@
 "use client";
 import BarWaveAnimation from "registry/new-york/svg/bar-wave-animation";
+import GlowCardAnimation from "registry/new-york/svg/glow-card-animation";
+import LiquidPauseAnimation from "registry/new-york/svg/liquid-pause-animation";
+import OrbitSmileyAnimation from "registry/new-york/svg/orbit-smiley-animation";
 import SmileyOrbAnimation from "registry/new-york/svg/smiley-orb-animation";
 import CopyDropdown from "../copy-dropdown";
 import { BorderDecorator } from "./svg-grid";
@@ -12,10 +15,28 @@ export const SvgAnimationsArr = [
     registryName: "smiley-orb-animation",
   },
   {
+    name: "Orbit Smiley",
+    description: "Smiley orb looping a path with a full spin, animated with Motion.",
+    component: <OrbitSmileyAnimation />,
+    registryName: "orbit-smiley-animation",
+  },
+  {
     name: "Bar Wave",
     description: "Animated bar wave SVG.",
     component: <BarWaveAnimation />,
     registryName: "bar-wave-animation",
+  },
+  {
+    name: "Glow Card",
+    description: "Gradient card drifting up into a dark glowing panel.",
+    component: <GlowCardAnimation />,
+    registryName: "glow-card-animation",
+  },
+  {
+    name: "Liquid Pause",
+    description: "Pause glyph over a morphing liquid blob on a gradient tile.",
+    component: <LiquidPauseAnimation />,
+    registryName: "liquid-pause-animation",
   },
 ];
 

@@ -16,10 +16,13 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-const TOOLBAR_BG = "#F2F2F1";
-const HIGHLIGHT = "#E2E2E0";
-const NAME_HIGHLIGHT = "#EAEAE8";
-const TOOLTIP_BG = "#F6F6F5";
+// Surfaces resolve from CSS variables declared on the root (see className),
+// so the editor retints itself for light/dark without a theme hook.
+const TOOLBAR_BG = "var(--te-toolbar)";
+const HIGHLIGHT = "var(--te-highlight)";
+const NAME_HIGHLIGHT = "var(--te-name-hl)";
+const TOOLTIP_BG = "var(--te-tooltip)";
+const HOVER_BG = "var(--te-hover)";
 
 const FULL_TEXT =
   "Giovanni Giorgio, known professionally as Giorgio Moroder, is an Italian music producer, songwriter, and DJ who is widely regarded as one of the pioneers of electronic dance music. Born on April 26, 1940, in Italy, Moroder's career spans over five decades, and he is credited with shaping the development of disco";
@@ -66,7 +69,7 @@ const TextEditorItalic = () => {
 
   return (
     <div
-      className="relative h-80 w-[420px] overflow-hidden rounded-2xl flex flex-col items-center"
+      className="relative h-80 w-[420px] overflow-hidden rounded-2xl flex flex-col items-center [--te-toolbar:#F2F2F1] [--te-highlight:#E2E2E0] [--te-name-hl:#EAEAE8] [--te-tooltip:#F6F6F5] [--te-hl:rgba(255,255,255,0.95)] [--te-hover:rgba(0,0,0,0.04)] dark:[--te-toolbar:#2A2A2D] dark:[--te-highlight:#3A3A3E] dark:[--te-name-hl:#303034] dark:[--te-tooltip:#2E2E32] dark:[--te-hl:rgba(255,255,255,0.06)] dark:[--te-hover:rgba(255,255,255,0.06)]"
       style={{ fontFamily: "ui-sans-serif, system-ui" }}
     >
       {/* Toolbar */}
@@ -76,7 +79,7 @@ const TextEditorItalic = () => {
           style={{
             background: TOOLBAR_BG,
             boxShadow:
-              "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.04) inset, 0 18px 30px -12px rgba(0,0,0,0.16), 0 4px 10px -2px rgba(0,0,0,0.06)",
+              "0 1px 0 var(--te-hl) inset, 0 -1px 0 rgba(0,0,0,0.12) inset, 0 18px 30px -12px rgba(0,0,0,0.35), 0 4px 10px -2px rgba(0,0,0,0.16)",
           }}
         >
           {/* Style cycler — changes the font of the highlighted name */}
@@ -84,7 +87,7 @@ const TextEditorItalic = () => {
             type="button"
             onClick={cycleStyle}
             aria-label={`Font style: ${currentStyle.label}`}
-            className="flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium text-neutral-600 transition-colors hover:text-neutral-900 active:scale-[0.97]"
+            className="flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium text-neutral-600 transition-colors hover:text-neutral-900 active:scale-[0.97] dark:text-neutral-300 dark:hover:text-neutral-50"
           >
             {currentStyle.label}
             <svg
@@ -92,7 +95,7 @@ const TextEditorItalic = () => {
               height="11"
               viewBox="0 0 12 12"
               fill="none"
-              className="text-neutral-500"
+              className="text-neutral-500 dark:text-neutral-400"
             >
               <path
                 d="M3 3 L9 9"
@@ -116,7 +119,9 @@ const TextEditorItalic = () => {
             onClick={() => setBold((b) => !b)}
             ariaLabel="Toggle bold"
           >
-            <span className="text-[12px] font-bold text-black">B</span>
+            <span className="text-[12px] font-bold text-black dark:text-white">
+              B
+            </span>
           </ToolButton>
 
           {/* Italic — hover shows tooltip */}
@@ -131,7 +136,7 @@ const TextEditorItalic = () => {
               ariaLabel="Toggle italic"
             >
               <span
-                className="text-[13px] italic text-black"
+                className="text-[13px] italic text-black dark:text-white"
                 style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
               >
                 I
@@ -149,11 +154,11 @@ const TextEditorItalic = () => {
                   className="absolute -top-9 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
                 >
                   <div
-                    className="px-2 py-1 text-[10px] font-medium text-neutral-700 rounded-md whitespace-nowrap"
+                    className="px-2 py-1 text-[10px] font-medium text-neutral-700 dark:text-neutral-200 rounded-md whitespace-nowrap"
                     style={{
                       background: TOOLTIP_BG,
                       boxShadow:
-                        "0 1px 0 rgba(255,255,255,0.95) inset, 0 4px 10px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
+                        "0 1px 0 var(--te-hl) inset, 0 4px 10px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.16)",
                     }}
                   >
                     Italic letters
@@ -174,11 +179,20 @@ const TextEditorItalic = () => {
             ariaLabel={`Alignment: ${align}`}
           >
             {align === "left" ? (
-              <AlignLeft className="size-3.5 text-black" strokeWidth={1.8} />
+              <AlignLeft
+                className="size-3.5 text-black dark:text-white"
+                strokeWidth={1.8}
+              />
             ) : align === "right" ? (
-              <AlignRight className="size-3.5 text-black" strokeWidth={1.8} />
+              <AlignRight
+                className="size-3.5 text-black dark:text-white"
+                strokeWidth={1.8}
+              />
             ) : (
-              <AlignCenter className="size-3.5 text-black" strokeWidth={1.8} />
+              <AlignCenter
+                className="size-3.5 text-black dark:text-white"
+                strokeWidth={1.8}
+              />
             )}
           </ToolButton>
 
@@ -191,7 +205,10 @@ const TextEditorItalic = () => {
             onClick={resetFormatting}
             ariaLabel="Reset formatting"
           >
-            <RotateCcw className="size-3.5 text-black" strokeWidth={1.8} />
+            <RotateCcw
+              className="size-3.5 text-black dark:text-white"
+              strokeWidth={1.8}
+            />
           </ToolButton>
 
           {/* Play — triggers letter-scatter animation on the body text */}
@@ -199,19 +216,12 @@ const TextEditorItalic = () => {
             type="button"
             onClick={playAnimation}
             whileTap={{ scale: 0.92 }}
-            whileHover={{ y: -1 }}
             transition={{ type: "spring", stiffness: 500, damping: 22 }}
-            className="grid size-7 cursor-pointer place-items-center rounded-full"
-            style={{
-              background:
-                "linear-gradient(180deg, #FFFFFF 0%, #E4E4E7 100%)",
-              boxShadow:
-                "0 1px 0 rgba(255,255,255,0.9) inset, 0 -1px 1px rgba(0,0,0,0.06) inset, 0 0 0 1px rgba(0,0,0,0.05), 0 2px 5px rgba(0,0,0,0.12)",
-            }}
+            className="grid size-7 cursor-pointer place-items-center rounded-full bg-neutral-900 dark:bg-white"
             aria-label="Play animation"
           >
             <Play
-              className="size-3 fill-black text-black"
+              className="size-3 translate-x-[0.5px] fill-white text-white dark:fill-neutral-900 dark:text-neutral-900"
               strokeWidth={0}
             />
           </motion.button>
@@ -224,7 +234,7 @@ const TextEditorItalic = () => {
         className={`relative mt-10 px-10 ${alignmentClass}`}
       >
         <p
-          className="text-[13px] leading-[1.55] tracking-[-0.005em] text-neutral-700"
+          className="text-[13px] leading-[1.55] tracking-[-0.005em] text-neutral-700 dark:text-neutral-300"
           style={{
             maskImage:
               "linear-gradient(180deg, black 0%, black 65%, transparent 95%)",
@@ -295,7 +305,7 @@ function ToolButton({
         backgroundColor: active ? HIGHLIGHT : "rgba(0,0,0,0)",
       }}
       whileTap={{ scale: 0.92 }}
-      whileHover={{ backgroundColor: active ? HIGHLIGHT : "rgba(0,0,0,0.04)" }}
+      whileHover={{ backgroundColor: active ? HIGHLIGHT : HOVER_BG }}
       transition={{
         backgroundColor: { duration: 0.18 },
         scale: { type: "spring", stiffness: 600, damping: 22 },

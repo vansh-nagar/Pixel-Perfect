@@ -49,12 +49,12 @@ const CarLockDriveMotion = () => {
 
   return (
     <div
-      className="relative w-[320px] h-[300px] overflow-hidden"
+      className="relative w-[320px] h-[300px] overflow-hidden [--car-bg:#FAFAFA] [--car-hl:rgba(255,255,255,0.95)] [--car-ground:rgba(0,0,0,0.06)] [--car-track:#E4E4E7] [--car-thumb:#FFFFFF] [--car-icon-active:#171717] [--car-icon-idle:#A1A1AA] dark:[--car-bg:#1C1C1F] dark:[--car-hl:rgba(255,255,255,0.05)] dark:[--car-ground:rgba(255,255,255,0.08)] dark:[--car-track:#2E2E33] dark:[--car-thumb:#56565E] dark:[--car-icon-active:#FAFAFA] dark:[--car-icon-idle:#71717A]"
       style={{
-        background: "#FAFAFA",
+        background: "var(--car-bg)",
         borderRadius: "28px",
         boxShadow:
-          "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 24px 40px -16px rgba(0,0,0,0.08), 0 4px 12px -2px rgba(0,0,0,0.04)",
+          "0 1px 0 var(--car-hl) inset, 0 -1px 0 rgba(0,0,0,0.12) inset, 0 24px 40px -16px rgba(0,0,0,0.30), 0 4px 12px -2px rgba(0,0,0,0.16)",
         fontFamily: "ui-sans-serif, system-ui",
       }}
     >
@@ -65,7 +65,7 @@ const CarLockDriveMotion = () => {
           top: "60%",
           height: 1,
           background:
-            "linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.06) 25%, rgba(0,0,0,0.06) 75%, transparent 100%)",
+            "linear-gradient(90deg, transparent 0%, var(--car-ground) 25%, var(--car-ground) 75%, transparent 100%)",
         }}
       />
 
@@ -92,9 +92,9 @@ const CarLockDriveMotion = () => {
         <div
           className="relative grid grid-cols-2 items-center rounded-full"
           style={{
-            background: "#E4E4E7",
+            background: "var(--car-track)",
             boxShadow:
-              "inset 0 1px 2px rgba(0,0,0,0.08), 0 1px 0 rgba(255,255,255,0.8)",
+              "inset 0 1px 2px rgba(0,0,0,0.20), 0 1px 0 var(--car-hl)",
             width: 116,
             height: 40,
             padding: 4,
@@ -102,14 +102,15 @@ const CarLockDriveMotion = () => {
         >
           {/* Thumb */}
           <motion.div
-            className="absolute rounded-full bg-white"
+            className="absolute rounded-full"
             style={{
               width: 54,
               top: 4,
               bottom: 4,
               left: 4,
+              background: "var(--car-thumb)",
               boxShadow:
-                "0 1px 2px rgba(0,0,0,0.08), 0 6px 14px -4px rgba(0,0,0,0.12), 0 1px 0 rgba(255,255,255,0.9) inset",
+                "0 1px 2px rgba(0,0,0,0.18), 0 6px 14px -4px rgba(0,0,0,0.28), 0 1px 0 var(--car-hl) inset",
             }}
             animate={{ x: driving ? 54 : 0 }}
             transition={{ type: "spring", stiffness: 420, damping: 32 }}
@@ -129,7 +130,11 @@ const CarLockDriveMotion = () => {
             >
               <Lock
                 className="size-4"
-                style={{ color: !driving ? "#171717" : "#A1A1AA" }}
+                style={{
+                  color: !driving
+                    ? "var(--car-icon-active)"
+                    : "var(--car-icon-idle)",
+                }}
                 strokeWidth={2.2}
               />
             </motion.span>
@@ -149,7 +154,11 @@ const CarLockDriveMotion = () => {
             >
               <Power
                 className="size-4"
-                style={{ color: driving ? "#171717" : "#A1A1AA" }}
+                style={{
+                  color: driving
+                    ? "var(--car-icon-active)"
+                    : "var(--car-icon-idle)",
+                }}
                 strokeWidth={2.2}
               />
             </motion.span>

@@ -14,10 +14,13 @@ const OUTER_TICKS = 60;
 const INNER_TICKS = 60;
 const DOT_RADIUS = 88;
 
-const ACTIVE = "#2A2A2A";
-const IDLE = "#D4D4D8";
-const TICK_OUTER = "rgba(160,160,170,0.55)";
-const TICK_INNER = "rgba(160,160,170,0.30)";
+// Colors resolve from CSS variables declared on the root (see className),
+// so the knob retints itself for light/dark without a theme hook.
+const ACTIVE = "var(--knob-dot-active)";
+const IDLE = "var(--knob-dot-idle)";
+const TICK_OUTER = "var(--knob-tick-outer)";
+const TICK_INNER = "var(--knob-tick-inner)";
+const MARKER = "var(--knob-marker)";
 
 const DialKnobMotion = () => {
   const [value, setValue] = useState(62);
@@ -70,7 +73,7 @@ const DialKnobMotion = () => {
 
   return (
     <div
-      className="relative grid w-[320px] place-items-center select-none"
+      className="relative grid w-[320px] place-items-center select-none [--knob-disc-from:#FAFAFA] [--knob-disc-to:#E4E4E7] [--knob-face-from:#FFFFFF] [--knob-face-to:#F4F4F5] [--knob-hl:rgba(255,255,255,0.95)] [--knob-tick-outer:rgba(160,160,170,0.55)] [--knob-tick-inner:rgba(160,160,170,0.30)] [--knob-marker:#71717A] [--knob-dot-idle:#D4D4D8] [--knob-dot-active:#2A2A2A] dark:[--knob-disc-from:#26262A] dark:[--knob-disc-to:#161618] dark:[--knob-face-from:#2A2A2E] dark:[--knob-face-to:#1D1D20] dark:[--knob-hl:rgba(255,255,255,0.06)] dark:[--knob-tick-outer:rgba(200,200,215,0.30)] dark:[--knob-tick-inner:rgba(200,200,215,0.16)] dark:[--knob-marker:#A1A1AA] dark:[--knob-dot-idle:#3F3F46] dark:[--knob-dot-active:#F4F4F5]"
       style={{
         height: 300,
         fontFamily: "ui-sans-serif, system-ui",
@@ -97,9 +100,9 @@ const DialKnobMotion = () => {
           style={{
             borderRadius: "50%",
             background:
-              "linear-gradient(180deg, #FAFAFA 0%, #E4E4E7 100%)",
+              "linear-gradient(180deg, var(--knob-disc-from) 0%, var(--knob-disc-to) 100%)",
             boxShadow:
-              "0 1px 0 rgba(255,255,255,0.95) inset, 0 -2px 4px rgba(0,0,0,0.05) inset, 0 14px 28px -10px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.04)",
+              "0 1px 0 var(--knob-hl) inset, 0 -2px 4px rgba(0,0,0,0.18) inset, 0 14px 28px -10px rgba(0,0,0,0.35), 0 4px 8px rgba(0,0,0,0.12)",
           }}
         />
 
@@ -130,9 +133,9 @@ const DialKnobMotion = () => {
                 y1={Math.sin(rad) * r1}
                 x2={Math.cos(rad) * (isMarker ? 102 : r2)}
                 y2={Math.sin(rad) * (isMarker ? 102 : r2)}
-                stroke={isMarker ? "#71717A" : TICK_OUTER}
                 strokeWidth={isMarker ? 1.6 : 1}
                 strokeLinecap="round"
+                style={{ stroke: isMarker ? MARKER : TICK_OUTER }}
               />
             );
           })}
@@ -149,9 +152,9 @@ const DialKnobMotion = () => {
             bottom: 20,
             borderRadius: "50%",
             background:
-              "linear-gradient(180deg, #FFFFFF 0%, #F4F4F5 100%)",
+              "linear-gradient(180deg, var(--knob-face-from) 0%, var(--knob-face-to) 100%)",
             boxShadow:
-              "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 0 0 1px rgba(0,0,0,0.03), 0 8px 18px -6px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.04)",
+              "0 1px 0 var(--knob-hl) inset, 0 -1px 0 rgba(0,0,0,0.12) inset, 0 0 0 1px rgba(0,0,0,0.12), 0 8px 18px -6px rgba(0,0,0,0.30), 0 2px 4px rgba(0,0,0,0.12)",
           }}
         >
           {/* Inner tick ring (very faint, all the way around) */}
@@ -171,9 +174,9 @@ const DialKnobMotion = () => {
                   y1={Math.sin(rad) * r1}
                   x2={Math.cos(rad) * r2}
                   y2={Math.sin(rad) * r2}
-                  stroke={TICK_INNER}
                   strokeWidth={0.7}
                   strokeLinecap="round"
+                  style={{ stroke: TICK_INNER }}
                 />
               );
             })}
@@ -188,7 +191,7 @@ const DialKnobMotion = () => {
                   cx={Math.cos(rad) * DOT_RADIUS}
                   cy={Math.sin(rad) * DOT_RADIUS}
                   r={1.6}
-                  fill={IDLE}
+                  style={{ fill: IDLE }}
                 />
               );
             })}
@@ -207,11 +210,11 @@ const DialKnobMotion = () => {
                 return (
                   <path
                     d={`M ${sx} ${sy} A ${DOT_RADIUS} ${DOT_RADIUS} 0 ${large} 1 ${ex} ${ey}`}
-                    stroke={ACTIVE}
                     strokeWidth={0.6}
                     strokeOpacity={0.18}
                     fill="none"
                     strokeLinecap="round"
+                    style={{ stroke: ACTIVE }}
                   />
                 );
               })()}
@@ -227,8 +230,8 @@ const DialKnobMotion = () => {
                   cx={Math.cos(rad) * DOT_RADIUS}
                   cy={Math.sin(rad) * DOT_RADIUS}
                   r={isLead ? 3.2 : 2.4}
-                  fill={ACTIVE}
                   style={{
+                    fill: ACTIVE,
                     transition: "r 180ms ease",
                   }}
                 />

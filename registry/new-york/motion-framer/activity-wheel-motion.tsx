@@ -112,12 +112,12 @@ const ActivityWheelMotion = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-[300px] h-[300px] overflow-hidden touch-none"
+      className="relative w-[300px] h-[300px] overflow-hidden touch-none [--wheel-bg:#FAFAFA] [--wheel-hl:rgba(255,255,255,0.95)] [--wheel-arc1:rgba(0,0,0,0.08)] [--wheel-arc2:rgba(0,0,0,0.04)] dark:[--wheel-bg:#1C1C1F] dark:[--wheel-hl:rgba(255,255,255,0.05)] dark:[--wheel-arc1:rgba(255,255,255,0.10)] dark:[--wheel-arc2:rgba(255,255,255,0.05)]"
       style={{
-        background: "#FAFAFA",
+        background: "var(--wheel-bg)",
         borderRadius: "28px",
         boxShadow:
-          "0 1px 0 rgba(255,255,255,0.95) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 24px 40px -16px rgba(0,0,0,0.08), 0 4px 12px -2px rgba(0,0,0,0.04)",
+          "0 1px 0 var(--wheel-hl) inset, 0 -1px 0 rgba(0,0,0,0.12) inset, 0 24px 40px -16px rgba(0,0,0,0.30), 0 4px 12px -2px rgba(0,0,0,0.16)",
         fontFamily: "ui-sans-serif, system-ui",
         overscrollBehavior: "contain",
       }}
@@ -133,18 +133,18 @@ const ActivityWheelMotion = () => {
           cy="150"
           r="140"
           fill="none"
-          stroke="rgba(0,0,0,0.08)"
           strokeWidth="1"
           strokeDasharray="2 4"
+          style={{ stroke: "var(--wheel-arc1)" }}
         />
         <circle
           cx="404"
           cy="150"
           r="125"
           fill="none"
-          stroke="rgba(0,0,0,0.04)"
           strokeWidth="1"
           strokeDasharray="2 4"
+          style={{ stroke: "var(--wheel-arc2)" }}
         />
       </svg>
 
@@ -221,7 +221,7 @@ const ActivityWheelMotion = () => {
                 </motion.div>
 
                 <motion.div
-                  className="rounded-full bg-neutral-900"
+                  className="rounded-full bg-neutral-900 dark:bg-neutral-100"
                   animate={{
                     width: isSelected ? 12 : 0,
                     height: 6,

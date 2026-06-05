@@ -44,6 +44,7 @@ const Gradient5 = () => (
 type BackgroundItem = {
   name: string;
   description: string;
+  code?: string;
   component?: JSX.Element;
   style?: CSSProperties;
 };
@@ -52,26 +53,31 @@ export const BackgroudArr: BackgroundItem[] = [
   {
     name: "Gradient 1",
     description: "Radial glow fade",
+    code: `<div aria-hidden className="absolute z-30 inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,var(--color-blue-600),var(--color-white)_100%)]" />`,
     component: <Gradient1 />,
   },
   {
     name: "Gradient 2",
     description: "Bottom radial bloom",
+    code: `<div className="bg-[radial-gradient(circle_at_bottom,var(--color-1),var(--color-2))] absolute inset-0" />`,
     component: <Gradient2 />,
   },
   {
     name: "Gradient 3",
     description: "Diagonal micro pattern",
+    code: `<div className="bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px] h-full w-full absolute inset-0" />`,
     component: <Gradient3 />,
   },
   {
     name: "Gradient 4",
     description: "Dual grid system",
+    code: "<div className=\"h-full w-full relative\">\n  <div\n    style={{\n      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px)`,\n      backgroundSize: \"100px 100px, 100px 100px, 20px 20px, 20px 20px\",\n      backgroundPosition: \"-2px -2px, -2px -2px, -1px -1px, -1px -1px\",\n    }}\n    className=\"absolute inset-0 dark:hidden\"\n  />\n  <div\n    style={{\n      backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px)`,\n      backgroundSize: \"100px 100px, 100px 100px, 20px 20px, 20px 20px\",\n      backgroundPosition: \"-2px -2px, -2px -2px, -1px -1px, -1px -1px\",\n    }}\n    className=\"absolute inset-0 hidden dark:block\"\n  />\n</div>",
     component: <Gradient4 />,
   },
   {
     name: "Gradient 5",
     description: "Dot mesh texture",
+    code: `<div className="absolute inset-0 after:pointer-events-none after:inset-0 after:inset-ring after:inset-ring-gray-950/5 dark:after:inset-ring-white/10 bg-[radial-gradient(var(--pattern-fg)_1px,transparent_0)] bg-size-[10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10" />`,
     component: <Gradient5 />,
   },
   {
@@ -298,11 +304,18 @@ const BackgroundGrid = () => {
                     styleObj = item.style;
                   }
 
-                  if (styleObj) {
+                  let innerContent = "";
+                  if (item.code) {
+                    innerContent = item.code;
+                  } else if (styleObj) {
                     const props = Object.entries(styleObj)
                       .map(([k, v]) => `  ${k}: '${v}',`)
                       .join("\n");
-                    code = `<div className='relative group border-b border-l border-dashed aspect-video flex items-center justify-center'>\n  <div className='w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50'>\n    <div style={{\n${props}\n}} className='absolute inset-0' />\n  </div>\n  <div className='leading-1 absolute left-1.5 bottom-1.5 z-40'>\n    <p className='text-xs'>${item.name}</p>\n    <p className='text-[8px] text-muted-foreground'>${item.description}</p>\n  </div>\n</div>`;
+                    innerContent = `<div style={{\n${props}\n}} className='absolute inset-0' />`;
+                  }
+
+                  if (innerContent) {
+                    code = `<div className='relative group border-b border-l border-dashed aspect-video flex items-center justify-center'>\n  <div className='w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50'>\n    ${innerContent}\n  </div>\n  <div className='leading-1 absolute left-1.5 bottom-1.5 z-40'>\n    <p className='text-xs'>${item.name}</p>\n    <p className='text-[8px] text-muted-foreground'>${item.description}</p>\n  </div>\n</div>`;
                   } else {
                     // Fallback logic for components or generic copy
                     code = `// Use specific component for ${item.name}`;

@@ -16,7 +16,7 @@ const ShaderGrid = () => {
   const [active, setActive] = useState<Shader | null>(null);
   const [blobOpen, setBlobOpen] = useState(false);
   const [twistOpen, setTwistOpen] = useState(false);
-  const itemsPerPage = 8;
+  const itemsPerPage = 12;
   const totalPages = Math.ceil(SHADERS.length / itemsPerPage);
   usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;

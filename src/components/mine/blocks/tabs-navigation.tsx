@@ -79,6 +79,11 @@ const navItems = [
     Component: lazyGrid(() => import("../grids/background-grid")),
   },
   {
+    name: "Image Gradients",
+    slug: "image-gradients",
+    Component: lazyGrid(() => import("../grids/image-gradient-grid")),
+  },
+  {
     name: "Mouse Followers",
     slug: "mouse-followers",
     Component: lazyGrid(() => import("../grids/mouse-follower-grid")),

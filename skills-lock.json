@@ -5,6 +5,12 @@
       "source": "emilkowalski/skill",
       "sourceType": "github",
       "computedHash": "eff737930f2b993a2a6cb4df3cf4876ba0cf8383db591819e2398f439217d85a"
+    },
+    "gsap": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/gsap/SKILL.md",
+      "computedHash": "ef2658b3705d3fd5c8e38d197b31521553a0bee3b40bda2ab70bf22bd6b88854"
     }
   }
 }

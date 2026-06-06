@@ -1,8 +1,6 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
-import { usePaginationKeys } from "@/hooks/use-pagination-keys";
+import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import {
   Select,
   SelectContent,
@@ -36,12 +34,25 @@ import CopyDropdown from "../copy-dropdown";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
 
+type TextItem = {
+  name: string;
+  description: string;
+  component: React.ReactNode;
+  registryName: string;
+  hasStagger: boolean;
+};
+
 const TextGrid = () => {
   const [staggerFrom, setStaggerFrom] = useState<StaggerFrom>("start");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const [activeId, setActiveId] = useState<string>("text-broken-glass");
+  const [panelHeight, setPanelHeight] = useState("calc(100vh - 151px)");
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const asideRef = useRef<HTMLElement>(null);
+  const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  const TextArr = [
+  const TextArr: TextItem[] = [
     {
       name: "Broken Glass Assemble",
       description: "Letters start shattered & rotated → snap into place.",
@@ -235,30 +246,158 @@ const TextGrid = () => {
     },
   ];
 
-  const totalPages = Math.ceil(TextArr.length / itemsPerPage);
-  usePaginationKeys(totalPages, setCurrentPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedItems = TextArr.slice(startIndex, startIndex + itemsPerPage);
+  // Size the two-pane layout to fill the viewport below the navbar + tabs, so
+  // the sidebar and the content each get their own scroll region.
+  useEffect(() => {
+    const measure = () => {
+      const top = wrapRef.current?.getBoundingClientRect().top ?? 137;
+      // +14px clears the page's bottom padding so the document itself never
+      // scrolls — only the two inner panes do.
+      setPanelHeight(`calc(100vh - ${Math.max(0, Math.round(top) + 14)}px)`);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  // Scroll-spy: highlight the sidebar item whose section is near the centre of
+  // the content pane (the content pane is the scroll container, not the page).
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) {
+          const id = visible.target.getAttribute("data-id");
+          if (id) setActiveId(id);
+        }
+      },
+      {
+        root: contentRef.current,
+        rootMargin: "-45% 0px -45% 0px",
+        threshold: [0, 0.25, 0.5, 1],
+      }
+    );
+    const nodes = Object.values(sectionRefs.current).filter(
+      Boolean
+    ) as HTMLElement[];
+    nodes.forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
+  }, []);
+
+  // Smart scroll: keep the active item in view inside the sidebar and reveal a
+  // few upcoming items, mirroring the tabs navigation's look-ahead behaviour.
+  useEffect(() => {
+    const aside = asideRef.current;
+    const item = itemRefs.current[activeId];
+    if (!aside || !item) return;
+
+    const lookAhead = 150; // px of neighbouring items to surface beyond the active one
+    const asideRect = aside.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+
+    if (itemRect.bottom + lookAhead > asideRect.bottom) {
+      aside.scrollBy({
+        top: itemRect.bottom + lookAhead - asideRect.bottom,
+        behavior: "smooth",
+      });
+    } else if (itemRect.top - lookAhead < asideRect.top) {
+      aside.scrollBy({
+        top: itemRect.top - lookAhead - asideRect.top,
+        behavior: "smooth",
+      });
+    }
+  }, [activeId]);
+
+  const scrollTo = (id: string) => {
+    sectionRefs.current[id]?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+    setActiveId(id);
+  };
 
   return (
-    <div className="flex flex-col gap-4 overflow-hidden">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
-        {paginatedItems.map((item, index) => (
-          <div
-            key={index}
-            className="relative border-b border-l p-1 border-dashed  aspect-square flex items-center justify-center"
+    <div
+      ref={wrapRef}
+      style={{ height: panelHeight }}
+      className="flex w-full items-stretch overflow-hidden"
+    >
+      {/* Sidebar — all animation names, scrolls independently */}
+      <aside
+        ref={asideRef}
+        className="hidden h-full w-[244px] shrink-0 flex-col overflow-y-auto overscroll-contain border-r border-dashed pr-2 md:flex [scrollbar-width:thin] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25"
+      >
+        <p className="sticky top-0 z-10 bg-background px-3 pb-2 pt-1 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
+          {TextArr.length} Animations
+        </p>
+        <nav className="flex flex-col">
+          {TextArr.map((item) => {
+            const active = activeId === item.registryName;
+            return (
+              <button
+                key={item.registryName}
+                type="button"
+                ref={(el) => {
+                  itemRefs.current[item.registryName] = el;
+                }}
+                onClick={() => scrollTo(item.registryName)}
+                className={cn(
+                  "group flex flex-col items-start gap-0.5 border-l-2 px-3 py-2 text-left transition-colors",
+                  active
+                    ? "border-foreground bg-muted/60"
+                    : "border-transparent hover:bg-muted/30"
+                )}
+              >
+                <span
+                  className={cn(
+                    "text-sm leading-tight transition-colors",
+                    active
+                      ? "text-foreground"
+                      : "text-muted-foreground group-hover:text-foreground"
+                  )}
+                >
+                  {item.name}
+                </span>
+                <span className="line-clamp-1 text-[10px] text-muted-foreground/70">
+                  {item.description}
+                </span>
+              </button>
+            );
+          })}
+        </nav>
+      </aside>
+
+      {/* Right — every text animation, stacked in its own scroll container.
+          h-full + min-h-0 pin the pane to the container height so the flexbox
+          `min-height: auto` rule can't let it grow to content height (which
+          would make the parent clip it with no scrollbar). */}
+      <div
+        ref={contentRef}
+        id="text-anim-scroll"
+        className="h-full min-h-0 min-w-0 flex-1 overflow-y-auto"
+      >
+        {TextArr.map((item) => (
+          <section
+            key={item.registryName}
+            data-id={item.registryName}
+            ref={(el) => {
+              sectionRefs.current[item.registryName] = el;
+            }}
+            className="relative flex min-h-[68vh] scroll-mt-4 items-center justify-center border-b border-dashed px-6 py-12"
           >
             <BorderDecorator />
-            <div className=" z-30">{item.component}</div>
+            <div className="z-30">{item.component}</div>
 
-            <div className=" leading-1 absolute left-1.5  bottom-1.5">
-              <p className="text-xs ">{item.name}</p>
-              <p className="text-[8px] text-muted-foreground">
+            <div className="absolute bottom-3 left-3 z-30 leading-tight">
+              <p className="text-sm font-medium">{item.name}</p>
+              <p className="max-w-md text-xs text-muted-foreground">
                 {item.description}
               </p>
             </div>
-            <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto_auto] grid-rows-[auto_1fr] h-full gap-0">
-              <div className=" border-t border-dashed "></div>
+
+            <div className="absolute right-3 top-3 z-30 flex items-center gap-2">
               {item.hasStagger && (
                 <Select
                   value={staggerFrom}
@@ -268,7 +407,7 @@ const TextGrid = () => {
                 >
                   <SelectTrigger
                     size="sm"
-                    className=" z-30 border-none rounded-none absolute bottom-0 right-0 "
+                    className="z-30 rounded-none border-dashed"
                   >
                     <SelectValue placeholder="Stagger" />
                   </SelectTrigger>
@@ -282,57 +421,10 @@ const TextGrid = () => {
                 </Select>
               )}
               <CopyDropdown registryName={item.registryName} />
-
-              <div />
-              <div />
-              <div className=" border-r border-dashed h-full -mr-[0.5px] " />
             </div>
-          </div>
+          </section>
         ))}
       </div>
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 py-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="border-dashed rounded-none"
-          >
-            <ChevronLeft className="size-4" />
-          </Button>
-
-          <div className="flex items-center gap-1">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <Button
-                key={page}
-                variant={currentPage === page ? "default" : "outline"}
-                size="sm"
-                onClick={() => setCurrentPage(page)}
-                className={`w-8 h-8 rounded-none border-dashed ${
-                  currentPage === page ? "" : ""
-                }`}
-              >
-                {page}
-              </Button>
-            ))}
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className="border-dashed rounded-none"
-          >
-            <ChevronRight className="size-4" />
-          </Button>
-        </div>
-      )}
     </div>
   );
 };
@@ -346,8 +438,6 @@ export const BorderDecorator = () => {
       <span className="border-muted-foreground absolute -right-px -top-px block size-6 border-dashed border-r-1 border-t-1 z-30"></span>
       <span className="border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-dashed border-b-1 border-l-1 z-30 "></span>
       <span className="border-muted-foreground absolute -bottom-px -right-px block size-6 border-b-1 border-r-1 border-dashed z-30"></span>
-
-      <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px] mt-[1px]  border-dashed"></span>
 
       {/* Circular border */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>

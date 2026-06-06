@@ -67,6 +67,7 @@
     "howler": "^2.2.4",
     "html2canvas-pro": "^2.0.2",
     "input-otp": "^1.4.2",
+    "lil-gui": "^0.21.0",
     "lucide-react": "^0.552.0",
     "motion": "^12.38.0",
     "next": "16.0.10",

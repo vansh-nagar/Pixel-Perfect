@@ -1798,6 +1798,36 @@
           "target": "components/pixel-perfect/liquid-pause-animation.tsx"
         }
       ]
+    },
+    {
+      "name": "paper-plane-animation",
+      "description": "Paper Plane Animation component.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/paper-plane-animation.tsx",
+          "target": "components/pixel-perfect/paper-plane-animation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bounce-smiley-animation",
+      "description": "Bounce Smiley Animation component.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/svg/bounce-smiley-animation.tsx",
+          "target": "components/pixel-perfect/bounce-smiley-animation.tsx"
+        }
+      ]
     }
   ]
 }

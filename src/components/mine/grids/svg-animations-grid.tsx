@@ -1,8 +1,10 @@
 "use client";
 import BarWaveAnimation from "registry/new-york/svg/bar-wave-animation";
+import BounceSmileyAnimation from "registry/new-york/svg/bounce-smiley-animation";
 import GlowCardAnimation from "registry/new-york/svg/glow-card-animation";
 import LiquidPauseAnimation from "registry/new-york/svg/liquid-pause-animation";
 import OrbitSmileyAnimation from "registry/new-york/svg/orbit-smiley-animation";
+import PaperPlaneAnimation from "registry/new-york/svg/paper-plane-animation";
 import SmileyOrbAnimation from "registry/new-york/svg/smiley-orb-animation";
 import CopyDropdown from "../copy-dropdown";
 import { BorderDecorator } from "./svg-grid";
@@ -37,6 +39,18 @@ export const SvgAnimationsArr = [
     description: "Pause glyph over a morphing liquid blob on a gradient tile.",
     component: <LiquidPauseAnimation />,
     registryName: "liquid-pause-animation",
+  },
+  {
+    name: "Paper Plane",
+    description: "Paper plane looping inside a pulsing dashed frame, animated with Motion.",
+    component: <PaperPlaneAnimation />,
+    registryName: "paper-plane-animation",
+  },
+  {
+    name: "Bounce Smiley",
+    description: "Winking smiley springing up from below with a spin, animated with Motion.",
+    component: <BounceSmileyAnimation />,
+    registryName: "bounce-smiley-animation",
   },
 ];
 

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import type { ShaderMaterial } from "three";
+import type { Mesh, ShaderMaterial } from "three";
 import GUI from "lil-gui";
 
 const vertexShader = /* glsl */ `
@@ -11,12 +11,7 @@ const vertexShader = /* glsl */ `
   uniform float uFrequency;
   uniform float uAmplitude;
   uniform float uSpeed;
-  uniform float uWarp;
-  uniform float uTwist;
-  uniform float uSpikes;
-  uniform float uPulse;
   varying float vDisplacement;
-  varying vec3 vNormal;
 
   // 3D simplex noise (Ashima / Ian McEwan), returns ~[-1, 1]
   vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -73,53 +68,13 @@ const vertexShader = /* glsl */ `
                                   dot(p2, x2), dot(p3, x3)));
   }
 
-  // fractal Brownian motion: stack octaves of noise for rich detail
-  float fbm(vec3 p) {
-    float v = 0.0;
-    float a = 0.5;
-    for (int i = 0; i < 5; i++) {
-      v += a * snoise(p);
-      p *= 2.0;
-      a *= 0.5;
-    }
-    return v;
-  }
-
-  // rotation matrix around the Y axis
-  mat3 rotateY(float angle) {
-    float c = cos(angle);
-    float s = sin(angle);
-    return mat3(c, 0.0, -s, 0.0, 1.0, 0.0, s, 0.0, c);
-  }
-
   void main() {
-    float t = uTime * uSpeed;
-    vec3 p = position;
-
-    // 3) TWIST: rotate each vertex around Y more the higher it is
-    p = rotateY(p.y * uTwist + t) * p;
-
-    // 2) DOMAIN WARP: offset the sample point by noise of the sample point
-    vec3 warp = vec3(
-      fbm(p * uFrequency + t),
-      fbm(p * uFrequency + 5.2 - t),
-      fbm(p * uFrequency + 9.3 + t * 0.5)
-    );
-
-    // 1) fbm displacement through the warped field
-    float n = fbm(p * uFrequency + warp * uWarp + t);
-
-    // 4) SPIKES: sharpen the noise into quills
-    float spike = pow(abs(n), 3.0) * uSpikes;
-
-    // 5) PULSE: the whole body breathes
-    float pulse = sin(t * 2.0) * uPulse;
-
-    float displacement = n * uAmplitude + spike + pulse;
+    // sample noise in the sphere's own space, animated over time
+    float noise = snoise(position * uFrequency + uTime * uSpeed);
+    float displacement = noise * uAmplitude;
     vDisplacement = displacement;
-    vNormal = normal;
 
-    // push out along the original normal
+    // push the vertex out along its normal by the noise amount
     vec3 newPosition = position + normal * displacement;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
   }
@@ -127,68 +82,53 @@ const vertexShader = /* glsl */ `
 
 const fragmentShader = /* glsl */ `
   varying float vDisplacement;
-  varying vec3 vNormal;
-
   void main() {
-    // cool palette: deep blue -> cyan -> violet, by displacement
-    float m = clamp(vDisplacement * 1.5 + 0.5, 0.0, 1.0);
-    vec3 deep  = vec3(0.02, 0.09, 0.30);
-    vec3 cyan  = vec3(0.10, 0.62, 0.90);
-    vec3 violet = vec3(0.50, 0.30, 0.95);
-    vec3 col = mix(deep, cyan, smoothstep(0.0, 0.55, m));
-    col = mix(col, violet, smoothstep(0.55, 1.0, m));
-
-    // fake directional light so the geometry reads
-    float light = clamp(
-      dot(normalize(vNormal), normalize(vec3(0.5, 0.8, 0.6))) * 0.5 + 0.5,
-      0.0, 1.0
-    );
-    col *= 0.55 + 0.45 * light;
-
-    gl_FragColor = vec4(col, 1.0);
+    vec3 colorA = vec3(0.1, 0.2, 0.9);
+    vec3 colorB = vec3(0.9, 0.3, 0.6);
+    vec3 color = mix(colorA, colorB, vDisplacement * 2.0 + 0.5);
+    gl_FragColor = vec4(color, 1.0);
   }
 `;
 
-const Blob = () => {
+const Blob = ({ interactive }: { interactive: boolean }) => {
+  const meshRef = useRef<Mesh>(null);
   const materialRef = useRef<ShaderMaterial>(null);
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
       uFrequency: { value: 1.25 },
-      uAmplitude: { value: 0.5 },
-      uSpeed: { value: 0.4 },
-      uWarp: { value: 0.8 },
-      uTwist: { value: 2.0 },
-      uSpikes: { value: 0.3 },
-      uPulse: { value: 0.15 },
+      uAmplitude: { value: 1 },
+      uSpeed: { value: 0.23 },
     }),
     []
   );
 
   useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
     if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = clock.getElapsedTime();
+      materialRef.current.uniforms.uTime.value = t;
+    }
+    // Auto-spin the thumbnail; full-screen lets the user drag instead.
+    if (!interactive && meshRef.current) {
+      meshRef.current.rotation.y = t * 0.3;
     }
   });
 
   useEffect(() => {
+    if (!interactive) return;
     const material = materialRef.current;
     if (!material) return;
     const gui = new GUI();
+    gui.domElement.style.zIndex = "10000"; // above the z-[9999] modal
     gui.add(material.uniforms.uFrequency, "value", 0, 5).name("frequency");
-    gui.add(material.uniforms.uAmplitude, "value", 0, 2).name("amplitude");
-    gui.add(material.uniforms.uSpeed, "value", 0, 3).name("speed");
-    gui.add(material.uniforms.uWarp, "value", 0, 3).name("warp");
-    gui.add(material.uniforms.uTwist, "value", 0, 8).name("twist");
-    gui.add(material.uniforms.uSpikes, "value", 0, 2).name("spikes");
-    gui.add(material.uniforms.uPulse, "value", 0, 1).name("pulse");
-    gui.add(material, "wireframe");
+    gui.add(material.uniforms.uAmplitude, "value", 0, 1).name("amplitude");
+    gui.add(material.uniforms.uSpeed, "value", 0, 2).name("speed");
     return () => gui.destroy();
-  }, []);
+  }, [interactive]);
 
   return (
-    <mesh>
-      <sphereGeometry args={[1, 200, 200]} />
+    <mesh ref={meshRef}>
+      <sphereGeometry args={[1, 128, 128]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
@@ -199,15 +139,24 @@ const Blob = () => {
   );
 };
 
-const Page = () => {
+const BlobSphere = ({
+  className,
+  dpr = 2,
+  interactive = false,
+}: {
+  className?: string;
+  /** Max pixel ratio. Use a lower value for small thumbnails. */
+  dpr?: number;
+  /** Enable drag-to-spin controls and the lil-gui panel. */
+  interactive?: boolean;
+}) => {
   return (
-    <div className="h-screen w-full bg-black">
-      <Canvas camera={{ position: [0, 0, 4] }}>
-        <Blob />
-        <OrbitControls enablePan={false} enableZoom={false} />
-      </Canvas>
-    </div>
+    <Canvas className={className} dpr={dpr} camera={{ position: [0, 0, 3] }}>
+      <color attach="background" args={[0, 0, 0]} />
+      <Blob interactive={interactive} />
+      {interactive && <OrbitControls enablePan={false} enableZoom={false} />}
+    </Canvas>
   );
 };
 
-export default Page;
+export default BlobSphere;

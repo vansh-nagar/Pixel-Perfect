@@ -322,6 +322,36 @@
       ]
     },
     {
+      "name": "refraction-glass-button",
+      "description": "A real glass button that refracts the content behind it via an feDisplacementMap lens, with chromatic edge fringe and specular sheen.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/refraction-glass-button.tsx",
+          "target": "components/pixel-perfect/refraction-glass-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "prism-glass-button",
+      "description": "A thick domed glass button that refracts the content behind it via an feDisplacementMap lens, with a heavy chromatic-aberration fringe, frost and specular sheen. Draggable.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/prism-glass-button.tsx",
+          "target": "components/pixel-perfect/prism-glass-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "glass-square-button",
       "description": "A rounded-square frosted glass button with diagonal gradient border and 10 color variants: blue, purple, emerald, rose, amber, cyan, lime, slate, red, indigo.",
       "type": "registry:block",
@@ -1713,7 +1743,7 @@
     },
     {
       "name": "yoga-invite-card",
-      "description": "Soft cream invite card with clean subtle micro-animations on mount —",
+      "description": "Soft cream invite card with clean subtle micro-animations on mount \u2014",
       "type": "registry:block",
       "dependencies": [
         "framer-motion"

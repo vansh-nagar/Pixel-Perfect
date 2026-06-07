@@ -19,6 +19,12 @@ export type GlassProps = {
   glow: number;
   /** Inner rim-light intensity, 0–1. */
   edgeHighlight: number;
+  /**
+   * Direction the rim light comes from, in degrees. 0 lights the top edge
+   * (with the matching dark on the bottom); the bright/dark pair rotates with
+   * the angle. Defaults to 0 to preserve the classic top-lit look.
+   */
+  edgeHighlightAngle?: number;
   /** Specular sheen intensity, 0–1. */
   specular: number;
   /** Direction the specular sheen comes from, in degrees. */
@@ -47,6 +53,7 @@ export function Glass({
   blur,
   glow,
   edgeHighlight,
+  edgeHighlightAngle = 0,
   specular,
   specularAngle,
   specularBlur = 0,
@@ -73,6 +80,13 @@ export function Glass({
   // more blur, more diffusion and a milkier, more frosted body.
   const frost = Math.min(0.22, blur * 0.02);
 
+  // Rim light direction: angle 0 → highlight on the top edge, dark on the
+  // bottom; the pair rotates together as the angle increases. sin/cos give the
+  // 1px inset offset, and the dark inset is simply the opposite offset.
+  const rimRad = (edgeHighlightAngle * Math.PI) / 180;
+  const rimX = +Math.sin(rimRad).toFixed(3);
+  const rimY = +Math.cos(rimRad).toFixed(3);
+
   const lensStyle: CSSProperties = {
     position: "absolute",
     left: 0,
@@ -91,9 +105,9 @@ export function Glass({
     // Rim light + a soft outer glow that keeps the glass legible over any
     // content. These run as cheap CSS passes rather than extra filter regions.
     boxShadow: [
-      `inset 0 1px 1px rgba(255,255,255,${0.5 * edgeHighlight})`,
+      `inset ${rimX}px ${rimY}px 1px rgba(255,255,255,${0.5 * edgeHighlight})`,
       `inset 0 0 0 1px rgba(255,255,255,${0.35 * edgeHighlight})`,
-      `inset 0 -1px 2px rgba(0,0,0,${0.12 * edgeHighlight})`,
+      `inset ${-rimX}px ${-rimY}px 2px rgba(0,0,0,${0.12 * edgeHighlight})`,
       `0 6px 24px rgba(0,0,0,${0.28 * glow})`,
       `0 0 24px rgba(255,255,255,${0.5 * glow})`,
     ].join(", "),

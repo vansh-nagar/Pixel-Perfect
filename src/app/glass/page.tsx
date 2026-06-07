@@ -20,6 +20,7 @@ const DEFAULTS = {
   chroma: 1.0,
   blur: 5.0,
   edgeHighlight: 0.33,
+  edgeHighlightAngle: 0,
   specular: 0.35,
   specularAngle: 45,
   specularBlur: 6,
@@ -59,6 +60,7 @@ const CONTROLS: Control[] = [
   { key: "chroma", label: "Chroma", min: 0, max: 3, step: 0.01, decimals: 2 },
   { key: "blur", label: "Blur", min: 0, max: 16, step: 0.1, decimals: 1 },
   { key: "edgeHighlight", label: "Edge Highlight", min: 0, max: 1, step: 0.01, decimals: 2 },
+  { key: "edgeHighlightAngle", label: "Edge Angle", min: 0, max: 360, step: 1, decimals: 0 },
   { key: "specular", label: "Specular", min: 0, max: 1, step: 0.01, decimals: 2 },
   { key: "specularAngle", label: "Specular Angle", min: 0, max: 360, step: 1, decimals: 0 },
   { key: "specularBlur", label: "Specular Blur", min: 0, max: 30, step: 0.5, decimals: 1 },
@@ -222,6 +224,7 @@ export default function GlassPage() {
                 blur={s.blur}
                 glow={0}
                 edgeHighlight={s.edgeHighlight}
+                edgeHighlightAngle={s.edgeHighlightAngle}
                 specular={s.specular}
                 specularAngle={s.specularAngle}
                 specularBlur={s.specularBlur}
@@ -398,6 +401,7 @@ function SnapshotTile({
         blur={s.blur}
         glow={0}
         edgeHighlight={s.edgeHighlight}
+        edgeHighlightAngle={s.edgeHighlightAngle}
         specular={s.specular}
         specularAngle={s.specularAngle}
         specularBlur={s.specularBlur}
@@ -547,6 +551,7 @@ const S = {
   chroma: ${s.chroma},
   blur: ${s.blur},
   edgeHighlight: ${s.edgeHighlight},
+  edgeHighlightAngle: ${s.edgeHighlightAngle},
   specular: ${s.specular},
   specularAngle: ${s.specularAngle},
   specularBlur: ${s.specularBlur},
@@ -568,6 +573,11 @@ export default function GlassRectangle() {
   const scaleB = lensScale - spread;
   const frost = Math.min(0.22, S.blur * 0.02);
 
+  // Rim light direction: 0 = top-lit; the bright/dark pair rotates with the angle.
+  const rimRad = (S.edgeHighlightAngle * Math.PI) / 180;
+  const rimX = +Math.sin(rimRad).toFixed(3);
+  const rimY = +Math.cos(rimRad).toFixed(3);
+
   const lensStyle: CSSProperties = {
     position: "relative",
     width: S.width,
@@ -578,9 +588,9 @@ export default function GlassRectangle() {
     WebkitBackdropFilter: map ? \`url(#\${filterId})\` : undefined,
     backgroundColor: \`rgba(255,255,255,\${frost})\`,
     boxShadow: [
-      \`inset 0 1px 1px rgba(255,255,255,\${0.5 * S.edgeHighlight})\`,
+      \`inset \${rimX}px \${rimY}px 1px rgba(255,255,255,\${0.5 * S.edgeHighlight})\`,
       \`inset 0 0 0 1px rgba(255,255,255,\${0.35 * S.edgeHighlight})\`,
-      \`inset 0 -1px 2px rgba(0,0,0,\${0.12 * S.edgeHighlight})\`,
+      \`inset \${-rimX}px \${-rimY}px 2px rgba(0,0,0,\${0.12 * S.edgeHighlight})\`,
     ].join(", "),
   };
 

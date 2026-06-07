@@ -302,6 +302,7 @@ const TextGrid = () => {
       {/* Sidebar — all animation names, scrolls independently */}
       <aside
         ref={asideRef}
+        data-lenis-prevent
         className="hidden h-full min-h-0 w-[244px] shrink-0 flex-col overflow-y-auto overscroll-contain border-r border-dashed pr-2 md:flex [scrollbar-width:thin] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25"
       >
         <p className="sticky top-0 z-10 bg-background px-3 pb-2 pt-1 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
@@ -352,6 +353,7 @@ const TextGrid = () => {
       <div
         ref={contentRef}
         id="text-anim-scroll"
+        data-lenis-prevent
         className="h-full min-h-0 min-w-0 flex-1 overflow-y-auto"
       >
         <section

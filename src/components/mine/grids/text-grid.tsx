@@ -46,7 +46,6 @@ const TextGrid = () => {
   const [staggerFrom, setStaggerFrom] = useState<StaggerFrom>("start");
   const [activeId, setActiveId] = useState<string>("text-broken-glass");
   const [panelHeight, setPanelHeight] = useState("calc(100vh - 151px)");
-  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const wrapRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const asideRef = useRef<HTMLElement>(null);
@@ -260,32 +259,6 @@ const TextGrid = () => {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Scroll-spy: highlight the sidebar item whose section is near the centre of
-  // the content pane (the content pane is the scroll container, not the page).
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) {
-          const id = visible.target.getAttribute("data-id");
-          if (id) setActiveId(id);
-        }
-      },
-      {
-        root: contentRef.current,
-        rootMargin: "-45% 0px -45% 0px",
-        threshold: [0, 0.25, 0.5, 1],
-      }
-    );
-    const nodes = Object.values(sectionRefs.current).filter(
-      Boolean
-    ) as HTMLElement[];
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, []);
-
   // Smart scroll: keep the active item in view inside the sidebar and reveal a
   // few upcoming items, mirroring the tabs navigation's look-ahead behaviour.
   useEffect(() => {
@@ -311,12 +284,14 @@ const TextGrid = () => {
   }, [activeId]);
 
   const scrollTo = (id: string) => {
-    sectionRefs.current[id]?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
     setActiveId(id);
+    // Reset the content pane to the top when switching to a new animation so a
+    // previously scrolled (overflowing) item doesn't start mid-scroll.
+    contentRef.current?.scrollTo({ top: 0, behavior: "auto" });
   };
+
+  const activeItem =
+    TextArr.find((item) => item.registryName === activeId) ?? TextArr[0];
 
   return (
     <div
@@ -327,7 +302,7 @@ const TextGrid = () => {
       {/* Sidebar — all animation names, scrolls independently */}
       <aside
         ref={asideRef}
-        className="hidden h-full w-[244px] shrink-0 flex-col overflow-y-auto overscroll-contain border-r border-dashed pr-2 md:flex [scrollbar-width:thin] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25"
+        className="hidden h-full min-h-0 w-[244px] shrink-0 flex-col overflow-y-auto overscroll-contain border-r border-dashed pr-2 md:flex [scrollbar-width:thin] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25"
       >
         <p className="sticky top-0 z-10 bg-background px-3 pb-2 pt-1 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
           {TextArr.length} Animations
@@ -369,61 +344,55 @@ const TextGrid = () => {
         </nav>
       </aside>
 
-      {/* Right — every text animation, stacked in its own scroll container.
-          h-full + min-h-0 pin the pane to the container height so the flexbox
-          `min-height: auto` rule can't let it grow to content height (which
-          would make the parent clip it with no scrollbar). */}
+      {/* Right — only the selected text animation. Its own scroll container so
+          a single overflowing item scrolls here while the sidebar stays put.
+          h-full + min-h-0 pin the pane to the container height; the section uses
+          min-h-full so it fills the pane but can grow (and scroll) when the
+          content is taller than the viewport. */}
       <div
         ref={contentRef}
         id="text-anim-scroll"
         className="h-full min-h-0 min-w-0 flex-1 overflow-y-auto"
       >
-        {TextArr.map((item) => (
-          <section
-            key={item.registryName}
-            data-id={item.registryName}
-            ref={(el) => {
-              sectionRefs.current[item.registryName] = el;
-            }}
-            className="relative flex min-h-[68vh] scroll-mt-4 items-center justify-center border-b border-dashed px-6 py-12"
-          >
-            <BorderDecorator />
-            <div className="z-30">{item.component}</div>
+        <section
+          key={activeItem.registryName}
+          data-id={activeItem.registryName}
+          className="relative flex min-h-full scroll-mt-4 items-center justify-center border-b border-dashed px-6 py-12"
+        >
+          <BorderDecorator />
+          <div className="z-30">{activeItem.component}</div>
 
-            <div className="absolute bottom-3 left-3 z-30 leading-tight">
-              <p className="text-sm font-medium">{item.name}</p>
-              <p className="max-w-md text-xs text-muted-foreground">
-                {item.description}
-              </p>
-            </div>
+          <div className="absolute bottom-3 left-3 z-30 leading-tight">
+            <p className="text-sm font-medium">{activeItem.name}</p>
+            <p className="max-w-md text-xs text-muted-foreground">
+              {activeItem.description}
+            </p>
+          </div>
 
-            <div className="absolute right-3 top-3 z-30 flex items-center gap-2">
-              {item.hasStagger && (
-                <Select
-                  value={staggerFrom}
-                  onValueChange={(value) =>
-                    setStaggerFrom(value as StaggerFrom)
-                  }
+          <div className="absolute right-3 top-3 z-30 flex items-center gap-2">
+            {activeItem.hasStagger && (
+              <Select
+                value={staggerFrom}
+                onValueChange={(value) => setStaggerFrom(value as StaggerFrom)}
+              >
+                <SelectTrigger
+                  size="sm"
+                  className="z-30 rounded-none border-dashed"
                 >
-                  <SelectTrigger
-                    size="sm"
-                    className="z-30 rounded-none border-dashed"
-                  >
-                    <SelectValue placeholder="Stagger" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="start">Start</SelectItem>
-                    <SelectItem value="end">End</SelectItem>
-                    <SelectItem value="center">Center</SelectItem>
-                    <SelectItem value="edges">Edges</SelectItem>
-                    <SelectItem value="random">Random</SelectItem>
-                  </SelectContent>
-                </Select>
-              )}
-              <CopyDropdown registryName={item.registryName} />
-            </div>
-          </section>
-        ))}
+                  <SelectValue placeholder="Stagger" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="start">Start</SelectItem>
+                  <SelectItem value="end">End</SelectItem>
+                  <SelectItem value="center">Center</SelectItem>
+                  <SelectItem value="edges">Edges</SelectItem>
+                  <SelectItem value="random">Random</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+            <CopyDropdown registryName={activeItem.registryName} />
+          </div>
+        </section>
       </div>
     </div>
   );

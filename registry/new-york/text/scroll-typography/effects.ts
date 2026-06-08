@@ -495,7 +495,13 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     words.forEach((word, wordPosition) => {
       tl.fromTo(
         wordChars(word),
-        { willChange: "transform", transformOrigin: wordPosition % 2 === 0 ? "50% 0%" : "50% 100%", scaleY: 0 },
+        {
+          willChange: "transform",
+          // Repo's `!wordPosition % 2` is truthy only for word 0, so only the
+          // first word grows from the top edge; the rest grow from the bottom.
+          transformOrigin: wordPosition === 0 ? "50% 0%" : "50% 100%",
+          scaleY: 0,
+        },
         { ease: "power1.inOut", scaleY: 1, stagger: { amount: 0.3, from: "center" } },
         0
       );

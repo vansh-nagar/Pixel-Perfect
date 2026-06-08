@@ -82,11 +82,29 @@ export function ScrollTypography({
 
       const resolved = scroller ?? findScroller(root);
 
-      const makeST = (cfg: Record<string, unknown>) => ({
-        ...cfg,
-        ...(resolved ? { scroller: resolved, pinType: "transform" } : {}),
-        ...(debug ? { markers: true } : {}),
-      });
+      const makeST = (cfg: Record<string, unknown>) => {
+        // Pinned effects scale their scroll distance to a fraction of the repo
+        // value when previewed in a small pane, so they play (and finish) within
+        // a reasonable scroll. Critically this scales EVERY `+=N%` end by the
+        // SAME factor, preserving each effect's internal tween ratios (e.g.
+        // fx15's 100%-pin / 140%-flip) so it still resolves cleanly. The
+        // full-window page (no scroller) keeps the exact repo distances.
+        let end = cfg.end;
+        if (resolved && typeof end === "string") {
+          const m = end.match(/^\+=(\d+)%$/);
+          // Only shorten the long pinned ranges (N > 80); leave short scrub
+          // ranges like fx1's `+=50%` untouched.
+          if (m && Number(m[1]) > 80) {
+            end = `+=${Math.round(Number(m[1]) * 0.45)}%`;
+          }
+        }
+        return {
+          ...cfg,
+          end,
+          ...(resolved ? { scroller: resolved, pinType: "transform" } : {}),
+          ...(debug ? { markers: true } : {}),
+        };
+      };
 
       EFFECTS[effect]({
         root,

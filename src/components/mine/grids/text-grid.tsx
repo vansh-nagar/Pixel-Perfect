@@ -30,6 +30,16 @@ import TextBrokenGlass from "../../../../registry/new-york/text/text-broken-glas
 import TextMatrixRain from "../../../../registry/new-york/text/text-matrix-rain";
 import TextGlitchPortal from "../../../../registry/new-york/text/text-glitch-portal";
 import TextTypewriterGlitch from "../../../../registry/new-york/text/text-typewriter-glitch";
+import { AnimateText } from "../../../../registry/new-york/text/animate-text/engine";
+import {
+  ANIMATE_TEXT_SPECS,
+  ANIMATE_TEXT_ORDER,
+} from "../../../../registry/new-york/text/animate-text/specs";
+import {
+  SharedSlideText,
+  KineticCenterText,
+  KineticStackText,
+} from "../../../../registry/new-york/text/animate-text/custom";
 import CopyDropdown from "../copy-dropdown";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
@@ -44,14 +54,83 @@ type TextItem = {
 
 const TextGrid = () => {
   const [staggerFrom, setStaggerFrom] = useState<StaggerFrom>("start");
-  const [activeId, setActiveId] = useState<string>("text-broken-glass");
+  const [activeId, setActiveId] = useState<string>("text-soft-blur-in");
   const [panelHeight, setPanelHeight] = useState("calc(100vh - 151px)");
   const wrapRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const asideRef = useRef<HTMLElement>(null);
   const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
+  // Catalog effects ported from the `animate-text` skill. Generic-stagger
+  // effects are spec-driven; the three layout-aware renderers have bespoke
+  // components. These sit at the top of the grid, in catalog order.
+  const animateTextEntries: TextItem[] = [
+    ...ANIMATE_TEXT_ORDER.slice(0, 17).map((id) => {
+      const s = ANIMATE_TEXT_SPECS[id];
+      const stagger = s.target !== "whole";
+      return {
+        name: s.display_name,
+        description: s.description,
+        component: (
+          <AnimateText
+            spec={s}
+            className={
+              id === "typewriter"
+                ? "text-2xl font-mono font-semibold"
+                : "text-2xl font-semibold"
+            }
+            {...(stagger ? { staggerFrom } : {})}
+          />
+        ),
+        registryName: `text-${id}`,
+        hasStagger: stagger,
+      } satisfies TextItem;
+    }),
+    {
+      name: "Kinetic Center Build",
+      description:
+        "A word appears in the center; each new word enters from the right and pushes the line until the phrase locks centered.",
+      component: <KineticCenterText className="text-2xl font-semibold" />,
+      registryName: "text-kinetic-center-build",
+      hasStagger: false,
+    },
+    {
+      name: "Short Slide Right",
+      description:
+        "The whole phrase glides in from the left as one move, while the words are revealed in sequence through opacity.",
+      component: <SharedSlideText className="text-2xl font-semibold" />,
+      registryName: "text-short-slide-right",
+      hasStagger: false,
+    },
+    {
+      name: "Short Slide Down",
+      description:
+        "Each new word drops in from above into its own line and pushes the stack downward until a centered composition locks.",
+      component: <KineticStackText className="text-2xl font-semibold" />,
+      registryName: "text-short-slide-down",
+      hasStagger: false,
+    },
+    ...ANIMATE_TEXT_ORDER.slice(17).map((id) => {
+      const s = ANIMATE_TEXT_SPECS[id];
+      const stagger = s.target !== "whole";
+      return {
+        name: s.display_name,
+        description: s.description,
+        component: (
+          <AnimateText
+            spec={s}
+            className="text-2xl font-semibold"
+            {...(stagger ? { staggerFrom } : {})}
+          />
+        ),
+        registryName: `text-${id}`,
+        hasStagger: stagger,
+      } satisfies TextItem;
+    }),
+  ];
+
   const TextArr: TextItem[] = [
+    ...animateTextEntries,
     {
       name: "Broken Glass Assemble",
       description: "Letters start shattered & rotated → snap into place.",

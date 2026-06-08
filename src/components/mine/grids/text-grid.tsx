@@ -40,6 +40,28 @@ import {
   KineticCenterText,
   KineticStackText,
 } from "../../../../registry/new-york/text/animate-text/custom";
+import {
+  DecodeCursor,
+  DecodeBar,
+  DecodeColor,
+  DecodeBox,
+} from "../../../../registry/new-york/text/line-hover/line-hover";
+import {
+  TextBlockTransition,
+  BLOCK_TRANSITION_ORDER,
+  BLOCK_TRANSITIONS,
+} from "../../../../registry/new-york/text/text-block-transitions";
+import {
+  ScrollTypography,
+  EFFECT_ORDER,
+  EFFECT_INFO,
+  type FxId,
+} from "../../../../registry/new-york/text/scroll-typography";
+import {
+  GooeyMorph,
+  GooeySlideX,
+  GooeySlideY,
+} from "../../../../registry/new-york/text/gooey-text";
 import CopyDropdown from "../copy-dropdown";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
@@ -50,16 +72,84 @@ type TextItem = {
   component: React.ReactNode;
   registryName: string;
   hasStagger: boolean;
+  /** Scroll-driven effect — rendered in a tall runway you scroll to play. */
+  isScroll?: boolean;
 };
 
 const TextGrid = () => {
   const [staggerFrom, setStaggerFrom] = useState<StaggerFrom>("start");
-  const [activeId, setActiveId] = useState<string>("text-soft-blur-in");
+  const [activeId, setActiveId] = useState<string>("text-block-center-rise");
   const [panelHeight, setPanelHeight] = useState("calc(100vh - 151px)");
   const wrapRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const asideRef = useRef<HTMLElement>(null);
   const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // Codrops "Gooey Text Hover" morphs — two phrases melt/reform via an animated
+  // SVG gooey blur filter, on a continuous loop and also re-triggered on hover.
+  const gooeyEntries: TextItem[] = [
+    {
+      name: "Gooey Morph",
+      description:
+        "Two phrases melt and reform into each other through an SVG gooey blur filter.",
+      component: <GooeyMorph />,
+      registryName: "text-gooey-morph",
+      hasStagger: false,
+    },
+    {
+      name: "Gooey Slide",
+      description:
+        "Gooey crossfade with a horizontal slide as one phrase morphs into the next.",
+      component: <GooeySlideX />,
+      registryName: "text-gooey-slide-x",
+      hasStagger: false,
+    },
+    {
+      name: "Gooey Drop",
+      description:
+        "Gooey crossfade with a vertical drop as one phrase morphs into the next.",
+      component: <GooeySlideY />,
+      registryName: "text-gooey-slide-y",
+      hasStagger: false,
+    },
+  ];
+
+  // Codrops "Line Text Hover" decode effects — terminal-style per-character
+  // scramble on a continuous loop, also re-triggered on per-line hover.
+  const lineHoverEntries: TextItem[] = [
+    {
+      name: "Terminal Cursor Decode",
+      description:
+        "Per-character scramble with a block cursor flashing as each letter locks in.",
+      component: <DecodeCursor className="text-xl" />,
+      registryName: "text-decode-cursor",
+      hasStagger: false,
+    },
+    {
+      name: "Difference Bar Decode",
+      description:
+        "Scramble decode with a white highlight bar wiping across in blend-difference.",
+      component: <DecodeBar className="text-xl" />,
+      registryName: "text-decode-bar",
+      hasStagger: false,
+    },
+    {
+      name: "Chromatic Decode",
+      description:
+        "Scramble where each glyph flashes a random color before settling.",
+      component: <DecodeColor className="text-xl" />,
+      registryName: "text-decode-color",
+      hasStagger: false,
+    },
+    {
+      name: "Box Reveal Decode",
+      description:
+        "Scramble decode with a rounded blurred box growing up from the bottom.",
+      component: <DecodeBox className="text-xl" />,
+      registryName: "text-decode-box",
+      hasStagger: false,
+    },
+  ];
 
   // Catalog effects ported from the `animate-text` skill. Generic-stagger
   // effects are spec-driven; the three layout-aware renderers have bespoke
@@ -129,7 +219,50 @@ const TextGrid = () => {
     }),
   ];
 
+  // Codrops "Text Block Transitions" — faithful ports of all 12 demos, each a
+  // two-layer crossfade that auto-loops between the two sample phrases. Every
+  // demo's stagger `from` is integral to its look, so the stagger selector is
+  // intentionally hidden for these (hasStagger: false).
+  const blockTransitionEntries: TextItem[] = BLOCK_TRANSITION_ORDER.map((id) => {
+    const t = BLOCK_TRANSITIONS[id];
+    return {
+      name: t.display_name,
+      description: t.description,
+      component: (
+        <TextBlockTransition variant={id} className="text-2xl font-semibold" />
+      ),
+      registryName: `text-block-${id}`,
+      hasStagger: false,
+    } satisfies TextItem;
+  });
+
+  // Codrops "On-Scroll Typography Animations" — all 29 effects, scroll-driven
+  // inside the preview pane (and on the dedicated /scroll-typography page).
+  const scrollTypographyEntries: TextItem[] = EFFECT_ORDER.map(
+    (fx): TextItem => {
+      const info = EFFECT_INFO[fx];
+      return {
+        name: info.name,
+        description: info.description,
+        component: (
+          <ScrollTypography
+            effect={fx}
+            text={info.sample}
+            className="text-4xl font-semibold tracking-tight sm:text-6xl"
+          />
+        ),
+        registryName: `text-scroll-${fx}`,
+        hasStagger: false,
+        isScroll: true,
+      };
+    }
+  );
+
   const TextArr: TextItem[] = [
+    ...gooeyEntries,
+    ...scrollTypographyEntries,
+    ...blockTransitionEntries,
+    ...lineHoverEntries,
     ...animateTextEntries,
     {
       name: "Broken Glass Assemble",
@@ -239,6 +372,7 @@ const TextGrid = () => {
       ),
       registryName: "text-fade",
       hasStagger: false,
+      isScroll: true,
     },
     {
       name: "Text Inertia Effect",
@@ -435,45 +569,89 @@ const TextGrid = () => {
         data-lenis-prevent
         className="h-full min-h-0 min-w-0 flex-1 overflow-y-auto"
       >
-        <section
-          key={activeItem.registryName}
-          data-id={activeItem.registryName}
-          className="relative flex min-h-full scroll-mt-4 items-center justify-center border-b border-dashed px-6 py-12"
-        >
-          <BorderDecorator />
-          <div className="z-30">{activeItem.component}</div>
+        {activeItem.isScroll ? (
+          <section
+            key={activeItem.registryName}
+            data-id={activeItem.registryName}
+            className="relative min-h-full border-b border-dashed"
+          >
+            {/* Sticky chrome — name + copy stay in view while you scroll the runway */}
+            <div className="pointer-events-none sticky top-0 z-40 flex items-start justify-between gap-3 bg-gradient-to-b from-background via-background/85 to-transparent px-3 pb-10 pt-3">
+              <div className="pointer-events-auto leading-tight">
+                <p className="text-sm font-medium">{activeItem.name}</p>
+                <p className="max-w-md text-xs text-muted-foreground">
+                  {activeItem.description}
+                </p>
+              </div>
+              <div className="pointer-events-auto">
+                <CopyDropdown registryName={activeItem.registryName} />
+              </div>
+            </div>
 
-          <div className="absolute bottom-3 left-3 z-30 leading-tight">
-            <p className="text-sm font-medium">{activeItem.name}</p>
-            <p className="max-w-md text-xs text-muted-foreground">
-              {activeItem.description}
-            </p>
-          </div>
+            {/* Entry runway → heading → exit runway (scroll drives the effect) */}
+            <div aria-hidden style={{ height: "70vh" }} />
+            <div className="flex min-h-[40vh] w-full items-center justify-center px-6">
+              {activeItem.component}
+            </div>
+            <div
+              aria-hidden
+              style={{
+                height: EFFECT_INFO[
+                  activeItem.registryName.replace("text-scroll-", "") as FxId
+                ]?.pinned
+                  ? "90vh"
+                  : "130vh",
+              }}
+            />
 
-          <div className="absolute right-3 top-3 z-30 flex items-center gap-2">
-            {activeItem.hasStagger && (
-              <Select
-                value={staggerFrom}
-                onValueChange={(value) => setStaggerFrom(value as StaggerFrom)}
-              >
-                <SelectTrigger
-                  size="sm"
-                  className="z-30 rounded-none border-dashed"
+            {/* Persistent scroll hint */}
+            <div className="pointer-events-none sticky bottom-4 z-40 -mt-12 flex justify-center">
+              <span className="rounded-full border border-dashed bg-background/70 px-3 py-1 text-[10px] font-medium uppercase tracking-widest text-muted-foreground backdrop-blur">
+                Scroll ↓ to play
+              </span>
+            </div>
+          </section>
+        ) : (
+          <section
+            key={activeItem.registryName}
+            data-id={activeItem.registryName}
+            className="relative flex min-h-full scroll-mt-4 items-center justify-center border-b border-dashed px-6 py-12"
+          >
+            <BorderDecorator />
+            <div className="z-30">{activeItem.component}</div>
+
+            <div className="absolute bottom-3 left-3 z-30 leading-tight">
+              <p className="text-sm font-medium">{activeItem.name}</p>
+              <p className="max-w-md text-xs text-muted-foreground">
+                {activeItem.description}
+              </p>
+            </div>
+
+            <div className="absolute right-3 top-3 z-30 flex items-center gap-2">
+              {activeItem.hasStagger && (
+                <Select
+                  value={staggerFrom}
+                  onValueChange={(value) => setStaggerFrom(value as StaggerFrom)}
                 >
-                  <SelectValue placeholder="Stagger" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="start">Start</SelectItem>
-                  <SelectItem value="end">End</SelectItem>
-                  <SelectItem value="center">Center</SelectItem>
-                  <SelectItem value="edges">Edges</SelectItem>
-                  <SelectItem value="random">Random</SelectItem>
-                </SelectContent>
-              </Select>
-            )}
-            <CopyDropdown registryName={activeItem.registryName} />
-          </div>
-        </section>
+                  <SelectTrigger
+                    size="sm"
+                    className="z-30 rounded-none border-dashed"
+                  >
+                    <SelectValue placeholder="Stagger" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="start">Start</SelectItem>
+                    <SelectItem value="end">End</SelectItem>
+                    <SelectItem value="center">Center</SelectItem>
+                    <SelectItem value="edges">Edges</SelectItem>
+                    <SelectItem value="random">Random</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+              <CopyDropdown registryName={activeItem.registryName} />
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

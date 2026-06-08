@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "index",
+  "description": "Index component.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/text/scroll-typography/index.ts",
+      "content": "export { ScrollTypography, default } from \"./engine\";\nexport type { ScrollTypographyProps } from \"./engine\";\nexport { EFFECTS, EFFECT_ORDER, EFFECT_INFO } from \"./effects\";\nexport type { FxId, EffectInfo, EffectCtx, EffectBuilder } from \"./effects\";\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/index.ts"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1743,7 +1743,7 @@
     },
     {
       "name": "yoga-invite-card",
-      "description": "Soft cream invite card with clean subtle micro-animations on mount \u2014",
+      "description": "Soft cream invite card with clean subtle micro-animations on mount —",
       "type": "registry:block",
       "dependencies": [
         "framer-motion"
@@ -1856,6 +1856,127 @@
           "type": "registry:component",
           "path": "registry/new-york/svg/bounce-smiley-animation.tsx",
           "target": "components/pixel-perfect/bounce-smiley-animation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "custom",
+      "description": "Layout-aware custom renderers from the `animate-text` catalog that cannot be",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/animate-text/custom.tsx",
+          "target": "components/pixel-perfect/custom.tsx"
+        }
+      ]
+    },
+    {
+      "name": "engine",
+      "description": "Generic-stagger text animation engine.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/animate-text/engine.tsx",
+          "target": "components/pixel-perfect/engine.tsx"
+        }
+      ]
+    },
+    {
+      "name": "specs",
+      "description": "Generic-stagger specs ported verbatim from the `animate-text` catalog.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/animate-text/specs.ts",
+          "target": "components/pixel-perfect/specs.ts"
+        }
+      ]
+    },
+    {
+      "name": "line-hover",
+      "description": "Line text hover decode animations — faithful GSAP ports of the four Codrops",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/line-hover/line-hover.tsx",
+          "target": "components/pixel-perfect/line-hover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "effects",
+      "description": "Scroll-typography effect builders — faithful GSAP ScrollTrigger ports of the",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/scroll-typography/effects.ts",
+          "target": "components/pixel-perfect/effects.ts"
+        }
+      ]
+    },
+    {
+      "name": "index",
+      "description": "Index component.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/scroll-typography/index.ts",
+          "target": "components/pixel-perfect/index.ts"
+        }
+      ]
+    },
+    {
+      "name": "text-block-transitions",
+      "description": "Codrops \"Text Block Transitions\" — faithful ports of all 12 demos from",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-block-transitions.tsx",
+          "target": "components/pixel-perfect/text-block-transitions.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gooey-text",
+      "description": "Gooey text hover morph — faithful GSAP ports of the three Codrops",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/gooey-text.tsx",
+          "target": "components/pixel-perfect/gooey-text.tsx"
         }
       ]
     }

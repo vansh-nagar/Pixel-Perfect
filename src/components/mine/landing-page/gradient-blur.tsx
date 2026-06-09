@@ -11,7 +11,7 @@ const LAYERS = [
   { blur: 16, mask: [87.5, 100] },
 ];
 
-function maskFor(stops: number[]) {
+function maskFor(stops: number[], side: "top" | "bottom") {
   // 4 stops -> transparent, opaque, opaque, transparent
   // 2 stops -> transparent, opaque (final layer)
   const parts =
@@ -23,27 +23,41 @@ function maskFor(stops: number[]) {
           `rgba(0,0,0,0) ${stops[3]}%`,
         ]
       : [`rgba(0,0,0,0) ${stops[0]}%`, `rgb(0,0,0) ${stops[1]}%`];
-  return `linear-gradient(${parts.join(", ")})`;
+  // `to bottom` (the default) stacks the heaviest blur at the bottom edge; for a
+  // top band we flip the axis so the heaviest blur sits at the top edge instead.
+  return `linear-gradient(to ${side}, ${parts.join(", ")})`;
 }
 
 type GradientBlurProps = {
   className?: string;
   /** Height of the blur band. Defaults to 60px. */
   height?: number;
+  /** Which edge the blur is anchored to / fades from. Defaults to "bottom". */
+  side?: "top" | "bottom";
+  /** Positioning strategy. "fixed" pins to the viewport (landing page); use
+   *  "absolute"/"sticky" to pin inside a scroll container instead. */
+  position?: "fixed" | "absolute" | "sticky";
 };
 
-export function GradientBlur({ className, height = 60 }: GradientBlurProps) {
+export function GradientBlur({
+  className,
+  height = 60,
+  side = "bottom",
+  position = "fixed",
+}: GradientBlurProps) {
   return (
     <div
       className={cn(
-        "pointer-events-none fixed inset-x-0 bottom-0 z-[60]",
+        "pointer-events-none inset-x-0 z-[60]",
+        position,
+        side === "top" ? "top-0" : "bottom-0",
         className,
       )}
       style={{ height }}
     >
       <div className="relative h-full">
         {LAYERS.map((layer, i) => {
-          const mask = maskFor(layer.mask);
+          const mask = maskFor(layer.mask, side);
           return (
             <div
               key={i}

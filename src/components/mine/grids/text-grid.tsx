@@ -63,6 +63,7 @@ import {
   GooeySlideY,
 } from "../../../../registry/new-york/text/gooey-text";
 import CopyDropdown from "../copy-dropdown";
+import { GradientBlur } from "../landing-page/gradient-blur";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
 
@@ -518,9 +519,16 @@ const TextGrid = () => {
         data-lenis-prevent
         className="hidden h-full min-h-0 w-[244px] shrink-0 flex-col overflow-y-auto overscroll-contain border-r border-dashed pr-2 md:flex [scrollbar-width:thin] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25"
       >
-        <p className="sticky top-0 z-10 bg-background px-3 pb-2 pt-1 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-          {TextArr.length} Animations
-        </p>
+        <div className="sticky top-0 z-10 bg-background px-3 pb-2 pt-1">
+          <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
+            {TextArr.length} Animations
+          </p>
+          <p className="mt-1 text-[10px] leading-snug text-red-500">
+            Heads up: ~20% of these are original to this library. The rest
+            (~80%) are faithful ports of open-source effects, credited to their
+            original authors.
+          </p>
+        </div>
         <nav className="flex flex-col">
           {TextArr.map((item) => {
             const active = activeId === item.registryName;
@@ -575,8 +583,21 @@ const TextGrid = () => {
             data-id={activeItem.registryName}
             className="relative min-h-full border-b border-dashed"
           >
-            {/* Sticky chrome — name + copy stay in view while you scroll the runway */}
-            <div className="pointer-events-none sticky top-0 z-40 flex items-start justify-between gap-3 bg-gradient-to-b from-background via-background/85 to-transparent px-3 pb-10 pt-3">
+            {/* Progressive blur band at the top of the runway — the same layered
+                backdrop-blur used at the bottom of the landing page, flipped to
+                fade from the top edge so scrolling type dissolves into a frosted
+                band instead of a hard cut. */}
+            <GradientBlur
+              side="top"
+              position="sticky"
+              height={96}
+              className="-mb-24"
+            />
+
+            {/* Sticky chrome — name + copy stay in view while you scroll the
+                runway. Sits above the blur band (z-[70] > the band's z-[60]) so
+                the label stays crisp while the type behind it blurs. */}
+            <div className="pointer-events-none sticky top-0 z-70 flex items-start justify-between gap-3 px-3 pb-10 pt-3">
               <div className="pointer-events-auto leading-tight">
                 <p className="text-sm font-medium">{activeItem.name}</p>
                 <p className="max-w-md text-xs text-muted-foreground">

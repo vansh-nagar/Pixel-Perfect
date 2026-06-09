@@ -77,4 +77,29 @@ export function GradientBlur({
   );
 }
 
+/** Self-contained, copy-pasteable source for the bottom-anchored progressive blur
+ *  band. Generated from the same LAYERS/maskFor used above so the snippet can never
+ *  drift from the live component. Consumed by the components grid's Copy button. */
+export const progressiveBlurSnippet = [
+  `<div className="pointer-events-none absolute inset-x-0 bottom-0 h-[60px]">`,
+  `  <div className="relative h-full">`,
+  ...LAYERS.map((layer, i) => {
+    const mask = maskFor(layer.mask, "bottom");
+    return [
+      `    <div`,
+      `      className="absolute inset-0"`,
+      `      style={{`,
+      `        zIndex: ${i + 1},`,
+      `        backdropFilter: "blur(${layer.blur}px)",`,
+      `        WebkitBackdropFilter: "blur(${layer.blur}px)",`,
+      `        maskImage: "${mask}",`,
+      `        WebkitMaskImage: "${mask}",`,
+      `      }}`,
+      `    />`,
+    ].join("\n");
+  }),
+  `  </div>`,
+  `</div>`,
+].join("\n");
+
 export default GradientBlur;

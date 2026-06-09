@@ -4,6 +4,10 @@ import { ChevronLeft, ChevronRight, Copy } from "lucide-react";
 import { useState, type JSX, type CSSProperties } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { toast } from "sonner";
+import {
+  GradientBlur,
+  progressiveBlurSnippet,
+} from "@/components/mine/landing-page/gradient-blur";
 
 const Gradient1 = () => (
   <div
@@ -41,6 +45,12 @@ const Gradient5 = () => (
   <div className="absolute inset-0 after:pointer-events-none after:inset-0 after:inset-ring after:inset-ring-gray-950/5 dark:after:inset-ring-white/10 bg-[radial-gradient(var(--pattern-fg)_1px,transparent_0)] bg-size-[10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10" />
 );
 
+const ProgressiveBlur = () => (
+  <div className="absolute inset-0 overflow-hidden">
+    <GradientBlur position="absolute" height={56} />
+  </div>
+);
+
 type BackgroundItem = {
   name: string;
   description: string;
@@ -50,6 +60,12 @@ type BackgroundItem = {
 };
 
 export const BackgroudArr: BackgroundItem[] = [
+  {
+    name: "Progressive Blur",
+    description: "Layered backdrop-blur fade",
+    code: progressiveBlurSnippet,
+    component: <ProgressiveBlur />,
+  },
   {
     name: "Gradient 1",
     description: "Radial glow fade",

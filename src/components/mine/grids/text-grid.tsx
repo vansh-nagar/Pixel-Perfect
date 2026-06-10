@@ -523,11 +523,6 @@ const TextGrid = () => {
           <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
             {TextArr.length} Animations
           </p>
-          <p className="mt-1 text-[10px] leading-snug text-red-500">
-            Heads up: ~20% of these are original to this library. The rest
-            (~80%) are faithful ports of open-source effects, credited to their
-            original authors.
-          </p>
         </div>
         <nav className="flex flex-col">
           {TextArr.map((item) => {

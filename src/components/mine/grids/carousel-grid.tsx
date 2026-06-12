@@ -3,67 +3,71 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
-import FlipTextReveal from "registry/new-york/gsap/flip-text-reveal";
-import Stagger1 from "registry/new-york/gsap/stagger1";
-import ColorFlairButton from "registry/new-york/motion-framer/color-flair-button";
-import InertiaArrowCard from "registry/new-york/motion-framer/inertia-arrow-card";
+import InfiniteCarousel from "registry/new-york/carousel/infinite-carousel";
+import ScrollDirectionCarousel from "registry/new-york/carousel/scroll-direction-carousel";
+import RadialCarousel from "registry/new-york/carousel/radial-carousel";
+import CardsSlider from "registry/new-york/carousel/cards-slider";
 import CopyDropdown from "../copy-dropdown";
 
-const GsapStaggerGridArr = [
+const CarouselGridArr = [
   {
-    name: "Inertia Arrow Card",
+    name: "Radial Carousel",
     description:
-      "A notched card whose magnetic pill button flings with GSAP InertiaPlugin in the direction and speed of the cursor.",
-    component: <InertiaArrowCard />,
-    registryName: "inertia-arrow-card",
+      "Cards fan along a circular arc and the wheel spins around its center as you scroll, carrying velocity momentum.",
+    component: <RadialCarousel />,
+    registryName: "radial-carousel",
   },
   {
-    name: "Color Flair Button",
+    name: "Scroll Direction Carousel",
     description:
-      "Concentric color circles bloom from the cursor's entry point, trail it, and peel back on exit.",
-    component: <ColorFlairButton />,
-    registryName: "color-flair-button",
+      "Travel direction follows your scroll direction; speed ramps with scroll velocity, then eases back to a gentle drift.",
+    component: <ScrollDirectionCarousel />,
+    registryName: "scroll-direction-carousel",
   },
   {
-    name: "Streak counter",
-    description: "A Streak counter ripple animation using GSAP.",
-    component: <Stagger1 />,
-    registryName: "stagger-1",
+    name: "Infinite Carousel",
+    description:
+      "A seamless infinite carousel: drifts on its own, speeds up and reverses with scroll velocity, and can be dragged to scrub — one GSAP timeline drives all three.",
+    component: <InfiniteCarousel />,
+    registryName: "infinite-carousel",
   },
   {
-    name: "Flip text reveal",
+    name: "Cards Slider",
     description:
-      "A GSAP Flip orb transition followed by a staggered text reveal.",
-    component: <FlipTextReveal />,
-    registryName: "flip-text-reveal",
+      "An infinite deck of product cards: the active card sits front-and-centre while the rest fan out behind with less scale and a soft blur. Drag, click a peeking card, or let it auto-advance — the index wraps forever.",
+    component: <CardsSlider />,
+    registryName: "cards-slider",
   },
 ];
 
-const GsapGrid = () => {
+const CarouselGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [refreshKeys, setRefreshKeys] = useState<Record<number, number>>({});
 
   const handleRefresh = (index: number) => {
     setRefreshKeys((prev) => ({ ...prev, [index]: (prev[index] || 0) + 1 }));
   };
-  const itemsPerPage = 6;
-  const totalPages = Math.ceil(GsapStaggerGridArr.length / itemsPerPage);
+  const itemsPerPage = CarouselGridArr.length;
+  const totalPages = Math.ceil(CarouselGridArr.length / itemsPerPage);
   usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedItems = GsapStaggerGridArr.slice(
+  const paginatedItems = CarouselGridArr.slice(
     startIndex,
     startIndex + itemsPerPage,
   );
 
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3">
         {paginatedItems.map((item, index) => (
           <div
             key={startIndex + index}
-            className="relative w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
+            className="relative w-full border-b border-l border-dashed h-[80vh] flex justify-center items-center overflow-hidden"
           >
-            <div className="z-30" key={refreshKeys[startIndex + index] || 0}>
+            <div
+              className="z-30 w-full"
+              key={refreshKeys[startIndex + index] || 0}
+            >
               {item.component}
             </div>
 
@@ -137,4 +141,4 @@ const GsapGrid = () => {
   );
 };
 
-export default GsapGrid;
+export default CarouselGrid;

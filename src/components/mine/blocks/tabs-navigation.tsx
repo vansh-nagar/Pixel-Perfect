@@ -60,6 +60,11 @@ const navItems = [
     Component: lazyGrid(() => import("../grids/gsap-grid")),
   },
   {
+    name: "Carousels",
+    slug: "carousels",
+    Component: lazyGrid(() => import("../grids/carousel-grid")),
+  },
+  {
     name: "SVG Assets",
     slug: "svg-assets",
     Component: lazyGrid(() => import("../grids/svg-grid")),

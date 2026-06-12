@@ -2012,6 +2012,69 @@
           "target": "components/pixel-perfect/inertia-arrow-card.tsx"
         }
       ]
+    },
+    {
+      "name": "infinite-carousel",
+      "description": "A seamless infinite carousel where one GSAP timeline powers idle drift, scroll-velocity speed/reverse, hover-slow, and drag-to-scrub — all sharing a single playhead so they never desync.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/infinite-carousel.tsx",
+          "target": "components/pixel-perfect/infinite-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-direction-carousel",
+      "description": "An infinite carousel whose travel direction follows your scroll direction and whose speed ramps with scroll velocity before easing back to a gentle drift — one GSAP timeline with a scroll-signed timeScale.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/scroll-direction-carousel.tsx",
+          "target": "components/pixel-perfect/scroll-direction-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cards-slider",
+      "description": "Cards Slider — an infinite deck of product cards. The active card sits",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/cards-slider.tsx",
+          "target": "components/pixel-perfect/cards-slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radial-carousel",
+      "description": "A radial arc carousel: cards fan along a circle's top arc and the whole wheel spins around its center as you scroll, carrying velocity momentum — every card shares one far-below transform-origin, so a single rotation value drives them all.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/radial-carousel.tsx",
+          "target": "components/pixel-perfect/radial-carousel.tsx"
+        }
+      ]
     }
   ]
 }

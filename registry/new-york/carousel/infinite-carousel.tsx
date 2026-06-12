@@ -1,3 +1,6 @@
+/**
+ * A seamless infinite carousel where one GSAP timeline powers idle drift, scroll-velocity speed/reverse, hover-slow, and drag-to-scrub — all sharing a single playhead so they never desync.
+ */
 "use client";
 
 import { useRef } from "react";
@@ -18,9 +21,9 @@ const SLIDES: Slide[] = [
   { title: "Sahara", tag: "07", gradient: "linear-gradient(135deg,#eab308,#f97316)" },
 ];
 
-const SPEED = 90; // px per second the strip drifts
+const SPEED = 90; // px per second the strip drifts at rest
 
-const Page = () => {
+const InfiniteCarousel = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -30,23 +33,18 @@ const Page = () => {
       const container = containerRef.current;
       if (!track || !container) return;
 
-      // The track renders TWO identical copies of the slides side by side.
-      // One "period" of the pattern = the width of a single copy.
-      // We measure one card + its right margin and multiply by the copy count,
-      // which is exact (scrollWidth can drop a trailing margin in some browsers).
+      // The track renders TWO identical copies side by side. One "period" of the
+      // pattern = the width of a single copy, measured from one card + its right
+      // margin (exact; scrollWidth can drop a trailing margin in some browsers).
       const firstCard = track.children[0] as HTMLElement;
       const cardWidth =
         firstCard.offsetWidth +
         parseFloat(getComputedStyle(firstCard).marginRight);
       const loopWidth = cardWidth * SLIDES.length;
 
-      // ── The single source of truth ──────────────────────────────────
-      // One tween slides the track left by exactly one copy's width.
-      //   ease:"none"  → perfectly constant speed (a carousel, not a bounce)
-      //   repeat:-1    → when it reaches x:-loopWidth it snaps back to x:0.
-      // That snap is INVISIBLE: at x:-loopWidth the second copy sits pixel-
-      // for-pixel where the first copy started. The hidden snap-at-the-seam
-      // is the entire "infinity" trick.
+      // One tween slides the track left by exactly one copy's width and repeats.
+      // At x:-loopWidth the second copy sits pixel-for-pixel where the first began,
+      // so the repeat snap is invisible — that hidden seam is the "infinity" trick.
       const loop = gsap.to(track, {
         x: -loopWidth,
         duration: loopWidth / SPEED,
@@ -54,47 +52,41 @@ const Page = () => {
         repeat: -1,
       });
 
-      // ── Speed model: one timeScale, three influences ───────────────
-      // timeScale = base (idle drift, eased toward a hover target)
-      //           + scroll (a velocity burst from the wheel, decays to 0)
-      // Scroll DOWN pushes it forward; scroll UP flips it into reverse;
-      // stop scrolling and it eases back to the gentle base drift.
+      // Speed model: timeScale = base (idle drift, eased toward a hover target)
+      // + scroll (a velocity burst from the wheel that bleeds back to 0).
       const wrapTime = gsap.utils.wrap(0, loop.duration());
       const pxPerSec = loopWidth / loop.duration();
 
       let dragging = false;
-      let base = 1; // current idle timeScale
-      let targetBase = 1; // hover target for base
-      let scroll = 0; // scroll-velocity burst, bled off each frame
+      let base = 1;
+      let targetBase = 1;
+      let scroll = 0;
 
       const tick = () => {
-        base += (targetBase - base) * 0.1; // ease base toward hover target
-        scroll *= 0.9; // bleed off the scroll burst → back to drift
+        base += (targetBase - base) * 0.1;
+        scroll *= 0.9;
         if (Math.abs(scroll) < 0.001) scroll = 0;
         if (!dragging) loop.timeScale(base + scroll); // drag owns time, not rate
       };
       gsap.ticker.add(tick);
 
-      // ── Hover: nudge the idle drift slower ─────────────────────────
+      // Hover slows the idle drift.
       const onEnter = () => (targetBase = 0.15);
       const onLeave = () => (targetBase = 1);
       container.addEventListener("mouseenter", onEnter);
       container.addEventListener("mouseleave", onLeave);
 
-      // ── Scroll → carousel: feed wheel velocity into the burst ──────
-      // deltaY is signed (down = +, up = −), so the SAME line both speeds
-      // the loop up and reverses it. The strip eats the scroll; the page
-      // doesn't move (preventDefault), so it reads as one infinite surface.
+      // Wheel velocity feeds the burst. deltaY is signed, so the same line speeds
+      // the loop up (scroll down) and reverses it (scroll up). Scoped to this
+      // element so many carousels coexist and the page scroll isn't globally hijacked.
       const onWheel = (e: WheelEvent) => {
         e.preventDefault();
         scroll = gsap.utils.clamp(-60, 1000, scroll + e.deltaY * 0.018);
       };
-      window.addEventListener("wheel", onWheel, { passive: false });
+      container.addEventListener("wheel", onWheel, { passive: false });
 
-      // ── Drag to scrub ──────────────────────────────────────────────
-      // Auto-play, scroll, AND drag all drive the SAME timeline. Drag
-      // moves the playhead (loop.time) — never x — so on release the loop
-      // keeps going from wherever you left it, with no desync.
+      // Drag scrubs the playhead (loop.time) directly — never x — so on release
+      // the loop keeps going from wherever you left it.
       let startX = 0;
       let startTime = 0;
 
@@ -110,7 +102,6 @@ const Page = () => {
       const onMove = (e: PointerEvent) => {
         if (!dragging) return;
         const dx = e.clientX - startX;
-        // drag right → rewind the playhead → strip follows your finger right
         loop.time(wrapTime(startTime - dx / pxPerSec));
       };
 
@@ -129,7 +120,7 @@ const Page = () => {
 
       return () => {
         gsap.ticker.remove(tick);
-        window.removeEventListener("wheel", onWheel);
+        container.removeEventListener("wheel", onWheel);
         container.removeEventListener("mouseenter", onEnter);
         container.removeEventListener("mouseleave", onLeave);
         container.removeEventListener("pointerdown", onDown);
@@ -142,33 +133,26 @@ const Page = () => {
   );
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-8 overflow-hidden bg-neutral-950 text-white">
-      <div className="text-center">
-        <h1 className="text-2xl font-semibold">Mega Carousel</h1>
-        <p className="text-sm text-neutral-400">
-          scroll to drive · drag to scrub · loops forever
-        </p>
-      </div>
-
+    <div className="w-full p-4">
       <div
         ref={containerRef}
         className="w-full cursor-grab touch-none select-none overflow-hidden"
         style={{
           maskImage:
-            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
           WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
         }}
       >
         <div ref={trackRef} className="flex w-max will-change-transform">
           {[...SLIDES, ...SLIDES].map((s, i) => (
             <article
               key={`${s.title}-${i}`}
-              className="mr-6 flex h-96 w-72 shrink-0 flex-col justify-end rounded-3xl p-6 shadow-2xl"
+              className="mr-6 flex h-96 w-72 shrink-0 flex-col justify-end rounded-3xl p-6 text-white shadow-xl"
               style={{ backgroundImage: s.gradient }}
             >
               <span className="text-sm font-medium text-white/70">{s.tag}</span>
-              <h2 className="text-3xl font-bold">{s.title}</h2>
+              <h3 className="text-3xl font-bold">{s.title}</h3>
             </article>
           ))}
         </div>
@@ -177,4 +161,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default InfiniteCarousel;

@@ -5,9 +5,25 @@ import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import FlipTextReveal from "registry/new-york/gsap/flip-text-reveal";
 import Stagger1 from "registry/new-york/gsap/stagger1";
+import ColorFlairButton from "registry/new-york/motion-framer/color-flair-button";
+import InertiaArrowCard from "registry/new-york/motion-framer/inertia-arrow-card";
 import CopyDropdown from "../copy-dropdown";
 
 const GsapStaggerGridArr = [
+  {
+    name: "Inertia Arrow Card",
+    description:
+      "A notched card whose magnetic pill button flings with GSAP InertiaPlugin in the direction and speed of the cursor.",
+    component: <InertiaArrowCard />,
+    registryName: "inertia-arrow-card",
+  },
+  {
+    name: "Color Flair Button",
+    description:
+      "Concentric color circles bloom from the cursor's entry point, trail it, and peel back on exit.",
+    component: <ColorFlairButton />,
+    registryName: "color-flair-button",
+  },
   {
     name: "Streak counter",
     description: "A Streak counter ripple animation using GSAP.",

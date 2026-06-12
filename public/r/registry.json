@@ -1979,6 +1979,39 @@
           "target": "components/pixel-perfect/gooey-text.tsx"
         }
       ]
+    },
+    {
+      "name": "color-flair-button",
+      "description": "A pill button with a directional color flair: stacked concentric circles bloom from",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/color-flair-button.tsx",
+          "target": "components/pixel-perfect/color-flair-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "inertia-arrow-card",
+      "description": "A notched card with a magnetic pill button: the pill flings with GSAP inertia in the",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap",
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/inertia-arrow-card.tsx",
+          "target": "components/pixel-perfect/inertia-arrow-card.tsx"
+        }
+      ]
     }
   ]
 }

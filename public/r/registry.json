@@ -1979,6 +1979,23 @@
           "target": "components/pixel-perfect/gooey-text.tsx"
         }
       ]
+    },
+    {
+      "name": "inertia-arrow-card",
+      "description": "A notched card with a magnetic pill button: the pill flings with GSAP inertia in the",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap",
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/inertia-arrow-card.tsx",
+          "target": "components/pixel-perfect/inertia-arrow-card.tsx"
+        }
+      ]
     }
   ]
 }

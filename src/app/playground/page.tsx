@@ -1,7 +1,5 @@
-import InferenceHero from "@/components/pixel-perfect/figma/inference-hero";
-
 const Page = () => {
-  return <InferenceHero />;
+  return <div className="grid min-h-screen place-items-center">Playground</div>;
 };
 
 export default Page;

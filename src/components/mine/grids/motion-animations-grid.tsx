@@ -17,7 +17,6 @@ import YogaInviteCard from "registry/new-york/motion-framer/yoga-invite-card";
 import ActivityWheelMotion from "registry/new-york/motion-framer/activity-wheel-motion";
 import CarLockDriveMotion from "registry/new-york/motion-framer/car-lock-drive-motion";
 import DialKnobMotion from "registry/new-york/motion-framer/dial-knob-motion";
-import InertiaArrowCard from "registry/new-york/motion-framer/inertia-arrow-card";
 import CopyDropdown from "../copy-dropdown";
 
 const MotionComponentArr: {
@@ -26,13 +25,6 @@ const MotionComponentArr: {
   Component: React.ComponentType;
   registryName: string;
 }[] = [
-  {
-    name: "Inertia Arrow Card",
-    description:
-      "A notched card with a magnetic pill button — GSAP inertia flings it toward the cursor while a Motion arrow conveyor loops on hover.",
-    Component: InertiaArrowCard,
-    registryName: "inertia-arrow-card",
-  },
   {
     name: "Dial Knob",
     description:

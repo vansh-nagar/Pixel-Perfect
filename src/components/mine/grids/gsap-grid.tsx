@@ -38,7 +38,7 @@ const GsapGrid = () => {
   const handleRefresh = (index: number) => {
     setRefreshKeys((prev) => ({ ...prev, [index]: (prev[index] || 0) + 1 }));
   };
-  const itemsPerPage = 2;
+  const itemsPerPage = 6;
   const totalPages = Math.ceil(GsapStaggerGridArr.length / itemsPerPage);
   usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;

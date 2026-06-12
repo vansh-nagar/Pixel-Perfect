@@ -1,0 +1,9 @@
+.next
+out
+build
+node_modules
+public/r
+registry.json
+package-lock.json
+bun.lock
+*.tsbuildinfo

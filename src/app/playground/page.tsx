@@ -54,10 +54,14 @@ function MouseImage() {
     new THREE.TextureLoader().load(SRC, (t) => {
       t.colorSpace = THREE.SRGBColorSpace
       t.magFilter = THREE.NearestFilter
-      if (matRef.current) matRef.current.uniforms.uTex.value = t
       setTexture(t)
     })
   }, [])
+
+  // attach the texture once the mesh/material has actually mounted
+  useEffect(() => {
+    if (texture && matRef.current) matRef.current.uniforms.uTex.value = texture
+  }, [texture])
 
   // where the cursor is (target) vs. where the image actually is (lags behind)
   const target = useRef({ x: 0, y: 0 })
@@ -109,7 +113,7 @@ function MouseImage() {
 
 const Page = () => {
   return (
-    <div className="h-screen w-full bg-black">
+    <div className="h-screen w-full bg-background">
       <Canvas
         orthographic
         camera={{ position: [0, 0, 100], zoom: 1, near: 0.1, far: 1000 }}

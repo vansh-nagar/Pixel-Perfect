@@ -48,7 +48,7 @@ const IconFall = () => {
       iconName as keyof typeof Icons
     ] as React.ComponentType<any>;
     if (IconComponent) {
-      return <IconComponent size={64} strokeWidth={1.5} />;
+      return <IconComponent size={128} strokeWidth={1.5} />;
     }
     return null;
   };

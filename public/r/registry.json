@@ -2125,6 +2125,36 @@
           "target": "components/pixel-perfect/bend-zoom-reveal.tsx"
         }
       ]
+    },
+    {
+      "name": "bend-mouse-follower",
+      "description": "A pixel-art frame that smoothly chases the cursor and warps with an air-friction bend on a WebGL plane.",
+      "type": "registry:block",
+      "dependencies": [
+        "@react-three/fiber",
+        "gsap",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/bend-mouse-follower.tsx",
+          "target": "components/pixel-perfect/bend-mouse-follower.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bend-button-follower",
+      "description": "A rounded pill button with text that smoothly chases the cursor and warps with an air-friction bend on a WebGL plane.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/bend-button-follower.tsx",
+          "target": "components/pixel-perfect/bend-button-follower.tsx"
+        }
+      ]
     }
   ]
 }

@@ -2231,6 +2231,19 @@
           "target": "components/pixel-perfect/hero-cover-reveal.tsx"
         }
       ]
+    },
+    {
+      "name": "footer-reveal",
+      "description": "A scroll-driven footer reveal — the footer sits pinned in place while the content above slides up to uncover it. Pure CSS sticky, no JS.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/footer-reveal.tsx",
+          "target": "components/pixel-perfect/footer-reveal.tsx"
+        }
+      ]
     }
   ]
 }

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import CopyDropdown from "../copy-dropdown";
 import { GradientBlur } from "../landing-page/gradient-blur";
 import HeroCoverReveal from "../../../../registry/new-york/scroll/hero-cover-reveal";
+import FooterReveal from "../../../../registry/new-york/scroll/footer-reveal";
 
 type ScrollItem = {
   name: string;
@@ -24,6 +25,14 @@ const ScrollArr: ScrollItem[] = [
       "The hero pins in place while the next section slides up and covers it. Scroll to play.",
     component: <HeroCoverReveal />,
     registryName: "hero-cover-reveal",
+    isFull: true,
+  },
+  {
+    name: "Footer Reveal",
+    description:
+      "The footer sits pinned in place while the content above slides up to uncover it. Scroll to play.",
+    component: <FooterReveal />,
+    registryName: "footer-reveal",
     isFull: true,
   },
 ];

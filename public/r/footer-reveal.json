@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-reveal",
+  "description": "A scroll-driven footer reveal — the footer sits pinned in place while the content above slides up to uncover it. Pure CSS sticky, no JS.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/scroll/footer-reveal.tsx",
+      "content": "\"use client\";\n\n/**\n * A scroll-driven footer reveal — the footer sits pinned in place while the content above slides up to uncover it. Pure CSS sticky, no JS.\n */\n\nconst STAGE_H = \"h-[40vh]\";\n\nconst FooterReveal = () => {\n  return (\n    <div className=\"relative w-full\">\n      <div\n        className={`relative z-10 h-[100vh] bg-indigo-600 text-white`}\n      >\n        <span className=\"absolute left-4 top-4 text-sm font-medium\">\n          Top Left\n        </span>\n        <span className=\"absolute right-4 top-4 text-sm font-medium\">\n          Top Right\n        </span>\n        <span className=\"absolute inset-0 grid place-items-center text-2xl font-bold\">\n          Content\n        </span>\n        <span className=\"absolute bottom-4 left-1/2 -translate-x-1/2 text-sm font-medium\">\n          Bottom\n        </span>\n      </div>\n\n      <div\n        className={`sticky bottom-0 z-0 ${STAGE_H} bg-neutral-950 text-white`}\n      >\n        <span className=\"absolute left-4 top-4 text-sm font-medium\">\n          Top Left\n        </span>\n        <span className=\"absolute right-4 top-4 text-sm font-medium\">\n          Top Right\n        </span>\n        <span className=\"absolute inset-0 grid place-items-center text-2xl font-bold\">\n          Footer\n        </span>\n        <span className=\"absolute bottom-4 left-1/2 -translate-x-1/2 text-sm font-medium\">\n          Bottom\n        </span>\n      </div>\n    </div>\n  );\n};\n\nexport default FooterReveal;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/footer-reveal.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

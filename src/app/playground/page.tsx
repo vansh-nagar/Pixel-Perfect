@@ -1,149 +1,124 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import * as THREE from 'three'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { SplitText } from 'gsap/SplitText'
-import { useGSAP } from '@gsap/react'
 
-gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP)
+const SRC = '/bend-image-reveal.gif'
+const IMG_ASPECT = 540 / 304
+const BASE_H = 200 // plane height in px (orthographic zoom 1 => 1 unit = 1px)
+const BASE_W = BASE_H * IMG_ASPECT
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
-const SRC = 'https://i.pinimg.com/originals/93/9e/92/939e9273e3d6ef4f281cda31e9e62488.gif'
-const STRIPS = 40 // vertical slices — more = smoother curve
+// the whole image is one texture on a subdivided plane; the GPU bends the vertices
+const vertexShader = /* glsl */ `
+  varying vec2 vUv;
+  uniform float uBendX;
+  uniform float uBendY;
+  void main() {
+    vUv = uv;
+    vec3 pos = position;
+    float px = uv.x * 2.0 - 1.0; // -1 (left)   .. +1 (right)
+    float py = uv.y * 2.0 - 1.0; // -1 (bottom) .. +1 (top)
+    pos.y += uBendY * px * px;   // moving vertically -> left/right edges trail
+    pos.x += uBendX * py * py;   // moving horizontally -> top/bottom edges trail
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+  }
+`
 
-const Page = () => {
-  const heroRef = useRef<HTMLElement>(null)
-  const meshRef = useRef<HTMLDivElement>(null)
-  const stripRefs = useRef<HTMLDivElement[]>([])
-  const textRef = useRef<HTMLHeadingElement>(null)
+const fragmentShader = /* glsl */ `
+  varying vec2 vUv;
+  uniform sampler2D uTex;
+  void main() {
+    gl_FragColor = texture2D(uTex, vUv);
+  }
+`
 
-  useGSAP(() => {
-    const mesh = meshRef.current!
-    const strips = stripRefs.current
+function MouseImage() {
+  const meshRef = useRef<THREE.Mesh>(null)
+  const matRef = useRef<THREE.ShaderMaterial>(null)
+  const { size } = useThree()
+  const [texture, setTexture] = useState<THREE.Texture | null>(null)
 
-    const vw = window.innerWidth
-    const vh = window.innerHeight
-    const rightX = vw * 0.4
-    const topY = -vh * 0.39
-    const bottomY = vh * 0.39
+  const uniforms = useMemo(
+    () => ({
+      uTex: { value: null as THREE.Texture | null },
+      uBendX: { value: 0 },
+      uBendY: { value: 0 },
+    }),
+    []
+  )
 
-    // --- SPLIT TEXT: stagger each character of the heading in ---
-    const split = SplitText.create(textRef.current, { type: 'chars,lines', mask: 'lines' })
-    const colors = ['#f87171', '#facc15', '#4ade80', '#60a5fa', '#c084fc']
-    gsap.set(split.chars, { color: gsap.utils.wrap(colors) })
-    gsap.from(split.chars, {
-      yPercent: 100,
-      opacity: 0,
-      filter: 'blur(6px)',
-      stagger: 0.05,
-      duration: 0.6,
-      ease: 'back.out(1.7)',
-      delay: 0.2,
+  useEffect(() => {
+    new THREE.TextureLoader().load(SRC, (t) => {
+      t.colorSpace = THREE.SRGBColorSpace
+      t.magFilter = THREE.NearestFilter
+      if (matRef.current) matRef.current.uniforms.uTex.value = t
+      setTexture(t)
     })
-
-    // --- BUILD THE MESH: paint each strip as a vertical slice of the image ---
-    const w = mesh.offsetWidth
-    const h = mesh.offsetHeight
-    const sw = w / STRIPS
-    strips.forEach((el, i) => {
-      gsap.set(el, {
-        backgroundImage: `url(${SRC})`,
-        backgroundSize: `${w}px ${h}px`,
-        backgroundPosition: `-${i * sw}px 0px`,
-        backgroundRepeat: 'no-repeat',
-      })
-    })
-
-    // normalized horizontal position of each strip: -1 (left edge) .. 0 (center) .. +1 (right edge)
-    const profile = strips.map((_, i) => ((i + 0.5) / STRIPS) * 2 - 1)
-
-    // parabolic bend across the strips: 0 at center, max at both edges.
-    // divide by current scale so the visual bend stays sane after the scroll zoom.
-    const applyBend = (bend: number) => {
-      const s = (gsap.getProperty(mesh, 'scaleX') as number) || 1
-      strips.forEach((el, i) => gsap.set(el, { y: (bend * profile[i] * profile[i]) / s }))
-    }
-
-    // --- ENTRANCE: move bottom-right -> top-right -> center, bending like air friction ---
-    gsap.set(mesh, { x: rightX, y: bottomY, opacity: 0 })
-
-    let prevY = bottomY
-    const tl = gsap.timeline({
-      defaults: { ease: 'power3.inOut' },
-      onUpdate: () => {
-        const cy = gsap.getProperty(mesh, 'y') as number
-        const vy = cy - prevY // vertical velocity this frame
-        prevY = cy
-        // moving up (vy<0) -> bend>0 -> edges droop DOWN, center stays. Moving down -> edges rise.
-        applyBend(gsap.utils.clamp(-60, 60, -vy * 2))
-      },
-    })
-    tl.to(mesh, { opacity: 1, duration: 0.3 })
-      .to(mesh, { y: topY, duration: 0.7 }) // straight up -> edges trail downward
-      .to(mesh, { x: 0, y: 0, duration: 0.9 }) // down to center -> edges trail upward
-
-    // --- SCROLL: grow big + bend the edges from scroll velocity ---
-    const coverScale = Math.max(vw / w, vh / h)
-    const proxy = { bend: 0 }
-    gsap.to(mesh, {
-      scale: coverScale - 0.1,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: 'top top',
-        end: '+=1500',
-        scrub: 1,
-        pin: true,
-        anticipatePin: 1,
-        markers: true,
-        onUpdate: (self) => {
-          // scroll velocity -> bend, then spring back to flat when scrolling stops
-          const bend = gsap.utils.clamp(-70, 70, self.getVelocity() / -40)
-          if (Math.abs(bend) > Math.abs(proxy.bend)) {
-            proxy.bend = bend
-            gsap.to(proxy, {
-              bend: 0,
-              duration: 0.8,
-              ease: 'power3',
-              overwrite: true,
-              onUpdate: () => applyBend(proxy.bend),
-            })
-          }
-        },
-      },
-    })
-
-    return () => split.revert()
   }, [])
 
+  // where the cursor is (target) vs. where the image actually is (lags behind)
+  const target = useRef({ x: 0, y: 0 })
+  const state = useRef({ x: 0, y: 0, bx: 0, by: 0 })
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      target.current.x = e.clientX - size.width / 2
+      target.current.y = -(e.clientY - size.height / 2) // three.js: +y up
+    }
+    window.addEventListener('pointermove', onMove)
+    return () => window.removeEventListener('pointermove', onMove)
+  }, [size.width, size.height])
+
+  useFrame(() => {
+    const mesh = meshRef.current
+    const mat = matRef.current
+    if (!mesh || !mat) return
+
+    // smoothly chase the cursor (the lag IS the "air resistance")
+    const prevX = state.current.x
+    const prevY = state.current.y
+    state.current.x = lerp(state.current.x, target.current.x, 0.1)
+    state.current.y = lerp(state.current.y, target.current.y, 0.1)
+    mesh.position.set(state.current.x, state.current.y, 0)
+
+    // bend opposite to travel, smoothed so it settles when the cursor stops
+    const vx = state.current.x - prevX
+    const vy = state.current.y - prevY
+    state.current.bx = lerp(state.current.bx, gsap.utils.clamp(-45, 45, -vx * 1.5), 0.15)
+    state.current.by = lerp(state.current.by, gsap.utils.clamp(-45, 45, -vy * 1.5), 0.15)
+    mat.uniforms.uBendX.value = state.current.bx
+    mat.uniforms.uBendY.value = state.current.by
+  })
+
+  if (!texture) return null
   return (
-    <>
-      <section ref={heroRef} className='relative h-screen overflow-hidden'>
-        <div className='absolute inset-0 grid place-items-center'>
-          <h1 ref={textRef} className='overflow-hidden text-4xl font-bold tracking-tight'>
-            GSAP GRID
-          </h1>
-        </div>
+    <mesh ref={meshRef}>
+      <planeGeometry args={[BASE_W, BASE_H, 48, 48]} />
+      <shaderMaterial
+        ref={matRef}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={uniforms}
+      />
+    </mesh>
+  )
+}
 
-        {/* the mesh: an aspect-video box sliced into vertical strips */}
-        <div className='absolute inset-0 grid place-items-center'>
-          <div ref={meshRef} className='relative aspect-video h-40'>
-            {Array.from({ length: STRIPS }).map((_, i) => (
-              <div
-                key={i}
-                ref={(el) => {
-                  if (el) stripRefs.current[i] = el
-                }}
-                className='absolute top-0 h-full will-change-transform'
-                style={{ left: `${(i / STRIPS) * 100}%`, width: `${100 / STRIPS}%` }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className='h-screen w-full' />
-    </>
+const Page = () => {
+  return (
+    <div className="h-screen w-full bg-black">
+      <Canvas
+        orthographic
+        camera={{ position: [0, 0, 100], zoom: 1, near: 0.1, far: 1000 }}
+        dpr={[1, 2]}
+        gl={{ antialias: true, alpha: true }}
+      >
+        <MouseImage />
+      </Canvas>
+    </div>
   )
 }
 

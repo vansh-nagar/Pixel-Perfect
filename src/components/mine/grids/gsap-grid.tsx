@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import FlipTextReveal from "registry/new-york/gsap/flip-text-reveal";
 import Stagger1 from "registry/new-york/gsap/stagger1";
 import BendZoomReveal from "registry/new-york/gsap/bend-zoom-reveal";
+import TextAlongPath from "registry/new-york/gsap/text-along-path";
 import ColorFlairButton from "registry/new-york/motion-framer/color-flair-button";
 import InertiaArrowCard from "registry/new-york/motion-framer/inertia-arrow-card";
 import CopyDropdown from "../copy-dropdown";
@@ -26,6 +27,13 @@ const GsapStaggerGridArr: GridItem[] = [
     component: <BendZoomReveal columns={2} />,
     registryName: "bend-zoom-reveal",
     span: 2,
+  },
+  {
+    name: "Text Along Path",
+    description:
+      "Repeated text glides endlessly around a curved SVG path, looped seamlessly with a GSAP timeline.",
+    component: <TextAlongPath />,
+    registryName: "text-along-path",
   },
   {
     name: "Inertia Arrow Card",

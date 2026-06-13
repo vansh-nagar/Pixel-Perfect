@@ -2244,6 +2244,137 @@
           "target": "components/pixel-perfect/footer-reveal.tsx"
         }
       ]
+    },
+    {
+      "name": "text-along-path",
+      "description": "Text that slides around a curved SVG path as you scroll inside the card — a GSAP take on Olivier Larose's text-along-path, with eased catch-up via gsap.quickTo.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/text-along-path.tsx",
+          "target": "components/pixel-perfect/text-along-path.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stacking-cards-parallax",
+      "description": "A scroll-driven stacking card parallax — sticky cards pin and scale down as later cards scroll up over them, building a layered depth stack.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/stacking-cards-parallax.tsx",
+          "target": "components/pixel-perfect/stacking-cards-parallax.tsx"
+        }
+      ]
+    },
+    {
+      "name": "center-split-reveal",
+      "description": "A center-split mask reveal — the image is clipped to a closed vertical seam down the middle, then the clip-path opens left and right to split it apart and uncover the whole frame.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/center-split-reveal.tsx",
+          "target": "components/pixel-perfect/center-split-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pixel-cursor-trail",
+      "description": "A pixelated cursor trail: hovered grid cells flash and fade, leaving a trail behind the mouse, with blend-mode text on top.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/pixel-cursor-trail.tsx",
+          "target": "components/pixel-perfect/pixel-cursor-trail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-clip-mask-reveal",
+      "description": "A scroll-driven text-clip mask reveal — a video is clipped to the shape of a word, and as you scroll the text-shaped mask scales up until it opens out and uncovers the full frame.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/text-clip-mask-reveal.tsx",
+          "target": "components/pixel-perfect/text-clip-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "blinds-mask-reveal",
+      "description": "A venetian-blinds mask reveal — the image is hidden behind N slats cut from a repeating-linear-gradient CSS mask, then every slat opens at once to uncover the whole frame.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/blinds-mask-reveal.tsx",
+          "target": "components/pixel-perfect/blinds-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "clock-mask-reveal",
+      "description": "A radial clock-sweep mask reveal — a conic-gradient CSS mask sweeps a wedge around the center like a clock hand, uncovering the image angle by angle until the full frame shows.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/clock-mask-reveal.tsx",
+          "target": "components/pixel-perfect/clock-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "iris-mask-reveal",
+      "description": "A camera-iris mask reveal — a circular clip-path opens from wherever you click and expands until it reaches the farthest corner, uncovering the full frame.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/iris-mask-reveal.tsx",
+          "target": "components/pixel-perfect/iris-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mosaic-mask-reveal",
+      "description": "A mosaic mask reveal — the image is rebuilt from a grid of square tiles that pop in with a staggered order (from the center, edges, randomly, or a corner) until the picture is whole.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/mosaic-mask-reveal.tsx",
+          "target": "components/pixel-perfect/mosaic-mask-reveal.tsx"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "clock-mask-reveal",
+  "description": "A radial clock-sweep mask reveal — a conic-gradient CSS mask sweeps a wedge around the center like a clock hand, uncovering the image angle by angle until the full frame shows.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/mask/clock-mask-reveal.tsx",
+      "content": "\"use client\";\n\n/**\n * A radial clock-sweep mask reveal — a conic-gradient CSS mask sweeps a wedge around the center like a clock hand, uncovering the image angle by angle until the full frame shows.\n */\n\nimport { useEffect, useRef } from \"react\";\nimport gsap from \"gsap\";\n\nconst SRC = \"/bend-image-reveal.gif\";\n\n// build the conic mask for a given sweep angle (degrees), clockwise from the top.\nconst conicMask = (a: number) =>\n  `conic-gradient(from -90deg at 50% 50%, #000 0deg, #000 ${a}deg, transparent ${a}deg, transparent 360deg)`;\n\nconst ClockMaskReveal = () => {\n  const imgRef = useRef<HTMLImageElement>(null);\n\n  const reveal = () => {\n    const img = imgRef.current;\n    if (!img) return;\n\n    const state = { a: 0 };\n    const apply = () => {\n      const mask = conicMask(state.a);\n      img.style.maskImage = mask;\n      img.style.webkitMaskImage = mask;\n    };\n    apply();\n\n    const tl = gsap.timeline();\n    tl.to(state, { a: 360, duration: 1.2, ease: \"power2.inOut\", onUpdate: apply });\n    tl.fromTo(\n      img,\n      { scale: 1.4, filter: \"blur(16px)\" },\n      { scale: 1, filter: \"blur(0px)\", duration: 1.2, ease: \"power2.inOut\" },\n      \"<\",\n    );\n  };\n\n  useEffect(() => {\n    reveal();\n  }, []);\n\n  return (\n    <button\n      onClick={reveal}\n      className=\"relative aspect-video w-[40rem] max-w-[92%] cursor-pointer overflow-hidden rounded-xl\"\n      aria-label=\"Replay reveal\"\n    >\n      <img\n        ref={imgRef}\n        src={SRC}\n        alt=\"reveal\"\n        className=\"size-full object-cover\"\n        style={{\n          maskImage: conicMask(0),\n          WebkitMaskImage: conicMask(0),\n          transform: \"scale(1.4)\",\n          filter: \"blur(16px)\",\n        }}\n      />\n    </button>\n  );\n};\n\nexport default ClockMaskReveal;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/clock-mask-reveal.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

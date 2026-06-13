@@ -124,6 +124,11 @@ const navItems = [
     slug: "shaders",
     Component: lazyGrid(() => import("../grids/shader-grid")),
   },
+  {
+    name: "Image Shaders",
+    slug: "image-shaders",
+    Component: lazyGrid(() => import("../grids/image-shaders-grid")),
+  },
 ];
 
 export function TabsNavigation() {

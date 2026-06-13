@@ -5,6 +5,8 @@ import CopyDropdown from "../copy-dropdown";
 import { GradientBlur } from "../landing-page/gradient-blur";
 import HeroCoverReveal from "../../../../registry/new-york/scroll/hero-cover-reveal";
 import FooterReveal from "../../../../registry/new-york/scroll/footer-reveal";
+import StackingCardsParallax from "../../../../registry/new-york/scroll/stacking-cards-parallax";
+import TextClipMaskReveal from "../../../../registry/new-york/scroll/text-clip-mask-reveal";
 
 type ScrollItem = {
   name: string;
@@ -33,6 +35,22 @@ const ScrollArr: ScrollItem[] = [
       "The footer sits pinned in place while the content above slides up to uncover it. Scroll to play.",
     component: <FooterReveal />,
     registryName: "footer-reveal",
+    isFull: true,
+  },
+  {
+    name: "Stacking Cards Parallax",
+    description:
+      "Sticky cards pin and scale down as later cards scroll up over them, building a layered depth stack. Scroll to play.",
+    component: <StackingCardsParallax />,
+    registryName: "stacking-cards-parallax",
+    isFull: true,
+  },
+  {
+    name: "Text Clip Mask Reveal",
+    description:
+      "A video is clipped to the shape of a word, then the text-shaped mask scales up on scroll until it opens out and uncovers the full frame. Scroll to play.",
+    component: <TextClipMaskReveal />,
+    registryName: "text-clip-mask-reveal",
     isFull: true,
   },
 ];

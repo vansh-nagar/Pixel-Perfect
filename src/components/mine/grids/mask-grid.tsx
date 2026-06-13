@@ -13,6 +13,17 @@ import StarMaskReveal from "../../../../registry/new-york/mask/star-mask-reveal"
 import DirectionalMaskReveal, {
   type WipeDirection,
 } from "../../../../registry/new-york/mask/directional-mask-reveal";
+import CenterSplitReveal, {
+  type SplitAxis,
+} from "../../../../registry/new-york/mask/center-split-reveal";
+import BlindsMaskReveal, {
+  type SlatOrientation,
+} from "../../../../registry/new-york/mask/blinds-mask-reveal";
+import ClockMaskReveal from "../../../../registry/new-york/mask/clock-mask-reveal";
+import MosaicMaskReveal, {
+  type MosaicOrder,
+} from "../../../../registry/new-york/mask/mosaic-mask-reveal";
+import IrisMaskReveal from "../../../../registry/new-york/mask/iris-mask-reveal";
 
 type MaskGridItem = {
   name: string;
@@ -57,6 +68,105 @@ const DirectionalMaskRevealWrapper = () => {
   );
 };
 
+const splitAxes: { value: SplitAxis; label: string }[] = [
+  { value: "horizontal", label: "Horizontal" },
+  { value: "vertical", label: "Vertical" },
+];
+
+const CenterSplitRevealWrapper = () => {
+  const [axis, setAxis] = useState<SplitAxis>("horizontal");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select value={axis} onValueChange={(v) => setAxis(v as SplitAxis)}>
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-32">
+            {splitAxes.map((a) => (
+              <SelectItem key={a.value} value={a.value} className="text-xs">
+                {a.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <CenterSplitReveal axis={axis} />
+    </>
+  );
+};
+
+const slatOrientations: { value: SlatOrientation; label: string }[] = [
+  { value: "vertical", label: "Vertical" },
+  { value: "horizontal", label: "Horizontal" },
+];
+
+const BlindsMaskRevealWrapper = () => {
+  const [orientation, setOrientation] = useState<SlatOrientation>("vertical");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={orientation}
+          onValueChange={(v) => setOrientation(v as SlatOrientation)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-32">
+            {slatOrientations.map((o) => (
+              <SelectItem key={o.value} value={o.value} className="text-xs">
+                {o.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <BlindsMaskReveal orientation={orientation} />
+    </>
+  );
+};
+
+const mosaicOrders: { value: MosaicOrder; label: string }[] = [
+  { value: "center", label: "Center" },
+  { value: "edges", label: "Edges" },
+  { value: "random", label: "Random" },
+  { value: "start", label: "Start" },
+  { value: "end", label: "End" },
+];
+
+const MosaicMaskRevealWrapper = () => {
+  const [order, setOrder] = useState<MosaicOrder>("center");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select value={order} onValueChange={(v) => setOrder(v as MosaicOrder)}>
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-32">
+            {mosaicOrders.map((o) => (
+              <SelectItem key={o.value} value={o.value} className="text-xs">
+                {o.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <MosaicMaskReveal order={order} />
+    </>
+  );
+};
+
 // Mask animations land here — add an entry per promoted component.
 export const MaskGridArr: MaskGridItem[] = [
   {
@@ -79,6 +189,41 @@ export const MaskGridArr: MaskGridItem[] = [
       "The image wipes in from a chosen edge — pick the direction from the dropdown. Click to replay.",
     component: <DirectionalMaskRevealWrapper />,
     registryName: "directional-mask-reveal",
+  },
+  {
+    name: "Center Split Reveal",
+    description:
+      "The image splits open from the middle — pick horizontal or vertical from the dropdown. Click to replay.",
+    component: <CenterSplitRevealWrapper />,
+    registryName: "center-split-reveal",
+  },
+  {
+    name: "Blinds Mask Reveal",
+    description:
+      "The image opens through venetian-blind slats cut from a CSS mask — pick vertical or horizontal from the dropdown. Click to replay.",
+    component: <BlindsMaskRevealWrapper />,
+    registryName: "blinds-mask-reveal",
+  },
+  {
+    name: "Clock Mask Reveal",
+    description:
+      "A conic-gradient mask sweeps a wedge around the center like a clock hand to uncover the image. Click to replay.",
+    component: <ClockMaskReveal />,
+    registryName: "clock-mask-reveal",
+  },
+  {
+    name: "Mosaic Mask Reveal",
+    description:
+      "The image is rebuilt from a grid of tiles that pop in staggered — pick the order from the dropdown. Click to replay.",
+    component: <MosaicMaskRevealWrapper />,
+    registryName: "mosaic-mask-reveal",
+  },
+  {
+    name: "Iris Mask Reveal",
+    description:
+      "A circular clip-path opens from wherever you click and expands to fill the frame. Click anywhere to replay.",
+    component: <IrisMaskReveal />,
+    registryName: "iris-mask-reveal",
   },
 ];
 

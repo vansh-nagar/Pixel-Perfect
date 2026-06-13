@@ -2,6 +2,7 @@
 import MouseFollower1 from "../../../../registry/new-york/mouse-follower/mouse-follower1";
 import BendMouseFollower from "../../../../registry/new-york/mouse-follower/bend-mouse-follower";
 import BendButtonFollower from "../../../../registry/new-york/mouse-follower/bend-button-follower";
+import PixelCursorTrail from "../../../../registry/new-york/mouse-follower/pixel-cursor-trail";
 import IconFall from "@/components/rune-landing/icon-fall";
 import CopyDropdown from "../copy-dropdown";
 
@@ -19,6 +20,13 @@ export const MouseFollowerArr = [
       "A rounded button that smoothly follows the cursor and leans with its motion for an air-friction feel.",
     component: <BendButtonFollower />,
     registryName: "bend-button-follower",
+  },
+  {
+    name: "Pixel Cursor Trail",
+    description:
+      "Hovered grid cells flash and fade behind the cursor for a pixelated trail, with blend-mode text on top.",
+    component: <PixelCursorTrail />,
+    registryName: "pixel-cursor-trail",
   },
   {
     name: "Image Fall",

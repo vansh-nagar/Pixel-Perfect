@@ -7,16 +7,390 @@ export type ImageShader = {
   /** Public path (or URL) of the image the shader samples. */
   image: string;
   /**
+   * Optional second image. When set, the canvas becomes a hover-to-play
+   * transition: `uProgress` eases 0→1 on hover. Sample it with `texCoverB(uv)`.
+   */
+  imageB?: string;
+  /**
    * GLSL `void main()` body. On top of the shared COMMON_GLSL helpers, image
    * shaders also get: `texCover(vec2 uv)` (cover-fitted sample), `coverUV`,
-   * `luma(vec3)`, plus `uTexture` / `uImageResolution`.
+   * `luma(vec3)`, plus `uTexture` / `uImageResolution`. Transition shaders also
+   * get `texCoverB(vec2 uv)`, `uTextureB`, `uImageResolutionB` and `uProgress`.
    */
   fragmentShader: string;
 };
 
 const DEMO = "/bend-image-reveal.gif";
+const DEMO_B = "/fluid-transition.gif";
 
 export const IMAGE_SHADERS: ImageShader[] = [
+  {
+    id: "wipe-reveal",
+    name: "Wipe Reveal transition",
+    title: "Wipe Reveal",
+    description:
+      "Hover to sweep a glowing diagonal seam across the frame, wiping one image into the next.",
+    image: DEMO,
+    imageB: DEMO_B,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float p = uProgress;
+        // position along a diagonal sweep, normalised to ~0..1
+        float edge = dot(uv, normalize(vec2(1.0, 0.35))) / 1.35;
+        float w = smoothstep(p - 0.04, p + 0.04, edge); // 1 = not yet wiped (A)
+        vec3 col = mix(texCoverB(uv).rgb, texCover(uv).rgb, w);
+        col += (1.0 - smoothstep(0.0, 0.05, abs(edge - p))) * 0.5; // glowing seam
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "pixel-melt-transition",
+    name: "Pixel Melt transition",
+    title: "Pixel Melt",
+    description:
+      "Hover to crunch both images into chunky mosaic blocks that flip over, staggered, into the second.",
+    image: DEMO,
+    imageB: DEMO_B,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        float p = uProgress;
+        float chunk = sin(p * 3.14159265);        // blockiest mid-transition
+        float cells = mix(220.0, 22.0, chunk);
+        vec2 grid = vec2(cells * aspect, cells);
+        vec2 puv = (floor(uv * grid) + 0.5) / grid;
+        float r = hash21(floor(uv * grid));        // per-block stagger
+        float reveal = smoothstep(r - 0.25, r + 0.25, p);
+        vec3 col = mix(texCover(puv).rgb, texCoverB(puv).rgb, reveal);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "liquid-transition",
+    name: "Liquid transition shader",
+    title: "Liquid Transition",
+    description:
+      "Hover to ripple both frames through a flowing noise warp as one dissolves into the other.",
+    image: DEMO,
+    imageB: DEMO_B,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float p = uProgress;
+        float amt = sin(p * 3.14159265) * 0.08;    // warp peaks mid-transition
+        vec2 w = vec2(
+          fbm(uv * 4.0 + time * 0.3),
+          fbm(uv * 4.0 + 5.0 - time * 0.2)
+        ) - 0.5;
+        vec3 a = texCover(uv + w * amt).rgb;
+        vec3 b = texCoverB(uv + w * amt).rgb;
+        gl_FragColor = vec4(mix(a, b, smoothstep(0.0, 1.0, p)), 1.0);
+      }
+    `,
+  },
+  {
+    id: "pixel-rise-reveal",
+    name: "Pixel Rise transition",
+    title: "Pixel Rise",
+    description:
+      "Hover and a ragged wall of pixels climbs from the bottom, dissolving the old image block by block as the new one rises into place.",
+    image: DEMO,
+    imageB: DEMO_B,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        float p = uProgress;
+
+        // chunky pixel blocks
+        float cells = 42.0;
+        vec2 grid = vec2(cells * aspect, cells);
+        vec2 cell = floor(uv * grid);
+        vec2 puv = (cell + 0.5) / grid;                // block centre
+        float r = hash21(cell);                         // per-block randomness
+
+        // Each block flips to the new image at its own moment as the front
+        // climbs from the bottom: lower (and "luckier") blocks go first, so the
+        // rising edge is a thick, ragged band of pixels, not a straight line.
+        float blockP = 0.05 + puv.y * 0.78 + r * 0.17;  // in (0,1]; never 0 at rest
+        float reveal = step(blockP, p);                 // 1 → new image B
+
+        // Sample blocky through the whole transition so it reads as a pixel
+        // dissolve; settle to the sharp full-res image only when idle (p≈0) or
+        // done (p≈1). (No reversed-edge smoothstep — that's GLSL UB.)
+        float settle = max(1.0 - smoothstep(0.0, 0.06, p),
+                           smoothstep(0.94, 1.0, p));
+        vec2 s = mix(puv, uv, settle);
+
+        vec3 col = mix(texCover(s).rgb, texCoverB(s).rgb, reveal);
+
+        // blocks crossing the front right now flash as their pixels flip over
+        float edge = (1.0 - smoothstep(0.0, 0.07, abs(blockP - p)))
+                   * step(0.02, p) * step(p, 0.98);
+        col += edge * (0.2 + 0.45 * r);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "burn-dissolve",
+    name: "Burn Dissolve transition",
+    title: "Burn Dissolve",
+    description:
+      "Hover and the first image burns away along a glowing ember edge, revealing the next through the noise.",
+    image: DEMO,
+    imageB: DEMO_B,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float p = uProgress;
+        float n = fbm(uv * 5.0);                 // dissolve threshold map
+        float edgeW = 0.1;
+        float t = mix(-edgeW, 1.0 + edgeW, p);   // sweep threshold across the noise
+        float reveal = 1.0 - smoothstep(t - edgeW, t + edgeW, n);
+        vec3 col = mix(texCover(uv).rgb, texCoverB(uv).rgb, reveal);
+        // glowing ember along the burning front
+        float glow = (1.0 - smoothstep(0.0, edgeW, abs(n - t)))
+                   * step(0.02, p) * step(p, 0.98);
+        col += glow * vec3(1.0, 0.5, 0.15) * 0.9;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "blinds-transition",
+    name: "Venetian Blinds transition",
+    title: "Venetian Blinds",
+    description:
+      "Hover to flip open a stack of horizontal blinds, each strip wiping to the second image.",
+    image: DEMO,
+    imageB: DEMO_B,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float p = uProgress;
+        float strips = 12.0;
+        float local = fract(uv.y * strips);      // 0..1 within each blind
+        float reveal = step(local, p);           // blind fills as p grows
+        vec3 col = mix(texCover(uv).rgb, texCoverB(uv).rgb, reveal);
+        // soft shadow line at each blind's leading edge
+        float seam = (1.0 - smoothstep(0.0, 0.04, abs(local - p)))
+                   * step(0.02, p) * step(p, 0.98);
+        col *= 1.0 - seam * 0.3;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "ripple-reveal",
+    name: "Ripple Reveal transition",
+    title: "Ripple Reveal",
+    description:
+      "Hover to send a rippling ring out from the centre, warping the first image aside as the next floods in.",
+    image: DEMO,
+    imageB: DEMO_B,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float p = uProgress;
+        float aspect = resolution.x / resolution.y;
+        vec2 c = uv - 0.5;
+        c.x *= aspect;
+        float dist = length(c);
+        float maxd = 0.5 * sqrt(1.0 + aspect * aspect);
+        float front = p * (maxd + 0.1);
+        float ring = 1.0 - smoothstep(0.0, 0.12, abs(dist - front));
+        vec2 dir = c / (dist + 1e-4);
+        vec2 warp = dir * ring * 0.03 * sin((dist - front) * 60.0);
+        warp.x /= aspect;
+        float reveal = step(dist, front);
+        vec3 col = mix(texCover(uv + warp).rgb, texCoverB(uv + warp).rgb, reveal);
+        col += ring * 0.2 * step(0.02, p) * step(p, 0.98);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "zoom-blur-transition",
+    name: "Zoom Blur transition",
+    title: "Zoom Blur",
+    description:
+      "Hover to punch through a radial zoom-blur — the first image streaks outward as the second rushes in.",
+    image: DEMO,
+    imageB: DEMO_B,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float p = smoothstep(0.0, 1.0, uProgress);
+        vec2 c = uv - 0.5;
+        float blur = sin(p * 3.14159265) * 0.25;   // strongest mid-transition
+        vec3 a = vec3(0.0), b = vec3(0.0);
+        const int N = 8;
+        for (int i = 0; i < N; i++) {
+          float k = (float(i) / float(N - 1) - 0.5) * 2.0; // -1..1
+          float s = 1.0 + blur * k;                        // radial scale jitter
+          a += texCover(0.5 + c * s).rgb;
+          b += texCoverB(0.5 + c * s).rgb;
+        }
+        a /= float(N);
+        b /= float(N);
+        gl_FragColor = vec4(mix(a, b, p), 1.0);
+      }
+    `,
+  },
+  {
+    id: "checker-flip",
+    name: "Checker Flip transition",
+    title: "Checker Flip",
+    description:
+      "Hover and the image tiles into a checkerboard whose squares flip over, staggered, to the next image.",
+    image: DEMO,
+    imageB: DEMO_B,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float p = uProgress;
+        float aspect = resolution.x / resolution.y;
+        float cells = 10.0;
+        vec2 grid = vec2(cells * aspect, cells);
+        vec2 cell = floor(uv * grid);
+        float checker = mod(cell.x + cell.y, 2.0);     // 0 / 1
+        float r = hash21(cell);
+        float cellP = 0.05 + checker * 0.45 + r * 0.45; // (0,1]: staggered order
+        float reveal = step(cellP, p);
+        vec3 col = mix(texCover(uv).rgb, texCoverB(uv).rgb, reveal);
+        // darken each tile at the instant it flips
+        float flip = (1.0 - smoothstep(0.0, 0.12, abs(cellP - p)))
+                   * step(0.02, p) * step(p, 0.98);
+        col *= 1.0 - flip * 0.35;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "dot-matrix-scatter",
+    name: "Dot Matrix shader",
+    title: "Dot Matrix",
+    description:
+      "An LED-style dot grid of the image — move your cursor to scatter the dots into a dispersing cloud.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+
+        // disturbance field around the cursor (aspect-corrected distance)
+        vec2 toM = uv - mouse;
+        toM.x *= aspect;
+        float dist = length(toM);
+        float force = smoothstep(0.30, 0.0, dist);   // 1 at the cursor, 0 beyond
+        vec2 dir = toM / (dist + 1e-4);
+
+        // push the sampled image outward from the cursor so the cloud disperses
+        vec2 suv = uv + dir * force * 0.13;
+
+        // dot grid over the (pushed) image
+        float cells = 110.0;
+        vec2 grid = vec2(cells * aspect, cells);
+        vec2 g = suv * grid;
+        vec2 cellId = floor(g);
+        vec2 f = fract(g) - 0.5;
+
+        // per-cell scatter jitter — only bites near the cursor
+        vec2 jit = (vec2(hash21(cellId), hash21(cellId + 7.7)) - 0.5) * 1.6 * force;
+        f -= jit;
+
+        vec3 col = texCover((cellId + 0.5) / grid).rgb;
+        float lum = luma(col);
+
+        // halftone: dot radius grows with brightness, shrinks where disturbed
+        float r = (0.18 + 0.30 * lum) * (1.0 - 0.45 * force);
+        float dotMask = smoothstep(r, r - 0.12, length(f));
+
+        // near the cursor ~half the dots wink in/out → floating specks + gaps
+        float flick = hash21(cellId + floor(time * 4.0));
+        dotMask *= mix(1.0, step(0.5, flick), force);
+
+        gl_FragColor = vec4(col * dotMask, 1.0);
+      }
+    `,
+  },
+  {
+    id: "ballpoint-drawing",
+    name: "Ballpoint Drawing shader",
+    title: "Ballpoint",
+    description:
+      "A ballpoint-pen cross-hatch rendering — strokes follow the image's form on grainy paper with a vignette. Adapted (single-pass) from flockaroo, CC BY-NC-SA.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      // Ballpoint pen drawing — single-pass adaptation of flockaroo's "ballpoint
+      // line drawing" (2018), CC BY-NC-SA 3.0. The original is multi-buffer; this
+      // recreates the look with procedural cross-hatching that follows image
+      // structure, procedural paper grain, and the same vignette math.
+
+      float penVal(vec2 uv) { return luma(texCover(uv).rgb); }
+
+      // 1 near a stroke line, 0 between them; runs perpendicular to \`ang\`.
+      float hatch(vec2 fc, float ang, float spacing, float wob) {
+        vec2 n = vec2(-sin(ang), cos(ang));
+        float coord = dot(fc, n);
+        float l = abs(fract(coord / spacing + wob) - 0.5) * 2.0;
+        return 1.0 - smoothstep(0.18, 0.55, l);
+      }
+
+      void main() {
+        vec2 uv = uv01();
+        vec2 px = 1.0 / resolution.xy;
+        vec2 fc = uv * resolution.xy;
+
+        // value + gradient of the image (gradient → stroke direction follows form)
+        float e = 1.5 * px.y;
+        float v = penVal(uv);
+        vec2 grad = vec2(
+          penVal(uv + vec2(e, 0.0)) - penVal(uv - vec2(e, 0.0)),
+          penVal(uv + vec2(0.0, e)) - penVal(uv - vec2(0.0, e))
+        );
+        float gmag = length(grad);
+        float gang = atan(grad.y, grad.x);
+        // strokes run perpendicular to the gradient (along iso-luminance); in flat
+        // areas fall back to a fixed 45° hatch.
+        float follow = smoothstep(0.0, 0.015, gmag);
+        float baseAng = mix(0.7853982, gang + 1.5707963, follow);
+
+        // hand-drawn pen wobble, with a slow redraw flicker for life
+        float wob = fbm(uv * 7.0 + floor(time * 8.0) * 0.04) * 0.6;
+
+        // build up hatch layers as the image gets darker
+        float d = 1.0 - v;
+        float ink = 0.0;
+        ink += hatch(fc, baseAng,        5.0, wob) * smoothstep(0.22, 0.34, d);
+        ink += hatch(fc, baseAng + 0.85, 5.5, wob) * smoothstep(0.40, 0.52, d);
+        ink += hatch(fc, baseAng - 0.65, 6.0, wob) * smoothstep(0.58, 0.70, d);
+        ink += hatch(fc, baseAng + 0.30, 4.5, wob) * smoothstep(0.76, 0.88, d);
+        ink = clamp(ink, 0.0, 1.0);
+
+        // paper: warm white with fibrous grain
+        float fiber = fbm(uv * resolution.xy * 0.16);
+        vec3 paper = vec3(0.96, 0.95, 0.91) - fiber * 0.05;
+        // ballpoint ink (blue-black), bleeding slightly with the paper fiber
+        vec3 pen = vec3(0.06, 0.09, 0.26) + fiber * 0.04;
+        vec3 col = mix(paper, pen, ink);
+
+        // vignette + edge falloff (ported from flockaroo's Image pass)
+        vec2 sc = (fc - 0.5 * resolution.xy) / resolution.x;
+        float vign = 1.0 - 0.3 * dot(sc, sc);
+        vign *= 1.0 - 0.7 * exp(-sin(uv.x * 3.1416) * 40.0);
+        vign *= 1.0 - 0.7 * exp(-sin(uv.y * 3.1416) * 20.0);
+        col *= vign;
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
   {
     id: "chromatic-aberration",
     name: "Chromatic Aberration shader",
@@ -645,6 +1019,130 @@ export const IMAGE_SHADERS: ImageShader[] = [
         float e = smoothstep(0.3, 0.7, sqrt(gx * gx + gy * gy));
         col = mix(col, vec3(0.04), e); // bold ink outline
         gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "thermal-vision",
+    name: "Thermal Vision shader",
+    title: "Thermal Vision",
+    description:
+      "Maps brightness onto an infrared heat ramp — cold indigo to white-hot.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      // classic infrared ramp: black → indigo → red → orange → white-hot
+      vec3 thermal(float t) {
+        vec3 c = mix(vec3(0.0, 0.0, 0.12), vec3(0.34, 0.0, 0.55),
+                     smoothstep(0.0, 0.25, t));
+        c = mix(c, vec3(0.86, 0.0, 0.30), smoothstep(0.25, 0.5, t));
+        c = mix(c, vec3(1.0, 0.55, 0.0), smoothstep(0.5, 0.75, t));
+        c = mix(c, vec3(1.0, 1.0, 0.75), smoothstep(0.75, 1.0, t));
+        return c;
+      }
+      void main() {
+        vec2 uv = uv01();
+        float l = luma(texCover(uv).rgb);
+        l += (fbm(uv * 7.0 + time * 0.5) - 0.5) * 0.06; // heat shimmer
+        gl_FragColor = vec4(thermal(clamp(l, 0.0, 1.0)), 1.0);
+      }
+    `,
+  },
+  {
+    id: "oil-paint",
+    name: "Oil Paint shader",
+    title: "Oil Paint",
+    description:
+      "Kuwahara filtering smears the image into soft painterly brush strokes.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      // Mean + summed colour variance of one quadrant around uv (Kuwahara).
+      vec4 region(vec2 uv, vec2 px, vec2 corner) {
+        vec3 sum = vec3(0.0), sum2 = vec3(0.0);
+        const int R = 3;
+        for (int i = 0; i <= R; i++) {
+          for (int j = 0; j <= R; j++) {
+            vec2 o = vec2(float(i), float(j)) * corner * px;
+            vec3 c = texCover(uv + o).rgb;
+            sum += c;
+            sum2 += c * c;
+          }
+        }
+        float n = float((R + 1) * (R + 1));
+        vec3 mean = sum / n;
+        vec3 var = sum2 / n - mean * mean;
+        return vec4(mean, var.r + var.g + var.b);
+      }
+      void main() {
+        vec2 uv = uv01();
+        vec2 px = 1.8 / resolution;             // brush size
+        vec4 a = region(uv, px, vec2( 1.0,  1.0));
+        vec4 b = region(uv, px, vec2(-1.0,  1.0));
+        vec4 c = region(uv, px, vec2( 1.0, -1.0));
+        vec4 d = region(uv, px, vec2(-1.0, -1.0));
+        vec3 col = a.rgb;
+        float mv = a.w;                          // pick the flattest quadrant
+        if (b.w < mv) { mv = b.w; col = b.rgb; }
+        if (c.w < mv) { mv = c.w; col = c.rgb; }
+        if (d.w < mv) { mv = d.w; col = d.rgb; }
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "vhs",
+    name: "VHS shader",
+    title: "VHS",
+    description:
+      "Tape warble, chroma bleed and a rolling tracking band — worn-out VHS.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        // tape warble: layered horizontal wobble down the screen
+        uv.x += sin(uv.y * 8.0 + time * 2.0) * 0.002
+              + sin(uv.y * 40.0 - time * 5.0) * 0.0015;
+        // a tracking band rolling slowly up the picture
+        float by = fract(uv.y + time * 0.2);
+        float track = smoothstep(0.0, 0.08, by) * smoothstep(0.2, 0.1, by);
+        uv.x += track
+              * (hash21(vec2(floor(uv.y * 80.0), floor(time * 8.0))) - 0.5)
+              * 0.05;
+        // chroma bleed: split the colour channels horizontally
+        float o = 0.004 + track * 0.01;
+        vec3 col = vec3(
+          texCover(uv + vec2(o, 0.0)).r,
+          texCover(uv).g,
+          texCover(uv - vec2(o, 0.0)).b
+        );
+        // tape noise lines + scanline darkening + slight desaturation
+        col += (hash21(vec2(floor(uv.y * 240.0), floor(time * 30.0))) - 0.5) * 0.12;
+        col *= 0.9 + 0.1 * sin(uv.y * 400.0);
+        col = mix(col, vec3(luma(col)), 0.1);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "kaleidoscope",
+    name: "Kaleidoscope shader",
+    title: "Kaleidoscope",
+    description:
+      "Folds the image into six-fold mirrored symmetry that slowly rotates.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        vec2 c = uv - 0.5;
+        c.x *= aspect;
+        float r = length(c);
+        float a = atan(c.y, c.x) + time * 0.2;
+        float seg = TAU / 6.0;
+        a = abs(mod(a, seg) - seg * 0.5);          // mirror within each wedge
+        vec2 p = vec2(cos(a), sin(a)) * r * (0.85 + 0.15 * sin(time * 0.3));
+        p.x /= aspect;
+        vec2 m = abs(fract((p + 0.5) * 0.5) * 2.0 - 1.0); // mirror-wrap into 0..1
+        gl_FragColor = texCover(m);
       }
     `,
   },

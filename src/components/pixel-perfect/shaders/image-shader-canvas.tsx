@@ -29,11 +29,18 @@ const IMAGE_GLSL = /* glsl */ `
   // Natural pixel size of the loaded image, for aspect-correct sampling.
   uniform vec2 uImageResolution;
 
+  // Optional second image + transition progress (0..1). For transition shaders;
+  // when no second image is given, uTextureB falls back to uTexture and
+  // uProgress stays 0, so single-image shaders are unaffected.
+  uniform sampler2D uTextureB;
+  uniform vec2 uImageResolutionB;
+  uniform float uProgress;
+
   // Map a 0..1 screen UV to texture UV with a "cover" fit (like
   // background-size: cover) so the image is never stretched.
-  vec2 coverUV(vec2 uv) {
+  vec2 coverUVRes(vec2 uv, vec2 imageRes) {
     float screenAspect = resolution.x / resolution.y;
-    float imageAspect = uImageResolution.x / uImageResolution.y;
+    float imageAspect = imageRes.x / imageRes.y;
     vec2 scale = vec2(1.0);
     if (screenAspect > imageAspect) {
       scale.y = imageAspect / screenAspect;
@@ -43,9 +50,14 @@ const IMAGE_GLSL = /* glsl */ `
     return (uv - 0.5) * scale + 0.5;
   }
 
-  // Sample the image at a 0..1 screen UV, cover-fitted.
+  vec2 coverUV(vec2 uv) { return coverUVRes(uv, uImageResolution); }
+
+  // Sample image A / image B at a 0..1 screen UV, cover-fitted.
   vec4 texCover(vec2 uv) {
     return texture2D(uTexture, coverUV(uv));
+  }
+  vec4 texCoverB(vec2 uv) {
+    return texture2D(uTextureB, coverUVRes(uv, uImageResolutionB));
   }
 
   float luma(vec3 c) {
@@ -56,6 +68,7 @@ const IMAGE_GLSL = /* glsl */ `
 const ImageShaderCanvas = ({
   fragmentShader,
   image,
+  imageB,
   className,
   dpr = 2,
   controls = false,
@@ -63,6 +76,12 @@ const ImageShaderCanvas = ({
   fragmentShader: string;
   /** Public path (or URL) of the image to sample. */
   image: string;
+  /**
+   * Optional second image. When provided the shader becomes a hover-to-play
+   * transition: `uProgress` eases 0→1 while the pointer is over the canvas
+   * (and back to 0 on leave). Sample it with `texCoverB(uv)`.
+   */
+  imageB?: string;
   className?: string;
   /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
@@ -83,6 +102,10 @@ const ImageShaderCanvas = ({
 
     // Animated texture (plays GIFs frame-by-frame; static fallback otherwise).
     const animated = createAnimatedTexture(image);
+    // Second image for transitions; falls back to image A when none is given
+    // (so mix(A, B, uProgress) is a no-op for single-image shaders).
+    const isTransition = !!imageB;
+    const animatedB = createAnimatedTexture(imageB ?? image);
 
     const uniforms = {
       time: { value: 0 },
@@ -90,6 +113,9 @@ const ImageShaderCanvas = ({
       mouse: { value: new THREE.Vector2(0.5, 0.5) },
       uTexture: { value: animated.texture },
       uImageResolution: { value: new THREE.Vector2(1, 1) },
+      uTextureB: { value: animatedB.texture },
+      uImageResolutionB: { value: new THREE.Vector2(1, 1) },
+      uProgress: { value: 0 },
       uZoom: { value: 1 },
       uHue: { value: 0 },
       uSaturation: { value: 1 },
@@ -135,8 +161,17 @@ const ImageShaderCanvas = ({
         1 - (e.clientY - rect.top) / rect.height,
       );
     };
-    const onPointerLeave = () => uniforms.mouse.value.set(0.5, 0.5);
+    // Hover drives the transition progress toward 1 (in) / 0 (out).
+    let hovered = false;
+    const onPointerEnter = () => {
+      hovered = true;
+    };
+    const onPointerLeave = () => {
+      hovered = false;
+      uniforms.mouse.value.set(0.5, 0.5);
+    };
     canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerenter", onPointerEnter);
     canvas.addEventListener("pointerleave", onPointerLeave);
 
     // Accumulate time scaled by speed so changing speed never jumps the clock.
@@ -152,6 +187,20 @@ const ImageShaderCanvas = ({
       const img = animated.texture.image as { width: number; height: number };
       if (img && img.width > 1) {
         uniforms.uImageResolution.value.set(img.width, img.height);
+      }
+      // ease transition progress toward the hover target (~1s, fps-independent)
+      if (isTransition) {
+        animatedB.update(shaderTime * 1000);
+        const imgB = animatedB.texture.image as {
+          width: number;
+          height: number;
+        };
+        if (imgB && imgB.width > 1) {
+          uniforms.uImageResolutionB.value.set(imgB.width, imgB.height);
+        }
+        const target = hovered ? 1 : 0;
+        uniforms.uProgress.value +=
+          (target - uniforms.uProgress.value) * Math.min(1, dt * 3.5);
       }
       renderer.render(scene, camera);
     };
@@ -212,17 +261,19 @@ const ImageShaderCanvas = ({
       intersectionObserver.disconnect();
       canvas.removeEventListener("webglcontextlost", onContextLost);
       canvas.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("pointerenter", onPointerEnter);
       canvas.removeEventListener("pointerleave", onPointerLeave);
       if (canvas.parentNode === container) {
         container.removeChild(canvas);
       }
       animated.dispose();
+      animatedB.dispose();
       geometry.dispose();
       material.dispose();
       renderer.forceContextLoss();
       renderer.dispose();
     };
-  }, [fragmentShader, image, dpr, controls]);
+  }, [fragmentShader, image, imageB, dpr, controls]);
 
   return (
     <div

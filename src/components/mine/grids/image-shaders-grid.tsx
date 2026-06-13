@@ -29,16 +29,24 @@ const ImageShadersGrid = () => {
   const [brushOpen, setBrushOpen] = useState(false);
   const [scratchOpen, setScratchOpen] = useState(false);
   const [baOpen, setBaOpen] = useState(false);
-  // Kept low on purpose: every tile is its own WebGL context and browsers cap
-  // them at ~16. The 5 interactive tiles (Fluid, Paint, Cursor Paint, Scratch,
-  // Before/After) all live on page 1, so 6 single-pass tiles keeps page 1 at 11.
-  const itemsPerPage = 6;
-  const totalPages = Math.ceil(IMAGE_SHADERS.length / itemsPerPage);
+  // 12 tiles per page. The 5 interactive static tiles (Fluid, Paint, Cursor
+  // Paint, Scratch, Before/After) all live on page 1 and take up slots there,
+  // so page 1 shows fewer registry shaders — keeping every page at 12 tiles
+  // (and 12 WebGL contexts, under the browser's ~16 cap) with a continuous slice.
+  const itemsPerPage = 12;
+  const RESERVED_FIRST_PAGE = 5;
+  const firstPageItems = itemsPerPage - RESERVED_FIRST_PAGE;
+  const totalPages =
+    IMAGE_SHADERS.length <= firstPageItems
+      ? 1
+      : 1 + Math.ceil((IMAGE_SHADERS.length - firstPageItems) / itemsPerPage);
   usePaginationKeys(totalPages, setCurrentPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
+  const startIndex =
+    currentPage === 1 ? 0 : firstPageItems + (currentPage - 2) * itemsPerPage;
+  const itemsOnPage = currentPage === 1 ? firstPageItems : itemsPerPage;
   const paginatedItems = IMAGE_SHADERS.slice(
     startIndex,
-    startIndex + itemsPerPage,
+    startIndex + itemsOnPage,
   );
 
   // Esc to close + lock scroll while a full-screen preview is open.
@@ -319,6 +327,7 @@ const ImageShadersGrid = () => {
                 <ImageShaderCanvas
                   fragmentShader={item.fragmentShader}
                   image={item.image}
+                  imageB={item.imageB}
                   dpr={1.25}
                   className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
                 />
@@ -340,7 +349,7 @@ const ImageShadersGrid = () => {
                 size="sm"
                 variant="copy"
                 onClick={() => {
-                  const code = `import ImageShaderCanvas from "@/components/pixel-perfect/shaders/image-shader-canvas";\n\n<ImageShaderCanvas\n  className="w-full h-full"\n  image="${item.image}"\n  fragmentShader={\`${item.fragmentShader.trim()}\`}\n/>`;
+                  const code = `import ImageShaderCanvas from "@/components/pixel-perfect/shaders/image-shader-canvas";\n\n<ImageShaderCanvas\n  className="w-full h-full"\n  image="${item.image}"${item.imageB ? `\n  imageB="${item.imageB}"` : ""}\n  fragmentShader={\`${item.fragmentShader.trim()}\`}\n/>`;
                   navigator.clipboard.writeText(code);
                   toast.success("Image shader code copied to clipboard!");
                 }}
@@ -409,6 +418,7 @@ const ImageShadersGrid = () => {
             <ImageShaderCanvas
               fragmentShader={active.fragmentShader}
               image={active.image}
+              imageB={active.imageB}
               className="h-full w-full"
               controls
             />

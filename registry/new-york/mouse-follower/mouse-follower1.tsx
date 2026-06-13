@@ -20,6 +20,17 @@ const Image = [
   "https://cdn.cosmos.so/71e10d8f-c92d-4761-96ce-4b6cc9eedcbe?format=jpeg",
   "https://cdn.cosmos.so/0cff1394-f353-4c9e-87f7-37c63d165bf9?format=jpeg",
   "https://cdn.cosmos.so/15a7b84c-ba74-470f-8813-25eb0a0d8ba2?format=jpeg",
+  "https://cdn.cosmos.so/9beb0a06-e008-4b95-a5b8-15c2d255a4c4?format=jpeg",
+  "https://cdn.cosmos.so/6a854a1b-5c06-45b1-b055-4a4652ba4e21?format=jpeg",
+  "https://cdn.cosmos.so/3c35a1b1-717b-4219-9282-881a762724f2?format=jpeg",
+  "https://cdn.cosmos.so/8a6998b4-fce7-48c4-b40c-9b90bcf0007c?format=jpeg",
+  "https://cdn.cosmos.so/f798acc8-6bc8-4f2c-ace2-2440f2be4795?format=jpeg",
+  "https://cdn.cosmos.so/39a80b7b-29fb-4079-a251-176df0fa15eb?format=jpeg",
+  "https://cdn.cosmos.so/dfa2ba1c-97b6-44ba-a68b-7c619c9d416b?format=jpeg",
+  "https://cdn.cosmos.so/97de8d7c-f9c0-4625-838f-3aaf8c286cdb?format=jpeg",
+  "https://cdn.cosmos.so/71e10d8f-c92d-4761-96ce-4b6cc9eedcbe?format=jpeg",
+  "https://cdn.cosmos.so/0cff1394-f353-4c9e-87f7-37c63d165bf9?format=jpeg",
+  "https://cdn.cosmos.so/15a7b84c-ba74-470f-8813-25eb0a0d8ba2?format=jpeg",
 ];
 
 const MouseFollower1 = () => {
@@ -29,7 +40,7 @@ const MouseFollower1 = () => {
   const lastMousePosRef = useRef<MousePos>({ x: 0, y: 0 });
   const cachedMousePosRef = useRef<MousePos>({ x: 0, y: 0 });
   const indexRef = useRef(0);
-  const gapRef = useRef(100);
+  const gapRef = useRef(200);
   const isHoveringRef = useRef(false);
   const boundsRef = useRef({ left: 0, right: 0, top: 0, bottom: 0 });
 
@@ -175,7 +186,7 @@ const MouseFollower1 = () => {
             }}
             src={img}
             alt="flair"
-            className="fixed w-12 opacity-0"
+            className="fixed w-32 opacity-0"
             style={{
               pointerEvents: "none",
             }}

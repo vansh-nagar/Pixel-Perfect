@@ -2155,6 +2155,21 @@
           "target": "components/pixel-perfect/bend-button-follower.tsx"
         }
       ]
+    },
+    {
+      "name": "magnetic-button",
+      "description": "A magnetic button that eases toward the cursor inside its zone, demonstrating GSAP's overwrite modes (true / false / \"auto\") against an idle CustomWiggle loop.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/magnetic-button.tsx",
+          "target": "components/pixel-perfect/magnetic-button.tsx"
+        }
+      ]
     }
   ]
 }

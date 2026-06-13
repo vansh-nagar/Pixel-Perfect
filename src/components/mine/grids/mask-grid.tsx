@@ -1,6 +1,18 @@
 "use client";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import CopyDropdown from "../copy-dropdown";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import RectMaskReveal from "../../../../registry/new-york/mask/rect-mask-reveal";
+import StarMaskReveal from "../../../../registry/new-york/mask/star-mask-reveal";
+import DirectionalMaskReveal, {
+  type WipeDirection,
+} from "../../../../registry/new-york/mask/directional-mask-reveal";
 
 type MaskGridItem = {
   name: string;
@@ -9,8 +21,66 @@ type MaskGridItem = {
   registryName: string;
 };
 
+const wipeDirections: { value: WipeDirection; label: string }[] = [
+  { value: "bottom", label: "Bottom → Top" },
+  { value: "top", label: "Top → Bottom" },
+  { value: "left", label: "Left → Right" },
+  { value: "right", label: "Right → Left" },
+];
+
+const DirectionalMaskRevealWrapper = () => {
+  const [direction, setDirection] = useState<WipeDirection>("bottom");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select
+          value={direction}
+          onValueChange={(v) => setDirection(v as WipeDirection)}
+        >
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-32">
+            {wipeDirections.map((d) => (
+              <SelectItem key={d.value} value={d.value} className="text-xs">
+                {d.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <DirectionalMaskReveal direction={direction} />
+    </>
+  );
+};
+
 // Mask animations land here — add an entry per promoted component.
-export const MaskGridArr: MaskGridItem[] = [];
+export const MaskGridArr: MaskGridItem[] = [
+  {
+    name: "Rect Mask Reveal",
+    description:
+      "A clip-path rectangle grows from the center, keeping the video aspect ratio, to uncover the full image. Click to replay.",
+    component: <RectMaskReveal />,
+    registryName: "rect-mask-reveal",
+  },
+  {
+    name: "Star Mask Reveal",
+    description:
+      "A sparkle-shaped clip-path scales up to uncover the full image. Click to replay.",
+    component: <StarMaskReveal />,
+    registryName: "star-mask-reveal",
+  },
+  {
+    name: "Directional Mask Reveal",
+    description:
+      "The image wipes in from a chosen edge — pick the direction from the dropdown. Click to replay.",
+    component: <DirectionalMaskRevealWrapper />,
+    registryName: "directional-mask-reveal",
+  },
+];
 
 const MaskGrid = () => {
   if (MaskGridArr.length === 0) {

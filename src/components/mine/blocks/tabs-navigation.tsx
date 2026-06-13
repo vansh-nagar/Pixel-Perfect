@@ -75,6 +75,11 @@ const navItems = [
     Component: lazyGrid(() => import("../grids/text-grid")),
   },
   {
+    name: "Scroll Animations",
+    slug: "scroll",
+    Component: lazyGrid(() => import("../grids/scroll-grid")),
+  },
+  {
     name: "Borders & Intersections",
     slug: "borders",
     Component: lazyGrid(() => import("../grids/border-grid")),

@@ -53,7 +53,9 @@ import type { RainbowColors } from "../../../../registry/new-york/buttons/rainbo
 import BevelButton from "../../../../registry/new-york/buttons/bevel-button";
 import SilverButton from "../../../../registry/new-york/buttons/silver-button";
 import RefractionGlassButton from "../../../../registry/new-york/buttons/refraction-glass-button";
-import MagneticButton from "../../../../registry/new-york/buttons/magnetic-button";
+import MagneticButton, {
+  type MagneticMode,
+} from "../../../../registry/new-york/buttons/magnetic-button";
 import {
   Home,
   Heart,
@@ -533,33 +535,46 @@ const BookDemoButtonWrapper = () => {
   );
 };
 
+const magneticModes: MagneticMode[] = ["plain", "false", "true", "auto"];
+const magneticLabels: Record<MagneticMode, string> = {
+  plain: "dynamic",
+  false: "false",
+  true: "true",
+  auto: "auto",
+};
+
+const MagneticButtonWrapper = () => {
+  const [mode, setMode] = useState<MagneticMode>("auto");
+  return (
+    <>
+      <div className="absolute left-1.5 top-1.5 z-40">
+        <Select value={mode} onValueChange={(v) => setMode(v as MagneticMode)}>
+          <SelectTrigger
+            size="sm"
+            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-28">
+            {magneticModes.map((m) => (
+              <SelectItem key={m} value={m} className="text-xs">
+                {magneticLabels[m]}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <MagneticButton mode={mode}>{magneticLabels[mode]}</MagneticButton>
+    </>
+  );
+};
+
 export const ButtonsArr = [
   {
     name: "Magnetic Button",
     description:
-      "Magnetic pull toward the cursor — overwrite: true kills all tweens (no wiggle).",
-    component: <MagneticButton mode="plain">dynamic</MagneticButton>,
-    registryName: "magnetic-button",
-  },
-  {
-    name: "Magnetic — overwrite: false",
-    description:
-      "Long follow + short leave tween conflict over x/y, causing a visible snap-back.",
-    component: <MagneticButton mode="false">false</MagneticButton>,
-    registryName: "magnetic-button",
-  },
-  {
-    name: "Magnetic — overwrite: true",
-    description:
-      "Magnetic pull kills the idle CustomWiggle loop along with everything else.",
-    component: <MagneticButton mode="true">true</MagneticButton>,
-    registryName: "magnetic-button",
-  },
-  {
-    name: 'Magnetic — overwrite: "auto"',
-    description:
-      "Pull overwrites only x/y, so the idle CustomWiggle rotation keeps running.",
-    component: <MagneticButton mode="auto">auto</MagneticButton>,
+      'Magnetic pull toward the cursor — pick a GSAP overwrite mode (true / false / "auto") from the dropdown to compare against an idle wiggle.',
+    component: <MagneticButtonWrapper />,
     registryName: "magnetic-button",
   },
   {

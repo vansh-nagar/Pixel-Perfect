@@ -16,13 +16,6 @@ export type MagneticMode = "plain" | "false" | "true" | "auto";
 const STRENGTH = 0.4; // how hard the button is pulled toward the cursor
 const LABEL_STRENGTH = 0.24; // label trails a touch less for a parallax feel
 
-const COLORS: Record<MagneticMode, string> = {
-  plain: "bg-gradient-to-br from-teal-400 to-emerald-600",
-  false: "bg-gradient-to-br from-rose-500 to-red-700",
-  true: "bg-gradient-to-br from-orange-400 to-amber-600",
-  auto: "bg-gradient-to-br from-lime-400 to-green-600",
-};
-
 const MagneticButton = ({
   mode = "auto",
   children = "Hover Me",
@@ -120,7 +113,7 @@ const MagneticButton = ({
     <div ref={zoneRef} className="grid h-40 w-40 place-items-center">
       <button
         ref={btnRef}
-        className={`rounded-full px-7 py-3 text-sm font-semibold text-white shadow-lg ${COLORS[mode]}`}
+        className="rounded-full bg-neutral-900 px-7 py-3 text-sm font-semibold text-white shadow-sm dark:bg-white dark:text-neutral-900"
       >
         <span ref={labelRef} className="inline-block">
           {children}

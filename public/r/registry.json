@@ -2170,6 +2170,67 @@
           "target": "components/pixel-perfect/magnetic-button.tsx"
         }
       ]
+    },
+    {
+      "name": "rect-mask-reveal",
+      "description": "A rectangular mask reveal — the image stays fixed while a clip-path inset rectangle grows from the center, keeping the video aspect ratio, to uncover the whole frame.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/rect-mask-reveal.tsx",
+          "target": "components/pixel-perfect/rect-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "star-mask-reveal",
+      "description": "A star-shaped mask reveal — a sparkle clip-path spins 360° once while scaling up from nothing to uncover the full image.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/star-mask-reveal.tsx",
+          "target": "components/pixel-perfect/star-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "directional-mask-reveal",
+      "description": "A directional mask reveal — the image wipes in from a chosen edge (top, bottom, left, or right) via an animated clip-path inset.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/directional-mask-reveal.tsx",
+          "target": "components/pixel-perfect/directional-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-cover-reveal",
+      "description": "A scroll-driven hero cover reveal — the hero pins in place while the next section slides up and covers it, scrubbed by GSAP ScrollTrigger.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/hero-cover-reveal.tsx",
+          "target": "components/pixel-perfect/hero-cover-reveal.tsx"
+        }
+      ]
     }
   ]
 }

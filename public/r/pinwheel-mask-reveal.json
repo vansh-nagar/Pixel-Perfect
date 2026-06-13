@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pinwheel-mask-reveal",
+  "description": "A pinwheel mask reveal — N wedges sweep open around the center like a windmill (or a camera shutter), cut from an animated repeating-conic-gradient mask, until the full frame shows.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/mask/pinwheel-mask-reveal.tsx",
+      "content": "\"use client\";\n\n/**\n * A pinwheel mask reveal — N wedges sweep open around the center like a windmill (or a camera shutter), cut from an animated repeating-conic-gradient mask, until the full frame shows.\n */\n\nimport { useEffect, useRef } from \"react\";\nimport gsap from \"gsap\";\n\nconst SRC = \"/bend-image-reveal.gif\";\nconst BLADES = 6;\nconst WEDGE = 360 / BLADES;\n\n// every wedge opens by `open` degrees at once; `rot` spins the whole pinwheel.\nconst pinwheelMask = (open: number, rot: number) =>\n  `repeating-conic-gradient(from ${rot}deg at 50% 50%, #000 0deg, #000 ${open}deg, transparent ${open}deg, transparent ${WEDGE}deg)`;\n\nconst PinwheelMaskReveal = () => {\n  const imgRef = useRef<HTMLImageElement>(null);\n\n  const reveal = () => {\n    const img = imgRef.current;\n    if (!img) return;\n\n    const state = { open: 0, rot: -40 };\n    const apply = () => {\n      const mask = pinwheelMask(state.open, state.rot);\n      img.style.maskImage = mask;\n      img.style.webkitMaskImage = mask;\n    };\n    apply();\n\n    const tl = gsap.timeline();\n    tl.to(state, {\n      open: WEDGE,\n      rot: 0,\n      duration: 1.2,\n      ease: \"power3.inOut\",\n      onUpdate: apply,\n    });\n    tl.fromTo(\n      img,\n      { scale: 1.4, filter: \"blur(16px)\" },\n      { scale: 1, filter: \"blur(0px)\", duration: 1.2, ease: \"power3.inOut\" },\n      \"<\",\n    );\n  };\n\n  useEffect(() => {\n    reveal();\n  }, []);\n\n  return (\n    <button\n      onClick={reveal}\n      className=\"relative aspect-video w-[40rem] max-w-[92%] cursor-pointer overflow-hidden rounded-xl\"\n      aria-label=\"Replay reveal\"\n    >\n      <img\n        ref={imgRef}\n        src={SRC}\n        alt=\"reveal\"\n        className=\"size-full object-cover\"\n        style={{\n          maskImage: pinwheelMask(0, -40),\n          WebkitMaskImage: pinwheelMask(0, -40),\n          transform: \"scale(1.4)\",\n          filter: \"blur(16px)\",\n        }}\n      />\n    </button>\n  );\n};\n\nexport default PinwheelMaskReveal;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/pinwheel-mask-reveal.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

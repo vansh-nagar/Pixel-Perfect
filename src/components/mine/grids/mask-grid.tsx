@@ -24,6 +24,10 @@ import MosaicMaskReveal, {
   type MosaicOrder,
 } from "../../../../registry/new-york/mask/mosaic-mask-reveal";
 import IrisMaskReveal from "../../../../registry/new-york/mask/iris-mask-reveal";
+import SpotlightMaskReveal from "../../../../registry/new-york/mask/spotlight-mask-reveal";
+import BrushMaskReveal from "../../../../registry/new-york/mask/brush-mask-reveal";
+import PinwheelMaskReveal from "../../../../registry/new-york/mask/pinwheel-mask-reveal";
+import SonarMaskReveal from "../../../../registry/new-york/mask/sonar-mask-reveal";
 
 type MaskGridItem = {
   name: string;
@@ -224,6 +228,34 @@ export const MaskGridArr: MaskGridItem[] = [
       "A circular clip-path opens from wherever you click and expands to fill the frame. Click anywhere to replay.",
     component: <IrisMaskReveal />,
     registryName: "iris-mask-reveal",
+  },
+  {
+    name: "Spotlight Mask Reveal",
+    description:
+      "The frame stays dark except a soft circle that follows your cursor — move to aim the flashlight, click to flood the whole frame (click again to dim).",
+    component: <SpotlightMaskReveal />,
+    registryName: "spotlight-mask-reveal",
+  },
+  {
+    name: "Brush Mask Reveal",
+    description:
+      "The image is painted in along a thick snaking brush stroke via an animated SVG-mask stroke-dashoffset. Click to replay.",
+    component: <BrushMaskReveal />,
+    registryName: "brush-mask-reveal",
+  },
+  {
+    name: "Pinwheel Mask Reveal",
+    description:
+      "Wedges sweep open around the center like a windmill, cut from a repeating-conic-gradient mask. Click to replay.",
+    component: <PinwheelMaskReveal />,
+    registryName: "pinwheel-mask-reveal",
+  },
+  {
+    name: "Sonar Mask Reveal",
+    description:
+      "Concentric rings thicken outward from the center, filling the gaps until the frame resolves. Click to replay.",
+    component: <SonarMaskReveal />,
+    registryName: "sonar-mask-reveal",
   },
 ];
 

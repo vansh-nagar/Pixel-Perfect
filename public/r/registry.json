@@ -2375,6 +2375,66 @@
           "target": "components/pixel-perfect/mosaic-mask-reveal.tsx"
         }
       ]
+    },
+    {
+      "name": "brush-mask-reveal",
+      "description": "A brush-stroke mask reveal — the image is painted in along a thick snaking brush stroke, using an inline SVG mask whose stroked path animates its stroke-dashoffset from hidden to fully drawn.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/brush-mask-reveal.tsx",
+          "target": "components/pixel-perfect/brush-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pinwheel-mask-reveal",
+      "description": "A pinwheel mask reveal — N wedges sweep open around the center like a windmill (or a camera shutter), cut from an animated repeating-conic-gradient mask, until the full frame shows.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/pinwheel-mask-reveal.tsx",
+          "target": "components/pixel-perfect/pinwheel-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sonar-mask-reveal",
+      "description": "A sonar mask reveal — concentric rings cut from a repeating-radial-gradient CSS mask thicken outward from the center, filling the gaps between them, until the whole frame is uncovered.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/sonar-mask-reveal.tsx",
+          "target": "components/pixel-perfect/sonar-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spotlight-mask-reveal",
+      "description": "A spotlight mask reveal — the image stays dark except for a soft circle that follows your cursor like a flashlight; click to flood the whole frame with light (and click again to dim back to the spotlight).",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/spotlight-mask-reveal.tsx",
+          "target": "components/pixel-perfect/spotlight-mask-reveal.tsx"
+        }
+      ]
     }
   ]
 }

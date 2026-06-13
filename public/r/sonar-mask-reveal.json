@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sonar-mask-reveal",
+  "description": "A sonar mask reveal — concentric rings cut from a repeating-radial-gradient CSS mask thicken outward from the center, filling the gaps between them, until the whole frame is uncovered.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/mask/sonar-mask-reveal.tsx",
+      "content": "\"use client\";\n\n/**\n * A sonar mask reveal — concentric rings cut from a repeating-radial-gradient CSS mask thicken outward from the center, filling the gaps between them, until the whole frame is uncovered.\n */\n\nimport { useEffect, useRef } from \"react\";\nimport gsap from \"gsap\";\n\nconst SRC = \"/bend-image-reveal.gif\";\nconst RINGS = 9;\n\nconst ringMask = (open: number, ring: number) =>\n  `repeating-radial-gradient(circle at 50% 50%, #000 0 ${open}px, transparent ${open}px ${ring}px)`;\n\nconst SonarMaskReveal = () => {\n  const imgRef = useRef<HTMLImageElement>(null);\n\n  // each ring's opaque part grows from 0 to the full ring spacing, so the gaps\n  // between the rings fill in and the image resolves from the center outward.\n  const reveal = () => {\n    const img = imgRef.current;\n    if (!img) return;\n\n    const state = { p: 0 };\n    const apply = () => {\n      // ring spacing spans the half-diagonal so the rings reach every corner.\n      const reach = Math.hypot(img.clientWidth, img.clientHeight) / 2;\n      const ring = reach / RINGS;\n      const open = ring * state.p;\n      const mask = ringMask(open, ring);\n      img.style.maskImage = mask;\n      img.style.webkitMaskImage = mask;\n    };\n    apply();\n\n    const tl = gsap.timeline();\n    tl.to(state, { p: 1, duration: 1.2, ease: \"power2.inOut\", onUpdate: apply });\n    tl.fromTo(\n      img,\n      { scale: 1.4, filter: \"blur(16px)\" },\n      { scale: 1, filter: \"blur(0px)\", duration: 1.2, ease: \"power2.inOut\" },\n      \"<\",\n    );\n  };\n\n  useEffect(() => {\n    reveal();\n  }, []);\n\n  return (\n    <button\n      onClick={reveal}\n      className=\"relative aspect-video w-[40rem] max-w-[92%] cursor-pointer overflow-hidden rounded-xl\"\n      aria-label=\"Replay reveal\"\n    >\n      <img\n        ref={imgRef}\n        src={SRC}\n        alt=\"reveal\"\n        className=\"size-full object-cover\"\n        style={{\n          maskImage:\n            \"repeating-radial-gradient(circle at 50% 50%, #000 0 0px, transparent 0px 24px)\",\n          WebkitMaskImage:\n            \"repeating-radial-gradient(circle at 50% 50%, #000 0 0px, transparent 0px 24px)\",\n          transform: \"scale(1.4)\",\n          filter: \"blur(16px)\",\n        }}\n      />\n    </button>\n  );\n};\n\nexport default SonarMaskReveal;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/sonar-mask-reveal.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

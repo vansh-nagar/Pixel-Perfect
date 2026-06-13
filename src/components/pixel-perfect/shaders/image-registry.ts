@@ -438,6 +438,216 @@ export const IMAGE_SHADERS: ImageShader[] = [
       }
     `,
   },
+  {
+    id: "ascii-art",
+    name: "ASCII Art shader",
+    title: "ASCII Art",
+    description:
+      "Rebuilds the image from terminal glyphs whose density tracks brightness.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      // ink coverage of a procedural glyph for brightness b, at cell pos cp (0..1)
+      float asciiInk(vec2 cp, float b) {
+        vec2 g = floor(cp * 5.0);
+        float x = g.x, y = g.y;
+        float cx = abs(x - 2.0) < 0.5 ? 1.0 : 0.0;
+        float cy = abs(y - 2.0) < 0.5 ? 1.0 : 0.0;
+        float checker = mod(x + y, 2.0) < 0.5 ? 1.0 : 0.0;
+        float center = (cx > 0.5 && cy > 0.5) ? 1.0 : 0.0;
+        float ink = 0.0;
+        if (b > 0.9) ink = 1.0;                       // full block
+        else if (b > 0.7) ink = checker;              // #
+        else if (b > 0.5) ink = max(cx, cy);          // +
+        else if (b > 0.32) ink = center + ((abs(x - 1.0) < 0.5 && abs(y - 3.0) < 0.5) ? 1.0 : 0.0);
+        else if (b > 0.16) ink = center;              // .
+        return clamp(ink, 0.0, 1.0);
+      }
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        float cells = 44.0;
+        vec2 grid = vec2(cells * aspect, cells);
+        vec2 cuv = (floor(uv * grid) + 0.5) / grid;
+        vec3 src = texCover(cuv).rgb;
+        float ink = asciiInk(fract(uv * grid), luma(src));
+        gl_FragColor = vec4(src * 1.2 * ink, 1.0); // glyphs tinted by the image
+      }
+    `,
+  },
+  {
+    id: "gameboy",
+    name: "Game Boy shader",
+    title: "Game Boy",
+    description:
+      "Four-shade DMG green palette with ordered dithering and chunky pixels.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      float Bayer2(vec2 a) { a = floor(a); return fract(a.x * 0.5 + a.y * a.y * 0.75); }
+      #define Bayer4(a) (Bayer2(0.5 * (a)) * 0.25 + Bayer2(a))
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        vec2 grid = vec2(140.0 * aspect, 140.0);
+        vec2 puv = (floor(uv * grid) + 0.5) / grid;
+        float l = luma(texCover(puv).rgb);
+        l += (Bayer4(uv * grid) - 0.5) * 0.25;
+        l = clamp(l, 0.0, 1.0);
+        vec3 c0 = vec3(0.06, 0.22, 0.06);
+        vec3 c1 = vec3(0.19, 0.40, 0.19);
+        vec3 c2 = vec3(0.55, 0.67, 0.06);
+        vec3 c3 = vec3(0.61, 0.74, 0.06);
+        vec3 col = l < 0.25 ? c0 : l < 0.5 ? c1 : l < 0.75 ? c2 : c3;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "hex-mosaic",
+    name: "Hexagon Mosaic shader",
+    title: "Hex Mosaic",
+    description: "Pixelates the image onto a honeycomb grid of hexagons.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        float scale = 26.0;
+        vec2 p = vec2(uv.x * aspect, uv.y) * scale;
+        vec2 r = vec2(1.0, 1.7320508);
+        vec2 h = r * 0.5;
+        vec2 a = mod(p, r) - h;
+        vec2 b = mod(p - h, r) - h;
+        vec2 gv = dot(a, a) < dot(b, b) ? a : b;
+        vec2 center = p - gv;
+        vec2 cuv = vec2(center.x / aspect, center.y) / scale;
+        gl_FragColor = vec4(texCover(cuv).rgb, 1.0);
+      }
+    `,
+  },
+  {
+    id: "crystallize",
+    name: "Crystallize shader",
+    title: "Crystallize",
+    description:
+      "Shatters the image into flat Voronoi cells with dark stained-glass leading.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        float scale = 18.0;
+        vec2 p = vec2(uv.x * aspect, uv.y) * scale;
+        vec2 ip = floor(p), fp = fract(p);
+        float md = 8.0, md2 = 8.0;
+        vec2 mseed = ip;
+        for (int y = -1; y <= 1; y++) {
+          for (int x = -1; x <= 1; x++) {
+            vec2 g = vec2(float(x), float(y));
+            vec2 o = vec2(hash21(ip + g), hash21(ip + g + 3.7));
+            float d = length(g + o - fp);
+            if (d < md) { md2 = md; md = d; mseed = ip + g + o; }
+            else if (d < md2) { md2 = d; }
+          }
+        }
+        vec2 cuv = vec2(mseed.x / aspect, mseed.y) / scale;
+        vec3 col = texCover(cuv).rgb;
+        col *= 0.35 + 0.65 * smoothstep(0.0, 0.06, md2 - md); // dark cell borders
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "engraving",
+    name: "Engraving shader",
+    title: "Engraving",
+    description:
+      "Renders the image as inked woodcut hatch-lines on warm paper.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float l = pow(luma(texCover(uv).rgb), 0.6);   // lift the dark scene
+        float shade = (1.0 - l) * 0.7;                 // cap so darks never go solid
+        float freq = 150.0;
+        // each period inks a fraction = shade, rest stays paper (thin lines on light)
+        float v1 = fract((uv.y + sin(uv.x * 9.0) * 0.012) * freq);
+        float v2 = fract((uv.x + sin(uv.y * 9.0) * 0.012) * freq);
+        float ink = step(v1, shade);
+        ink = max(ink, step(v2, shade - 0.35));        // cross-hatch only the darker tones
+        vec3 col = mix(vec3(0.96, 0.94, 0.87), vec3(0.07), ink);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "low-poly",
+    name: "Low-Poly shader",
+    title: "Low Poly",
+    description:
+      "Flat-shades the image across a grid split into triangles, geometric-art style.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        float scale = 24.0;
+        vec2 p = vec2(uv.x * aspect, uv.y) * scale;
+        vec2 ip = floor(p), fp = fract(p);
+        vec2 tri = (fp.x + fp.y < 1.0)
+          ? vec2(1.0 / 3.0, 1.0 / 3.0)
+          : vec2(2.0 / 3.0, 2.0 / 3.0);
+        vec2 cp = ip + tri;
+        vec2 cuv = vec2(cp.x / aspect, cp.y) / scale;
+        gl_FragColor = vec4(texCover(cuv).rgb, 1.0);
+      }
+    `,
+  },
+  {
+    id: "anaglyph",
+    name: "Anaglyph 3D shader",
+    title: "Anaglyph 3D",
+    description:
+      "Red/cyan stereo split driven by brightness-as-depth — grab your 3D glasses.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float depth = luma(texCover(uv).rgb) - 0.5;
+        float sep = depth * 0.02 + 0.004;
+        float red = texCover(uv - vec2(sep, 0.0)).r;
+        vec3 cyan = texCover(uv + vec2(sep, 0.0)).rgb;
+        gl_FragColor = vec4(red, cyan.g, cyan.b, 1.0);
+      }
+    `,
+  },
+  {
+    id: "comic-cel",
+    name: "Comic Cel shader",
+    title: "Comic Cel",
+    description:
+      "Posterised flat colours with bold inked outlines — cel-shaded comic look.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        vec3 col = floor(texCover(uv).rgb * 4.0 + 0.5) / 4.0; // posterize
+        vec2 px = 1.5 / resolution;
+        float tl = luma(texCover(uv + px * vec2(-1.0,  1.0)).rgb);
+        float t  = luma(texCover(uv + px * vec2( 0.0,  1.0)).rgb);
+        float tr = luma(texCover(uv + px * vec2( 1.0,  1.0)).rgb);
+        float l  = luma(texCover(uv + px * vec2(-1.0,  0.0)).rgb);
+        float r  = luma(texCover(uv + px * vec2( 1.0,  0.0)).rgb);
+        float bl = luma(texCover(uv + px * vec2(-1.0, -1.0)).rgb);
+        float b  = luma(texCover(uv + px * vec2( 0.0, -1.0)).rgb);
+        float br = luma(texCover(uv + px * vec2( 1.0, -1.0)).rgb);
+        float gx = -tl - 2.0 * l - bl + tr + 2.0 * r + br;
+        float gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;
+        float e = smoothstep(0.3, 0.7, sqrt(gx * gx + gy * gy));
+        col = mix(col, vec3(0.04), e); // bold ink outline
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
 ];
 
 export const getImageShader = (id: string): ImageShader | undefined =>

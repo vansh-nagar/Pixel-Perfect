@@ -80,6 +80,11 @@ const navItems = [
     Component: lazyGrid(() => import("../grids/background-grid")),
   },
   {
+    name: "Mask Animation",
+    slug: "masks",
+    Component: lazyGrid(() => import("../grids/mask-grid")),
+  },
+  {
     name: "Image Gradients",
     slug: "image-gradients",
     Component: lazyGrid(() => import("../grids/image-gradient-grid")),

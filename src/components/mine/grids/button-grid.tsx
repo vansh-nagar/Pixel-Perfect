@@ -54,6 +54,7 @@ import BevelButton from "../../../../registry/new-york/buttons/bevel-button";
 import SilverButton from "../../../../registry/new-york/buttons/silver-button";
 import RefractionGlassButton from "../../../../registry/new-york/buttons/refraction-glass-button";
 import PrismGlassButton from "../../../../registry/new-york/buttons/prism-glass-button";
+import MagneticButton from "../../../../registry/new-york/buttons/magnetic-button";
 import {
   Home,
   Heart,
@@ -534,6 +535,34 @@ const BookDemoButtonWrapper = () => {
 };
 
 export const ButtonsArr = [
+  {
+    name: "Magnetic Button",
+    description:
+      "Magnetic pull toward the cursor — overwrite: true kills all tweens (no wiggle).",
+    component: <MagneticButton mode="plain">dynamic</MagneticButton>,
+    registryName: "magnetic-button",
+  },
+  {
+    name: "Magnetic — overwrite: false",
+    description:
+      "Long follow + short leave tween conflict over x/y, causing a visible snap-back.",
+    component: <MagneticButton mode="false">false</MagneticButton>,
+    registryName: "magnetic-button",
+  },
+  {
+    name: "Magnetic — overwrite: true",
+    description:
+      "Magnetic pull kills the idle CustomWiggle loop along with everything else.",
+    component: <MagneticButton mode="true">true</MagneticButton>,
+    registryName: "magnetic-button",
+  },
+  {
+    name: 'Magnetic — overwrite: "auto"',
+    description:
+      "Pull overwrites only x/y, so the idle CustomWiggle rotation keeps running.",
+    component: <MagneticButton mode="auto">auto</MagneticButton>,
+    registryName: "magnetic-button",
+  },
   {
     name: "Refraction Glass Button",
     description:

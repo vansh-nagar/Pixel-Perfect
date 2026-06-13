@@ -1981,17 +1981,148 @@
       ]
     },
     {
-      "name": "magnetic-button",
-      "description": "A magnetic button that eases toward the cursor inside its zone, demonstrating GSAP's overwrite modes (true / false / \"auto\") against an idle CustomWiggle loop.",
+      "name": "color-flair-button",
+      "description": "A pill button with a directional color flair: stacked concentric circles bloom from",
       "type": "registry:block",
       "dependencies": [
+        "@gsap/react",
         "gsap"
       ],
       "files": [
         {
           "type": "registry:component",
-          "path": "registry/new-york/buttons/magnetic-button.tsx",
-          "target": "components/pixel-perfect/magnetic-button.tsx"
+          "path": "registry/new-york/motion-framer/color-flair-button.tsx",
+          "target": "components/pixel-perfect/color-flair-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "inertia-arrow-card",
+      "description": "A notched card with a magnetic pill button: the pill flings with GSAP inertia in the",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap",
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/inertia-arrow-card.tsx",
+          "target": "components/pixel-perfect/inertia-arrow-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "infinite-carousel",
+      "description": "A seamless infinite carousel where one GSAP timeline powers idle drift, scroll-velocity speed/reverse, hover-slow, and drag-to-scrub — all sharing a single playhead so they never desync.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/infinite-carousel.tsx",
+          "target": "components/pixel-perfect/infinite-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-direction-carousel",
+      "description": "An infinite carousel whose travel direction follows your scroll direction and whose speed ramps with scroll velocity before easing back to a gentle drift — one GSAP timeline with a scroll-signed timeScale.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/scroll-direction-carousel.tsx",
+          "target": "components/pixel-perfect/scroll-direction-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cards-slider",
+      "description": "Cards Slider — an infinite deck of product cards. The active card sits",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/cards-slider.tsx",
+          "target": "components/pixel-perfect/cards-slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radial-carousel",
+      "description": "A radial arc carousel: cards fan along a circle's top arc and the whole wheel spins around its center as you scroll, carrying velocity momentum — every card shares one far-below transform-origin, so a single rotation value drives them all.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/radial-carousel.tsx",
+          "target": "components/pixel-perfect/radial-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ring-carousel-3d",
+      "description": "Ring Carousel 3D — image cards arranged around a circle in real 3D space",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/ring-carousel-3d.tsx",
+          "target": "components/pixel-perfect/ring-carousel-3d.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bend-image-reveal",
+      "description": "A pixel-art frame that flies in and warps with an air-friction bend, deformed on a WebGL plane by a GSAP-driven vertex shader.",
+      "type": "registry:block",
+      "dependencies": [
+        "@react-three/fiber",
+        "gsap",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/bend-image-reveal.tsx",
+          "target": "components/pixel-perfect/bend-image-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bend-zoom-reveal",
+      "description": "A pixel-art frame that flies in, then zooms to fill the box as you scroll inside it, warping with an air-friction bend on a WebGL plane.",
+      "type": "registry:block",
+      "dependencies": [
+        "@react-three/fiber",
+        "gsap",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/bend-zoom-reveal.tsx",
+          "target": "components/pixel-perfect/bend-zoom-reveal.tsx"
         }
       ]
     }

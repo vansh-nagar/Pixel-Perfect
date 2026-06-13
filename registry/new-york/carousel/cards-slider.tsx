@@ -16,27 +16,27 @@ const CARDS: Card[] = [
   {
     title: "ZV210",
     image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "AX90",
     image:
-      "https://images.unsplash.com/photo-1483721310020-03333e577078?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "NOVA",
     image:
-      "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1620421680010-0766ff230392?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "DRIFT",
     image:
-      "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "PULSE",
     image:
-      "https://images.unsplash.com/photo-1530549387789-4c1017266635?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1557672172-298e090bd0f1?q=80&w=800&auto=format&fit=crop",
   },
 ];
 

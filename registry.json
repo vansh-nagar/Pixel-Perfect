@@ -2075,6 +2075,56 @@
           "target": "components/pixel-perfect/radial-carousel.tsx"
         }
       ]
+    },
+    {
+      "name": "ring-carousel-3d",
+      "description": "Ring Carousel 3D — image cards arranged around a circle in real 3D space",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/ring-carousel-3d.tsx",
+          "target": "components/pixel-perfect/ring-carousel-3d.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bend-image-reveal",
+      "description": "A pixel-art frame that flies in and warps with an air-friction bend, deformed on a WebGL plane by a GSAP-driven vertex shader.",
+      "type": "registry:block",
+      "dependencies": [
+        "@react-three/fiber",
+        "gsap",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/bend-image-reveal.tsx",
+          "target": "components/pixel-perfect/bend-image-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bend-zoom-reveal",
+      "description": "A pixel-art frame that flies in, then zooms to fill the box as you scroll inside it, warping with an air-friction bend on a WebGL plane.",
+      "type": "registry:block",
+      "dependencies": [
+        "@react-three/fiber",
+        "gsap",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/bend-zoom-reveal.tsx",
+          "target": "components/pixel-perfect/bend-zoom-reveal.tsx"
+        }
+      ]
     }
   ]
 }

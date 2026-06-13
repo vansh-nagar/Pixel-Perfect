@@ -1,15 +1,32 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import FlipTextReveal from "registry/new-york/gsap/flip-text-reveal";
 import Stagger1 from "registry/new-york/gsap/stagger1";
+import BendZoomReveal from "registry/new-york/gsap/bend-zoom-reveal";
 import ColorFlairButton from "registry/new-york/motion-framer/color-flair-button";
 import InertiaArrowCard from "registry/new-york/motion-framer/inertia-arrow-card";
 import CopyDropdown from "../copy-dropdown";
 
-const GsapStaggerGridArr = [
+type GridItem = {
+  name: string;
+  description: string;
+  component: ReactNode;
+  registryName: string;
+  span?: 1 | 2; // how many columns the card covers (default 1)
+};
+
+const GsapStaggerGridArr: GridItem[] = [
+  {
+    name: "Bend Zoom",
+    description:
+      "A frame flies in, then zooms to fill the box as you scroll inside it, warping with an air-friction bend on a WebGL plane.",
+    component: <BendZoomReveal columns={2} />,
+    registryName: "bend-zoom-reveal",
+    span: 2,
+  },
   {
     name: "Inertia Arrow Card",
     description:
@@ -61,9 +78,14 @@ const GsapGrid = () => {
         {paginatedItems.map((item, index) => (
           <div
             key={startIndex + index}
-            className="relative w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
+            className={`relative w-full border-b border-l border-dashed flex justify-center items-center ${
+              item.span === 2 ? "sm:col-span-2 aspect-2/1" : "aspect-square"
+            }`}
           >
-            <div className="z-30" key={refreshKeys[startIndex + index] || 0}>
+            <div
+              className={`z-30 ${item.span === 2 ? "h-full w-full p-6" : ""}`}
+              key={refreshKeys[startIndex + index] || 0}
+            >
               {item.component}
             </div>
 

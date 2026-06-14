@@ -28,6 +28,8 @@ import SpotlightMaskReveal from "../../../../registry/new-york/mask/spotlight-ma
 import BrushMaskReveal from "../../../../registry/new-york/mask/brush-mask-reveal";
 import PinwheelMaskReveal from "../../../../registry/new-york/mask/pinwheel-mask-reveal";
 import SonarMaskReveal from "../../../../registry/new-york/mask/sonar-mask-reveal";
+import NoiseMaskReveal from "../../../../registry/new-york/mask/noise-mask-reveal";
+import NoiseDissolveReveal from "../../../../registry/new-york/mask/noise-dissolve-reveal";
 
 type MaskGridItem = {
   name: string;
@@ -256,6 +258,34 @@ export const MaskGridArr: MaskGridItem[] = [
       "Concentric rings thicken outward from the center, filling the gaps until the frame resolves. Click to replay.",
     component: <SonarMaskReveal />,
     registryName: "sonar-mask-reveal",
+  },
+  {
+    name: "Noise Mask",
+    description:
+      "The image sits crisp in the centre while a fragment-shader fbm-noise mask dissolves its edges into a soft cloudy texture that gently drifts and breathes.",
+    component: <NoiseMaskReveal src="/heavenly-handshake.png" />,
+    registryName: "noise-mask-reveal",
+  },
+  {
+    name: "Noise Mask (Center)",
+    description:
+      "A tight round centre-only spotlight — everything but the middle dissolves into the slowly drifting cloudy fbm-noise mask.",
+    component: (
+      <NoiseMaskReveal
+        src="/heavenly-handshake.png"
+        shape="radial"
+        inner={0.5}
+        fade={0.5}
+      />
+    ),
+    registryName: "noise-mask-reveal",
+  },
+  {
+    name: "Noise Dissolve Reveal",
+    description:
+      "A fragment shader materialises the image in through a drifting cloud of fbm noise, with a warm grainy glow on the dissolve edge. Click to replay.",
+    component: <NoiseDissolveReveal src="/heavenly-handshake.png" />,
+    registryName: "noise-dissolve-reveal",
   },
 ];
 

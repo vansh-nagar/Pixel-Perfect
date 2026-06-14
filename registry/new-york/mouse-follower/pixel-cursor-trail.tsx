@@ -1,5 +1,5 @@
 /**
- * A pixelated cursor trail: grid cells flash and fade as the cursor passes over them, with blend-mode text on top.
+ * A pixelated cursor trail: grid cells flash and fade as the cursor passes over them.
  */
 "use client";
 
@@ -83,12 +83,6 @@ const PixelCursorTrail = () => {
               ))}
             </div>
           ))}
-      </div>
-
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-8">
-        <p className="text-center text-2xl font-medium uppercase leading-tight mix-blend-difference">
-          We specialize in turning space into complex shapes
-        </p>
       </div>
     </div>
   );

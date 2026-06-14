@@ -317,6 +317,110 @@ export const IMAGE_SHADERS: ImageShader[] = [
     `,
   },
   {
+    id: "shery-liquid",
+    name: "Liquid Distortion shader",
+    title: "Liquid Distortion",
+    description:
+      "A mesmerising simplex-noise liquid warp drifting across the image. Adapted from Shery.js (style 1), MIT — Sheryians Coding School.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      // Adapted from Shery.js effect 1 (Simple Liquid Distortion), MIT.
+      void main() {
+        vec2 uv = uv01();
+        vec3 v = vec3(uv.x + time * 0.1, uv.y, time * 0.3);
+        vec2 surface = vec2(snoise(v) * 0.08, snoise(v + 4.0) * 0.02);
+        gl_FragColor = texCover(uv + surface);
+      }
+    `,
+  },
+  {
+    id: "shery-liquid-cursor",
+    name: "Liquid Cursor shader",
+    title: "Liquid Cursor",
+    description:
+      "A flowing liquid distortion that bends around your cursor. Adapted from Shery.js (style 5), MIT — Sheryians Coding School.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      // Adapted from Shery.js effect 5 (Liquid variant, cursor-reactive), MIT.
+      void main() {
+        vec2 uv = uv01();
+        vec2 m = mouse - 0.5;
+        float n = snoise(vec3(uv - m * 0.5 + 0.2 * time, 1.0));
+        vec2 surface = vec2(n * 0.08, n * 0.08);
+        gl_FragColor = texCover(uv + surface);
+      }
+    `,
+  },
+  {
+    id: "shery-perlin",
+    name: "Perlin Distortion shader",
+    title: "Perlin Distortion",
+    description:
+      "A pulsing Perlin-noise displacement that breathes the image in and out. Adapted from Shery.js (style 6), MIT — Sheryians Coding School.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      // Adapted from Shery.js effect 6 (Perlin Noise), MIT.
+      void main() {
+        vec2 uv = uv01();
+        float scale = 2.0, detail = 50.0, speed = 1.0, amount = 9.0;
+        float x = (uv.x - 0.5) * scale * (detail / 100.0) * sin(time) * speed;
+        float y = (uv.y - 0.5) * scale * (detail / 100.0) * cos(time) * speed;
+        uv += snoise(vec3(x, y, 0.0)) * (amount / 100.0);
+        gl_FragColor = texCover(uv);
+      }
+    `,
+  },
+  {
+    id: "shery-wind",
+    name: "Wind shader",
+    title: "Wind",
+    description:
+      "A natural simplex-noise sway, like the image fluttering in a breeze. Adapted from Shery.js (style 4), MIT — Sheryians Coding School.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      // Adapted from Shery.js effect 4 (3D Wind) — depth sway recast as a uv warp, MIT.
+      void main() {
+        vec2 uv = uv01();
+        float freq = 3.0, speed = 1.0, amp = 0.05;
+        float n = snoise(vec3(uv.x * freq + time * speed, uv.y * freq, 0.0));
+        uv.x += n * amp * uv.y;          // sways more toward the top, like a flag
+        uv.y += n * amp * 0.3;
+        gl_FragColor = texCover(uv);
+      }
+    `,
+  },
+  {
+    id: "shery-cyber-squares",
+    name: "Cyber Squares shader",
+    title: "Cyber Squares",
+    description:
+      "Retro cyber squares pulse across the image and brighten around your cursor. Adapted from Shery.js (style 7), MIT — Sheryians Coding School.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      // Adapted from Shery.js effect 7 (Cyber Squares), single-image branch, MIT.
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        float m = 0.4 + 0.6 * smoothstep(0.35, 0.0, length(uv - mouse));
+
+        float tiles = 9.0;
+        vec2 scaled = tiles * vec2(uv.x, uv.y / aspect);
+        vec2 tile = fract(scaled);
+        float tileDist = min(min(tile.x, 1.0 - tile.x), min(tile.y, 1.0 - tile.y));
+        float squareDist = length(floor(scaled));
+
+        float edge = sin(time - squareDist * 3.0);
+        edge = mod(edge * edge, 1.0);
+        float value = mix(tileDist, 1.0 - tileDist, step(0.5, edge));
+        edge = pow(abs(1.0 - edge * m), 1.5 * m);
+        value = smoothstep(edge - 0.5 * m, edge, value);
+
+        vec3 col = mix(vec3(0.0), texCover(uv).rgb, value);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
     id: "dot-matrix-scatter",
     name: "Dot Matrix shader",
     title: "Dot Matrix",

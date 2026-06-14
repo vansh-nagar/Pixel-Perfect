@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import ShaderCanvas from "@/components/pixel-perfect/shaders/shader-canvas";
 import BlobSphere from "@/components/pixel-perfect/shaders/blob-sphere";
 import TwistedBlob from "@/components/pixel-perfect/shaders/twisted-blob";
+import DayNightSky from "@/components/pixel-perfect/shaders/day-night-sky";
 import { SHADERS, type Shader } from "@/components/pixel-perfect/shaders/registry";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 
@@ -16,11 +17,12 @@ const ShaderGrid = () => {
   const [active, setActive] = useState<Shader | null>(null);
   const [blobOpen, setBlobOpen] = useState(false);
   const [twistOpen, setTwistOpen] = useState(false);
+  const [skyOpen, setSkyOpen] = useState(false);
   const itemsPerPage = 12;
-  // Page 1 also shows two static tiles (Noise Blob + Twisted Blob), so they
-  // take up slots there — page 1 holds fewer registry shaders, keeping every
-  // page's total tile count the same and the slice continuous across pages.
-  const RESERVED_FIRST_PAGE = 2;
+  // Page 1 also shows three static tiles (Noise Blob + Twisted Blob + Day to
+  // Night), so they take up slots there — page 1 holds fewer registry shaders,
+  // keeping every page's total tile count the same and the slice continuous.
+  const RESERVED_FIRST_PAGE = 3;
   const firstPageItems = itemsPerPage - RESERVED_FIRST_PAGE;
   const totalPages =
     SHADERS.length <= firstPageItems
@@ -34,12 +36,13 @@ const ShaderGrid = () => {
 
   // Esc to close + lock scroll while any full-screen preview is open.
   useEffect(() => {
-    if (!active && !blobOpen && !twistOpen) return;
+    if (!active && !blobOpen && !twistOpen && !skyOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setActive(null);
         setBlobOpen(false);
         setTwistOpen(false);
+        setSkyOpen(false);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -49,7 +52,7 @@ const ShaderGrid = () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
     };
-  }, [active, blobOpen, twistOpen]);
+  }, [active, blobOpen, twistOpen, skyOpen]);
 
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
@@ -134,6 +137,53 @@ const ShaderGrid = () => {
                   const code = `import TwistedBlob from "@/components/pixel-perfect/shaders/twisted-blob";\n\n<TwistedBlob className="w-full h-full" interactive />`;
                   navigator.clipboard.writeText(code);
                   toast.success("Blob component copied to clipboard!");
+                }}
+                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
+              >
+                <Copy className="size-3" /> Copy
+                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
+                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
+              </Button>
+              <div />
+              <div className="border-r border-dashed h-full -mr-[0.5px]" />
+            </div>
+          </div>
+        )}
+        {currentPage === 1 && (
+          <div className="relative group border-b border-l border-dashed aspect-video flex items-center justify-center">
+            <div className="z-30 w-full h-full flex items-center justify-center overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setSkyOpen(true)}
+                aria-label="Preview Day to Night full screen"
+                className="w-full h-full relative overflow-hidden block cursor-pointer"
+              >
+                <DayNightSky
+                  dpr={1.25}
+                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
+                />
+              </button>
+            </div>
+
+            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+              <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Day to Night
+              </p>
+              <p className="text-[8px] text-white/70 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                A sky that glides from day to night — open it for a slider to
+                scrub sun, moon, clouds and stars.
+              </p>
+            </div>
+
+            <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
+              <div className="border-t border-dashed" />
+              <Button
+                size="sm"
+                variant="copy"
+                onClick={() => {
+                  const code = `import DayNightSky from "@/components/pixel-perfect/shaders/day-night-sky";\n\n<DayNightSky className="w-full h-full" controls />`;
+                  navigator.clipboard.writeText(code);
+                  toast.success("Day to Night component copied to clipboard!");
                 }}
                 className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
               >
@@ -315,6 +365,34 @@ const ShaderGrid = () => {
             <div className="pointer-events-none absolute bottom-5 left-5 z-10 text-sm text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
               Twisted Blob
               <span className="ml-2 text-white/40">drag to spin · Esc to close</span>
+            </div>
+          </div>,
+          document.body,
+        )}
+
+      {skyOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Day to Night preview"
+            className="fixed inset-0 z-[9999] bg-black"
+          >
+            <DayNightSky controls className="h-full w-full" />
+            <button
+              type="button"
+              onClick={() => setSkyOpen(false)}
+              aria-label="Close preview"
+              className="absolute left-5 top-5 z-10 flex size-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur transition-colors hover:bg-black/70"
+            >
+              <X className="size-5" />
+            </button>
+            <div className="pointer-events-none absolute bottom-5 left-5 z-10 text-sm text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+              Day to Night
+              <span className="ml-2 text-white/40">
+                drag the slider · Esc to close
+              </span>
             </div>
           </div>,
           document.body,

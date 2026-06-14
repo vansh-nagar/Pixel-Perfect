@@ -24,7 +24,7 @@ export const MouseFollowerArr = [
   {
     name: "Pixel Cursor Trail",
     description:
-      "Hovered grid cells flash and fade behind the cursor for a pixelated trail, with blend-mode text on top.",
+      "Hovered grid cells flash and fade behind the cursor for a pixelated trail.",
     component: <PixelCursorTrail />,
     registryName: "pixel-cursor-trail",
   },

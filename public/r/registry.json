@@ -2435,6 +2435,38 @@
           "target": "components/pixel-perfect/spotlight-mask-reveal.tsx"
         }
       ]
+    },
+    {
+      "name": "noise-mask-reveal",
+      "description": "A fragment-shader noise mask reveal — the image dissolves in through a drifting cloud of fbm noise, with a warm grainy glow riding the dissolve edge. Click to replay.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/noise-mask-reveal.tsx",
+          "target": "components/pixel-perfect/noise-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "noise-dissolve-reveal",
+      "description": "A fragment-shader noise dissolve reveal — the image materialises in through a drifting cloud of fbm noise, with a warm grainy glow riding the dissolve edge. Click to replay.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/noise-dissolve-reveal.tsx",
+          "target": "components/pixel-perfect/noise-dissolve-reveal.tsx"
+        }
+      ]
     }
   ]
 }

@@ -421,6 +421,45 @@ export const IMAGE_SHADERS: ImageShader[] = [
     `,
   },
   {
+    id: "pixel-distortion",
+    name: "Pixel Distortion shader",
+    title: "Pixel Distortion",
+    description:
+      "Move your cursor to crunch the image into chunky pixel blocks that jitter, distort and RGB-split around the pointer.",
+    image: DEMO,
+    fragmentShader: /* glsl */ `
+      void main() {
+        vec2 uv = uv01();
+        float aspect = resolution.x / resolution.y;
+        vec2 d = uv - mouse;
+        d.x *= aspect;
+        float force = 1.0 - smoothstep(0.0, 0.34, length(d)); // 1 at cursor → 0 away
+
+        // pixel blocks: near full-res away, chunky right under the cursor
+        float cells = mix(240.0, 24.0, force);
+        vec2 grid = vec2(cells * aspect, cells);
+        vec2 cell = floor(uv * grid);
+        vec2 puv = (cell + 0.5) / grid;
+
+        // per-block jitter that wobbles over time → the distortion animates
+        float r = hash21(cell);
+        float r2 = hash21(cell + 7.3);
+        vec2 jitter = (vec2(r, r2) - 0.5)
+                    * force * 0.07 * (0.5 + 0.5 * sin(time * 6.0 + r * 6.2831));
+
+        // chroma split grows with proximity for a glitchy edge
+        float ca = force * 0.012;
+        vec2 s = puv + jitter;
+        vec3 col = vec3(
+          texCover(s + vec2(ca, 0.0)).r,
+          texCover(s).g,
+          texCover(s - vec2(ca, 0.0)).b
+        );
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
     id: "dot-matrix-scatter",
     name: "Dot Matrix shader",
     title: "Dot Matrix",

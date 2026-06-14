@@ -2467,6 +2467,274 @@
           "target": "components/pixel-perfect/noise-dissolve-reveal.tsx"
         }
       ]
+    },
+    {
+      "name": "gravity-image-trail",
+      "description": "A GSAP image trail where images cascade from the cursor, fall, and bounce off the bottom edge.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/gravity-image-trail.tsx",
+          "target": "components/pixel-perfect/gravity-image-trail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scale-image-trail",
+      "description": "A GSAP image trail that pops each image in with a bouncy scale, then shrinks it away behind the cursor.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/scale-image-trail.tsx",
+          "target": "components/pixel-perfect/scale-image-trail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-trail-effects",
+      "description": "A cursor image trail with six switchable reveal effects — flame, venetian, curtain, hexagon, liquid and zoom split.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/image-trail-effects.tsx",
+          "target": "components/pixel-perfect/image-trail-effects.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-trail-direction",
+      "description": "A GSAP cursor trail where each image slides in from the side the cursor is moving toward, then fades out.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/image-trail-direction.tsx",
+          "target": "components/pixel-perfect/image-trail-direction.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-trail-drop",
+      "description": "A GSAP cursor trail where images chase the cursor, then fade and fall off the bottom edge.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/image-trail-drop.tsx",
+          "target": "components/pixel-perfect/image-trail-drop.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-trail-fade",
+      "description": "A GSAP cursor trail where images ease toward the cursor, then fade and shrink away.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/image-trail-fade.tsx",
+          "target": "components/pixel-perfect/image-trail-fade.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-trail-scaleup",
+      "description": "A GSAP cursor trail where images trail the cursor on a long ease, then fade while scaling up and out.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/image-trail-scaleup.tsx",
+          "target": "components/pixel-perfect/image-trail-scaleup.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-trail-slide",
+      "description": "A GSAP cursor trail where images follow the cursor, then scatter off in random directions with a spin.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/image-trail-slide.tsx",
+          "target": "components/pixel-perfect/image-trail-slide.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-trail-squeeze",
+      "description": "A GSAP cursor trail where each image fades, squeezes thin and stretches tall as it drops away.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/image-trail-squeeze.tsx",
+          "target": "components/pixel-perfect/image-trail-squeeze.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-trail-classic",
+      "description": "A GSAP cursor trail where images appear at the cursor, glide to it, then scale and fade out.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/motion-trail-classic.tsx",
+          "target": "components/pixel-perfect/motion-trail-classic.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-trail-exiting",
+      "description": "A GSAP cursor trail where each image pops in at the cursor, then exits upward with a random sideways drift.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/motion-trail-exiting.tsx",
+          "target": "components/pixel-perfect/motion-trail-exiting.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-trail-flow",
+      "description": "A GSAP cursor trail where images flare with brightness/contrast tied to speed, then drift off in the travel direction.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/motion-trail-flow.tsx",
+          "target": "components/pixel-perfect/motion-trail-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-trail-innerscape",
+      "description": "A GSAP cursor trail where the outer image grows in while its inner layer un-zooms from a bright over-scale.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/motion-trail-innerscape.tsx",
+          "target": "components/pixel-perfect/motion-trail-innerscape.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-trail-persistence",
+      "description": "A GSAP cursor trail where blend-mode images linger in a stack and the oldest fades out as new ones arrive.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/motion-trail-persistence.tsx",
+          "target": "components/pixel-perfect/motion-trail-persistence.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-trail-perspective",
+      "description": "A GSAP cursor trail where images tilt in 3D and shift in depth based on the cursor's distance from center.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/motion-trail-perspective.tsx",
+          "target": "components/pixel-perfect/motion-trail-perspective.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-trail-spin",
+      "description": "A GSAP cursor trail where images rotate to follow the cursor's heading and fling off along its path.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/motion-trail-spin.tsx",
+          "target": "components/pixel-perfect/motion-trail-spin.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-trail-tile",
+      "description": "A GSAP cursor trail where each image lands as a 3x3 grid of tiles that scatter and fade apart.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/motion-trail-tile.tsx",
+          "target": "components/pixel-perfect/motion-trail-tile.tsx"
+        }
+      ]
+    },
+    {
+      "name": "motion-trail-velocity",
+      "description": "A GSAP cursor trail whose images grow, brighten, blur and desaturate in proportion to cursor speed.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/motion-trail-velocity.tsx",
+          "target": "components/pixel-perfect/motion-trail-velocity.tsx"
+        }
+      ]
     }
   ]
 }

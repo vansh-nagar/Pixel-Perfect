@@ -21,6 +21,15 @@ import ImageTrailDrop from "../../../../registry/new-york/mouse-follower/image-t
 import ImageTrailSlide from "../../../../registry/new-york/mouse-follower/image-trail-slide";
 import ImageTrailSqueeze from "../../../../registry/new-york/mouse-follower/image-trail-squeeze";
 import ImageTrailDirection from "../../../../registry/new-york/mouse-follower/image-trail-direction";
+import MaskTrailIris from "../../../../registry/new-york/mouse-follower/mask-trail-iris";
+import MaskTrailClock from "../../../../registry/new-york/mouse-follower/mask-trail-clock";
+import MaskTrailPinwheel from "../../../../registry/new-york/mouse-follower/mask-trail-pinwheel";
+import MaskTrailBlinds from "../../../../registry/new-york/mouse-follower/mask-trail-blinds";
+import MaskTrailSonar from "../../../../registry/new-york/mouse-follower/mask-trail-sonar";
+import MaskTrailRect from "../../../../registry/new-york/mouse-follower/mask-trail-rect";
+import MaskTrailSplit from "../../../../registry/new-york/mouse-follower/mask-trail-split";
+import MaskTrailWipe from "../../../../registry/new-york/mouse-follower/mask-trail-wipe";
+import MaskTrailStar from "../../../../registry/new-york/mouse-follower/mask-trail-star";
 import IconFall from "@/components/rune-landing/icon-fall";
 import CopyDropdown from "../copy-dropdown";
 
@@ -176,6 +185,69 @@ export const MouseFollowerArr = [
       "Each image slides in from the side the cursor is moving toward, then fades out. (GSAP)",
     component: <ImageTrailDirection />,
     registryName: "image-trail-direction",
+  },
+  {
+    name: "Mask Trail · Iris",
+    description:
+      "Each image irises open from a growing circular clip-path, then fades. (GSAP)",
+    component: <MaskTrailIris />,
+    registryName: "mask-trail-iris",
+  },
+  {
+    name: "Mask Trail · Clock",
+    description:
+      "Each image sweeps in like a clock hand via a conic-gradient mask, then fades. (GSAP)",
+    component: <MaskTrailClock />,
+    registryName: "mask-trail-clock",
+  },
+  {
+    name: "Mask Trail · Pinwheel",
+    description:
+      "Each image blooms open through spinning windmill wedges via a conic-gradient mask, then fades. (GSAP)",
+    component: <MaskTrailPinwheel />,
+    registryName: "mask-trail-pinwheel",
+  },
+  {
+    name: "Mask Trail · Blinds",
+    description:
+      "Each image opens through venetian-blind slats cut from a repeating-linear-gradient mask, then fades. (GSAP)",
+    component: <MaskTrailBlinds />,
+    registryName: "mask-trail-blinds",
+  },
+  {
+    name: "Mask Trail · Sonar",
+    description:
+      "Each image resolves from the center outward through concentric rings, then fades. (GSAP)",
+    component: <MaskTrailSonar />,
+    registryName: "mask-trail-sonar",
+  },
+  {
+    name: "Mask Trail · Rect",
+    description:
+      "Each image grows open from a centered clip-path rectangle, then fades. (GSAP)",
+    component: <MaskTrailRect />,
+    registryName: "mask-trail-rect",
+  },
+  {
+    name: "Mask Trail · Split",
+    description:
+      "Each image splits open from a centered seam via a clip-path inset, then fades. (GSAP)",
+    component: <MaskTrailSplit />,
+    registryName: "mask-trail-split",
+  },
+  {
+    name: "Mask Trail · Wipe",
+    description:
+      "Each image wipes upward from its bottom edge via a clip-path inset, then fades. (GSAP)",
+    component: <MaskTrailWipe />,
+    registryName: "mask-trail-wipe",
+  },
+  {
+    name: "Mask Trail · Star",
+    description:
+      "Each image bursts open from a growing, spinning sparkle clip-path, then fades. (GSAP)",
+    component: <MaskTrailStar />,
+    registryName: "mask-trail-star",
   },
   {
     name: "Icon Fall",

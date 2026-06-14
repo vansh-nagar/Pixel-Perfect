@@ -2735,6 +2735,141 @@
           "target": "components/pixel-perfect/motion-trail-velocity.tsx"
         }
       ]
+    },
+    {
+      "name": "mask-trail-blinds",
+      "description": "A cursor trail where each image opens through venetian-blind slats cut from a repeating-linear-gradient mask, then fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mask-trail-blinds.tsx",
+          "target": "components/pixel-perfect/mask-trail-blinds.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mask-trail-clock",
+      "description": "A cursor trail where each image sweeps in like a clock hand via a conic-gradient mask, then fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mask-trail-clock.tsx",
+          "target": "components/pixel-perfect/mask-trail-clock.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mask-trail-iris",
+      "description": "A cursor trail where each image irises open from a growing circular clip-path, then fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mask-trail-iris.tsx",
+          "target": "components/pixel-perfect/mask-trail-iris.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mask-trail-pinwheel",
+      "description": "A cursor trail where each image blooms open through spinning windmill wedges via a conic-gradient mask, then fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mask-trail-pinwheel.tsx",
+          "target": "components/pixel-perfect/mask-trail-pinwheel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mask-trail-rect",
+      "description": "A cursor trail where each image grows open from a centered clip-path rectangle, then fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mask-trail-rect.tsx",
+          "target": "components/pixel-perfect/mask-trail-rect.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mask-trail-sonar",
+      "description": "A cursor trail where each image resolves from the center outward through concentric rings cut from a repeating-radial-gradient mask, then fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mask-trail-sonar.tsx",
+          "target": "components/pixel-perfect/mask-trail-sonar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mask-trail-split",
+      "description": "A cursor trail where each image splits open from a centered seam via an animated clip-path inset, then fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mask-trail-split.tsx",
+          "target": "components/pixel-perfect/mask-trail-split.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mask-trail-star",
+      "description": "A cursor trail where each image bursts open from a growing, spinning sparkle clip-path, then fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mask-trail-star.tsx",
+          "target": "components/pixel-perfect/mask-trail-star.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mask-trail-wipe",
+      "description": "A cursor trail where each image wipes upward from its bottom edge via an animated clip-path inset, then fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/mask-trail-wipe.tsx",
+          "target": "components/pixel-perfect/mask-trail-wipe.tsx"
+        }
+      ]
     }
   ]
 }

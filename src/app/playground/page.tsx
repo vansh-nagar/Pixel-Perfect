@@ -33,8 +33,14 @@ const Model = ({ play }: { play: boolean }) => {
   const mouseTarget = useRef(new THREE.Vector2(0.5, 0.5));
   const uMouse = useRef({ value: new THREE.Vector2(0.5, 0.5) });
   const uReveal = useRef({ value: 0 });
-  const uRadius = useRef({ value: 0.17 }); // fraction of the viewport
+  const uRadius = useRef({ value: 0.15 }); // fraction of the viewport
   const uResolution = useRef({ value: new THREE.Vector2(1, 1) });
+  // Click-to-spread "venom takeover".
+  const painted = useRef(false);
+  const spreadTarget = useRef(0);
+  const uSpread = useRef({ value: 0 });
+  const uSpreadCenter = useRef({ value: new THREE.Vector2(0.5, 0.5) });
+  const uTime = useRef({ value: 0 });
 
   // Glossy piano-black + white feature edges, patched with a screen-space
   // ink-bleed reveal (cursor-reveal idea) — colourful gradient + soft glow.
@@ -69,6 +75,9 @@ const Model = ({ play }: { play: boolean }) => {
       shader.uniforms.uReveal = uReveal.current;
       shader.uniforms.uRadius = uRadius.current;
       shader.uniforms.uResolution = uResolution.current;
+      shader.uniforms.uSpread = uSpread.current;
+      shader.uniforms.uSpreadCenter = uSpreadCenter.current;
+      shader.uniforms.uTime = uTime.current;
       shader.uniforms.uColorA = { value: colA };
       shader.uniforms.uColorB = { value: colB };
 
@@ -78,6 +87,7 @@ const Model = ({ play }: { play: boolean }) => {
           `#include <common>
           uniform vec2 uMouse; uniform float uReveal; uniform float uRadius;
           uniform vec2 uResolution; uniform vec3 uColorA; uniform vec3 uColorB;
+          uniform float uSpread; uniform vec2 uSpreadCenter; uniform float uTime;
           float gAmt; vec3 gCol;
           float prHash(vec2 p){ p = fract(p*vec2(123.34,456.21)); p += dot(p,p+45.32); return fract(p.x*p.y); }
           float prNoise(vec2 p){ vec2 i=floor(p),f=fract(p); vec2 u=f*f*(3.0-2.0*f);
@@ -90,29 +100,36 @@ const Model = ({ play }: { play: boolean }) => {
           {
             vec2 sc = gl_FragCoord.xy / uResolution;
             float aspect = uResolution.x / uResolution.y;
+
+            // hover ink-bleed spot following the cursor
             float d = length(vec2((sc.x - uMouse.x) * aspect, sc.y - uMouse.y));
-            // strong, low-freq fbm warps the edge so the bleed is blobby/random
             float warp = (prFbm(sc * 4.0) - 0.5) * uRadius * 2.2;
-            float spot = smoothstep(uRadius, uRadius * 0.1, d + warp);
-            gAmt = spot * uReveal;
-            gCol = mix(uColorA, uColorB, clamp(sc.y, 0.0, 1.0));
-            diffuseColor.rgb = mix(diffuseColor.rgb, gCol, gAmt);
+            float spot = smoothstep(uRadius, uRadius * 0.1, d + warp) * uReveal;
+
+            // click spread — venom crawls out from the click point, animated
+            // fbm tendrils on the advancing edge
+            float dc = length(vec2((sc.x - uSpreadCenter.x) * aspect, sc.y - uSpreadCenter.y));
+            float tendril = (prFbm(sc * 5.0 + uTime * 0.25) - 0.5) * 0.55;
+            float thr = mix(0.0, 2.0, uSpread);
+            float spread = smoothstep(thr, thr - 0.16, dc + tendril);
+
+            gAmt = max(spot, spread);
+
+            // living veins: the gradient wobbles with animated noise
+            float veins = prFbm(sc * 9.0 + uTime * 0.4);
+            gCol = mix(uColorA, uColorB, clamp(sc.y + (veins - 0.5) * 0.45, 0.0, 1.0));
+            diffuseColor.rgb = mix(diffuseColor.rgb, gCol, gAmt * 0.8);
           }`,
         )
         .replace(
           "#include <roughnessmap_fragment>",
           `#include <roughnessmap_fragment>
-          roughnessFactor = mix(roughnessFactor, 0.45, gAmt);`,
-        )
-        .replace(
-          "#include <metalnessmap_fragment>",
-          `#include <metalnessmap_fragment>
-          metalnessFactor = mix(metalnessFactor, 0.0, gAmt);`,
+          roughnessFactor = mix(roughnessFactor, 0.4, gAmt);`,
         )
         .replace(
           "#include <emissivemap_fragment>",
           `#include <emissivemap_fragment>
-          totalEmissiveRadiance += gCol * gAmt * 0.85;`,
+          totalEmissiveRadiance += gCol * gAmt * 0.2;`,
         );
     };
     mat.customProgramCacheKey = () => "ink-bleed-screen-v1";
@@ -144,6 +161,10 @@ const Model = ({ play }: { play: boolean }) => {
       state.gl.domElement.width,
       state.gl.domElement.height,
     );
+    // venom spread eases toward its target; uTime keeps the noise crawling
+    uSpread.current.value +=
+      (spreadTarget.current - uSpread.current.value) * 0.05;
+    uTime.current.value = state.clock.elapsedTime;
     const reveal = uReveal.current.value;
 
     if (!play) {
@@ -178,11 +199,24 @@ const Model = ({ play }: { play: boolean }) => {
   const onOut = () => {
     hovered.current = false;
   };
+  // Click → venom spreads out from the click point to cover the model; click
+  // again → it retracts and the glossy original returns.
+  const onClick = (e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    painted.current = !painted.current;
+    spreadTarget.current = painted.current ? 1 : 0;
+    uSpreadCenter.current.value.copy(mouseTarget.current);
+  };
 
   return (
     <group ref={ref}>
       <Center>
-        <primitive object={scene} onPointerOver={onOver} onPointerOut={onOut} />
+        <primitive
+          object={scene}
+          onPointerOver={onOver}
+          onPointerOut={onOut}
+          onClick={onClick}
+        />
       </Center>
     </group>
   );

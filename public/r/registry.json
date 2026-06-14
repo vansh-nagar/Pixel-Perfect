@@ -2870,6 +2870,54 @@
           "target": "components/pixel-perfect/mask-trail-wipe.tsx"
         }
       ]
+    },
+    {
+      "name": "spinning-cube-motion",
+      "description": "A 3D cube continuously spinning on its Y axis, built with CSS 3D transforms and driven by Framer Motion.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/spinning-cube-motion.tsx",
+          "target": "components/pixel-perfect/spinning-cube-motion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "fluid-cube-scroll",
+      "description": "A scroll-driven 3D cube that slides across the viewport while a GPU fluid simulation masks its colourful faces in under the cursor.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/fluid-cube-scroll.tsx",
+          "target": "components/pixel-perfect/fluid-cube-scroll.tsx"
+        }
+      ]
+    },
+    {
+      "name": "raycaster-shapes",
+      "description": "Geometries on a 3D plane: a raycaster lights up the hovered shape's edges with a Fresnel rim shader, and clicking pops it up and spins it.",
+      "type": "registry:block",
+      "dependencies": [
+        "@react-three/drei",
+        "@react-three/fiber",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/three-js/raycaster-shapes.tsx",
+          "target": "components/pixel-perfect/raycaster-shapes.tsx"
+        }
+      ]
     }
   ]
 }

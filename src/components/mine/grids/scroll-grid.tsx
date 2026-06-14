@@ -7,6 +7,7 @@ import HeroCoverReveal from "../../../../registry/new-york/scroll/hero-cover-rev
 import FooterReveal from "../../../../registry/new-york/scroll/footer-reveal";
 import StackingCardsParallax from "../../../../registry/new-york/scroll/stacking-cards-parallax";
 import TextClipMaskReveal from "../../../../registry/new-york/scroll/text-clip-mask-reveal";
+import FluidCubeScroll from "../../../../registry/new-york/scroll/fluid-cube-scroll";
 
 type ScrollItem = {
   name: string;
@@ -21,6 +22,14 @@ type ScrollItem = {
 
 // Scroll animations land here — add an entry per promoted component.
 const ScrollArr: ScrollItem[] = [
+  {
+    name: "Fluid Cube",
+    description:
+      "A 3D cube slides across on scroll while a GPU fluid simulation masks its colourful faces in under the cursor. Scroll to play.",
+    component: <FluidCubeScroll />,
+    registryName: "fluid-cube-scroll",
+    isFull: true,
+  },
   {
     name: "Hero Cover Reveal",
     description:

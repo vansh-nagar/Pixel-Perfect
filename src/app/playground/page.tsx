@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeEvent } from "@react-three/fiber";
 import { Center, Environment, useGLTF } from "@react-three/drei";
 import { AnimatePresence, motion } from "framer-motion";
 import { Suspense, useEffect, useRef, useState } from "react";
@@ -27,8 +27,17 @@ const Model = ({ play }: { play: boolean }) => {
   const ref = useRef<Group>(null);
   const start = useRef<number | null>(null);
 
-  // Glossy piano-black with white feature-edge highlights (reflections from the
-  // environment + a clearcoat give the wet/polished look).
+  const hovered = useRef(false);
+  // Screen-space cursor (0..1) so the bleed is one continuous mask across every
+  // face from the camera's view — not a separate spot per face.
+  const mouseTarget = useRef(new THREE.Vector2(0.5, 0.5));
+  const uMouse = useRef({ value: new THREE.Vector2(0.5, 0.5) });
+  const uReveal = useRef({ value: 0 });
+  const uRadius = useRef({ value: 0.17 }); // fraction of the viewport
+  const uResolution = useRef({ value: new THREE.Vector2(1, 1) });
+
+  // Glossy piano-black + white feature edges, patched with a screen-space
+  // ink-bleed reveal (cursor-reveal idea) — colourful gradient + soft glow.
   useEffect(() => {
     const mat = new THREE.MeshPhysicalMaterial({
       color: "#070707",
@@ -38,6 +47,9 @@ const Model = ({ play }: { play: boolean }) => {
       clearcoatRoughness: 0.04,
       envMapIntensity: 1.6,
     });
+    const colA = new THREE.Color("#a855f7");
+    const colB = new THREE.Color("#22d3ee");
+
     const edgeMat = new THREE.LineBasicMaterial({ color: 0xffffff });
     const added: THREE.LineSegments[] = [];
     scene.traverse((o) => {
@@ -45,12 +57,67 @@ const Model = ({ play }: { play: boolean }) => {
       if (!m.isMesh) return;
       m.material = mat;
       const edges = new THREE.LineSegments(
-        new THREE.EdgesGeometry(m.geometry, 30), // only sharp feature edges
+        new THREE.EdgesGeometry(m.geometry, 30),
         edgeMat,
       );
       m.add(edges);
       added.push(edges);
     });
+
+    mat.onBeforeCompile = (shader) => {
+      shader.uniforms.uMouse = uMouse.current;
+      shader.uniforms.uReveal = uReveal.current;
+      shader.uniforms.uRadius = uRadius.current;
+      shader.uniforms.uResolution = uResolution.current;
+      shader.uniforms.uColorA = { value: colA };
+      shader.uniforms.uColorB = { value: colB };
+
+      shader.fragmentShader = shader.fragmentShader
+        .replace(
+          "#include <common>",
+          `#include <common>
+          uniform vec2 uMouse; uniform float uReveal; uniform float uRadius;
+          uniform vec2 uResolution; uniform vec3 uColorA; uniform vec3 uColorB;
+          float gAmt; vec3 gCol;
+          float prHash(vec2 p){ p = fract(p*vec2(123.34,456.21)); p += dot(p,p+45.32); return fract(p.x*p.y); }
+          float prNoise(vec2 p){ vec2 i=floor(p),f=fract(p); vec2 u=f*f*(3.0-2.0*f);
+            return mix(mix(prHash(i),prHash(i+vec2(1.0,0.0)),u.x), mix(prHash(i+vec2(0.0,1.0)),prHash(i+vec2(1.0,1.0)),u.x), u.y); }
+          float prFbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*prNoise(p); p*=2.0; a*=0.5;} return v; }`,
+        )
+        .replace(
+          "#include <color_fragment>",
+          `#include <color_fragment>
+          {
+            vec2 sc = gl_FragCoord.xy / uResolution;
+            float aspect = uResolution.x / uResolution.y;
+            float d = length(vec2((sc.x - uMouse.x) * aspect, sc.y - uMouse.y));
+            // strong, low-freq fbm warps the edge so the bleed is blobby/random
+            float warp = (prFbm(sc * 4.0) - 0.5) * uRadius * 2.2;
+            float spot = smoothstep(uRadius, uRadius * 0.1, d + warp);
+            gAmt = spot * uReveal;
+            gCol = mix(uColorA, uColorB, clamp(sc.y, 0.0, 1.0));
+            diffuseColor.rgb = mix(diffuseColor.rgb, gCol, gAmt);
+          }`,
+        )
+        .replace(
+          "#include <roughnessmap_fragment>",
+          `#include <roughnessmap_fragment>
+          roughnessFactor = mix(roughnessFactor, 0.45, gAmt);`,
+        )
+        .replace(
+          "#include <metalnessmap_fragment>",
+          `#include <metalnessmap_fragment>
+          metalnessFactor = mix(metalnessFactor, 0.0, gAmt);`,
+        )
+        .replace(
+          "#include <emissivemap_fragment>",
+          `#include <emissivemap_fragment>
+          totalEmissiveRadiance += gCol * gAmt * 0.85;`,
+        );
+    };
+    mat.customProgramCacheKey = () => "ink-bleed-screen-v1";
+    mat.needsUpdate = true;
+
     return () => {
       mat.dispose();
       edgeMat.dispose();
@@ -64,6 +131,21 @@ const Model = ({ play }: { play: boolean }) => {
   useFrame((state) => {
     const g = ref.current;
     if (!g) return;
+
+    // ease reveal in/out + smoothly follow the cursor in screen space
+    const target = hovered.current ? 1 : 0;
+    uReveal.current.value += (target - uReveal.current.value) * 0.08;
+    mouseTarget.current.set(
+      state.pointer.x * 0.5 + 0.5,
+      state.pointer.y * 0.5 + 0.5,
+    );
+    uMouse.current.value.lerp(mouseTarget.current, 0.18);
+    uResolution.current.value.set(
+      state.gl.domElement.width,
+      state.gl.domElement.height,
+    );
+    const reveal = uReveal.current.value;
+
     if (!play) {
       g.position.y = -8;
       g.scale.setScalar(0.7);
@@ -72,24 +154,35 @@ const Model = ({ play }: { play: boolean }) => {
     if (start.current === null) start.current = state.clock.elapsedTime;
     const t = state.clock.elapsedTime - start.current;
 
+    let base: number;
     if (t < INTRO_DUR) {
       const p = t / INTRO_DUR;
       g.position.y = -8 * (1 - easeOutBack(p));
-      g.scale.setScalar(0.7 + 0.3 * easeOutBack(p, 2.2));
       g.rotation.z = 0;
+      base = 0.7 + 0.3 * easeOutBack(p, 2.2);
     } else {
       const ft = t - INTRO_DUR;
       const ramp = Math.min(ft / 1.2, 1);
       g.position.y = Math.sin(ft * 1.6) * 0.5 * ramp;
       g.rotation.z = Math.sin(ft * 1.1) * 0.06 * ramp;
-      g.scale.setScalar(1);
+      base = 1;
     }
+    // barely-there "breathing" scale on hover
+    g.scale.setScalar(base * (1 + 0.025 * reveal));
   });
+
+  const onOver = (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    hovered.current = true;
+  };
+  const onOut = () => {
+    hovered.current = false;
+  };
 
   return (
     <group ref={ref}>
       <Center>
-        <primitive object={scene} />
+        <primitive object={scene} onPointerOver={onOver} onPointerOut={onOut} />
       </Center>
     </group>
   );
@@ -135,7 +228,7 @@ const DistortedPixels = () => {
 
     const draw = () => {
       ctx.clearRect(0, 0, TS, TS);
-      ctx.strokeStyle = "rgba(217,217,217,0.75)";
+      ctx.fillStyle = "rgba(217,217,217,0.18)"; // solid (filled), subtle
 
       // POLIFY, auto-fit to ~80% width, centred, with refined letter-spacing
       const c2d = ctx as CanvasRenderingContext2D & { letterSpacing: string };
@@ -147,8 +240,7 @@ const DistortedPixels = () => {
       const fs = ((TS * 0.8) / w100) * 100;
       ctx.font = `700 ${fs}px 'Space Grotesk', sans-serif`;
       c2d.letterSpacing = `${(8 / 100) * fs}px`;
-      ctx.lineWidth = Math.max(3, fs * 0.016);
-      ctx.strokeText("POLIFY", TS / 2, TS / 2);
+      ctx.fillText("POLIFY", TS / 2, TS / 2);
       texture.needsUpdate = true;
     };
     draw();

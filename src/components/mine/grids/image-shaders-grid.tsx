@@ -15,6 +15,7 @@ import InertiaParticles from "@/components/pixel-perfect/shaders/inertia-particl
 import MagneticSwarm from "@/components/pixel-perfect/shaders/magnetic-swarm";
 import FlowField from "@/components/pixel-perfect/shaders/flow-field";
 import RippleTouch from "@/components/pixel-perfect/shaders/ripple-touch";
+import PixelDistortion from "@/components/pixel-perfect/shaders/pixel-distortion";
 import {
   IMAGE_SHADERS,
   type ImageShader,
@@ -46,7 +47,7 @@ const ImageShadersGrid = () => {
   // is 12 live WebGL contexts on page 1, near the browser's ~16 cap; revisit if
   // we add more page-1 tiles.
   const itemsPerPage = 12;
-  const RESERVED_FIRST_PAGE = 10;
+  const RESERVED_FIRST_PAGE = 11;
   const firstPageItems = itemsPerPage - RESERVED_FIRST_PAGE;
   const totalPages =
     IMAGE_SHADERS.length <= firstPageItems
@@ -116,6 +117,46 @@ const ImageShadersGrid = () => {
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+        {currentPage === 1 && (
+          <div className="relative group border-b border-l border-dashed aspect-video flex items-center justify-center">
+            <div className="z-30 w-full h-full flex items-center justify-center overflow-hidden">
+              <PixelDistortion
+                image={FLUID_IMAGE}
+                dpr={1.25}
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+
+            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+              <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Pixel Distortion
+              </p>
+              <p className="text-[8px] text-white/70 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Move your cursor to smear the image pixels along a relaxing grid.
+              </p>
+            </div>
+
+            <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
+              <div className="border-t border-dashed" />
+              <Button
+                size="sm"
+                variant="copy"
+                onClick={() => {
+                  const code = `import PixelDistortion from "@/components/pixel-perfect/shaders/pixel-distortion";\n\n<PixelDistortion\n  className="w-full h-full"\n  image="${FLUID_IMAGE}"\n/>`;
+                  navigator.clipboard.writeText(code);
+                  toast.success("Pixel Distortion component copied to clipboard!");
+                }}
+                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
+              >
+                <Copy className="size-3" /> Copy
+                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
+                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
+              </Button>
+              <div />
+              <div className="border-r border-dashed h-full -mr-[0.5px]" />
+            </div>
+          </div>
+        )}
         {currentPage === 1 && (
           <div className="relative group border-b border-l border-dashed aspect-video flex items-center justify-center">
             <div className="z-30 w-full h-full flex items-center justify-center overflow-hidden">

@@ -42,9 +42,28 @@ Common props on most: `image: string`, `className?: string`, `dpr?: number`
 | `InertiaParticles` | `inertia-particles.tsx` | — | Particles with spring/inertia toward image pixels |
 | `MagneticSwarm` | `magnetic-swarm.tsx` | — | Particles swarm/repel around the cursor |
 | `RippleTouch` | `ripple-touch.tsx` | — | Cursor ripples distort the image |
+| `PixelDistortion` | `pixel-distortion.tsx` | — | akella-style grid smear: cursor pushes cells, they relax back |
+| `MagneticWarp` | `magnetic-warp.tsx` | — | Spring grid gathers toward the cursor (iron filings), wobbles home |
+| `CursorTrailSmear` | `cursor-trail-smear.tsx` | — | Liquid streak trails the cursor along its velocity, then heals |
+| `LiquidMelt` | `liquid-melt.tsx` | — | Per-column heat → hover melts/drips columns downward, recovers |
+| `VortexPull` | `vortex-pull.tsx` | — | Inertial whirlpool chases the cursor; lags + keeps spinning |
+| `JellyBulge` | `jelly-bulge.tsx` | — | Spring-driven magnifier lens that overshoots/jiggles like jelly |
+
+The bottom six are **stateful** standalone components: they keep simulation state
+in JS (a float `DataTexture` grid, a trail buffer, per-column arrays, or spring
+physics) and step it each frame, which is what gives them inertia/spring/relax
+feel the stateless registry fragment shaders can't reproduce. Model new ones of
+this kind on `pixel-distortion.tsx` / `ripple-touch.tsx` (own raw renderer,
+`createAnimatedTexture`, `IntersectionObserver` pause, `ResizeObserver`,
+lil-gui `controls`).
 
 These are showcased (with full-screen previews + copy snippets) in
 [src/components/mine/grids/image-shaders-grid.tsx](../../../src/components/mine/grids/image-shaders-grid.tsx).
+Each WebGL shader tile creates its own GL context on mount and browsers cap live
+contexts at ~16, so the grid wraps every shader tile in
+[`<LazyVisible>`](../../../src/components/mine/lazy-visible.tsx) — it only mounts
+a tile (and its context) while it's near the viewport and unmounts it once it
+scrolls away. Reuse that wrapper for any grid that stacks many shader tiles.
 Image assets currently in `public/`: `bend-image-reveal.gif`,
 `fluid-transition.gif`, `card.png`, `og.png`.
 

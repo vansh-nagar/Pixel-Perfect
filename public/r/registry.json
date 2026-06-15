@@ -2918,6 +2918,24 @@
           "target": "components/pixel-perfect/raycaster-shapes.tsx"
         }
       ]
+    },
+    {
+      "name": "floating-logo-intro",
+      "description": "A 3D logo that draws itself in (SVG stroke), rises with an easeOutBack overshoot and floats, over a cursor-distorted pixel-text background, with a hover ink-bleed reveal and click \"venom\" takeover shader.",
+      "type": "registry:block",
+      "dependencies": [
+        "@react-three/drei",
+        "@react-three/fiber",
+        "framer-motion",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/three-js/floating-logo-intro.tsx",
+          "target": "components/pixel-perfect/floating-logo-intro.tsx"
+        }
+      ]
     }
   ]
 }

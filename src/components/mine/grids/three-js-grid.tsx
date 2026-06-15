@@ -4,6 +4,7 @@ import { useState } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import RaycasterShapes from "registry/new-york/three-js/raycaster-shapes";
+import FloatingLogoIntro from "registry/new-york/three-js/floating-logo-intro";
 import CopyDropdown from "../copy-dropdown";
 
 const ThreeJsComponentArr: {
@@ -12,6 +13,13 @@ const ThreeJsComponentArr: {
   Component: React.ComponentType;
   registryName: string;
 }[] = [
+  {
+    name: "Floating Logo Intro",
+    description:
+      "A 3D logo draws itself in (SVG stroke), rises with an easeOutBack overshoot and floats over a cursor-distorted pixel-text background. Hover for an ink-bleed colour reveal; click for a venom takeover.",
+    Component: FloatingLogoIntro,
+    registryName: "floating-logo-intro",
+  },
   {
     name: "Raycaster Shapes",
     description:

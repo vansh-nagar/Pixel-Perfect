@@ -16,6 +16,12 @@ import MagneticSwarm from "@/components/pixel-perfect/shaders/magnetic-swarm";
 import FlowField from "@/components/pixel-perfect/shaders/flow-field";
 import RippleTouch from "@/components/pixel-perfect/shaders/ripple-touch";
 import PixelDistortion from "@/components/pixel-perfect/shaders/pixel-distortion";
+import MagneticWarp from "@/components/pixel-perfect/shaders/magnetic-warp";
+import CursorTrailSmear from "@/components/pixel-perfect/shaders/cursor-trail-smear";
+import LiquidMelt from "@/components/pixel-perfect/shaders/liquid-melt";
+import VortexPull from "@/components/pixel-perfect/shaders/vortex-pull";
+import JellyBulge from "@/components/pixel-perfect/shaders/jelly-bulge";
+import LazyVisible from "@/components/mine/lazy-visible";
 import {
   IMAGE_SHADERS,
   type ImageShader,
@@ -40,15 +46,20 @@ const ImageShadersGrid = () => {
   const [swarmOpen, setSwarmOpen] = useState(false);
   const [flowOpen, setFlowOpen] = useState(false);
   const [rippleOpen, setRippleOpen] = useState(false);
-  // 12 tiles per page. The 10 interactive static tiles (Fluid, Paint, Cursor
-  // Paint, Scratch, Before/After, Particles, Inertia, Swarm, Flow Field, Ripple)
-  // all live on page 1 and take up slots there, so page 1 shows fewer registry
-  // shaders — keeping every page at 12 tiles with a continuous slice. NOTE: that
-  // is 12 live WebGL contexts on page 1, near the browser's ~16 cap; revisit if
-  // we add more page-1 tiles.
+  const [warpOpen, setWarpOpen] = useState(false);
+  const [trailOpen, setTrailOpen] = useState(false);
+  const [meltOpen, setMeltOpen] = useState(false);
+  const [vortexOpen, setVortexOpen] = useState(false);
+  const [jellyOpen, setJellyOpen] = useState(false);
+  // The 16 hand-built interactive tiles (Pixel Distortion, Fluid, Paint, Cursor
+  // Paint, Scratch, Before/After, Particles, Inertia, Swarm, Flow Field, Ripple,
+  // Magnetic Warp, Cursor Trail, Liquid Melt, Vortex Pull, Jelly Bulge) all live
+  // on page 1; the registry shaders paginate over pages 2+. Each shader tile is
+  // wrapped in <LazyVisible>, so only the tiles near the viewport hold a live
+  // WebGL context (browsers cap at ~16) — the rest tear down until scrolled to.
   const itemsPerPage = 12;
-  const RESERVED_FIRST_PAGE = 11;
-  const firstPageItems = itemsPerPage - RESERVED_FIRST_PAGE;
+  const RESERVED_FIRST_PAGE = 16;
+  const firstPageItems = Math.max(0, itemsPerPage - RESERVED_FIRST_PAGE);
   const totalPages =
     IMAGE_SHADERS.length <= firstPageItems
       ? 1
@@ -75,7 +86,12 @@ const ImageShadersGrid = () => {
       !inertiaOpen &&
       !swarmOpen &&
       !flowOpen &&
-      !rippleOpen
+      !rippleOpen &&
+      !warpOpen &&
+      !trailOpen &&
+      !meltOpen &&
+      !vortexOpen &&
+      !jellyOpen
     )
       return;
     const onKey = (e: KeyboardEvent) => {
@@ -91,6 +107,11 @@ const ImageShadersGrid = () => {
         setSwarmOpen(false);
         setFlowOpen(false);
         setRippleOpen(false);
+        setWarpOpen(false);
+        setTrailOpen(false);
+        setMeltOpen(false);
+        setVortexOpen(false);
+        setJellyOpen(false);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -112,6 +133,11 @@ const ImageShadersGrid = () => {
     swarmOpen,
     flowOpen,
     rippleOpen,
+    warpOpen,
+    trailOpen,
+    meltOpen,
+    vortexOpen,
+    jellyOpen,
   ]);
 
   return (
@@ -120,11 +146,13 @@ const ImageShadersGrid = () => {
         {currentPage === 1 && (
           <div className="relative group border-b border-l border-dashed aspect-video flex items-center justify-center">
             <div className="z-30 w-full h-full flex items-center justify-center overflow-hidden">
-              <PixelDistortion
-                image={FLUID_IMAGE}
-                dpr={1.25}
-                className="absolute inset-0 w-full h-full"
-              />
+              <LazyVisible className="absolute inset-0 w-full h-full">
+                <PixelDistortion
+                  image={FLUID_IMAGE}
+                  dpr={1.25}
+                  className="w-full h-full"
+                />
+              </LazyVisible>
             </div>
 
             <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
@@ -166,12 +194,14 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Fluid Distortion full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <FluidImage
-                  image={FLUID_IMAGE}
-                  imageB={FLUID_IMAGE_B}
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <FluidImage
+                    image={FLUID_IMAGE}
+                    imageB={FLUID_IMAGE_B}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
 
@@ -215,11 +245,13 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Paint Reveal full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <PaintReveal
-                  image={PAINT_IMAGE}
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <PaintReveal
+                    image={PAINT_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
 
@@ -263,12 +295,14 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Cursor Paint full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <CursorReveal
-                  image={BRUSH_IMAGE}
-                  mode="paint"
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <CursorReveal
+                    image={BRUSH_IMAGE}
+                    mode="paint"
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
             <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
@@ -310,12 +344,14 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Scratch to Reveal full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <CursorReveal
-                  image={BRUSH_IMAGE}
-                  mode="scratch"
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <CursorReveal
+                    image={BRUSH_IMAGE}
+                    mode="scratch"
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
             <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
@@ -357,12 +393,14 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Before After full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <BeforeAfter
-                  image={FLUID_IMAGE}
-                  imageB={FLUID_IMAGE_B}
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <BeforeAfter
+                    image={FLUID_IMAGE}
+                    imageB={FLUID_IMAGE_B}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
             <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
@@ -403,11 +441,13 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Image Particles full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <ImageParticles
-                  image={FLUID_IMAGE}
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <ImageParticles
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
             <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
@@ -449,11 +489,13 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Inertia Particles full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <InertiaParticles
-                  image={FLUID_IMAGE}
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <InertiaParticles
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
             <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
@@ -495,11 +537,13 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Magnetic Swarm full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <MagneticSwarm
-                  image={FLUID_IMAGE}
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <MagneticSwarm
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
             <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
@@ -541,11 +585,13 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Flow Field full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <FlowField
-                  image={FLUID_IMAGE}
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <FlowField
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
             <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
@@ -587,11 +633,13 @@ const ImageShadersGrid = () => {
                 aria-label="Preview Ripple Touch full screen"
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <RippleTouch
-                  image={FLUID_IMAGE}
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <RippleTouch
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
             <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
@@ -624,6 +672,246 @@ const ImageShadersGrid = () => {
             </div>
           </div>
         )}
+        {currentPage === 1 && (
+          <div className="relative group border-b border-l border-dashed aspect-video flex items-center justify-center">
+            <div className="z-30 w-full h-full flex items-center justify-center overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setWarpOpen(true)}
+                aria-label="Preview Magnetic Warp full screen"
+                className="w-full h-full relative overflow-hidden block cursor-pointer"
+              >
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <MagneticWarp
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
+              </button>
+            </div>
+            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+              <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Magnetic Warp
+              </p>
+              <p className="text-[8px] text-white/70 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                The image gathers toward your cursor like iron filings, then
+                springs and wobbles back home.
+              </p>
+            </div>
+            <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
+              <div className="border-t border-dashed" />
+              <Button
+                size="sm"
+                variant="copy"
+                onClick={() => {
+                  const code = `import MagneticWarp from "@/components/pixel-perfect/shaders/magnetic-warp";\n\n<MagneticWarp className="w-full h-full" image="${FLUID_IMAGE}" />`;
+                  navigator.clipboard.writeText(code);
+                  toast.success("Magnetic Warp component copied to clipboard!");
+                }}
+                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
+              >
+                <Copy className="size-3" /> Copy
+                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
+                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
+              </Button>
+              <div />
+              <div className="border-r border-dashed h-full -mr-[0.5px]" />
+            </div>
+          </div>
+        )}
+        {currentPage === 1 && (
+          <div className="relative group border-b border-l border-dashed aspect-video flex items-center justify-center">
+            <div className="z-30 w-full h-full flex items-center justify-center overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setTrailOpen(true)}
+                aria-label="Preview Cursor Trail full screen"
+                className="w-full h-full relative overflow-hidden block cursor-pointer"
+              >
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <CursorTrailSmear
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
+              </button>
+            </div>
+            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+              <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Cursor Trail
+              </p>
+              <p className="text-[8px] text-white/70 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Your cursor drags a liquid streak across the image that trails
+                behind and heals as it fades.
+              </p>
+            </div>
+            <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
+              <div className="border-t border-dashed" />
+              <Button
+                size="sm"
+                variant="copy"
+                onClick={() => {
+                  const code = `import CursorTrailSmear from "@/components/pixel-perfect/shaders/cursor-trail-smear";\n\n<CursorTrailSmear className="w-full h-full" image="${FLUID_IMAGE}" />`;
+                  navigator.clipboard.writeText(code);
+                  toast.success("Cursor Trail component copied to clipboard!");
+                }}
+                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
+              >
+                <Copy className="size-3" /> Copy
+                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
+                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
+              </Button>
+              <div />
+              <div className="border-r border-dashed h-full -mr-[0.5px]" />
+            </div>
+          </div>
+        )}
+        {currentPage === 1 && (
+          <div className="relative group border-b border-l border-dashed aspect-video flex items-center justify-center">
+            <div className="z-30 w-full h-full flex items-center justify-center overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setMeltOpen(true)}
+                aria-label="Preview Liquid Melt full screen"
+                className="w-full h-full relative overflow-hidden block cursor-pointer"
+              >
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <LiquidMelt
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
+              </button>
+            </div>
+            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+              <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Liquid Melt
+              </p>
+              <p className="text-[8px] text-white/70 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Hover to heat the image — the columns you linger over sag and
+                drip like warm wax, then recover.
+              </p>
+            </div>
+            <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
+              <div className="border-t border-dashed" />
+              <Button
+                size="sm"
+                variant="copy"
+                onClick={() => {
+                  const code = `import LiquidMelt from "@/components/pixel-perfect/shaders/liquid-melt";\n\n<LiquidMelt className="w-full h-full" image="${FLUID_IMAGE}" />`;
+                  navigator.clipboard.writeText(code);
+                  toast.success("Liquid Melt component copied to clipboard!");
+                }}
+                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
+              >
+                <Copy className="size-3" /> Copy
+                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
+                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
+              </Button>
+              <div />
+              <div className="border-r border-dashed h-full -mr-[0.5px]" />
+            </div>
+          </div>
+        )}
+        {currentPage === 1 && (
+          <div className="relative group border-b border-l border-dashed aspect-video flex items-center justify-center">
+            <div className="z-30 w-full h-full flex items-center justify-center overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setVortexOpen(true)}
+                aria-label="Preview Vortex Pull full screen"
+                className="w-full h-full relative overflow-hidden block cursor-pointer"
+              >
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <VortexPull
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
+              </button>
+            </div>
+            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+              <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Vortex Pull
+              </p>
+              <p className="text-[8px] text-white/70 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                A whirlpool chases your cursor with momentum — it lags,
+                overshoots and keeps spinning after you stop.
+              </p>
+            </div>
+            <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
+              <div className="border-t border-dashed" />
+              <Button
+                size="sm"
+                variant="copy"
+                onClick={() => {
+                  const code = `import VortexPull from "@/components/pixel-perfect/shaders/vortex-pull";\n\n<VortexPull className="w-full h-full" image="${FLUID_IMAGE}" />`;
+                  navigator.clipboard.writeText(code);
+                  toast.success("Vortex Pull component copied to clipboard!");
+                }}
+                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
+              >
+                <Copy className="size-3" /> Copy
+                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
+                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
+              </Button>
+              <div />
+              <div className="border-r border-dashed h-full -mr-[0.5px]" />
+            </div>
+          </div>
+        )}
+        {currentPage === 1 && (
+          <div className="relative group border-b border-l border-dashed aspect-video flex items-center justify-center">
+            <div className="z-30 w-full h-full flex items-center justify-center overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setJellyOpen(true)}
+                aria-label="Preview Jelly Bulge full screen"
+                className="w-full h-full relative overflow-hidden block cursor-pointer"
+              >
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <JellyBulge
+                    image={FLUID_IMAGE}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
+              </button>
+            </div>
+            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+              <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                Jelly Bulge
+              </p>
+              <p className="text-[8px] text-white/70 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                A glassy lens of jelly follows your cursor, magnifying the image
+                and jiggling with a bouncy overshoot.
+              </p>
+            </div>
+            <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
+              <div className="border-t border-dashed" />
+              <Button
+                size="sm"
+                variant="copy"
+                onClick={() => {
+                  const code = `import JellyBulge from "@/components/pixel-perfect/shaders/jelly-bulge";\n\n<JellyBulge className="w-full h-full" image="${FLUID_IMAGE}" />`;
+                  navigator.clipboard.writeText(code);
+                  toast.success("Jelly Bulge component copied to clipboard!");
+                }}
+                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
+              >
+                <Copy className="size-3" /> Copy
+                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
+                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
+              </Button>
+              <div />
+              <div className="border-r border-dashed h-full -mr-[0.5px]" />
+            </div>
+          </div>
+        )}
         {paginatedItems.map((item) => (
           <div
             key={item.id}
@@ -636,13 +924,15 @@ const ImageShadersGrid = () => {
                 aria-label={`Preview ${item.title} image shader full screen`}
                 className="w-full h-full relative overflow-hidden block cursor-pointer"
               >
-                <ImageShaderCanvas
-                  fragmentShader={item.fragmentShader}
-                  image={item.image}
-                  imageB={item.imageB}
-                  dpr={1.25}
-                  className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105"
-                />
+                <LazyVisible className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105">
+                  <ImageShaderCanvas
+                    fragmentShader={item.fragmentShader}
+                    image={item.image}
+                    imageB={item.imageB}
+                    dpr={1.25}
+                    className="w-full h-full"
+                  />
+                </LazyVisible>
               </button>
             </div>
 
@@ -1040,6 +1330,150 @@ const ImageShadersGrid = () => {
               Ripple Touch
               <span className="ml-2 text-white/40">
                 move or click · Esc to close
+              </span>
+            </div>
+          </div>,
+          document.body,
+        )}
+
+      {warpOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Magnetic Warp preview"
+            className="fixed inset-0 z-[9999] bg-black"
+          >
+            <MagneticWarp image={FLUID_IMAGE} className="h-full w-full" controls />
+            <button
+              type="button"
+              onClick={() => setWarpOpen(false)}
+              aria-label="Close preview"
+              className="absolute left-5 top-5 z-10 flex size-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur transition-colors hover:bg-black/70"
+            >
+              <X className="size-5" />
+            </button>
+            <div className="pointer-events-none absolute bottom-5 left-5 z-10 text-sm text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+              Magnetic Warp
+              <span className="ml-2 text-white/40">
+                gather + spring back · Esc to close
+              </span>
+            </div>
+          </div>,
+          document.body,
+        )}
+
+      {trailOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Cursor Trail preview"
+            className="fixed inset-0 z-[9999] bg-black"
+          >
+            <CursorTrailSmear
+              image={FLUID_IMAGE}
+              className="h-full w-full"
+              controls
+            />
+            <button
+              type="button"
+              onClick={() => setTrailOpen(false)}
+              aria-label="Close preview"
+              className="absolute left-5 top-5 z-10 flex size-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur transition-colors hover:bg-black/70"
+            >
+              <X className="size-5" />
+            </button>
+            <div className="pointer-events-none absolute bottom-5 left-5 z-10 text-sm text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+              Cursor Trail
+              <span className="ml-2 text-white/40">
+                drag a streak · Esc to close
+              </span>
+            </div>
+          </div>,
+          document.body,
+        )}
+
+      {meltOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Liquid Melt preview"
+            className="fixed inset-0 z-[9999] bg-black"
+          >
+            <LiquidMelt image={FLUID_IMAGE} className="h-full w-full" controls />
+            <button
+              type="button"
+              onClick={() => setMeltOpen(false)}
+              aria-label="Close preview"
+              className="absolute left-5 top-5 z-10 flex size-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur transition-colors hover:bg-black/70"
+            >
+              <X className="size-5" />
+            </button>
+            <div className="pointer-events-none absolute bottom-5 left-5 z-10 text-sm text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+              Liquid Melt
+              <span className="ml-2 text-white/40">
+                hover to melt · Esc to close
+              </span>
+            </div>
+          </div>,
+          document.body,
+        )}
+
+      {vortexOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Vortex Pull preview"
+            className="fixed inset-0 z-[9999] bg-black"
+          >
+            <VortexPull image={FLUID_IMAGE} className="h-full w-full" controls />
+            <button
+              type="button"
+              onClick={() => setVortexOpen(false)}
+              aria-label="Close preview"
+              className="absolute left-5 top-5 z-10 flex size-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur transition-colors hover:bg-black/70"
+            >
+              <X className="size-5" />
+            </button>
+            <div className="pointer-events-none absolute bottom-5 left-5 z-10 text-sm text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+              Vortex Pull
+              <span className="ml-2 text-white/40">
+                swirl chases cursor · Esc to close
+              </span>
+            </div>
+          </div>,
+          document.body,
+        )}
+
+      {jellyOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Jelly Bulge preview"
+            className="fixed inset-0 z-[9999] bg-black"
+          >
+            <JellyBulge image={FLUID_IMAGE} className="h-full w-full" controls />
+            <button
+              type="button"
+              onClick={() => setJellyOpen(false)}
+              aria-label="Close preview"
+              className="absolute left-5 top-5 z-10 flex size-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur transition-colors hover:bg-black/70"
+            >
+              <X className="size-5" />
+            </button>
+            <div className="pointer-events-none absolute bottom-5 left-5 z-10 text-sm text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+              Jelly Bulge
+              <span className="ml-2 text-white/40">
+                bouncy lens · Esc to close
               </span>
             </div>
           </div>,

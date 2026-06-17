@@ -8,6 +8,8 @@ import ScrollDirectionCarousel from "registry/new-york/carousel/scroll-direction
 import RadialCarousel from "registry/new-york/carousel/radial-carousel";
 import CardsSlider from "registry/new-york/carousel/cards-slider";
 import RingCarousel3D from "registry/new-york/carousel/ring-carousel-3d";
+import PerspectiveDeckCarousel from "registry/new-york/carousel/perspective-deck-carousel";
+import FannedDeckCarousel from "registry/new-york/carousel/fanned-deck-carousel";
 import CopyDropdown from "../copy-dropdown";
 
 const CarouselGridArr = [
@@ -45,6 +47,20 @@ const CarouselGridArr = [
       "Image cards arranged around a circle in real 3D space: the ring drifts on its own, spins when you drag with carried momentum, and cards brighten toward the front and dim toward the back.",
     component: <RingCarousel3D />,
     registryName: "ring-carousel-3d",
+  },
+  {
+    name: "Perspective Deck Carousel",
+    description:
+      "Image cards fanned along a 3D diagonal that recedes up-and-to-the-right. It auto-slides and loops infinitely with no seam, and can be dragged to scrub through the deck.",
+    component: <PerspectiveDeckCarousel />,
+    registryName: "perspective-deck-carousel",
+  },
+  {
+    name: "Fanned Deck Carousel",
+    description:
+      "Image cards fanned along a flat diagonal (no depth recede), each angled about Y. Auto-slides, loops infinitely with no seam, and can be dragged to scrub.",
+    component: <FannedDeckCarousel />,
+    registryName: "fanned-deck-carousel",
   },
 ];
 

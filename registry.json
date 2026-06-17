@@ -2936,6 +2936,32 @@
           "target": "components/pixel-perfect/floating-logo-intro.tsx"
         }
       ]
+    },
+    {
+      "name": "perspective-deck-carousel",
+      "description": "A row of image cards fanned along a 3D diagonal that recedes up-and-to-the-right; it auto-slides, loops infinitely with no seam, and can be dragged to scrub.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/perspective-deck-carousel.tsx",
+          "target": "components/pixel-perfect/perspective-deck-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "fanned-deck-carousel",
+      "description": "A tall row of image cards fanned along a flat diagonal (no depth recede); each card is angled about Y. It auto-slides, loops infinitely with no seam, and can be dragged to scrub.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/fanned-deck-carousel.tsx",
+          "target": "components/pixel-perfect/fanned-deck-carousel.tsx"
+        }
+      ]
     }
   ]
 }

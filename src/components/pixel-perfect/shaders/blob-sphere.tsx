@@ -108,7 +108,6 @@ const Blob = ({ interactive }: { interactive: boolean }) => {
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = t;
     }
-    // Auto-spin the thumbnail; full-screen lets the user drag instead.
     if (!interactive && meshRef.current) {
       meshRef.current.rotation.y = t * 0.3;
     }
@@ -145,9 +144,7 @@ const BlobSphere = ({
   interactive = false,
 }: {
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Enable drag-to-spin controls and the lil-gui panel. */
   interactive?: boolean;
 }) => {
   return (

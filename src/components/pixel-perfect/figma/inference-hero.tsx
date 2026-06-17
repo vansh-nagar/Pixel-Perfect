@@ -1,16 +1,5 @@
 "use client";
 
-/**
- * Inference hero — focuses on the L-shaped cut-out at the bottom-left.
- *
- * The green panel is a single rounded rectangle. A page-coloured "pocket" is
- * pinned flush to its bottom-left corner, which removes the green there and
- * turns the green into an inverted-L that wraps the two cards on the top and
- * right. Because the pocket shares the box's corner radius (bottom-left) and
- * uses big radii on the inner corners (top-right / bottom-right), the green
- * showing behind those rounded corners reads as the smooth concave cut.
- */
-
 const PAGE = "#f4f4f2"; // page background == the colour that "shows through" the cut-out
 const GREEN = "#16271c"; // dark forest panel
 const VERDE = "#9de870"; // light-green accent
@@ -82,7 +71,6 @@ const InferenceHero = () => {
         className="relative flex h-[620px] w-full max-w-[1180px] flex-col rounded-[40px] p-12"
         style={{ backgroundColor: GREEN }}
       >
-        {/* Heading + copy (no illustration, per request) */}
         <h1 className="text-[64px] font-bold leading-[1.02] tracking-tight text-white">
           Inference{" "}
           <span style={{ color: VERDE }} className="whitespace-nowrap">
@@ -97,12 +85,6 @@ const InferenceHero = () => {
           streamlined operations.
         </p>
 
-        {/* The L-shaped cut-out.
-            Page-coloured pocket pinned flush to the box's bottom-left corner.
-            - bottom-left radius matches the box (40px) so the silhouette stays
-              clean and no green slivers leak.
-            - big top-right / bottom-right radii reveal the green behind them as
-              the concave "L" wrap around the cards. */}
         <div
           className="absolute bottom-0 left-0 w-fit rounded-br-[44px] rounded-tr-[44px] p-3.5"
           style={{ backgroundColor: PAGE }}

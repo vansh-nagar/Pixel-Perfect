@@ -51,12 +51,6 @@ const ImageShadersGrid = () => {
   const [meltOpen, setMeltOpen] = useState(false);
   const [vortexOpen, setVortexOpen] = useState(false);
   const [jellyOpen, setJellyOpen] = useState(false);
-  // The 16 hand-built interactive tiles (Pixel Distortion, Fluid, Paint, Cursor
-  // Paint, Scratch, Before/After, Particles, Inertia, Swarm, Flow Field, Ripple,
-  // Magnetic Warp, Cursor Trail, Liquid Melt, Vortex Pull, Jelly Bulge) all live
-  // on page 1; the registry shaders paginate over pages 2+. Each shader tile is
-  // wrapped in <LazyVisible>, so only the tiles near the viewport hold a live
-  // WebGL context (browsers cap at ~16) — the rest tear down until scrolled to.
   const itemsPerPage = 12;
   const RESERVED_FIRST_PAGE = 16;
   const firstPageItems = Math.max(0, itemsPerPage - RESERVED_FIRST_PAGE);
@@ -73,7 +67,6 @@ const ImageShadersGrid = () => {
     startIndex + itemsOnPage,
   );
 
-  // Esc to close + lock scroll while a full-screen preview is open.
   useEffect(() => {
     if (
       !active &&

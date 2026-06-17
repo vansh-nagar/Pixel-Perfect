@@ -27,7 +27,6 @@ export function CommandPalette() {
   const [open, setOpen] = React.useState(false);
   const [isMac, setIsMac] = React.useState(false);
 
-  // Toggle on ⌘J or Ctrl+J
   React.useEffect(() => {
     setIsMac(
       typeof window !== "undefined" &&
@@ -66,7 +65,6 @@ export function CommandPalette() {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
 
-          {/* Suggestions */}
           <CommandGroup heading="Suggestions">
             <CommandItem>
               <Calendar />
@@ -86,7 +84,6 @@ export function CommandPalette() {
 
           <CommandSeparator />
 
-          {/* Settings */}
           <CommandGroup heading="Settings">
             <CommandItem>
               <User />

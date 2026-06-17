@@ -5,26 +5,15 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * VortexPull — a swirling whirlpool chases the cursor with momentum. The swirl
- * centre eases toward the pointer, and its strength spins up while the cursor is
- * present and unwinds when it leaves — both with inertia, so the vortex lags,
- * overshoots and keeps turning for a moment after you stop. The shader rotates
- * UVs around the centre by an angle that falls off with distance.
- * -------------------------------------------------------------------------- */
-
 const VortexPull = ({
   image,
   className,
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the image to swirl. */
   image: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel. */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -106,7 +95,6 @@ const VortexPull = ({
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // --- pointer ----------------------------------------------------------
     const mouse = { x: 0.5, y: 0.5 };
     let active = false;
     const onMove = (e: PointerEvent) => {
@@ -122,7 +110,6 @@ const VortexPull = ({
     canvas.addEventListener("pointermove", onMove);
     canvas.addEventListener("pointerleave", onLeave);
 
-    // Inertial state: the centre lags the cursor, the angle keeps spinning.
     let cx = 0.5;
     let cy = 0.5;
     let strength = 0; // eases toward config.swirl while active
@@ -141,12 +128,10 @@ const VortexPull = ({
         uniforms.uImageResolution.value.set(img.width, img.height);
       }
 
-      // centre chases the cursor (when it's left, it stays put and unwinds)
       if (active) {
         cx += (mouse.x - cx) * Math.min(1, dt * 6);
         cy += (mouse.y - cy) * Math.min(1, dt * 6);
       }
-      // strength spins up while engaged, unwinds when not — with inertia
       const target = active ? config.swirl : 0;
       strength += (target - strength) * Math.min(1, dt * 2.5);
       angle += strength * config.spin * dt;

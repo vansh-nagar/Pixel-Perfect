@@ -5,14 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * MagneticSwarm — the image as a grid of GPU points that are *attracted* into
- * the cursor: within a radius each particle is pulled toward the pointer and
- * given a tangential kick, so they gather into a swirling swarm that orbits the
- * cursor. A weak spring to each particle's home cell reassembles the image when
- * the cursor leaves. Physics is integrated on the CPU each frame.
- * -------------------------------------------------------------------------- */
-
 const VERTEX_SHADER = /* glsl */ `
   precision highp float;
   attribute vec2 aUv;
@@ -173,7 +165,6 @@ const MagneticSwarm = ({
             const pull = f * attract;
             ax += ex * inv * pull;
             ay += ey * inv * pull;
-            // tangential kick → orbit
             const sw = f * swirl;
             ax += -ey * inv * sw;
             ay += ex * inv * sw;

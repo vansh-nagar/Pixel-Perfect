@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState, useRef } from "react";
-// import gsap from "gsap";
 import StarBorder from "../mine/landing-page/star-border";
 
 export const ComponentTransition = ({

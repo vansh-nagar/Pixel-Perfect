@@ -1,10 +1,8 @@
 export type Shader = {
   id: string;
   name: string;
-  /** Short label used in the gallery card / sidebar. */
   title: string;
   description: string;
-  /** GLSL `void main()` body. Helpers from COMMON_GLSL are available. */
   fragmentShader: string;
 };
 

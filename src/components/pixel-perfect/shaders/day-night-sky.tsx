@@ -3,13 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
-/* -------------------------------------------------------------------------- *
- * DayNightSky — a sky that glides from day to night. In the thumbnail it auto-
- * cycles; in the full-screen view a real range slider scrubs `uT` (0 = day,
- * 1 = night): the gradient, a sun→crescent-moon, drifting clouds and a field of
- * twinkling stars all cross-fade with a warm dusk band in the middle.
- * -------------------------------------------------------------------------- */
-
 const VERTEX_SHADER = /* glsl */ `
   varying vec2 vUv;
   void main() {
@@ -102,14 +95,11 @@ const DayNightSky = ({
   controls = false,
 }: {
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Full-screen mode: show the day→night slider (thumbnail auto-cycles). */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState(0.25);
-  // live ref so the render loop reads the latest slider value without re-running
   const valueRef = useRef(value);
   valueRef.current = value;
 
@@ -160,7 +150,6 @@ const DayNightSky = ({
       shaderTime += Math.min((now - last) / 1000, 0.05);
       last = now;
       uniforms.uTime.value = shaderTime;
-      // full-screen → follow the slider; thumbnail → slow auto day/night cycle
       uniforms.uT.value = controls
         ? valueRef.current
         : 0.5 - 0.5 * Math.cos(shaderTime * 0.25);

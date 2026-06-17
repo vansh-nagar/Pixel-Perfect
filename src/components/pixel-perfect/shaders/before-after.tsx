@@ -4,11 +4,6 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * BeforeAfter — wipe between two images with a draggable handle and a liquid,
- * displaced seam. Full-screen follows the cursor; thumbnails auto-sweep so the
- * tile is alive. ----------------------------------------------------------- */
-
 const VERTEX = /* glsl */ `
   varying vec2 vUv;
   void main() {
@@ -54,13 +49,10 @@ const BeforeAfter = ({
   dpr = 2,
   interactive = false,
 }: {
-  /** Left/"before" image. */
   image: string;
-  /** Right/"after" image. */
   imageB: string;
   className?: string;
   dpr?: number;
-  /** Follow the cursor to drag the seam (else auto-sweep). */
   interactive?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);

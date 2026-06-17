@@ -173,7 +173,6 @@ const MosaicMaskRevealWrapper = () => {
   );
 };
 
-// Mask animations land here — add an entry per promoted component.
 export const MaskGridArr: MaskGridItem[] = [
   {
     name: "Rect Mask Reveal",

@@ -19,9 +19,6 @@ const ShaderGrid = () => {
   const [twistOpen, setTwistOpen] = useState(false);
   const [skyOpen, setSkyOpen] = useState(false);
   const itemsPerPage = 12;
-  // Page 1 also shows three static tiles (Noise Blob + Twisted Blob + Day to
-  // Night), so they take up slots there — page 1 holds fewer registry shaders,
-  // keeping every page's total tile count the same and the slice continuous.
   const RESERVED_FIRST_PAGE = 3;
   const firstPageItems = itemsPerPage - RESERVED_FIRST_PAGE;
   const totalPages =
@@ -34,7 +31,6 @@ const ShaderGrid = () => {
   const itemsOnPage = currentPage === 1 ? firstPageItems : itemsPerPage;
   const paginatedItems = SHADERS.slice(startIndex, startIndex + itemsOnPage);
 
-  // Esc to close + lock scroll while any full-screen preview is open.
   useEffect(() => {
     if (!active && !blobOpen && !twistOpen && !skyOpen) return;
     const onKey = (e: KeyboardEvent) => {

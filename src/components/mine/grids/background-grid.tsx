@@ -277,7 +277,6 @@ const BackgroundGrid = () => {
             className="relative group border-b border-l border-dashed  aspect-video flex items-center justify-center "
           >
             <div className=" z-30 w-full h-full flex items-center justify-center overflow-hidden">
-              {/* Wrap content to prevent overflow and center it, similar to the editor preview but smaller */}
               {item.component ? (
                 <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50">
                   {item.component}
@@ -306,7 +305,6 @@ const BackgroundGrid = () => {
                 variant={"copy"}
                 onClick={() => {
                   let code = "";
-                  // Try to extract style from the component if present, or from style
                   let styleObj: CSSProperties | undefined;
                   if (
                     item.component &&
@@ -333,7 +331,6 @@ const BackgroundGrid = () => {
                   if (innerContent) {
                     code = `<div className='relative group border-b border-l border-dashed aspect-video flex items-center justify-center'>\n  <div className='w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50'>\n    ${innerContent}\n  </div>\n  <div className='leading-1 absolute left-1.5 bottom-1.5 z-40'>\n    <p className='text-xs'>${item.name}</p>\n    <p className='text-[8px] text-muted-foreground'>${item.description}</p>\n  </div>\n</div>`;
                   } else {
-                    // Fallback logic for components or generic copy
                     code = `// Use specific component for ${item.name}`;
                   }
                   navigator.clipboard.writeText(code);

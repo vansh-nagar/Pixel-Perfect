@@ -153,7 +153,6 @@ export function TabsNavigation() {
     }
   }, []);
 
-  // Smart scroll: bring the active tab — and the items just after it — into view.
   useEffect(() => {
     const list = listRef.current;
     const trigger = triggerRefs.current[active];
@@ -164,13 +163,11 @@ export function TabsNavigation() {
     const triggerRect = trigger.getBoundingClientRect();
 
     if (triggerRect.right + padding > listRect.right) {
-      // Active tab is at/past the right edge → scroll right to reveal the next items.
       list.scrollBy({
         left: triggerRect.right + padding - listRect.right,
         behavior: "smooth",
       });
     } else if (triggerRect.left - padding < listRect.left) {
-      // Active tab is at/past the left edge → scroll left to reveal the previous items.
       list.scrollBy({
         left: triggerRect.left - padding - listRect.left,
         behavior: "smooth",
@@ -184,8 +181,6 @@ export function TabsNavigation() {
     url.searchParams.set("tab", slug);
     window.history.replaceState(null, "", url);
 
-    // Release focus from the tab trigger so the ←/→ keys drive the grid's
-    // pagination instead of Radix's built-in tab navigation.
     requestAnimationFrame(() => {
       const focused = document.activeElement;
       if (

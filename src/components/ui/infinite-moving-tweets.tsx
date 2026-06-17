@@ -78,7 +78,6 @@ export const InfiniteMovingTweets = ({
     }
   };
 
-  // Function to render tweet content with highlighted mentions
   const renderContent = (content: string) => {
     const parts = content.split(/(@\w+)/g);
     return parts.map((part, index) => {
@@ -126,7 +125,6 @@ const TweetCard = ({
 }) => {
   return (
     <div className="relative border-b rounded-none p-4 w-full shrink-0 border-r border-muted">
-      {/* Header */}
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center">
           <img
@@ -163,7 +161,6 @@ const TweetCard = ({
         )}
       </div>
 
-      {/* Content */}
       <p className="text-sm leading-relaxed">{renderContent(tweet.content)}</p>
     </div>
   );

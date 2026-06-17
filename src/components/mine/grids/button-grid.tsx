@@ -633,13 +633,6 @@ export const ButtonsArr = [
     component: <BookDemoButtonWrapper />,
     registryName: "book-demo-button",
   },
-  // {
-  //   name: "Recessed Stepper",
-  //   description:
-  //     "Embossed +/- stepper sitting in a recessed pill cavity with press-to-sink and hold-to-repeat.",
-  //   component: <RecessedStepperButton />,
-  //   registryName: "recessed-stepper-button",
-  // },
   {
     name: "Soft Pill Secondary",
     description:
@@ -849,7 +842,6 @@ const ButtonGrid = () => {
         ))}
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-center gap-2 py-4">
           <Button
@@ -907,13 +899,10 @@ export const BorderDecorator = () => {
 
       <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px] mt-px  border-dashed"></span>
 
-      {/* Circular border */}
       <div className="absolute group-hover:animate-spin top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>
 
-      {/* Horizontal line */}
       <div className="absolute top-1/2 left-0 right-0 h-px bg-linear-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-y-1/2 z-10 pointer-events-none"></div>
 
-      {/* Vertical line */}
       <div className="absolute top-0 bottom-0 left-1/2 w-px bg-linear-to-b from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-x-1/2 z-10 pointer-events-none"></div>
     </>
   );

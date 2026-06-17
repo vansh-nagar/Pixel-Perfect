@@ -20,7 +20,6 @@ import { AnimatePresence, motion } from "motion/react";
 import useMeasure from "react-use-measure";
 import { cn } from "@/lib/utils";
 
-// Change Here
 const MAIN_NAV = [
   { icon: PlusSignIcon, name: "home" },
   { icon: Search01Icon, name: "search" },
@@ -58,7 +57,6 @@ const BottomMenu = () => {
     "default" | "home" | "search" | "notifications" | "profile" | "theme"
   >("default");
 
-  // Track selected theme
   const [theme, setTheme] = useState<"light" | "dark" | "system">("light");
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -199,7 +197,6 @@ const BottomMenu = () => {
       ref={containerRef}
       className={cn("relative flex flex-col items-center")}
     >
-      {/* Hidden for measurement */}
       <div
         ref={hiddenRef}
         className="absolute left-[-9999px] top-[-9999px] invisible pointer-events-none"
@@ -209,7 +206,6 @@ const BottomMenu = () => {
         </div>
       </div>
 
-      {/* Animated submenu */}
       <AnimatePresence mode="wait">
         {view !== "default" && (
           <motion.div
@@ -286,7 +282,6 @@ const BottomMenu = () => {
         )}
       </AnimatePresence>
 
-      {/* Toolbar */}
       <div className="flex items-center gap-1 bg-background/95 backdrop-blur-xl border border-border rounded-[18px] p-1 mt-3 z-10">
         {MAIN_NAV.map(({ icon: Icon, name }) => (
           <button

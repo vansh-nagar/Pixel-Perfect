@@ -6,18 +6,6 @@ import gsap from "gsap";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * PaintReveal — a brush-stroke reveal that swaps a procedurally-derived pencil
- * sketch for the full painted image, using procedural noise for organic, paper-
- * bleed edges. Inspired by the PaintRevealMaterial effect: a `uProgress` uniform
- * (0 → 1) is animated by GSAP; here we autoplay a gentle loop and snap to a full
- * reveal on hover (thumbnails), so the tile is alive but still interactive.
- *
- * The blog blends two real textures (sketch + painted). We only have the painted
- * scene, so the "sketch" is generated in-shader (Sobel edges + graphite tone on
- * warm paper) — swap in a real sketch texture later if you have one.
- * -------------------------------------------------------------------------- */
-
 const VERTEX_SHADER = /* glsl */ `
   varying vec2 vUv;
   void main() {
@@ -113,12 +101,9 @@ const PaintReveal = ({
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the painted image (sketch is derived from it). */
   image: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Full-screen mode: autoplay loop continuously + show the controls panel. */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -162,7 +147,6 @@ const PaintReveal = ({
     const onContextLost = (e: Event) => e.preventDefault();
     canvas.addEventListener("webglcontextlost", onContextLost);
 
-    // --- GSAP-driven progress (uProgress 0 -> 1) --------------------------
     const state = { progress: 0 };
     const makeLoop = () =>
       gsap.to(state, {
@@ -174,9 +158,6 @@ const PaintReveal = ({
       });
     let loop = makeLoop();
 
-    // Thumbnails: snap to a full reveal on hover, resume the loop on leave.
-    // Full-screen (controls) just runs the loop — the canvas fills the screen,
-    // so there is no meaningful hover-out to react to.
     const onEnter = () => {
       loop.kill();
       gsap.to(state, {

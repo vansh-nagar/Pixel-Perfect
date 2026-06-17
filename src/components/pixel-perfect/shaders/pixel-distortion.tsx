@@ -5,16 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * PixelDistortion — interactive grid distortion (à la akella/DistortedPixels).
- *
- * A small grid is stored in a float DataTexture of RG offsets. Each frame every
- * cell relaxes back toward zero; the cursor pushes the cells near it by its
- * velocity (scaled by 1/distance). The display shader then samples the image at
- * `uv - strength * offset.rg`, so the pixels smear along the cursor trail and
- * settle when it stops.
- * -------------------------------------------------------------------------- */
-
 const GRID = 40; // grid cells per axis — fewer = bigger "pixels"
 
 const PixelDistortion = ({
@@ -23,12 +13,9 @@ const PixelDistortion = ({
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the image to distort. */
   image: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel (strength / relax). */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -126,7 +113,6 @@ const PixelDistortion = ({
     const ro = new ResizeObserver(resize);
     ro.observe(container);
 
-    // --- pointer ----------------------------------------------------------
     const mouse = { x: 0.5, y: 0.5, px: 0.5, py: 0.5, vx: 0, vy: 0 };
     const onMove = (e: PointerEvent) => {
       const r = canvas.getBoundingClientRect();

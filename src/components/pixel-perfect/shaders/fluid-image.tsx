@@ -5,18 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * A GPU fluid simulation (Navier–Stokes, à la GPU Gems / Pavel Dobryakov)
- * ported to three.js, used to distort + tint an image.
- *
- * Each frame runs a ping-pong pipeline of full-screen passes over float render
- * targets: splat → curl → vorticity → divergence → pressure (Jacobi) →
- * gradient-subtract → advect(velocity) → advect(dye). A final display pass
- * samples the image, displaces it by the dye's signed RG field, and blends the
- * moving fluid back in as a coloured mask (the FluidSlider effect).
- * -------------------------------------------------------------------------- */
-
-// Plain pass-through: writes vUv, draws the full-screen quad in clip space.
 const BASE_VERTEX = /* glsl */ `
   precision highp float;
   attribute vec3 position;
@@ -28,8 +16,6 @@ const BASE_VERTEX = /* glsl */ `
   }
 `;
 
-// Same, but also precomputes the four neighbour texel coords for the finite
-// difference passes (curl/divergence/pressure/gradient).
 const STENCIL_VERTEX = /* glsl */ `
   precision highp float;
   attribute vec3 position;
@@ -201,8 +187,6 @@ const GRADIENT_FRAG = /* glsl */ `
   }
 `;
 
-// Final composite: where the fluid flows, distort + reveal image B over image
-// A — a fluid-driven transition between the two textures (the FluidSlider).
 const DISPLAY_FRAG = /* glsl */ `
   precision highp float;
   uniform sampler2D uImage;
@@ -273,14 +257,10 @@ const FluidImage = ({
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the base image (shown where the fluid is calm). */
   image: string;
-  /** Optional second image revealed where the fluid flows (transition). */
   imageB?: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel. */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -310,7 +290,6 @@ const FluidImage = ({
     mesh.frustumCulled = false;
     scene.add(mesh);
 
-    // --- Render targets ----------------------------------------------------
     const aspect = Math.max(
       container.clientWidth / Math.max(container.clientHeight, 1),
       0.0001,
@@ -366,7 +345,6 @@ const FluidImage = ({
     const divergence = makeRT();
     const curl = makeRT();
 
-    // --- Materials ---------------------------------------------------------
     const mat = (
       vertexShader: string,
       fragmentShader: string,
@@ -433,10 +411,8 @@ const FluidImage = ({
       uDisplacement: { value: config.displacement },
     });
 
-    // --- Image textures (animated GIFs, frame-by-frame; static fallback) ---
     const animated = createAnimatedTexture(image);
     displayMat.uniforms.uImage.value = animated.texture;
-    // Fall back to image A when no second image is given (mix becomes a no-op).
     const animatedB = createAnimatedTexture(imageB ?? image);
     displayMat.uniforms.uImageB.value = animatedB.texture;
 
@@ -449,7 +425,6 @@ const FluidImage = ({
       renderer.render(scene, camera);
     };
 
-    // --- Pointer / auto input ---------------------------------------------
     type Splat = { x: number; y: number; dx: number; dy: number };
     const queue: Splat[] = [];
     let pointer: { x: number; y: number } | null = null;
@@ -472,7 +447,6 @@ const FluidImage = ({
     canvas.addEventListener("pointermove", onPointerMove);
     canvas.addEventListener("pointerleave", onPointerLeave);
 
-    // Drift a splat along a Lissajous path while idle so the tile stays alive.
     let autoPrev: { x: number; y: number } | null = null;
     const pushAutoSplat = () => {
       const t = shaderTime * 0.6;
@@ -485,7 +459,6 @@ const FluidImage = ({
     };
 
     const applySplat = (s: Splat) => {
-      // velocity splat — drives the motion
       splatMat.uniforms.uTarget.value = velocity.read.texture;
       splatMat.uniforms.radius.value = config.radius;
       (splatMat.uniforms.point.value as THREE.Vector2).set(s.x, s.y);
@@ -497,7 +470,6 @@ const FluidImage = ({
       blit(splatMat, velocity.write);
       velocity.swap();
 
-      // dye splat — signed RG field the display pass reads for distortion
       splatMat.uniforms.uTarget.value = dye.read.texture;
       (splatMat.uniforms.color.value as THREE.Vector3).set(
         s.dx * config.splatForce,
@@ -508,13 +480,10 @@ const FluidImage = ({
       dye.swap();
     };
 
-    // --- Simulation step ---------------------------------------------------
     const step = (dt: number) => {
-      // Curl
       curlMat.uniforms.uVelocity.value = velocity.read.texture;
       blit(curlMat, curl);
 
-      // Vorticity confinement
       vorticityMat.uniforms.uVelocity.value = velocity.read.texture;
       vorticityMat.uniforms.uCurl.value = curl.texture;
       vorticityMat.uniforms.curl.value = config.curl;
@@ -522,11 +491,9 @@ const FluidImage = ({
       blit(vorticityMat, velocity.write);
       velocity.swap();
 
-      // Divergence
       divergenceMat.uniforms.uVelocity.value = velocity.read.texture;
       blit(divergenceMat, divergence);
 
-      // Decay pressure (frame-rate normalised)
       clearMat.uniforms.uTexture.value = pressure.read.texture;
       clearMat.uniforms.value.value = Math.pow(
         config.pressureDissipation,
@@ -535,7 +502,6 @@ const FluidImage = ({
       blit(clearMat, pressure.write);
       pressure.swap();
 
-      // Jacobi pressure solve
       divergenceMat.uniforms.uVelocity.value = velocity.read.texture;
       for (let i = 0; i < PRESSURE_ITERATIONS; i++) {
         pressureMat.uniforms.uPressure.value = pressure.read.texture;
@@ -544,13 +510,11 @@ const FluidImage = ({
         pressure.swap();
       }
 
-      // Subtract pressure gradient → divergence-free velocity
       gradientMat.uniforms.uPressure.value = pressure.read.texture;
       gradientMat.uniforms.uVelocity.value = velocity.read.texture;
       blit(gradientMat, velocity.write);
       velocity.swap();
 
-      // Advect velocity
       advectionMat.uniforms.uVelocity.value = velocity.read.texture;
       advectionMat.uniforms.uSource.value = velocity.read.texture;
       advectionMat.uniforms.dt.value = dt;
@@ -561,7 +525,6 @@ const FluidImage = ({
       blit(advectionMat, velocity.write);
       velocity.swap();
 
-      // Advect dye
       advectionMat.uniforms.uVelocity.value = velocity.read.texture;
       advectionMat.uniforms.uSource.value = dye.read.texture;
       advectionMat.uniforms.dissipation.value = Math.pow(
@@ -572,7 +535,6 @@ const FluidImage = ({
       dye.swap();
     };
 
-    // --- Frame loop --------------------------------------------------------
     let shaderTime = 0;
     let last = performance.now();
 
@@ -595,13 +557,10 @@ const FluidImage = ({
 
       if (shaderTime - lastInteraction > 1.2) pushAutoSplat();
 
-      // Use a fixed substep for the advection backtrace so motion speed is
-      // hardware-independent; dissipation is normalised above via pow(.., dt*60).
       const simDt = 0.016;
       while (queue.length) applySplat(queue.shift() as Splat);
       step(simDt);
 
-      // Composite to screen
       displayMat.uniforms.uDye.value = dye.read.texture;
       displayMat.uniforms.uDisplacement.value = config.displacement;
       blit(displayMat, null);
@@ -641,7 +600,6 @@ const FluidImage = ({
     };
     animate();
 
-    // --- Controls ----------------------------------------------------------
     let gui: GUI | null = null;
     if (controls) {
       gui = new GUI();

@@ -67,8 +67,6 @@ export function HeroSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const isActive = useRef<boolean>(true);
 
-  // No longer calculate these on every render; handled in DebugOverlay
-
   useEffect(() => {
     let raf = 0;
     const handleMouseMove = (e: MouseEvent) => {

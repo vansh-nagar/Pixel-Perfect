@@ -1,23 +1,13 @@
 import * as THREE from "three";
 
-/**
- * A three.js texture that plays an animated image (GIF / animated WebP).
- *
- * Static loaders only ever upload a GIF's first frame, so we decode every frame
- * with the WebCodecs `ImageDecoder` and blit the current one onto a canvas each
- * tick. Falls back to a plain static load when `ImageDecoder` is unavailable.
- */
 export type AnimatedTexture = {
   texture: THREE.Texture;
-  /** Advance to the frame for the given elapsed time. Call once per render. */
   update: (elapsedMs: number) => void;
   dispose: () => void;
 };
 
 type Frame = { bitmap: ImageBitmap; durationMs: number };
 
-// Minimal structural type for ImageDecoder so we don't depend on a specific
-// TypeScript lib version shipping the WebCodecs DOM types.
 type DecodedFrame = {
   image: {
     displayWidth: number;
@@ -55,10 +45,6 @@ export function createAnimatedTexture(url: string): AnimatedTexture {
   let lastIndex = -1;
   let disposed = false;
 
-  // Resizing the canvas after the first upload would make three.js try to
-  // texSubImage into a smaller GPU allocation ("Offset overflows texture
-  // dimensions"). Disposing frees the GL texture — but keeps the JS object and
-  // its uniform binding — so the next render re-allocates at the new size.
   const resizeCanvas = (w: number, h: number) => {
     if (canvas.width === w && canvas.height === h) return;
     canvas.width = w;
@@ -73,7 +59,6 @@ export function createAnimatedTexture(url: string): AnimatedTexture {
     texture.needsUpdate = true;
   };
 
-  // Fallback: load the first frame as a normal image.
   const loadStatic = () => {
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -110,7 +95,6 @@ export function createAnimatedTexture(url: string): AnimatedTexture {
           const bitmap = await createImageBitmap(
             image as unknown as ImageBitmapSource,
           );
-          // VideoFrame.duration is in microseconds; default to ~100ms.
           decoded.push({ bitmap, durationMs: (image.duration ?? 100_000) / 1000 });
           image.close();
         }

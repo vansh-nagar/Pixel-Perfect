@@ -12,8 +12,6 @@ const VERTEX_SHADER = /* glsl */ `
   }
 `;
 
-// Wraps every registry shader: runs its (renamed) main, then post-processes
-// the result with the universal hue/saturation/contrast/brightness controls.
 const WRAPPER_MAIN = /* glsl */ `
   void main() {
     fragColor = vec4(0.0, 0.0, 0.0, 1.0);
@@ -22,8 +20,6 @@ const WRAPPER_MAIN = /* glsl */ `
   }
 `;
 
-// Texture sampling helpers prepended to every image-shader fragment shader,
-// on top of the shared COMMON_GLSL (noise/palette/uv helpers/adjust).
 const IMAGE_GLSL = /* glsl */ `
   uniform sampler2D uTexture;
   // Natural pixel size of the loaded image, for aspect-correct sampling.
@@ -74,18 +70,10 @@ const ImageShaderCanvas = ({
   controls = false,
 }: {
   fragmentShader: string;
-  /** Public path (or URL) of the image to sample. */
   image: string;
-  /**
-   * Optional second image. When provided the shader becomes a hover-to-play
-   * transition: `uProgress` eases 0→1 while the pointer is over the canvas
-   * (and back to 0 on leave). Sample it with `texCoverB(uv)`.
-   */
   imageB?: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel (speed/zoom/color). */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -100,10 +88,7 @@ const ImageShaderCanvas = ({
     const scene = new THREE.Scene();
     const geometry = new THREE.PlaneGeometry(2, 2);
 
-    // Animated texture (plays GIFs frame-by-frame; static fallback otherwise).
     const animated = createAnimatedTexture(image);
-    // Second image for transitions; falls back to image A when none is given
-    // (so mix(A, B, uProgress) is a no-op for single-image shaders).
     const isTransition = !!imageB;
     const animatedB = createAnimatedTexture(imageB ?? image);
 
@@ -122,11 +107,8 @@ const ImageShaderCanvas = ({
       uContrast: { value: 1 },
       uBrightness: { value: 1 },
     };
-    // Time speed lives in JS (it scales how fast `time` advances), not GLSL.
     const params = { speed: 1 };
 
-    // Rename the shader's main() and redirect its gl_FragColor writes into the
-    // scratch `fragColor`, so the wrapper can post-process the result.
     const userSrc = fragmentShader
       .replace(/\bvoid\s+main\b/, "void userMain")
       .replace(/\bgl_FragColor\b/g, "fragColor");
@@ -148,11 +130,9 @@ const ImageShaderCanvas = ({
     container.appendChild(renderer.domElement);
 
     const canvas = renderer.domElement;
-    // Allow the GPU to restore a transiently-lost context instead of going black.
     const onContextLost = (e: Event) => e.preventDefault();
     canvas.addEventListener("webglcontextlost", onContextLost);
 
-    // Track the cursor in 0..1 UV space (y flipped to match gl_FragCoord).
     const onPointerMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
@@ -161,7 +141,6 @@ const ImageShaderCanvas = ({
         1 - (e.clientY - rect.top) / rect.height,
       );
     };
-    // Hover drives the transition progress toward 1 (in) / 0 (out).
     let hovered = false;
     const onPointerEnter = () => {
       hovered = true;
@@ -174,7 +153,6 @@ const ImageShaderCanvas = ({
     canvas.addEventListener("pointerenter", onPointerEnter);
     canvas.addEventListener("pointerleave", onPointerLeave);
 
-    // Accumulate time scaled by speed so changing speed never jumps the clock.
     let shaderTime = 0;
     let last = performance.now();
     const render = () => {
@@ -188,7 +166,6 @@ const ImageShaderCanvas = ({
       if (img && img.width > 1) {
         uniforms.uImageResolution.value.set(img.width, img.height);
       }
-      // ease transition progress toward the hover target (~1s, fps-independent)
       if (isTransition) {
         animatedB.update(shaderTime * 1000);
         const imgB = animatedB.texture.image as {
@@ -222,8 +199,6 @@ const ImageShaderCanvas = ({
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
 
-    // Animate only while on (or near) screen; render one frame on mount so a
-    // tile is never blank before it scrolls into view.
     let visible = true;
     const intersectionObserver = new IntersectionObserver(
       ([entry]) => {
@@ -241,7 +216,6 @@ const ImageShaderCanvas = ({
     };
     animate();
 
-    // Live customization panel (full-screen preview only).
     let gui: GUI | null = null;
     if (controls) {
       gui = new GUI();

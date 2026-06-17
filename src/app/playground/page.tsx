@@ -5,18 +5,6 @@ import gsap from "gsap";
 import { Button } from "@/components/ui/button";
 import { ButtonsArr } from "@/components/mine/grids/button-grid";
 
-/* ---------------------------------------------------------------------------
- * Button physics sandbox.
- *
- * Random buttons from the button grid drop in and behave like real rigid
- * bodies: gravity pulls them down, they bounce off the walls + the footer
- * (the floor), and they collide with each other (AABB) so they pile up. A tiny
- * hand-rolled solver runs the simulation; GSAP's ticker drives the loop and
- * `gsap.set` writes each body's transform every frame.
- * ------------------------------------------------------------------------- */
-
-// Skip the grid entries that ship with a variant/mode <Select> dropdown — we
-// only want plain buttons falling, not a dropdown riding along with them.
 const DROPDOWN_BUTTONS = new Set([
   "Magnetic Button",
   "3D Button",
@@ -57,13 +45,11 @@ const Page = () => {
   const bodies = useRef<Map<number, Body>>(new Map());
   const bounds = useRef({ w: 0, h: 0 });
   const nextId = useRef(0);
-  // grab-to-throw: which body is held + the cursor position (scene coords)
   const held = useRef<{ id: number; offX: number; offY: number } | null>(null);
   const pointer = useRef({ x: 0, y: 0 });
 
   const [items, setItems] = useState<Item[]>([]);
 
-  // Register/measure a freshly-mounted body element and seed its physics.
   const register = (item: Item) => (el: HTMLDivElement | null) => {
     if (!el) {
       bodies.current.delete(item.id);
@@ -73,7 +59,6 @@ const Page = () => {
     const w = el.offsetWidth || 120;
     const h = el.offsetHeight || 44;
     const W = bounds.current.w || window.innerWidth;
-    // spawn within a central band so bodies overlap and pile on each other
     const x = Math.max(
       w / 2,
       Math.min(W - w / 2, W / 2 + (Math.random() - 0.5) * W * 0.45),
@@ -93,7 +78,6 @@ const Page = () => {
     gsap.set(el, { x: x - w / 2, y: body.y - h / 2, opacity: 1 });
   };
 
-  // Pick up a body: remember the grab offset so it doesn't snap to the cursor.
   const grab = (e: React.PointerEvent<HTMLDivElement>, id: number) => {
     const b = bodies.current.get(id);
     const scene = sceneRef.current;
@@ -142,15 +126,11 @@ const Page = () => {
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
 
-    // one physics substep — integrate the free bodies then resolve overlaps.
-    // The held body is kinematic (positioned from the cursor in `update`), so we
-    // skip gravity/walls for it and let it shove everything else fully.
     const step = (dt: number, h: typeof held.current) => {
       const { w: W, h: H } = bounds.current;
       const floorY = H - FOOTER_H;
       const list = [...bodies.current.values()];
 
-      // integrate
       for (const b of list) {
         if (h && b.id === h.id) continue;
         b.vy += GRAVITY * dt;
@@ -158,7 +138,6 @@ const Page = () => {
         b.y += b.vy * dt;
       }
 
-      // resolve collisions + walls/floor over a few passes for stable stacks
       for (let it = 0; it < ITERATIONS; it++) {
         for (let i = 0; i < list.length; i++) {
           for (let j = i + 1; j < list.length; j++) {
@@ -169,7 +148,6 @@ const Page = () => {
             const ox = (a.w + c.w) / 2 - Math.abs(dx);
             const oy = (a.h + c.h) / 2 - Math.abs(dy);
             if (ox <= 0 || oy <= 0) continue;
-            // a held body is immovable — it shoves the other one fully.
             const aHeld = !!h && a.id === h.id;
             const cHeld = !!h && c.id === h.id;
             if (ox < oy) {
@@ -209,7 +187,6 @@ const Page = () => {
             }
           }
         }
-        // walls + floor (skip the held body so it can be dragged anywhere)
         for (const b of list) {
           if (h && b.id === h.id) continue;
           if (b.x - b.w / 2 < 0) {
@@ -230,7 +207,6 @@ const Page = () => {
 
     };
 
-    // commit transforms once per frame (lean slightly toward travel direction)
     const render = () => {
       for (const b of bodies.current.values()) {
         const targetRot = Math.max(-9, Math.min(9, b.vx * 0.02));
@@ -248,14 +224,11 @@ const Page = () => {
       const dt = Math.min(deltaMs / 1000, 1 / 30);
       const h = held.current;
 
-      // re-measure (some buttons finish laying out a frame after mount)
       for (const b of bodies.current.values()) {
         b.w = b.el.offsetWidth || b.w;
         b.h = b.el.offsetHeight || b.h;
       }
 
-      // drive the held body from the cursor once per frame so its velocity
-      // (and thus its throw momentum + the shove it gives others) is correct.
       if (h) {
         const b = bodies.current.get(h.id);
         if (b) {
@@ -274,7 +247,6 @@ const Page = () => {
     };
     gsap.ticker.add(update);
 
-    // seed a few on mount
     const seed = gsap.delayedCall(0.2, () => drop(6));
 
     return () => {
@@ -291,7 +263,6 @@ const Page = () => {
       ref={sceneRef}
       className="relative h-screen w-screen overflow-hidden bg-background select-none"
     >
-      {/* falling bodies */}
       {items.map((item) => (
         <div
           key={item.id}
@@ -304,7 +275,6 @@ const Page = () => {
         </div>
       ))}
 
-      {/* footer = the floor + controls */}
       <div
         className="absolute inset-x-0 bottom-0 z-50 flex items-center justify-between gap-4 border-t border-border bg-card/80 px-6 backdrop-blur"
         style={{ height: FOOTER_H }}

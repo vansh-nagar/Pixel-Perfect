@@ -62,7 +62,6 @@ export function Navbar({ className = "" }: { className?: string }) {
             </span>
           </Button>
         </Link>
-        {/* Inline icon buttons on larger screens */}
         <div className="hidden items-center gap-2 sm:flex">
           {NAV_LINKS.map(({ href, label, icon: Icon }) => (
             <Tooltip key={href}>
@@ -84,7 +83,6 @@ export function Navbar({ className = "" }: { className?: string }) {
           ))}
         </div>
 
-        {/* Collapsed menu on mobile */}
         <div className="sm:hidden">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

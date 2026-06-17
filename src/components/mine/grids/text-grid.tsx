@@ -73,7 +73,6 @@ type TextItem = {
   component: React.ReactNode;
   registryName: string;
   hasStagger: boolean;
-  /** Scroll-driven effect — rendered in a tall runway you scroll to play. */
   isScroll?: boolean;
 };
 
@@ -86,8 +85,6 @@ const TextGrid = () => {
   const asideRef = useRef<HTMLElement>(null);
   const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  // Codrops "Gooey Text Hover" morphs — two phrases melt/reform via an animated
-  // SVG gooey blur filter, on a continuous loop and also re-triggered on hover.
   const gooeyEntries: TextItem[] = [
     {
       name: "Gooey Morph",
@@ -115,8 +112,6 @@ const TextGrid = () => {
     },
   ];
 
-  // Codrops "Line Text Hover" decode effects — terminal-style per-character
-  // scramble on a continuous loop, also re-triggered on per-line hover.
   const lineHoverEntries: TextItem[] = [
     {
       name: "Terminal Cursor Decode",
@@ -152,9 +147,6 @@ const TextGrid = () => {
     },
   ];
 
-  // Catalog effects ported from the `animate-text` skill. Generic-stagger
-  // effects are spec-driven; the three layout-aware renderers have bespoke
-  // components. These sit at the top of the grid, in catalog order.
   const animateTextEntries: TextItem[] = [
     ...ANIMATE_TEXT_ORDER.slice(0, 17).map((id) => {
       const s = ANIMATE_TEXT_SPECS[id];
@@ -220,10 +212,6 @@ const TextGrid = () => {
     }),
   ];
 
-  // Codrops "Text Block Transitions" — faithful ports of all 12 demos, each a
-  // two-layer crossfade that auto-loops between the two sample phrases. Every
-  // demo's stagger `from` is integral to its look, so the stagger selector is
-  // intentionally hidden for these (hasStagger: false).
   const blockTransitionEntries: TextItem[] = BLOCK_TRANSITION_ORDER.map((id) => {
     const t = BLOCK_TRANSITIONS[id];
     return {
@@ -237,8 +225,6 @@ const TextGrid = () => {
     } satisfies TextItem;
   });
 
-  // Codrops "On-Scroll Typography Animations" — all 29 effects, scroll-driven
-  // inside the preview pane (and on the dedicated /scroll-typography page).
   const scrollTypographyEntries: TextItem[] = EFFECT_ORDER.map(
     (fx): TextItem => {
       const info = EFFECT_INFO[fx];
@@ -459,13 +445,9 @@ const TextGrid = () => {
     },
   ];
 
-  // Size the two-pane layout to fill the viewport below the navbar + tabs, so
-  // the sidebar and the content each get their own scroll region.
   useEffect(() => {
     const measure = () => {
       const top = wrapRef.current?.getBoundingClientRect().top ?? 137;
-      // +14px clears the page's bottom padding so the document itself never
-      // scrolls — only the two inner panes do.
       setPanelHeight(`calc(100vh - ${Math.max(0, Math.round(top) + 14)}px)`);
     };
     measure();
@@ -473,8 +455,6 @@ const TextGrid = () => {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Smart scroll: keep the active item in view inside the sidebar and reveal a
-  // few upcoming items, mirroring the tabs navigation's look-ahead behaviour.
   useEffect(() => {
     const aside = asideRef.current;
     const item = itemRefs.current[activeId];
@@ -499,8 +479,6 @@ const TextGrid = () => {
 
   const scrollTo = (id: string) => {
     setActiveId(id);
-    // Reset the content pane to the top when switching to a new animation so a
-    // previously scrolled (overflowing) item doesn't start mid-scroll.
     contentRef.current?.scrollTo({ top: 0, behavior: "auto" });
   };
 
@@ -513,7 +491,6 @@ const TextGrid = () => {
       style={{ height: panelHeight }}
       className="flex w-full items-stretch overflow-hidden"
     >
-      {/* Sidebar — all animation names, scrolls independently */}
       <aside
         ref={asideRef}
         data-lenis-prevent
@@ -561,11 +538,6 @@ const TextGrid = () => {
         </nav>
       </aside>
 
-      {/* Right — only the selected text animation. Its own scroll container so
-          a single overflowing item scrolls here while the sidebar stays put.
-          h-full + min-h-0 pin the pane to the container height; the section uses
-          min-h-full so it fills the pane but can grow (and scroll) when the
-          content is taller than the viewport. */}
       <div
         ref={contentRef}
         id="text-anim-scroll"
@@ -578,10 +550,6 @@ const TextGrid = () => {
             data-id={activeItem.registryName}
             className="relative min-h-full border-b border-dashed"
           >
-            {/* Progressive blur band at the top of the runway — the same layered
-                backdrop-blur used at the bottom of the landing page, flipped to
-                fade from the top edge so scrolling type dissolves into a frosted
-                band instead of a hard cut. */}
             <GradientBlur
               side="top"
               position="sticky"
@@ -589,9 +557,6 @@ const TextGrid = () => {
               className="-mb-24"
             />
 
-            {/* Sticky chrome — name + copy stay in view while you scroll the
-                runway. Sits above the blur band (z-[70] > the band's z-[60]) so
-                the label stays crisp while the type behind it blurs. */}
             <div className="pointer-events-none sticky top-0 z-70 flex items-start justify-between gap-3 px-3 pb-10 pt-3">
               <div className="pointer-events-auto leading-tight">
                 <p className="text-sm font-medium">{activeItem.name}</p>
@@ -604,7 +569,6 @@ const TextGrid = () => {
               </div>
             </div>
 
-            {/* Entry runway → heading → exit runway (scroll drives the effect) */}
             <div aria-hidden style={{ height: "70vh" }} />
             <div className="flex min-h-[40vh] w-full items-center justify-center px-6">
               {activeItem.component}
@@ -620,7 +584,6 @@ const TextGrid = () => {
               }}
             />
 
-            {/* Persistent scroll hint */}
             <div className="pointer-events-none sticky bottom-4 z-40 -mt-12 flex justify-center">
               <span className="rounded-full border border-dashed bg-background/70 px-3 py-1 text-[10px] font-medium uppercase tracking-widest text-muted-foreground backdrop-blur">
                 Scroll ↓ to play
@@ -683,13 +646,10 @@ export const BorderDecorator = () => {
       <span className="border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-dashed border-b-1 border-l-1 z-30 "></span>
       <span className="border-muted-foreground absolute -bottom-px -right-px block size-6 border-b-1 border-r-1 border-dashed z-30"></span>
 
-      {/* Circular border */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>
 
-      {/* Horizontal line */}
       <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-y-1/2 z-10 pointer-events-none"></div>
 
-      {/* Vertical line */}
       <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-x-1/2 z-10 pointer-events-none"></div>
     </>
   );

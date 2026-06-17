@@ -5,26 +5,15 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * JellyBulge — a glassy lens of jelly wobbles after the cursor. Two springs
- * drive it: one for the bulge's position (it lags and overshoots the pointer)
- * and one for its size (it swells on enter and deflates on leave with a bouncy
- * wobble). The shader magnifies the image inside the lens and adds a subtle
- * chromatic edge, so the picture jiggles like it's under a drop of water.
- * -------------------------------------------------------------------------- */
-
 const JellyBulge = ({
   image,
   className,
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the image to bulge. */
   image: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel. */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -113,7 +102,6 @@ const JellyBulge = ({
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // --- pointer ----------------------------------------------------------
     const mouse = { x: 0.5, y: 0.5 };
     let active = false;
     const onMove = (e: PointerEvent) => {
@@ -129,7 +117,6 @@ const JellyBulge = ({
     canvas.addEventListener("pointermove", onMove);
     canvas.addEventListener("pointerleave", onLeave);
 
-    // Spring state: position (px,py) + velocity, and magnitude (m) + velocity.
     let px = 0.5;
     let py = 0.5;
     let vpx = 0;
@@ -161,10 +148,8 @@ const JellyBulge = ({
         uniforms.uImageResolution.value.set(img.width, img.height);
       }
 
-      // position springs toward the cursor (overshoots → jelly lag)
       [px, vpx] = spring(px, vpx, mouse.x, dt);
       [py, vpy] = spring(py, vpy, mouse.y, dt);
-      // size springs in on enter, out on leave (bouncy)
       [m, vm] = spring(m, vm, active ? 1 : 0, dt);
 
       uniforms.uCenter.value.set(px, py);

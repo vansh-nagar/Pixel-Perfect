@@ -5,15 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * ImageParticles — rebuilds the image as a grid of GPU points (one per cell).
- * Each particle samples its own colour from the image, drifts gently at rest,
- * and is pushed away in a chaotic scatter around the cursor as it moves. The
- * displacement is computed statelessly from each particle's home position, so
- * particles always spring back when the cursor leaves — no integration, no
- * drift accumulation.
- * -------------------------------------------------------------------------- */
-
 const VERTEX_SHADER = /* glsl */ `
   precision highp float;
 
@@ -104,12 +95,9 @@ const ImageParticles = ({
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the image to turn into particles. */
   image: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel (scatter/drift/size). */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -121,7 +109,6 @@ const ImageParticles = ({
     const camera = new THREE.Camera(); // positions are already in clip space
     const scene = new THREE.Scene();
 
-    // one particle per grid cell: home position in NDC + home uv + randoms
     const count = COLS * ROWS;
     const positions = new Float32Array(count * 3);
     const uvs = new Float32Array(count * 2);
@@ -186,7 +173,6 @@ const ImageParticles = ({
     const onContextLost = (e: Event) => e.preventDefault();
     canvas.addEventListener("webglcontextlost", onContextLost);
 
-    // Cursor → NDC (y up). Ease toward the target so scatter feels fluid.
     const target = new THREE.Vector2(1000, 1000);
     const onPointerMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -216,7 +202,6 @@ const ImageParticles = ({
       shaderTime += dt;
       uniforms.uTime.value = shaderTime;
       animated.update(shaderTime * 1000);
-      // ease the cursor uniform toward the pointer (snap when teleporting away)
       const m = uniforms.uMouse.value;
       if (target.x > 100) m.copy(target);
       else m.lerp(target, Math.min(1, dt * 12));

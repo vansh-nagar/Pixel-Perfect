@@ -26,8 +26,6 @@ const variantStyles: Record<
     shadow: string;
   }
 > = {
-  // "Generate" — light silver body, thin 1.5px stroke whose gradient runs
-  // white → mid-gray → a sage-green bottom rim (exact Figma stroke stops)
   steel: {
     body: "linear-gradient(180deg, #ededed 0%, #9e9e9e 100%)",
     border: "linear-gradient(180deg, #ffffff 0%, #7a7a7a 51%, #7bae9e 100%)",
@@ -39,7 +37,6 @@ const variantStyles: Record<
     textShadow: "0px 1px 0px rgba(255,255,255,0.25)",
     shadow: "0 1px 2px rgba(0,0,0,0.18), 0 4px 10px -3px rgba(0,0,0,0.14)",
   },
-  // "New Button" — inverted gloss body, chunky 5px gradient stroke
   pearl: {
     body: "linear-gradient(180deg, #bebdbd 0%, #ffffff 100%)",
     border: "linear-gradient(180deg, #ffffff 0%, #dedede 50%, #bdbdbd 100%)",
@@ -72,7 +69,6 @@ const SilverButton = React.forwardRef<HTMLButtonElement, SilverButtonProps>(
           fontSize: v.fontSize,
           color: v.textColor,
           textShadow: v.textShadow,
-          // body fills the padding-box; the vertical gradient stroke paints the border-box
           background: `${v.body} padding-box, ${v.border} border-box`,
           boxShadow: v.shadow,
           ...style,

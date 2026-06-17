@@ -95,18 +95,12 @@ const NoiseMaskReveal = ({
   fade = 0.65,
   soft = 0.5,
 }: {
-  /** Public path (or URL) of the image to frame. */
   src?: string;
   className?: string;
-  /** Subtle motion on by default — the cloud edge drifts and breathes. Set false to freeze. */
   drift?: boolean;
-  /** "box" keeps a wide centre; "radial" is a tight round centre-only spotlight. */
   shape?: "box" | "radial";
-  /** Edge distance where the fade begins (smaller = less visible, tighter centre). */
   inner?: number;
-  /** Width of the fade band (smaller = harder edge). */
   fade?: number;
-  /** How much the fbm noise roughens the dissolve edge. */
   soft?: number;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -149,8 +143,6 @@ const NoiseMaskReveal = ({
 
     const render = () => renderer.render(scene, camera);
 
-    // Load the requested image; fall back to the demo asset if it 404s, so the
-    // tile always shows something (drop your file in and it picks it up).
     const loader = new THREE.TextureLoader();
     let disposed = false;
     const accept = (tex: THREE.Texture) => {
@@ -184,7 +176,6 @@ const NoiseMaskReveal = ({
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
 
-    // Static by default (render on load/resize only); drift runs a light loop.
     let raf = 0;
     if (drift) {
       let last = performance.now();

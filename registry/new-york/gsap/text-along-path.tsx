@@ -17,8 +17,6 @@ const Page = () => {
   useEffect(() => {
     const proxy = { p: 0 };
 
-    // advancing every copy by exactly one STEP lands each copy where the next
-    // one started, so when the tween repeats there is no visible seam
     const tween = gsap.to(proxy, {
       p: 1,
       duration: 8,

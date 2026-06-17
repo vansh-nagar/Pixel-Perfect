@@ -10,19 +10,12 @@ export type FxId =
   | "fx11" | "fx12" | "fx13" | "fx14" | "fx15" | "fx16" | "fx17" | "fx18" | "fx19" | "fx20"
   | "fx21" | "fx22" | "fx23" | "fx24" | "fx25" | "fx26" | "fx27" | "fx28" | "fx29";
 
-/** Everything a builder needs; supplied by the engine. */
 export type EffectCtx = {
-  /** The heading element (Codrops' `title`). */
   root: HTMLElement;
-  /** Block wrapper around the heading — the element pinned by pinned effects. */
   stage: HTMLElement;
-  /** Flat list of every character span (class `st-char`). */
   chars: HTMLElement[];
-  /** Word spans (class `st-word`); each contains its own `st-char`s. */
   words: HTMLElement[];
-  /** Resolved scroll container — an element, or `undefined` for the window. */
   scroller: Element | undefined;
-  /** Injects `scroller` + `pinType` into a ScrollTrigger config. */
   makeST: (cfg: Record<string, unknown>) => any;
 };
 
@@ -31,28 +24,19 @@ export type EffectBuilder = (ctx: EffectCtx) => void;
 export type EffectInfo = {
   name: string;
   description: string;
-  /** Pinned effects need extra scroll runway and auto pin-spacing. */
   pinned: boolean;
-  /** Default editorial heading; `\n` becomes a new centered line. */
   sample: string;
 };
-
-/* ───────────────────────── helpers ───────────────────────── */
 
 const wordChars = (word: HTMLElement) =>
   Array.from(word.querySelectorAll<HTMLElement>(".st-char"));
 
-/** Set `perspective` on the parents of the given elements (Codrops sets it on `char.parentNode`). */
 const perspectiveOnParents = (els: HTMLElement[], value: number) => {
   const parents = new Set<HTMLElement>();
   els.forEach((el) => el.parentElement && parents.add(el.parentElement));
   parents.forEach((p) => gsap.set(p, { perspective: value }));
 };
 
-/**
- * Wrap each char in an overflow-hidden inline-block span (Codrops' `.char-wrap`),
- * giving fx11/fx12 their mask-reveal. Mirrors Codrops' `wrapElements`.
- */
 const wrapCharsForMask = (chars: HTMLElement[]) => {
   chars.forEach((char) => {
     const parent = char.parentElement;
@@ -67,7 +51,6 @@ const wrapCharsForMask = (chars: HTMLElement[]) => {
   });
 };
 
-/** Codrops' triangular "distance from centre" index used by fx22/fx24/fx28. */
 const mirrorIndex = (position: number, total: number) =>
   position < Math.ceil(total / 2)
     ? position
@@ -79,10 +62,7 @@ const lettersAndSymbols = [
   "%", "^", "&", "*", "-", "_", "+", "=", ";", ":", "<", ">", ",",
 ];
 
-/* ───────────────────────── builders ───────────────────────── */
-
 export const EFFECTS: Record<FxId, EffectBuilder> = {
-  // fx1 — spin + scale in, per character
   fx1: ({ chars, root, makeST }) => {
     gsap.fromTo(
       chars,
@@ -94,7 +74,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx2 — stretched chars rise into place
   fx2: ({ chars, root, makeST }) => {
     gsap.fromTo(
       chars,
@@ -106,7 +85,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx3 — vertical unfold (scaleY 0 → 1 from the top edge)
   fx3: ({ chars, root, makeST }) => {
     gsap.fromTo(
       chars,
@@ -118,7 +96,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx4 — each word's letters fan out from / collapse to the word centre
   fx4: ({ words, makeST }) => {
     words.forEach((word) => {
       gsap.fromTo(
@@ -132,7 +109,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx5 — random scatter assemble
   fx5: ({ chars, root, makeST }) => {
     gsap.fromTo(
       chars,
@@ -144,7 +120,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx6 — 3D flip up, per word
   fx6: ({ words, makeST }) => {
     words.forEach((word) => {
       const chars = wordChars(word);
@@ -160,7 +135,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx7 — 3D swing in around the Y axis, from the end of each word
   fx7: ({ words, makeST }) => {
     words.forEach((word) => {
       const chars = wordChars(word);
@@ -176,7 +150,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx8 — scramble decode (play on enter, not scrubbed)
   fx8: ({ chars, root, makeST }) => {
     chars.forEach((char, position) => {
       const initialHTML = char.innerHTML;
@@ -204,7 +177,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx9 — letters start stacked at the container centre, then fan out to place
   fx9: ({ words, scroller, makeST }) => {
     const vp = scroller
       ? scroller.getBoundingClientRect()
@@ -229,7 +201,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx10 — blur into focus, random order (play on enter)
   fx10: ({ chars, root, makeST }) => {
     gsap.fromTo(
       chars,
@@ -241,7 +212,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx11 — mask slide in from the right (play on enter)
   fx11: ({ chars, root, makeST }) => {
     wrapCharsForMask(chars);
     gsap.fromTo(
@@ -254,7 +224,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx12 — skewed, stretched streak in from the left
   fx12: ({ chars, root, makeST }) => {
     wrapCharsForMask(chars);
     gsap.fromTo(
@@ -267,7 +236,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx13 — 3D flip + tumble in
   fx13: ({ chars, root, makeST }) => {
     perspectiveOnParents(chars, 2000);
     gsap.fromTo(
@@ -280,7 +248,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx14 — pinned: whole line slides in while letters rise + scale down
   fx14: ({ chars, root, stage, makeST }) => {
     gsap.fromTo(
       root,
@@ -300,7 +267,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx15 — pinned: whole line slides in while letters do a deep 3D X-flip
   fx15: ({ chars, root, stage, makeST }) => {
     perspectiveOnParents(chars, 2000);
     gsap.fromTo(
@@ -321,7 +287,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx16 — whole line tilts level while words brighten
   fx16: ({ root, words, makeST }) => {
     gsap.fromTo(
       root,
@@ -341,7 +306,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx17 — random 3D settle
   fx17: ({ chars, root, makeST }) => {
     perspectiveOnParents(chars, 1000);
     gsap.fromTo(
@@ -354,7 +318,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx18 — depth push-in
   fx18: ({ chars, root, makeST }) => {
     perspectiveOnParents(chars, 1000);
     gsap.fromTo(
@@ -367,7 +330,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx19 — top-down 3D flip
   fx19: ({ chars, root, makeST }) => {
     perspectiveOnParents(chars, 1000);
     gsap.fromTo(
@@ -380,7 +342,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx20 — bottom-up 3D flip, random order
   fx20: ({ chars, root, makeST }) => {
     perspectiveOnParents(chars, 1000);
     gsap.fromTo(
@@ -393,7 +354,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx21 — multi-axis depth swarm, per word
   fx21: ({ words, makeST }) => {
     words.forEach((word) => {
       const chars = wordChars(word);
@@ -415,7 +375,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx22 — spiral converge, per word
   fx22: ({ words, makeST }) => {
     words.forEach((word) => {
       const chars = wordChars(word);
@@ -444,7 +403,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx23 — scale up + spread, alternating direction per word
   fx23: ({ words, makeST }) => {
     words.forEach((word, wordPosition) => {
       gsap.fromTo(
@@ -462,7 +420,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx24 — elastic rebound from below, from the centre out
   fx24: ({ chars, root, makeST }) => {
     const charsTotal = chars.length;
     gsap.fromTo(
@@ -475,7 +432,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx25 — pinned: letters grow vertically over a long scroll
   fx25: ({ chars, root, stage, makeST }) => {
     gsap.fromTo(
       chars,
@@ -487,7 +443,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx26 — pinned: each word grows vertically in turn, alternating origins
   fx26: ({ words, root, stage, makeST }) => {
     const tl = gsap.timeline({
       scrollTrigger: makeST({ trigger: root, start: "center center", end: "+=100%", scrub: true, pin: stage }),
@@ -497,8 +452,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
         wordChars(word),
         {
           willChange: "transform",
-          // Repo's `!wordPosition % 2` is truthy only for word 0, so only the
-          // first word grows from the top edge; the rest grow from the bottom.
           transformOrigin: wordPosition === 0 ? "50% 0%" : "50% 100%",
           scaleY: 0,
         },
@@ -508,7 +461,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx27 — pinned: words swarm in from deep 3D space, random order
   fx27: ({ words, root, stage, makeST }) => {
     perspectiveOnParents(words, 1000);
     gsap.fromTo(
@@ -528,7 +480,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  // fx28 — blur + scale settle, centre-weighted, per word
   fx28: ({ words, makeST }) => {
     words.forEach((word) => {
       const chars = wordChars(word);
@@ -556,7 +507,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  // fx29 — letters pop from a corner, alternating corner + direction per word
   fx29: ({ words, makeST }) => {
     words.forEach((word, pos) => {
       gsap.fromTo(
@@ -570,8 +520,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 };
-
-/* ───────────────────────── catalog metadata ───────────────────────── */
 
 export const EFFECT_ORDER: FxId[] = [
   "fx1", "fx2", "fx3", "fx4", "fx5", "fx6", "fx7", "fx8", "fx9", "fx10",

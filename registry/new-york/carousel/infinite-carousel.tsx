@@ -33,18 +33,12 @@ const InfiniteCarousel = () => {
       const container = containerRef.current;
       if (!track || !container) return;
 
-      // The track renders TWO identical copies side by side. One "period" of the
-      // pattern = the width of a single copy, measured from one card + its right
-      // margin (exact; scrollWidth can drop a trailing margin in some browsers).
       const firstCard = track.children[0] as HTMLElement;
       const cardWidth =
         firstCard.offsetWidth +
         parseFloat(getComputedStyle(firstCard).marginRight);
       const loopWidth = cardWidth * SLIDES.length;
 
-      // One tween slides the track left by exactly one copy's width and repeats.
-      // At x:-loopWidth the second copy sits pixel-for-pixel where the first began,
-      // so the repeat snap is invisible — that hidden seam is the "infinity" trick.
       const loop = gsap.to(track, {
         x: -loopWidth,
         duration: loopWidth / SPEED,
@@ -52,8 +46,6 @@ const InfiniteCarousel = () => {
         repeat: -1,
       });
 
-      // Speed model: timeScale = base (idle drift, eased toward a hover target)
-      // + scroll (a velocity burst from the wheel that bleeds back to 0).
       const wrapTime = gsap.utils.wrap(0, loop.duration());
       const pxPerSec = loopWidth / loop.duration();
 
@@ -70,23 +62,17 @@ const InfiniteCarousel = () => {
       };
       gsap.ticker.add(tick);
 
-      // Hover slows the idle drift.
       const onEnter = () => (targetBase = 0.15);
       const onLeave = () => (targetBase = 1);
       container.addEventListener("mouseenter", onEnter);
       container.addEventListener("mouseleave", onLeave);
 
-      // Wheel velocity feeds the burst. deltaY is signed, so the same line speeds
-      // the loop up (scroll down) and reverses it (scroll up). Scoped to this
-      // element so many carousels coexist and the page scroll isn't globally hijacked.
       const onWheel = (e: WheelEvent) => {
         e.preventDefault();
         scroll = gsap.utils.clamp(-60, 1000, scroll + e.deltaY * 0.018);
       };
       container.addEventListener("wheel", onWheel, { passive: false });
 
-      // Drag scrubs the playhead (loop.time) directly — never x — so on release
-      // the loop keeps going from wherever you left it.
       let startX = 0;
       let startTime = 0;
 

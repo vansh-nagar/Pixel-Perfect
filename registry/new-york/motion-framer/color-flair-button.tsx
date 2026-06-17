@@ -11,7 +11,6 @@ import gsap from "gsap";
 
 gsap.registerPlugin(useGSAP);
 
-// Different radii → concentric color rings (biggest behind, smallest on top).
 const FLAIRS = [
   { color: "#A5A6F6", size: "210%" }, // purple
   { color: "#7BD88F", size: "158%" }, // green
@@ -31,10 +30,8 @@ const ColorFlairButton = () => {
         button.querySelectorAll<HTMLElement>(".flair"),
       );
 
-      // Center every circle on its (x, y) point and start hidden.
       gsap.set(flairs, { xPercent: -50, yPercent: -50, scale: 0 });
 
-      // One follow-tween per circle, each with a different lag → they trail apart.
       const move = flairs.map((f, i) => {
         const duration = 0.65 - i * 0.12; // 0.65 → 0.29 across the stack
         return {
@@ -56,7 +53,6 @@ const ColorFlairButton = () => {
           m.xSet(x); // teleport every circle to the entry point...
           m.ySet(y);
         });
-        // ...then bloom them open (outer → inner) with an overlapping stagger.
         gsap.to(flairs, {
           scale: 1,
           duration: 0.4,
@@ -80,7 +76,6 @@ const ColorFlairButton = () => {
           m.x(x);
           m.y(y);
         });
-        // Shrink innermost (top) first, then outward → peels the layers back.
         gsap.to(flairs, {
           scale: 0,
           duration: 0.35,
@@ -110,7 +105,6 @@ const ColorFlairButton = () => {
         href="#"
         className="relative inline-flex items-center overflow-hidden rounded-full border border-black px-8 py-4 text-lg font-medium text-black"
       >
-        {/* Concentric color circles — each scales 0 → 1 from the cursor point, staggered. */}
         {FLAIRS.map((f) => (
           <span
             key={f.color}

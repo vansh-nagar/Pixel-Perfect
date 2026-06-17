@@ -247,8 +247,6 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     samples: ["Signal", "Header", "Vector"],
   }),
 
-  // --- Additional bundled specs (hidden on the website) ---
-
   "depth-parallax-words": spec({
     id: "depth-parallax-words",
     display_name: "Depth Parallax Words",
@@ -296,7 +294,6 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
   }),
 };
 
-/** Catalog order — visible effects first, then hidden bundled specs. */
 export const ANIMATE_TEXT_ORDER: string[] = [
   "soft-blur-in",
   "per-character-rise",

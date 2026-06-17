@@ -16,7 +16,6 @@ import { EFFECTS, type FxId } from "./effects";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
-/** Coalesce refreshes from many instances mounting/resizing in the same tick. */
 let refreshTimer = 0;
 function scheduleRefresh() {
   if (typeof window === "undefined") return;
@@ -24,7 +23,6 @@ function scheduleRefresh() {
   refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 60);
 }
 
-/** Nearest scrollable ancestor (or a Lenis-prevented pane); `undefined` = window. */
 function findScroller(el: HTMLElement): Element | undefined {
   let node = el.parentElement;
   while (node) {
@@ -38,16 +36,11 @@ function findScroller(el: HTMLElement): Element | undefined {
 }
 
 export interface ScrollTypographyProps {
-  /** Which of the 29 effects to play (`"fx1"`..`"fx29"`). */
   effect: FxId;
-  /** Heading text; `\n` starts a new centered line. */
   text: string;
   className?: string;
-  /** Heading tag — defaults to `h2`. */
   as?: keyof React.JSX.IntrinsicElements;
-  /** Override the auto-detected scroll container. */
   scroller?: Element | null;
-  /** Show ScrollTrigger markers. */
   debug?: boolean;
 }
 
@@ -69,7 +62,6 @@ export function ScrollTypography({
       const stage = stageRef.current;
       if (!root || !stage) return;
 
-      // Respect reduced-motion: leave the heading as plain, readable text.
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
       const split = new SplitText(root, {
@@ -87,12 +79,6 @@ export function ScrollTypography({
         if (resolved) {
           out.scroller = resolved;
           out.pinType = "transform";
-          // Pinning inside a nested pane scroller — combined with the repo's huge
-          // `+=N%` pin distances — is unreliable and can leave an effect stuck
-          // unfinished. In the pane ONLY, convert those long pinned ranges into a
-          // plain scrub that plays as the heading scrolls through the viewport,
-          // so every effect reliably completes. The full-window page (no nested
-          // scroller) keeps real pinning and the exact repo distances.
           const end = out.end;
           if (typeof end === "string") {
             const m = end.match(/^\+=(\d+)%$/);
@@ -116,10 +102,8 @@ export function ScrollTypography({
       });
 
       scheduleRefresh();
-      // Re-measure once webfonts settle (SplitText positions shift on swap-in).
       document.fonts?.ready.then(scheduleRefresh);
 
-      // Element scrollers aren't tracked by ST's window resize listener.
       let resizeTimer = 0;
       const ro = new ResizeObserver(() => {
         window.clearTimeout(resizeTimer);

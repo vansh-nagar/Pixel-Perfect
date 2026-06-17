@@ -7,9 +7,6 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
-// Walk up to the element that actually scrolls — this grid renders each effect
-// inside an inner `overflow-y-auto` pane (`data-lenis-prevent`), not the window,
-// so `useScroll` has to track that container or progress reads as 0.
 function findScroller(el: HTMLElement): HTMLElement | undefined {
   let node = el.parentElement;
   while (node) {
@@ -155,8 +152,6 @@ const StackingCardsParallax = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const [scroller, setScroller] = useState<HTMLElement | null>(null);
 
-  // Resolve the scroll container before mounting the `useScroll`-driven stack,
-  // so `container.current` is populated when the hook initializes.
   useLayoutEffect(() => {
     if (rootRef.current) setScroller(findScroller(rootRef.current) ?? null);
   }, []);

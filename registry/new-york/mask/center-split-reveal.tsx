@@ -11,9 +11,6 @@ const SRC = "/bend-image-reveal.gif";
 
 export type SplitAxis = "horizontal" | "vertical";
 
-// inset(top right bottom left): the closed seam per axis. "horizontal" splits
-// along the horizontal axis (a vertical seam opening left/right); "vertical"
-// splits along the vertical axis (a horizontal seam opening top/bottom).
 const HIDDEN: Record<SplitAxis, string> = {
   horizontal: "inset(0% 50% 0% 50% round 12px)",
   vertical: "inset(50% 0% 50% 0% round 12px)",
@@ -27,9 +24,6 @@ const CenterSplitReveal = ({
 }) => {
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // the closed seam opens outward to both edges, so the image splits apart from
-  // the middle. alongside it, the image starts blurred + zoomed in and settles
-  // to crisp/1x.
   const reveal = () => {
     if (!imgRef.current) return;
     gsap.fromTo(
@@ -49,7 +43,6 @@ const CenterSplitReveal = ({
     );
   };
 
-  // replay whenever the axis changes (and on mount)
   useEffect(() => {
     reveal();
     // eslint-disable-next-line react-hooks/exhaustive-deps

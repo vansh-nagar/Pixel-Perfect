@@ -24,7 +24,6 @@ const SLIDES: Slide[] = [
 const SPEED = 90; // px per second at idle drift
 const IDLE = 1; // timeScale magnitude when no scrolling
 
-// The notched-card arrow, reused static from the Inertia Arrow Card.
 const Arrow = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -52,40 +51,27 @@ const ScrollDirectionCarousel = () => {
       const container = containerRef.current;
       if (!track || !container) return;
 
-      // Two identical copies side by side → one period = one copy's width.
       const firstCard = track.children[0] as HTMLElement;
       const cardWidth =
         firstCard.offsetWidth +
         parseFloat(getComputedStyle(firstCard).marginRight);
       const loopWidth = cardWidth * SLIDES.length;
 
-      // Drive x ourselves and wrap it into one period so the loop is seamless in
-      // BOTH directions. (A plain repeat:-1 tween can't play before its start, so
-      // reversing it would stall at x:0 — this never does.)
       const wrapX = gsap.utils.wrap(-loopWidth, 0);
       const setX = gsap.quickSetter(track, "x", "px");
       let x = 0;
 
-      // Speed model: velocity = direction * (IDLE + boost) * SPEED
-      //   direction → ±1, set by the SIGN of your last scroll (down = forward,
-      //               up = backward) and it PERSISTS, so the strip keeps drifting
-      //               that way until you scroll the other way.
-      //   boost     → extra magnitude from scroll velocity, bled back to 0 so the
-      //               carousel speeds up as you scroll, then eases to the idle drift.
       let direction = 1;
       let boost = 0;
 
       const tick = (_time: number, deltaTime: number) => {
         boost *= 0.92;
         if (boost < 0.001) boost = 0;
-        // Forward (direction:1) drifts left, matching the original travel.
         x -= direction * (IDLE + boost) * SPEED * (deltaTime / 1000);
         setX(wrapX(x));
       };
       gsap.ticker.add(tick);
 
-      // Scoped to this element (not window) so multiple carousels coexist and the
-      // page scroll isn't globally hijacked.
       const onWheel = (e: WheelEvent) => {
         e.preventDefault();
         if (e.deltaY !== 0) direction = e.deltaY > 0 ? 1 : -1;
@@ -103,7 +89,6 @@ const ScrollDirectionCarousel = () => {
 
   return (
     <div className="w-full p-4">
-      {/* Inverted-corner notch clip, shared by every card. */}
       <svg width="0" height="0" className="absolute">
         <defs>
           <clipPath id="sdc-notch" clipPathUnits="objectBoundingBox">
@@ -134,7 +119,6 @@ const ScrollDirectionCarousel = () => {
                 </span>
                 <h3 className="text-3xl font-bold">{s.title}</h3>
               </div>
-              {/* Static button nestled in the notch. */}
               <div className="absolute bottom-0 right-0 flex h-16 w-28 items-center justify-center rounded-full bg-white/25">
                 <Arrow />
               </div>

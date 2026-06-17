@@ -12,8 +12,6 @@ const SRC = "/bend-image-reveal.gif";
 const IrisMaskReveal = () => {
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // grow a circle from (x, y) out to the farthest corner so the whole frame ends
-  // up revealed. defaults to the center when triggered without a pointer event.
   const reveal = (x?: number, y?: number) => {
     const img = imgRef.current;
     if (!img) return;
@@ -21,7 +19,6 @@ const IrisMaskReveal = () => {
     const h = img.clientHeight;
     const cx = x ?? w / 2;
     const cy = y ?? h / 2;
-    // farthest of the four corners from the click point
     const maxR = Math.max(
       Math.hypot(cx, cy),
       Math.hypot(w - cx, cy),

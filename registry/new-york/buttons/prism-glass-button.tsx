@@ -10,26 +10,14 @@ import {
 } from "react";
 import { motion, type HTMLMotionProps } from "framer-motion";
 
-/* -------------------------------------------------------------------------- */
-/*  Displacement-map generator                                                */
-/* -------------------------------------------------------------------------- */
-// The effect rests on a single SVG filter primitive, feDisplacementMap. It reads
-// a small PNG built on the fly from the lens shape and, for each pixel of the
-// content behind the glass, uses the map's red/green channels to decide how far
-// to bend that pixel. Outside the lens the map is neutral, so only the region
-// under the glass refracts.
-
 type LensParams = {
   width: number;
   height: number;
   borderRadius: number;
   /** Overall refraction strength (how hard the glass bends content). */
   scale: number;
-  /** How far in from the edge, in px, the bend ramps up. */
   depth: number;
-  /** Surface curve, 0–1: 0 = flat rim bevel → 1 = strongly domed. */
   curvature: number;
-  /** Spreads the displacement outward, fattening the refracted ring. */
   splay: number;
 };
 
@@ -47,7 +35,6 @@ const smoothStep = (a: number, b: number, t: number) => {
   return x * x * (3 - 2 * x);
 };
 
-// Signed distance to a rounded rectangle centred at the origin.
 const roundedRectSDF = (
   x: number,
   y: number,
@@ -77,8 +64,6 @@ function generateLensMap(p: LensParams): GeneratedMap {
   const ctx = canvas.getContext("2d")!;
   const img = ctx.createImageData(w, h);
 
-  // Only the top-left quadrant is evaluated, then mirrored — a rounded rect is
-  // four-fold symmetric, so this is a quarter of the per-pixel work.
   const qw = Math.ceil(w / 2);
   const qh = Math.ceil(h / 2);
   const dxQuad = new Float32Array(qw * qh);
@@ -150,11 +135,6 @@ function generateLensMap(p: LensParams): GeneratedMap {
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Tuning — the exact settings from the control panel                        */
-/* -------------------------------------------------------------------------- */
-// Deep dome (curvature 1, depth 26), heavy chromatic spread and a touch of frost
-// blur — a thick prism puck rather than a thin sheet of glass.
 const SETTINGS = {
   scale: 0.151,
   depth: 26,
@@ -173,13 +153,6 @@ type PrismGlassButtonProps = HTMLMotionProps<"button"> & {
   children?: ReactNode;
 };
 
-/**
- * A thick prism of glass: a deeply-domed feDisplacementMap lens with a strong
- * chromatic-aberration fringe and a faint frost. The refraction only shows over
- * real content, so place it over texture (a gradient, image, or busy layout),
- * not a flat fill. Press bends the glass harder; drag it to slide the lens
- * across the content behind it.
- */
 const PrismGlassButton = ({
   children = "Glass",
   className,
@@ -193,7 +166,6 @@ const PrismGlassButton = ({
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [pressed, setPressed] = useState(false);
 
-  // Measure the rendered button so the lens matches it exactly.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -207,8 +179,6 @@ const PrismGlassButton = ({
     return () => ro.disconnect();
   }, []);
 
-  // Fully rounded pill — the lens radius tracks half the height so the glass
-  // edge always matches the button's rounded-full outline.
   const radius = size.h / 2;
 
   const map = useMemo(() => {
@@ -224,13 +194,10 @@ const PrismGlassButton = ({
     });
   }, [size.w, size.h, radius, pressed]);
 
-  // Safari caches filter output by ID, so the token must change with the map.
   const version = size.w * 100000 + size.h * 10 + (pressed ? 1 : 0);
   const filterId = `prism-glass-${version}`;
   const lensScale = map?.scale ?? 0;
 
-  // Split the displacement into three scales for R / G / B and screen them back
-  // together — at chroma 0 they coincide; above 0 a colour fringe appears.
   const spread = SETTINGS.chroma * (map?.chromaAmount ?? 0) * 0.6;
   const scaleR = lensScale + spread;
   const scaleG = lensScale;

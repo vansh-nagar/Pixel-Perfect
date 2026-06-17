@@ -27,7 +27,6 @@ import { useGSAP } from "@gsap/react";
 
 type Variant = "cursor" | "bar" | "color" | "box";
 
-// Mirrors the Codrops lettersAndSymbols pool (kept lowercase; CSS uppercases it).
 const GLYPHS =
   "abcdefghijklmnopqrstuvwxyz!@#$%^&*-_+=;:<>,".split("");
 const COLORS = ["#22a3a9", "#4ca922", "#a99222", "#1d2619"];
@@ -45,7 +44,6 @@ const CONFIG: Record<
 const randomGlyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
 const randomColor = () => COLORS[Math.floor(Math.random() * COLORS.length)];
 
-// Showcase loop pacing (the original is hover-only; these drive the auto-loop).
 const LINE_STAGGER_MS = 220;
 const BACK_DELAY_MS = 2600;
 const CYCLE_MS = 5000;
@@ -106,8 +104,6 @@ export function LineHoverText({
           wrap.appendChild(text);
 
           let block: HTMLSpanElement | null = null;
-          // Whitespace keeps the layout gap but is never scrambled (matches the
-          // SplitType behaviour of only animating non-space characters).
           if (variant === "cursor" && /\S/.test(ch)) {
             block = document.createElement("span");
             block.style.position = "absolute";
@@ -227,7 +223,6 @@ export function LineHoverText({
 
       const built: Line[] = els.map((el, i) => buildLine(el, lines[i] ?? ""));
 
-      // Hover: re-trigger the decode; bar/box variants reverse on leave.
       built.forEach((line) => {
         line.onEnter = () => {
           if (line.pendingBack) {
@@ -243,7 +238,6 @@ export function LineHoverText({
         }
       });
 
-      // Continuous loop across all lines.
       const cycle = () => {
         if (cancelled) return;
         built.forEach((line, i) => {

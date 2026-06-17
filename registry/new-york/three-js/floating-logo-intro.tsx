@@ -13,11 +13,9 @@ import type { Group } from "three";
 
 const MODEL_URL = "/model/polify.glb";
 
-// Logo path normalised to M/L only (the original used H commands).
 const LOGO_PATH =
   "M726.5 0L840.5 66.5L633.5 389L491 389L420 497.5L110 497.5L0 431L278 0L726.5 0ZM398 84.5L182.5 416.5L302.5 416.5L372 306L514 306L655.5 84.5L398 84.5Z";
 
-// easeOutBack: overshoots then settles with slope 0 — float takes over cleanly.
 const easeOutBack = (x: number, s = 1.70158) => {
   const c1 = s;
   const c3 = c1 + 1;
@@ -32,22 +30,17 @@ const Model = ({ play }: { play: boolean }) => {
   const start = useRef<number | null>(null);
 
   const hovered = useRef(false);
-  // Screen-space cursor (0..1) so the bleed is one continuous mask across every
-  // face from the camera's view — not a separate spot per face.
   const mouseTarget = useRef(new THREE.Vector2(0.5, 0.5));
   const uMouse = useRef({ value: new THREE.Vector2(0.5, 0.5) });
   const uReveal = useRef({ value: 0 });
   const uRadius = useRef({ value: 0.15 }); // fraction of the viewport
   const uResolution = useRef({ value: new THREE.Vector2(1, 1) });
-  // Click-to-spread "venom takeover".
   const painted = useRef(false);
   const spreadTarget = useRef(0);
   const uSpread = useRef({ value: 0 });
   const uSpreadCenter = useRef({ value: new THREE.Vector2(0.5, 0.5) });
   const uTime = useRef({ value: 0 });
 
-  // Glossy piano-black + white feature edges, patched with a screen-space
-  // ink-bleed reveal (cursor-reveal idea) — colourful gradient + soft glow.
   useEffect(() => {
     const mat = new THREE.MeshPhysicalMaterial({
       color: "#070707",
@@ -153,7 +146,6 @@ const Model = ({ play }: { play: boolean }) => {
     const g = ref.current;
     if (!g) return;
 
-    // ease reveal in/out + smoothly follow the cursor in screen space
     const target = hovered.current ? 1 : 0;
     uReveal.current.value += (target - uReveal.current.value) * 0.08;
     mouseTarget.current.set(
@@ -165,7 +157,6 @@ const Model = ({ play }: { play: boolean }) => {
       state.gl.domElement.width,
       state.gl.domElement.height,
     );
-    // venom spread eases toward its target; uTime keeps the noise crawling
     uSpread.current.value +=
       (spreadTarget.current - uSpread.current.value) * 0.05;
     uTime.current.value = state.clock.elapsedTime;
@@ -192,7 +183,6 @@ const Model = ({ play }: { play: boolean }) => {
       g.rotation.z = Math.sin(ft * 1.1) * 0.06 * ramp;
       base = 1;
     }
-    // barely-there "breathing" scale on hover
     g.scale.setScalar(base * (1 + 0.025 * reveal));
   });
 
@@ -203,8 +193,6 @@ const Model = ({ play }: { play: boolean }) => {
   const onOut = () => {
     hovered.current = false;
   };
-  // Click → venom spreads out from the click point to cover the model; click
-  // again → it retracts and the glossy original returns.
   const onClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     painted.current = !painted.current;
@@ -228,15 +216,6 @@ const Model = ({ play }: { play: boolean }) => {
 
 useGLTF.preload(MODEL_URL);
 
-/* ---------------------------------------------------------------------------
- * Distorted-pixels background (technique from akella/DistortedPixels, MIT).
- *
- * The logo + POLIFY are drawn to a canvas texture. A small grid DataTexture
- * holds per-cell RG offsets; the cursor pushes nearby cells (scaled by its
- * velocity) and every cell relaxes back each frame. The display shader samples
- * the texture at `uv - k * offset.rg`, so the pixels smear/distort along the
- * cursor trail and settle when it stops.
- * ------------------------------------------------------------------------- */
 const GRID = 36; // fewer cells = bigger "pixels"
 
 const DistortedPixels = () => {
@@ -254,7 +233,6 @@ const DistortedPixels = () => {
     const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, -10, 10);
     camera.position.z = 1;
 
-    // --- content texture: logo mark + POLIFY drawn to a square canvas --------
     const TS = 2048;
     const tcan = document.createElement("canvas");
     tcan.width = TS;
@@ -268,7 +246,6 @@ const DistortedPixels = () => {
       ctx.clearRect(0, 0, TS, TS);
       ctx.fillStyle = "rgba(217,217,217,0.18)"; // solid (filled), subtle
 
-      // POLIFY, auto-fit to ~80% width, centred, with refined letter-spacing
       const c2d = ctx as CanvasRenderingContext2D & { letterSpacing: string };
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -284,7 +261,6 @@ const DistortedPixels = () => {
     draw();
     if (document.fonts?.ready) document.fonts.ready.then(draw);
 
-    // --- offset grid DataTexture --------------------------------------------
     const data = new Float32Array(GRID * GRID * 4);
     const dataTexture = new THREE.DataTexture(
       data,
@@ -333,7 +309,6 @@ const DistortedPixels = () => {
       const h = container.clientHeight;
       if (!w || !h) return;
       renderer.setSize(w, h);
-      // cover-fit the square texture into the viewport
       const imgAspect = 1;
       let a1 = 1;
       let a2 = 1;
@@ -348,7 +323,6 @@ const DistortedPixels = () => {
     const ro = new ResizeObserver(resize);
     ro.observe(container);
 
-    // --- pointer (tracked on the window so the model canvas on top is fine) --
     const mouse = { x: 0.5, y: 0.5, px: 0.5, py: 0.5, vx: 0, vy: 0 };
     const onMove = (e: PointerEvent) => {
       const r = renderer.domElement.getBoundingClientRect();
@@ -421,10 +395,8 @@ const FloatingLogoIntro = () => {
     <div className="relative h-full w-full overflow-hidden bg-neutral-900">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap');`}</style>
 
-      {/* Distorted-pixels background: logo + POLIFY, smear along the cursor. */}
       <DistortedPixels />
 
-      {/* Transparent canvas with the floating model, over the distorted bg. */}
       <Canvas
         style={{ position: "absolute", inset: 0, zIndex: 10 }}
         dpr={[1, 2]}
@@ -438,7 +410,6 @@ const FloatingLogoIntro = () => {
         </Suspense>
       </Canvas>
 
-      {/* Intro: draw the logo stroke, then fade the cover out. */}
       <AnimatePresence>
         {showIntro && (
           <motion.div

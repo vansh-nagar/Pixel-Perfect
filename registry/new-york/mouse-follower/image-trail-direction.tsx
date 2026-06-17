@@ -51,7 +51,6 @@ const ImageTrailDirection = () => {
       z++;
       idx = wrap(idx + 1);
       const el = items[idx];
-      // Enter from the side opposite the cursor's horizontal travel.
       const offset = mouse.x > last.x ? 100 : -100;
       gsap.killTweensOf(el);
       gsap

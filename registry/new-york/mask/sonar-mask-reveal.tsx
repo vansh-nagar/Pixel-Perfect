@@ -16,15 +16,12 @@ const ringMask = (open: number, ring: number) =>
 const SonarMaskReveal = () => {
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // each ring's opaque part grows from 0 to the full ring spacing, so the gaps
-  // between the rings fill in and the image resolves from the center outward.
   const reveal = () => {
     const img = imgRef.current;
     if (!img) return;
 
     const state = { p: 0 };
     const apply = () => {
-      // ring spacing spans the half-diagonal so the rings reach every corner.
       const reach = Math.hypot(img.clientWidth, img.clientHeight) / 2;
       const ring = reach / RINGS;
       const open = ring * state.p;

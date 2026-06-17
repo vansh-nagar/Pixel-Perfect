@@ -19,9 +19,6 @@ const BlindsMaskReveal = ({
 }) => {
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // each slat is a band of `size / SLATS`; `open` (the opaque part of the band)
-  // grows from 0 to the full band, so all slats open in unison. vertical slats
-  // run along the width (90deg); horizontal along the height (0deg).
   const reveal = () => {
     const img = imgRef.current;
     if (!img) return;

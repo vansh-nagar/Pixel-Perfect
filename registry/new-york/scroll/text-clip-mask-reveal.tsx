@@ -6,9 +6,6 @@
 
 import { useEffect, useRef } from "react";
 
-// Walk up to the element that actually scrolls — this grid renders each effect
-// inside an inner `overflow-y-auto` pane (`data-lenis-prevent`), not the window,
-// so progress has to be measured against that container's viewport.
 function findScroller(el: HTMLElement): HTMLElement | undefined {
   let node = el.parentElement;
   while (node) {
@@ -24,9 +21,6 @@ function findScroller(el: HTMLElement): HTMLElement | undefined {
   return undefined;
 }
 
-// A word rendered as an SVG, used as the mask. Default fill is opaque (visible);
-// the transparent background hides everything else — so the video only shows
-// through the letterforms.
 const maskUrl = (text: string) =>
   "data:image/svg+xml," +
   encodeURIComponent(
@@ -37,9 +31,7 @@ const maskUrl = (text: string) =>
   );
 
 type TextClipMaskRevealProps = {
-  /** The word punched out of the video. */
   text?: string;
-  /** Video shown through the mask. */
   src?: string;
 };
 
@@ -63,9 +55,6 @@ const TextClipMaskReveal = ({
     let eased = 0;
     let raf = 0;
 
-    // 0 → 1 as the tall container scrolls past the sticky frame inside the
-    // scroll pane. getBoundingClientRect (not offsetTop) keeps the math correct
-    // regardless of which ancestor is the scroller.
     const rawProgress = () => {
       const rect = root.getBoundingClientRect();
       const viewport = scroller?.clientHeight ?? window.innerHeight;

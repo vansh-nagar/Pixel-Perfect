@@ -38,8 +38,6 @@ const RingCarousel3D = () => {
   const stageRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
 
-  // Even angular step; radius pulled in by OVERLAP so the cards crowd the
-  // front arc and overlap, instead of sitting spaced out around the ring.
   const step = 360 / IMAGES.length;
   const radius = Math.round(
     (CARD_W / 2 / Math.tan(Math.PI / IMAGES.length)) * OVERLAP,
@@ -66,7 +64,6 @@ const RingCarousel3D = () => {
         }
         gsap.set(ring, { rotationX: TILT, rotationY: rotation });
 
-        // Brightness/opacity by how much each card faces the camera.
         cards.forEach((card, i) => {
           const facing = Math.cos(((rotation + i * step) * Math.PI) / 180);
           const t = (facing + 1) / 2; // 0 (back) → 1 (front)

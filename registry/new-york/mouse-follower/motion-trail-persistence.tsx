@@ -30,7 +30,6 @@ const MotionTrailPersistence = () => {
     const wrap = gsap.utils.wrap(0, total);
     const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b;
     const visibleTotal = Math.min(9, total - 1);
-    // Circular index, [offset] positions back from [position].
     const getNewPosition = (position: number, offset: number) => {
       const realOffset = Math.abs(offset) % total;
       return position - realOffset >= 0 ? position - realOffset : total - (realOffset - position);
@@ -86,7 +85,6 @@ const MotionTrailPersistence = () => {
         0
       );
 
-      // Once the stack is full, retire the oldest still-visible image.
       if (visibleCount >= visibleTotal) {
         const old = items[getNewPosition(idx, visibleTotal)];
         gsap.to(old, { duration: 0.4, ease: "power4", opacity: 0, scale: 1.3 });

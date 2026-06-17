@@ -21,7 +21,6 @@ const CARDS = [
   { seed: "veil-12", title: "Cascade" },
 ];
 
-// Dialed-in layout.
 const C = {
   persp: 600, // CSS perspective distance (px)
   ox: 0, // perspective-origin X (% — vanishing point)
@@ -41,16 +40,12 @@ const FannedDeckCarousel = () => {
   const railRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // scroll position along the deck (float index). target is what drag sets.
   const scroll = useRef(0);
   const target = useRef(0);
 
   useEffect(() => {
     const N = CARDS.length;
     const AUTO = 0.006; // gentle auto-slide (cards/frame) when not dragging
-    // Wrap window: cards live in p ∈ [WLO, WLO + N). Both ends sit inside the
-    // fade zones (front fades by p≈-0.6, back by p≈9), so a card teleporting by
-    // N at a boundary is invisible — the loop reads as seamless.
     const WLO = -1.5;
 
     let dragging = false;
@@ -61,11 +56,8 @@ const FannedDeckCarousel = () => {
       for (let i = 0; i < N; i++) {
         const el = cardRefs.current[i];
         if (!el) continue;
-        // wrap the raw index-distance into the visible window
         let p = i - scroll.current;
         p = ((((p - WLO) % N) + N) % N) + WLO;
-        // far cards shrink a touch and fade; the one passing the camera
-        // (p < 0) fades out as it exits the front.
         const scale = 1 - Math.max(0, p) * 0.012;
         const opacity =
           p < 0
@@ -86,7 +78,6 @@ const FannedDeckCarousel = () => {
     };
     tick();
 
-    // --- drag to scrub ----------------------------------------------------
     const onDown = (e: PointerEvent) => {
       dragging = true;
       lastX = e.clientX;
@@ -95,7 +86,6 @@ const FannedDeckCarousel = () => {
     };
     const onMove = (e: PointerEvent) => {
       if (!dragging) return;
-      // movement along the deck's diagonal (right+up) advances it
       const dx = e.clientX - lastX;
       const dy = e.clientY - lastY;
       lastX = e.clientX;
@@ -161,7 +151,6 @@ const FannedDeckCarousel = () => {
                 draggable={false}
                 className="h-full w-full object-cover"
               />
-              {/* glassy sheen + title */}
               <div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-black/30 via-transparent to-white/15" />
               <p className="pointer-events-none absolute bottom-3 left-4 text-[11px] font-medium uppercase tracking-widest text-white/90 drop-shadow">
                 {card.title}

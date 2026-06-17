@@ -11,8 +11,6 @@ const SRC = "/bend-image-reveal.gif";
 
 export type WipeDirection = "top" | "bottom" | "left" | "right";
 
-// inset(top right bottom left): the hidden start per direction. The named edge
-// is where the reveal grows FROM, so the opposite inset starts at 100%.
 const HIDDEN: Record<WipeDirection, string> = {
   bottom: "inset(100% 0% 0% 0%)", // grows upward from the bottom
   top: "inset(0% 0% 100% 0%)", // grows downward from the top
@@ -37,7 +35,6 @@ const DirectionalMaskReveal = ({
     );
   };
 
-  // replay whenever the direction changes (and on mount)
   useEffect(() => {
     reveal();
     // eslint-disable-next-line react-hooks/exhaustive-deps

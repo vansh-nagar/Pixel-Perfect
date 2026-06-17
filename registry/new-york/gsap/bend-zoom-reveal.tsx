@@ -13,7 +13,6 @@ const SRC = "/bend-image-reveal.gif";
 const IMG_ASPECT = 540 / 304;
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-// the whole image is one texture on one subdivided plane; the GPU bends the vertices
 const vertexShader = /* glsl */ `
   varying vec2 vUv;
   uniform float uBendX;
@@ -56,7 +55,6 @@ function BendImage({ scrollRef }: { scrollRef: RefObject<HTMLDivElement | null> 
     [],
   );
 
-  // starting plane size + how far it grows to fill the box
   const planeH = Math.min(size.height * 0.42, (size.width * 0.7) / IMG_ASPECT);
   const planeW = planeH * IMG_ASPECT;
   const coverScale = Math.max(size.width / planeW, size.height / planeH);
@@ -71,7 +69,6 @@ function BendImage({ scrollRef }: { scrollRef: RefObject<HTMLDivElement | null> 
 
   const state = useRef({ x: 0, y: 0, s: 0, bx: 0, by: 0 });
 
-  // --- ENTRANCE (on mount): fly in from bottom-right -> top-right -> center ---
   useEffect(() => {
     const mesh = meshRef.current;
     const mat = matRef.current;
@@ -97,20 +94,17 @@ function BendImage({ scrollRef }: { scrollRef: RefObject<HTMLDivElement | null> 
     };
   }, [texture, size.width, size.height]);
 
-  // --- SCROLL (inside the box): zoom to fill + bend from velocity ---
   useFrame(() => {
     const mesh = meshRef.current;
     const mat = matRef.current;
     const sc = scrollRef.current;
     if (!mesh || !mat) return;
 
-    // grow the plane based on how far the box has been scrolled
     const max = sc ? Math.max(1, sc.scrollHeight - sc.clientHeight) : 1;
     const progress = sc ? gsap.utils.clamp(0, 1, sc.scrollTop / max) : 0;
     const scale = lerp(1, coverScale, progress);
     mesh.scale.set(scale, scale, 1);
 
-    // velocities: entrance motion (position) + scroll
     const pvx = mesh.position.x - state.current.x;
     const pvy = mesh.position.y - state.current.y;
     const sv = sc ? sc.scrollTop - state.current.s : 0;
@@ -118,7 +112,6 @@ function BendImage({ scrollRef }: { scrollRef: RefObject<HTMLDivElement | null> 
     state.current.y = mesh.position.y;
     state.current.s = sc ? sc.scrollTop : 0;
 
-    // bend opposite to travel; divide by scale so the visual bend stays constant when zoomed
     const targetX = gsap.utils.clamp(-45, 45, -pvx * 2);
     const targetY = gsap.utils.clamp(-45, 45, -pvy * 2 + sv * -1.4);
     state.current.bx = lerp(state.current.bx, targetX, 0.12);
@@ -152,7 +145,6 @@ const Page = ({ columns = 1 }: { columns?: 1 | 2 }) => {
         columns === 2 ? "h-full w-full" : "h-72 w-72"
       }`}
     >
-      {/* WebGL overlay on top; pointer-events-none so the wheel reaches the scroller */}
       <Canvas
         className="pointer-events-none absolute inset-0 z-10"
         orthographic
@@ -163,7 +155,6 @@ const Page = ({ columns = 1 }: { columns?: 1 | 2 }) => {
         <BendImage scrollRef={scrollRef} />
       </Canvas>
 
-      {/* native scroll container: the tall spacer drives the zoom; overscroll-contain keeps the wheel inside */}
       <div
         ref={scrollRef}
         className="scrollbar-none absolute inset-0 overflow-y-auto overscroll-contain"

@@ -27,12 +27,10 @@ const GravityImageTrail = () => {
     let oldY = 0;
     let imgIndex = 0;
 
-    // Track the elements/timelines we spawn so we can clean up on unmount.
     const active = new Set<{ el: HTMLImageElement; tl: gsap.core.Timeline }>();
 
     const createMedia = (x: number, y: number, deltaX: number) => {
       const H = root.clientHeight;
-      // Skip if spawned too close to the floor — there's no room to fall/bounce.
       if (y > H - H * 0.2) return;
 
       const el = document.createElement("img");
@@ -50,7 +48,6 @@ const GravityImageTrail = () => {
         active.delete(entry);
       });
 
-      // Appear with an elastic pop.
       tl.fromTo(
         el,
         {
@@ -68,7 +65,6 @@ const GravityImageTrail = () => {
         }
       );
 
-      // Drift horizontally in the cursor's direction of travel.
       tl.fromTo(
         el,
         { x },
@@ -81,7 +77,6 @@ const GravityImageTrail = () => {
         "<"
       );
 
-      // Fall to the floor.
       tl.fromTo(
         el,
         { y },
@@ -95,7 +90,6 @@ const GravityImageTrail = () => {
         "<"
       );
 
-      // Bounce back up and out — stronger overshoot the higher it started.
       tl.to(el, {
         x: "+=" + deltaX * 1.6,
         rotation: (Math.random() - 0.5) * 40,
@@ -113,14 +107,11 @@ const GravityImageTrail = () => {
       );
     };
 
-    // Listen on the window — an overlay (borders + copy button) sits on top of
-    // this container in the grid, so a container-scoped listener never fires.
     const handleMouseMove = (e: MouseEvent) => {
       const rect = root.getBoundingClientRect();
       const valX = e.clientX - rect.left;
       const valY = e.clientY - rect.top;
 
-      // Only react while the cursor is actually inside this cell.
       const inside =
         valX >= 0 && valX <= rect.width && valY >= 0 && valY <= rect.height;
       if (!inside) {
@@ -158,7 +149,6 @@ const GravityImageTrail = () => {
       ref={containerRef}
       className="relative h-full w-full overflow-hidden"
     >
-      {/* Preload images so spawned copies appear instantly, no network delay. */}
       <div className="pointer-events-none absolute h-px w-px opacity-0">
         {Images.map((src, i) => (
           // eslint-disable-next-line @next/next/no-img-element

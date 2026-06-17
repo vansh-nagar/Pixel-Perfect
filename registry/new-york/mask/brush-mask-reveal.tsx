@@ -9,13 +9,10 @@ import gsap from "gsap";
 
 const SRC = "/bend-image-reveal.gif";
 
-// a connected boustrophedon (snake) stroke; a thick round stroke sweeping these
-// three rows covers the whole 640×360 frame as it is drawn.
 const STROKE = "M -60 60 H 700 V 180 H -60 V 300 H 700";
 
 const BrushMaskReveal = () => {
   const pathRef = useRef<SVGPathElement>(null);
-  // useId can contain ":" which breaks url(#...) references — strip it.
   const maskId = `brush-${useId().replace(/:/g, "")}`;
 
   const reveal = () => {

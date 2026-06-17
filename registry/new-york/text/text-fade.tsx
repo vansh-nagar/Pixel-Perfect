@@ -15,7 +15,6 @@ function scheduleRefresh() {
   refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 60);
 }
 
-/** Nearest scrollable ancestor (or a Lenis-prevented pane); `undefined` = window. */
 function findScroller(el: HTMLElement): Element | undefined {
   let node = el.parentElement;
   while (node) {
@@ -49,8 +48,6 @@ const TextFade = ({
       color: "#b5cab7",
     });
 
-    // Drive the word-by-word fade from the scroll position: words brighten as
-    // the paragraph scrolls up through the viewport and dim again on scroll-up.
     const scroller = findScroller(root);
     gsap.to(split.words, {
       opacity: 1,
@@ -68,10 +65,8 @@ const TextFade = ({
     });
 
     scheduleRefresh();
-    // Re-measure once webfonts settle (SplitText positions shift on swap-in).
     document.fonts?.ready.then(scheduleRefresh);
 
-    // Element scrollers aren't tracked by ScrollTrigger's window resize listener.
     let resizeTimer = 0;
     const ro = new ResizeObserver(() => {
       window.clearTimeout(resizeTimer);

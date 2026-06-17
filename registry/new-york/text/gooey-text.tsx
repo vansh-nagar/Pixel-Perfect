@@ -80,7 +80,6 @@ export function GooeyText({ variant, textA, textB, className }: GooeyTextProps) 
   const a = textA ?? cfg.textA;
   const b = textB ?? cfg.textB;
 
-  // SVG filter ids must be document-unique; useId keeps multiple mounts apart.
   const filterId = `goo-${useId().replace(/:/g, "")}`;
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -160,7 +159,6 @@ export function GooeyText({ variant, textA, textB, className }: GooeyTextProps) 
       host.addEventListener("mouseenter", onEnter);
       host.addEventListener("mouseleave", onLeave);
 
-      // Continuous loop: alternate forward/back morph with a hold between.
       let forward = true;
       const timers: number[] = [];
       const step = () => {

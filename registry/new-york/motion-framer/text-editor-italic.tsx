@@ -15,8 +15,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-// Surfaces resolve from CSS variables declared on the root (see className),
-// so the editor retints itself for light/dark without a theme hook.
 const TOOLBAR_BG = "var(--te-toolbar)";
 const HIGHLIGHT = "var(--te-highlight)";
 const NAME_HIGHLIGHT = "var(--te-name-hl)";
@@ -71,7 +69,6 @@ const TextEditorItalic = () => {
       className="relative h-80 w-[420px] overflow-hidden rounded-2xl flex flex-col items-center [--te-toolbar:#F2F2F1] [--te-highlight:#E2E2E0] [--te-name-hl:#EAEAE8] [--te-tooltip:#F6F6F5] [--te-hl:rgba(255,255,255,0.95)] [--te-hover:rgba(0,0,0,0.04)] dark:[--te-toolbar:#2A2A2D] dark:[--te-highlight:#3A3A3E] dark:[--te-name-hl:#303034] dark:[--te-tooltip:#2E2E32] dark:[--te-hl:rgba(255,255,255,0.06)] dark:[--te-hover:rgba(255,255,255,0.06)]"
       style={{ fontFamily: "ui-sans-serif, system-ui" }}
     >
-      {/* Toolbar */}
       <div className="relative mt-8">
         <div
           className="flex items-center gap-1.5 rounded-full pl-3 pr-1.5 py-1.5"
@@ -81,7 +78,6 @@ const TextEditorItalic = () => {
               "0 1px 0 var(--te-hl) inset, 0 -1px 0 rgba(0,0,0,0.12) inset, 0 18px 30px -12px rgba(0,0,0,0.35), 0 4px 10px -2px rgba(0,0,0,0.16)",
           }}
         >
-          {/* Style cycler — changes the font of the highlighted name */}
           <button
             type="button"
             onClick={cycleStyle}
@@ -112,7 +108,6 @@ const TextEditorItalic = () => {
             </svg>
           </button>
 
-          {/* Bold */}
           <ToolButton
             active={bold}
             onClick={() => setBold((b) => !b)}
@@ -123,7 +118,6 @@ const TextEditorItalic = () => {
             </span>
           </ToolButton>
 
-          {/* Italic — hover shows tooltip */}
           <div
             className="relative"
             onMouseEnter={() => setHoverItalic(true)}
@@ -142,7 +136,6 @@ const TextEditorItalic = () => {
               </span>
             </ToolButton>
 
-            {/* Tooltip on hover */}
             <AnimatePresence>
               {hoverItalic && (
                 <motion.div
@@ -171,7 +164,6 @@ const TextEditorItalic = () => {
             </AnimatePresence>
           </div>
 
-          {/* Align — cycles left/center/right */}
           <ToolButton
             active={align !== "center"}
             onClick={cycleAlign}
@@ -195,10 +187,8 @@ const TextEditorItalic = () => {
             )}
           </ToolButton>
 
-          {/* Spacer */}
           <div className="w-1" />
 
-          {/* Reset formatting */}
           <ToolButton
             active={false}
             onClick={resetFormatting}
@@ -210,7 +200,6 @@ const TextEditorItalic = () => {
             />
           </ToolButton>
 
-          {/* Play — triggers letter-scatter animation on the body text */}
           <motion.button
             type="button"
             onClick={playAnimation}
@@ -234,7 +223,6 @@ const TextEditorItalic = () => {
         </div>
       </div>
 
-      {/* Body text — re-keyed by playKey so the stagger animation re-runs on play */}
       <div
         key={playKey}
         className={`relative mt-10 px-10 ${alignmentClass}`}

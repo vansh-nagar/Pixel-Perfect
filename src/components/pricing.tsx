@@ -1,4 +1,4 @@
-import { Check, Circle } from "lucide-react";
+import { Circle } from "lucide-react";
 import StarBorder from "./mine/landing-page/star-border";
 import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
 import Link from "next/link";

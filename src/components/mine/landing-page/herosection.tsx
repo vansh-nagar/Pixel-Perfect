@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import { Model3D } from "@/components/ui/3dmodel";
 import { HeroGrid } from "./canvas/hero-grid";
-import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
 import TextTypewriterGlitch from "registry/new-york/text/text-typewriter-glitch";
 import { FaGithub } from "react-icons/fa6";
 
@@ -60,7 +59,6 @@ export function HeroSection() {
   const [, forceRender] = useState(0);
   const [fps, setFps] = useState<number>(0);
   const [ms, setMs] = useState<number>(0);
-  const last = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const lastFrameTime = useRef<number>(
     typeof performance !== "undefined" ? performance.now() : 0
   );

@@ -33,9 +33,6 @@ export function HeroGrid() {
     };
 
     const drawGrid = () => {
-      const isDark =
-        document.documentElement.classList.contains("dark") ||
-        window.matchMedia("(prefers-color-scheme: dark)").matches;
       const lineColor = "rgba(200, 200, 200, 0.1)";
       const starColor = "rgba(200, 200, 200, 0.25)";
 

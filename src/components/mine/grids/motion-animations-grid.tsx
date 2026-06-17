@@ -13,7 +13,6 @@ import CoinSpinAnimation from "registry/new-york/motion-framer/coin-spin-animati
 import FreePremiumToggle from "registry/new-york/motion-framer/free-premium-toggle";
 import MilestoneOdometer from "registry/new-york/motion-framer/milestone-odometer";
 import TextEditorItalic from "registry/new-york/motion-framer/text-editor-italic";
-import YogaInviteCard from "registry/new-york/motion-framer/yoga-invite-card";
 import ActivityWheelMotion from "registry/new-york/motion-framer/activity-wheel-motion";
 import CarLockDriveMotion from "registry/new-york/motion-framer/car-lock-drive-motion";
 import DialKnobMotion from "registry/new-york/motion-framer/dial-knob-motion";

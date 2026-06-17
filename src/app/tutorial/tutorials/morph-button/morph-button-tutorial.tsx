@@ -1,19 +1,15 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Code, Eye } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ToggleButton from "../../../../../registry/new-york/buttons/toggle-buttion";
 import MorphButton from "../../../../../registry/new-york/buttons/morph-button";
 import CopyDropdown from "@/components/mine/copy-dropdown";
 import Editor from "@monaco-editor/react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
 
 const MORPH_SOURCE = `"use client";
 import React, { useRef } from "react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
 import MorphSVGPlugin from "gsap/MorphSVGPlugin";
 
 gsap.registerPlugin(MorphSVGPlugin);

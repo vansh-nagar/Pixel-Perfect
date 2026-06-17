@@ -45,7 +45,6 @@ import FramerCtaButton from "../../../../registry/new-york/buttons/framer-cta-bu
 import SoftPillButton from "../../../../registry/new-york/buttons/soft-pill-button";
 import BookDemoButton from "../../../../registry/new-york/buttons/book-demo-button";
 import type { BookDemoVariant } from "../../../../registry/new-york/buttons/book-demo-button";
-import RecessedStepperButton from "../../../../registry/new-york/buttons/recessed-stepper-button";
 import GlassyButton from "../../../../registry/new-york/buttons/glassy-button";
 import LiquidButton from "../../../../registry/new-york/buttons/liquid-button";
 import RainbowGlowingButton from "../../../../registry/new-york/buttons/rainbow-glowing-button";

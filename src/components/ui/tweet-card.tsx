@@ -4,7 +4,6 @@ import { getTweet, type Tweet } from "react-tweet/api";
 
 import { cn } from "@/lib/utils";
 import StarBorder from "../mine/landing-page/star-border";
-import { FaTwitter } from "react-icons/fa6";
 
 interface TwitterIconProps {
   className?: string;

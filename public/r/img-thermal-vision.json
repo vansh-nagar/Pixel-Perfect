@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-thermal-vision",
+  "description": "Maps brightness onto an infrared heat ramp — cold indigo to white-hot.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-thermal-vision.tsx",
+      "content": "\"use client\";\n\n/**\n * Maps brightness onto an infrared heat ramp — cold indigo to white-hot.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // classic infrared ramp: black → indigo → red → orange → white-hot\n      vec3 thermal(float t) {\n        vec3 c = mix(vec3(0.0, 0.0, 0.12), vec3(0.34, 0.0, 0.55),\n                     smoothstep(0.0, 0.25, t));\n        c = mix(c, vec3(0.86, 0.0, 0.30), smoothstep(0.25, 0.5, t));\n        c = mix(c, vec3(1.0, 0.55, 0.0), smoothstep(0.5, 0.75, t));\n        c = mix(c, vec3(1.0, 1.0, 0.75), smoothstep(0.75, 1.0, t));\n        return c;\n      }\n      void main() {\n        vec2 uv = uv01();\n        float l = luma(texCover(uv).rgb);\n        l += (fbm(uv * 7.0 + time * 0.5) - 0.5) * 0.06; // heat shimmer\n        gl_FragColor = vec4(thermal(clamp(l, 0.0, 1.0)), 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function ThermalVision({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-thermal-vision.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

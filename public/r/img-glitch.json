@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-glitch",
+  "description": "Random horizontal slices tear and shift with bursts of RGB noise.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-glitch.tsx",
+      "content": "\"use client\";\n\n/**\n * Random horizontal slices tear and shift with bursts of RGB noise.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float t = floor(time * 12.0);\n        float line = floor(uv.y * 24.0);\n        float n = hash21(vec2(line, t));\n        float glitch = step(0.78, n);\n        float shift = (hash21(vec2(line, t + 1.0)) - 0.5) * glitch * 0.12;\n        uv.x = fract(uv.x + shift);\n        float ca = glitch * 0.02;\n        float r = texCover(uv + vec2(ca, 0.0)).r;\n        float g = texCover(uv).g;\n        float b = texCover(uv - vec2(ca, 0.0)).b;\n        vec3 col = vec3(r, g, b) + glitch * 0.05;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function Glitch({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-glitch.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

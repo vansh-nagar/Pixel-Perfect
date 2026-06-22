@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-ascii-art",
+  "description": "Rebuilds the image from terminal glyphs whose density tracks brightness.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-ascii-art.tsx",
+      "content": "\"use client\";\n\n/**\n * Rebuilds the image from terminal glyphs whose density tracks brightness.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // ink coverage of a procedural glyph for brightness b, at cell pos cp (0..1)\n      float asciiInk(vec2 cp, float b) {\n        vec2 g = floor(cp * 5.0);\n        float x = g.x, y = g.y;\n        float cx = abs(x - 2.0) < 0.5 ? 1.0 : 0.0;\n        float cy = abs(y - 2.0) < 0.5 ? 1.0 : 0.0;\n        float checker = mod(x + y, 2.0) < 0.5 ? 1.0 : 0.0;\n        float center = (cx > 0.5 && cy > 0.5) ? 1.0 : 0.0;\n        float ink = 0.0;\n        if (b > 0.9) ink = 1.0;                       // full block\n        else if (b > 0.7) ink = checker;              // #\n        else if (b > 0.5) ink = max(cx, cy);          // +\n        else if (b > 0.32) ink = center + ((abs(x - 1.0) < 0.5 && abs(y - 3.0) < 0.5) ? 1.0 : 0.0);\n        else if (b > 0.16) ink = center;              // .\n        return clamp(ink, 0.0, 1.0);\n      }\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float cells = 44.0;\n        vec2 grid = vec2(cells * aspect, cells);\n        vec2 cuv = (floor(uv * grid) + 0.5) / grid;\n        vec3 src = texCover(cuv).rgb;\n        float ink = asciiInk(fract(uv * grid), luma(src));\n        gl_FragColor = vec4(src * 1.2 * ink, 1.0); // glyphs tinted by the image\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function AsciiArt({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-ascii-art.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-hex-mosaic",
+  "description": "Pixelates the image onto a honeycomb grid of hexagons.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-hex-mosaic.tsx",
+      "content": "\"use client\";\n\n/**\n * Pixelates the image onto a honeycomb grid of hexagons.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float scale = 26.0;\n        vec2 p = vec2(uv.x * aspect, uv.y) * scale;\n        vec2 r = vec2(1.0, 1.7320508);\n        vec2 h = r * 0.5;\n        vec2 a = mod(p, r) - h;\n        vec2 b = mod(p - h, r) - h;\n        vec2 gv = dot(a, a) < dot(b, b) ? a : b;\n        vec2 center = p - gv;\n        vec2 cuv = vec2(center.x / aspect, center.y) / scale;\n        gl_FragColor = vec4(texCover(cuv).rgb, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function HexMosaic({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-hex-mosaic.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

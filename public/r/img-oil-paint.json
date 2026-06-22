@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-oil-paint",
+  "description": "Kuwahara filtering smears the image into soft painterly brush strokes.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-oil-paint.tsx",
+      "content": "\"use client\";\n\n/**\n * Kuwahara filtering smears the image into soft painterly brush strokes.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // Mean + summed colour variance of one quadrant around uv (Kuwahara).\n      vec4 region(vec2 uv, vec2 px, vec2 corner) {\n        vec3 sum = vec3(0.0), sum2 = vec3(0.0);\n        const int R = 3;\n        for (int i = 0; i <= R; i++) {\n          for (int j = 0; j <= R; j++) {\n            vec2 o = vec2(float(i), float(j)) * corner * px;\n            vec3 c = texCover(uv + o).rgb;\n            sum += c;\n            sum2 += c * c;\n          }\n        }\n        float n = float((R + 1) * (R + 1));\n        vec3 mean = sum / n;\n        vec3 var = sum2 / n - mean * mean;\n        return vec4(mean, var.r + var.g + var.b);\n      }\n      void main() {\n        vec2 uv = uv01();\n        vec2 px = 1.8 / resolution;             // brush size\n        vec4 a = region(uv, px, vec2( 1.0,  1.0));\n        vec4 b = region(uv, px, vec2(-1.0,  1.0));\n        vec4 c = region(uv, px, vec2( 1.0, -1.0));\n        vec4 d = region(uv, px, vec2(-1.0, -1.0));\n        vec3 col = a.rgb;\n        float mv = a.w;                          // pick the flattest quadrant\n        if (b.w < mv) { mv = b.w; col = b.rgb; }\n        if (c.w < mv) { mv = c.w; col = c.rgb; }\n        if (d.w < mv) { mv = d.w; col = d.rgb; }\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function OilPaint({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-oil-paint.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

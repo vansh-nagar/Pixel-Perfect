@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-led-dot-matrix",
+  "description": "Rebuilds the image from a grid of glowing round LEDs on a black panel.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-led-dot-matrix.tsx",
+      "content": "\"use client\";\n\n/**\n * Rebuilds the image from a grid of glowing round LEDs on a black panel.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float scale = 64.0;\n        vec2 grid = vec2(scale * aspect, scale);\n        vec2 cuv = (floor(uv * grid) + 0.5) / grid;   // cell centre\n        vec2 cell = fract(uv * grid) - 0.5;           // -0.5..0.5 within cell\n        vec3 col = texCover(cuv).rgb;\n        float d = length(cell);\n        float radius = 0.30 + 0.12 * luma(col);        // brighter cells light up bigger\n        float led = smoothstep(radius, radius - 0.12, d);\n        float glow = 0.012 / (d * d + 0.012);          // soft bloom around each LED\n        gl_FragColor = vec4(col * led + col * glow * 0.25, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function LedDotMatrix({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-led-dot-matrix.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

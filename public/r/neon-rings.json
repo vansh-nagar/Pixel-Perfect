@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "neon-rings",
+  "description": "Pulsing, wobbling concentric rings glowing through a cosine spectrum.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/neon-rings.tsx",
+      "content": "\"use client\";\n\n/**\n * Pulsing, wobbling concentric rings glowing through a cosine spectrum.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uvCentered();\n        float t = time * 0.5;\n        float r = length(uv);\n        float a = atan(uv.y, uv.x);\n        float wob = 0.05 * sin(a * 6.0 + t * 2.0);\n        float rings = abs(fract((r + wob) * 4.0 - t) * 2.0 - 1.0);\n        float glow = 0.025 / (rings + 0.025);\n        vec3 col = palette(\n          r - t * 0.2,\n          vec3(0.5), vec3(0.5), vec3(1.0), vec3(0.0, 0.33, 0.67)\n        ) * glow;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function NeonRings({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/neon-rings.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

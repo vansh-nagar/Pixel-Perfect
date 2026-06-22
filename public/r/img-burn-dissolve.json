@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-burn-dissolve",
+  "description": "Hover and the first image burns away along a glowing ember edge, revealing the next through the noise.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-burn-dissolve.tsx",
+      "content": "\"use client\";\n\n/**\n * Hover and the first image burns away along a glowing ember edge, revealing the next through the noise.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float p = uProgress;\n        float n = fbm(uv * 5.0);                 // dissolve threshold map\n        float edgeW = 0.1;\n        float t = mix(-edgeW, 1.0 + edgeW, p);   // sweep threshold across the noise\n        float reveal = 1.0 - smoothstep(t - edgeW, t + edgeW, n);\n        vec3 col = mix(texCover(uv).rgb, texCoverB(uv).rgb, reveal);\n        // glowing ember along the burning front\n        float glow = (1.0 - smoothstep(0.0, edgeW, abs(n - t)))\n                   * step(0.02, p) * step(p, 0.98);\n        col += glow * vec3(1.0, 0.5, 0.15) * 0.9;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\nconst DEFAULT_IMAGE_B = \"/fluid-transition.gif\";\n\nexport default function BurnDissolve({\n  image = DEFAULT_IMAGE,\n  imageB = DEFAULT_IMAGE_B,\n  className,\n  controls,\n}: {\n  image?: string;\n  imageB?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      imageB={imageB}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-burn-dissolve.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

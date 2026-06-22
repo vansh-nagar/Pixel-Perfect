@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-liquid-transition",
+  "description": "Hover to ripple both frames through a flowing noise warp as one dissolves into the other.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-liquid-transition.tsx",
+      "content": "\"use client\";\n\n/**\n * Hover to ripple both frames through a flowing noise warp as one dissolves into the other.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float p = uProgress;\n        float amt = sin(p * 3.14159265) * 0.08;    // warp peaks mid-transition\n        vec2 w = vec2(\n          fbm(uv * 4.0 + time * 0.3),\n          fbm(uv * 4.0 + 5.0 - time * 0.2)\n        ) - 0.5;\n        vec3 a = texCover(uv + w * amt).rgb;\n        vec3 b = texCoverB(uv + w * amt).rgb;\n        gl_FragColor = vec4(mix(a, b, smoothstep(0.0, 1.0, p)), 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\nconst DEFAULT_IMAGE_B = \"/fluid-transition.gif\";\n\nexport default function LiquidTransition({\n  image = DEFAULT_IMAGE,\n  imageB = DEFAULT_IMAGE_B,\n  className,\n  controls,\n}: {\n  image?: string;\n  imageB?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      imageB={imageB}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-liquid-transition.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

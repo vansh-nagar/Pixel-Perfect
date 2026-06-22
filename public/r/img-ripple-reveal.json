@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-ripple-reveal",
+  "description": "Hover to send a rippling ring out from the centre, warping the first image aside as the next floods in.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-ripple-reveal.tsx",
+      "content": "\"use client\";\n\n/**\n * Hover to send a rippling ring out from the centre, warping the first image aside as the next floods in.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float p = uProgress;\n        float aspect = resolution.x / resolution.y;\n        vec2 c = uv - 0.5;\n        c.x *= aspect;\n        float dist = length(c);\n        float maxd = 0.5 * sqrt(1.0 + aspect * aspect);\n        float front = p * (maxd + 0.1);\n        float ring = 1.0 - smoothstep(0.0, 0.12, abs(dist - front));\n        vec2 dir = c / (dist + 1e-4);\n        vec2 warp = dir * ring * 0.03 * sin((dist - front) * 60.0);\n        warp.x /= aspect;\n        float reveal = step(dist, front);\n        vec3 col = mix(texCover(uv + warp).rgb, texCoverB(uv + warp).rgb, reveal);\n        col += ring * 0.2 * step(0.02, p) * step(p, 0.98);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\nconst DEFAULT_IMAGE_B = \"/fluid-transition.gif\";\n\nexport default function RippleReveal({\n  image = DEFAULT_IMAGE,\n  imageB = DEFAULT_IMAGE_B,\n  className,\n  controls,\n}: {\n  image?: string;\n  imageB?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      imageB={imageB}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-ripple-reveal.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

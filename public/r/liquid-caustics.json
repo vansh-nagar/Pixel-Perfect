@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "liquid-caustics",
+  "description": "Sunlight refracting through rippling water onto a pool floor.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/liquid-caustics.tsx",
+      "content": "\"use client\";\n\n/**\n * Sunlight refracting through rippling water onto a pool floor.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01() * 4.0;\n        float aspect = resolution.x / resolution.y;\n        uv.x *= aspect;\n        float t = time * 0.4;\n        vec2 p = uv;\n        for (int i = 0; i < 4; i++) {\n          float fi = float(i) + 1.0;\n          p += vec2(sin(p.y * 1.5 + t + fi), cos(p.x * 1.5 - t + fi)) * 0.35;\n        }\n        float v = abs(sin(p.x) * sin(p.y));\n        float caustic = pow(1.0 - v, 4.0);\n        vec3 col = mix(vec3(0.0, 0.22, 0.45), vec3(0.45, 0.95, 1.0), caustic);\n        col += pow(caustic, 3.0) * 0.5;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function LiquidCaustics({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/liquid-caustics.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

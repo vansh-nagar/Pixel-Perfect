@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-fiery-aurora",
+  "description": "A fiery aurora of layered orange and yellow radial glows.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/gradient-fiery-aurora.tsx",
+      "content": "/**\n * A fiery aurora of layered orange and yellow radial glows.\n */\nexport default function GradientFieryAurora() {\n  return (\n    <div\n      className=\"absolute inset-0\"\n      style={{\n        background:\n          \"radial-gradient(45.33% 46.43% at 41.69% 50%, #FF4001 0%, rgba(255, 64, 1, 0) 100%), radial-gradient(28.41% 117.96% at 7.72% 28.75%, #FFFDA6 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(37.39% 69.19% at 107.79% 0%, #FF7500 0%, rgba(255, 66, 0, 0) 100%), radial-gradient(54.38% 89.75% at 83.46% 89.75%, #FFF926 0%, rgba(255, 69, 0, 0.6) 100%), #FF4001\",\n      }}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/gradient-fiery-aurora.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

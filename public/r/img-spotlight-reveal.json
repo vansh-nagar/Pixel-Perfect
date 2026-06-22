@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-spotlight-reveal",
+  "description": "A flashlight of full colour follows your cursor through a darkened image.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-spotlight-reveal.tsx",
+      "content": "\"use client\";\n\n/**\n * A flashlight of full colour follows your cursor through a darkened image.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        vec3 col = texCover(uv).rgb;\n        float aspect = resolution.x / resolution.y;\n        vec2 d = uv - mouse;\n        d.x *= aspect;\n        float dist = length(d);\n        float n = fbm(uv * 8.0 + time * 0.3) * 0.04;     // wobble the beam edge\n        float light = smoothstep(0.32, 0.05, dist + n);\n        vec3 dim = vec3(luma(col) * 0.12);               // near-black outside\n        vec3 outc = mix(dim, col, light);\n        outc += col * smoothstep(0.45, 0.0, dist) * 0.15; // soft warm falloff\n        gl_FragColor = vec4(outc, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function SpotlightReveal({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-spotlight-reveal.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

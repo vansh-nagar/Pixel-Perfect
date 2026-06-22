@@ -1,5 +1,9 @@
 "use client";
 
+/**
+ * ASCII flame animation rendered in a red terminal style.
+ */
+
 import { useEffect, useState } from "react";
 
 const fps = 30;

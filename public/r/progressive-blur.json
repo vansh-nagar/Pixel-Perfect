@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progressive-blur",
+  "description": "A progressive (layered) backdrop-blur fade, stacking eight masked blur layers.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/progressive-blur.tsx",
+      "content": "\"use client\";\n\n/**\n * A progressive (layered) backdrop-blur fade, stacking eight masked blur layers.\n */\nexport default function ProgressiveBlur() {\n  return (\n    <div className=\"pointer-events-none absolute inset-0 overflow-hidden\">\n      <div className=\"relative h-full w-full\">\n        {[\n          { blur: 0.5, mask: [0, 12.5, 25, 37.5] },\n          { blur: 1, mask: [12.5, 25, 37.5, 50] },\n          { blur: 2, mask: [25, 37.5, 50, 62.5] },\n          { blur: 3, mask: [37.5, 50, 62.5, 75] },\n          { blur: 5, mask: [50, 62.5, 75, 87.5] },\n          { blur: 8, mask: [62.5, 75, 87.5, 100] },\n          { blur: 12, mask: [75, 87.5, 100, 112.5] },\n          { blur: 16, mask: [87.5, 100, 100, 100] },\n        ].map((layer, i) => {\n          const s = layer.mask;\n          const mask = `linear-gradient(to bottom, rgba(0,0,0,0) ${s[0]}%, rgb(0,0,0) ${s[1]}%, rgb(0,0,0) ${s[2]}%, rgba(0,0,0,0) ${s[3]}%)`;\n          return (\n            <div\n              key={i}\n              className=\"absolute inset-0\"\n              style={{\n                zIndex: i + 1,\n                backdropFilter: `blur(${layer.blur}px)`,\n                WebkitBackdropFilter: `blur(${layer.blur}px)`,\n                maskImage: mask,\n                WebkitMaskImage: mask,\n              }}\n            />\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/progressive-blur.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

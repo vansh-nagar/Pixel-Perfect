@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-checker-flip",
+  "description": "Hover and the image tiles into a checkerboard whose squares flip over, staggered, to the next image.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-checker-flip.tsx",
+      "content": "\"use client\";\n\n/**\n * Hover and the image tiles into a checkerboard whose squares flip over, staggered, to the next image.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float p = uProgress;\n        float aspect = resolution.x / resolution.y;\n        float cells = 10.0;\n        vec2 grid = vec2(cells * aspect, cells);\n        vec2 cell = floor(uv * grid);\n        float checker = mod(cell.x + cell.y, 2.0);     // 0 / 1\n        float r = hash21(cell);\n        float cellP = 0.05 + checker * 0.45 + r * 0.45; // (0,1]: staggered order\n        float reveal = step(cellP, p);\n        vec3 col = mix(texCover(uv).rgb, texCoverB(uv).rgb, reveal);\n        // darken each tile at the instant it flips\n        float flip = (1.0 - smoothstep(0.0, 0.12, abs(cellP - p)))\n                   * step(0.02, p) * step(p, 0.98);\n        col *= 1.0 - flip * 0.35;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\nconst DEFAULT_IMAGE_B = \"/fluid-transition.gif\";\n\nexport default function CheckerFlip({\n  image = DEFAULT_IMAGE,\n  imageB = DEFAULT_IMAGE_B,\n  className,\n  controls,\n}: {\n  image?: string;\n  imageB?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      imageB={imageB}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-checker-flip.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

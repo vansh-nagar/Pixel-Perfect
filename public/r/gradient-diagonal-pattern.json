@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-diagonal-pattern",
+  "description": "A fine diagonal repeating-line micro pattern.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/gradient-diagonal-pattern.tsx",
+      "content": "/**\n * A fine diagonal repeating-line micro pattern.\n */\nexport default function GradientDiagonalPattern() {\n  return (\n    <div className=\"bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px] h-full w-full absolute inset-0\" />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/gradient-diagonal-pattern.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

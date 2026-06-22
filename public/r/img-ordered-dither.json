@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-ordered-dither",
+  "description": "Bayer-matrix ordered dithering crunched down to a few colour levels.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-ordered-dither.tsx",
+      "content": "\"use client\";\n\n/**\n * Bayer-matrix ordered dithering crunched down to a few colour levels.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // Recursive Bayer ordered-dither matrix (no dynamic indexing → GLES1 safe).\n      float Bayer2(vec2 a) { a = floor(a); return fract(a.x * 0.5 + a.y * a.y * 0.75); }\n      #define Bayer4(a) (Bayer2(0.5 * (a)) * 0.25 + Bayer2(a))\n      #define Bayer8(a) (Bayer4(0.5 * (a)) * 0.25 + Bayer2(a))\n\n      void main() {\n        vec2 uv = uv01();\n        // chunky pixels so the ordered dither reads as a retro screen\n        float aspect = resolution.x / resolution.y;\n        vec2 grid = vec2(190.0 * aspect, 190.0);\n        vec2 puv = (floor(uv * grid) + 0.5) / grid;\n        vec3 col = texCover(puv).rgb;\n        float levels = mix(2.0, 4.0, 0.5 + 0.5 * sin(time * 0.3));\n        float threshold = Bayer8(uv * grid) - 0.5; // one dither cell per pixel\n        col += threshold / levels;\n        col = floor(col * (levels - 1.0) + 0.5) / (levels - 1.0);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function OrderedDither({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-ordered-dither.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

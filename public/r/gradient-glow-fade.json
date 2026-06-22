@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-glow-fade",
+  "description": "Radial glow that fades from a blue bloom at the top into white.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/gradient-glow-fade.tsx",
+      "content": "/**\n * Radial glow that fades from a blue bloom at the top into white.\n */\nexport default function GradientGlowFade() {\n  return (\n    <div\n      aria-hidden\n      className=\"absolute z-30 inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,var(--color-blue-600),var(--color-white)_100%)]\"\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/gradient-glow-fade.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-shery-perlin",
+  "description": "A pulsing Perlin-noise displacement that breathes the image in and out. Adapted from Shery.js (style 6), MIT — Sheryians Coding School.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-shery-perlin.tsx",
+      "content": "\"use client\";\n\n/**\n * A pulsing Perlin-noise displacement that breathes the image in and out. Adapted from Shery.js (style 6), MIT — Sheryians Coding School.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // Adapted from Shery.js effect 6 (Perlin Noise), MIT.\n      void main() {\n        vec2 uv = uv01();\n        float scale = 2.0, detail = 50.0, speed = 1.0, amount = 9.0;\n        float x = (uv.x - 0.5) * scale * (detail / 100.0) * sin(time) * speed;\n        float y = (uv.y - 0.5) * scale * (detail / 100.0) * cos(time) * speed;\n        uv += snoise(vec3(x, y, 0.0)) * (amount / 100.0);\n        gl_FragColor = texCover(uv);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function SheryPerlin({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-shery-perlin.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-halftone",
+  "description": "Rebuilds the image from ink dots that grow where the picture is darker.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-halftone.tsx",
+      "content": "\"use client\";\n\n/**\n * Rebuilds the image from ink dots that grow where the picture is darker.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float scale = 90.0;\n        vec2 grid = vec2(scale * aspect, scale);\n        vec2 cell = fract(uv * grid) - 0.5;\n        vec2 cuv = (floor(uv * grid) + 0.5) / grid;\n        vec3 col = texCover(cuv).rgb;\n        float radius = (1.0 - luma(col)) * 0.7;\n        float dot = smoothstep(radius, radius - 0.12, length(cell));\n        gl_FragColor = vec4(mix(vec3(1.0), col, dot), 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function Halftone({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-halftone.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

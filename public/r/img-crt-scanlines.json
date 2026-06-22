@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-crt-scanlines",
+  "description": "Curved tube, scanlines, RGB fringe and a rolling bar — vintage television.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-crt-scanlines.tsx",
+      "content": "\"use client\";\n\n/**\n * Curved tube, scanlines, RGB fringe and a rolling bar — vintage television.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        // barrel distortion around the centre (the curved glass tube)\n        vec2 c = uv - 0.5;\n        float r2 = dot(c, c);\n        uv = 0.5 + c * (1.0 + 0.18 * r2);\n        if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n          gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);\n          return;\n        }\n        // slight per-channel offset (phosphor fringe)\n        float off = 0.0016;\n        vec3 col = vec3(\n          texCover(uv + vec2(off, 0.0)).r,\n          texCover(uv).g,\n          texCover(uv - vec2(off, 0.0)).b\n        );\n        // scanlines + a brightness bar rolling slowly down the screen\n        col *= 0.82 + 0.18 * (0.5 + 0.5 * sin(uv.y * 300.0));\n        col *= 0.94 + 0.06 * sin(uv.y * 4.0 - time * 2.0);\n        // vignette\n        col *= smoothstep(1.0, 0.2, r2 * 2.2);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function CrtScanlines({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-crt-scanlines.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

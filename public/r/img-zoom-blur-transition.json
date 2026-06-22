@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-zoom-blur-transition",
+  "description": "Hover to punch through a radial zoom-blur — the first image streaks outward as the second rushes in.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-zoom-blur-transition.tsx",
+      "content": "\"use client\";\n\n/**\n * Hover to punch through a radial zoom-blur — the first image streaks outward as the second rushes in.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float p = smoothstep(0.0, 1.0, uProgress);\n        vec2 c = uv - 0.5;\n        float blur = sin(p * 3.14159265) * 0.25;   // strongest mid-transition\n        vec3 a = vec3(0.0), b = vec3(0.0);\n        const int N = 8;\n        for (int i = 0; i < N; i++) {\n          float k = (float(i) / float(N - 1) - 0.5) * 2.0; // -1..1\n          float s = 1.0 + blur * k;                        // radial scale jitter\n          a += texCover(0.5 + c * s).rgb;\n          b += texCoverB(0.5 + c * s).rgb;\n        }\n        a /= float(N);\n        b /= float(N);\n        gl_FragColor = vec4(mix(a, b, p), 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\nconst DEFAULT_IMAGE_B = \"/fluid-transition.gif\";\n\nexport default function ZoomBlurTransition({\n  image = DEFAULT_IMAGE,\n  imageB = DEFAULT_IMAGE_B,\n  className,\n  controls,\n}: {\n  image?: string;\n  imageB?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      imageB={imageB}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-zoom-blur-transition.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

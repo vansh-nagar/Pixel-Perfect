@@ -72,6 +72,10 @@ type TextItem = {
   description: string;
   component: React.ReactNode;
   registryName: string;
+  // Some variants share a single registry source file (e.g. all gooey variants
+  // live in `gooey-text.tsx`). `registrySlug` is the file the Copy dropdown
+  // installs/copies; it falls back to `registryName` when they're the same.
+  registrySlug?: string;
   hasStagger: boolean;
   isScroll?: boolean;
 };
@@ -92,6 +96,7 @@ const TextGrid = () => {
         "Two phrases melt and reform into each other through an SVG gooey blur filter.",
       component: <GooeyMorph />,
       registryName: "text-gooey-morph",
+      registrySlug: "gooey-text",
       hasStagger: false,
     },
     {
@@ -100,6 +105,7 @@ const TextGrid = () => {
         "Gooey crossfade with a horizontal slide as one phrase morphs into the next.",
       component: <GooeySlideX />,
       registryName: "text-gooey-slide-x",
+      registrySlug: "gooey-text",
       hasStagger: false,
     },
     {
@@ -108,6 +114,7 @@ const TextGrid = () => {
         "Gooey crossfade with a vertical drop as one phrase morphs into the next.",
       component: <GooeySlideY />,
       registryName: "text-gooey-slide-y",
+      registrySlug: "gooey-text",
       hasStagger: false,
     },
   ];
@@ -119,6 +126,7 @@ const TextGrid = () => {
         "Per-character scramble with a block cursor flashing as each letter locks in.",
       component: <DecodeCursor className="text-xl" />,
       registryName: "text-decode-cursor",
+      registrySlug: "line-hover",
       hasStagger: false,
     },
     {
@@ -127,6 +135,7 @@ const TextGrid = () => {
         "Scramble decode with a white highlight bar wiping across in blend-difference.",
       component: <DecodeBar className="text-xl" />,
       registryName: "text-decode-bar",
+      registrySlug: "line-hover",
       hasStagger: false,
     },
     {
@@ -135,6 +144,7 @@ const TextGrid = () => {
         "Scramble where each glyph flashes a random color before settling.",
       component: <DecodeColor className="text-xl" />,
       registryName: "text-decode-color",
+      registrySlug: "line-hover",
       hasStagger: false,
     },
     {
@@ -143,6 +153,7 @@ const TextGrid = () => {
         "Scramble decode with a rounded blurred box growing up from the bottom.",
       component: <DecodeBox className="text-xl" />,
       registryName: "text-decode-box",
+      registrySlug: "line-hover",
       hasStagger: false,
     },
   ];
@@ -175,6 +186,7 @@ const TextGrid = () => {
         "A word appears in the center; each new word enters from the right and pushes the line until the phrase locks centered.",
       component: <KineticCenterText className="text-2xl font-semibold" />,
       registryName: "text-kinetic-center-build",
+      registrySlug: "custom",
       hasStagger: false,
     },
     {
@@ -183,6 +195,7 @@ const TextGrid = () => {
         "The whole phrase glides in from the left as one move, while the words are revealed in sequence through opacity.",
       component: <SharedSlideText className="text-2xl font-semibold" />,
       registryName: "text-short-slide-right",
+      registrySlug: "custom",
       hasStagger: false,
     },
     {
@@ -191,6 +204,7 @@ const TextGrid = () => {
         "Each new word drops in from above into its own line and pushes the stack downward until a centered composition locks.",
       component: <KineticStackText className="text-2xl font-semibold" />,
       registryName: "text-short-slide-down",
+      registrySlug: "custom",
       hasStagger: false,
     },
     ...ANIMATE_TEXT_ORDER.slice(17).map((id) => {
@@ -565,7 +579,7 @@ const TextGrid = () => {
                 </p>
               </div>
               <div className="pointer-events-auto">
-                <CopyDropdown registryName={activeItem.registryName} />
+                <CopyDropdown registryName={activeItem.registrySlug ?? activeItem.registryName} />
               </div>
             </div>
 
@@ -627,7 +641,7 @@ const TextGrid = () => {
                   </SelectContent>
                 </Select>
               )}
-              <CopyDropdown registryName={activeItem.registryName} />
+              <CopyDropdown registryName={activeItem.registrySlug ?? activeItem.registryName} />
             </div>
           </section>
         )}

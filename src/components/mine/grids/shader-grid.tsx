@@ -1,10 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Copy, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { toast } from "sonner";
+import CopyDropdown from "../copy-dropdown";
+
 import ShaderCanvas from "@/components/pixel-perfect/shaders/shader-canvas";
 import BlobSphere from "@/components/pixel-perfect/shaders/blob-sphere";
 import TwistedBlob from "@/components/pixel-perfect/shaders/twisted-blob";
@@ -80,20 +81,10 @@ const ShaderGrid = () => {
 
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import BlobSphere from "@/components/pixel-perfect/shaders/blob-sphere";\n\n<BlobSphere className="w-full h-full" interactive />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Blob component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="blob-sphere"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -126,20 +117,10 @@ const ShaderGrid = () => {
 
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import TwistedBlob from "@/components/pixel-perfect/shaders/twisted-blob";\n\n<TwistedBlob className="w-full h-full" interactive />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Blob component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="twisted-blob"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -173,20 +154,10 @@ const ShaderGrid = () => {
 
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import DayNightSky from "@/components/pixel-perfect/shaders/day-night-sky";\n\n<DayNightSky className="w-full h-full" controls />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Day to Night component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="day-night-sky"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -223,20 +194,10 @@ const ShaderGrid = () => {
 
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import ShaderCanvas from "@/components/pixel-perfect/shaders/shader-canvas";\n\n<ShaderCanvas\n  className="w-full h-full"\n  fragmentShader={\`${item.fragmentShader.trim()}\`}\n/>`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Shader code copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName={item.id}
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>

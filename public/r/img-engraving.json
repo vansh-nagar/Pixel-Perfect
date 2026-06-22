@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-engraving",
+  "description": "Renders the image as inked woodcut hatch-lines on warm paper.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-engraving.tsx",
+      "content": "\"use client\";\n\n/**\n * Renders the image as inked woodcut hatch-lines on warm paper.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float l = pow(luma(texCover(uv).rgb), 0.6);   // lift the dark scene\n        float shade = (1.0 - l) * 0.7;                 // cap so darks never go solid\n        float freq = 150.0;\n        // each period inks a fraction = shade, rest stays paper (thin lines on light)\n        float v1 = fract((uv.y + sin(uv.x * 9.0) * 0.012) * freq);\n        float v2 = fract((uv.x + sin(uv.y * 9.0) * 0.012) * freq);\n        float ink = step(v1, shade);\n        ink = max(ink, step(v2, shade - 0.35));        // cross-hatch only the darker tones\n        vec3 col = mix(vec3(0.96, 0.94, 0.87), vec3(0.07), ink);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function Engraving({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-engraving.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

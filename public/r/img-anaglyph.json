@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-anaglyph",
+  "description": "Red/cyan stereo split driven by brightness-as-depth — grab your 3D glasses.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-anaglyph.tsx",
+      "content": "\"use client\";\n\n/**\n * Red/cyan stereo split driven by brightness-as-depth — grab your 3D glasses.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float depth = luma(texCover(uv).rgb) - 0.5;\n        float sep = depth * 0.02 + 0.004;\n        float red = texCover(uv - vec2(sep, 0.0)).r;\n        vec3 cyan = texCover(uv + vec2(sep, 0.0)).rgb;\n        gl_FragColor = vec4(red, cyan.g, cyan.b, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function Anaglyph({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-anaglyph.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

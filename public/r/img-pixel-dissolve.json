@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-pixel-dissolve",
+  "description": "The image materialises from chunky mosaic blocks into full resolution.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-pixel-dissolve.tsx",
+      "content": "\"use client\";\n\n/**\n * The image materialises from chunky mosaic blocks into full resolution.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float prog = 0.68 - 0.32 * cos(time * 0.55);       // 0.36..1.0 (never blank)\n        float cells = mix(12.0, 200.0, prog);\n        vec2 grid = vec2(cells * aspect, cells);\n        vec2 cuv = (floor(uv * grid) + 0.5) / grid;\n        vec3 blocky = texCover(cuv).rgb;\n        vec3 sharp = texCover(uv).rgb;\n        float r = hash21(floor(uv * grid));                // per-block randomness\n        float on = smoothstep(0.0, 0.2, prog - r * 0.4);   // blocks pop in irregularly\n        vec3 col = mix(vec3(0.03), blocky, on);\n        col = mix(col, sharp, smoothstep(0.75, 1.0, prog));\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function PixelDissolve({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-pixel-dissolve.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

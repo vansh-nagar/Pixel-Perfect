@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-purple-blue",
+  "description": "A purple-to-blue angled linear gradient.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/gradient-purple-blue.tsx",
+      "content": "/**\n * A purple-to-blue angled linear gradient.\n */\nexport default function GradientPurpleBlue() {\n  return (\n    <div\n      className=\"absolute inset-0\"\n      style={{\n        background:\n          \"linear-gradient(115.43deg, #1A00FF 0%, #9D00FF 100%)\",\n      }}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/gradient-purple-blue.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

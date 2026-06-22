@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-kaleidoscope",
+  "description": "Folds the image into six-fold mirrored symmetry that slowly rotates.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-kaleidoscope.tsx",
+      "content": "\"use client\";\n\n/**\n * Folds the image into six-fold mirrored symmetry that slowly rotates.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        vec2 c = uv - 0.5;\n        c.x *= aspect;\n        float r = length(c);\n        float a = atan(c.y, c.x) + time * 0.2;\n        float seg = TAU / 6.0;\n        a = abs(mod(a, seg) - seg * 0.5);          // mirror within each wedge\n        vec2 p = vec2(cos(a), sin(a)) * r * (0.85 + 0.15 * sin(time * 0.3));\n        p.x /= aspect;\n        vec2 m = abs(fract((p + 0.5) * 0.5) * 2.0 - 1.0); // mirror-wrap into 0..1\n        gl_FragColor = texCover(m);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function Kaleidoscope({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-kaleidoscope.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

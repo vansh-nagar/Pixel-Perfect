@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-magnifier-lens",
+  "description": "A fish-eye loupe follows your cursor, zooming the image right beneath it.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-magnifier-lens.tsx",
+      "content": "\"use client\";\n\n/**\n * A fish-eye loupe follows your cursor, zooming the image right beneath it.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        vec2 d = uv - mouse;\n        d.x *= aspect;\n        float dist = length(d);\n        float radius = 0.22;\n        vec2 suv = uv;\n        if (dist < radius) {\n          float t = dist / radius;\n          float k = mix(0.5, 1.0, smoothstep(0.0, 1.0, t)); // zoom hardest at centre\n          suv = mouse + (uv - mouse) * k;\n        }\n        vec3 col = texCover(suv).rgb;\n        // glass rim: thin bright ring at the lens edge\n        float rim = smoothstep(radius, radius - 0.012, dist)\n                  - smoothstep(radius - 0.02, radius - 0.032, dist);\n        col += rim * 0.45;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function MagnifierLens({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-magnifier-lens.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

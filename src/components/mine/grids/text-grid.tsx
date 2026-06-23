@@ -82,7 +82,7 @@ type TextItem = {
 
 const TextGrid = () => {
   const [staggerFrom, setStaggerFrom] = useState<StaggerFrom>("start");
-  const [activeId, setActiveId] = useState<string>("text-block-center-rise");
+  const [activeId, setActiveId] = useState<string>("text-matrix-rain");
   const [panelHeight, setPanelHeight] = useState("calc(100vh - 151px)");
   const wrapRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -260,6 +260,17 @@ const TextGrid = () => {
   );
 
   const TextArr: TextItem[] = [
+    {
+      name: "Matrix Rain Decode",
+      description: "Columns of random symbols fall → lock into real text.",
+      component: (
+        <TextMatrixRain className="text-2xl font-bold font-mono">
+          JUST GIVE IT A STAR
+        </TextMatrixRain>
+      ),
+      registryName: "text-matrix-rain",
+      hasStagger: false,
+    },
     ...gooeyEntries,
     ...scrollTypographyEntries,
     ...blockTransitionEntries,
@@ -274,17 +285,6 @@ const TextGrid = () => {
         </TextBrokenGlass>
       ),
       registryName: "text-broken-glass",
-      hasStagger: false,
-    },
-    {
-      name: "Matrix Rain Decode",
-      description: "Columns of random symbols fall → lock into real text.",
-      component: (
-        <TextMatrixRain className="text-2xl font-bold font-mono">
-          JUST GIVE IT A STAR
-        </TextMatrixRain>
-      ),
-      registryName: "text-matrix-rain",
       hasStagger: false,
     },
     {

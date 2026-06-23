@@ -570,13 +570,6 @@ const MagneticButtonWrapper = () => {
 
 export const ButtonsArr = [
   {
-    name: "Magnetic Button",
-    description:
-      'Magnetic pull toward the cursor — pick a GSAP overwrite mode (true / false / "auto") from the dropdown to compare against an idle wiggle.',
-    component: <MagneticButtonWrapper />,
-    registryName: "magnetic-button",
-  },
-  {
     name: "Refraction Glass Button",
     description:
       "Real glass lens that refracts the content behind it via feDisplacementMap, with chromatic edge and specular sheen.",
@@ -800,6 +793,13 @@ export const ButtonsArr = [
       "Premium gradient button with image overlay and 8 color variants.",
     component: <LiquidGradientButtonWrapper />,
     registryName: "liquid-gradient-button",
+  },
+  {
+    name: "Magnetic Button",
+    description:
+      'Magnetic pull toward the cursor — pick a GSAP overwrite mode (true / false / "auto") from the dropdown to compare against an idle wiggle.',
+    component: <MagneticButtonWrapper />,
+    registryName: "magnetic-button",
   },
 ];
 

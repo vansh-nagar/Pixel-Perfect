@@ -34,7 +34,7 @@ const SpinningCubeMotion = () => {
           {faces.map((face) => (
             <div
               key={face.label}
-              className="absolute grid place-items-center border border-white/30 bg-white/5 text-[10px] font-medium uppercase tracking-widest text-white/70 backdrop-blur-sm"
+              className="absolute grid place-items-center border border-foreground/30 bg-foreground/5 text-[10px] font-medium uppercase tracking-widest text-foreground/70 backdrop-blur-sm"
               style={{
                 width: SIZE,
                 height: SIZE,

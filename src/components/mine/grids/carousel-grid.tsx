@@ -7,7 +7,6 @@ import InfiniteCarousel from "registry/new-york/carousel/infinite-carousel";
 import ScrollDirectionCarousel from "registry/new-york/carousel/scroll-direction-carousel";
 import RadialCarousel from "registry/new-york/carousel/radial-carousel";
 import CardsSlider from "registry/new-york/carousel/cards-slider";
-import RingCarousel3D from "registry/new-york/carousel/ring-carousel-3d";
 import PerspectiveDeckCarousel from "registry/new-york/carousel/perspective-deck-carousel";
 import FannedDeckCarousel from "registry/new-york/carousel/fanned-deck-carousel";
 import CopyDropdown from "../copy-dropdown";
@@ -40,13 +39,6 @@ const CarouselGridArr = [
       "An infinite deck of product cards: the active card sits front-and-centre while the rest fan out behind with less scale and a soft blur. Drag, click a peeking card, or let it auto-advance — the index wraps forever.",
     component: <CardsSlider />,
     registryName: "cards-slider",
-  },
-  {
-    name: "Ring Carousel 3D",
-    description:
-      "Image cards arranged around a circle in real 3D space: the ring drifts on its own, spins when you drag with carried momentum, and cards brighten toward the front and dim toward the back.",
-    component: <RingCarousel3D />,
-    registryName: "ring-carousel-3d",
   },
   {
     name: "Perspective Deck Carousel",

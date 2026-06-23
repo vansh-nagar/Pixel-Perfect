@@ -251,11 +251,11 @@ const DistortedPixels = () => {
       ctx.textBaseline = "middle";
       ctx.font = "700 100px 'Space Grotesk', sans-serif";
       c2d.letterSpacing = "8px";
-      const w100 = ctx.measureText("POLIFY").width || 600;
+      const w100 = ctx.measureText("PIXEL").width || 600;
       const fs = ((TS * 0.8) / w100) * 100;
       ctx.font = `700 ${fs}px 'Space Grotesk', sans-serif`;
       c2d.letterSpacing = `${(8 / 100) * fs}px`;
-      ctx.fillText("POLIFY", TS / 2, TS / 2);
+      ctx.fillText("PIXEL", TS / 2, TS / 2);
       texture.needsUpdate = true;
     };
     draw();

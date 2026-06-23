@@ -2,7 +2,6 @@
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
@@ -211,13 +210,6 @@ export function TabsNavigation() {
             <div className="border-t border-dashed group-data-[state=active]:border-foreground mask-x-to-98%" />
           </TabsTrigger>
         ))}
-        <Link
-          href="/scroll-typography"
-          className="z-50 cursor-pointer group text-xs px-1 py-1 font-medium text-nowrap inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Scroll Typography
-          <ArrowUpRight className="size-3" />
-        </Link>
         <a
           href="https://www.asciistudio.space/showcase"
           target="_blank"

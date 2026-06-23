@@ -15,7 +15,6 @@ import {
   MoreHorizontalCircle01Icon,
 } from "@hugeicons/core-free-icons";
 
-// Change Here
 const menuItems = [
   { id: "profile", label: "Profile", icon: UserIcon },
   { id: "upgrade", label: "Upgrade", icon: CreditCardIcon },
@@ -92,7 +91,6 @@ export function TwentyTwelveOne() {
           />
         </motion.div>
 
-        {/* Menu Content - visible when open */}
         <div ref={contentRef}>
           <motion.div
             layout
@@ -165,7 +163,6 @@ export function TwentyTwelveOne() {
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
-                    {/* Hover/Active background indicator */}
                     {showIndicator && (
                       <motion.div
                         layoutId="activeIndicator"
@@ -180,7 +177,6 @@ export function TwentyTwelveOne() {
                         }}
                       />
                     )}
-                    {/* Left bar indicator */}
                     {showIndicator && (
                       <motion.div
                         layoutId="leftBar"

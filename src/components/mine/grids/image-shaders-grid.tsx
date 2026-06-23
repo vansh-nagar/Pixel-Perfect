@@ -1,10 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Copy, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { toast } from "sonner";
+import CopyDropdown from "../copy-dropdown";
 import ImageShaderCanvas from "@/components/pixel-perfect/shaders/image-shader-canvas";
 import FluidImage from "@/components/pixel-perfect/shaders/fluid-image";
 import PaintReveal from "@/components/pixel-perfect/shaders/paint-reveal";
@@ -51,12 +51,6 @@ const ImageShadersGrid = () => {
   const [meltOpen, setMeltOpen] = useState(false);
   const [vortexOpen, setVortexOpen] = useState(false);
   const [jellyOpen, setJellyOpen] = useState(false);
-  // The 16 hand-built interactive tiles (Pixel Distortion, Fluid, Paint, Cursor
-  // Paint, Scratch, Before/After, Particles, Inertia, Swarm, Flow Field, Ripple,
-  // Magnetic Warp, Cursor Trail, Liquid Melt, Vortex Pull, Jelly Bulge) all live
-  // on page 1; the registry shaders paginate over pages 2+. Each shader tile is
-  // wrapped in <LazyVisible>, so only the tiles near the viewport hold a live
-  // WebGL context (browsers cap at ~16) — the rest tear down until scrolled to.
   const itemsPerPage = 12;
   const RESERVED_FIRST_PAGE = 16;
   const firstPageItems = Math.max(0, itemsPerPage - RESERVED_FIRST_PAGE);
@@ -73,7 +67,6 @@ const ImageShadersGrid = () => {
     startIndex + itemsOnPage,
   );
 
-  // Esc to close + lock scroll while a full-screen preview is open.
   useEffect(() => {
     if (
       !active &&
@@ -166,20 +159,10 @@ const ImageShadersGrid = () => {
 
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import PixelDistortion from "@/components/pixel-perfect/shaders/pixel-distortion";\n\n<PixelDistortion\n  className="w-full h-full"\n  image="${FLUID_IMAGE}"\n/>`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Pixel Distortion component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="pixel-distortion"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -217,20 +200,10 @@ const ImageShadersGrid = () => {
 
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import FluidImage from "@/components/pixel-perfect/shaders/fluid-image";\n\n<FluidImage\n  className="w-full h-full"\n  image="${FLUID_IMAGE}"\n  imageB="${FLUID_IMAGE_B}"\n/>`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Fluid component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="fluid-image"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -267,20 +240,10 @@ const ImageShadersGrid = () => {
 
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import PaintReveal from "@/components/pixel-perfect/shaders/paint-reveal";\n\n<PaintReveal className="w-full h-full" image="${PAINT_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Paint Reveal component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="paint-reveal"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -316,20 +279,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import CursorReveal from "@/components/pixel-perfect/shaders/cursor-reveal";\n\n<CursorReveal className="w-full h-full" image="${BRUSH_IMAGE}" mode="paint" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Cursor Paint component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="cursor-reveal"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -365,20 +318,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import CursorReveal from "@/components/pixel-perfect/shaders/cursor-reveal";\n\n<CursorReveal className="w-full h-full" image="${BRUSH_IMAGE}" mode="scratch" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Scratch component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="cursor-reveal"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -413,20 +356,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import BeforeAfter from "@/components/pixel-perfect/shaders/before-after";\n\n<BeforeAfter\n  className="w-full h-full"\n  image="${FLUID_IMAGE}"\n  imageB="${FLUID_IMAGE_B}"\n  interactive\n/>`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Before/After component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="before-after"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -461,20 +394,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import ImageParticles from "@/components/pixel-perfect/shaders/image-particles";\n\n<ImageParticles className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Image Particles component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="image-particles"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -509,20 +432,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import InertiaParticles from "@/components/pixel-perfect/shaders/inertia-particles";\n\n<InertiaParticles className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Inertia Particles component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="inertia-particles"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -557,20 +470,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import MagneticSwarm from "@/components/pixel-perfect/shaders/magnetic-swarm";\n\n<MagneticSwarm className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Magnetic Swarm component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="magnetic-swarm"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -605,20 +508,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import FlowField from "@/components/pixel-perfect/shaders/flow-field";\n\n<FlowField className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Flow Field component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="flow-field"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -653,20 +546,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import RippleTouch from "@/components/pixel-perfect/shaders/ripple-touch";\n\n<RippleTouch className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Ripple Touch component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="ripple-touch"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -701,20 +584,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import MagneticWarp from "@/components/pixel-perfect/shaders/magnetic-warp";\n\n<MagneticWarp className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Magnetic Warp component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="magnetic-warp"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -749,20 +622,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import CursorTrailSmear from "@/components/pixel-perfect/shaders/cursor-trail-smear";\n\n<CursorTrailSmear className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Cursor Trail component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="cursor-trail-smear"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -797,20 +660,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import LiquidMelt from "@/components/pixel-perfect/shaders/liquid-melt";\n\n<LiquidMelt className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Liquid Melt component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="liquid-melt"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -845,20 +698,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import VortexPull from "@/components/pixel-perfect/shaders/vortex-pull";\n\n<VortexPull className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Vortex Pull component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="vortex-pull"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -893,20 +736,10 @@ const ImageShadersGrid = () => {
             </div>
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import JellyBulge from "@/components/pixel-perfect/shaders/jelly-bulge";\n\n<JellyBulge className="w-full h-full" image="${FLUID_IMAGE}" />`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Jelly Bulge component copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName="jelly-bulge"
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>
@@ -947,20 +780,10 @@ const ImageShadersGrid = () => {
 
             <div className="absolute inset-x-0 top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2 pointer-events-none">
               <div className="border-t border-dashed" />
-              <Button
-                size="sm"
-                variant="copy"
-                onClick={() => {
-                  const code = `import ImageShaderCanvas from "@/components/pixel-perfect/shaders/image-shader-canvas";\n\n<ImageShaderCanvas\n  className="w-full h-full"\n  image="${item.image}"${item.imageB ? `\n  imageB="${item.imageB}"` : ""}\n  fragmentShader={\`${item.fragmentShader.trim()}\`}\n/>`;
-                  navigator.clipboard.writeText(code);
-                  toast.success("Image shader code copied to clipboard!");
-                }}
-                className="text-xs cursor-pointer z-30 relative border border-dashed right-1 top-1 rounded-none pointer-events-auto"
-              >
-                <Copy className="size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed" />
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2 border-dashed" />
-              </Button>
+              <CopyDropdown
+                registryName={`img-${item.id}`}
+                className="pointer-events-auto"
+              />
               <div />
               <div className="border-r border-dashed h-full -mr-[0.5px]" />
             </div>

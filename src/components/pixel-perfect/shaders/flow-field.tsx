@@ -5,15 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * FlowField — the image as a grid of GPU points that constantly stream along an
- * animated curl-noise velocity field. A spring back to each particle's home
- * cell keeps the picture legible while everything shimmers and flows; the
- * cursor injects extra turbulence and a push, stirring the currents. Curl noise
- * and integration run on the CPU each frame (single-octave value noise so it
- * stays cheap for ~11k particles).
- * -------------------------------------------------------------------------- */
-
 const VERTEX_SHADER = /* glsl */ `
   precision highp float;
   attribute vec2 aUv;
@@ -52,7 +43,6 @@ const FRAGMENT_SHADER = /* glsl */ `
 const COLS = 140;
 const ROWS = 80;
 
-// cheap hash-based value noise (matches the smoothstep-interpolated GLSL one)
 const hash = (ix: number, iy: number) => {
   let n = (ix * 374761393 + iy * 668265263) | 0;
   n = (n ^ (n >> 13)) * 1274126177;
@@ -182,7 +172,6 @@ const FlowField = ({
         const px = positions[i * 3];
         const py = positions[i * 3 + 1];
 
-        // curl of a scrolling value-noise potential → divergence-free flow
         const sx = px * scale;
         const sy = py * scale;
         const fy1 = vnoise(sx + t, sy + eps);
@@ -202,7 +191,6 @@ const FlowField = ({
         vx *= amp;
         vy *= amp;
 
-        // spring home so the picture stays readable
         vx += (homeX[i] - px) * homeSpring;
         vy += (homeY[i] - py) * homeSpring;
 

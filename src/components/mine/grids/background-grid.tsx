@@ -1,259 +1,144 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Copy } from "lucide-react";
-import { useState, type JSX, type CSSProperties } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, type JSX } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
-import { toast } from "sonner";
-import {
-  GradientBlur,
-  progressiveBlurSnippet,
-} from "@/components/mine/landing-page/gradient-blur";
+import CopyDropdown from "../copy-dropdown";
 
-const Gradient1 = () => (
-  <div
-    aria-hidden
-    className="absolute z-30 inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,var(--color-blue-600),var(--color-white)_100%)]"
-  />
-);
-const Gradient2 = () => (
-  <div className="bg-[radial-gradient(circle_at_bottom,var(--color-1),var(--color-2))] absolute inset-0" />
-);
-const Gradient3 = () => (
-  <div className="bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px] h-full w-full absolute inset-0"></div>
-);
-const Gradient4 = () => (
-  <div className="h-full w-full relative">
-    <div
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px)`,
-        backgroundSize: "100px 100px, 100px 100px, 20px 20px, 20px 20px",
-        backgroundPosition: "-2px -2px, -2px -2px, -1px -1px, -1px -1px",
-      }}
-      className="absolute inset-0 dark:hidden"
-    ></div>
-    <div
-      style={{
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px)`,
-        backgroundSize: "100px 100px, 100px 100px, 20px 20px, 20px 20px",
-        backgroundPosition: "-2px -2px, -2px -2px, -1px -1px, -1px -1px",
-      }}
-      className="absolute inset-0 hidden dark:block"
-    ></div>
-  </div>
-);
-const Gradient5 = () => (
-  <div className="absolute inset-0 after:pointer-events-none after:inset-0 after:inset-ring after:inset-ring-gray-950/5 dark:after:inset-ring-white/10 bg-[radial-gradient(var(--pattern-fg)_1px,transparent_0)] bg-size-[10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10" />
-);
-
-const ProgressiveBlur = () => (
-  <div className="absolute inset-0 overflow-hidden">
-    <GradientBlur position="absolute" height={56} />
-  </div>
-);
+import ProgressiveBlur from "../../../../registry/new-york/backgrounds/progressive-blur";
+import GradientGlowFade from "../../../../registry/new-york/backgrounds/gradient-glow-fade";
+import GradientBottomBloom from "../../../../registry/new-york/backgrounds/gradient-bottom-bloom";
+import GradientDiagonalPattern from "../../../../registry/new-york/backgrounds/gradient-diagonal-pattern";
+import GradientDualGrid from "../../../../registry/new-york/backgrounds/gradient-dual-grid";
+import GradientDotMesh from "../../../../registry/new-york/backgrounds/gradient-dot-mesh";
+import GradientPurpleBlue from "../../../../registry/new-york/backgrounds/gradient-purple-blue";
+import GradientConicSweep from "../../../../registry/new-york/backgrounds/gradient-conic-sweep";
+import GradientSunsetGlow from "../../../../registry/new-york/backgrounds/gradient-sunset-glow";
+import GradientCoralBlur from "../../../../registry/new-york/backgrounds/gradient-coral-blur";
+import GradientCoolAurora from "../../../../registry/new-york/backgrounds/gradient-cool-aurora";
+import GradientFieryAurora from "../../../../registry/new-york/backgrounds/gradient-fiery-aurora";
+import GradientGoldSheen from "../../../../registry/new-york/backgrounds/gradient-gold-sheen";
+import GradientChrome from "../../../../registry/new-york/backgrounds/gradient-chrome";
+import GradientPurpleMetal from "../../../../registry/new-york/backgrounds/gradient-purple-metal";
+import GradientSteelMetal from "../../../../registry/new-york/backgrounds/gradient-steel-metal";
+import SilverMetallic from "../../../../registry/new-york/backgrounds/silver-metallic";
+import NexvynGradient from "../../../../registry/new-york/backgrounds/nexvyn-gradient";
 
 type BackgroundItem = {
   name: string;
   description: string;
-  code?: string;
-  component?: JSX.Element;
-  style?: CSSProperties;
+  component: JSX.Element;
+  registryName: string;
 };
 
 export const BackgroudArr: BackgroundItem[] = [
   {
     name: "Progressive Blur",
     description: "Layered backdrop-blur fade",
-    code: progressiveBlurSnippet,
     component: <ProgressiveBlur />,
+    registryName: "progressive-blur",
   },
   {
     name: "Gradient 1",
     description: "Radial glow fade",
-    code: `<div aria-hidden className="absolute z-30 inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,var(--color-blue-600),var(--color-white)_100%)]" />`,
-    component: <Gradient1 />,
+    component: <GradientGlowFade />,
+    registryName: "gradient-glow-fade",
   },
   {
     name: "Gradient 2",
     description: "Bottom radial bloom",
-    code: `<div className="bg-[radial-gradient(circle_at_bottom,var(--color-1),var(--color-2))] absolute inset-0" />`,
-    component: <Gradient2 />,
+    component: <GradientBottomBloom />,
+    registryName: "gradient-bottom-bloom",
   },
   {
     name: "Gradient 3",
     description: "Diagonal micro pattern",
-    code: `<div className="bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px] h-full w-full absolute inset-0" />`,
-    component: <Gradient3 />,
+    component: <GradientDiagonalPattern />,
+    registryName: "gradient-diagonal-pattern",
   },
   {
     name: "Gradient 4",
     description: "Dual grid system",
-    code: "<div className=\"h-full w-full relative\">\n  <div\n    style={{\n      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px)`,\n      backgroundSize: \"100px 100px, 100px 100px, 20px 20px, 20px 20px\",\n      backgroundPosition: \"-2px -2px, -2px -2px, -1px -1px, -1px -1px\",\n    }}\n    className=\"absolute inset-0 dark:hidden\"\n  />\n  <div\n    style={{\n      backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px)`,\n      backgroundSize: \"100px 100px, 100px 100px, 20px 20px, 20px 20px\",\n      backgroundPosition: \"-2px -2px, -2px -2px, -1px -1px, -1px -1px\",\n    }}\n    className=\"absolute inset-0 hidden dark:block\"\n  />\n</div>",
-    component: <Gradient4 />,
+    component: <GradientDualGrid />,
+    registryName: "gradient-dual-grid",
   },
   {
     name: "Gradient 5",
     description: "Dot mesh texture",
-    code: `<div className="absolute inset-0 after:pointer-events-none after:inset-0 after:inset-ring after:inset-ring-gray-950/5 dark:after:inset-ring-white/10 bg-[radial-gradient(var(--pattern-fg)_1px,transparent_0)] bg-size-[10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10" />`,
-    component: <Gradient5 />,
+    component: <GradientDotMesh />,
+    registryName: "gradient-dot-mesh",
   },
   {
     name: "Gradient 6",
     description: "Purple-blue angled gradient",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "linear-gradient(115.43deg, #1A00FF 0%, #9D00FF 100%)",
-        }}
-      />
-    ),
+    component: <GradientPurpleBlue />,
+    registryName: "gradient-purple-blue",
   },
   {
     name: "Gradient 7",
     description: "Multi-layer conic sweep",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "conic-gradient(from 135deg at 50% 50%, rgba(0, 0, 0, 0) 0deg, #000000 360deg), conic-gradient(from 44.87deg at 50% 50%, rgba(0, 0, 0, 0) 0deg, #000000 360deg), conic-gradient(from -89.88deg at 50% 50%, #FFFFFF 0deg, #999999 360deg)",
-        }}
-      />
-    ),
+    component: <GradientConicSweep />,
+    registryName: "gradient-conic-sweep",
   },
   {
     name: "Gradient 8",
     description: "Sunset glow with inner shadow",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(0.1deg, rgba(255, 74, 74, 0) 0.09%, rgba(255, 36, 36, 0.2) 76.39%), linear-gradient(360deg, #FFF16E 2.67%, #FF8A33 30.48%, #FF4A4A 51.8%), #FF4A4A",
-        }}
-      />
-    ),
+    component: <GradientSunsetGlow />,
+    registryName: "gradient-sunset-glow",
   },
   {
     name: "Gradient 9",
     description: "Coral blur with warm shadows",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(137.47deg, #FF6D5E 11.08%, #FF9186 42.04%, #FF5948 95.9%)",
-          backdropFilter: "blur(0.75px)",
-        }}
-      />
-    ),
+    component: <GradientCoralBlur />,
+    registryName: "gradient-coral-blur",
   },
   {
     name: "Gradient 10",
     description: "Cool aurora pill glow",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(45.33% 46.43% at 41.69% 50%, #0140FF 0%, rgba(1, 64, 255, 0) 100%), radial-gradient(28.41% 117.96% at 7.72% 28.75%, #A6FDFF 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(37.39% 69.19% at 107.79% 0%, #0075FF 0%, rgba(0, 66, 255, 0) 100%), radial-gradient(54.38% 89.75% at 83.46% 89.75%, #26F9FF 0%, rgba(0, 69, 255, 0.6) 100%), #0140FF",
-        }}
-      />
-    ),
+    component: <GradientCoolAurora />,
+    registryName: "gradient-cool-aurora",
   },
   {
     name: "Gradient 11",
     description: "Fiery aurora radial glow",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(45.33% 46.43% at 41.69% 50%, #FF4001 0%, rgba(255, 64, 1, 0) 100%), radial-gradient(28.41% 117.96% at 7.72% 28.75%, #FFFDA6 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(37.39% 69.19% at 107.79% 0%, #FF7500 0%, rgba(255, 66, 0, 0) 100%), radial-gradient(54.38% 89.75% at 83.46% 89.75%, #FFF926 0%, rgba(255, 69, 0, 0.6) 100%), #FF4001",
-        }}
-      />
-    ),
+    component: <GradientFieryAurora />,
+    registryName: "gradient-fiery-aurora",
   },
   {
     name: "Gradient 12",
     description: "Gold metallic sheen",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(125.94deg, #AE4E00 0%, #B47E11 25%, #EFD983 39.26%, #FEF1A2 44.41%, #EFD983 49.2%, #BC881B 75%, #A54E07 100%)",
-        }}
-      />
-    ),
+    component: <GradientGoldSheen />,
+    registryName: "gradient-gold-sheen",
   },
   {
     name: "Gradient 14",
     description: "Chrome metallic reflection",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(0deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.24)), conic-gradient(from 90deg at 50% 50%, #FDFDFD 0deg, #464646 44.35deg, #2C2C2C 56.43deg, #2C2C2C 63.53deg, #595959 77.78deg, #FDFDFD 101.95deg, #B5B5B5 130.71deg, #2C2C2C 158.9deg, #2F2F2F 170.95deg, #2C2C2C 179.09deg, #595959 197.78deg, #FDFDFD 227.8deg, #CDCDCD 240.9deg, #595959 273.03deg, #696969 300.73deg, #8C8C8C 313.13deg, #FDFDFD 360deg)",
-        }}
-      />
-    ),
+    component: <GradientChrome />,
+    registryName: "gradient-chrome",
   },
   {
     name: "Gradient 15",
     description: "Purple brushed metal",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(99.09deg, rgba(211, 212, 213, 0.15) 12.86%, rgba(139, 145, 147, 0.15) 15.34%, rgba(87, 95, 99, 0.15) 17.82%, rgba(55, 65, 69, 0.15) 18.64%, rgba(43, 54, 58, 0.15) 19.47%, rgba(52, 62, 66, 0.15) 22.77%, rgba(77, 85, 89, 0.15) 26.9%, rgba(117, 123, 126, 0.15) 32.68%, rgba(173, 176, 177, 0.15) 38.46%, rgba(205, 205, 206, 0.15) 41.76%, rgba(198, 199, 200, 0.15) 43.41%, rgba(180, 182, 184, 0.15) 45.06%, rgba(151, 156, 158, 0.15) 46.71%, rgba(111, 118, 122, 0.15) 49.19%, rgba(72, 83, 87, 0.15) 50.84%, rgba(76, 86, 90, 0.15) 52.49%, rgba(89, 98, 102, 0.15) 54.97%, rgba(112, 117, 120, 0.15) 57.45%, rgba(143, 144, 146, 0.15) 59.1%, rgba(152, 152, 154, 0.15) 59.92%, rgba(165, 165, 166, 0.15) 63.23%, rgba(199, 199, 200, 0.15) 70.66%, rgba(255, 255, 255, 0.15) 78.91%, rgba(209, 209, 210, 0.15) 81.39%, rgba(79, 79, 83, 0.15) 87.17%, rgba(27, 27, 32, 0.15) 90.47%, rgba(49, 49, 54, 0.15) 91.3%, rgba(77, 77, 81, 0.15) 92.12%, rgba(116, 116, 118, 0.15) 92.95%, rgba(165, 165, 167, 0.15) 94.6%, rgba(233, 233, 233, 0.15) 95.43%), linear-gradient(0deg, #895DEC, #895DEC), #E8E8E8",
-          backgroundBlendMode: "hard-light, normal, normal",
-        }}
-      />
-    ),
+    component: <GradientPurpleMetal />,
+    registryName: "gradient-purple-metal",
   },
   {
     name: "Gradient 16",
     description: "Steel brushed metal",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(99.09deg, rgba(211, 212, 213, 0.18) 12.86%, rgba(139, 145, 147, 0.18) 15.34%, rgba(87, 95, 99, 0.18) 17.82%, rgba(55, 65, 69, 0.18) 18.64%, rgba(43, 54, 58, 0.18) 19.47%, rgba(52, 62, 66, 0.18) 22.77%, rgba(77, 85, 89, 0.18) 26.9%, rgba(117, 123, 126, 0.18) 32.68%, rgba(173, 176, 177, 0.18) 38.46%, rgba(205, 205, 206, 0.18) 41.76%, rgba(198, 199, 200, 0.18) 43.41%, rgba(180, 182, 184, 0.18) 45.06%, rgba(151, 156, 158, 0.18) 46.71%, rgba(111, 118, 122, 0.18) 49.19%, rgba(72, 83, 87, 0.18) 50.84%, rgba(76, 86, 90, 0.18) 52.49%, rgba(89, 98, 102, 0.18) 54.97%, rgba(112, 117, 120, 0.18) 57.45%, rgba(143, 144, 146, 0.18) 59.1%, rgba(152, 152, 154, 0.18) 59.92%, rgba(165, 165, 166, 0.18) 63.23%, rgba(199, 199, 200, 0.18) 70.66%, rgba(255, 255, 255, 0.18) 78.91%, rgba(209, 209, 210, 0.18) 81.39%, rgba(79, 79, 83, 0.18) 87.17%, rgba(27, 27, 32, 0.18) 90.47%, rgba(49, 49, 54, 0.18) 91.3%, rgba(77, 77, 81, 0.18) 92.12%, rgba(116, 116, 118, 0.18) 92.95%, rgba(165, 165, 167, 0.18) 94.6%, rgba(233, 233, 233, 0.18) 95.43%), linear-gradient(273.67deg, #E8E8E8 19.03%, #F9F9F9 80.97%)",
-          backgroundBlendMode: "hard-light, normal",
-        }}
-      />
-    ),
+    component: <GradientSteelMetal />,
+    registryName: "gradient-steel-metal",
   },
   {
     name: "Silver metallic",
     description: "A simple gradient for Nexvyn",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(137.47deg, rgba(255, 255, 255, 0.3) 11.08%, rgba(248, 250, 255, 0.8) 39.07%, rgba(245, 248, 255, 0.9) 60.7%, rgba(255, 255, 255, 0.2) 95.9%)",
-          backdropFilter: "blur(0.5px)",
-        }}
-      />
-    ),
+    component: <SilverMetallic />,
+    registryName: "silver-metallic",
   },
   {
     name: "Nexvyn gradient",
     description: "Soft purple-orange radial",
-    component: (
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(44.02% 44.02% at 14.38% 14.47%, rgba(188, 92, 248, 0.2) 0%, rgba(255, 255, 255, 0.2) 100%), radial-gradient(50.49% 50.49% at 64.54% 12.33%, #EFD0BB 0%, #FFFFFF 100%)",
-        }}
-      />
-    ),
+    component: <NexvynGradient />,
+    registryName: "nexvyn-gradient",
   },
 ];
 
@@ -277,19 +162,9 @@ const BackgroundGrid = () => {
             className="relative group border-b border-l border-dashed  aspect-video flex items-center justify-center "
           >
             <div className=" z-30 w-full h-full flex items-center justify-center overflow-hidden">
-              {/* Wrap content to prevent overflow and center it, similar to the editor preview but smaller */}
-              {item.component ? (
-                <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50">
-                  {item.component}
-                </div>
-              ) : item.style ? (
-                <div className="w-full h-full relative overflow-hidden">
-                  <div
-                    className="absolute inset-0"
-                    style={{ ...item.style, borderRadius: "0px" }}
-                  />
-                </div>
-              ) : null}
+              <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50">
+                {item.component}
+              </div>
             </div>
 
             <div className=" leading-1 absolute left-1.5  bottom-1.5 z-40">
@@ -301,50 +176,7 @@ const BackgroundGrid = () => {
 
             <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
               <div className=" border-t border-dashed "></div>
-              <Button
-                size={"sm"}
-                variant={"copy"}
-                onClick={() => {
-                  let code = "";
-                  // Try to extract style from the component if present, or from style
-                  let styleObj: CSSProperties | undefined;
-                  if (
-                    item.component &&
-                    typeof item.component === "object" &&
-                    "props" in item.component &&
-                    item.component.props &&
-                    item.component.props.style
-                  ) {
-                    styleObj = item.component.props.style as CSSProperties;
-                  } else if (item.style) {
-                    styleObj = item.style;
-                  }
-
-                  let innerContent = "";
-                  if (item.code) {
-                    innerContent = item.code;
-                  } else if (styleObj) {
-                    const props = Object.entries(styleObj)
-                      .map(([k, v]) => `  ${k}: '${v}',`)
-                      .join("\n");
-                    innerContent = `<div style={{\n${props}\n}} className='absolute inset-0' />`;
-                  }
-
-                  if (innerContent) {
-                    code = `<div className='relative group border-b border-l border-dashed aspect-video flex items-center justify-center'>\n  <div className='w-full h-full relative overflow-hidden flex items-center justify-center bg-background/50'>\n    ${innerContent}\n  </div>\n  <div className='leading-1 absolute left-1.5 bottom-1.5 z-40'>\n    <p className='text-xs'>${item.name}</p>\n    <p className='text-[8px] text-muted-foreground'>${item.description}</p>\n  </div>\n</div>`;
-                  } else {
-                    // Fallback logic for components or generic copy
-                    code = `// Use specific component for ${item.name}`;
-                  }
-                  navigator.clipboard.writeText(code);
-                  toast.success("Code copied to clipboard!");
-                }}
-                className="text-xs  cursor-pointer z-30 relative border  border-dashed right-1 top-1  rounded-none "
-              >
-                <Copy className=" size-3" /> Copy
-                <span className="absolute -right-px -top-px z-30 block size-2 border-b border-l border-dashed "></span>
-                <span className="absolute -bottom-px -left-[0.5px] z-30 border-t border-r block size-2  border-dashed"></span>
-              </Button>
+              <CopyDropdown registryName={item.registryName} />
               <div />
               <div className=" border-r border-dashed h-full -mr-[0.5px] " />
             </div>

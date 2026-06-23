@@ -118,7 +118,6 @@ export default function Cd() {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLPreElement>(null);
 
-  // Animation logic using requestAnimationFrame for smoothness
   useEffect(() => {
     let animationId: number;
     let lastTime = 0;
@@ -141,7 +140,6 @@ export default function Cd() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Responsive scaling logic (similar to studio fit-to-container)
   useEffect(() => {
     const measure = () => {
       const container = containerRef.current;

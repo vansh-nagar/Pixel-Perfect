@@ -20,7 +20,6 @@ const SidebarGrid = () => {
 
   return (
     <div className="relative border border-dashed">
-      {/* Selector row */}
       <div className="flex items-center justify-between gap-3 border-b border-dashed px-3 py-2 flex-wrap">
         <div className="flex flex-wrap gap-1.5">
           {SidebarsArr.map((item, i) => (
@@ -40,13 +39,11 @@ const SidebarGrid = () => {
         <CopyDropdown registryName={active.registryName} />
       </div>
 
-      {/* Preview stage — sidebar anchored to the left like a real app */}
       <div className="relative flex items-stretch min-h-[560px] bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px]">
         <div className="z-10 shrink-0">{active.component}</div>
         <div className="flex-1" />
       </div>
 
-      {/* Caption */}
       <div className="border-t border-dashed px-3 py-2 leading-tight">
         <p className="text-xs font-medium">{active.name}</p>
         <p className="text-[10px] text-muted-foreground">

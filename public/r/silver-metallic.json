@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "silver-metallic",
+  "description": "A soft silver metallic gradient with a faint backdrop blur.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/silver-metallic.tsx",
+      "content": "/**\n * A soft silver metallic gradient with a faint backdrop blur.\n */\nexport default function SilverMetallic() {\n  return (\n    <div\n      className=\"absolute inset-0\"\n      style={{\n        background:\n          \"linear-gradient(137.47deg, rgba(255, 255, 255, 0.3) 11.08%, rgba(248, 250, 255, 0.8) 39.07%, rgba(245, 248, 255, 0.9) 60.7%, rgba(255, 255, 255, 0.2) 95.9%)\",\n          backdropFilter: \"blur(0.5px)\",\n      }}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/silver-metallic.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -46,10 +46,6 @@ function createAbsWord(word: string) {
 
 type KeyFrame = { offset: number } & WordState;
 
-/* ------------------------------------------------------------------ */
-/* short-slide-right — shared-slide-opacity-stage                      */
-/* ------------------------------------------------------------------ */
-
 const SLIDE_SAMPLES = ["Move with intent.", "Words glide across.", "Build the rhythm."];
 
 export function SharedSlideText({ className }: { className?: string }) {
@@ -102,7 +98,6 @@ export function SharedSlideText({ className }: { className?: string }) {
           stagger: { each: 0.066, from: "start" },
         });
         active.push(wordTw);
-        // The phrase-level slide is the longer move; await it.
         await tween(title, { x: 0, filter: "blur(0px)", duration: 0.374, ease: enterEase });
       };
 
@@ -142,10 +137,6 @@ export function SharedSlideText({ className }: { className?: string }) {
     </div>
   );
 }
-
-/* ------------------------------------------------------------------ */
-/* kinetic-center-build — horizontal word build                       */
-/* ------------------------------------------------------------------ */
 
 const CENTER_PHRASES = [
   ["Words", "push", "left"],
@@ -292,7 +283,6 @@ export function KineticCenterText({ className }: { className?: string }) {
             await Promise.all(moves);
           }
 
-          // Snap to exact final poses to avoid accumulated drift.
           items.forEach((it, idx) => {
             it.pos = positions[idx];
             it.state = { x: positions[idx], y: 0, scale: 1, blur: 0, opacity: 1 };
@@ -355,10 +345,6 @@ export function KineticCenterText({ className }: { className?: string }) {
     </div>
   );
 }
-
-/* ------------------------------------------------------------------ */
-/* short-slide-down — kinetic-top-build (vertical word stack)          */
-/* ------------------------------------------------------------------ */
 
 const STACK_PHRASES = [
   ["Drop", "into", "place"],

@@ -10,8 +10,6 @@ const VERTEX_SHADER = /* glsl */ `
   }
 `;
 
-// Wraps every registry shader: runs its (renamed) main, then post-processes
-// the result with the universal hue/saturation/contrast/brightness controls.
 const WRAPPER_MAIN = /* glsl */ `
   void main() {
     fragColor = vec4(0.0, 0.0, 0.0, 1.0);
@@ -20,7 +18,6 @@ const WRAPPER_MAIN = /* glsl */ `
   }
 `;
 
-// Shared helpers prepended to every fragment shader in the registry.
 export const COMMON_GLSL = /* glsl */ `
   precision highp float;
 
@@ -146,9 +143,7 @@ const ShaderCanvas = ({
 }: {
   fragmentShader: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel (speed/zoom/color). */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -173,11 +168,8 @@ const ShaderCanvas = ({
       uContrast: { value: 1 },
       uBrightness: { value: 1 },
     };
-    // Time speed lives in JS (it scales how fast `time` advances), not GLSL.
     const params = { speed: 1 };
 
-    // Rename the shader's main() and redirect its gl_FragColor writes into the
-    // scratch `fragColor`, so the wrapper can post-process the result.
     const userSrc = fragmentShader
       .replace(/\bvoid\s+main\b/, "void userMain")
       .replace(/\bgl_FragColor\b/g, "fragColor");
@@ -199,11 +191,9 @@ const ShaderCanvas = ({
     container.appendChild(renderer.domElement);
 
     const canvas = renderer.domElement;
-    // Allow the GPU to restore a transiently-lost context instead of going black.
     const onContextLost = (e: Event) => e.preventDefault();
     canvas.addEventListener("webglcontextlost", onContextLost);
 
-    // Track the cursor in 0..1 UV space (y flipped to match gl_FragCoord).
     const onPointerMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
@@ -216,7 +206,6 @@ const ShaderCanvas = ({
     canvas.addEventListener("pointermove", onPointerMove);
     canvas.addEventListener("pointerleave", onPointerLeave);
 
-    // Accumulate time scaled by speed so changing speed never jumps the clock.
     let shaderTime = 0;
     let last = performance.now();
     const render = () => {
@@ -245,8 +234,6 @@ const ShaderCanvas = ({
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
 
-    // Animate only while on (or near) screen; render one frame on mount so a
-    // tile is never blank before it scrolls into view.
     let visible = true;
     const intersectionObserver = new IntersectionObserver(
       ([entry]) => {
@@ -264,7 +251,6 @@ const ShaderCanvas = ({
     };
     animate();
 
-    // Live customization panel (full-screen preview only).
     let gui: GUI | null = null;
     if (controls) {
       gui = new GUI();

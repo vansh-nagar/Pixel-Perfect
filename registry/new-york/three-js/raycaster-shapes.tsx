@@ -9,10 +9,6 @@ import { OrbitControls } from "@react-three/drei";
 import { useEffect, useMemo, useRef, type ReactNode } from "react";
 import * as THREE from "three";
 
-// Rim/edge shader: simple diffuse base + a Fresnel term that glows on the
-// silhouette (the "edges" of the shape from the camera's view). `uHovered`
-// ramps that rim from a faint outline to a bright glow when the raycaster
-// reports this shape as the one under the cursor.
 const RIM_VERT = /* glsl */ `
   varying vec3 vNormal;
   varying vec3 vViewDir;
@@ -128,7 +124,6 @@ const Shape = ({ position, color, rotation, children }: ShapeProps) => {
     [color],
   );
 
-  // Tag the mesh so the scene-wide raycast/animation loop can find it.
   useEffect(() => {
     const mesh = ref.current;
     if (!mesh) return;
@@ -157,9 +152,6 @@ const Shape = ({ position, color, rotation, children }: ShapeProps) => {
 const Scene = () => {
   const hoveredRef = useRef<THREE.Mesh | null>(null);
 
-  // Click the hovered shape → pop it up and spin it a random number of whole
-  // turns, then it settles back. Scoped to the canvas so clicks elsewhere on
-  // the page don't trigger it.
   useEffect(() => {
     const TAU = Math.PI * 2;
     const onClick = (e: MouseEvent) => {
@@ -169,15 +161,12 @@ const Scene = () => {
       const d = m.userData.anim as ShapeAnim;
       const t = performance.now() / 1000;
 
-      // Pop up + spin.
       d.clickStart = t;
       d.popH = 1.0 + Math.random() * 0.9;
       d.spinX = TAU * (Math.random() < 0.5 ? 0 : 1);
       d.spinY = TAU * (1 + Math.floor(Math.random() * 2));
       d.spinZ = TAU * (Math.random() < 0.5 ? 0 : 1);
 
-      // Paint-reveal to a new random colour. Commit any in-progress paint as the
-      // new "from", then sweep toward a fresh random "to".
       const mat = m.material as THREE.ShaderMaterial;
       mat.uniforms.uColor.value.copy(mat.uniforms.uColorTo.value);
       mat.uniforms.uColorTo.value.setHSL(Math.random(), 0.7, 0.55);
@@ -189,14 +178,12 @@ const Scene = () => {
   }, []);
 
   useFrame((state) => {
-    // Collect the tagged shapes by traversing the scene (a frame-local value).
     const shapes: THREE.Mesh[] = [];
     state.scene.traverse((o) => {
       if ((o as THREE.Mesh).isMesh && o.userData.anim)
         shapes.push(o as THREE.Mesh);
     });
 
-    // Raycast from the camera through the cursor to find the hovered shape.
     state.raycaster.setFromCamera(state.pointer, state.camera);
     const hits = state.raycaster.intersectObjects(shapes, false);
     const hovered = (hits[0]?.object as THREE.Mesh | undefined) ?? null;
@@ -208,18 +195,15 @@ const Scene = () => {
 
       const mat = m.material as THREE.ShaderMaterial;
 
-      // Normalise the paint sweep to the geometry size (computed once).
       if (!d.radiusSet) {
         m.geometry.computeBoundingSphere();
         mat.uniforms.uRadius.value = m.geometry.boundingSphere?.radius ?? 1;
         d.radiusSet = true;
       }
 
-      // Edge-glow on the hovered shape.
       const u = mat.uniforms.uHovered;
       u.value += ((m === hovered ? 1 : 0) - u.value) * 0.15;
 
-      // Paint-reveal progress: sweep the new colour in, then commit it.
       if (d.paintStart !== null) {
         const pp = Math.min((now - d.paintStart) / 1.1, 1);
         mat.uniforms.uPaint.value = pp;
@@ -230,7 +214,6 @@ const Scene = () => {
         }
       }
 
-      // One-shot pop (hop up and back down) + spin on click.
       if (d.clickStart !== null) {
         const p = Math.min((now - d.clickStart) / 0.9, 1);
         const ease = 1 - Math.pow(1 - p, 3); // easeOutCubic for the spin
@@ -257,14 +240,12 @@ const Scene = () => {
       <ambientLight intensity={0.4} />
       <directionalLight position={[5, 8, 5]} intensity={1.2} />
 
-      {/* Ground plane + grid */}
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[12, 12]} />
         <meshStandardMaterial color="#1f2937" />
       </mesh>
       <gridHelper args={[12, 12, "#374151", "#374151"]} />
 
-      {/* Shapes with the rim/edge shader, detected via raycaster */}
       <Shape position={[-2.2, 0.5, -1]} color="#6366f1">
         <boxGeometry args={[1, 1, 1]} />
       </Shape>

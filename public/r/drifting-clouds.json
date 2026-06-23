@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "drifting-clouds",
+  "description": "Soft warped fbm clouds rolling across a clear blue sky.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/drifting-clouds.tsx",
+      "content": "\"use client\";\n\n/**\n * Soft warped fbm clouds rolling across a clear blue sky.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        uv.x *= aspect;\n        float t = time * 0.05;\n        float f = fbm(uv * 3.0 + vec2(t, t * 0.5));\n        f = fbm(uv * 3.0 + f + vec2(t * 0.5, 0.0));\n        vec3 sky = vec3(0.25, 0.45, 0.85);\n        vec3 cloud = vec3(1.0);\n        vec3 col = mix(sky, cloud, smoothstep(0.25, 0.85, f));\n        col = mix(col, vec3(0.55, 0.70, 0.95), (1.0 - uv.y) * 0.25);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function DriftingClouds({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/drifting-clouds.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

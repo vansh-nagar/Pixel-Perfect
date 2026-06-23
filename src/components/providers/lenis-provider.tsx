@@ -3,11 +3,6 @@
 import { ReactNode, useEffect, useState, createContext, useContext } from "react";
 import Lenis from "@studio-freight/lenis";
 
-/**
- * Exposes the singleton Lenis instance to consumers (e.g. the scroll-typography
- * page) so they can wire `lenis.on("scroll", ScrollTrigger.update)` without
- * spinning up a second smooth-scroll driver. `null` until the instance mounts.
- */
 const LenisContext = createContext<Lenis | null>(null);
 
 export const useLenis = () => useContext(LenisContext);

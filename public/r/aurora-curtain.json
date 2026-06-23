@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aurora-curtain",
+  "description": "Drifting ribbons of green and violet light over a deep night sky.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/aurora-curtain.tsx",
+      "content": "\"use client\";\n\n/**\n * Drifting ribbons of green and violet light over a deep night sky.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float t = time * 0.15;\n\n        float n = fbm(vec2(uv.x * 2.5, uv.y * 1.5 - t));\n        float curtain = fbm(vec2(uv.x * 3.0 + t, uv.y * 4.0 - t * 1.5));\n        float ribbon = smoothstep(0.1, 0.7, n) * (1.0 - smoothstep(0.2, 0.95, uv.y));\n        ribbon *= 0.6 + 0.4 * curtain;\n\n        vec3 green = vec3(0.10, 0.95, 0.55);\n        vec3 teal = vec3(0.10, 0.65, 0.95);\n        vec3 purple = vec3(0.55, 0.20, 0.95);\n\n        vec3 col = mix(green, teal, fbm(uv * 3.0 + t));\n        col = mix(col, purple, smoothstep(0.35, 1.0, uv.y));\n        col *= ribbon * 1.6;\n\n        col += vec3(0.02, 0.03, 0.09);\n        col += hash21(uv * resolution.xy) * 0.015;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function AuroraCurtain({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/aurora-curtain.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

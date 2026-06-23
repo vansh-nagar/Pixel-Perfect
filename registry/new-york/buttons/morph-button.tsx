@@ -3,7 +3,6 @@ import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import MorphSVGPlugin from "gsap/MorphSVGPlugin";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 
 gsap.registerPlugin(MorphSVGPlugin);

@@ -69,9 +69,6 @@ const ImageGradientGrid = () => {
 
   const copyImage = async (src: string, index: number) => {
     try {
-      // Construct the ClipboardItem with a Blob promise so Safari (which
-      // requires the item to be built synchronously in the click handler)
-      // and Chromium both accept it.
       await navigator.clipboard.write([
         new ClipboardItem({
           "image/png": fetch(src).then((res) => res.blob()),

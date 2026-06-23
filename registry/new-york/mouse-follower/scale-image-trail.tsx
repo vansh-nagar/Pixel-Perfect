@@ -15,7 +15,6 @@ const Images = [
   "https://cdn.cosmos.so/39a80b7b-29fb-4079-a251-176df0fa15eb?format=jpeg",
 ];
 
-// Spawn tuning.
 const MOVEMENT_THRESHOLD = 100; // px the cursor must travel before a new image
 const DELAY_BETWEEN = 70; // ms minimum gap between spawns
 const IMG_W = 160;
@@ -35,8 +34,6 @@ const ScaleImageTrail = () => {
 
     const active = new Set<HTMLImageElement>();
 
-    // Listen on the window — an overlay sits on top of this cell in the grid,
-    // so a container-scoped listener would never receive the events.
     const handleMouseMove = (e: MouseEvent) => {
       const rect = root.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -67,14 +64,12 @@ const ScaleImageTrail = () => {
       root.appendChild(el);
       active.add(el);
 
-      // Pop in with a bouncy scale.
       gsap.fromTo(
         el,
         { opacity: 1, scale: 0, rotation: gsap.utils.random(-20, 20) },
         { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }
       );
 
-      // Then shrink away and clean up.
       gsap.to(el, {
         scale: 0,
         duration: 0.6,
@@ -105,7 +100,6 @@ const ScaleImageTrail = () => {
 
   return (
     <div ref={containerRef} className="relative h-full w-full overflow-hidden">
-      {/* Preload so spawned clones appear instantly. */}
       <div className="pointer-events-none absolute h-px w-px opacity-0">
         {Images.map((src, i) => (
           // eslint-disable-next-line @next/next/no-img-element

@@ -4,7 +4,6 @@ import { getTweet, type Tweet } from "react-tweet/api";
 
 import { cn } from "@/lib/utils";
 import StarBorder from "../mine/landing-page/star-border";
-import { FaTwitter } from "react-icons/fa6";
 
 interface TwitterIconProps {
   className?: string;
@@ -81,7 +80,6 @@ export const TweetNotFound = ({
 export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
   <div className="flex flex-row items-start justify-between tracking-normal">
     <div className="flex items-center space-x-3">
-      {/* <a href={tweet.user.url} target="_blank" rel="noreferrer"> */}
       <img
         title={`Profile picture of ${tweet.user.name}`}
         alt={tweet.user.screen_name}
@@ -91,11 +89,8 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
         className="border-border/50 overflow-hidden rounded-full border z-20 relative"
       />
 
-      {/* </a> */}
       <div className="flex flex-col gap-0.5">
         <div
-          // href={tweet.user.url}
-          // target="_blank"
           rel="noreferrer"
           className="text-foreground flex items-center font-medium whitespace-nowrap transition-opacity hover:opacity-80"
         >
@@ -107,8 +102,6 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
         </div>
         <div className="flex items-center space-x-1">
           <div
-            // href={tweet.user.url}
-            // target="_blank"
             rel="noreferrer"
             className="text-muted-foreground hover:text-foreground text-sm transition-colors"
           >
@@ -117,10 +110,8 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
         </div>
       </div>
     </div>
-    {/* <a href={tweet.url} target="_blank" rel="noreferrer"> */}
 
     <span className="sr-only">Link to tweet</span>
-    {/* </a> */}
   </div>
 );
 
@@ -215,9 +206,6 @@ export const MagicTweet = ({
   tweet: Tweet;
   className?: string;
 }) => {
-  // The X syndication API now omits empty entity arrays (only user_mentions is
-  // returned), but enrichTweet iterates each array unconditionally. Backfill the
-  // missing arrays so it doesn't crash on `for (const entity of undefined)`.
   const e = tweet.entities;
   const safeTweet: Tweet = {
     ...tweet,
@@ -246,9 +234,6 @@ export const MagicTweet = ({
   );
 };
 
-/**
- * TweetCard (Server Side Only)
- */
 export const TweetCard = async ({
   id,
   components,

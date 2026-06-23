@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-pixelate",
+  "description": "Snaps the image to a square grid whose resolution breathes over time.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-pixelate.tsx",
+      "content": "\"use client\";\n\n/**\n * Snaps the image to a square grid whose resolution breathes over time.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float cells = mix(18.0, 110.0, 0.5 + 0.5 * sin(time * 0.6));\n        vec2 grid = vec2(cells * aspect, cells);\n        vec2 puv = (floor(uv * grid) + 0.5) / grid;\n        gl_FragColor = texCover(puv);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function Pixelate({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-pixelate.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

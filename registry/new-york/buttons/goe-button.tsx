@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 const GooeyButton = () => {
-  const [hovered, setHovered] = useState(false);
+  const [hovered] = useState(false);
   return (
     <div>
       <GooeyFilter />

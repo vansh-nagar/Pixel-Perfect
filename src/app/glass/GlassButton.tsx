@@ -5,15 +5,6 @@ import { Glass } from "./Glass";
 import { generateLensMap } from "./lib/displacement";
 import { cn } from "@/lib/utils";
 
-/**
- * A button that *is* a piece of glass: it refracts whatever content sits behind
- * it using the same feDisplacementMap technique as the showcase. The lens is
- * sized to the button (measured live), shaped as a pill, and bends a little
- * harder while pressed so the press registers as a tactile squeeze.
- *
- * Refraction only shows over real content — place it on something with texture
- * (a gradient, an image, a busy layout), not a flat fill.
- */
 export function GlassButton({
   children,
   className,
@@ -26,7 +17,6 @@ export function GlassButton({
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [pressed, setPressed] = useState(false);
 
-  // Measure the rendered button so the lens matches it exactly, and track resize.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -44,7 +34,6 @@ export function GlassButton({
       width: size.w,
       height: size.h,
       borderRadius: radius,
-      // The press bends the glass harder — a small lens "squeeze" on tap.
       scale: pressed ? 0.42 : 0.26,
       depth: Math.max(4, size.h * 0.22),
       curvature: 14,
@@ -52,7 +41,6 @@ export function GlassButton({
     });
   }, [size.w, size.h, radius, pressed]);
 
-  // Safari caches filter output by ID, so the token must change with the map.
   const version = size.w * 100000 + size.h * 10 + (pressed ? 1 : 0);
 
   return (

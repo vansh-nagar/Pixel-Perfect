@@ -54,7 +54,6 @@ export default function ClaudeSidebar() {
         className="min-h-0! h-full w-fit"
         style={{ "--sidebar-width": EXPANDED } as React.CSSProperties}
       >
-        {/* Width-animated wrapper. Inner Sidebar is w-full so it follows the wrapper. */}
         <div
           className="shrink-0 overflow-hidden"
           style={{
@@ -67,7 +66,6 @@ export default function ClaudeSidebar() {
             className="flex h-full min-h-[520px] w-full! flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border"
             style={{ transition: `background-color 35ms ${EASE}` }}
           >
-            {/* Header — wordmark fades out, toggle pinned top-right */}
             <SidebarHeader className="relative flex-row! w-full items-center gap-0! p-2! pt-2 h-12 shrink-0">
               <div
                 className="flex items-center gap-1.5 pl-2 h-8 overflow-clip"
@@ -90,7 +88,6 @@ export default function ClaudeSidebar() {
               </button>
             </SidebarHeader>
 
-            {/* Primary nav */}
             <SidebarMenu className="gap-px! pt-2 px-2">
               {navItems.map((it) => (
                 <SidebarMenuItem key={it.label} className="list-none!">
@@ -102,7 +99,6 @@ export default function ClaudeSidebar() {
                   />
                 </SidebarMenuItem>
               ))}
-              {/* "More" caret */}
               <SidebarMenuItem className="list-none!">
                 <button
                   aria-label="More"
@@ -126,7 +122,6 @@ export default function ClaudeSidebar() {
               </SidebarMenuItem>
             </SidebarMenu>
 
-            {/* Lists — fully fade out + inert when collapsed */}
             <SidebarContent
               className="gap-0! pt-2 overflow-x-hidden!"
               style={{
@@ -151,7 +146,6 @@ export default function ClaudeSidebar() {
               </div>
             </SidebarContent>
 
-            {/* User card */}
             <SidebarFooter className="p-0! gap-0! border-t border-sidebar-border mt-auto">
               <button
                 className="group flex h-16 w-full items-center gap-3 px-2 transition-colors duration-150 hover:bg-sidebar-accent/50 overflow-hidden"
@@ -276,8 +270,6 @@ function ChatRow({ title }: { title: string }) {
     </li>
   );
 }
-
-/* ───────────────────── Icons (with hover micro-animations) ───────────────────── */
 
 function PlusIcon() {
   return (

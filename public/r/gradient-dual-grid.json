@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-dual-grid",
+  "description": "A dual-scale grid system with light and dark variants.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/gradient-dual-grid.tsx",
+      "content": "/**\n * A dual-scale grid system with light and dark variants.\n */\nexport default function GradientDualGrid() {\n  return (\n    <div className=\"h-full w-full relative\">\n      <div\n        style={{\n          backgroundImage:\n            \"linear-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 0, 0, 0.05) 2px, transparent 2px), linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px)\",\n          backgroundSize: \"100px 100px, 100px 100px, 20px 20px, 20px 20px\",\n          backgroundPosition: \"-2px -2px, -2px -2px, -1px -1px, -1px -1px\",\n        }}\n        className=\"absolute inset-0 dark:hidden\"\n      />\n      <div\n        style={{\n          backgroundImage:\n            \"linear-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 2px, transparent 2px), linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px)\",\n          backgroundSize: \"100px 100px, 100px 100px, 20px 20px, 20px 20px\",\n          backgroundPosition: \"-2px -2px, -2px -2px, -1px -1px, -1px -1px\",\n        }}\n        className=\"absolute inset-0 hidden dark:block\"\n      />\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/gradient-dual-grid.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

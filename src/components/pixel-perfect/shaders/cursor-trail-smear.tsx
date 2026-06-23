@@ -5,15 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * CursorTrailSmear — the cursor leaves a liquid streak. Recent pointer samples
- * (position + velocity) are tracked JS-side with an age and packed into small
- * uniform arrays. The shader smears the image along each sample's velocity with
- * a soft gaussian blob, weighted by how fresh it is, so a stroke trails behind
- * the cursor and heals as the samples expire. No float render targets — robust
- * on every WebGL device.
- * -------------------------------------------------------------------------- */
-
 const MAX_TRAIL = 24;
 
 const CursorTrailSmear = ({
@@ -22,12 +13,9 @@ const CursorTrailSmear = ({
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the image to smear. */
   image: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel. */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -118,7 +106,6 @@ const CursorTrailSmear = ({
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // --- pointer ----------------------------------------------------------
     const trail: {
       x: number;
       y: number;
@@ -159,7 +146,6 @@ const CursorTrailSmear = ({
       if (img && img.width > 1) {
         uniforms.uImageResolution.value.set(img.width, img.height);
       }
-      // expire old samples, then pack newest-first into the uniform arrays
       for (let i = trail.length - 1; i >= 0; i--) {
         if (shaderTime - trail[i].start > LIFE) trail.splice(i, 1);
       }

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-ink-bleed",
+  "description": "Colour blooms outward from your cursor like ink dropped into water.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-ink-bleed.tsx",
+      "content": "\"use client\";\n\n/**\n * Colour blooms outward from your cursor like ink dropped into water.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        vec3 col = texCover(uv).rgb;\n        vec3 gray = vec3(luma(col));\n        float prog = 0.5 - 0.5 * cos(time * 0.4);\n        vec2 d = uv - mouse;\n        d.x *= aspect;\n        float dist = length(d);\n        float n = fbm(uv * 6.0 + time * 0.2) * 0.18;       // organic ink front\n        float front = 0.25 + prog * 0.95;                  // 0.25..1.2 (always some colour)\n        float ink = smoothstep(front, front - 0.15, dist + n);\n        ink = max(ink, smoothstep(0.14, 0.0, dist));        // colour core stays at the cursor\n        float edge = smoothstep(0.06, 0.0, abs((dist + n) - front));\n        vec3 outc = mix(gray, col, ink);\n        outc *= 1.0 - edge * 0.25;                          // darker wet rim\n        gl_FragColor = vec4(outc, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function InkBleed({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-ink-bleed.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -4,16 +4,6 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * CursorReveal — drag the cursor to reveal the image through a brush mask that
- * persists across frames (ping-pong feedback buffer).
- *   • mode "paint":   base is black-&-white; your strokes paint colour back in
- *                     and slowly fade away.
- *   • mode "scratch": base is a frosted layer; your strokes scratch it off to
- *                     uncover the image, healing back very slowly.
- * Thumbnails auto-draw a drifting stroke so the tile is alive; the cursor adds
- * to it. -------------------------------------------------------------------- */
-
 const VERTEX = /* glsl */ `
   varying vec2 vUv;
   void main() {
@@ -22,7 +12,6 @@ const VERTEX = /* glsl */ `
   }
 `;
 
-// Accumulate the brush into the mask (R channel), fading the previous frame.
 const UPDATE_FRAG = /* glsl */ `
   precision highp float;
   uniform sampler2D uPrev;
@@ -89,7 +78,6 @@ const CursorReveal = ({
   dpr = 2,
 }: {
   image: string;
-  /** "paint" reveals colour over B&W; "scratch" uncovers under frosted glass. */
   mode?: "paint" | "scratch";
   className?: string;
   dpr?: number;
@@ -161,7 +149,6 @@ const CursorReveal = ({
       renderer.render(scene, camera);
     };
 
-    // pointer + idle auto-stroke
     let point: { x: number; y: number } | null = null;
     let prevPoint = { x: 0.5, y: 0.5 };
     let lastInteraction = -Infinity;
@@ -175,7 +162,6 @@ const CursorReveal = ({
     canvas.addEventListener("pointermove", onMove);
     canvas.addEventListener("pointerleave", onLeave);
 
-    // paint fades fairly quickly; scratch heals very slowly
     const fadeBase = mode === "scratch" ? 0.996 : 0.97;
 
     let shaderTime = 0;
@@ -190,7 +176,6 @@ const CursorReveal = ({
       const img = animated.texture.image as { width: number; height: number };
       if (img && img.width > 1) displayMat.uniforms.uTextureRes.value.set(img.width, img.height);
 
-      // current brush point (cursor, or a drifting idle stroke)
       let cur = point;
       if (!cur && shaderTime - lastInteraction > 0.8) {
         const t = shaderTime * 0.8;
@@ -202,7 +187,6 @@ const CursorReveal = ({
         u.uPrevPoint.value.set(prevPoint.x, prevPoint.y);
         prevPoint = cur;
       } else {
-        // no stroke this frame: paint off-canvas so only the fade applies
         u.uPoint.value.set(-1, -1);
         u.uPrevPoint.value.set(-1, -1);
       }

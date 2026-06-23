@@ -2,7 +2,6 @@
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
@@ -153,7 +152,6 @@ export function TabsNavigation() {
     }
   }, []);
 
-  // Smart scroll: bring the active tab — and the items just after it — into view.
   useEffect(() => {
     const list = listRef.current;
     const trigger = triggerRefs.current[active];
@@ -164,13 +162,11 @@ export function TabsNavigation() {
     const triggerRect = trigger.getBoundingClientRect();
 
     if (triggerRect.right + padding > listRect.right) {
-      // Active tab is at/past the right edge → scroll right to reveal the next items.
       list.scrollBy({
         left: triggerRect.right + padding - listRect.right,
         behavior: "smooth",
       });
     } else if (triggerRect.left - padding < listRect.left) {
-      // Active tab is at/past the left edge → scroll left to reveal the previous items.
       list.scrollBy({
         left: triggerRect.left - padding - listRect.left,
         behavior: "smooth",
@@ -184,8 +180,6 @@ export function TabsNavigation() {
     url.searchParams.set("tab", slug);
     window.history.replaceState(null, "", url);
 
-    // Release focus from the tab trigger so the ←/→ keys drive the grid's
-    // pagination instead of Radix's built-in tab navigation.
     requestAnimationFrame(() => {
       const focused = document.activeElement;
       if (
@@ -216,13 +210,6 @@ export function TabsNavigation() {
             <div className="border-t border-dashed group-data-[state=active]:border-foreground mask-x-to-98%" />
           </TabsTrigger>
         ))}
-        <Link
-          href="/scroll-typography"
-          className="z-50 cursor-pointer group text-xs px-1 py-1 font-medium text-nowrap inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Scroll Typography
-          <ArrowUpRight className="size-3" />
-        </Link>
         <a
           href="https://www.asciistudio.space/showcase"
           target="_blank"

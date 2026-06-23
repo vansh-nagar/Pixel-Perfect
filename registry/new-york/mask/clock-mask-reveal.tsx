@@ -9,7 +9,6 @@ import gsap from "gsap";
 
 const SRC = "/bend-image-reveal.gif";
 
-// build the conic mask for a given sweep angle (degrees), clockwise from the top.
 const conicMask = (a: number) =>
   `conic-gradient(from -90deg at 50% 50%, #000 0deg, #000 ${a}deg, transparent ${a}deg, transparent 360deg)`;
 

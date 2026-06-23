@@ -23,17 +23,14 @@ const CarLockDriveMotion = () => {
     if (driving) return;
     setDriving(true);
 
-    // Phase 1: accelerate out the right edge
     await carControls.start({
       x: 420,
       transition: { duration: 0.6, ease: [0.42, 0, 0.7, 0.2] },
     });
 
-    // Teleport off-screen left (card has overflow-hidden, so it's invisible)
     carControls.set({ x: -420 });
     await new Promise((r) => setTimeout(r, 120));
 
-    // Phase 2: decelerate back into resting position
     await carControls.start({
       x: 0,
       transition: { duration: 0.95, ease: [0.16, 1, 0.3, 1] },
@@ -44,7 +41,6 @@ const CarLockDriveMotion = () => {
 
   const handleLock = () => {
     if (driving) return;
-    // Already locked at rest; this is just here to dim the right button visually.
   };
 
   return (
@@ -58,7 +54,6 @@ const CarLockDriveMotion = () => {
         fontFamily: "ui-sans-serif, system-ui",
       }}
     >
-      {/* Faint ground line */}
       <div
         className="pointer-events-none absolute left-0 right-0"
         style={{
@@ -69,8 +64,6 @@ const CarLockDriveMotion = () => {
         }}
       />
 
-      {/* Car — marginLeft offsets the image's internal whitespace bias so
-          the visual car-center lines up with the card center at rest. */}
       <motion.img
         src={CAR_IMG}
         alt="Car side view"
@@ -87,7 +80,6 @@ const CarLockDriveMotion = () => {
         }}
       />
 
-      {/* Pill switch */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
         <div
           className="relative grid grid-cols-2 items-center rounded-full"
@@ -100,7 +92,6 @@ const CarLockDriveMotion = () => {
             padding: 4,
           }}
         >
-          {/* Thumb */}
           <motion.div
             className="absolute rounded-full"
             style={{

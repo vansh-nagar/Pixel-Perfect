@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-pixel-melt-transition",
+  "description": "Hover to crunch both images into chunky mosaic blocks that flip over, staggered, into the second.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-pixel-melt-transition.tsx",
+      "content": "\"use client\";\n\n/**\n * Hover to crunch both images into chunky mosaic blocks that flip over, staggered, into the second.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float p = uProgress;\n        float chunk = sin(p * 3.14159265);        // blockiest mid-transition\n        float cells = mix(220.0, 22.0, chunk);\n        vec2 grid = vec2(cells * aspect, cells);\n        vec2 puv = (floor(uv * grid) + 0.5) / grid;\n        float r = hash21(floor(uv * grid));        // per-block stagger\n        float reveal = smoothstep(r - 0.25, r + 0.25, p);\n        vec3 col = mix(texCover(puv).rgb, texCoverB(puv).rgb, reveal);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\nconst DEFAULT_IMAGE_B = \"/fluid-transition.gif\";\n\nexport default function PixelMeltTransition({\n  image = DEFAULT_IMAGE,\n  imageB = DEFAULT_IMAGE_B,\n  className,\n  controls,\n}: {\n  image?: string;\n  imageB?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      imageB={imageB}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-pixel-melt-transition.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

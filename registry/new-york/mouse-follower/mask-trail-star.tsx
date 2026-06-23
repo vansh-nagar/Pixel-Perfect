@@ -18,13 +18,11 @@ const POOL = [...IMAGES, ...IMAGES];
 const SIZE = 150;
 const THRESHOLD = 85;
 
-// The sparkle, authored in an 18x18 box centered on (9, 9).
 const STAR_PATH =
   "M7.71519 0.738646C7.93701 -0.246165 9.34033 -0.246182 9.56216 0.738628C10.3456 4.21619 13.0612 6.9319 16.5388 7.71526C17.5236 7.93711 17.5236 9.34048 16.5388 9.56233C13.0612 10.3457 10.3456 13.0613 9.56216 16.5389C9.34033 17.5237 7.93701 17.5237 7.71519 16.5389C6.93176 13.0613 4.21616 10.3457 0.738557 9.56233C-0.246299 9.34048 -0.246299 7.93711 0.738557 7.71526C4.21599 6.9319 6.93176 4.21619 7.71519 0.738646Z";
 const STAR_CENTER = 9;
 const STAR_NUMS = STAR_PATH.match(/-?\d*\.?\d+/g)!.map(Number);
 
-// Scale + rotate the path around (cx, cy), in CSS pixels.
 const starClip = (s: number, rotation: number, cx: number, cy: number) => {
   const rad = (rotation * Math.PI) / 180;
   const cos = Math.cos(rad);

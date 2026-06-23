@@ -13,8 +13,6 @@ const ROWS = 5;
 
 export type MosaicOrder = "center" | "edges" | "random" | "start" | "end";
 
-// every tile carries the full image, scaled up COLS×ROWS and offset to its own
-// cell, so the grid reconstructs the picture (sprite-sheet math).
 const tiles = Array.from({ length: COLS * ROWS }, (_, i) => {
   const c = i % COLS;
   const r = Math.floor(i / COLS);

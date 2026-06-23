@@ -64,8 +64,6 @@ const clampSize = (n: number) => {
   return Math.max(MIN_SIZE, Math.min(MAX_SIZE, Math.round(n)));
 };
 
-// X = solid, o = semi, . / space = empty. Must be a square of `size` rows of
-// `size` chars each.
 const parsePattern = (str: string): { size: number; grid: Cell[][] } => {
   const rows = str
     .trim()
@@ -120,7 +118,6 @@ export default function PixelIconToolPage() {
 
   const view = computeView(size, pad);
 
-  // Trace overlay
   const [overlay, setOverlay] = useState("");
   const [overlayOpacity, setOverlayOpacity] = useState(0.35);
   const [overlayVisible, setOverlayVisible] = useState(true);
@@ -373,7 +370,6 @@ ${lines.join("\n")}
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      // ignore
     }
   };
 
@@ -404,7 +400,6 @@ ${lines.join("\n")}
         onPointerLeave={stop}
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 flex flex-col gap-8">
-          {/* Header */}
           <header className="flex items-end justify-between gap-4 flex-wrap">
             <div>
               <div className="text-[11px] uppercase tracking-[0.18em] text-neutral-500 mb-1.5">
@@ -429,9 +424,7 @@ ${lines.join("\n")}
           </header>
 
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px] gap-6">
-            {/* EDITOR */}
             <section className="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-5 sm:p-6 flex flex-col items-stretch gap-5 select-none min-w-0">
-              {/* Toolbar: tool segment + actions */}
               <div className="flex items-center gap-3 flex-wrap">
                 <div
                   role="tablist"
@@ -490,7 +483,6 @@ ${lines.join("\n")}
                 </div>
               </div>
 
-              {/* Trace overlay panel */}
               <div className="rounded-xl border border-neutral-800 bg-neutral-950/40">
                 <button
                   type="button"
@@ -601,7 +593,6 @@ ${lines.join("\n")}
                 )}
               </div>
 
-              {/* Canvas */}
               <div className="w-full flex justify-center">
                 <div
                   className="relative rounded-lg overflow-hidden w-full max-w-[640px] aspect-square ring-1 ring-neutral-800"
@@ -672,9 +663,7 @@ ${lines.join("\n")}
                 </div>
               </div>
 
-              {/* Settings */}
               <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-5 items-center">
-                {/* Color */}
                 <div className="flex items-center gap-3 flex-wrap">
                   <SectionLabel>Color</SectionLabel>
                   <label
@@ -725,7 +714,6 @@ ${lines.join("\n")}
                   className="h-8! bg-neutral-800 hidden md:block"
                 />
 
-                {/* Size + presets */}
                 <div className="flex items-center gap-3 md:justify-end flex-wrap">
                   <SectionLabel>Size</SectionLabel>
                   <Input
@@ -760,7 +748,6 @@ ${lines.join("\n")}
                   </div>
                 </div>
 
-                {/* Toggles span full row on second line */}
                 <div className="md:col-span-3 flex items-center gap-5 pt-2 border-t border-neutral-800/60 flex-wrap">
                   <div className="flex items-center gap-2">
                     <SectionLabel>Canvas</SectionLabel>
@@ -853,7 +840,6 @@ ${lines.join("\n")}
               </div>
             </section>
 
-            {/* PREVIEW + EXPORT */}
             <aside className="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-5 sm:p-6 flex flex-col gap-5 min-w-0">
               <div>
                 <div className="flex items-center justify-between mb-2.5">
@@ -930,8 +916,6 @@ ${lines.join("\n")}
     </TooltipProvider>
   );
 }
-
-/* ─────────── Local helpers ─────────── */
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -1067,8 +1051,6 @@ function Toggle({
     </label>
   );
 }
-
-/* ─────────── Icons ─────────── */
 
 function UndoIcon() {
   return (

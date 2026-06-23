@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-coral-blur",
+  "description": "A coral linear gradient with a faint backdrop blur.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/gradient-coral-blur.tsx",
+      "content": "/**\n * A coral linear gradient with a faint backdrop blur.\n */\nexport default function GradientCoralBlur() {\n  return (\n    <div\n      className=\"absolute inset-0\"\n      style={{\n        background:\n          \"linear-gradient(137.47deg, #FF6D5E 11.08%, #FF9186 42.04%, #FF5948 95.9%)\",\n          backdropFilter: \"blur(0.75px)\",\n      }}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/gradient-coral-blur.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

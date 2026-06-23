@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wave-lines",
+  "description": "Stacked glowing sine lines drifting at staggered speeds through a cosine palette.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/wave-lines.tsx",
+      "content": "\"use client\";\n\n/**\n * Stacked glowing sine lines drifting at staggered speeds through a cosine palette.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // cosine palette tuned for the wave hues\n      vec3 wavePalette(float t) {\n        return vec3(0.5)\n             + vec3(0.5) * cos(TAU * (vec3(1.0) * t + vec3(0.1, 0.4, 0.5)));\n      }\n\n      // one glowing sine line, tinted by hue\n      vec3 waveLine(vec2 uv, float amp, float freq, float phase, float thick, vec3 hue) {\n        float y = uv.y + amp * sin(freq * (uv.x - phase));\n        float bright = smoothstep(0.0, 1.0, 1.0 - abs(y) / thick);\n        return vec3(bright) * hue;\n      }\n\n      void main() {\n        vec2 uv = uvCentered();\n        vec3 col = vec3(0.0);\n        for (float layer = 0.0; layer < 1.0; layer += 0.1) {\n          float amp = 0.25 + 0.25 * sin(time + layer) * (1.0 - layer);\n          float phase = time * (1.0 - layer);\n          float thick = 0.01 + 0.001 * pow(abs(uv.x), 8.0);\n          vec3 hue = wavePalette(0.5 * uv.x + layer - 0.5 * time);\n          col += waveLine(uv, amp, 2.0, phase, thick, hue);\n        }\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function WaveLines({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/wave-lines.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-glass-shatter",
+  "description": "The image is cracked into Voronoi glass shards — move your cursor to blow them outward, leaving dark leading between the pieces.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-glass-shatter.tsx",
+      "content": "\"use client\";\n\n/**\n * The image is cracked into Voronoi glass shards — move your cursor to blow them outward, leaving dark leading between the pieces.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float scale = 11.0;\n        vec2 p = vec2(uv.x * aspect, uv.y) * scale;\n        vec2 ip = floor(p), fp = fract(p);\n\n        // nearest + second-nearest Voronoi feature points (3x3 search)\n        float md = 8.0, md2 = 8.0;\n        vec2 mseed = ip;\n        for (int y = -1; y <= 1; y++) {\n          for (int x = -1; x <= 1; x++) {\n            vec2 g = vec2(float(x), float(y));\n            vec2 o = vec2(hash21(ip + g), hash21(ip + g + 3.7));\n            float d = length(g + o - fp);\n            if (d < md) { md2 = md; md = d; mseed = ip + g + o; }\n            else if (d < md2) { md2 = d; }\n          }\n        }\n\n        // each shard slides away from the cursor, scaled by its distance\n        vec2 cellUv = vec2(mseed.x / aspect, mseed.y) / scale;\n        vec2 toM = cellUv - mouse;\n        vec2 dm = toM; dm.x *= aspect;\n        float dist = length(dm);\n        float force = smoothstep(0.42, 0.0, dist);\n        float rr = hash21(mseed * 1.7);\n        vec2 off = (toM / (dist + 1e-4)) * force * 0.12 * (0.5 + rr);\n\n        vec3 col = texCover(uv - off).rgb;\n        float border = smoothstep(0.0, 0.04, md2 - md); // dark leading between shards\n        col *= 0.4 + 0.6 * border;\n        col += force * (1.0 - border) * 0.15;           // refracted edge glints\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function GlassShatter({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-glass-shatter.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

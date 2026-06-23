@@ -1,22 +1,4 @@
 #!/usr/bin/env node
-/**
- * sync-registry.mjs
- *
- * Scans every component under `registry/new-york/**` and ensures `registry.json`
- * has a corresponding entry — adding new ones, merging inferred dependencies
- * into existing ones, then runs `shadcn build` to regenerate `public/r/*.json`.
- *
- *   bun run registry:sync           # one-shot
- *   bun run registry:sync -- --watch  # rebuilds on file save
- *
- * Drop a JSDoc at the top of any component to set its description:
- *
- *   /**
- *    * A glossy keycap-style button with a press animation.
- *    *\/
- *
- * Otherwise the description falls back to the humanised filename.
- */
 
 import fs from "node:fs";
 import path from "node:path";
@@ -29,10 +11,7 @@ const REGISTRY_PATH = path.join(ROOT, "registry.json");
 const COMPONENTS_DIR = path.join(ROOT, "registry/new-york");
 const TARGET_DIR = "components/pixel-perfect";
 
-// npm packages that ship with most React/Next setups — never list as deps.
 const BUILTIN_DEPS = new Set(["react", "react-dom", "next"]);
-
-/* ───────────────────── helpers ───────────────────── */
 
 function walk(dir) {
   const out = [];
@@ -52,7 +31,6 @@ function humanize(slug) {
     .join(" ");
 }
 
-/** Pulls the first non-tag line from the first JSDoc block. */
 function extractDescription(content) {
   const m = content.match(/\/\*\*([\s\S]*?)\*\//);
   if (!m) return null;
@@ -72,13 +50,6 @@ function extractImports(content) {
   return imports;
 }
 
-/**
- * Classify each import:
- *  - relative / `registry/...`        → ignored (component code)
- *  - `@/components/ui/<name>`         → shadcn registry dependency
- *  - `@/...`                          → local code (ignored)
- *  - bare specifier                   → npm dependency
- */
 function classifyDeps(imports) {
   const npm = new Set();
   const registry = new Set();
@@ -90,7 +61,6 @@ function classifyDeps(imports) {
     }
     if (spec.startsWith("@/")) continue;
 
-    // npm — get root package name (handle scoped @x/y)
     const root = spec.startsWith("@")
       ? spec.split("/").slice(0, 2).join("/")
       : spec.split("/")[0];
@@ -102,8 +72,6 @@ function classifyDeps(imports) {
 function arrayEq(a = [], b = []) {
   return JSON.stringify(a) === JSON.stringify(b);
 }
-
-/* ───────────────────── main sync ───────────────────── */
 
 function sync({ build = true, quiet = false } = {}) {
   const raw = fs.readFileSync(REGISTRY_PATH, "utf8");
@@ -131,7 +99,6 @@ function sync({ build = true, quiet = false } = {}) {
 
     const existing = byName.get(name);
     if (existing) {
-      // Merge inferred deps additively — never remove what the user set.
       const mergedNpm = [
         ...new Set([...(existing.dependencies ?? []), ...npm]),
       ].sort();
@@ -161,7 +128,6 @@ function sync({ build = true, quiet = false } = {}) {
       continue;
     }
 
-    // Fresh entry
     const entry = {
       name,
       description,
@@ -192,8 +158,6 @@ function sync({ build = true, quiet = false } = {}) {
     execSync("npx shadcn build", { stdio: "inherit", cwd: ROOT });
   }
 }
-
-/* ───────────────────── CLI ───────────────────── */
 
 const args = process.argv.slice(2);
 const watch = args.includes("--watch");

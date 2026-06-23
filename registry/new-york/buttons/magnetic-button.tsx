@@ -33,13 +33,10 @@ const MagneticButton = ({
     const label = labelRef.current;
     if (!zone || !btn || !label) return;
 
-    // "true" kills ALL tweens on the target; "auto" kills only conflicting props;
-    // "false" (the default) lets tweens stack and fight over x/y.
     const overwrite = mode === "true" ? true : mode === "false" ? false : "auto";
     const isFalse = mode === "false";
     const hasWiggle = mode === "true" || mode === "auto";
 
-    // idle attention-seeking wiggle — only "auto" survives the magnetic pull
     if (hasWiggle) {
       gsap.to(btn, {
         rotation: 12,
@@ -69,7 +66,6 @@ const MagneticButton = ({
       gsap.to(btn, {
         x: mapX * STRENGTH,
         y: mapY * STRENGTH,
-        // a long follow on "false" lets the leave tween collide with it → snap-back
         duration: isFalse ? 1.5 : 0.4,
         ease: "power2.out",
         overwrite,

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-dot-matrix-scatter",
+  "description": "An LED-style dot grid of the image — move your cursor to scatter the dots into a dispersing cloud.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-dot-matrix-scatter.tsx",
+      "content": "\"use client\";\n\n/**\n * An LED-style dot grid of the image — move your cursor to scatter the dots into a dispersing cloud.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n\n        // disturbance field around the cursor (aspect-corrected distance)\n        vec2 toM = uv - mouse;\n        toM.x *= aspect;\n        float dist = length(toM);\n        float force = smoothstep(0.30, 0.0, dist);   // 1 at the cursor, 0 beyond\n        vec2 dir = toM / (dist + 1e-4);\n\n        // push the sampled image outward from the cursor so the cloud disperses\n        vec2 suv = uv + dir * force * 0.13;\n\n        // dot grid over the (pushed) image\n        float cells = 110.0;\n        vec2 grid = vec2(cells * aspect, cells);\n        vec2 g = suv * grid;\n        vec2 cellId = floor(g);\n        vec2 f = fract(g) - 0.5;\n\n        // per-cell scatter jitter — only bites near the cursor\n        vec2 jit = (vec2(hash21(cellId), hash21(cellId + 7.7)) - 0.5) * 1.6 * force;\n        f -= jit;\n\n        vec3 col = texCover((cellId + 0.5) / grid).rgb;\n        float lum = luma(col);\n\n        // halftone: dot radius grows with brightness, shrinks where disturbed\n        float r = (0.18 + 0.30 * lum) * (1.0 - 0.45 * force);\n        float dotMask = smoothstep(r, r - 0.12, length(f));\n\n        // near the cursor ~half the dots wink in/out → floating specks + gaps\n        float flick = hash21(cellId + floor(time * 4.0));\n        dotMask *= mix(1.0, step(0.5, flick), force);\n\n        gl_FragColor = vec4(col * dotMask, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function DotMatrixScatter({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-dot-matrix-scatter.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

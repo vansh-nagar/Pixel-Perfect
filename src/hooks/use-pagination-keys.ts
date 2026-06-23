@@ -2,10 +2,6 @@
 
 import { useEffect } from "react";
 
-/**
- * Lets the left/right arrow keys flip through paginated grids.
- * No-op while focus is in a text field so typing isn't hijacked.
- */
 export function usePaginationKeys(
   totalPages: number,
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>,

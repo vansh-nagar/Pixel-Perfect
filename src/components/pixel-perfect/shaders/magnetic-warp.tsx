@@ -5,16 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * MagneticWarp — the image behaves like iron filings. A grid of per-cell
- * offsets is held JS-side, each cell driven by a little spring. While the cursor
- * is over the canvas, cells within its radius are pulled toward it; the rest
- * spring back toward home. Because each spring has velocity + damping, the image
- * gathers and bulges where you hover, then wobbles and overshoots back into
- * place when you leave. The offsets are uploaded as a float DataTexture that the
- * display shader reads to warp the sampled UVs.
- * -------------------------------------------------------------------------- */
-
 const GRID = 44; // grid cells per axis
 
 const MagneticWarp = ({
@@ -23,12 +13,9 @@ const MagneticWarp = ({
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the image to warp. */
   image: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel. */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -55,7 +42,6 @@ const MagneticWarp = ({
 
     const animated = createAnimatedTexture(image);
 
-    // rg = current offset; the matching velocity lives in a parallel JS array.
     const data = new Float32Array(GRID * GRID * 4);
     const vel = new Float32Array(GRID * GRID * 2);
     const dataTexture = new THREE.DataTexture(
@@ -109,7 +95,6 @@ const MagneticWarp = ({
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // --- pointer ----------------------------------------------------------
     const mouse = { x: 0.5, y: 0.5 };
     let active = false;
     const onMove = (e: PointerEvent) => {
@@ -147,7 +132,6 @@ const MagneticWarp = ({
               ty = -(dy / dist) * f;
             }
           }
-          // critically-damped-ish spring toward the target offset
           const ax = (tx - data[i4]) * config.stiffness;
           const ay = (ty - data[i4 + 1]) * config.stiffness;
           vel[i2] = (vel[i2] + ax) * config.damping;

@@ -39,7 +39,7 @@ export default function TextBurnNeon({
         textShadow: "0 0 0px #ff0000",
       });
 
-      chars.forEach((char, i) => {
+      chars.forEach((char) => {
         const delay = Math.random() * 0.5;
         const tl = gsap.timeline({ delay });
 

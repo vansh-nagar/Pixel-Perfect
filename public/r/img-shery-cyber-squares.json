@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-shery-cyber-squares",
+  "description": "Retro cyber squares pulse across the image and brighten around your cursor. Adapted from Shery.js (style 7), MIT — Sheryians Coding School.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-shery-cyber-squares.tsx",
+      "content": "\"use client\";\n\n/**\n * Retro cyber squares pulse across the image and brighten around your cursor. Adapted from Shery.js (style 7), MIT — Sheryians Coding School.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // Adapted from Shery.js effect 7 (Cyber Squares), single-image branch, MIT.\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float m = 0.4 + 0.6 * smoothstep(0.35, 0.0, length(uv - mouse));\n\n        float tiles = 9.0;\n        vec2 scaled = tiles * vec2(uv.x, uv.y / aspect);\n        vec2 tile = fract(scaled);\n        float tileDist = min(min(tile.x, 1.0 - tile.x), min(tile.y, 1.0 - tile.y));\n        float squareDist = length(floor(scaled));\n\n        float edge = sin(time - squareDist * 3.0);\n        edge = mod(edge * edge, 1.0);\n        float value = mix(tileDist, 1.0 - tileDist, step(0.5, edge));\n        edge = pow(abs(1.0 - edge * m), 1.5 * m);\n        value = smoothstep(edge - 0.5 * m, edge, value);\n\n        vec3 col = mix(vec3(0.0), texCover(uv).rgb, value);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function SheryCyberSquares({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-shery-cyber-squares.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-wipe-reveal",
+  "description": "Hover to sweep a glowing diagonal seam across the frame, wiping one image into the next.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-wipe-reveal.tsx",
+      "content": "\"use client\";\n\n/**\n * Hover to sweep a glowing diagonal seam across the frame, wiping one image into the next.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float p = uProgress;\n        // position along a diagonal sweep, normalised to ~0..1\n        float edge = dot(uv, normalize(vec2(1.0, 0.35))) / 1.35;\n        float w = smoothstep(p - 0.04, p + 0.04, edge); // 1 = not yet wiped (A)\n        vec3 col = mix(texCoverB(uv).rgb, texCover(uv).rgb, w);\n        col += (1.0 - smoothstep(0.0, 0.05, abs(edge - p))) * 0.5; // glowing seam\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\nconst DEFAULT_IMAGE_B = \"/fluid-transition.gif\";\n\nexport default function WipeReveal({\n  image = DEFAULT_IMAGE,\n  imageB = DEFAULT_IMAGE_B,\n  className,\n  controls,\n}: {\n  image?: string;\n  imageB?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      imageB={imageB}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-wipe-reveal.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

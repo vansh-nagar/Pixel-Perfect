@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-ripple",
+  "description": "Concentric water ripples radiate from your cursor and warp the image.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-ripple.tsx",
+      "content": "\"use client\";\n\n/**\n * Concentric water ripples radiate from your cursor and warp the image.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        vec2 d = uv - mouse;\n        d.x *= aspect;\n        float dist = length(d);\n        float ripple = sin(dist * 40.0 - time * 4.0)\n                     * 0.012 * smoothstep(0.5, 0.0, dist);\n        vec2 off = normalize(d + 1e-6) * ripple;\n        off.x /= aspect;\n        gl_FragColor = texCover(uv + off);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function Ripple({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-ripple.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

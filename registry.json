@@ -1397,19 +1397,6 @@
       ]
     },
     {
-      "name": "red fire",
-      "description": "Red fire component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/ascii/red fire.tsx",
-          "target": "components/pixel-perfect/red fire.tsx"
-        }
-      ]
-    },
-    {
       "name": "border1",
       "description": "Border1 component.",
       "type": "registry:block",
@@ -2073,22 +2060,6 @@
           "type": "registry:component",
           "path": "registry/new-york/carousel/radial-carousel.tsx",
           "target": "components/pixel-perfect/radial-carousel.tsx"
-        }
-      ]
-    },
-    {
-      "name": "ring-carousel-3d",
-      "description": "Ring Carousel 3D — image cards arranged around a circle in real 3D space",
-      "type": "registry:block",
-      "dependencies": [
-        "@gsap/react",
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/carousel/ring-carousel-3d.tsx",
-          "target": "components/pixel-perfect/ring-carousel-3d.tsx"
         }
       ]
     },
@@ -2935,6 +2906,1625 @@
           "path": "registry/new-york/three-js/floating-logo-intro.tsx",
           "target": "components/pixel-perfect/floating-logo-intro.tsx"
         }
+      ]
+    },
+    {
+      "name": "perspective-deck-carousel",
+      "description": "A row of image cards fanned along a 3D diagonal that recedes up-and-to-the-right; it auto-slides, loops infinitely with no seam, and can be dragged to scrub.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/perspective-deck-carousel.tsx",
+          "target": "components/pixel-perfect/perspective-deck-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "fanned-deck-carousel",
+      "description": "A tall row of image cards fanned along a flat diagonal (no depth recede); each card is angled about Y. It auto-slides, loops infinitely with no seam, and can be dragged to scrub.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/fanned-deck-carousel.tsx",
+          "target": "components/pixel-perfect/fanned-deck-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "red-fire",
+      "description": "ASCII flame animation rendered in a red terminal style.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/ascii/red-fire.tsx",
+          "target": "components/pixel-perfect/red-fire.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-bottom-bloom",
+      "description": "A radial bloom rising from the bottom of the frame.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-bottom-bloom.tsx",
+          "target": "components/pixel-perfect/gradient-bottom-bloom.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-chrome",
+      "description": "A chrome metallic reflection built from a multi-stop conic gradient.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-chrome.tsx",
+          "target": "components/pixel-perfect/gradient-chrome.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-conic-sweep",
+      "description": "A layered multi-conic sweep blending black and grey.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-conic-sweep.tsx",
+          "target": "components/pixel-perfect/gradient-conic-sweep.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-cool-aurora",
+      "description": "A cool aurora of layered blue and cyan radial glows.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-cool-aurora.tsx",
+          "target": "components/pixel-perfect/gradient-cool-aurora.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-coral-blur",
+      "description": "A coral linear gradient with a faint backdrop blur.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-coral-blur.tsx",
+          "target": "components/pixel-perfect/gradient-coral-blur.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-diagonal-pattern",
+      "description": "A fine diagonal repeating-line micro pattern.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-diagonal-pattern.tsx",
+          "target": "components/pixel-perfect/gradient-diagonal-pattern.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-dot-mesh",
+      "description": "A fixed radial dot-mesh texture with a subtle inset ring.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-dot-mesh.tsx",
+          "target": "components/pixel-perfect/gradient-dot-mesh.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-dual-grid",
+      "description": "A dual-scale grid system with light and dark variants.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-dual-grid.tsx",
+          "target": "components/pixel-perfect/gradient-dual-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-fiery-aurora",
+      "description": "A fiery aurora of layered orange and yellow radial glows.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-fiery-aurora.tsx",
+          "target": "components/pixel-perfect/gradient-fiery-aurora.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-glow-fade",
+      "description": "Radial glow that fades from a blue bloom at the top into white.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-glow-fade.tsx",
+          "target": "components/pixel-perfect/gradient-glow-fade.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-gold-sheen",
+      "description": "A gold metallic sheen sweeping across the frame.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-gold-sheen.tsx",
+          "target": "components/pixel-perfect/gradient-gold-sheen.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-purple-blue",
+      "description": "A purple-to-blue angled linear gradient.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-purple-blue.tsx",
+          "target": "components/pixel-perfect/gradient-purple-blue.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-purple-metal",
+      "description": "A purple brushed-metal sheen via hard-light blended gradients.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-purple-metal.tsx",
+          "target": "components/pixel-perfect/gradient-purple-metal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-steel-metal",
+      "description": "A steel brushed-metal sheen via hard-light blended gradients.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-steel-metal.tsx",
+          "target": "components/pixel-perfect/gradient-steel-metal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gradient-sunset-glow",
+      "description": "A warm sunset glow with a soft red inner shadow.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/gradient-sunset-glow.tsx",
+          "target": "components/pixel-perfect/gradient-sunset-glow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "nexvyn-gradient",
+      "description": "A soft purple-and-orange radial gradient.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/nexvyn-gradient.tsx",
+          "target": "components/pixel-perfect/nexvyn-gradient.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progressive-blur",
+      "description": "A progressive (layered) backdrop-blur fade, stacking eight masked blur layers.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/progressive-blur.tsx",
+          "target": "components/pixel-perfect/progressive-blur.tsx"
+        }
+      ]
+    },
+    {
+      "name": "silver-metallic",
+      "description": "A soft silver metallic gradient with a faint backdrop blur.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/silver-metallic.tsx",
+          "target": "components/pixel-perfect/silver-metallic.tsx"
+        }
+      ]
+    },
+    {
+      "name": "aurora-curtain",
+      "description": "Drifting ribbons of green and violet light over a deep night sky.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/aurora-curtain.tsx",
+          "target": "components/pixel-perfect/aurora-curtain.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "blob-sphere",
+      "description": "A sphere displaced by 3D noise in the vertex shader — drag to spin.",
+      "type": "registry:block",
+      "dependencies": [
+        "@react-three/drei",
+        "@react-three/fiber",
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/blob-sphere.tsx",
+          "target": "components/pixel-perfect/blob-sphere.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cursor-spotlight",
+      "description": "A noise-wobbled glow that tracks your cursor across the dark — hover to move it.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/cursor-spotlight.tsx",
+          "target": "components/pixel-perfect/cursor-spotlight.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "day-night-sky",
+      "description": "A shader sky that glides from day to night — sun, moon, drifting clouds and stars, with an optional scrub slider.",
+      "type": "registry:block",
+      "dependencies": [
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/day-night-sky.tsx",
+          "target": "components/pixel-perfect/day-night-sky.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dreamy-clouds",
+      "description": "Soft photographic cumulus clouds drifting across a periwinkle-to-pink dream sky — layered for depth, with lit tops and cool shadowed undersides.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/dreamy-clouds.tsx",
+          "target": "components/pixel-perfect/dreamy-clouds.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "drifting-clouds",
+      "description": "Soft warped fbm clouds rolling across a clear blue sky.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/drifting-clouds.tsx",
+          "target": "components/pixel-perfect/drifting-clouds.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "gentle-waves",
+      "description": "A calm light-to-blue gradient rolling with slow, soft waves.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/gentle-waves.tsx",
+          "target": "components/pixel-perfect/gentle-waves.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "kaleidoscope",
+      "description": "Eight-fold mirrored noise that slowly rotates through the spectrum.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/kaleidoscope.tsx",
+          "target": "components/pixel-perfect/kaleidoscope.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "liquid-caustics",
+      "description": "Sunlight refracting through rippling water onto a pool floor.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/liquid-caustics.tsx",
+          "target": "components/pixel-perfect/liquid-caustics.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "liquid-metal",
+      "description": "Layered domain warping that pools into a flowing chrome surface.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/liquid-metal.tsx",
+          "target": "components/pixel-perfect/liquid-metal.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "neon-rings",
+      "description": "Pulsing, wobbling concentric rings glowing through a cosine spectrum.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/neon-rings.tsx",
+          "target": "components/pixel-perfect/neon-rings.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "plasma-flow",
+      "description": "Classic interfering sine fields cycling through a vivid cosine palette.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/plasma-flow.tsx",
+          "target": "components/pixel-perfect/plasma-flow.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "seventies-melt",
+      "description": "Iterated sine domain-warping melts the plane into a wobbling 70s lava haze.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/seventies-melt.tsx",
+          "target": "components/pixel-perfect/seventies-melt.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "shader-canvas",
+      "description": "A reusable full-screen fragment-shader canvas powered by Three.js, with shared GLSL helpers (noise/fbm), time/mouse/resolution uniforms and optional GUI controls.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/shader-canvas.tsx",
+          "target": "components/pixel-perfect/shader-canvas.tsx"
+        }
+      ]
+    },
+    {
+      "name": "twisted-blob",
+      "description": "A vertex-twisted sphere with domain-warped noise — drag to spin.",
+      "type": "registry:block",
+      "dependencies": [
+        "@react-three/drei",
+        "@react-three/fiber",
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/twisted-blob.tsx",
+          "target": "components/pixel-perfect/twisted-blob.tsx"
+        }
+      ]
+    },
+    {
+      "name": "wave-lines",
+      "description": "Stacked glowing sine lines drifting at staggered speeds through a cosine palette.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/wave-lines.tsx",
+          "target": "components/pixel-perfect/wave-lines.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "animated-texture",
+      "description": "Helper that builds an animated (GIF/video-capable) Three.js texture for image shaders.",
+      "type": "registry:block",
+      "dependencies": [
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/animated-texture.ts",
+          "target": "components/pixel-perfect/animated-texture.ts"
+        }
+      ]
+    },
+    {
+      "name": "before-after",
+      "description": "Drag the handle to wipe between two images with a liquid seam.",
+      "type": "registry:block",
+      "dependencies": [
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/before-after.tsx",
+          "target": "components/pixel-perfect/before-after.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "cursor-reveal",
+      "description": "Drag to paint colour back into a B&W photo, or scratch off frosted glass — strokes linger.",
+      "type": "registry:block",
+      "dependencies": [
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/cursor-reveal.tsx",
+          "target": "components/pixel-perfect/cursor-reveal.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "cursor-trail-smear",
+      "description": "Your cursor drags a liquid streak across the image that trails and fades.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/cursor-trail-smear.tsx",
+          "target": "components/pixel-perfect/cursor-trail-smear.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "flow-field",
+      "description": "Particles stream along curl-noise currents that reform the image.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/flow-field.tsx",
+          "target": "components/pixel-perfect/flow-field.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "fluid-image",
+      "description": "A real-time GPU fluid simulation — move your cursor to flow one image into another.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/fluid-image.tsx",
+          "target": "components/pixel-perfect/fluid-image.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "image-particles",
+      "description": "The image is shattered into a drifting grid of particles — move your cursor to disturb them.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/image-particles.tsx",
+          "target": "components/pixel-perfect/image-particles.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "image-shader-canvas",
+      "description": "A reusable image-shader canvas (Three.js) that loads one or two images, exposes time/mouse/progress uniforms and runs a custom fragment shader with cover-fit sampling.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/image-shader-canvas.tsx",
+          "target": "components/pixel-perfect/image-shader-canvas.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json",
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "img-anaglyph",
+      "description": "Red/cyan stereo split driven by brightness-as-depth — grab your 3D glasses.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-anaglyph.tsx",
+          "target": "components/pixel-perfect/img-anaglyph.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-ascii-art",
+      "description": "Rebuilds the image from terminal glyphs whose density tracks brightness.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-ascii-art.tsx",
+          "target": "components/pixel-perfect/img-ascii-art.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-ballpoint-drawing",
+      "description": "A ballpoint-pen cross-hatch rendering — strokes follow the image's form on grainy paper with a vignette. Adapted (single-pass) from flockaroo, CC BY-NC-SA.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-ballpoint-drawing.tsx",
+          "target": "components/pixel-perfect/img-ballpoint-drawing.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-blinds-transition",
+      "description": "Hover to flip open a stack of horizontal blinds, each strip wiping to the second image.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-blinds-transition.tsx",
+          "target": "components/pixel-perfect/img-blinds-transition.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-burn-dissolve",
+      "description": "Hover and the first image burns away along a glowing ember edge, revealing the next through the noise.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-burn-dissolve.tsx",
+          "target": "components/pixel-perfect/img-burn-dissolve.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-checker-flip",
+      "description": "Hover and the image tiles into a checkerboard whose squares flip over, staggered, to the next image.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-checker-flip.tsx",
+          "target": "components/pixel-perfect/img-checker-flip.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-chromatic-aberration",
+      "description": "Red and blue channels drift apart toward the edges with a slow pulse.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-chromatic-aberration.tsx",
+          "target": "components/pixel-perfect/img-chromatic-aberration.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-comic-cel",
+      "description": "Posterised flat colours with bold inked outlines — cel-shaded comic look.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-comic-cel.tsx",
+          "target": "components/pixel-perfect/img-comic-cel.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-crt-scanlines",
+      "description": "Curved tube, scanlines, RGB fringe and a rolling bar — vintage television.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-crt-scanlines.tsx",
+          "target": "components/pixel-perfect/img-crt-scanlines.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-crystallize",
+      "description": "Shatters the image into flat Voronoi cells with dark stained-glass leading.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-crystallize.tsx",
+          "target": "components/pixel-perfect/img-crystallize.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-depth-parallax",
+      "description": "Fake 2.5D — brightness becomes depth, so the scene tilts as you move.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-depth-parallax.tsx",
+          "target": "components/pixel-perfect/img-depth-parallax.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-dot-matrix-scatter",
+      "description": "An LED-style dot grid of the image — move your cursor to scatter the dots into a dispersing cloud.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-dot-matrix-scatter.tsx",
+          "target": "components/pixel-perfect/img-dot-matrix-scatter.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-duotone",
+      "description": "Maps brightness onto a two-colour gradient that shifts through the spectrum.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-duotone.tsx",
+          "target": "components/pixel-perfect/img-duotone.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-edge-sketch",
+      "description": "Sobel edge detection lights up the outlines in their own colour on black.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-edge-sketch.tsx",
+          "target": "components/pixel-perfect/img-edge-sketch.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-engraving",
+      "description": "Renders the image as inked woodcut hatch-lines on warm paper.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-engraving.tsx",
+          "target": "components/pixel-perfect/img-engraving.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-gameboy",
+      "description": "Four-shade DMG green palette with ordered dithering and chunky pixels.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-gameboy.tsx",
+          "target": "components/pixel-perfect/img-gameboy.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-glass-shatter",
+      "description": "The image is cracked into Voronoi glass shards — move your cursor to blow them outward, leaving dark leading between the pieces.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-glass-shatter.tsx",
+          "target": "components/pixel-perfect/img-glass-shatter.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-glitch",
+      "description": "Random horizontal slices tear and shift with bursts of RGB noise.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-glitch.tsx",
+          "target": "components/pixel-perfect/img-glitch.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-halftone",
+      "description": "Rebuilds the image from ink dots that grow where the picture is darker.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-halftone.tsx",
+          "target": "components/pixel-perfect/img-halftone.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-hex-mosaic",
+      "description": "Pixelates the image onto a honeycomb grid of hexagons.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-hex-mosaic.tsx",
+          "target": "components/pixel-perfect/img-hex-mosaic.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-ink-bleed",
+      "description": "Colour blooms outward from your cursor like ink dropped into water.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-ink-bleed.tsx",
+          "target": "components/pixel-perfect/img-ink-bleed.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-kaleidoscope",
+      "description": "Folds the image into six-fold mirrored symmetry that slowly rotates.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-kaleidoscope.tsx",
+          "target": "components/pixel-perfect/img-kaleidoscope.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-led-dot-matrix",
+      "description": "Rebuilds the image from a grid of glowing round LEDs on a black panel.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-led-dot-matrix.tsx",
+          "target": "components/pixel-perfect/img-led-dot-matrix.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-liquid-transition",
+      "description": "Hover to ripple both frames through a flowing noise warp as one dissolves into the other.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-liquid-transition.tsx",
+          "target": "components/pixel-perfect/img-liquid-transition.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-low-poly",
+      "description": "Flat-shades the image across a grid split into triangles, geometric-art style.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-low-poly.tsx",
+          "target": "components/pixel-perfect/img-low-poly.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-magnifier-lens",
+      "description": "A fish-eye loupe follows your cursor, zooming the image right beneath it.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-magnifier-lens.tsx",
+          "target": "components/pixel-perfect/img-magnifier-lens.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-oil-paint",
+      "description": "Kuwahara filtering smears the image into soft painterly brush strokes.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-oil-paint.tsx",
+          "target": "components/pixel-perfect/img-oil-paint.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-ordered-dither",
+      "description": "Bayer-matrix ordered dithering crunched down to a few colour levels.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-ordered-dither.tsx",
+          "target": "components/pixel-perfect/img-ordered-dither.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-pixel-dissolve",
+      "description": "The image materialises from chunky mosaic blocks into full resolution.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-pixel-dissolve.tsx",
+          "target": "components/pixel-perfect/img-pixel-dissolve.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-pixel-distortion",
+      "description": "Move your cursor to crunch the image into chunky pixel blocks that jitter, distort and RGB-split around the pointer.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-pixel-distortion.tsx",
+          "target": "components/pixel-perfect/img-pixel-distortion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-pixel-melt-transition",
+      "description": "Hover to crunch both images into chunky mosaic blocks that flip over, staggered, into the second.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-pixel-melt-transition.tsx",
+          "target": "components/pixel-perfect/img-pixel-melt-transition.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-pixel-rise-reveal",
+      "description": "Hover and a ragged wall of pixels climbs from the bottom, dissolving the old image block by block as the new one rises into place.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-pixel-rise-reveal.tsx",
+          "target": "components/pixel-perfect/img-pixel-rise-reveal.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-pixelate",
+      "description": "Snaps the image to a square grid whose resolution breathes over time.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-pixelate.tsx",
+          "target": "components/pixel-perfect/img-pixelate.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-posterize",
+      "description": "Flattens the image into a handful of colour bands, screen-print style.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-posterize.tsx",
+          "target": "components/pixel-perfect/img-posterize.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-ripple-reveal",
+      "description": "Hover to send a rippling ring out from the centre, warping the first image aside as the next floods in.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-ripple-reveal.tsx",
+          "target": "components/pixel-perfect/img-ripple-reveal.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-ripple",
+      "description": "Concentric water ripples radiate from your cursor and warp the image.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-ripple.tsx",
+          "target": "components/pixel-perfect/img-ripple.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-shery-cyber-squares",
+      "description": "Retro cyber squares pulse across the image and brighten around your cursor. Adapted from Shery.js (style 7), MIT — Sheryians Coding School.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-shery-cyber-squares.tsx",
+          "target": "components/pixel-perfect/img-shery-cyber-squares.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-shery-liquid-cursor",
+      "description": "A flowing liquid distortion that bends around your cursor. Adapted from Shery.js (style 5), MIT — Sheryians Coding School.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-shery-liquid-cursor.tsx",
+          "target": "components/pixel-perfect/img-shery-liquid-cursor.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-shery-liquid",
+      "description": "A mesmerising simplex-noise liquid warp drifting across the image. Adapted from Shery.js (style 1), MIT — Sheryians Coding School.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-shery-liquid.tsx",
+          "target": "components/pixel-perfect/img-shery-liquid.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-shery-perlin",
+      "description": "A pulsing Perlin-noise displacement that breathes the image in and out. Adapted from Shery.js (style 6), MIT — Sheryians Coding School.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-shery-perlin.tsx",
+          "target": "components/pixel-perfect/img-shery-perlin.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-shery-wind",
+      "description": "A natural simplex-noise sway, like the image fluttering in a breeze. Adapted from Shery.js (style 4), MIT — Sheryians Coding School.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-shery-wind.tsx",
+          "target": "components/pixel-perfect/img-shery-wind.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-spotlight-reveal",
+      "description": "A flashlight of full colour follows your cursor through a darkened image.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-spotlight-reveal.tsx",
+          "target": "components/pixel-perfect/img-spotlight-reveal.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-thermal-vision",
+      "description": "Maps brightness onto an infrared heat ramp — cold indigo to white-hot.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-thermal-vision.tsx",
+          "target": "components/pixel-perfect/img-thermal-vision.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-twirl",
+      "description": "Swirls the pixels into a spinning vortex centred on your cursor.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-twirl.tsx",
+          "target": "components/pixel-perfect/img-twirl.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-vhs",
+      "description": "Tape warble, chroma bleed and a rolling tracking band — worn-out VHS.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-vhs.tsx",
+          "target": "components/pixel-perfect/img-vhs.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-wave",
+      "description": "Gently ripples the whole image like a flag in a slow breeze.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-wave.tsx",
+          "target": "components/pixel-perfect/img-wave.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-wipe-reveal",
+      "description": "Hover to sweep a glowing diagonal seam across the frame, wiping one image into the next.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-wipe-reveal.tsx",
+          "target": "components/pixel-perfect/img-wipe-reveal.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "img-zoom-blur-transition",
+      "description": "Hover to punch through a radial zoom-blur — the first image streaks outward as the second rushes in.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/img-zoom-blur-transition.tsx",
+          "target": "components/pixel-perfect/img-zoom-blur-transition.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+      ]
+    },
+    {
+      "name": "inertia-particles",
+      "description": "Move your cursor to shove the particles aside — a damped spring snaps them back.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/inertia-particles.tsx",
+          "target": "components/pixel-perfect/inertia-particles.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "jelly-bulge",
+      "description": "A glassy lens of jelly follows your cursor, magnifying the image.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/jelly-bulge.tsx",
+          "target": "components/pixel-perfect/jelly-bulge.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "liquid-melt",
+      "description": "Hover to heat the image — the columns you linger over sag and melt.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/liquid-melt.tsx",
+          "target": "components/pixel-perfect/liquid-melt.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "magnetic-swarm",
+      "description": "Particles are sucked into a swirling swarm around your cursor.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/magnetic-swarm.tsx",
+          "target": "components/pixel-perfect/magnetic-swarm.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "magnetic-warp",
+      "description": "The image gathers toward your cursor like iron filings, then relaxes back.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/magnetic-warp.tsx",
+          "target": "components/pixel-perfect/magnetic-warp.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "paint-reveal",
+      "description": "A pencil sketch paints itself in with organic, noisy brush edges.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap",
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/paint-reveal.tsx",
+          "target": "components/pixel-perfect/paint-reveal.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "pixel-distortion",
+      "description": "Move your cursor to smear the image pixels along a relaxing grid.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/pixel-distortion.tsx",
+          "target": "components/pixel-perfect/pixel-distortion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "ripple-touch",
+      "description": "Move or click to drop water ripples that expand and refract the image.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/ripple-touch.tsx",
+          "target": "components/pixel-perfect/ripple-touch.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
+      ]
+    },
+    {
+      "name": "vortex-pull",
+      "description": "A whirlpool chases your cursor with momentum — it lags, then catches up.",
+      "type": "registry:block",
+      "dependencies": [
+        "lil-gui",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/vortex-pull.tsx",
+          "target": "components/pixel-perfect/vortex-pull.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/animated-texture.json"
       ]
     }
   ]

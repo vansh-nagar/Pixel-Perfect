@@ -35,7 +35,6 @@ export function ComponentGrid() {
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = 1;
 
-      // Draw vertical lines for single row
       for (let x = 0; x <= canvas.width; x += gridSize) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -43,7 +42,6 @@ export function ComponentGrid() {
         ctx.stroke();
       }
 
-      // Draw top and bottom horizontal borders only
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(canvas.width, 0);
@@ -82,7 +80,6 @@ export function ComponentGrid() {
         ctx.fill();
       };
 
-      // Draw stars only at top and bottom intersections
       for (let x = 0; x <= canvas.width; x += gridSize) {
         drawStar(x, 0, 8, 4);
         drawStar(x, canvas.height, 8, 4);

@@ -28,9 +28,6 @@ const PixelCursorTrail = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Track the cursor on `window` and colour whichever cell it's over. We can't
-  // rely on the cells receiving mouse events because the grid card layers an
-  // overlay (border lines + copy button) on top of this component.
   useEffect(() => {
     if (blockSize <= 0) return;
 

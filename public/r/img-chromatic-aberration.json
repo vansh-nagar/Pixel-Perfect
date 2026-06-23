@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-chromatic-aberration",
+  "description": "Red and blue channels drift apart toward the edges with a slow pulse.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-chromatic-aberration.tsx",
+      "content": "\"use client\";\n\n/**\n * Red and blue channels drift apart toward the edges with a slow pulse.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        vec2 dir = uv - 0.5;\n        float amt = (0.004 + 0.012 * length(dir)) * (0.6 + 0.4 * sin(time));\n        float r = texCover(uv + dir * amt).r;\n        float g = texCover(uv).g;\n        float b = texCover(uv - dir * amt).b;\n        gl_FragColor = vec4(r, g, b, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function ChromaticAberration({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-chromatic-aberration.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

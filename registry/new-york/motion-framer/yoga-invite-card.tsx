@@ -42,7 +42,6 @@ const YogaInviteCard = () => {
           transition={{ delayChildren: 0.12, staggerChildren: 0.06 }}
           className="flex flex-col"
         >
-          {/* Avatar + name */}
           <div className="flex items-center gap-2.5">
             <motion.img
               variants={{
@@ -63,7 +62,6 @@ const YogaInviteCard = () => {
             </motion.span>
           </div>
 
-          {/* Subtitle */}
           <motion.p
             variants={fadeUp}
             className="mt-2.5 text-[15px] leading-tight text-neutral-400"
@@ -71,7 +69,6 @@ const YogaInviteCard = () => {
             is going to join you for:
           </motion.p>
 
-          {/* Class name + icon */}
           <div className="mt-1 flex items-center gap-2">
             <motion.span
               variants={fadeUp}
@@ -109,7 +106,6 @@ const YogaInviteCard = () => {
             </motion.div>
           </div>
 
-          {/* Divider */}
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
@@ -117,7 +113,6 @@ const YogaInviteCard = () => {
             className="my-4 h-px origin-left bg-neutral-200/80"
           />
 
-          {/* Date / time / place */}
           <motion.div
             initial="hidden"
             animate="shown"

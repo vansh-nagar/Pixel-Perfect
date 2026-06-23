@@ -1,7 +1,7 @@
 "use client";
 
 import Cd from "registry/new-york/ascii/cd";
-import RedFireAscii from "../../../../registry/new-york/ascii/red fire";
+import RedFireAscii from "../../../../registry/new-york/ascii/red-fire";
 import CopyDropdown from "../copy-dropdown";
 
 const asciiAnimations = [

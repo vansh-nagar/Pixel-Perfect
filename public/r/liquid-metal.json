@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "liquid-metal",
+  "description": "Layered domain warping that pools into a flowing chrome surface.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/liquid-metal.tsx",
+      "content": "\"use client\";\n\n/**\n * Layered domain warping that pools into a flowing chrome surface.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01() * 3.0;\n        float t = time * 0.15;\n        vec2 q = vec2(fbm(uv + t), fbm(uv + vec2(5.2, 1.3)));\n        vec2 r = vec2(\n          fbm(uv + 4.0 * q + vec2(1.7, 9.2) + t * 0.5),\n          fbm(uv + 4.0 * q + vec2(8.3, 2.8))\n        );\n        float f = fbm(uv + 4.0 * r);\n        vec3 col = mix(vec3(0.08, 0.10, 0.15), vec3(0.90, 0.93, 0.99), f);\n        col = mix(col, vec3(0.35, 0.45, 0.70), clamp(length(q), 0.0, 1.0));\n        col = mix(col, vec3(0.97), r.x * 0.55);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function LiquidMetal({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/liquid-metal.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

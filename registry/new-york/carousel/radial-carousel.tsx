@@ -34,9 +34,6 @@ const RadialCarousel = () => {
         container.querySelectorAll(".radial-card"),
       );
 
-      // Every card pivots around the SAME point — the circle's center, RADIUS px
-      // below each card's top edge at its horizontal middle. Because the pivot is
-      // shared, one rotation value sweeps the entire fan along the arc.
       gsap.set(cards, { transformOrigin: `50% ${RADIUS}px` });
 
       let rotation = 0; // global wheel angle (deg)
@@ -45,9 +42,6 @@ const RadialCarousel = () => {
         cards.forEach((card, i) => gsap.set(card, { rotation: i * GAP + rotation }));
       render();
 
-      // Spin forever on its own at a constant speed. deltaTime (ms) keeps it
-      // frame-rate independent; COUNT cards evenly spaced over 360° make the
-      // wrap seamless, so it loops infinitely with no scroll needed.
       const tick = (_time: number, deltaTime: number) => {
         rotation = (rotation + SPEED * (deltaTime / 1000)) % 360;
         render();
@@ -64,7 +58,6 @@ const RadialCarousel = () => {
       ref={containerRef}
       className="relative h-[80vh] w-full select-none overflow-hidden"
     >
-      {/* Faint vertical guide through the peak of the arc. */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-full -translate-x-1/2 border-l border-dashed border-neutral-300" />
 
       {SLIDES.map((s, i) => (

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { Code, Eye } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ToggleButton from "../../../../../registry/new-york/buttons/toggle-buttion";
-import GlassButton from "../../../../../registry/new-york/buttons/glass-button";
 import type { GlassVariant } from "../../../../../registry/new-york/buttons/glass-button";
 import CopyDropdown from "@/components/mine/copy-dropdown";
 import Editor from "@monaco-editor/react";

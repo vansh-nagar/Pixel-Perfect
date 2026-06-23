@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-bottom-bloom",
+  "description": "A radial bloom rising from the bottom of the frame.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/gradient-bottom-bloom.tsx",
+      "content": "/**\n * A radial bloom rising from the bottom of the frame.\n */\nexport default function GradientBottomBloom() {\n  return (\n    <div className=\"bg-[radial-gradient(circle_at_bottom,var(--color-1),var(--color-2))] absolute inset-0\" />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/gradient-bottom-bloom.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

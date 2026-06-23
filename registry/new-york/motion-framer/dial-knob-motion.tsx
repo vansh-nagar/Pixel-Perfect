@@ -14,8 +14,6 @@ const OUTER_TICKS = 60;
 const INNER_TICKS = 60;
 const DOT_RADIUS = 88;
 
-// Colors resolve from CSS variables declared on the root (see className),
-// so the knob retints itself for light/dark without a theme hook.
 const ACTIVE = "var(--knob-dot-active)";
 const IDLE = "var(--knob-dot-idle)";
 const TICK_OUTER = "var(--knob-tick-outer)";
@@ -79,7 +77,6 @@ const DialKnobMotion = () => {
         fontFamily: "ui-sans-serif, system-ui",
       }}
     >
-      {/* Knob wrapper — handles pointer events, no visible style */}
       <div
         ref={knobRef}
         onPointerDown={onPointerDown}
@@ -93,8 +90,6 @@ const DialKnobMotion = () => {
           touchAction: "none",
         }}
       >
-        {/* Outer disc shell — STATIC. Holds the gradient + shadows so the
-            drop shadow doesn't spin when the knob rotates. */}
         <div
           className="absolute inset-0"
           style={{
@@ -106,8 +101,6 @@ const DialKnobMotion = () => {
           }}
         />
 
-        {/* Outer tick ring — ROTATES with value. Only the ticks turn, so
-            the gradient lighting and drop shadow stay anchored. */}
         <svg
           className="pointer-events-none absolute inset-0"
           viewBox="-120 -120 240 240"
@@ -123,8 +116,6 @@ const DialKnobMotion = () => {
             const rad = (angle * Math.PI) / 180;
             const r1 = 114;
             const r2 = 108;
-            // Emphasize a "12 o'clock" reference tick so rotation is
-            // visually obvious.
             const isMarker = i === 0;
             return (
               <line
@@ -141,8 +132,6 @@ const DialKnobMotion = () => {
           })}
         </svg>
 
-        {/* Inner raised face — stays fixed so the dot arc reads as
-            an absolute value indicator */}
         <div
           className="absolute"
           style={{
@@ -157,7 +146,6 @@ const DialKnobMotion = () => {
               "0 1px 0 var(--knob-hl) inset, 0 -1px 0 rgba(0,0,0,0.12) inset, 0 0 0 1px rgba(0,0,0,0.12), 0 8px 18px -6px rgba(0,0,0,0.30), 0 2px 4px rgba(0,0,0,0.12)",
           }}
         >
-          {/* Inner tick ring (very faint, all the way around) */}
           <svg
             className="pointer-events-none absolute inset-0"
             viewBox="-100 -100 200 200"
@@ -181,7 +169,6 @@ const DialKnobMotion = () => {
               );
             })}
 
-            {/* Idle dot trail — barely visible, blends with disc */}
             {Array.from({ length: DOT_COUNT }).map((_, i) => {
               const angle = (i / DOT_COUNT) * 360 - 90;
               const rad = (angle * Math.PI) / 180;
@@ -196,7 +183,6 @@ const DialKnobMotion = () => {
               );
             })}
 
-            {/* Faint connecting arc behind the active dots */}
             {filledDots > 1 &&
               (() => {
                 const startRad = (-90 * Math.PI) / 180;
@@ -219,7 +205,6 @@ const DialKnobMotion = () => {
                 );
               })()}
 
-            {/* Active dots */}
             {Array.from({ length: filledDots }).map((_, i) => {
               const angle = (i / DOT_COUNT) * 360 - 90;
               const rad = (angle * Math.PI) / 180;

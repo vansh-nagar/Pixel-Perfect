@@ -8,7 +8,6 @@ import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Plus, X, Copy, Check } from "lucide-react";
 
-// The article's default values for the interactive demo.
 const DEFAULTS = {
   width: 120,
   height: 80,
@@ -28,8 +27,6 @@ const DEFAULTS = {
 
 type State = typeof DEFAULTS;
 
-// Controls that reshape the displacement map (regenerate) vs. those that only
-// retune the filter / CSS passes (no regen — these stay cheap to drag).
 const MAP_KEYS = [
   "width",
   "height",
@@ -66,7 +63,6 @@ const CONTROLS: Control[] = [
   { key: "specularBlur", label: "Specular Blur", min: 0, max: 30, step: 0.5, decimals: 1 },
 ];
 
-// The two columns fill row by row: Width | Height, BorderRadius | Scale, …
 const LEFT_CONTROLS = CONTROLS.filter((_, i) => i % 2 === 0);
 const RIGHT_CONTROLS = CONTROLS.filter((_, i) => i % 2 === 1);
 
@@ -74,12 +70,9 @@ const PANEL = 330; // square preview size, px
 const TILE = 210; // saved-snapshot tile size, px
 const MAP_BG = "#8b8b8f"; // neutral grey so the map's colours read cleanly
 
-// Tint the shared Slider violet without forking the component: reach its inner
-// range / thumb slots via arbitrary variants.
 const SLIDER_CLS =
   "flex-1 min-w-0 [&_[data-slot=slider-range]]:bg-violet-500 [&_[data-slot=slider-thumb]]:border-violet-500/70";
 
-// Small stable string hash → a selector-safe numeric token for the filter ID.
 function hashString(str: string) {
   let h = 0;
   for (let i = 0; i < str.length; i++) {
@@ -91,12 +84,10 @@ function hashString(str: string) {
 export default function GlassPage() {
   const [s, setS] = useState<State>(DEFAULTS);
 
-  // The lens floats over the content; drag it around. Position is its centre.
   const [center, setCenter] = useState({ x: PANEL / 2, y: PANEL / 2 });
   const stageRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ dx: number; dy: number } | null>(null);
 
-  // Saved snapshots: each "+" freezes the current settings into a tile below.
   const [snapshots, setSnapshots] = useState<{ id: number; settings: State }[]>(
     []
   );
@@ -117,8 +108,6 @@ export default function GlassPage() {
     []
   );
 
-  // Rebuild the map only when the shape changes — never on a plain move — so
-  // dragging stays cheap. Derived during render (no effect, no cascading state).
   const mapSignature = MAP_KEYS.map((k) => s[k]).join("|");
   const map = useMemo<GeneratedMap | null>(() => {
     if (typeof window === "undefined") return null; // skip on the server
@@ -134,13 +123,8 @@ export default function GlassPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapSignature]);
 
-  // Safari caches filter output by filter ID, so a fresh ID per shape change
-  // forces it to read the new map. Hashing the signature gives a new, stable,
-  // selector-safe token exactly when (and only when) the map changes.
   const version = useMemo(() => hashString(mapSignature), [mapSignature]);
 
-  // Keep the lens inside the stage even as the lens grows — clamp at render time
-  // rather than writing back to state from an effect.
   const clampCenter = useCallback(
     (cx: number, cy: number) => ({
       x: Math.max(s.width / 2, Math.min(PANEL - s.width / 2, cx)),
@@ -178,7 +162,6 @@ export default function GlassPage() {
     (e.currentTarget as HTMLElement).style.cursor = "grab";
   };
 
-  // Scale the map preview up to fill its panel while keeping the lens aspect.
   const mapPreview = useMemo(() => {
     const fit = Math.min((PANEL - 48) / s.width, (PANEL - 48) / s.height);
     return { w: s.width * fit, h: s.height * fit };
@@ -201,7 +184,6 @@ export default function GlassPage() {
     <div className="min-h-screen bg-background text-foreground">
       <div className="flex justify-center px-6 py-12">
         <div className="w-max max-w-full">
-          {/* Previews: refracted result + the map that drives it. */}
           <div className="flex flex-wrap justify-center gap-5">
             <div
               ref={stageRef}
@@ -253,13 +235,11 @@ export default function GlassPage() {
             </div>
           </div>
 
-          {/* Caption. */}
           <p className="my-6 text-center text-sm text-muted-foreground">
             On the left is the refracted result, on the right the map that drives
             it.
           </p>
 
-          {/* Controls — two columns split by a divider. */}
           <div className="rounded-xl border border-border bg-card p-6">
             <div className="grid grid-cols-1 gap-y-5 sm:grid-cols-2 sm:gap-y-0">
               <div className="space-y-5 sm:pr-8">
@@ -271,7 +251,6 @@ export default function GlassPage() {
             </div>
           </div>
 
-          {/* Snapshots — each "+" freezes the current settings into a tile. */}
           <div className="mt-6 grid grid-cols-3 gap-4">
             <button
               type="button"
@@ -293,7 +272,6 @@ export default function GlassPage() {
             ))}
           </div>
 
-          {/* A glass button — it refracts the strip behind it; press to squeeze. */}
           <div
             className="mt-6 flex items-center justify-center rounded-xl border border-border p-12"
             style={{
@@ -346,8 +324,6 @@ function ControlRow({
   );
 }
 
-// A frozen tile: the current settings captured into a fixed-size glass rectangle
-// that refracts the content behind it, plus copy / remove actions.
 function SnapshotTile({
   id,
   settings: s,
@@ -373,7 +349,6 @@ function SnapshotTile({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sig]);
-  // Unique per tile so duplicate settings don't share (and fight over) a filter ID.
   const version = useMemo(() => hashString(`${id}:${sig}`), [id, sig]);
 
   const onCopy = useCallback(() => {
@@ -432,9 +407,6 @@ function SnapshotTile({
   );
 }
 
-// Emit a self-contained React component for a snapshot: the displacement
-// generator and the glass rectangle, with every value baked in. Paste it
-// anywhere — it refracts whatever sits behind it (needs textured content).
 function buildSnapshotCode(s: State): string {
   return `"use client";
 
@@ -635,9 +607,6 @@ export default function GlassRectangle() {
 `;
 }
 
-// Distinct objects — emojis + shapes — scattered on a plain field with a faint
-// grid. Recognisable edges are what make the refraction obvious as the lens
-// passes over them; a flat gradient would barely show the bend.
 const SHAPES = [
   { left: "69%", top: "9%", className: "h-14 w-14 rounded-full", bg: "#f59e0b" },
   { left: "15%", top: "40%", className: "h-12 w-12 rounded-md rotate-12", bg: "#38bdf8" },
@@ -659,7 +628,6 @@ function RefractableContent() {
       className="pointer-events-none absolute inset-0 select-none"
       style={{ backgroundColor: "#0c0c14" }}
     >
-      {/* Faint grid — a clean reference that visibly bends under the lens. */}
       <div
         className="absolute inset-0"
         style={{
@@ -674,7 +642,6 @@ function RefractableContent() {
           style={{ left: s.left, top: s.top, backgroundColor: s.bg }}
         />
       ))}
-      {/* A triangle near the centre so the lens refracts something on load. */}
       <div
         className="absolute"
         style={{

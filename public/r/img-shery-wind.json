@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-shery-wind",
+  "description": "A natural simplex-noise sway, like the image fluttering in a breeze. Adapted from Shery.js (style 4), MIT — Sheryians Coding School.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-shery-wind.tsx",
+      "content": "\"use client\";\n\n/**\n * A natural simplex-noise sway, like the image fluttering in a breeze. Adapted from Shery.js (style 4), MIT — Sheryians Coding School.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // Adapted from Shery.js effect 4 (3D Wind) — depth sway recast as a uv warp, MIT.\n      void main() {\n        vec2 uv = uv01();\n        float freq = 3.0, speed = 1.0, amp = 0.05;\n        float n = snoise(vec3(uv.x * freq + time * speed, uv.y * freq, 0.0));\n        uv.x += n * amp * uv.y;          // sways more toward the top, like a flag\n        uv.y += n * amp * 0.3;\n        gl_FragColor = texCover(uv);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function SheryWind({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-shery-wind.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -33,9 +33,6 @@ export function HeroGrid() {
     };
 
     const drawGrid = () => {
-      const isDark =
-        document.documentElement.classList.contains("dark") ||
-        window.matchMedia("(prefers-color-scheme: dark)").matches;
       const lineColor = "rgba(200, 200, 200, 0.1)";
       const starColor = "rgba(200, 200, 200, 0.25)";
 
@@ -127,7 +124,6 @@ export function HeroGrid() {
             logoSize / 2
           );
 
-          // Left bbbloockk
           ctx.fillRect(
             centerX - logoSize,
             centerY - logoSize / 2,
@@ -142,12 +138,10 @@ export function HeroGrid() {
             logoSize / 2
           );
 
-          // Right bbbloockk
           ctx.save();
           ctx.translate(centerX + logoSize / 2, centerY - logoSize / 2);
           ctx.fillRect(2, 0, logoSize / 2, logoSize);
 
-          // Right-angle triangleeeeeeeeeeee
           ctx.beginPath();
           ctx.moveTo(2, logoSize); // bottom-left corner
           ctx.lineTo(2 + logoSize / 2, logoSize + 1); // bottom-right
@@ -157,7 +151,6 @@ export function HeroGrid() {
 
           ctx.restore();
 
-          // Bottom bbbloockk
           ctx.fillRect(
             centerX - logoSize + 10,
             centerY + logoSize / 3,

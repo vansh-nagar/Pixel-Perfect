@@ -31,11 +31,9 @@ const TextScatter1 = ({
         repeatDelay: 0.5,
       });
 
-      // Each char scatters then immediately falls
       split.chars.forEach((char, i) => {
         const delay = i * 0.1; // stagger delay
 
-        // Scatter
         tl.to(
           char,
           {
@@ -50,7 +48,6 @@ const TextScatter1 = ({
           delay
         );
 
-        // Fall straight down immediately after scatter
         tl.to(
           char,
           {
@@ -63,7 +60,6 @@ const TextScatter1 = ({
         );
       });
 
-      // Reset for next loop
       tl.set(split.chars, {
         x: 0,
         y: 0,

@@ -443,7 +443,6 @@ const ImageTrailEffects = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(rafId);
       clearTimeout(moveTimeout);
-      // Remove the trail nodes we appended (React owns the rest of the subtree).
       trail.forEach((item) => item.element.remove());
     };
   }, []);
@@ -470,7 +469,6 @@ const ImageTrailEffects = () => {
         ))}
       </div>
 
-      {/* Preload so trail images appear instantly. */}
       <div className="pointer-events-none absolute h-px w-px opacity-0">
         {Images.map((src, i) => (
           // eslint-disable-next-line @next/next/no-img-element
@@ -483,7 +481,6 @@ const ImageTrailEffects = () => {
 
 export default ImageTrailEffects;
 
-// Frame-aligned timestamp without Date.now()/performance.now() at module load.
 function timeNow() {
   return performance.now();
 }

@@ -5,15 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * LiquidMelt — hover to melt the image. The frame is split into vertical
- * columns; hovering "heats" the columns under the cursor, and hot columns drip
- * downward over time (their sampling offset grows). Heat fades and the drip
- * slowly recovers, so the picture sags like warm wax where you linger and heals
- * once you move on. Per-column heat + drip are tracked JS-side and uploaded as a
- * 1-D float DataTexture the shader reads to push each column's UVs down.
- * -------------------------------------------------------------------------- */
-
 const COLUMNS = 120;
 
 const LiquidMelt = ({
@@ -22,12 +13,9 @@ const LiquidMelt = ({
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the image to melt. */
   image: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel. */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -118,7 +106,6 @@ const LiquidMelt = ({
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // --- pointer ----------------------------------------------------------
     const mouse = { x: 0.5, y: 0.5 };
     let active = false;
     const onMove = (e: PointerEvent) => {
@@ -146,7 +133,6 @@ const LiquidMelt = ({
         }
       }
       for (let c = 0; c < COLUMNS; c++) {
-        // hot columns keep dripping; everything cools + slowly recovers
         dripData[c * 4] += heat[c] * dt * 1.2;
         dripData[c * 4] = Math.max(0, dripData[c * 4] - config.recover * dt);
         heat[c] *= 1 - Math.min(1, dt * 2.2);

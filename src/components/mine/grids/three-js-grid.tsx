@@ -47,7 +47,6 @@ const ThreeJsGrid = () => {
 
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
-      {/* Single column — one animation per row. */}
       <div className="grid grid-cols-1 gap-0">
         {paginatedItems.map((item, index) => {
           const Component = item.Component;

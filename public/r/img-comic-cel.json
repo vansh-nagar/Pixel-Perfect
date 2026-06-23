@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-comic-cel",
+  "description": "Posterised flat colours with bold inked outlines — cel-shaded comic look.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-comic-cel.tsx",
+      "content": "\"use client\";\n\n/**\n * Posterised flat colours with bold inked outlines — cel-shaded comic look.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        vec3 col = floor(texCover(uv).rgb * 4.0 + 0.5) / 4.0; // posterize\n        vec2 px = 1.5 / resolution;\n        float tl = luma(texCover(uv + px * vec2(-1.0,  1.0)).rgb);\n        float t  = luma(texCover(uv + px * vec2( 0.0,  1.0)).rgb);\n        float tr = luma(texCover(uv + px * vec2( 1.0,  1.0)).rgb);\n        float l  = luma(texCover(uv + px * vec2(-1.0,  0.0)).rgb);\n        float r  = luma(texCover(uv + px * vec2( 1.0,  0.0)).rgb);\n        float bl = luma(texCover(uv + px * vec2(-1.0, -1.0)).rgb);\n        float b  = luma(texCover(uv + px * vec2( 0.0, -1.0)).rgb);\n        float br = luma(texCover(uv + px * vec2( 1.0, -1.0)).rgb);\n        float gx = -tl - 2.0 * l - bl + tr + 2.0 * r + br;\n        float gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n        float e = smoothstep(0.3, 0.7, sqrt(gx * gx + gy * gy));\n        col = mix(col, vec3(0.04), e); // bold ink outline\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function ComicCel({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-comic-cel.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

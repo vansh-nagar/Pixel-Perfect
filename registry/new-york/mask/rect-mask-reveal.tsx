@@ -12,9 +12,6 @@ const SRC = "/bend-image-reveal.gif";
 const RectMaskReveal = () => {
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // a centered rectangle grows out to the edges; a uniform inset % keeps the
-  // revealed rectangle at the same (video) aspect ratio as the container.
-  // alongside it, the image starts blurred + zoomed in and settles to crisp/1x.
   const reveal = () => {
     if (!imgRef.current) return;
     gsap.fromTo(

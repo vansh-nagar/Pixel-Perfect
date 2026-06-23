@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "seventies-melt",
+  "description": "Iterated sine domain-warping melts the plane into a wobbling 70s lava haze.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/seventies-melt.tsx",
+      "content": "\"use client\";\n\n/**\n * Iterated sine domain-warping melts the plane into a wobbling 70s lava haze.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // cosine eased into a [minimum, minimum + range] band\n      float cosRange(float amt, float range, float minimum) {\n        return (((1.0 + cos(radians(amt))) * 0.5) * range) + minimum;\n      }\n\n      void main() {\n        const int zoom = 40;\n        const float brightness = 0.975;\n        float t = time * 1.25;\n        vec2 p = (2.0 * gl_FragCoord.xy - resolution.xy)\n               / max(resolution.x, resolution.y);\n        float ct = cosRange(t * 5.0, 3.0, 1.1);\n        float xBoost = cosRange(t * 0.2, 5.0, 5.0);\n        float yBoost = cosRange(t * 0.1, 10.0, 5.0);\n        float fScale = cosRange(t * 15.5, 1.25, 0.5);\n\n        for (int i = 1; i < zoom; i++) {\n          float _i = float(i);\n          vec2 newp = p;\n          newp.x += 0.25 / _i\n                  * sin(_i * p.y + t * cos(ct) * 0.5 / 20.0 + 0.005 * _i)\n                  * fScale + xBoost;\n          newp.y += 0.25 / _i\n                  * sin(_i * p.x + t * ct * 0.3 / 40.0 + 0.03 * float(i + 15))\n                  * fScale + yBoost;\n          p = newp;\n        }\n\n        vec3 col = vec3(\n          0.5 * sin(3.0 * p.x) + 0.5,\n          0.5 * sin(3.0 * p.y) + 0.5,\n          sin(p.x + p.y)\n        );\n        gl_FragColor = vec4(col * brightness, 1.0);\n      }\n    `;\n\nexport default function SeventiesMelt({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/seventies-melt.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

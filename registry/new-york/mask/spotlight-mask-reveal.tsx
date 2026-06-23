@@ -9,7 +9,6 @@ import gsap from "gsap";
 
 const SRC = "/bend-image-reveal.gif";
 
-// a soft radial mask: opaque core fading to transparent at `r`.
 const spot = (x: number, y: number, r: number) =>
   `radial-gradient(circle ${r}px at ${x}px ${y}px, #000 0px, #000 ${r * 0.6}px, transparent ${r}px)`;
 
@@ -27,14 +26,12 @@ const SpotlightMaskReveal = () => {
     img.style.webkitMaskImage = mask;
   };
 
-  // resting spotlight radius ~28% of the smaller side
   const spotRadius = () => {
     const img = imgRef.current;
     if (!img) return 140;
     return Math.min(img.clientWidth, img.clientHeight) * 0.28;
   };
 
-  // full-frame radius: reach the farthest corner from the current point.
   const floodRadius = (x: number, y: number) => {
     const img = imgRef.current;
     if (!img) return 1200;
@@ -78,7 +75,6 @@ const SpotlightMaskReveal = () => {
     if (!img) return;
     state.current = { x: img.clientWidth / 2, y: img.clientHeight / 2, r: 0 };
     apply();
-    // intro: the spotlight blooms in at the center
     gsap.to(state.current, {
       r: spotRadius(),
       duration: 0.8,

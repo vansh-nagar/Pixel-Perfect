@@ -80,7 +80,6 @@ const FRAGMENT_SHADER = /* glsl */ `
 const NoiseDissolveReveal = ({
   src = FALLBACK_SRC,
 }: {
-  /** Public path (or URL) of the image to reveal. */
   src?: string;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);

@@ -1,22 +1,10 @@
 export type ImageShader = {
   id: string;
   name: string;
-  /** Short label used in the gallery card / preview. */
   title: string;
   description: string;
-  /** Public path (or URL) of the image the shader samples. */
   image: string;
-  /**
-   * Optional second image. When set, the canvas becomes a hover-to-play
-   * transition: `uProgress` eases 0→1 on hover. Sample it with `texCoverB(uv)`.
-   */
   imageB?: string;
-  /**
-   * GLSL `void main()` body. On top of the shared COMMON_GLSL helpers, image
-   * shaders also get: `texCover(vec2 uv)` (cover-fitted sample), `coverUV`,
-   * `luma(vec3)`, plus `uTexture` / `uImageResolution`. Transition shaders also
-   * get `texCoverB(vec2 uv)`, `uTextureB`, `uImageResolutionB` and `uProgress`.
-   */
   fragmentShader: string;
 };
 

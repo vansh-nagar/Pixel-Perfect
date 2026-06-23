@@ -38,7 +38,6 @@ const Page = () => {
     };
 
     const tick = () => {
-      // ease toward the cursor each frame — the lag is the smooth "delay"
       state.x = lerp(state.x, target.x, 0.12);
       state.y = lerp(state.y, target.y, 0.12);
       btn.style.transform = `translate(${state.x}px, ${state.y}px)`;

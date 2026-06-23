@@ -11,7 +11,6 @@ const SRC = "/bend-image-reveal.gif";
 const BLADES = 6;
 const WEDGE = 360 / BLADES;
 
-// every wedge opens by `open` degrees at once; `rot` spins the whole pinwheel.
 const pinwheelMask = (open: number, rot: number) =>
   `repeating-conic-gradient(from ${rot}deg at 50% 50%, #000 0deg, #000 ${open}deg, transparent ${open}deg, transparent ${WEDGE}deg)`;
 

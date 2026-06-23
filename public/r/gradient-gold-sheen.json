@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-gold-sheen",
+  "description": "A gold metallic sheen sweeping across the frame.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/gradient-gold-sheen.tsx",
+      "content": "/**\n * A gold metallic sheen sweeping across the frame.\n */\nexport default function GradientGoldSheen() {\n  return (\n    <div\n      className=\"absolute inset-0\"\n      style={{\n        background:\n          \"linear-gradient(125.94deg, #AE4E00 0%, #B47E11 25%, #EFD983 39.26%, #FEF1A2 44.41%, #EFD983 49.2%, #BC881B 75%, #A54E07 100%)\",\n      }}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/gradient-gold-sheen.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

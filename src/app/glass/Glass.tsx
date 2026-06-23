@@ -8,34 +8,16 @@ export type GlassProps = {
   width: number;
   height: number;
   borderRadius: number;
-  /** Lens top-left offset within its positioned parent, in px. */
   x: number;
   y: number;
-  /** Chromatic-aberration strength (0 = none). */
   chroma: number;
-  /** Gaussian blur applied after refraction, in px. */
   blur: number;
-  /** Outer glow / drop strength, 0–1. */
   glow: number;
-  /** Inner rim-light intensity, 0–1. */
   edgeHighlight: number;
-  /**
-   * Direction the rim light comes from, in degrees. 0 lights the top edge
-   * (with the matching dark on the bottom); the bright/dark pair rotates with
-   * the angle. Defaults to 0 to preserve the classic top-lit look.
-   */
   edgeHighlightAngle?: number;
-  /** Specular sheen intensity, 0–1. */
   specular: number;
-  /** Direction the specular sheen comes from, in degrees. */
   specularAngle: number;
-  /** Softens the specular sheen, in px (0 = crisp). */
   specularBlur?: number;
-  /**
-   * Bumped whenever the map changes. Safari caches filter output by filter ID,
-   * so we mint a fresh ID on every update to force it to read the new map —
-   * otherwise the glass freezes mid-motion.
-   */
   version: number;
   className?: string;
   children?: ReactNode;
@@ -65,24 +47,13 @@ export function Glass({
   const filterId = `glass-filter-${version}`;
   const scale = map?.scale ?? 0;
 
-  // Split the displacement into three slightly different scales for R / G / B,
-  // then screen them back together. At chroma 0 the three scales are identical
-  // and the image reconstructs exactly; above 0 the channels separate into a
-  // faint colour fringe along the lens edge.
   const spread = chroma * (map?.chromaAmount ?? 0) * 0.6;
   const scaleR = scale + spread;
   const scaleG = scale;
   const scaleB = scale - spread;
 
-  // Frosted glass: the blur diffuses the backdrop, but a blurred backdrop alone
-  // still reads as clear glass. The frost comes from a milky light-scatter tint
-  // laid over it, scaled by the same blur — so the Blur control *is* the frost:
-  // more blur, more diffusion and a milkier, more frosted body.
   const frost = Math.min(0.22, blur * 0.02);
 
-  // Rim light direction: angle 0 → highlight on the top edge, dark on the
-  // bottom; the pair rotates together as the angle increases. sin/cos give the
-  // 1px inset offset, and the dark inset is simply the opposite offset.
   const rimRad = (edgeHighlightAngle * Math.PI) / 180;
   const rimX = +Math.sin(rimRad).toFixed(3);
   const rimY = +Math.cos(rimRad).toFixed(3);
@@ -97,13 +68,8 @@ export function Glass({
     transform: `translate3d(${x}px, ${y}px, 0)`,
     backdropFilter: map ? `url(#${filterId})` : undefined,
     WebkitBackdropFilter: map ? `url(#${filterId})` : undefined,
-    // Milky frost body — light scattered inside the glass.
     backgroundColor: `rgba(255,255,255,${frost})`,
-    // Clip the (optionally blurred) sheen to the lens's rounded shape. Doesn't
-    // touch the box-shadow rim/glow, which paint outside the box.
     overflow: "hidden",
-    // Rim light + a soft outer glow that keeps the glass legible over any
-    // content. These run as cheap CSS passes rather than extra filter regions.
     boxShadow: [
       `inset ${rimX}px ${rimY}px 1px rgba(255,255,255,${0.5 * edgeHighlight})`,
       `inset 0 0 0 1px rgba(255,255,255,${0.35 * edgeHighlight})`,
@@ -115,7 +81,6 @@ export function Glass({
     touchAction: "none",
   };
 
-  // Specular sheen: a directional sweep of highlight across the lens.
   const sheenStyle: CSSProperties = {
     position: "absolute",
     inset: 0,
@@ -142,8 +107,6 @@ export function Glass({
           <defs>
             <filter
               id={filterId}
-              // sRGB keeps the colour-channel split from drifting through the
-              // filter's linear-light default.
               colorInterpolationFilters="sRGB"
               x="0"
               y="0"
@@ -160,7 +123,6 @@ export function Glass({
                 result="map"
               />
 
-              {/* Red channel, pushed a touch harder. */}
               <feDisplacementMap
                 in="SourceGraphic"
                 in2="map"
@@ -176,7 +138,6 @@ export function Glass({
                 result="red"
               />
 
-              {/* Green channel, the reference bend. */}
               <feDisplacementMap
                 in="SourceGraphic"
                 in2="map"
@@ -192,7 +153,6 @@ export function Glass({
                 result="green"
               />
 
-              {/* Blue channel, pushed a touch less. */}
               <feDisplacementMap
                 in="SourceGraphic"
                 in2="map"

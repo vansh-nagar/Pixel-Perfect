@@ -13,7 +13,6 @@ const SRC = "/bend-image-reveal.gif";
 const IMG_ASPECT = 540 / 304;
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-// the whole image is one texture on a subdivided plane; the GPU bends the vertices
 const vertexShader = /* glsl */ `
   varying vec2 vUv;
   uniform float uBendX;
@@ -63,19 +62,16 @@ function MouseImage({ containerRef }: { containerRef: RefObject<HTMLDivElement |
     });
   }, []);
 
-  // attach the texture once the mesh/material has mounted
   useEffect(() => {
     if (texture && matRef.current) matRef.current.uniforms.uTex.value = texture;
   }, [texture]);
 
-  // where the cursor is (target) vs. where the image actually is (lags behind)
   const target = useRef({ x: 0, y: 0 });
   const st = useRef({ x: 0, y: 0, bx: 0, by: 0 });
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    // listen on window so the card's overlays can't swallow the event
     const onMove = (e: PointerEvent) => {
       const r = el.getBoundingClientRect();
       const inside =
@@ -100,14 +96,12 @@ function MouseImage({ containerRef }: { containerRef: RefObject<HTMLDivElement |
     const mat = matRef.current;
     if (!mesh || !mat) return;
 
-    // smoothly chase the cursor (the lag IS the "air resistance")
     const px = st.current.x;
     const py = st.current.y;
     st.current.x = lerp(st.current.x, target.current.x, 0.1);
     st.current.y = lerp(st.current.y, target.current.y, 0.1);
     mesh.position.set(st.current.x, st.current.y, 0);
 
-    // bend opposite to travel, smoothed so it settles when the cursor stops
     const vx = st.current.x - px;
     const vy = st.current.y - py;
     st.current.bx = lerp(st.current.bx, gsap.utils.clamp(-45, 45, -vx * 1.5), 0.15);

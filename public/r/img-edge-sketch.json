@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-edge-sketch",
+  "description": "Sobel edge detection lights up the outlines in their own colour on black.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-edge-sketch.tsx",
+      "content": "\"use client\";\n\n/**\n * Sobel edge detection lights up the outlines in their own colour on black.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        vec2 px = 1.5 / resolution;   // sampling spread, in screen pixels\n        float tl = luma(texCover(uv + px * vec2(-1.0,  1.0)).rgb);\n        float t  = luma(texCover(uv + px * vec2( 0.0,  1.0)).rgb);\n        float tr = luma(texCover(uv + px * vec2( 1.0,  1.0)).rgb);\n        float l  = luma(texCover(uv + px * vec2(-1.0,  0.0)).rgb);\n        float r  = luma(texCover(uv + px * vec2( 1.0,  0.0)).rgb);\n        float bl = luma(texCover(uv + px * vec2(-1.0, -1.0)).rgb);\n        float b  = luma(texCover(uv + px * vec2( 0.0, -1.0)).rgb);\n        float br = luma(texCover(uv + px * vec2( 1.0, -1.0)).rgb);\n        float gx = -tl - 2.0 * l - bl + tr + 2.0 * r + br;\n        float gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n        float edge = smoothstep(0.15, 0.7, sqrt(gx * gx + gy * gy));\n        vec3 col = texCover(uv).rgb * edge * 1.8;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function EdgeSketch({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-edge-sketch.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

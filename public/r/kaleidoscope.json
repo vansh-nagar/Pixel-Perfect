@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kaleidoscope",
+  "description": "Eight-fold mirrored noise that slowly rotates through the spectrum.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/kaleidoscope.tsx",
+      "content": "\"use client\";\n\n/**\n * Eight-fold mirrored noise that slowly rotates through the spectrum.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uvCentered();\n        float t = time * 0.2;\n        uv = rot(t * 0.3) * uv;\n        float r = length(uv);\n        float a = atan(uv.y, uv.x);\n        float seg = TAU / 8.0;\n        a = mod(a, seg);\n        a = abs(a - seg * 0.5);\n        vec2 p = vec2(cos(a), sin(a)) * r;\n        float n = fbm(p * 3.0 + t);\n        vec3 col = palette(\n          n + r - t * 0.3,\n          vec3(0.5), vec3(0.5), vec3(1.0), vec3(0.0, 0.33, 0.67)\n        );\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function Kaleidoscope({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/kaleidoscope.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

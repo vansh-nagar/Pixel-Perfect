@@ -1,19 +1,12 @@
 import React from "react";
 import TextMatrixRain from "../text/text-matrix-rain";
-import { Card } from "@/components/ui/card";
 import {
-  BookAIcon,
   Bookmark,
   CalendarRange,
-  Copy,
   Fingerprint,
   MousePointer2,
-  Sparkle,
-  Sparkles,
-  UserRound,
-  Variable,
 } from "lucide-react";
-import { easeIn, easeOut, hover, motion } from "motion/react";
+import { motion } from "motion/react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import TextBurnNeon from "../text/text-burn-neon";

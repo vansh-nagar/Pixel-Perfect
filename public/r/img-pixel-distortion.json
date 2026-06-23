@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-pixel-distortion",
+  "description": "Move your cursor to crunch the image into chunky pixel blocks that jitter, distort and RGB-split around the pointer.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-pixel-distortion.tsx",
+      "content": "\"use client\";\n\n/**\n * Move your cursor to crunch the image into chunky pixel blocks that jitter, distort and RGB-split around the pointer.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        vec2 d = uv - mouse;\n        d.x *= aspect;\n        float force = 1.0 - smoothstep(0.0, 0.34, length(d)); // 1 at cursor → 0 away\n\n        // pixel blocks: near full-res away, chunky right under the cursor\n        float cells = mix(240.0, 24.0, force);\n        vec2 grid = vec2(cells * aspect, cells);\n        vec2 cell = floor(uv * grid);\n        vec2 puv = (cell + 0.5) / grid;\n\n        // per-block jitter that wobbles over time → the distortion animates\n        float r = hash21(cell);\n        float r2 = hash21(cell + 7.3);\n        vec2 jitter = (vec2(r, r2) - 0.5)\n                    * force * 0.07 * (0.5 + 0.5 * sin(time * 6.0 + r * 6.2831));\n\n        // chroma split grows with proximity for a glitchy edge\n        float ca = force * 0.012;\n        vec2 s = puv + jitter;\n        vec3 col = vec3(\n          texCover(s + vec2(ca, 0.0)).r,\n          texCover(s).g,\n          texCover(s - vec2(ca, 0.0)).b\n        );\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function PixelDistortion({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-pixel-distortion.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

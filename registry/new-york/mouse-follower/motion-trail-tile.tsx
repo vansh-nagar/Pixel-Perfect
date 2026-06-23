@@ -20,7 +20,6 @@ const THRESHOLD = 80;
 const ROWS = 3;
 const COLS = 3;
 
-// Pre-computed clip-path for each of the 9 tiles.
 const CLIPS = Array.from({ length: ROWS * COLS }, (_, i) => {
   const row = Math.floor(i / COLS);
   const col = i % COLS;

@@ -5,15 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * InertiaParticles — the image as a grid of GPU points, each with real physics.
- * As the cursor passes, nearby particles are shoved away; a damped spring then
- * pulls every particle back toward its home cell. Because each one carries
- * velocity, they overshoot and settle with bouncy inertia rather than snapping
- * back. Integration runs on the CPU (one pass over a typed array per frame) and
- * the live positions are uploaded to the point cloud each frame.
- * -------------------------------------------------------------------------- */
-
 const VERTEX_SHADER = /* glsl */ `
   precision highp float;
 
@@ -68,12 +59,9 @@ const InertiaParticles = ({
   dpr = 2,
   controls = false,
 }: {
-  /** Public path (or URL) of the image to turn into particles. */
   image: string;
   className?: string;
-  /** Max pixel ratio. Use a lower value for small thumbnails. */
   dpr?: number;
-  /** Show the lil-gui customization panel (spring/damping/force). */
   controls?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -85,7 +73,6 @@ const InertiaParticles = ({
     const camera = new THREE.Camera();
     const scene = new THREE.Scene();
 
-    // per-particle state lives in typed arrays we integrate on the CPU
     const count = COLS * ROWS;
     const positions = new Float32Array(count * 3); // live (uploaded each frame)
     const uvs = new Float32Array(count * 2);
@@ -151,10 +138,8 @@ const InertiaParticles = ({
     const onContextLost = (e: Event) => e.preventDefault();
     canvas.addEventListener("webglcontextlost", onContextLost);
 
-    // tunable physics
     const sim = { stiffness: 70, damping: 0.88, radius: 0.3, force: 32 };
 
-    // cursor in NDC (y up); x far off-screen disables repulsion
     const mouse = new THREE.Vector2(1000, 1000);
     const onPointerMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -178,11 +163,9 @@ const InertiaParticles = ({
         const px = positions[i * 3];
         const py = positions[i * 3 + 1];
 
-        // damped spring pulling the particle home
         let ax = (homeX[i] - px) * stiffness;
         let ay = (homeY[i] - py) * stiffness;
 
-        // repulsion from the cursor (aspect-corrected round falloff)
         if (hasMouse) {
           const ex = px - mx;
           const ey = py - my;

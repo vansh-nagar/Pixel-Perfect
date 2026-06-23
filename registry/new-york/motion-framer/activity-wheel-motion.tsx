@@ -122,7 +122,6 @@ const ActivityWheelMotion = () => {
         overscrollBehavior: "contain",
       }}
     >
-      {/* Dashed arc spine — items appear to ride along its left edge */}
       <svg
         viewBox="0 0 300 300"
         className="pointer-events-none absolute inset-0"
@@ -148,16 +147,12 @@ const ActivityWheelMotion = () => {
         />
       </svg>
 
-      {/* Wheel */}
       <div className="absolute inset-x-0 top-1/2 -translate-y-1/2">
         {VIBES.map((vibe, i) => {
           const offset = i - selected;
           const abs = Math.abs(offset);
           const isSelected = offset === 0;
 
-          // Position along a circular arc: leftmost point of the arc is the
-          // "selected" anchor (offset 0), items rotate up/down to ±angle
-          // around the arc center which sits off the right edge of the card.
           const angleRad = (offset * ARC_STEP_DEG * Math.PI) / 180;
           const arcX = ARC_RADIUS * (1 - Math.cos(angleRad));
           const arcY = ARC_RADIUS * Math.sin(angleRad);
@@ -184,7 +179,6 @@ const ActivityWheelMotion = () => {
                 mass: 0.7,
               }}
             >
-              {/* Name */}
               <motion.span
                 className="rounded-full px-2.5 py-1 text-[13px] tracking-tight"
                 animate={{
@@ -201,7 +195,6 @@ const ActivityWheelMotion = () => {
                 {vibe.name}
               </motion.span>
 
-              {/* Icon + indicator */}
               <div className="flex items-center gap-2">
                 <motion.div
                   className="grid size-8 place-items-center rounded-full"

@@ -59,7 +59,6 @@ export type AnimateTextSpec = {
 
 const easeCache = new Map<string, gsap.EaseFunction | string>();
 
-/** Convert a CSS easing string into a GSAP-compatible ease. */
 export function toEase(easing: string): gsap.EaseFunction | string {
   if (easeCache.has(easing)) return easeCache.get(easing)!;
 
@@ -84,7 +83,6 @@ export function toEase(easing: string): gsap.EaseFunction | string {
 
 type SplitPart = { text: string; animated: boolean; block: boolean };
 
-/** Split text into animated units following the renderer split rules. */
 function splitUnits(text: string, target: Target): SplitPart[] {
   if (target === "whole") return [{ text, animated: true, block: false }];
   if (target === "per-line")
@@ -102,7 +100,6 @@ function splitUnits(text: string, target: Target): SplitPart[] {
   }));
 }
 
-/** Render a phrase into the stage and return the animated unit spans. */
 function renderUnits(
   stage: HTMLElement,
   text: string,
@@ -124,7 +121,6 @@ function renderUnits(
   return units;
 }
 
-/** Materialise a frame into GSAP tween vars. */
 function frameVars(
   frame: Frame,
   yTravel: number,

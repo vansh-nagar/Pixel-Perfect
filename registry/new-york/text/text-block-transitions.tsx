@@ -25,13 +25,10 @@ import { useGSAP } from "@gsap/react";
 type Anim = gsap.core.Tween | gsap.core.Timeline;
 
 type Split = {
-  /** All `.word` elements, in document order (codrops `splittingOutput[i].words`). */
   words: HTMLElement[];
-  /** `.char` elements grouped per word (codrops `chars[i][wordIndex]`). */
   chars: HTMLElement[][];
 };
 
-/** Everything a single switch (out + in) needs, mirroring the codrops closure. */
 type Ctx = {
   curWords: HTMLElement[];
   upWords: HTMLElement[];
@@ -39,34 +36,22 @@ type Ctx = {
   upChars: HTMLElement[][];
   curLayer: HTMLElement;
   upLayer: HTMLElement;
-  /** Toggle a layer's "current" state (codrops `.content__text--current`). */
   setCurrent: (layer: HTMLElement, on: boolean) => void;
-  /** Register an animation so the React cleanup can kill it. */
   track: (a: Anim) => void;
-  /** The whole-timeline onComplete: advance the pointer + schedule the next loop. */
   finish: () => void;
 };
 
 export type BlockTransition = {
   display_name: string;
   description: string;
-  /** Whether each word's text is wrapped in an `overflow:hidden` mask span. */
   wrap?: boolean;
-  /** Where to set CSS `perspective` so 3D rotations read with depth. */
   perspectiveScope?: "word" | "layer";
   perspective?: number;
-  /** Set `transform-style: preserve-3d` on words (needed for nested 3D chars). */
   preserve3dWords?: boolean;
-  /** Build + start the GSAP timeline for one out→in switch. */
   run: (ctx: Ctx) => void;
 };
 
-/* ------------------------------------------------------------------ */
-/* The 12 transitions — faithful ports of js/demo1…demo12/index.js     */
-/* ------------------------------------------------------------------ */
-
 export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
-  // Demo 1 — words fade out; new words rise with a center-split tilt.
   "center-rise": {
     display_name: "Center Rise & Tilt",
     description:
@@ -104,7 +89,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 2 — plain random per-word fade.
   "random-fade": {
     display_name: "Random Fade",
     description: "Old words blink out; new words fade in one by one at random.",
@@ -130,7 +114,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 3 — letters flip out/in around the Y axis, words offset randomly.
   "letter-flip-y": {
     display_name: "3D Letter Flip",
     description:
@@ -173,7 +156,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 4 — letters collapse to nothing from the edges, new letters pop in.
   "scale-pop": {
     display_name: "Scale Collapse & Pop",
     description:
@@ -216,7 +198,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 5 — letters squash to a flat line and grow back (vertical blinds).
   "vertical-blinds": {
     display_name: "Vertical Blinds",
     description:
@@ -255,7 +236,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 6 — words slide up out of a mask; new words slide up into it.
   "slide-up-mask": {
     display_name: "Slide-Up Mask",
     description:
@@ -294,7 +274,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 7 — words and their masks slide in opposite directions (panel push).
   "push-panel": {
     display_name: "Push Panel",
     description:
@@ -357,7 +336,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 8 — words squash flat, new words bounce back with an elastic ease.
   "elastic-squash": {
     display_name: "Elastic Squash",
     description:
@@ -394,7 +372,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 9 — words scatter into 3D depth at random and fly back from the front.
   "z-scatter": {
     display_name: "3D Z-Scatter",
     description:
@@ -457,7 +434,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 10 — letters drift apart at random and the next set converges in.
   "drift-scatter": {
     display_name: "Random Drift Scatter",
     description:
@@ -506,7 +482,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 11 — words flip down/up around the X axis from their bottom edge.
   "flap-x": {
     display_name: "3D Flap",
     description:
@@ -556,7 +531,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
     },
   },
 
-  // Demo 12 — letters swing open like doors on the Y axis, with depth.
   "door-swing": {
     display_name: "3D Door Swing",
     description:
@@ -603,7 +577,6 @@ export const BLOCK_TRANSITIONS: Record<string, BlockTransition> = {
   },
 };
 
-/** Display order of the 12 transitions (matches codrops demo1…demo12). */
 export const BLOCK_TRANSITION_ORDER: string[] = [
   "center-rise",
   "random-fade",
@@ -619,17 +592,11 @@ export const BLOCK_TRANSITION_ORDER: string[] = [
   "door-swing",
 ];
 
-/* ------------------------------------------------------------------ */
-/* Renderer                                                            */
-/* ------------------------------------------------------------------ */
-
-/** Two short phrases the effect alternates between (echoing the codrops copy). */
 const DEFAULT_SAMPLES: [string, string] = [
   "Whispers on the wind",
   "Secrets yet untold",
 ];
 
-/** Pause (ms) the finished phrase is held before the next transition starts. */
 const HOLD_MS = 1500;
 
 const LAYER_STYLE: React.CSSProperties = {
@@ -641,7 +608,6 @@ const LAYER_STYLE: React.CSSProperties = {
   flexWrap: "nowrap",
 };
 
-/** Build the `.word` > `.char` DOM for one phrase (codrops Splitting.js shape). */
 function splitText(layer: HTMLElement, phrase: string, wrap: boolean): Split {
   layer.textContent = "";
   const words: HTMLElement[] = [];
@@ -666,7 +632,6 @@ function splitText(layer: HTMLElement, phrase: string, wrap: boolean): Split {
 
     const spacing = wi < tokens.length - 1 ? "0.28em" : "0";
     if (wrap) {
-      // Mask wrapper for demos 6 & 7 — the word's parentNode (used by demo 7).
       const mask = document.createElement("span");
       mask.style.display = "inline-block";
       mask.style.position = "relative";
@@ -687,7 +652,6 @@ function splitText(layer: HTMLElement, phrase: string, wrap: boolean): Split {
   return { words, chars };
 }
 
-/** Apply the one-time 3D setup (perspective / preserve-3d) for a layer. */
 function applyDepth(def: BlockTransition, layer: HTMLElement, split: Split) {
   if (def.perspectiveScope === "layer" && def.perspective)
     gsap.set(layer, { perspective: def.perspective });
@@ -698,9 +662,7 @@ function applyDepth(def: BlockTransition, layer: HTMLElement, split: Split) {
 }
 
 interface TextBlockTransitionProps {
-  /** One of `BLOCK_TRANSITION_ORDER`. */
   variant: string;
-  /** The two phrases to alternate between. */
   samples?: [string, string];
   className?: string;
 }
@@ -790,7 +752,6 @@ export function TextBlockTransition({
       className={className}
       style={{ position: "relative", display: "inline-block", whiteSpace: "nowrap" }}
     >
-      {/* Invisible sizer so the absolutely-positioned layers have a box. */}
       <span aria-hidden style={{ visibility: "hidden" }}>
         {sizer}
       </span>

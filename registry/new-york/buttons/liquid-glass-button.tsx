@@ -15,7 +15,6 @@ const LiquidGlassButton = ({
         className="relative px-6 py-3 rounded-full overflow-visible bg-transparent border-none"
       >
         <span className="relative z-50 text-sm">{children}</span>
-        {/* Border gradient mask */}
         <span
           className="pointer-events-none absolute inset-0 rounded-full opacity-50 z-40"
           aria-hidden="true"
@@ -36,7 +35,6 @@ const LiquidGlassButton = ({
             backdropFilter: "blur(16.5px)",
           }}
         />
-        {/* Shadow layer 1 */}
         <div
           className="absolute rounded-full pointer-events-none"
           style={{
@@ -48,7 +46,6 @@ const LiquidGlassButton = ({
           }}
         />
 
-        {/* Shadow layer 2 */}
         <div
           className="absolute rounded-full pointer-events-none"
           style={{
@@ -60,7 +57,6 @@ const LiquidGlassButton = ({
           }}
         />
 
-        {/* Shadow layer 3 */}
         <div
           className="absolute rounded-full pointer-events-none"
           style={{
@@ -72,7 +68,6 @@ const LiquidGlassButton = ({
           }}
         />
 
-        {/* Shadow layer 4 */}
         <div
           className="absolute rounded-full pointer-events-none"
           style={{

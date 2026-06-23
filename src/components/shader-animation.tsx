@@ -18,14 +18,12 @@ export function ShaderAnimation() {
 
     const container = containerRef.current
 
-    // Vertex shader
     const vertexShader = `
       void main() {
         gl_Position = vec4( position, 1.0 );
       }
     `
 
-    // Fragment shader
     const fragmentShader = `
       #define TWO_PI 6.2831853072
       #define PI 3.14159265359
@@ -50,7 +48,6 @@ export function ShaderAnimation() {
       }
     `
 
-    // Initialize Three.js scene
     const camera = new THREE.Camera()
     camera.position.z = 1
 
@@ -76,7 +73,6 @@ export function ShaderAnimation() {
 
     container.appendChild(renderer.domElement)
 
-    // Handle window resize
     const onWindowResize = () => {
       const width = container.clientWidth
       const height = container.clientHeight
@@ -85,11 +81,9 @@ export function ShaderAnimation() {
       uniforms.resolution.value.y = renderer.domElement.height
     }
 
-    // Initial resize
     onWindowResize()
     window.addEventListener("resize", onWindowResize, false)
 
-    // Animation loop
     const animate = () => {
       const animationId = requestAnimationFrame(animate)
       uniforms.time.value += 0.05
@@ -100,7 +94,6 @@ export function ShaderAnimation() {
       }
     }
 
-    // Store scene references for cleanup
     sceneRef.current = {
       camera,
       scene,
@@ -109,10 +102,8 @@ export function ShaderAnimation() {
       animationId: 0,
     }
 
-    // Start animation
     animate()
 
-    // Cleanup function
     return () => {
       window.removeEventListener("resize", onWindowResize)
 

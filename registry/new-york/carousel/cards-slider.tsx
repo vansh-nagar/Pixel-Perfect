@@ -44,7 +44,6 @@ const VISIBLE = 2; // cards shown on each side of the active one
 const SPACING = 56; // px each step fans sideways
 const DRAG_THRESHOLD = 70; // px before a drag commits to a step
 
-// Signed, wrapped distance of card `i` from `active`, e.g. -2..2 for 5 cards.
 const offsetFrom = (i: number, active: number, len: number) => {
   let d = (((i - active) % len) + len) % len;
   if (d > len / 2) d -= len;
@@ -56,7 +55,6 @@ const CardsSlider = () => {
   const [paused, setPaused] = useState(false);
   const len = CARDS.length;
 
-  // Auto-advance forever; index grows unbounded and the wrap keeps it seamless.
   useEffect(() => {
     if (paused) return;
     const id = setInterval(() => setActive((a) => a + 1), 2600);
@@ -97,8 +95,6 @@ const CardsSlider = () => {
                 zIndex: 100 - abs,
                 pointerEvents: hidden ? "none" : "auto",
               }}
-              // Only the front card is draggable — grab the top image itself
-              // and swipe; release past the threshold to commit a step.
               drag={isActive ? "x" : false}
               dragSnapToOrigin
               dragConstraints={{ left: 0, right: 0 }}

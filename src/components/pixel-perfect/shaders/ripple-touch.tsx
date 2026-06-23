@@ -5,14 +5,6 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-/* -------------------------------------------------------------------------- *
- * RippleTouch — move or click over the image to drop water ripples. Each touch
- * emits an expanding ring that decays over time; the shader sums all live rings
- * and refracts the image along their crests, like disturbing a pond. Ripple
- * sources are tracked in JS and passed as a small uniform array, so it needs no
- * float render targets (robust on every WebGL1 device).
- * -------------------------------------------------------------------------- */
-
 const MAX_RIPPLES = 14;
 
 const VERTEX_SHADER = /* glsl */ `
@@ -154,7 +146,6 @@ const RippleTouch = ({
     const onPointerMove = (e: PointerEvent) => {
       const uv = toUv(e);
       if (!uv) return;
-      // throttle: emit a new ripple only after the cursor has travelled a bit
       const dx = uv.x - lastEmitX;
       const dy = uv.y - lastEmitY;
       if (dx * dx + dy * dy > 0.0025) emit(uv.x, uv.y);
@@ -171,7 +162,6 @@ const RippleTouch = ({
       if (img && img.width > 1) {
         uniforms.uImageResolution.value.set(img.width, img.height);
       }
-      // expire old ripples, pack the rest into the uniform array (newest first)
       for (let i = ripples.length - 1; i >= 0; i--) {
         if (shaderTime - ripples[i].start > LIFE) ripples.splice(i, 1);
       }

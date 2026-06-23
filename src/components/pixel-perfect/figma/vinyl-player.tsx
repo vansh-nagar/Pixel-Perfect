@@ -17,7 +17,6 @@ const VinylPlayer = () => {
           "inset 0 -4px 4px rgba(0,0,0,0.18), inset 0 4px 2px 2px #ffffff, 0 9px 20px rgba(0,0,0,0.37), 0 36px 36px rgba(0,0,0,0.18), 0 80px 48px rgba(0,0,0,0.09)",
       }}
     >
-      {/* Status: VN + presence dot */}
       <div className="absolute left-[25px] top-[27px] flex items-center gap-[6px]">
         <span className="text-[20px] leading-[23px] tracking-tight text-[#6e6e6e]">
           VN
@@ -31,7 +30,6 @@ const VinylPlayer = () => {
         />
       </div>
 
-      {/* Volume slider tab on right edge */}
       <div
         className="absolute right-[-7px] top-[88px] h-[85px] w-[14px] rounded-[2px]"
         style={{
@@ -47,7 +45,6 @@ const VinylPlayer = () => {
         </div>
       </div>
 
-      {/* Vinyl record */}
       <div
         aria-hidden
         className="absolute left-[calc(50%-7.5px)] top-[55px] -translate-x-1/2"
@@ -78,7 +75,6 @@ const VinylPlayer = () => {
                 strokeWidth="0.6"
               />
             ))}
-            {/* Specular sheen */}
             <ellipse
               cx="60"
               cy="55"
@@ -88,16 +84,13 @@ const VinylPlayer = () => {
             />
           </svg>
 
-          {/* Center label + spindle */}
           <div className="absolute left-1/2 top-1/2 flex size-[14px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_0_3px_rgba(0,0,0,0.35)]">
             <span className="block size-[3px] rounded-full bg-black/80" />
           </div>
         </div>
       </div>
 
-      {/* Tonearm */}
       <div className="pointer-events-none absolute right-[20px] top-[24px] z-10">
-        {/* Pivot base */}
         <div
           className="relative size-[44px] rounded-full"
           style={{
@@ -121,7 +114,6 @@ const VinylPlayer = () => {
           />
         </div>
 
-        {/* Arm */}
         <div
           className="absolute left-[22px] top-[36px] origin-top"
           style={{
@@ -129,7 +121,6 @@ const VinylPlayer = () => {
             transition: "transform 900ms cubic-bezier(0.4,0,0.2,1)",
           }}
         >
-          {/* Shaft */}
           <div
             className="h-[148px] w-[4px]"
             style={{
@@ -138,7 +129,6 @@ const VinylPlayer = () => {
               boxShadow: "0 1px 2px rgba(0,0,0,0.25)",
             }}
           />
-          {/* Counterweight bend */}
           <div
             className="absolute -top-[6px] left-1/2 -translate-x-1/2 h-[10px] w-[10px] rounded-full"
             style={{
@@ -147,7 +137,6 @@ const VinylPlayer = () => {
               boxShadow: "0 1px 2px rgba(0,0,0,0.3)",
             }}
           />
-          {/* Headshell (cartridge) */}
           <div
             className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[20px] w-[16px] rounded-[2px]"
             style={{
@@ -156,12 +145,10 @@ const VinylPlayer = () => {
                 "0 2px 3px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.12)",
             }}
           />
-          {/* Needle */}
           <span className="absolute -bottom-[7px] left-1/2 block h-[4px] w-[1.5px] -translate-x-1/2 bg-[#1a1a1a]" />
         </div>
       </div>
 
-      {/* Track info */}
       <div className="absolute left-1/2 top-[315px] flex w-[301px] -translate-x-1/2 items-center gap-[10px]">
         <AlbumArt />
         <div className="flex min-w-0 flex-col">
@@ -174,7 +161,6 @@ const VinylPlayer = () => {
         </div>
       </div>
 
-      {/* Transport controls */}
       <div className="absolute left-1/2 top-[400px] flex -translate-x-1/2 items-center gap-[24px]">
         <ControlButton size={46} aria-label="Previous track">
           <SkipBack

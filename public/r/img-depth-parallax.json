@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-depth-parallax",
+  "description": "Fake 2.5D — brightness becomes depth, so the scene tilts as you move.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-depth-parallax.tsx",
+      "content": "\"use client\";\n\n/**\n * Fake 2.5D — brightness becomes depth, so the scene tilts as you move.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float depth = luma(texCover(uv).rgb);\n        // cursor offset + a gentle idle sway so it lives at rest too\n        vec2 par = (mouse - 0.5) + 0.12 * vec2(sin(time * 0.5), cos(time * 0.4));\n        vec2 suv = uv + par * depth * 0.06;\n        gl_FragColor = vec4(texCover(suv).rgb, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function DepthParallax({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-depth-parallax.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

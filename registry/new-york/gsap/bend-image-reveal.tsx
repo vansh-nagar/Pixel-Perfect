@@ -1,7 +1,5 @@
 "use client";
 
-/* react-three-fiber's useFrame mutates refs + material uniforms every frame by design
-   (the animation runs outside React's render), which is incompatible with this rule. */
 /* eslint-disable react-hooks/immutability */
 
 /**
@@ -16,7 +14,6 @@ import gsap from "gsap";
 const SRC = "/bend-image-reveal.gif";
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-// the whole image is one texture on a subdivided plane; the GPU bends the vertices
 const vertexShader = /* glsl */ `
   varying vec2 vUv;
   uniform float uBendY;
@@ -50,7 +47,6 @@ function Collage({
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
   const meshes = useRef<THREE.Mesh[]>([]);
 
-  // ONE material + ONE 1x1 geometry shared by every plane (cheap; bend is global)
   const [material] = useState(
     () =>
       new THREE.ShaderMaterial({
@@ -77,7 +73,6 @@ function Collage({
     if (!scroller) return;
     const canvasRect = gl.domElement.getBoundingClientRect();
 
-    // each plane copies its DOM slot's rectangle, relative to the canvas
     for (let i = 0; i < meshes.current.length; i++) {
       const slot = slots.current[i];
       const mesh = meshes.current[i];
@@ -89,7 +84,6 @@ function Collage({
       mesh.scale.set(r.width, r.height, 1);
     }
 
-    // bend from smoothed scroll velocity of THIS box (no jitter)
     const s = scroller.scrollTop;
     const vel = s - lastScroll.current;
     lastScroll.current = s;
@@ -127,7 +121,6 @@ const Page = ({ columns = 2 }: { columns?: 1 | 2 }) => {
         columns === 2 ? "h-full w-full" : "h-72 w-72"
       }`}
     >
-      {/* WebGL overlay on top; pointer-events-none so the wheel reaches the scroller */}
       <Canvas
         className="pointer-events-none absolute inset-0 z-10"
         orthographic
@@ -138,7 +131,6 @@ const Page = ({ columns = 2 }: { columns?: 1 | 2 }) => {
         <Collage scrollRef={scrollRef} slots={slots} count={count} />
       </Canvas>
 
-      {/* native scroll container — overscroll-contain keeps the wheel inside this box */}
       <div
         ref={scrollRef}
         className="scrollbar-none absolute inset-0 overflow-y-auto overscroll-contain p-2"

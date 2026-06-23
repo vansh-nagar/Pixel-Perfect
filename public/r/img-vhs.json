@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-vhs",
+  "description": "Tape warble, chroma bleed and a rolling tracking band — worn-out VHS.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-vhs.tsx",
+      "content": "\"use client\";\n\n/**\n * Tape warble, chroma bleed and a rolling tracking band — worn-out VHS.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        // tape warble: layered horizontal wobble down the screen\n        uv.x += sin(uv.y * 8.0 + time * 2.0) * 0.002\n              + sin(uv.y * 40.0 - time * 5.0) * 0.0015;\n        // a tracking band rolling slowly up the picture\n        float by = fract(uv.y + time * 0.2);\n        float track = smoothstep(0.0, 0.08, by) * smoothstep(0.2, 0.1, by);\n        uv.x += track\n              * (hash21(vec2(floor(uv.y * 80.0), floor(time * 8.0))) - 0.5)\n              * 0.05;\n        // chroma bleed: split the colour channels horizontally\n        float o = 0.004 + track * 0.01;\n        vec3 col = vec3(\n          texCover(uv + vec2(o, 0.0)).r,\n          texCover(uv).g,\n          texCover(uv - vec2(o, 0.0)).b\n        );\n        // tape noise lines + scanline darkening + slight desaturation\n        col += (hash21(vec2(floor(uv.y * 240.0), floor(time * 30.0))) - 0.5) * 0.12;\n        col *= 0.9 + 0.1 * sin(uv.y * 400.0);\n        col = mix(col, vec3(luma(col)), 0.1);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function Vhs({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-vhs.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

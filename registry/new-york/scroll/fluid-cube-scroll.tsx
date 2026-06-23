@@ -8,9 +8,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
-// Walk up to the element that actually scrolls — the scroll grid renders each
-// effect inside an inner `overflow-y-auto` pane (`data-lenis-prevent`), not the
-// window, so `useScroll` has to track that container or progress reads as 0.
 function findScroller(el: HTMLElement): HTMLElement | undefined {
   let node = el.parentElement;
   while (node) {
@@ -26,7 +23,6 @@ function findScroller(el: HTMLElement): HTMLElement | undefined {
   return undefined;
 }
 
-// --- Fluid sim shaders (ported from fluid-image.tsx) -----------------------
 const BASE_VERTEX = /* glsl */ `
   precision highp float;
   attribute vec3 position;
@@ -207,8 +203,6 @@ const GRADIENT_FRAG = /* glsl */ `
   }
 `;
 
-// Display: mask between the two cube snapshots using the dye field. No UV
-// offset → the cube's shape stays intact, only its colour is revealed.
 const DISPLAY_FRAG = /* glsl */ `
   precision highp float;
   uniform sampler2D uImage;
@@ -226,7 +220,6 @@ const DISPLAY_FRAG = /* glsl */ `
   }
 `;
 
-// --- Cube face shader (colourful, fluid-like fbm flow) ----------------------
 const CUBE_VERT = /* glsl */ `
   varying vec2 vUv;
   void main() {
@@ -293,8 +286,6 @@ const DEFAULTS = {
 const PRESSURE_ITERATIONS = 18;
 const SIM_RESOLUTION = 160;
 
-// The WebGL layer: a 3D cube whose colourful faces are masked in by a GPU fluid
-// simulation. Rotation is driven by the scroll `progress` MotionValue.
 const FluidCubeCanvas = ({
   progress,
   className,
@@ -590,7 +581,6 @@ const FluidCubeCanvas = ({
       last = now;
       shaderTime += dt;
 
-      // Scroll-driven rotation, eased toward the target each frame.
       const p = progress.get();
       const targetY = p * Math.PI * 4;
       const targetX = p * Math.PI * 2;
@@ -710,9 +700,6 @@ const Scene = ({ scroller }: { scroller: HTMLElement }) => {
     offset: ["start start", "end end"],
   });
 
-  // Cube container is 50vw wide. translateX(0%) parks it on the left half,
-  // translateX(100%) on the right. As we scroll: right → left → left → right,
-  // always filling the half the text isn't using.
   const x = useTransform(
     scrollYProgress,
     [0, 0.33, 0.66, 1],
@@ -721,7 +708,6 @@ const Scene = ({ scroller }: { scroller: HTMLElement }) => {
 
   return (
     <div ref={targetRef} className="relative w-full bg-neutral-950 text-white">
-      {/* Pinned, sliding cube */}
       <div className="pointer-events-none sticky top-0 z-10 h-screen w-full">
         <motion.div
           style={{ x }}
@@ -734,9 +720,6 @@ const Scene = ({ scroller }: { scroller: HTMLElement }) => {
         </motion.div>
       </div>
 
-      {/* Text sections scroll over the pinned cube. The wrapper must be
-          pointer-events-none so cursor events fall through to the cube canvas
-          behind it (z-10); only the text blocks re-enable pointer events. */}
       <div className="pointer-events-none relative z-20 mt-[-100vh]">
         <section className="pointer-events-none flex min-h-screen w-full items-center justify-start px-8 md:px-16">
           <div className="pointer-events-auto flex max-w-md flex-col gap-4 text-left">
@@ -794,8 +777,6 @@ const FluidCubeScroll = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const [scroller, setScroller] = useState<HTMLElement | null>(null);
 
-  // Resolve the scroll container before mounting the `useScroll`-driven scene,
-  // so `container.current` is populated when the hook initializes.
   useLayoutEffect(() => {
     if (rootRef.current) setScroller(findScroller(rootRef.current) ?? null);
   }, []);

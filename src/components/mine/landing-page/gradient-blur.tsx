@@ -12,8 +12,6 @@ const LAYERS = [
 ];
 
 function maskFor(stops: number[], side: "top" | "bottom") {
-  // 4 stops -> transparent, opaque, opaque, transparent
-  // 2 stops -> transparent, opaque (final layer)
   const parts =
     stops.length === 4
       ? [
@@ -23,19 +21,13 @@ function maskFor(stops: number[], side: "top" | "bottom") {
           `rgba(0,0,0,0) ${stops[3]}%`,
         ]
       : [`rgba(0,0,0,0) ${stops[0]}%`, `rgb(0,0,0) ${stops[1]}%`];
-  // `to bottom` (the default) stacks the heaviest blur at the bottom edge; for a
-  // top band we flip the axis so the heaviest blur sits at the top edge instead.
   return `linear-gradient(to ${side}, ${parts.join(", ")})`;
 }
 
 type GradientBlurProps = {
   className?: string;
-  /** Height of the blur band. Defaults to 60px. */
   height?: number;
-  /** Which edge the blur is anchored to / fades from. Defaults to "bottom". */
   side?: "top" | "bottom";
-  /** Positioning strategy. "fixed" pins to the viewport (landing page); use
-   *  "absolute"/"sticky" to pin inside a scroll container instead. */
   position?: "fixed" | "absolute" | "sticky";
 };
 
@@ -77,9 +69,6 @@ export function GradientBlur({
   );
 }
 
-/** Self-contained, copy-pasteable source for the bottom-anchored progressive blur
- *  band. Generated from the same LAYERS/maskFor used above so the snippet can never
- *  drift from the live component. Consumed by the components grid's Copy button. */
 export const progressiveBlurSnippet = [
   `<div className="pointer-events-none absolute inset-x-0 bottom-0 h-[60px]">`,
   `  <div className="relative h-full">`,

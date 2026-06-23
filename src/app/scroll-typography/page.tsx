@@ -17,8 +17,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function ScrollTypographyPage() {
   const lenis = useLenis();
 
-  // Drive ScrollTrigger from Lenis' own scroll emission (single driver — the
-  // provider already owns the rAF loop), so scrub stays frame-synced and jitter-free.
   useEffect(() => {
     if (!lenis) return;
     const update = () => ScrollTrigger.update();
@@ -28,7 +26,6 @@ export default function ScrollTypographyPage() {
 
   return (
     <main className="relative w-full bg-background text-foreground">
-      {/* Slim fixed chrome */}
       <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-3 mix-blend-difference text-white">
         <Link
           href="/blocks?tab=text"
@@ -42,7 +39,6 @@ export default function ScrollTypographyPage() {
         </span>
       </header>
 
-      {/* Hero */}
       <section className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
         <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
           {EFFECT_ORDER.length} scroll-driven effects
@@ -59,7 +55,6 @@ export default function ScrollTypographyPage() {
         </span>
       </section>
 
-      {/* Effect sections */}
       {EFFECT_ORDER.map((fx, i) => {
         const info = EFFECT_INFO[fx];
         return (
@@ -83,7 +78,6 @@ export default function ScrollTypographyPage() {
         );
       })}
 
-      {/* Outro */}
       <section className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-6 text-center">
         <p className="text-sm text-muted-foreground">That’s all 29.</p>
         <Link

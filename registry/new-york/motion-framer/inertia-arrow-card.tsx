@@ -17,7 +17,6 @@ const nunito = Nunito({ subsets: ["latin"] });
 
 const VELOCITY = 25; // higher = bigger fling
 
-// One conveyor cell: half the track wide, with the arrow centered.
 const ArrowCell = () => (
   <span className="grid w-1/2 shrink-0 place-items-center">
     <svg
@@ -50,7 +49,6 @@ const InertiaArrowCard = () => {
       const pill = pillRef.current;
       if (!root || !zone || !pill) return;
 
-      // Track the mouse's per-move delta (its velocity & direction).
       let oldX = 0;
       let oldY = 0;
       let deltaX = 0;
@@ -64,8 +62,6 @@ const InertiaArrowCard = () => {
       };
       root.addEventListener("mousemove", handleMove);
 
-      // On entering the (fixed) zone, fling the pill in the mouse's direction,
-      // scaled by its speed, then let inertia glide it back to start (end: 0).
       const handleEnter = () => {
         const tl = gsap.timeline({ onComplete: () => tl.kill() });
         tl.timeScale(1.2);
@@ -77,7 +73,6 @@ const InertiaArrowCard = () => {
           },
         });
 
-        // A little life: random tilt that yoyos back.
         tl.fromTo(
           pill,
           { rotate: 0 },
@@ -106,14 +101,12 @@ const InertiaArrowCard = () => {
       ref={rootRef}
       className={`${nunito.className} grid place-items-center p-8`}
     >
-      {/* Define the clips once; objectBoundingBox = coords are 0–1 fractions of the box */}
       <svg width="0" height="0" className="absolute">
         <defs>
           <clipPath id="iac-inverted" clipPathUnits="objectBoundingBox">
             <path d="M0.1,0 H0.9 A0.1,0.1 0 0 1 1,0.1 V0.7 A0.1,0.1 0 0 1 0.9,0.8 H0.8 A0.1,0.1 0 0 0 0.7,0.9 V0.9 A0.1,0.1 0 0 1 0.6,1 H0.1 A0.1,0.1 0 0 1 0,0.9 V0.1 A0.1,0.1 0 0 1 0.1,0 Z" />
           </clipPath>
 
-          {/* Pill from a 25×16 rx=8 rect → rx 8/25=0.32, ry 8/16=0.5 (capsule while box stays 25:16) */}
           <clipPath id="iac-pill" clipPathUnits="objectBoundingBox">
             <rect width="1" height="1" rx="0.32" ry="0.5" />
           </clipPath>
@@ -135,20 +128,17 @@ const InertiaArrowCard = () => {
           amet non sint pariatur.
         </div>
 
-        {/* Fixed hover zone: owns the pointer (GSAP fling + conveyor state). */}
         <div
           ref={zoneRef}
           onMouseEnter={() => setRunning(true)}
           onMouseLeave={() => setRunning(false)}
           className="group absolute right-0 bottom-0 aspect-25/16 w-[100px]"
         >
-          {/* The pill flings (GSAP). pointer-events-none so it never steals the hover. */}
           <div
             ref={pillRef}
             className="pointer-events-none flex h-full w-full items-center justify-center bg-[#B5BAFF] transition-colors duration-300 will-change-transform group-hover:bg-[#9FA1FF]"
             style={{ clipPath: "url(#iac-pill)" }}
           >
-            {/* Motion conveyor: viewport fills the whole pill. */}
             <div className="h-full w-full overflow-hidden">
               <motion.div
                 className="flex h-full w-[200%]"

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "nexvyn-gradient",
+  "description": "A soft purple-and-orange radial gradient.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/backgrounds/nexvyn-gradient.tsx",
+      "content": "/**\n * A soft purple-and-orange radial gradient.\n */\nexport default function NexvynGradient() {\n  return (\n    <div\n      className=\"absolute inset-0\"\n      style={{\n        background:\n          \"radial-gradient(44.02% 44.02% at 14.38% 14.47%, rgba(188, 92, 248, 0.2) 0%, rgba(255, 255, 255, 0.2) 100%), radial-gradient(50.49% 50.49% at 64.54% 12.33%, #EFD0BB 0%, #FFFFFF 100%)\",\n      }}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/nexvyn-gradient.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

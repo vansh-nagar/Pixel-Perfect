@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "img-low-poly",
+  "description": "Flat-shades the image across a grid split into triangles, geometric-art style.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/image-shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/img-low-poly.tsx",
+      "content": "\"use client\";\n\n/**\n * Flat-shades the image across a grid split into triangles, geometric-art style.\n */\n\nimport ImageShaderCanvas from \"./image-shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      void main() {\n        vec2 uv = uv01();\n        float aspect = resolution.x / resolution.y;\n        float scale = 24.0;\n        vec2 p = vec2(uv.x * aspect, uv.y) * scale;\n        vec2 ip = floor(p), fp = fract(p);\n        vec2 tri = (fp.x + fp.y < 1.0)\n          ? vec2(1.0 / 3.0, 1.0 / 3.0)\n          : vec2(2.0 / 3.0, 2.0 / 3.0);\n        vec2 cp = ip + tri;\n        vec2 cuv = vec2(cp.x / aspect, cp.y) / scale;\n        gl_FragColor = vec4(texCover(cuv).rgb, 1.0);\n      }\n    `;\nconst DEFAULT_IMAGE = \"/bend-image-reveal.gif\";\n\nexport default function LowPoly({\n  image = DEFAULT_IMAGE,\n  className,\n  controls,\n}: {\n  image?: string;\n  className?: string;\n  controls?: boolean;\n}) {\n  return (\n    <ImageShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      image={image}\n      className={className}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/img-low-poly.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

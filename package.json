@@ -10,6 +10,7 @@
     "registry:build": "shadcn build",
     "registry-sync": "node scripts/sync-registry.mjs",
     "registry:watch": "node scripts/sync-registry.mjs --watch",
+    "tweets:download": "node scripts/download-tweets.mjs",
     "rbuild": "shadcn build"
   },
   "dependencies": {

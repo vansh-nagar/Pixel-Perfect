@@ -1,9 +1,13 @@
 import { Suspense } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { enrichTweet, type EnrichedTweet, type TweetProps } from "react-tweet";
 import { getTweet, type Tweet } from "react-tweet/api";
 
 import { cn } from "@/lib/utils";
 import StarBorder from "../mine/landing-page/star-border";
+import tweetCache from "@/data/tweets/cache.json";
+
+const cachedTweets = tweetCache as unknown as Record<string, Tweet>;
 
 interface TwitterIconProps {
   className?: string;
@@ -111,7 +115,16 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
       </div>
     </div>
 
-    <span className="sr-only">Link to tweet</span>
+    <a
+      href={`https://x.com/${tweet.user.screen_name}/status/${tweet.id_str}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      title="View original post on X"
+      aria-label={`View @${tweet.user.screen_name}'s original post on X`}
+      className="text-muted-foreground hover:text-foreground relative z-20 shrink-0 transition-colors"
+    >
+      <ArrowUpRight className="size-4" />
+    </a>
   </div>
 );
 
@@ -243,15 +256,18 @@ export const TweetCard = async ({
 }: TweetProps & {
   className?: string;
 }) => {
-  const tweet = id
-    ? await getTweet(id).catch((err) => {
-        if (onError) {
-          onError(err);
-        } else {
-          console.error(err);
-        }
-      })
-    : undefined;
+  const cached = id ? cachedTweets[id] : undefined;
+  const tweet =
+    cached ??
+    (id
+      ? await getTweet(id).catch((err) => {
+          if (onError) {
+            onError(err);
+          } else {
+            console.error(err);
+          }
+        })
+      : undefined);
 
   if (!tweet) {
     const NotFound = components?.TweetNotFound || TweetNotFound;

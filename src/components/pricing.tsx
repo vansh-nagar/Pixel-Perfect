@@ -1,6 +1,6 @@
 import { Circle } from "lucide-react";
 import StarBorder from "./mine/landing-page/star-border";
-import RainbowDonateButton from "./mine/landing-page/rainbow-donate-button";
+import SupportShowcase from "./mine/landing-page/support-showcase";
 
 export default function Pricing() {
   return (
@@ -45,13 +45,11 @@ export default function Pricing() {
                   Help me keep the library free for everyone
                 </p>
 
-                <span className="mb-6 mt-6 inline-block font-medium text-6xl">
+                <span className="mb-2 mt-6 inline-block font-medium text-6xl">
                   <span className="  text-2xl">$</span>3
                 </span>
 
-                <div className="mt-6 flex justify-center">
-                  <RainbowDonateButton />
-                </div>
+                <SupportShowcase />
 
                 <p className="text-muted-foreground mt-6 text-xs">
                   Your donation helps me maintain the library, <br />

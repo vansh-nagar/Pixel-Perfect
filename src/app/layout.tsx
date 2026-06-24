@@ -7,6 +7,7 @@ import LenisProvider from "@/components/providers/lenis-provider";
 import { baseMetadata, defaultViewport } from "@/lib/seo/metadata";
 import { jsonLdSchemas } from "@/lib/seo/schemas";
 import { Agentation } from "agentation";
+import { StarSprite } from "@/components/mine/landing-page/star-border";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -44,6 +45,7 @@ export default function RootLayout({
           className={`${interTight.variable} ${pixelify.variable} antialiased`}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <StarSprite />
             {children}
             <Toaster />
             {process.env.NODE_ENV === "development" && <Agentation />}

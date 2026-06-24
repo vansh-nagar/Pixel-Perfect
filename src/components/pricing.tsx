@@ -1,7 +1,6 @@
 import { Circle } from "lucide-react";
 import StarBorder from "./mine/landing-page/star-border";
-import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
-import Link from "next/link";
+import RainbowDonateButton from "./mine/landing-page/rainbow-donate-button";
 
 export default function Pricing() {
   return (
@@ -32,7 +31,7 @@ export default function Pricing() {
         <div className=" text-center relative overflow-hidden w-full py-10">
           <StarBorder />
           <h2 className="text-3xl font-medium md:text-4xl lg:text-5xl">
-            Support Pixel Perfect UI Library
+            Support Pixel Perfect :D
           </h2>
         </div>
         <div className="overflow-hidden relative">
@@ -50,14 +49,8 @@ export default function Pricing() {
                   <span className="  text-2xl">$</span>3
                 </span>
 
-                <div className="flex justify-center">
-                  <Link
-                    href={
-                      "https://buy.polar.sh/polar_cl_f2wnG1ytyvuNI3PIlhnvmlIm3Z7IKK25YZeqR49IQbB"
-                    }
-                  >
-                    <MouseFollowerButton>Donate Now</MouseFollowerButton>
-                  </Link>
+                <div className="mt-6 flex justify-center">
+                  <RainbowDonateButton />
                 </div>
 
                 <p className="text-muted-foreground mt-6 text-xs">

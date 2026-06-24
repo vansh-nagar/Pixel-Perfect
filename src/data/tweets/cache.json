@@ -1,0 +1,3475 @@
+{
+  "2069443974935302223": {
+    "__typename": "Tweet",
+    "favorite_count": 1,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2069412660857180484",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-06-23T15:34:26.000Z",
+    "display_text_range": [
+      11,
+      131
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2069443974935302223",
+    "text": "@vansh1029 Really impressive! I really liked your portfolio and your project!\n\nIt gave me some ideas for my own. Super inspiring :)",
+    "user": {
+      "id_str": "1767192178692886528",
+      "name": "Raffx",
+      "screen_name": "raffxsolana",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2029281577075916800/N_VpJaIm_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2069443974935302223"
+      ],
+      "editable_until_msecs": "1782232466000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 260,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 6,
+      "retweet_count": 3,
+      "created_at": "2026-06-23T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        58
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/6yNITnpZIc",
+            "expanded_url": "https://x.com/vansh1029/status/2069412660857180484/video/1",
+            "indices": [
+              59,
+              82
+            ],
+            "url": "https://t.co/6yNITnpZIc"
+          }
+        ]
+      },
+      "id_str": "2069412660857180484",
+      "text": "Fixed pagination across multiple grids in Pixel Perfect :) https://t.co/6yNITnpZIc",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2069412660857180484"
+        ],
+        "editable_until_msecs": "1782225000000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/6yNITnpZIc",
+          "expanded_url": "https://x.com/vansh1029/status/2069412660857180484/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            59,
+            82
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2067195036836773888/img/REQDmmTKAkatPeBQ.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1058,
+            "width": 1920
+          },
+          "sizes": {
+            "large": {
+              "h": 1058,
+              "resize": "fit",
+              "w": 1920
+            },
+            "medium": {
+              "h": 661,
+              "resize": "fit",
+              "w": 1200
+            },
+            "small": {
+              "h": 375,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/6yNITnpZIc",
+          "video_info": {
+            "aspect_ratio": [
+              960,
+              529
+            ],
+            "duration_millis": 15208,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/pl/CVRg8RhLmdGy0qNO.m3u8?v=cfc"
+              },
+              {
+                "bitrate": 256000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/488x270/zOBmfQyRAk7hwvy5.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/652x360/__eZ9Plmy5K5ekn7.mp4"
+              },
+              {
+                "bitrate": 2176000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1306x720/E2t_EV13wxpwFvTd.mp4"
+              },
+              {
+                "bitrate": 10368000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1920x1058/4YtefoaA3Zw2VnQN.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          960,
+          529
+        ],
+        "contentType": "media_entity",
+        "durationMs": 15208,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2067195036836773888/img/REQDmmTKAkatPeBQ.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/pl/CVRg8RhLmdGy0qNO.m3u8?v=cfc"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/488x270/zOBmfQyRAk7hwvy5.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/652x360/__eZ9Plmy5K5ekn7.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1306x720/E2t_EV13wxpwFvTd.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1920x1058/4YtefoaA3Zw2VnQN.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2069412660857180484"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2069487757303447779": {
+    "__typename": "Tweet",
+    "favorite_count": 1,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2069412660857180484",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-06-23T18:28:25.000Z",
+    "display_text_range": [
+      11,
+      122
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2069487757303447779",
+    "text": "@vansh1029 These interactions look super clean. Definitely checking out the repo. 👏\n\nCurious; is this built with Next.js?",
+    "user": {
+      "id_str": "1926506280799137792",
+      "name": "Ahmed Alsayad 🍉",
+      "screen_name": "AhmedAtEffekt",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2024610882458730497/KGb7_Hbn_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2069487757303447779"
+      ],
+      "editable_until_msecs": "1782242905000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 260,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 6,
+      "retweet_count": 3,
+      "created_at": "2026-06-23T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        58
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/6yNITnpZIc",
+            "expanded_url": "https://x.com/vansh1029/status/2069412660857180484/video/1",
+            "indices": [
+              59,
+              82
+            ],
+            "url": "https://t.co/6yNITnpZIc"
+          }
+        ]
+      },
+      "id_str": "2069412660857180484",
+      "text": "Fixed pagination across multiple grids in Pixel Perfect :) https://t.co/6yNITnpZIc",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2069412660857180484"
+        ],
+        "editable_until_msecs": "1782225000000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/6yNITnpZIc",
+          "expanded_url": "https://x.com/vansh1029/status/2069412660857180484/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            59,
+            82
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2067195036836773888/img/REQDmmTKAkatPeBQ.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1058,
+            "width": 1920
+          },
+          "sizes": {
+            "large": {
+              "h": 1058,
+              "resize": "fit",
+              "w": 1920
+            },
+            "medium": {
+              "h": 661,
+              "resize": "fit",
+              "w": 1200
+            },
+            "small": {
+              "h": 375,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/6yNITnpZIc",
+          "video_info": {
+            "aspect_ratio": [
+              960,
+              529
+            ],
+            "duration_millis": 15208,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/pl/CVRg8RhLmdGy0qNO.m3u8?v=cfc"
+              },
+              {
+                "bitrate": 256000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/488x270/zOBmfQyRAk7hwvy5.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/652x360/__eZ9Plmy5K5ekn7.mp4"
+              },
+              {
+                "bitrate": 2176000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1306x720/E2t_EV13wxpwFvTd.mp4"
+              },
+              {
+                "bitrate": 10368000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1920x1058/4YtefoaA3Zw2VnQN.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          960,
+          529
+        ],
+        "contentType": "media_entity",
+        "durationMs": 15208,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2067195036836773888/img/REQDmmTKAkatPeBQ.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/pl/CVRg8RhLmdGy0qNO.m3u8?v=cfc"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/488x270/zOBmfQyRAk7hwvy5.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/652x360/__eZ9Plmy5K5ekn7.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1306x720/E2t_EV13wxpwFvTd.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1920x1058/4YtefoaA3Zw2VnQN.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2069412660857180484"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2069575224702456275": {
+    "__typename": "Tweet",
+    "favorite_count": 1,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2069412660857180484",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-06-24T00:15:59.000Z",
+    "display_text_range": [
+      11,
+      22
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2069575224702456275",
+    "text": "@vansh1029 Amazing one",
+    "user": {
+      "id_str": "1480846102496747520",
+      "name": "terzicc",
+      "screen_name": "terzicdsgn",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2055724991346302977/6h-gFU1J_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2069575224702456275"
+      ],
+      "editable_until_msecs": "1782263759000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 260,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 6,
+      "retweet_count": 3,
+      "created_at": "2026-06-23T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        58
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/6yNITnpZIc",
+            "expanded_url": "https://x.com/vansh1029/status/2069412660857180484/video/1",
+            "indices": [
+              59,
+              82
+            ],
+            "url": "https://t.co/6yNITnpZIc"
+          }
+        ]
+      },
+      "id_str": "2069412660857180484",
+      "text": "Fixed pagination across multiple grids in Pixel Perfect :) https://t.co/6yNITnpZIc",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2069412660857180484"
+        ],
+        "editable_until_msecs": "1782225000000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/6yNITnpZIc",
+          "expanded_url": "https://x.com/vansh1029/status/2069412660857180484/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            59,
+            82
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2067195036836773888/img/REQDmmTKAkatPeBQ.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1058,
+            "width": 1920
+          },
+          "sizes": {
+            "large": {
+              "h": 1058,
+              "resize": "fit",
+              "w": 1920
+            },
+            "medium": {
+              "h": 661,
+              "resize": "fit",
+              "w": 1200
+            },
+            "small": {
+              "h": 375,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/6yNITnpZIc",
+          "video_info": {
+            "aspect_ratio": [
+              960,
+              529
+            ],
+            "duration_millis": 15208,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/pl/CVRg8RhLmdGy0qNO.m3u8?v=cfc"
+              },
+              {
+                "bitrate": 256000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/488x270/zOBmfQyRAk7hwvy5.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/652x360/__eZ9Plmy5K5ekn7.mp4"
+              },
+              {
+                "bitrate": 2176000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1306x720/E2t_EV13wxpwFvTd.mp4"
+              },
+              {
+                "bitrate": 10368000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1920x1058/4YtefoaA3Zw2VnQN.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          960,
+          529
+        ],
+        "contentType": "media_entity",
+        "durationMs": 15208,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2067195036836773888/img/REQDmmTKAkatPeBQ.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/pl/CVRg8RhLmdGy0qNO.m3u8?v=cfc"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/488x270/zOBmfQyRAk7hwvy5.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/652x360/__eZ9Plmy5K5ekn7.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1306x720/E2t_EV13wxpwFvTd.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1920x1058/4YtefoaA3Zw2VnQN.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2069412660857180484"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2068696814367228182": {
+    "__typename": "Tweet",
+    "favorite_count": 0,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2068687883188212110",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-06-21T14:05:29.000Z",
+    "display_text_range": [
+      11,
+      28
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2068696814367228182",
+    "text": "@vansh1029 looks cleannn man",
+    "user": {
+      "id_str": "1917637884967792640",
+      "name": "Daniel",
+      "screen_name": "DanielWhit21874",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2057915040057982976/gSIeaZnQ_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2068696814367228182"
+      ],
+      "editable_until_msecs": "1782054329000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 185,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 7,
+      "retweet_count": 3,
+      "created_at": "2026-06-21T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        117
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/KLJ70oMk6k",
+            "expanded_url": "https://x.com/vansh1029/status/2068687883188212110/photo/1",
+            "indices": [
+              118,
+              141
+            ],
+            "url": "https://t.co/KLJ70oMk6k"
+          }
+        ]
+      },
+      "id_str": "2068687883188212110",
+      "text": "New batch dropped :D\n\nOnly on Pixel Perfect some of these are experimental built just for learning and pushing ideas. https://t.co/KLJ70oMk6k",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2068687883188212110"
+        ],
+        "editable_until_msecs": "1782052200000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.x.com/KLJ70oMk6k",
+          "expanded_url": "https://x.com/vansh1029/status/2068687883188212110/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            118,
+            141
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/HLAk2HjbwAEleEs.jpg",
+          "original_info": {
+            "focus_rects": [
+              {
+                "h": 1668,
+                "w": 2979,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 1668,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 1463,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 834,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 3024,
+                "x": 0,
+                "y": 0
+              }
+            ],
+            "height": 1668,
+            "width": 3024
+          },
+          "sizes": {
+            "large": {
+              "h": 1130,
+              "resize": "fit",
+              "w": 2048
+            },
+            "medium": {
+              "h": 662,
+              "resize": "fit",
+              "w": 1200
+            },
+            "small": {
+              "h": 375,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KLJ70oMk6k"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "h": 1668,
+              "w": 2979,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 1668,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 1463,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 834,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 3024,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "expandedUrl": "https://x.com/vansh1029/status/2068687883188212110/photo/1",
+          "url": "https://pbs.twimg.com/media/HLAk2HjbwAEleEs.jpg",
+          "width": 3024,
+          "height": 1668
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2068715836970619073": {
+    "__typename": "Tweet",
+    "favorite_count": 1,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2068687883188212110",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-06-21T15:21:05.000Z",
+    "display_text_range": [
+      11,
+      30
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2068715836970619073",
+    "text": "@vansh1029 Great collection ♥️",
+    "user": {
+      "id_str": "1717562767379722240",
+      "name": "diip3sh",
+      "screen_name": "diip3sh",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2058930482520424448/XD1LRcyD_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2068715836970619073"
+      ],
+      "editable_until_msecs": "1782058865000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 185,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 7,
+      "retweet_count": 3,
+      "created_at": "2026-06-21T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        117
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/KLJ70oMk6k",
+            "expanded_url": "https://x.com/vansh1029/status/2068687883188212110/photo/1",
+            "indices": [
+              118,
+              141
+            ],
+            "url": "https://t.co/KLJ70oMk6k"
+          }
+        ]
+      },
+      "id_str": "2068687883188212110",
+      "text": "New batch dropped :D\n\nOnly on Pixel Perfect some of these are experimental built just for learning and pushing ideas. https://t.co/KLJ70oMk6k",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2068687883188212110"
+        ],
+        "editable_until_msecs": "1782052200000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.x.com/KLJ70oMk6k",
+          "expanded_url": "https://x.com/vansh1029/status/2068687883188212110/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            118,
+            141
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/HLAk2HjbwAEleEs.jpg",
+          "original_info": {
+            "focus_rects": [
+              {
+                "h": 1668,
+                "w": 2979,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 1668,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 1463,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 834,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 3024,
+                "x": 0,
+                "y": 0
+              }
+            ],
+            "height": 1668,
+            "width": 3024
+          },
+          "sizes": {
+            "large": {
+              "h": 1130,
+              "resize": "fit",
+              "w": 2048
+            },
+            "medium": {
+              "h": 662,
+              "resize": "fit",
+              "w": 1200
+            },
+            "small": {
+              "h": 375,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KLJ70oMk6k"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "h": 1668,
+              "w": 2979,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 1668,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 1463,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 834,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 3024,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "expandedUrl": "https://x.com/vansh1029/status/2068687883188212110/photo/1",
+          "url": "https://pbs.twimg.com/media/HLAk2HjbwAEleEs.jpg",
+          "width": 3024,
+          "height": 1668
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2068702903242764527": {
+    "__typename": "Tweet",
+    "favorite_count": 0,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2068687883188212110",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-06-21T14:29:41.000Z",
+    "display_text_range": [
+      11,
+      43
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2068702903242764527",
+    "text": "@vansh1029 Literal Goldmine on the Internet",
+    "user": {
+      "id_str": "1580501212138328065",
+      "name": "Dikhsit Bhattarai",
+      "screen_name": "dikhsit_b",
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2054501109222535168/Fqnk9fgV_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2068702903242764527"
+      ],
+      "editable_until_msecs": "1782055781000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 185,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 7,
+      "retweet_count": 3,
+      "created_at": "2026-06-21T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        117
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/KLJ70oMk6k",
+            "expanded_url": "https://x.com/vansh1029/status/2068687883188212110/photo/1",
+            "indices": [
+              118,
+              141
+            ],
+            "url": "https://t.co/KLJ70oMk6k"
+          }
+        ]
+      },
+      "id_str": "2068687883188212110",
+      "text": "New batch dropped :D\n\nOnly on Pixel Perfect some of these are experimental built just for learning and pushing ideas. https://t.co/KLJ70oMk6k",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2068687883188212110"
+        ],
+        "editable_until_msecs": "1782052200000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.x.com/KLJ70oMk6k",
+          "expanded_url": "https://x.com/vansh1029/status/2068687883188212110/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            118,
+            141
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/HLAk2HjbwAEleEs.jpg",
+          "original_info": {
+            "focus_rects": [
+              {
+                "h": 1668,
+                "w": 2979,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 1668,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 1463,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 834,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "h": 1668,
+                "w": 3024,
+                "x": 0,
+                "y": 0
+              }
+            ],
+            "height": 1668,
+            "width": 3024
+          },
+          "sizes": {
+            "large": {
+              "h": 1130,
+              "resize": "fit",
+              "w": 2048
+            },
+            "medium": {
+              "h": 662,
+              "resize": "fit",
+              "w": 1200
+            },
+            "small": {
+              "h": 375,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KLJ70oMk6k"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "h": 1668,
+              "w": 2979,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 1668,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 1463,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 834,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 1668,
+              "w": 3024,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "expandedUrl": "https://x.com/vansh1029/status/2068687883188212110/photo/1",
+          "url": "https://pbs.twimg.com/media/HLAk2HjbwAEleEs.jpg",
+          "width": 3024,
+          "height": 1668
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2065509234616193260": {
+    "__typename": "Tweet",
+    "favorite_count": 1,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2065426392020607233",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "qme",
+    "created_at": "2026-06-12T18:59:11.000Z",
+    "display_text_range": [
+      11,
+      17
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2065509234616193260",
+    "text": "@vansh1029 🔥🔥🔥",
+    "user": {
+      "id_str": "1172969916040962048",
+      "name": "VisualAgencyES",
+      "screen_name": "VisualAgencyES_",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2057587901844660224/5XNzkbF2_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2065509234616193260"
+      ],
+      "editable_until_msecs": "1781294351000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 28,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 4,
+      "retweet_count": 1,
+      "created_at": "2026-06-12T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        48
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/lOVpDz8QKA",
+            "expanded_url": "https://x.com/vansh1029/status/2065426392020607233/video/1",
+            "indices": [
+              49,
+              72
+            ],
+            "url": "https://t.co/lOVpDz8QKA"
+          }
+        ]
+      },
+      "id_str": "2065426392020607233",
+      "text": "Another banger button :)\nOnly on Pixel Perfect ↓ https://t.co/lOVpDz8QKA",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2065426392020607233"
+        ],
+        "editable_until_msecs": "1781274600000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/lOVpDz8QKA",
+          "expanded_url": "https://x.com/vansh1029/status/2065426392020607233/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            49,
+            72
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2062917225951227904/img/ENZ0yKAfKea4rnhp.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1080,
+            "width": 1080
+          },
+          "sizes": {
+            "large": {
+              "h": 1080,
+              "resize": "fit",
+              "w": 1080
+            },
+            "medium": {
+              "h": 1080,
+              "resize": "fit",
+              "w": 1080
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/lOVpDz8QKA",
+          "video_info": {
+            "aspect_ratio": [
+              1,
+              1
+            ],
+            "duration_millis": 19776,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2062917225951227904/pl/kN3hfKXtTtdNk8jo.m3u8?v=cfc"
+              },
+              {
+                "bitrate": 432000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/320x320/XQmZAGq5Hz1x4mTD.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/540x540/ZBhrYXgExRvnp4YC.mp4"
+              },
+              {
+                "bitrate": 1280000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/720x720/vrQj197sxYUPDHK1.mp4"
+              },
+              {
+                "bitrate": 8768000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/1080x1080/VlHVzND8ToWo-mLh.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          1,
+          1
+        ],
+        "contentType": "media_entity",
+        "durationMs": 19776,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2062917225951227904/img/ENZ0yKAfKea4rnhp.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2062917225951227904/pl/kN3hfKXtTtdNk8jo.m3u8?v=cfc"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/320x320/XQmZAGq5Hz1x4mTD.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/540x540/ZBhrYXgExRvnp4YC.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/720x720/vrQj197sxYUPDHK1.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/1080x1080/VlHVzND8ToWo-mLh.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2065426392020607233"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2064951392968872192": {
+    "__typename": "Tweet",
+    "favorite_count": 0,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2064701615970357365",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-06-11T06:02:31.000Z",
+    "display_text_range": [
+      11,
+      40
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2064951392968872192",
+    "text": "@vansh1029 Really nice design! Well done",
+    "user": {
+      "id_str": "2029183032385781760",
+      "name": "Emily Ritter",
+      "screen_name": "emilyrtter1",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2034244596621062144/YmJQRL_v_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2064951392968872192"
+      ],
+      "editable_until_msecs": "1781161351000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 30,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 4,
+      "retweet_count": 1,
+      "created_at": "2026-06-10T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        73
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/d8Dhx9cHeN",
+            "expanded_url": "https://x.com/vansh1029/status/2064701615970357365/video/1",
+            "indices": [
+              74,
+              97
+            ],
+            "url": "https://t.co/d8Dhx9cHeN"
+          }
+        ]
+      },
+      "id_str": "2064701615970357365",
+      "text": "Cooked up a cool button with some gradient magic :)\nOnly on pixel-perfect https://t.co/d8Dhx9cHeN",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2064701615970357365"
+        ],
+        "editable_until_msecs": "1781101800000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/d8Dhx9cHeN",
+          "expanded_url": "https://x.com/vansh1029/status/2064701615970357365/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            74,
+            97
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2062914964873232385/img/DyZcOJbpMrcSmHya.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1080,
+            "width": 1080
+          },
+          "sizes": {
+            "large": {
+              "h": 1080,
+              "resize": "fit",
+              "w": 1080
+            },
+            "medium": {
+              "h": 1080,
+              "resize": "fit",
+              "w": 1080
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/d8Dhx9cHeN",
+          "video_info": {
+            "aspect_ratio": [
+              1,
+              1
+            ],
+            "duration_millis": 14074,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2062914964873232385/pl/lzu4pydVvFX04BZe.m3u8?v=cfc"
+              },
+              {
+                "bitrate": 432000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/320x320/3A5QffB0-StOinWU.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/540x540/xRZlR3qFz5jfm-hN.mp4"
+              },
+              {
+                "bitrate": 1280000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/720x720/iskHnp1gruZDo03B.mp4"
+              },
+              {
+                "bitrate": 8768000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/1080x1080/u6vPf8mFEocMbpiK.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          1,
+          1
+        ],
+        "contentType": "media_entity",
+        "durationMs": 14074,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2062914964873232385/img/DyZcOJbpMrcSmHya.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2062914964873232385/pl/lzu4pydVvFX04BZe.m3u8?v=cfc"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/320x320/3A5QffB0-StOinWU.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/540x540/xRZlR3qFz5jfm-hN.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/720x720/iskHnp1gruZDo03B.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/1080x1080/u6vPf8mFEocMbpiK.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2064701615970357365"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2061650732223475832": {
+    "__typename": "Tweet",
+    "favorite_count": 4,
+    "in_reply_to_screen_name": "molightme",
+    "in_reply_to_status_id_str": "2061650552648572944",
+    "in_reply_to_user_id_str": "190151042",
+    "lang": "zh",
+    "possibly_sensitive": false,
+    "created_at": "2026-06-02T03:26:52.000Z",
+    "display_text_range": [
+      11,
+      51
+    ],
+    "entities": {
+      "urls": [
+        {
+          "display_url": "uiroot.com/tools/176",
+          "expanded_url": "https://uiroot.com/tools/176",
+          "indices": [
+            28,
+            51
+          ],
+          "url": "https://t.co/qUcyUOWL4T"
+        }
+      ],
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2061650732223475832",
+    "text": "@vansh1029 太好看了，收录到 UI 根目录了 https://t.co/qUcyUOWL4T",
+    "user": {
+      "id_str": "190151042",
+      "name": "molight",
+      "screen_name": "molightme",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1821165033633804291/SpdOZ7RO_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2061650732223475832"
+      ],
+      "editable_until_msecs": "1780374412000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 58,
+      "lang": "zh",
+      "possibly_sensitive": false,
+      "reply_count": 5,
+      "retweet_count": 5,
+      "created_at": "2026-06-02T03:26:10.000Z",
+      "display_text_range": [
+        0,
+        55
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/Jn5b7Yhw6I",
+            "expanded_url": "https://x.com/molightme/status/2061650552648572944/video/1",
+            "indices": [
+              55,
+              78
+            ],
+            "url": "https://t.co/Jn5b7Yhw6I"
+          }
+        ],
+        "user_mentions": [
+          {
+            "id_str": "1895655751169032192",
+            "indices": [
+              44,
+              54
+            ],
+            "name": "Vansh N.",
+            "screen_name": "vansh1029"
+          }
+        ]
+      },
+      "id_str": "2061650552648572944",
+      "text": "发现一个质量极高的开源组件库，真的是像素级舒适。🩷\n\nPixel Perfect by @vansh1029 https://t.co/Jn5b7Yhw6I",
+      "user": {
+        "id_str": "190151042",
+        "name": "molight",
+        "screen_name": "molightme",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1821165033633804291/SpdOZ7RO_normal.jpg"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2061650552648572944"
+        ],
+        "editable_until_msecs": "1780374370000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/Jn5b7Yhw6I",
+          "expanded_url": "https://x.com/molightme/status/2061650552648572944/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            55,
+            78
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2061650165791100928/img/5Z-BJG92Y8b3KApq.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 2160,
+            "width": 3324
+          },
+          "sizes": {
+            "large": {
+              "h": 1331,
+              "resize": "fit",
+              "w": 2048
+            },
+            "medium": {
+              "h": 780,
+              "resize": "fit",
+              "w": 1200
+            },
+            "small": {
+              "h": 442,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/Jn5b7Yhw6I",
+          "video_info": {
+            "aspect_ratio": [
+              277,
+              180
+            ],
+            "duration_millis": 24126,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2061650165791100928/pl/S5f3x7A-fZrqhsDb.m3u8?v=cfc"
+              },
+              {
+                "bitrate": 256000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/414x270/v1uqT8l-usFFo33W.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/554x360/jeesLLOvdKNRWEWE.mp4"
+              },
+              {
+                "bitrate": 2176000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/1108x720/zYu4kYw9JOYJPd5z.mp4"
+              },
+              {
+                "bitrate": 10368000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/1662x1080/1Xxu4DR83L-WoR34.mp4"
+              },
+              {
+                "bitrate": 25128000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/3324x2160/ugS-sNIedmZIxvfD.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          277,
+          180
+        ],
+        "contentType": "media_entity",
+        "durationMs": 24126,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2061650165791100928/img/5Z-BJG92Y8b3KApq.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2061650165791100928/pl/S5f3x7A-fZrqhsDb.m3u8?v=cfc"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/414x270/v1uqT8l-usFFo33W.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/554x360/jeesLLOvdKNRWEWE.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/1108x720/zYu4kYw9JOYJPd5z.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/1662x1080/1Xxu4DR83L-WoR34.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2061650165791100928/vid/avc1/3324x2160/ugS-sNIedmZIxvfD.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2061650552648572944"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "card": {
+      "card_platform": {
+        "platform": {
+          "audience": {
+            "name": "production"
+          },
+          "device": {
+            "name": "iPhone",
+            "version": "13"
+          }
+        }
+      },
+      "name": "summary_large_image",
+      "url": "https://t.co/qUcyUOWL4T",
+      "binding_values": {
+        "photo_image_full_size_large": {
+          "image_value": {
+            "height": 419,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=800x419",
+            "width": 800
+          },
+          "type": "IMAGE"
+        },
+        "thumbnail_image": {
+          "image_value": {
+            "height": 150,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=280x150",
+            "width": 267
+          },
+          "type": "IMAGE"
+        },
+        "description": {
+          "string_value": "Pixel Perfect UI is a documentation-first React component library designed for building beautiful, responsive interfaces quickly. What it does: This lightwei...",
+          "type": "STRING"
+        },
+        "domain": {
+          "string_value": "uiroot.com",
+          "type": "STRING"
+        },
+        "thumbnail_image_large": {
+          "image_value": {
+            "height": 320,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=800x320_1",
+            "width": 569
+          },
+          "type": "IMAGE"
+        },
+        "summary_photo_image_small": {
+          "image_value": {
+            "height": 202,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=386x202",
+            "width": 386
+          },
+          "type": "IMAGE"
+        },
+        "thumbnail_image_original": {
+          "image_value": {
+            "height": 1080,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=orig",
+            "width": 1920
+          },
+          "type": "IMAGE"
+        },
+        "photo_image_full_size_small": {
+          "image_value": {
+            "height": 202,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=386x202",
+            "width": 386
+          },
+          "type": "IMAGE"
+        },
+        "summary_photo_image_large": {
+          "image_value": {
+            "height": 419,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=800x419",
+            "width": 800
+          },
+          "type": "IMAGE"
+        },
+        "thumbnail_image_small": {
+          "image_value": {
+            "height": 81,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=144x144",
+            "width": 144
+          },
+          "type": "IMAGE"
+        },
+        "thumbnail_image_x_large": {
+          "image_value": {
+            "height": 1080,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=png&name=2048x2048_2_exp",
+            "width": 1920
+          },
+          "type": "IMAGE"
+        },
+        "photo_image_full_size_original": {
+          "image_value": {
+            "height": 1080,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=orig",
+            "width": 1920
+          },
+          "type": "IMAGE"
+        },
+        "vanity_url": {
+          "scribe_key": "vanity_url",
+          "string_value": "uiroot.com",
+          "type": "STRING"
+        },
+        "photo_image_full_size": {
+          "image_value": {
+            "height": 314,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=600x314",
+            "width": 600
+          },
+          "type": "IMAGE"
+        },
+        "thumbnail_image_color": {
+          "image_color_value": {
+            "palette": [
+              {
+                "percentage": 53.1,
+                "rgb": {
+                  "blue": 254,
+                  "green": 254,
+                  "red": 254
+                }
+              },
+              {
+                "percentage": 40.02,
+                "rgb": {
+                  "blue": 32,
+                  "green": 32,
+                  "red": 32
+                }
+              },
+              {
+                "percentage": 8.91,
+                "rgb": {
+                  "blue": 121,
+                  "green": 121,
+                  "red": 121
+                }
+              }
+            ]
+          },
+          "type": "IMAGE_COLOR"
+        },
+        "title": {
+          "string_value": "Pixel Perfect UI - Bespoke React components for stunning, modern web apps. | UI root",
+          "type": "STRING"
+        },
+        "summary_photo_image_color": {
+          "image_color_value": {
+            "palette": [
+              {
+                "percentage": 53.1,
+                "rgb": {
+                  "blue": 254,
+                  "green": 254,
+                  "red": 254
+                }
+              },
+              {
+                "percentage": 40.02,
+                "rgb": {
+                  "blue": 32,
+                  "green": 32,
+                  "red": 32
+                }
+              },
+              {
+                "percentage": 8.91,
+                "rgb": {
+                  "blue": 121,
+                  "green": 121,
+                  "red": 121
+                }
+              }
+            ]
+          },
+          "type": "IMAGE_COLOR"
+        },
+        "summary_photo_image_x_large": {
+          "image_value": {
+            "height": 1080,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=png&name=2048x2048_2_exp",
+            "width": 1920
+          },
+          "type": "IMAGE"
+        },
+        "summary_photo_image": {
+          "image_value": {
+            "height": 314,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=600x314",
+            "width": 600
+          },
+          "type": "IMAGE"
+        },
+        "photo_image_full_size_color": {
+          "image_color_value": {
+            "palette": [
+              {
+                "percentage": 53.1,
+                "rgb": {
+                  "blue": 254,
+                  "green": 254,
+                  "red": 254
+                }
+              },
+              {
+                "percentage": 40.02,
+                "rgb": {
+                  "blue": 32,
+                  "green": 32,
+                  "red": 32
+                }
+              },
+              {
+                "percentage": 8.91,
+                "rgb": {
+                  "blue": 121,
+                  "green": 121,
+                  "red": 121
+                }
+              }
+            ]
+          },
+          "type": "IMAGE_COLOR"
+        },
+        "photo_image_full_size_x_large": {
+          "image_value": {
+            "height": 1080,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=png&name=2048x2048_2_exp",
+            "width": 1920
+          },
+          "type": "IMAGE"
+        },
+        "card_url": {
+          "scribe_key": "card_url",
+          "string_value": "https://t.co/qUcyUOWL4T",
+          "type": "STRING"
+        },
+        "summary_photo_image_original": {
+          "image_value": {
+            "height": 1080,
+            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=orig",
+            "width": 1920
+          },
+          "type": "IMAGE"
+        }
+      }
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2059313029389652151": {
+    "__typename": "Tweet",
+    "favorite_count": 0,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2059084603969982619",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-05-26T16:37:41.000Z",
+    "display_text_range": [
+      11,
+      19
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2059313029389652151",
+    "text": "@vansh1029 So nice!",
+    "user": {
+      "id_str": "386523725",
+      "name": "Putri Karunia",
+      "screen_name": "putrikarunian",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1548136639343407105/6V1yijO6_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2059313029389652151"
+      ],
+      "editable_until_msecs": "1779817061000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 69,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 8,
+      "retweet_count": 1,
+      "created_at": "2026-05-26T01:30:00.000Z",
+      "display_text_range": [
+        0,
+        75
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/sJ75JgHXFA",
+            "expanded_url": "https://x.com/vansh1029/status/2059084603969982619/video/1",
+            "indices": [
+              76,
+              99
+            ],
+            "url": "https://t.co/sJ75JgHXFA"
+          }
+        ]
+      },
+      "id_str": "2059084603969982619",
+      "text": "Made keyboard keys using some shadow magic ❇︎\nAvailable on pixel perfect :) https://t.co/sJ75JgHXFA",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2059084603969982619"
+        ],
+        "editable_until_msecs": "1779762600000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/sJ75JgHXFA",
+          "expanded_url": "https://x.com/vansh1029/status/2059084603969982619/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            76,
+            99
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2058799929884352512/img/qROgYd_XbbjjCBIU.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1130,
+            "width": 1130
+          },
+          "sizes": {
+            "large": {
+              "h": 1130,
+              "resize": "fit",
+              "w": 1130
+            },
+            "medium": {
+              "h": 1130,
+              "resize": "fit",
+              "w": 1130
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/sJ75JgHXFA",
+          "video_info": {
+            "aspect_ratio": [
+              1,
+              1
+            ],
+            "duration_millis": 22545,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/pl/XoVRts12wFnwkKCq.m3u8"
+              },
+              {
+                "bitrate": 432000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/320x320/zQ_X_7_ThqjZsN48.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/540x540/ZItfog8dAbE5xAlK.mp4"
+              },
+              {
+                "bitrate": 1280000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/720x720/wc5guEYkU4era0Kj.mp4"
+              },
+              {
+                "bitrate": 8768000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/1130x1130/AsxrizObxJQEJx-3.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          1,
+          1
+        ],
+        "contentType": "media_entity",
+        "durationMs": 22545,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2058799929884352512/img/qROgYd_XbbjjCBIU.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/pl/XoVRts12wFnwkKCq.m3u8"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/320x320/zQ_X_7_ThqjZsN48.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/540x540/ZItfog8dAbE5xAlK.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/720x720/wc5guEYkU4era0Kj.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/1130x1130/AsxrizObxJQEJx-3.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2059084603969982619"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2059347259360514100": {
+    "__typename": "Tweet",
+    "favorite_count": 0,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2059084603969982619",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-05-26T18:53:42.000Z",
+    "display_text_range": [
+      11,
+      52
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2059347259360514100",
+    "text": "@vansh1029 This looks so pixel perfect and realistic",
+    "user": {
+      "id_str": "2039230081537572864",
+      "name": "Sammy",
+      "screen_name": "Sammyykm_",
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2054060696821018624/CEOzHNuW_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2059347259360514100"
+      ],
+      "editable_until_msecs": "1779825222000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 69,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 8,
+      "retweet_count": 1,
+      "created_at": "2026-05-26T01:30:00.000Z",
+      "display_text_range": [
+        0,
+        75
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/sJ75JgHXFA",
+            "expanded_url": "https://x.com/vansh1029/status/2059084603969982619/video/1",
+            "indices": [
+              76,
+              99
+            ],
+            "url": "https://t.co/sJ75JgHXFA"
+          }
+        ]
+      },
+      "id_str": "2059084603969982619",
+      "text": "Made keyboard keys using some shadow magic ❇︎\nAvailable on pixel perfect :) https://t.co/sJ75JgHXFA",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2059084603969982619"
+        ],
+        "editable_until_msecs": "1779762600000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/sJ75JgHXFA",
+          "expanded_url": "https://x.com/vansh1029/status/2059084603969982619/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            76,
+            99
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2058799929884352512/img/qROgYd_XbbjjCBIU.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1130,
+            "width": 1130
+          },
+          "sizes": {
+            "large": {
+              "h": 1130,
+              "resize": "fit",
+              "w": 1130
+            },
+            "medium": {
+              "h": 1130,
+              "resize": "fit",
+              "w": 1130
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/sJ75JgHXFA",
+          "video_info": {
+            "aspect_ratio": [
+              1,
+              1
+            ],
+            "duration_millis": 22545,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/pl/XoVRts12wFnwkKCq.m3u8"
+              },
+              {
+                "bitrate": 432000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/320x320/zQ_X_7_ThqjZsN48.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/540x540/ZItfog8dAbE5xAlK.mp4"
+              },
+              {
+                "bitrate": 1280000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/720x720/wc5guEYkU4era0Kj.mp4"
+              },
+              {
+                "bitrate": 8768000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/1130x1130/AsxrizObxJQEJx-3.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          1,
+          1
+        ],
+        "contentType": "media_entity",
+        "durationMs": 22545,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2058799929884352512/img/qROgYd_XbbjjCBIU.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/pl/XoVRts12wFnwkKCq.m3u8"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/320x320/zQ_X_7_ThqjZsN48.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/540x540/ZItfog8dAbE5xAlK.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/720x720/wc5guEYkU4era0Kj.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2058799929884352512/vid/avc1/1130x1130/AsxrizObxJQEJx-3.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2059084603969982619"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2052305594330272012": {
+    "__typename": "Tweet",
+    "favorite_count": 1,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2052018044340224143",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-05-07T08:32:38.000Z",
+    "display_text_range": [
+      11,
+      47
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2052305594330272012",
+    "text": "@vansh1029 Micro interactions are so satisfying",
+    "user": {
+      "id_str": "2045046841600077824",
+      "name": "madebrux",
+      "screen_name": "madebrux",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2046137756473331712/apFiNZfn_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2052305594330272012"
+      ],
+      "editable_until_msecs": "1778146358000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 211,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 11,
+      "retweet_count": 11,
+      "created_at": "2026-05-06T13:30:01.000Z",
+      "display_text_range": [
+        0,
+        71
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/pcQ1H6qN3p",
+            "expanded_url": "https://x.com/vansh1029/status/2052018044340224143/video/1",
+            "indices": [
+              72,
+              95
+            ],
+            "url": "https://t.co/pcQ1H6qN3p"
+          }
+        ]
+      },
+      "id_str": "2052018044340224143",
+      "text": "Recreated this sick button by LueStudio :)\nAvailable on Pixel Perfect ↓ https://t.co/pcQ1H6qN3p",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2052018044340224143"
+        ],
+        "editable_until_msecs": "1778077801000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/pcQ1H6qN3p",
+          "expanded_url": "https://x.com/vansh1029/status/2052018044340224143/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            72,
+            95
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2051884266955710464/img/CXy2KkPfgqvJR3QD.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1104,
+            "width": 1106
+          },
+          "sizes": {
+            "large": {
+              "h": 1104,
+              "resize": "fit",
+              "w": 1106
+            },
+            "medium": {
+              "h": 1104,
+              "resize": "fit",
+              "w": 1106
+            },
+            "small": {
+              "h": 679,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/pcQ1H6qN3p",
+          "video_info": {
+            "aspect_ratio": [
+              553,
+              552
+            ],
+            "duration_millis": 18752,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/pl/IJw75bX39To4tcSU.m3u8?v=cfc"
+              },
+              {
+                "bitrate": 256000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/270x270/CxytcY68gCD7dACx.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/360x360/bcUAMg108Tr_ccGv.mp4"
+              },
+              {
+                "bitrate": 2176000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/720x720/NUYLxiklzvXKtgA8.mp4"
+              },
+              {
+                "bitrate": 10368000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/1106x1104/65QFcTARgj9pkpsr.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          553,
+          552
+        ],
+        "contentType": "media_entity",
+        "durationMs": 18752,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2051884266955710464/img/CXy2KkPfgqvJR3QD.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/pl/IJw75bX39To4tcSU.m3u8?v=cfc"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/270x270/CxytcY68gCD7dACx.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/360x360/bcUAMg108Tr_ccGv.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/720x720/NUYLxiklzvXKtgA8.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/1106x1104/65QFcTARgj9pkpsr.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2052018044340224143"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2052063566249767003": {
+    "__typename": "Tweet",
+    "favorite_count": 0,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2052018044340224143",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-05-06T16:30:54.000Z",
+    "display_text_range": [
+      11,
+      25
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2052063566249767003",
+    "text": "@vansh1029 Well done man!",
+    "user": {
+      "id_str": "1848671602730536961",
+      "name": "Fred Wanders",
+      "screen_name": "FredWanders",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2012152348488204289/BR5RGcAr_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2052063566249767003"
+      ],
+      "editable_until_msecs": "1778088654000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 211,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 11,
+      "retweet_count": 11,
+      "created_at": "2026-05-06T13:30:01.000Z",
+      "display_text_range": [
+        0,
+        71
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/pcQ1H6qN3p",
+            "expanded_url": "https://x.com/vansh1029/status/2052018044340224143/video/1",
+            "indices": [
+              72,
+              95
+            ],
+            "url": "https://t.co/pcQ1H6qN3p"
+          }
+        ]
+      },
+      "id_str": "2052018044340224143",
+      "text": "Recreated this sick button by LueStudio :)\nAvailable on Pixel Perfect ↓ https://t.co/pcQ1H6qN3p",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2052018044340224143"
+        ],
+        "editable_until_msecs": "1778077801000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/pcQ1H6qN3p",
+          "expanded_url": "https://x.com/vansh1029/status/2052018044340224143/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            72,
+            95
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2051884266955710464/img/CXy2KkPfgqvJR3QD.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1104,
+            "width": 1106
+          },
+          "sizes": {
+            "large": {
+              "h": 1104,
+              "resize": "fit",
+              "w": 1106
+            },
+            "medium": {
+              "h": 1104,
+              "resize": "fit",
+              "w": 1106
+            },
+            "small": {
+              "h": 679,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/pcQ1H6qN3p",
+          "video_info": {
+            "aspect_ratio": [
+              553,
+              552
+            ],
+            "duration_millis": 18752,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/pl/IJw75bX39To4tcSU.m3u8?v=cfc"
+              },
+              {
+                "bitrate": 256000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/270x270/CxytcY68gCD7dACx.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/360x360/bcUAMg108Tr_ccGv.mp4"
+              },
+              {
+                "bitrate": 2176000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/720x720/NUYLxiklzvXKtgA8.mp4"
+              },
+              {
+                "bitrate": 10368000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/1106x1104/65QFcTARgj9pkpsr.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          553,
+          552
+        ],
+        "contentType": "media_entity",
+        "durationMs": 18752,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2051884266955710464/img/CXy2KkPfgqvJR3QD.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/pl/IJw75bX39To4tcSU.m3u8?v=cfc"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/270x270/CxytcY68gCD7dACx.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/360x360/bcUAMg108Tr_ccGv.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/720x720/NUYLxiklzvXKtgA8.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2051884266955710464/vid/avc1/1106x1104/65QFcTARgj9pkpsr.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2052018044340224143"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2045147592204681349": {
+    "__typename": "Tweet",
+    "favorite_count": 0,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2045132672096510252",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-04-17T14:29:17.000Z",
+    "display_text_range": [
+      11,
+      36
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2045147592204681349",
+    "text": "@vansh1029 love the cards background",
+    "user": {
+      "id_str": "1391235419325407232",
+      "name": "Gurbinder",
+      "screen_name": "legionsdev",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1924504051728670720/mqyGd02m_normal.jpg",
+      "highlighted_label": {
+        "badge": {
+          "url": "https://pbs.twimg.com/profile_images/1734051373921210368/oTvvFIvI_bigger.jpg"
+        },
+        "description": "Axiom",
+        "url": {
+          "url": "https://twitter.com/AxiomFM",
+          "url_type": "DeepLink"
+        },
+        "user_label_display_type": "Badge",
+        "user_label_type": "BusinessLabel"
+      }
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2045147592204681349"
+      ],
+      "editable_until_msecs": "1776439757000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 38,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 3,
+      "retweet_count": 3,
+      "created_at": "2026-04-17T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        109
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/4ohOX1DNgq",
+            "expanded_url": "https://x.com/vansh1029/status/2045132672096510252/video/1",
+            "indices": [
+              110,
+              133
+            ],
+            "url": "https://t.co/4ohOX1DNgq"
+          }
+        ]
+      },
+      "id_str": "2045132672096510252",
+      "text": "Added 3 new buttons to Pixel Perfect \nPixel Perfect have some of the most unique CSS button styles I’ve made. https://t.co/4ohOX1DNgq",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2045132672096510252"
+        ],
+        "editable_until_msecs": "1776436200000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/4ohOX1DNgq",
+          "expanded_url": "https://x.com/vansh1029/status/2045132672096510252/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            110,
+            133
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2044954269556817920/img/o939xKPKNrlubn5R.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 1020,
+            "width": 1858
+          },
+          "sizes": {
+            "large": {
+              "h": 1020,
+              "resize": "fit",
+              "w": 1858
+            },
+            "medium": {
+              "h": 659,
+              "resize": "fit",
+              "w": 1200
+            },
+            "small": {
+              "h": 373,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/4ohOX1DNgq",
+          "video_info": {
+            "aspect_ratio": [
+              929,
+              510
+            ],
+            "duration_millis": 8277,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2044954269556817920/pl/-ZdHeGxorJWN0b9x.m3u8"
+              },
+              {
+                "bitrate": 256000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2044954269556817920/vid/avc1/490x270/vJYl-i1Q28WntGA4.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2044954269556817920/vid/avc1/654x360/SeyP4QW2SVWfIzJB.mp4"
+              },
+              {
+                "bitrate": 2176000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2044954269556817920/vid/avc1/1310x720/2dm7pAQXXAURzyqs.mp4"
+              },
+              {
+                "bitrate": 10368000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2044954269556817920/vid/avc1/1858x1020/3hVMER5OmnhKIKb9.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          929,
+          510
+        ],
+        "contentType": "media_entity",
+        "durationMs": 8277,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2044954269556817920/img/o939xKPKNrlubn5R.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2044954269556817920/pl/-ZdHeGxorJWN0b9x.m3u8"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2044954269556817920/vid/avc1/490x270/vJYl-i1Q28WntGA4.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2044954269556817920/vid/avc1/654x360/SeyP4QW2SVWfIzJB.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2044954269556817920/vid/avc1/1310x720/2dm7pAQXXAURzyqs.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2044954269556817920/vid/avc1/1858x1020/3hVMER5OmnhKIKb9.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2045132672096510252"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "2032404866623062360": {
+    "__typename": "Tweet",
+    "favorite_count": 0,
+    "in_reply_to_screen_name": "vansh1029",
+    "in_reply_to_status_id_str": "2032086709442060533",
+    "in_reply_to_user_id_str": "1895655751169032192",
+    "lang": "en",
+    "created_at": "2026-03-13T10:34:15.000Z",
+    "display_text_range": [
+      11,
+      21
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "1895655751169032192",
+          "indices": [
+            0,
+            10
+          ],
+          "name": "Vansh N.",
+          "screen_name": "vansh1029"
+        }
+      ]
+    },
+    "id_str": "2032404866623062360",
+    "text": "@vansh1029 Dope work!",
+    "user": {
+      "id_str": "1380212106",
+      "name": "Gustav ❖",
+      "screen_name": "gustavwf",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1749381900538413056/jD72QyUF_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2032404866623062360"
+      ],
+      "editable_until_msecs": "1773401655000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "favorite_count": 28,
+      "lang": "en",
+      "possibly_sensitive": false,
+      "reply_count": 4,
+      "retweet_count": 1,
+      "created_at": "2026-03-12T13:30:00.000Z",
+      "display_text_range": [
+        0,
+        125
+      ],
+      "entities": {
+        "media": [
+          {
+            "display_url": "pic.x.com/7RQmMMK0om",
+            "expanded_url": "https://x.com/vansh1029/status/2032086709442060533/video/1",
+            "indices": [
+              126,
+              149
+            ],
+            "url": "https://t.co/7RQmMMK0om"
+          }
+        ]
+      },
+      "id_str": "2032086709442060533",
+      "text": "Cooked this text animation a while ago.\nFeel free to use it in your portfolio if it fits your theme.\nOnly on Pixel Perfect :) https://t.co/7RQmMMK0om",
+      "user": {
+        "id_str": "1895655751169032192",
+        "name": "Vansh N.",
+        "screen_name": "vansh1029",
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle",
+        "verified": false,
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "2032086709442060533"
+        ],
+        "editable_until_msecs": "1773325800000",
+        "edits_remaining": "5",
+        "is_edit_eligible": false
+      },
+      "mediaDetails": [
+        {
+          "additional_media_info": {},
+          "display_url": "pic.x.com/7RQmMMK0om",
+          "expanded_url": "https://x.com/vansh1029/status/2032086709442060533/video/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            126,
+            149
+          ],
+          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2032066100964573187/img/vOyjtDahO9N0voVX.jpg",
+          "original_info": {
+            "focus_rects": [],
+            "height": 750,
+            "width": 752
+          },
+          "sizes": {
+            "large": {
+              "h": 750,
+              "resize": "fit",
+              "w": 752
+            },
+            "medium": {
+              "h": 750,
+              "resize": "fit",
+              "w": 752
+            },
+            "small": {
+              "h": 678,
+              "resize": "fit",
+              "w": 680
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "video",
+          "url": "https://t.co/7RQmMMK0om",
+          "video_info": {
+            "aspect_ratio": [
+              376,
+              375
+            ],
+            "duration_millis": 9813,
+            "variants": [
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/amplify_video/2032066100964573187/pl/I6S2zA6ZBOFTalqT.m3u8"
+              },
+              {
+                "bitrate": 256000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2032066100964573187/vid/avc1/270x270/p53LI1WhZi12xO_S.mp4"
+              },
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2032066100964573187/vid/avc1/360x360/eh6mwwbFUJI0RCk-.mp4"
+              },
+              {
+                "bitrate": 2176000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/amplify_video/2032066100964573187/vid/avc1/752x750/Qu5Z2IypRdyHJ7kT.mp4"
+              }
+            ]
+          }
+        }
+      ],
+      "photos": [],
+      "video": {
+        "aspectRatio": [
+          376,
+          375
+        ],
+        "contentType": "media_entity",
+        "durationMs": 9813,
+        "mediaAvailability": {
+          "status": "available"
+        },
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2032066100964573187/img/vOyjtDahO9N0voVX.jpg",
+        "variants": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://video.twimg.com/amplify_video/2032066100964573187/pl/I6S2zA6ZBOFTalqT.m3u8"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2032066100964573187/vid/avc1/270x270/p53LI1WhZi12xO_S.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2032066100964573187/vid/avc1/360x360/eh6mwwbFUJI0RCk-.mp4"
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://video.twimg.com/amplify_video/2032066100964573187/vid/avc1/752x750/Qu5Z2IypRdyHJ7kT.mp4"
+          }
+        ],
+        "videoId": {
+          "type": "tweet",
+          "id": "2032086709442060533"
+        },
+        "viewCount": 0
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  }
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#EDEDED" />
+  <text x="960" y="455" text-anchor="middle" font-family="'Arial Black', Helvetica, Arial, sans-serif" font-weight="900" font-size="380" letter-spacing="-12" fill="#FBFBFB">Hello</text>
+  <text x="960" y="855" text-anchor="middle" font-family="'Arial Black', Helvetica, Arial, sans-serif" font-weight="900" font-size="360" letter-spacing="-6" fill="#FBFBFB">Savio</text>
+</svg>

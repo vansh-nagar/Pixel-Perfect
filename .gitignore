@@ -41,3 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 .agents
+# local skill (not committed)
+.claude/skills/emil-design-eng

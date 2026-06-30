@@ -13,6 +13,13 @@ const TARGET_DIR = "components/pixel-perfect";
 
 const BUILTIN_DEPS = new Set(["react", "react-dom", "next"]);
 
+// Map a local `@/components/ui/<name>` import to the external registry id it
+// must resolve to in a consumer project (when the component was itself added
+// from a third-party registry rather than the default one).
+const REGISTRY_ALIASES = {
+  "dotm-square-11": "@dotmatrix/dotm-square-11",
+};
+
 function walk(dir) {
   const out = [];
   if (!fs.existsSync(dir)) return out;
@@ -56,7 +63,8 @@ function classifyDeps(imports) {
   for (const spec of imports) {
     if (spec.startsWith(".") || spec.startsWith("registry/")) continue;
     if (spec.startsWith("@/components/ui/")) {
-      registry.add(spec.replace("@/components/ui/", "").split("/")[0]);
+      const ui = spec.replace("@/components/ui/", "").split("/")[0];
+      registry.add(REGISTRY_ALIASES[ui] ?? ui);
       continue;
     }
     if (spec.startsWith("@/")) continue;

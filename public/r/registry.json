@@ -4526,6 +4526,44 @@
       "registryDependencies": [
         "https://www.pixel-perfect.space/r/animated-texture.json"
       ]
+    },
+    {
+      "name": "chat-ui",
+      "description": "A streaming chat UI built on MessageScroller — anchored turns, follow-the-edge auto-scroll, a dot-matrix thinking indicator, and word-by-word reveal.",
+      "type": "registry:block",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@dotmatrix/dotm-square-11",
+        "message-scroller"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/chat/chat-ui.tsx",
+          "target": "components/pixel-perfect/chat-ui.tsx"
+        }
+      ],
+      "css": {
+        "@utility scrollbar-thin": {
+          "scrollbar-width": "thin"
+        },
+        "@utility scrollbar-none": {
+          "scrollbar-width": "none",
+          "&::-webkit-scrollbar": {
+            "display": "none"
+          }
+        },
+        "@utility scrollbar-gutter-stable": {
+          "scrollbar-gutter": "stable"
+        },
+        "@utility scroll-fade-b": {
+          "-webkit-mask-image": "linear-gradient(to bottom, #000 calc(100% - 1.75rem), transparent)",
+          "mask-image": "linear-gradient(to bottom, #000 calc(100% - 1.75rem), transparent)"
+        }
+      }
     }
   ]
 }

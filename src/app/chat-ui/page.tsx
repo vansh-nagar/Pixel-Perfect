@@ -6,17 +6,25 @@ import { ArrowUp, Bot } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { ThinkingIndicator } from "@/components/assistant-ui/thinking-indicator";
+import {
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerProvider,
+  MessageScrollerViewport,
+} from "@/components/ui/message-scroller";
 
 /* ─────────────────────────────────────────────────────────
- * A normal vertical chat UI (no backend, all motion). Flow per send:
+ * A normal vertical chat (no backend, all motion) built on MessageScroller:
+ *   • each user turn is a scrollAnchor — it's pinned near the top so the new
+ *     turn can be read from the start, with a peek of the previous turn above
+ *   • autoScroll follows the streamed reply only while at the live edge
+ *   • the floating arrow (MessageScrollerButton) jumps back to the latest
+ *   • scroll-fade-b masks the bottom edge so messages dissolve into the composer
  *
- *    0ms   user bubble springs in from the right (y+scale)
- *  120ms   assistant "thinking" bubble: the dot-matrix loader + status label
- *          (Connecting → Thinking → Generating) — the DotmSquare11 animation
- *  2200ms  thinking bubble exits, assistant bubble springs in and the reply
- *          streams in word-by-word with a blinking caret; list auto-scrolls
- *
- * Type and hit ↵ to replay. Honors prefers-reduced-motion.
+ * Per send: user bubble springs in (anchored) → dot-matrix thinking indicator
+ * → assistant bubble streams in word-by-word. Honors prefers-reduced-motion.
  * ───────────────────────────────────────────────────────── */
 
 const TIMING = {
@@ -24,8 +32,12 @@ const TIMING = {
   wordInterval: 55, // ms between each streamed word
 };
 
-/* Snappy-but-soft spring used for every bubble entrance. */
+/* Snappy-but-soft spring used for every row entrance. */
 const ENTRANCE_SPRING = { type: "spring" as const, stiffness: 420, damping: 30 };
+
+/* Animate the transcript row itself (transform + opacity only — never height/
+ * margin, which would fight the scroller's positioning). */
+const MotionItem = motion.create(MessageScrollerItem);
 
 type Role = "user" | "assistant";
 
@@ -47,9 +59,9 @@ const INITIAL_MESSAGES: Message[] = [
 /* Canned replies cycle on each send — they only exist to drive the animation. */
 const CANNED_REPLIES = [
   "Good motion is mostly timing and restraint: animate a property or two, keep it under 300ms, and let the easing do the talking.",
-  "The magic in a chat UI is the small stuff — a thinking indicator, a word-by-word reveal, and an auto-scroll that never fights the reader.",
+  "The magic in a chat UI is the small stuff — a thinking indicator, a word-by-word reveal, and a scroller that never fights the reader's place.",
   "I'd reach for a spring on entrance and an ease-out on exit. Springs feel alive; ease-outs feel polished and final.",
-  "Try staggering each word by ~40–60ms as it streams. It reads like real thinking instead of a paste.",
+  "Try staggering each word by ~40–60ms as it streams. It reads like real thinking instead of a paste. And keep older turns anchored so people never lose where they are.",
 ];
 
 const Page = () => {
@@ -57,24 +69,18 @@ const Page = () => {
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
 
-  const scrollRef = useRef<HTMLDivElement>(null);
   const idRef = useRef(INITIAL_MESSAGES.length);
   const replyRef = useRef(0);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const reduceMotion = useReducedMotion();
 
-  const scrollToBottom = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollTo({
-      top: el.scrollHeight,
-      behavior: reduceMotion ? "auto" : "smooth",
-    });
-  }, [reduceMotion]);
-
-  // Keep the latest message / thinking bubble in view.
+  // Auto-grow the composer textarea up to a max height (collapses back on send).
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, isThinking, scrollToBottom]);
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${Math.min(el.scrollHeight, 128)}px`;
+  }, [input]);
 
   const markStreamDone = useCallback((id: number) => {
     setMessages((prev) =>
@@ -118,36 +124,46 @@ const Page = () => {
           </div>
         </div>
 
-        {/* Messages */}
-        <div ref={scrollRef} className="flex-1 space-y-4 overflow-y-auto px-5 py-5">
-          <AnimatePresence initial={false}>
-            {messages.map((message) => (
-              <MessageBubble
-                key={message.id}
-                message={message}
-                reduceMotion={!!reduceMotion}
-                onStreamDone={markStreamDone}
-                onType={scrollToBottom}
-              />
-            ))}
-            {isThinking && (
-              <motion.div
-                key="thinking"
-                layout
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
-                transition={ENTRANCE_SPRING}
-                className="flex justify-start gap-2"
-              >
-                <BotAvatar className="self-end" />
-                <div className="rounded-2xl rounded-bl-sm bg-muted px-3 py-1.5">
-                  <ThinkingIndicator />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        {/* Transcript — MessageScroller owns scroll, anchoring, and follow-output */}
+        <MessageScrollerProvider autoScroll scrollPreviousItemPeek={56}>
+          <MessageScroller className="min-h-0 flex-1">
+            {/* opt out of the global Lenis smooth-scroll so the transcript
+                scrolls natively (Lenis otherwise hijacks the wheel) */}
+            <MessageScrollerViewport data-lenis-prevent className="px-5 py-5">
+              <MessageScrollerContent className="gap-4">
+                {messages.map((message) => (
+                  <MessageRow
+                    key={message.id}
+                    message={message}
+                    reduceMotion={!!reduceMotion}
+                    onStreamDone={markStreamDone}
+                  />
+                ))}
+
+                <AnimatePresence>
+                  {isThinking && (
+                    <MotionItem
+                      key="thinking"
+                      messageId="thinking"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={ENTRANCE_SPRING}
+                      className="flex justify-start gap-2"
+                    >
+                      <BotAvatar className="self-end" />
+                      <div className="rounded-2xl rounded-bl-sm bg-muted px-3 py-1.5">
+                        <ThinkingIndicator />
+                      </div>
+                    </MotionItem>
+                  )}
+                </AnimatePresence>
+              </MessageScrollerContent>
+            </MessageScrollerViewport>
+
+            <MessageScrollerButton className="shadow-sm" />
+          </MessageScroller>
+        </MessageScrollerProvider>
 
         {/* Composer */}
         <form
@@ -155,23 +171,34 @@ const Page = () => {
             e.preventDefault();
             send();
           }}
-          className="flex items-center gap-2 border-t border-border px-3 py-3"
+          className="border-t border-border p-3"
         >
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type a message…"
-            className="h-10 flex-1 rounded-full bg-muted px-4 text-sm text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
-          />
-          <motion.button
-            type="submit"
-            disabled={!input.trim() || isThinking}
-            whileTap={{ scale: 0.88 }}
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-opacity disabled:opacity-40"
-            aria-label="Send message"
-          >
-            <ArrowUp className="size-5" />
-          </motion.button>
+          <div className="flex items-end gap-2 rounded-3xl border border-border bg-muted p-1.5 transition-shadow focus-within:ring-2 focus-within:ring-ring">
+            <textarea
+              ref={textareaRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  send();
+                }
+              }}
+              rows={1}
+              placeholder="Type a message…"
+              aria-label="Message input"
+              className="max-h-32 min-h-9 flex-1 resize-none bg-transparent px-3 py-1.5 text-sm leading-relaxed text-foreground outline-none placeholder:text-muted-foreground"
+            />
+            <motion.button
+              type="submit"
+              disabled={!input.trim() || isThinking}
+              whileTap={{ scale: 0.88 }}
+              className="grid size-9 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-opacity disabled:opacity-40"
+              aria-label="Send message"
+            >
+              <ArrowUp className="size-5" />
+            </motion.button>
+          </div>
         </form>
       </div>
     </div>
@@ -191,29 +218,25 @@ function BotAvatar({ className }: { className?: string }) {
   );
 }
 
-interface MessageBubbleProps {
+interface MessageRowProps {
   message: Message;
   reduceMotion: boolean;
   onStreamDone: (id: number) => void;
-  onType: () => void;
 }
 
-function MessageBubble({
-  message,
-  reduceMotion,
-  onStreamDone,
-  onType,
-}: MessageBubbleProps) {
+/* One transcript row: the animated MessageScrollerItem holding a chat bubble.
+ * User rows are scroll anchors, so a new turn pins near the top of the view. */
+function MessageRow({ message, reduceMotion, onStreamDone }: MessageRowProps) {
   const isUser = message.role === "user";
-  // Stable so StreamingText's interval effect doesn't churn each render.
   const handleDone = useCallback(
     () => onStreamDone(message.id),
     [onStreamDone, message.id],
   );
 
   return (
-    <motion.div
-      layout
+    <MotionItem
+      messageId={String(message.id)}
+      scrollAnchor={isUser}
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={ENTRANCE_SPRING}
@@ -222,7 +245,7 @@ function MessageBubble({
       {!isUser && <BotAvatar className="self-end" />}
       <div
         className={cn(
-          "max-w-[78%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
+          "max-w-[78%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap wrap-break-word",
           isUser
             ? "rounded-br-sm bg-primary text-primary-foreground"
             : "rounded-bl-sm bg-muted text-foreground",
@@ -233,13 +256,12 @@ function MessageBubble({
             text={message.text}
             reduceMotion={reduceMotion}
             onDone={handleDone}
-            onType={onType}
           />
         ) : (
           message.text
         )}
       </div>
-    </motion.div>
+    </MotionItem>
   );
 }
 
@@ -247,12 +269,11 @@ interface StreamingTextProps {
   text: string;
   reduceMotion: boolean;
   onDone: () => void;
-  onType: () => void;
 }
 
 /* Reveals text one word at a time; each new word fades in, a caret blinks at
- * the tail until the last word lands. */
-function StreamingText({ text, reduceMotion, onDone, onType }: StreamingTextProps) {
+ * the tail until the last word lands. autoScroll follows the growth. */
+function StreamingText({ text, reduceMotion, onDone }: StreamingTextProps) {
   const words = useMemo(() => text.split(" "), [text]);
   const [count, setCount] = useState(reduceMotion ? words.length : 0);
 
@@ -263,10 +284,9 @@ function StreamingText({ text, reduceMotion, onDone, onType }: StreamingTextProp
     }
     const t = window.setTimeout(() => {
       setCount((c) => c + 1);
-      onType();
     }, TIMING.wordInterval);
     return () => window.clearTimeout(t);
-  }, [count, words.length, onDone, onType]);
+  }, [count, words.length, onDone]);
 
   return (
     <span>

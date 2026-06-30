@@ -242,6 +242,30 @@ body,
   --color-ring: var(--ring);
 }
 
+/* Utilities used by MessageScroller (the registry ships the component but not
+ * these). scroll-fade-b is the bottom mask so messages dissolve toward the
+ * composer / jump button instead of hard-cutting at the viewport edge. */
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+}
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@utility scrollbar-gutter-stable {
+  scrollbar-gutter: stable;
+}
+@utility scroll-fade-b {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 calc(100% - 1.75rem),
+    transparent
+  );
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.75rem), transparent);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

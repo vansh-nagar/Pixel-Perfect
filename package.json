@@ -14,6 +14,8 @@
     "rbuild": "shadcn build"
   },
   "dependencies": {
+    "@assistant-ui/react": "^0.14.24",
+    "@assistant-ui/react-markdown": "^0.14.5",
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
     "@hugeicons/core-free-icons": "^4.1.1",
@@ -66,6 +68,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
+    "dialkit": "^1.3.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.24.10",
     "gsap": "^3.14.2",
@@ -89,13 +92,16 @@
     "react-tweet": "^3.3.0",
     "react-use-measure": "^2.1.7",
     "recharts": "^2.15.4",
+    "remark-gfm": "^4.0.1",
     "shadcn": "^3.5.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "three": "^0.181.2",
+    "tw-shimmer": "^0.4.11",
     "ui-lib": ".",
     "vaul": "^1.1.2",
-    "zod": "^4.1.12"
+    "zod": "^4.1.12",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

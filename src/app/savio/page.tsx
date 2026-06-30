@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   ArrowUpDown,
   Captions,
@@ -83,6 +83,7 @@ function Sticker({
   onClick?: () => void;
   children: ReactNode;
 }) {
+  const reduce = useReducedMotion();
   return (
     <motion.div
       onClick={onClick}
@@ -90,6 +91,15 @@ function Sticker({
       style={{ rotate }}
       variants={stickerVariants}
       transition={SPRING_POP}
+      whileHover={
+        reduce
+          ? undefined
+          : {
+              scale: 1.1,
+              transition: { duration: 0.18, ease: [0.25, 0.46, 0.45, 0.94] },
+            }
+      }
+      whileTap={reduce ? undefined : { scale: 0.9, transition: { duration: 0.1 } }}
     >
       <div className="relative text-[#0c0c0c]">
         {children}
@@ -187,6 +197,7 @@ function QuickAddSheet({
   onMic: () => void;
 }) {
   const [labels, setLabels] = useState(false);
+  const reduce = useReducedMotion();
 
   return (
     <div className="relative flex h-[372px] w-[409px] items-end">
@@ -208,7 +219,7 @@ function QuickAddSheet({
             boxShadow: "0px 24px 48px rgba(0,0,0,0.14)",
           },
         }}
-        transition={SPRING_MORPH}
+        transition={reduce ? { duration: 0 } : SPRING_MORPH}
       >
 
         <motion.div
@@ -437,10 +448,10 @@ function QuickAddSheet({
               labels ? "bg-[#34c759]" : "bg-[#DBDBDB]"
             }`}
           >
-            <span
-              className={`absolute top-[2px] size-[14px] rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.25)] transition-all ${
-                labels ? "left-[15px]" : "left-[2px]"
-              }`}
+            <motion.span
+              className="absolute left-[2px] top-[2px] size-[14px] rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.25)]"
+              animate={{ x: labels ? 13 : 0 }}
+              transition={{ type: "spring", duration: 0.3, bounce: 0.2 }}
             />
           </span>
         </motion.button>
@@ -451,6 +462,7 @@ function QuickAddSheet({
           className="absolute bottom-[10px] right-[14px] block outline-none focus-visible:outline-none"
           variants={{ closed: { rotate: 0 }, open: { rotate: 45 } }}
           transition={SPRING_POP}
+          whileTap={{ scale: 0.86 }}
         >
           <RingGlyph />
         </motion.button>
@@ -464,6 +476,7 @@ const Page = () => {
   const [seconds, setSeconds] = useState(0);
   const [open, setOpen] = useState(false);
   const [recording, setRecording] = useState(false);
+  const reduce = useReducedMotion();
 
   const rowRef = useRef<HTMLDivElement>(null);
   const spanRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -619,7 +632,7 @@ const Page = () => {
           <motion.div
             initial={false}
             animate={{ y: recording ? 0 : "120%" }}
-            transition={SPRING_DRAWER}
+            transition={reduce ? { duration: 0 } : SPRING_DRAWER}
             style={{ pointerEvents: recording ? "auto" : "none" }}
             className="relative flex h-[446px] w-[409px] flex-col rounded-[40px] will-change-transform"
           >
@@ -697,17 +710,21 @@ const Page = () => {
 
         <div className="absolute left-1/2 top-[335px] flex -translate-x-1/2 items-center gap-[31px]">
 
-          <button
+          <motion.button
             type="button"
             onClick={stop}
+            whileTap={{ scale: 0.94 }}
+            transition={{ duration: 0.1 }}
             className={`grid size-[67px] place-items-center ${buttonClass}`}
           >
             <span className="size-[17px] rounded-[3px] bg-white" />
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
             type="button"
             onClick={() => setPlaying((p) => !p)}
+            whileTap={{ scale: 0.94 }}
+            transition={{ duration: 0.1 }}
             className={`relative grid size-[87px] place-items-center ${buttonClass}`}
           >
             <span className="flex -translate-y-1 items-center gap-0.5 text-white">
@@ -717,20 +734,28 @@ const Page = () => {
 
             <span className="absolute bottom-[15px] flex size-3 items-center justify-center">
               {playing ? (
-                <span className="size-1.5 rounded-full bg-[#ff3b30] shadow-[0_0_4px_1px_rgba(255,59,48,0.5)]" />
+                <motion.span
+                  className="size-1.5 rounded-full bg-[#ff3b30] shadow-[0_0_4px_1px_rgba(255,59,48,0.5)]"
+                  animate={
+                    reduce ? {} : { opacity: [1, 0.4, 1], scale: [1, 0.82, 1] }
+                  }
+                  transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                />
               ) : (
                 <span className="size-1.5 rounded-full bg-[#4E4E4E] shadow-[inset_0px_0.5px_0.8px_rgba(0,0,0,0.64),inset_0px_-0.5px_0px_#808080]" />
               )}
             </span>
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
             type="button"
             onClick={reset}
+            whileTap={{ scale: 0.94 }}
+            transition={{ duration: 0.1 }}
             className={`grid size-[67px] place-items-center ${buttonClass}`}
           >
             <Trash2 className="size-6 text-[#D1D1D1]" strokeWidth={2} />
-          </button>
+          </motion.button>
         </div>
           </motion.div>
         </div>

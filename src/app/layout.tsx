@@ -7,6 +7,8 @@ import LenisProvider from "@/components/providers/lenis-provider";
 import { baseMetadata, defaultViewport } from "@/lib/seo/metadata";
 import { jsonLdSchemas } from "@/lib/seo/schemas";
 import { Agentation } from "agentation";
+import { DialRoot } from "dialkit";
+import "dialkit/styles.css";
 import { StarSprite } from "@/components/mine/landing-page/star-border";
 
 const interTight = Inter_Tight({
@@ -49,6 +51,9 @@ export default function RootLayout({
             {children}
             <Toaster />
             {process.env.NODE_ENV === "development" && <Agentation />}
+            {process.env.NODE_ENV === "development" && (
+              <DialRoot position="top-right" />
+            )}
           </ThemeProvider>
           <Analytics />
         </body>

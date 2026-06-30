@@ -75,7 +75,7 @@ const BookDemoButton = React.forwardRef<HTMLButtonElement, BookDemoButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "group/btn relative inline-flex h-11 w-36 rounded-[12px] overflow-hidden transition-transform active:scale-[0.98]",
+          "group/btn bd-root relative inline-flex h-11 w-36 rounded-[12px] overflow-hidden transition-transform active:scale-[0.97]",
           className,
         )}
         style={{
@@ -87,22 +87,31 @@ const BookDemoButton = React.forwardRef<HTMLButtonElement, BookDemoButtonProps>(
       >
         <style>{`
           @keyframes bd-dot-wave {
-            0%, 70%, 100% { opacity: 0.25; transform: scale(0.85); }
-            35% { opacity: 1; transform: scale(1); }
+            0%, 65%, 100% { opacity: 0.3; transform: translateX(0) scale(0.8); }
+            32% { opacity: 1; transform: translateX(0.5px) scale(1.08); }
           }
           .bd-dot {
             transform-box: fill-box;
             transform-origin: center;
-            animation: bd-dot-wave 1.4s ease-in-out infinite;
+            /* Calm, slow shimmer at rest... */
+            animation: bd-dot-wave 1.8s cubic-bezier(0.45,0.05,0.55,0.95) infinite;
+          }
+          /* ...that springs to life (and marches faster) on hover/focus. */
+          .bd-root:hover .bd-dot,
+          .bd-root:focus-visible .bd-dot {
+            animation-duration: 0.95s;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .bd-dot { animation: none; opacity: 1; transform: none; }
           }
         `}</style>
 
-        <span className="absolute inset-y-0 right-4 flex items-center text-white font-medium text-[14px] tracking-tight">
+        <span className="absolute inset-y-0 right-4 flex items-center text-white font-medium text-[14px] tracking-tight transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/btn:translate-x-2 group-hover/btn:opacity-0 group-focus-visible/btn:translate-x-2 group-focus-visible/btn:opacity-0 motion-reduce:transition-none">
           {children || "Book a demo"}
         </span>
 
         <span
-          className="absolute top-1 left-1 bottom-1 z-10 w-9 group-hover/btn:w-[calc(100%-0.5rem)] flex items-center justify-start overflow-hidden rounded-md pl-3 pr-2.5 gap-2.5 transition-[width,gap] duration-200 ease-[cubic-bezier(0.65,0,0.35,1)]"
+          className="absolute top-1 left-1 bottom-1 z-10 w-9 group-hover/btn:w-[calc(100%-0.5rem)] group-focus-visible/btn:w-[calc(100%-0.5rem)] group-active/btn:w-[calc(100%-0.5rem)] flex items-center justify-start overflow-hidden rounded-md pl-3 pr-2.5 gap-2.5 transition-[width,gap] duration-260 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
           style={{
             background: `linear-gradient(180deg, ${v.from} 0%, ${v.to} 100%)`,
             boxShadow:

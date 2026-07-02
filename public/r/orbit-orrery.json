@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "orbit-orrery",
+  "description": "A miniature orrery: planets circling a pulsing sun on a tilted orbital plane seen in perspective.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/perspective/orbit-orrery.tsx",
+      "content": "/**\n * A miniature orrery: planets circling a pulsing sun on a tilted orbital plane seen in perspective.\n */\n\"use client\";\n\nimport { motion } from \"framer-motion\";\n\nconst PLANE_TILT = 64;\n\nconst ORBITS = [\n  { radius: 26, duration: 3.5, planet: 6 },\n  { radius: 42, duration: 6.5, planet: 8 },\n  { radius: 58, duration: 10, planet: 5 },\n];\n\nconst OrbitOrrery = () => {\n  return (\n    <div style={{ perspective: 800 }}>\n      <div\n        className=\"relative size-32\"\n        style={{\n          transform: `rotateX(${PLANE_TILT}deg)`,\n          transformStyle: \"preserve-3d\",\n        }}\n      >\n        {ORBITS.map((orbit, i) => (\n          <div\n            key={orbit.radius}\n            className=\"absolute\"\n            style={{\n              width: orbit.radius * 2,\n              height: orbit.radius * 2,\n              left: `calc(50% - ${orbit.radius}px)`,\n              top: `calc(50% - ${orbit.radius}px)`,\n            }}\n          >\n            <div\n              className={`absolute inset-0 rounded-full border border-foreground/20 ${\n                i === ORBITS.length - 1 ? \"border-dashed\" : \"\"\n              }`}\n            />\n            <motion.div\n              className=\"absolute inset-0\"\n              animate={{ rotate: 360 }}\n              transition={{\n                duration: orbit.duration,\n                ease: \"linear\",\n                repeat: Infinity,\n              }}\n            >\n              <div\n                className=\"absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground/80\"\n                style={{ width: orbit.planet, height: orbit.planet }}\n              />\n            </motion.div>\n          </div>\n        ))}\n\n        {/* the sun, counter-tilted to face the viewer */}\n        <div\n          className=\"absolute inset-0 grid place-items-center\"\n          style={{\n            transform: `rotateX(-${PLANE_TILT}deg)`,\n            transformStyle: \"preserve-3d\",\n          }}\n        >\n          <motion.div\n            className=\"size-3.5 rounded-full bg-foreground\"\n            animate={{ scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}\n            transition={{ duration: 2.2, ease: \"easeInOut\", repeat: Infinity }}\n          />\n        </div>\n      </div>\n    </div>\n  );\n};\n\nexport default OrbitOrrery;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/orbit-orrery.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

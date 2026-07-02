@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wave-mask-reveal",
+  "description": "A liquid-wave mask reveal — the image fills from the bottom like rising water, with a living sine-wave crest cut from an inline SVG mask.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/mask/wave-mask-reveal.tsx",
+      "content": "\"use client\";\n\n/**\n * A liquid-wave mask reveal — the image fills from the bottom like rising water, with a living sine-wave crest cut from an inline SVG mask.\n */\n\nimport { useEffect, useId, useRef } from \"react\";\nimport gsap from \"gsap\";\n\nconst SRC = \"/bend-image-reveal.gif\";\n\nconst W = 640;\nconst H = 360;\nconst STEP = 16;\n\nconst wavePath = (level: number, t: number) => {\n  const base = H * (1 - level);\n  // crest is biggest mid-rise and flattens out as the fill completes\n  const amp = 20 * Math.sin(Math.PI * Math.min(Math.max(level, 0), 1));\n  let d = \"\";\n  for (let x = 0; x <= W; x += STEP) {\n    const y =\n      base +\n      amp *\n        (0.7 * Math.sin(x * 0.014 + t * 2.3) +\n          0.3 * Math.sin(x * 0.032 - t * 3.6));\n    d += `${x === 0 ? \"M\" : \"L\"} ${x} ${y.toFixed(1)} `;\n  }\n  return `${d}L ${W} ${H} L 0 ${H} Z`;\n};\n\nconst WaveMaskReveal = () => {\n  const pathRef = useRef<SVGPathElement>(null);\n  const imageRef = useRef<SVGImageElement>(null);\n  const tlRef = useRef<gsap.core.Timeline | null>(null);\n  const maskId = `wave-${useId().replace(/:/g, \"\")}`;\n\n  const reveal = () => {\n    const image = imageRef.current;\n    if (!image) return;\n\n    const state = { level: 0, t: 0 };\n    const apply = () => {\n      pathRef.current?.setAttribute(\"d\", wavePath(state.level, state.t));\n    };\n\n    tlRef.current?.kill();\n    const tl = gsap.timeline({ onUpdate: apply });\n    tlRef.current = tl;\n    tl.to(state, { level: 1.05, duration: 2, ease: \"power2.inOut\" }, 0);\n    tl.to(state, { t: 7, duration: 2, ease: \"none\" }, 0);\n    tl.fromTo(\n      image,\n      { scale: 1.3, transformOrigin: \"50% 50%\", filter: \"blur(12px)\" },\n      { scale: 1, filter: \"blur(0px)\", duration: 2, ease: \"power2.inOut\" },\n      0,\n    );\n  };\n\n  useEffect(() => {\n    reveal();\n  }, []);\n\n  return (\n    <button\n      onClick={reveal}\n      className=\"relative aspect-video w-[40rem] max-w-[92%] cursor-pointer overflow-hidden rounded-xl\"\n      aria-label=\"Replay reveal\"\n    >\n      <svg\n        viewBox=\"0 0 640 360\"\n        preserveAspectRatio=\"xMidYMid slice\"\n        className=\"size-full\"\n        aria-hidden\n      >\n        <defs>\n          <mask id={maskId}>\n            <path ref={pathRef} d={wavePath(0, 0)} fill=\"#fff\" />\n          </mask>\n        </defs>\n        <g mask={`url(#${maskId})`}>\n          <image\n            ref={imageRef}\n            href={SRC}\n            width=\"640\"\n            height=\"360\"\n            preserveAspectRatio=\"xMidYMid slice\"\n          />\n        </g>\n      </svg>\n    </button>\n  );\n};\n\nexport default WaveMaskReveal;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/wave-mask-reveal.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "coverflow-marquee",
+  "description": "An endless coverflow: cards glide across the stage, swinging flat as they pass center, with floor reflections.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/perspective/coverflow-marquee.tsx",
+      "content": "/**\n * An endless coverflow: cards glide across the stage, swinging flat as they pass center, with floor reflections.\n */\n\"use client\";\n\nimport { motion } from \"framer-motion\";\n\nconst CARD_COUNT = 5;\nconst DURATION = 6;\n\nconst CardArt = ({ index }: { index: number }) => (\n  <div className=\"flex h-20 w-16 flex-col items-center justify-center gap-1.5 rounded-md border border-foreground/30 bg-muted\">\n    <span className=\"font-mono text-lg text-foreground/60\">\n      {String(index + 1).padStart(2, \"0\")}\n    </span>\n    <div className=\"h-1 w-8 rounded-full bg-foreground/25\" />\n    <div className=\"h-1 w-5 rounded-full bg-foreground/15\" />\n  </div>\n);\n\nconst CoverflowMarquee = () => {\n  return (\n    <div style={{ perspective: 700 }}>\n      <div\n        className=\"relative h-48 w-56\"\n        style={{ transformStyle: \"preserve-3d\" }}\n      >\n        {Array.from({ length: CARD_COUNT }, (_, i) => (\n          <motion.div\n            key={i}\n            className=\"absolute inset-0 m-auto h-fit w-fit\"\n            style={{ transformStyle: \"preserve-3d\" }}\n            animate={{\n              x: [150, -150],\n              rotateY: [-55, -55, 0, 55, 55],\n              z: [0, 0, 70, 0, 0],\n              opacity: [0, 1, 1, 1, 0],\n            }}\n            transition={{\n              duration: DURATION,\n              ease: \"linear\",\n              repeat: Infinity,\n              delay: -((i * DURATION) / CARD_COUNT),\n            }}\n          >\n            <CardArt index={i} />\n            <div\n              className=\"mt-0.5 opacity-60\"\n              style={{\n                transform: \"scaleY(-1)\",\n                maskImage:\n                  \"linear-gradient(to top, rgba(0,0,0,0.45), transparent 65%)\",\n                WebkitMaskImage:\n                  \"linear-gradient(to top, rgba(0,0,0,0.45), transparent 65%)\",\n              }}\n            >\n              <CardArt index={i} />\n            </div>\n          </motion.div>\n        ))}\n      </div>\n    </div>\n  );\n};\n\nexport default CoverflowMarquee;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/coverflow-marquee.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

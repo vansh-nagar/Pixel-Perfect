@@ -4564,6 +4564,450 @@
           "mask-image": "linear-gradient(to bottom, #000 calc(100% - 1.75rem), transparent)"
         }
       }
+    },
+    {
+      "name": "flip-tile-wave",
+      "description": "A grid of two-faced tiles flipping in a diagonal 3D wave, revealing their dark side and back again.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/flip-tile-wave.tsx",
+          "target": "components/pixel-perfect/flip-tile-wave.tsx"
+        }
+      ]
+    },
+    {
+      "name": "helix-spinner",
+      "description": "A column of bars, each offset a few degrees on the Y axis, spinning together as a twisting 3D helix.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/helix-spinner.tsx",
+          "target": "components/pixel-perfect/helix-spinner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hover-layer-stack",
+      "description": "An isometric stack of UI layers that lifts apart on hover, exploding the interface into its depth layers.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/hover-layer-stack.tsx",
+          "target": "components/pixel-perfect/hover-layer-stack.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rotating-ring-carousel",
+      "description": "Numbered panels arranged in a 3D ring, slowly orbiting the Y axis like a cylindrical carousel.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/rotating-ring-carousel.tsx",
+          "target": "components/pixel-perfect/rotating-ring-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tilt-card-glare",
+      "description": "A mouse-tracked 3D tilt card with parallax depth layers and a moving glare highlight.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/tilt-card-glare.tsx",
+          "target": "components/pixel-perfect/tilt-card-glare.tsx"
+        }
+      ]
+    },
+    {
+      "name": "accordion-carousel",
+      "description": "An accordion of vertical image panels — the active panel springs wide to reveal its photo and caption while the rest compress into slim slivers with sideways titles. Click a panel to expand it; it auto-advances until hovered.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/accordion-carousel.tsx",
+          "target": "components/pixel-perfect/accordion-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cover-flow-carousel",
+      "description": "A classic cover-flow carousel: the centre cover faces you while the side covers angle inward with depth and a floor reflection. Drag to scrub with snap, click a side cover to bring it front, or let it auto-advance.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/cover-flow-carousel.tsx",
+          "target": "components/pixel-perfect/cover-flow-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "orbit-carousel",
+      "description": "Cards orbit an ellipse in faux-3D — swinging to the front they scale up, sharpen and stack forward; passing behind they shrink, dim and blur. Drag to spin with momentum; it drifts on its own when idle.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/orbit-carousel.tsx",
+          "target": "components/pixel-perfect/orbit-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sliced-reveal-carousel",
+      "description": "Slide transitions slice the photo into vertical strips that cascade in one column at a time — the new image sweeps up while the old sweeps away, offset by a per-strip stagger. Auto-advances; arrows and dots take over on click.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/sliced-reveal-carousel.tsx",
+          "target": "components/pixel-perfect/sliced-reveal-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "accordion-fold",
+      "description": "A paper map of hinged panels that folds itself up like an accordion and flattens back out.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/accordion-fold.tsx",
+          "target": "components/pixel-perfect/accordion-fold.tsx"
+        }
+      ]
+    },
+    {
+      "name": "depth-tunnel",
+      "description": "Concentric frames flying out of the screen toward the viewer in an endless, slowly twisting depth tunnel.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/depth-tunnel.tsx",
+          "target": "components/pixel-perfect/depth-tunnel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "flip-clock-counter",
+      "description": "A split-flap clock digit that folds down every tick like a mechanical departure board.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/flip-clock-counter.tsx",
+          "target": "components/pixel-perfect/flip-clock-counter.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gyroscope-rings",
+      "description": "Three rings spinning on tilted axes around a pulsing core, forming a 3D gyroscope with orbiting beads.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/gyroscope-rings.tsx",
+          "target": "components/pixel-perfect/gyroscope-rings.tsx"
+        }
+      ]
+    },
+    {
+      "name": "swing-door-reveal",
+      "description": "A door that swings open on hover with a springy 3D hinge, revealing a glowing light behind it.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/swing-door-reveal.tsx",
+          "target": "components/pixel-perfect/swing-door-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-flip-book",
+      "description": "An open book lying in perspective, endlessly turning its pages with a 3D flip around the spine.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/page-flip-book.tsx",
+          "target": "components/pixel-perfect/page-flip-book.tsx"
+        }
+      ]
+    },
+    {
+      "name": "aperture-mask-reveal",
+      "description": "A camera-aperture mask reveal — six shutter blades twist open around the center, dilating a hexagonal iris cut from an inline SVG mask.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/aperture-mask-reveal.tsx",
+          "target": "components/pixel-perfect/aperture-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ink-blob-mask-reveal",
+      "description": "An ink-blob mask reveal — a drop splats in the middle, then spreads outward as an organic wobbling blob clip-path until it floods the frame.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/ink-blob-mask-reveal.tsx",
+          "target": "components/pixel-perfect/ink-blob-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "keyhole-mask-reveal",
+      "description": "A keyhole mask reveal — a keyhole clip-path pops in with a slight tilt, then the view zooms through it until the image fills the frame.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/keyhole-mask-reveal.tsx",
+          "target": "components/pixel-perfect/keyhole-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-zoom-mask-reveal",
+      "description": "A text-zoom mask reveal — the image shows through the giant word \"PIXEL\", which then dives through the X until the whole frame is uncovered.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/text-zoom-mask-reveal.tsx",
+          "target": "components/pixel-perfect/text-zoom-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "wave-mask-reveal",
+      "description": "A liquid-wave mask reveal — the image fills from the bottom like rising water, with a living sine-wave crest cut from an inline SVG mask.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mask/wave-mask-reveal.tsx",
+          "target": "components/pixel-perfect/wave-mask-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cube-carousel",
+      "description": "Slides live on the faces of a 3D prism that rotates to advance, dipping back in scale mid-turn like it needs room to swing. Drag to spin it freely with snap, or let it auto-rotate; faces are reassigned on the fly so any number of slides fits on four faces.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/cube-carousel.tsx",
+          "target": "components/pixel-perfect/cube-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ferris-wheel-carousel",
+      "description": "Gondola cards hang from a slowly turning ferris wheel — they stay upright as the wheel rotates and swing like pendulums when it speeds up or brakes. Drag anywhere to spin it with momentum; it settles back into a lazy drift.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/ferris-wheel-carousel.tsx",
+          "target": "components/pixel-perfect/ferris-wheel-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slat-flip-carousel",
+      "description": "The image is split into horizontal louver slats that flip 180° about their own axis in a stagger — the new slide rides in on the back of each slat like rotating window blinds. Auto-advances; arrows flip the louvers in either direction.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/slat-flip-carousel.tsx",
+          "target": "components/pixel-perfect/slat-flip-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toss-deck-carousel",
+      "description": "A messy pile of polaroids — flick the top one away and it flies off with your throw while the pile shuffles up and a new photo slips in underneath. Tosses itself when you leave it alone; the pile never runs out.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/toss-deck-carousel.tsx",
+          "target": "components/pixel-perfect/toss-deck-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "coverflow-marquee",
+      "description": "An endless coverflow: cards glide across the stage, swinging flat as they pass center, with floor reflections.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/coverflow-marquee.tsx",
+          "target": "components/pixel-perfect/coverflow-marquee.tsx"
+        }
+      ]
+    },
+    {
+      "name": "domino-run",
+      "description": "A receding row of dominoes toppling toward the camera one by one, then standing back up in a wave.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/domino-run.tsx",
+          "target": "components/pixel-perfect/domino-run.tsx"
+        }
+      ]
+    },
+    {
+      "name": "exploding-dice-cube",
+      "description": "A spinning 3D die whose six pip faces fly apart into an exploded view on hover and spring back together.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/exploding-dice-cube.tsx",
+          "target": "components/pixel-perfect/exploding-dice-cube.tsx"
+        }
+      ]
+    },
+    {
+      "name": "orbit-orrery",
+      "description": "A miniature orrery: planets circling a pulsing sun on a tilted orbital plane seen in perspective.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/orbit-orrery.tsx",
+          "target": "components/pixel-perfect/orbit-orrery.tsx"
+        }
+      ]
+    },
+    {
+      "name": "perspective-text-crawl",
+      "description": "An opening-crawl of text scrolling up a tilted plane and fading into the distance, movie-style.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/perspective-text-crawl.tsx",
+          "target": "components/pixel-perfect/perspective-text-crawl.tsx"
+        }
+      ]
+    },
+    {
+      "name": "swinging-sign",
+      "description": "A hanging shop sign swinging toward and away from the camera on its strings like a pendulum.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/swinging-sign.tsx",
+          "target": "components/pixel-perfect/swinging-sign.tsx"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tilt-card-glare",
+  "description": "A mouse-tracked 3D tilt card with parallax depth layers and a moving glare highlight.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/perspective/tilt-card-glare.tsx",
+      "content": "/**\n * A mouse-tracked 3D tilt card with parallax depth layers and a moving glare highlight.\n */\n\"use client\";\n\nimport { useRef } from \"react\";\nimport {\n  motion,\n  useMotionTemplate,\n  useMotionValue,\n  useSpring,\n  useTransform,\n} from \"framer-motion\";\n\nconst TiltCardGlare = () => {\n  const ref = useRef<HTMLDivElement>(null);\n  const px = useMotionValue(0.5);\n  const py = useMotionValue(0.5);\n\n  const spring = { stiffness: 200, damping: 20 };\n  const rotateX = useSpring(useTransform(py, [0, 1], [14, -14]), spring);\n  const rotateY = useSpring(useTransform(px, [0, 1], [-14, 14]), spring);\n\n  const glareX = useTransform(px, [0, 1], [0, 100]);\n  const glareY = useTransform(py, [0, 1], [0, 100]);\n  const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.25), transparent 60%)`;\n\n  const handlePointerMove = (e: React.PointerEvent) => {\n    const rect = ref.current?.getBoundingClientRect();\n    if (!rect) return;\n    px.set((e.clientX - rect.left) / rect.width);\n    py.set((e.clientY - rect.top) / rect.height);\n  };\n\n  const handlePointerLeave = () => {\n    px.set(0.5);\n    py.set(0.5);\n  };\n\n  return (\n    <div style={{ perspective: 800 }}>\n      <motion.div\n        ref={ref}\n        onPointerMove={handlePointerMove}\n        onPointerLeave={handlePointerLeave}\n        className=\"relative h-52 w-40 rounded-xl border border-foreground/20 bg-foreground/5 p-4\"\n        style={{ rotateX, rotateY, transformStyle: \"preserve-3d\" }}\n      >\n        <motion.div\n          className=\"pointer-events-none absolute inset-0 rounded-xl\"\n          style={{ background: glare }}\n        />\n        <div\n          className=\"flex h-full flex-col justify-between\"\n          style={{ transform: \"translateZ(40px)\", transformStyle: \"preserve-3d\" }}\n        >\n          <div className=\"size-8 rounded-full border border-foreground/30 bg-foreground/10\" />\n          <div className=\"flex flex-col gap-2\">\n            <div className=\"h-2 w-3/4 rounded-full bg-foreground/30\" />\n            <div className=\"h-2 w-1/2 rounded-full bg-foreground/20\" />\n          </div>\n          <span\n            className=\"w-fit rounded-full border border-foreground/30 px-2 py-0.5 text-[8px] uppercase tracking-widest text-foreground/70\"\n            style={{ transform: \"translateZ(30px)\" }}\n          >\n            hover me\n          </span>\n        </div>\n      </motion.div>\n    </div>\n  );\n};\n\nexport default TiltCardGlare;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/tilt-card-glare.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

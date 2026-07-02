@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flip-tile-wave",
+  "description": "A grid of two-faced tiles flipping in a diagonal 3D wave, revealing their dark side and back again.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/perspective/flip-tile-wave.tsx",
+      "content": "/**\n * A grid of two-faced tiles flipping in a diagonal 3D wave, revealing their dark side and back again.\n */\n\"use client\";\n\nimport { motion } from \"framer-motion\";\n\nconst GRID_SIZE = 4;\nconst TILE = 30;\n\nconst FlipTileWave = () => {\n  return (\n    <div style={{ perspective: 600 }}>\n      <div\n        className=\"grid gap-1.5\"\n        style={{\n          gridTemplateColumns: `repeat(${GRID_SIZE}, ${TILE}px)`,\n          transformStyle: \"preserve-3d\",\n        }}\n      >\n        {Array.from({ length: GRID_SIZE * GRID_SIZE }, (_, i) => {\n          const row = Math.floor(i / GRID_SIZE);\n          const col = i % GRID_SIZE;\n          return (\n            <motion.div\n              key={i}\n              className=\"relative\"\n              style={{\n                width: TILE,\n                height: TILE,\n                transformStyle: \"preserve-3d\",\n              }}\n              animate={{ rotateY: 180 }}\n              transition={{\n                duration: 0.7,\n                ease: \"easeInOut\",\n                delay: (row + col) * 0.12,\n                repeat: Infinity,\n                repeatType: \"reverse\",\n                repeatDelay: 1.2,\n              }}\n            >\n              <div\n                className=\"absolute inset-0 rounded-sm border border-foreground/30 bg-foreground/5\"\n                style={{ backfaceVisibility: \"hidden\" }}\n              />\n              <div\n                className=\"absolute inset-0 rounded-sm bg-foreground/80\"\n                style={{\n                  backfaceVisibility: \"hidden\",\n                  transform: \"rotateY(180deg)\",\n                }}\n              />\n            </motion.div>\n          );\n        })}\n      </div>\n    </div>\n  );\n};\n\nexport default FlipTileWave;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/flip-tile-wave.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

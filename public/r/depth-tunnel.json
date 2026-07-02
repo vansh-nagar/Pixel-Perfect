@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "depth-tunnel",
+  "description": "Concentric frames flying out of the screen toward the viewer in an endless, slowly twisting depth tunnel.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/perspective/depth-tunnel.tsx",
+      "content": "/**\n * Concentric frames flying out of the screen toward the viewer in an endless, slowly twisting depth tunnel.\n */\n\"use client\";\n\nimport { motion } from \"framer-motion\";\n\nconst FRAME_COUNT = 6;\nconst DURATION = 6;\n\nconst DepthTunnel = () => {\n  return (\n    <div\n      className=\"relative\"\n      style={{ width: 160, height: 160, perspective: 500 }}\n    >\n      <div className=\"absolute inset-0 m-auto size-1 rounded-full bg-foreground/40\" />\n      {Array.from({ length: FRAME_COUNT }, (_, i) => (\n        <motion.div\n          key={i}\n          className=\"absolute inset-0 m-auto size-32 rounded-xl border-2 border-foreground/40\"\n          animate={{\n            z: [-700, 300],\n            rotate: [i * 15, i * 15 + 90],\n            opacity: [0, 1, 1, 0],\n          }}\n          transition={{\n            duration: DURATION,\n            ease: \"linear\",\n            repeat: Infinity,\n            delay: -((i * DURATION) / FRAME_COUNT),\n          }}\n        />\n      ))}\n    </div>\n  );\n};\n\nexport default DepthTunnel;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/depth-tunnel.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

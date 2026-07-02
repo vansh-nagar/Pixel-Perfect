@@ -4,6 +4,23 @@ import { useState } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import SpinningCubeMotion from "registry/new-york/perspective/spinning-cube-motion";
+import TiltCardGlare from "registry/new-york/perspective/tilt-card-glare";
+import RotatingRingCarousel from "registry/new-york/perspective/rotating-ring-carousel";
+import HoverLayerStack from "registry/new-york/perspective/hover-layer-stack";
+import HelixSpinner from "registry/new-york/perspective/helix-spinner";
+import FlipTileWave from "registry/new-york/perspective/flip-tile-wave";
+import FlipClockCounter from "registry/new-york/perspective/flip-clock-counter";
+import GyroscopeRings from "registry/new-york/perspective/gyroscope-rings";
+import AccordionFold from "registry/new-york/perspective/accordion-fold";
+import DepthTunnel from "registry/new-york/perspective/depth-tunnel";
+import SwingDoorReveal from "registry/new-york/perspective/swing-door-reveal";
+import PageFlipBook from "registry/new-york/perspective/page-flip-book";
+import ExplodingDiceCube from "registry/new-york/perspective/exploding-dice-cube";
+import CoverflowMarquee from "registry/new-york/perspective/coverflow-marquee";
+import DominoRun from "registry/new-york/perspective/domino-run";
+import OrbitOrrery from "registry/new-york/perspective/orbit-orrery";
+import PerspectiveTextCrawl from "registry/new-york/perspective/perspective-text-crawl";
+import SwingingSign from "registry/new-york/perspective/swinging-sign";
 import CopyDropdown from "../copy-dropdown";
 
 const PerspectiveComponentArr: {
@@ -18,6 +35,125 @@ const PerspectiveComponentArr: {
       "3D cube spinning on its Y axis with a fixed tilt, built with CSS 3D transforms and Framer Motion.",
     Component: SpinningCubeMotion,
     registryName: "spinning-cube-motion",
+  },
+  {
+    name: "Tilt Card",
+    description:
+      "Mouse-tracked 3D tilt card with parallax depth layers and a moving glare highlight.",
+    Component: TiltCardGlare,
+    registryName: "tilt-card-glare",
+  },
+  {
+    name: "Ring Carousel",
+    description:
+      "Numbered panels arranged in a 3D ring, slowly orbiting the Y axis like a cylindrical carousel.",
+    Component: RotatingRingCarousel,
+    registryName: "rotating-ring-carousel",
+  },
+  {
+    name: "Layer Stack",
+    description:
+      "Isometric stack of UI layers that lifts apart on hover, exploding the interface into its depth.",
+    Component: HoverLayerStack,
+    registryName: "hover-layer-stack",
+  },
+  {
+    name: "Helix Spinner",
+    description:
+      "A column of bars offset a few degrees each, spinning together as a twisting 3D helix.",
+    Component: HelixSpinner,
+    registryName: "helix-spinner",
+  },
+  {
+    name: "Flip Tile Wave",
+    description:
+      "A grid of two-faced tiles flipping in a diagonal 3D wave, revealing their dark side and back.",
+    Component: FlipTileWave,
+    registryName: "flip-tile-wave",
+  },
+  {
+    name: "Flip Clock",
+    description:
+      "A split-flap clock digit that folds down every tick like a mechanical departure board.",
+    Component: FlipClockCounter,
+    registryName: "flip-clock-counter",
+  },
+  {
+    name: "Gyroscope",
+    description:
+      "Three rings spinning on tilted axes around a pulsing core, with beads orbiting each ring.",
+    Component: GyroscopeRings,
+    registryName: "gyroscope-rings",
+  },
+  {
+    name: "Accordion Fold",
+    description:
+      "A paper map of hinged panels that folds itself up like an accordion and flattens back out.",
+    Component: AccordionFold,
+    registryName: "accordion-fold",
+  },
+  {
+    name: "Depth Tunnel",
+    description:
+      "Concentric frames flying toward the viewer in an endless, slowly twisting depth tunnel.",
+    Component: DepthTunnel,
+    registryName: "depth-tunnel",
+  },
+  {
+    name: "Door Reveal",
+    description:
+      "A door that swings open on hover with a springy 3D hinge, revealing a glowing light behind.",
+    Component: SwingDoorReveal,
+    registryName: "swing-door-reveal",
+  },
+  {
+    name: "Page Flip",
+    description:
+      "An open book lying in perspective, endlessly turning its pages with a 3D flip around the spine.",
+    Component: PageFlipBook,
+    registryName: "page-flip-book",
+  },
+  {
+    name: "Exploding Dice",
+    description:
+      "A spinning 3D die whose six pip faces fly apart into an exploded view on hover and spring back.",
+    Component: ExplodingDiceCube,
+    registryName: "exploding-dice-cube",
+  },
+  {
+    name: "Coverflow",
+    description:
+      "An endless coverflow: cards glide across the stage, swinging flat as they pass center, with reflections.",
+    Component: CoverflowMarquee,
+    registryName: "coverflow-marquee",
+  },
+  {
+    name: "Domino Run",
+    description:
+      "A receding row of dominoes toppling toward the camera one by one, then standing back up in a wave.",
+    Component: DominoRun,
+    registryName: "domino-run",
+  },
+  {
+    name: "Orrery",
+    description:
+      "A miniature orrery: planets circling a pulsing sun on a tilted orbital plane seen in perspective.",
+    Component: OrbitOrrery,
+    registryName: "orbit-orrery",
+  },
+  {
+    name: "Text Crawl",
+    description:
+      "An opening-crawl of text scrolling up a tilted plane and fading into the distance, movie-style.",
+    Component: PerspectiveTextCrawl,
+    registryName: "perspective-text-crawl",
+  },
+  {
+    name: "Swinging Sign",
+    description:
+      "A hanging shop sign swinging toward and away from the camera on its strings like a pendulum.",
+    Component: SwingingSign,
+    registryName: "swinging-sign",
   },
 ];
 

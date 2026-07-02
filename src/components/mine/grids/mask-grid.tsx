@@ -30,6 +30,11 @@ import PinwheelMaskReveal from "../../../../registry/new-york/mask/pinwheel-mask
 import SonarMaskReveal from "../../../../registry/new-york/mask/sonar-mask-reveal";
 import NoiseMaskReveal from "../../../../registry/new-york/mask/noise-mask-reveal";
 import NoiseDissolveReveal from "../../../../registry/new-york/mask/noise-dissolve-reveal";
+import KeyholeMaskReveal from "../../../../registry/new-york/mask/keyhole-mask-reveal";
+import ApertureMaskReveal from "../../../../registry/new-york/mask/aperture-mask-reveal";
+import InkBlobMaskReveal from "../../../../registry/new-york/mask/ink-blob-mask-reveal";
+import WaveMaskReveal from "../../../../registry/new-york/mask/wave-mask-reveal";
+import TextZoomMaskReveal from "../../../../registry/new-york/mask/text-zoom-mask-reveal";
 
 type MaskGridItem = {
   name: string;
@@ -285,6 +290,41 @@ export const MaskGridArr: MaskGridItem[] = [
       "A fragment shader materialises the image in through a drifting cloud of fbm noise, with a warm grainy glow on the dissolve edge. Click to replay.",
     component: <NoiseDissolveReveal src="/heavenly-handshake.png" />,
     registryName: "noise-dissolve-reveal",
+  },
+  {
+    name: "Keyhole Mask Reveal",
+    description:
+      "A keyhole clip-path pops in with a slight tilt, then you zoom through the keyhole until the image fills the frame. Click to replay.",
+    component: <KeyholeMaskReveal />,
+    registryName: "keyhole-mask-reveal",
+  },
+  {
+    name: "Aperture Mask Reveal",
+    description:
+      "Six camera-shutter blades twist open around the center, dilating a hexagonal iris cut from an SVG mask. Click to replay.",
+    component: <ApertureMaskReveal />,
+    registryName: "aperture-mask-reveal",
+  },
+  {
+    name: "Ink Blob Mask Reveal",
+    description:
+      "An ink drop splats in the middle, then spreads outward as an organic wobbling blob clip-path until it floods the frame. Click to replay.",
+    component: <InkBlobMaskReveal />,
+    registryName: "ink-blob-mask-reveal",
+  },
+  {
+    name: "Wave Mask Reveal",
+    description:
+      "The image fills from the bottom like rising water, with a living sine-wave crest cut from an animated SVG mask. Click to replay.",
+    component: <WaveMaskReveal />,
+    registryName: "wave-mask-reveal",
+  },
+  {
+    name: "Text Zoom Mask Reveal",
+    description:
+      "The image shows through the giant word PIXEL, then dives through the X until the whole frame is uncovered. Click to replay.",
+    component: <TextZoomMaskReveal />,
+    registryName: "text-zoom-mask-reveal",
   },
 ];
 

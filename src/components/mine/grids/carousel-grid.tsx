@@ -9,6 +9,14 @@ import RadialCarousel from "registry/new-york/carousel/radial-carousel";
 import CardsSlider from "registry/new-york/carousel/cards-slider";
 import PerspectiveDeckCarousel from "registry/new-york/carousel/perspective-deck-carousel";
 import FannedDeckCarousel from "registry/new-york/carousel/fanned-deck-carousel";
+import CoverFlowCarousel from "registry/new-york/carousel/cover-flow-carousel";
+import SlicedRevealCarousel from "registry/new-york/carousel/sliced-reveal-carousel";
+import AccordionCarousel from "registry/new-york/carousel/accordion-carousel";
+import OrbitCarousel from "registry/new-york/carousel/orbit-carousel";
+import CubeCarousel from "registry/new-york/carousel/cube-carousel";
+import SlatFlipCarousel from "registry/new-york/carousel/slat-flip-carousel";
+import TossDeckCarousel from "registry/new-york/carousel/toss-deck-carousel";
+import FerrisWheelCarousel from "registry/new-york/carousel/ferris-wheel-carousel";
 import CopyDropdown from "../copy-dropdown";
 
 const CarouselGridArr = [
@@ -53,6 +61,62 @@ const CarouselGridArr = [
       "Image cards fanned along a flat diagonal (no depth recede), each angled about Y. Auto-slides, loops infinitely with no seam, and can be dragged to scrub.",
     component: <FannedDeckCarousel />,
     registryName: "fanned-deck-carousel",
+  },
+  {
+    name: "Cover Flow Carousel",
+    description:
+      "A classic cover-flow: the centre cover faces you while side covers angle inward with depth and a floor reflection. Drag to scrub with snap, click a side cover to bring it front, or let it auto-advance.",
+    component: <CoverFlowCarousel />,
+    registryName: "cover-flow-carousel",
+  },
+  {
+    name: "Sliced Reveal Carousel",
+    description:
+      "Slide transitions slice the photo into vertical strips that cascade in one column at a time — the new image sweeps up while the old sweeps away, offset by a per-strip stagger.",
+    component: <SlicedRevealCarousel />,
+    registryName: "sliced-reveal-carousel",
+  },
+  {
+    name: "Accordion Carousel",
+    description:
+      "An accordion of vertical image panels — the active panel springs wide to reveal its photo and caption while the rest compress into slim slivers with sideways titles. Click to expand; auto-advances until hovered.",
+    component: <AccordionCarousel />,
+    registryName: "accordion-carousel",
+  },
+  {
+    name: "Orbit Carousel",
+    description:
+      "Cards orbit an ellipse in faux-3D — swinging to the front they scale up and stack forward; passing behind they shrink, dim and blur. Drag to spin with momentum; it drifts on its own when idle.",
+    component: <OrbitCarousel />,
+    registryName: "orbit-carousel",
+  },
+  {
+    name: "Cube Carousel",
+    description:
+      "Slides live on the faces of a 3D prism that rotates to advance, dipping back in scale mid-turn like it needs room to swing. Drag to spin it freely with snap, or let it auto-rotate — faces are reassigned on the fly so any number of slides fits on four faces.",
+    component: <CubeCarousel />,
+    registryName: "cube-carousel",
+  },
+  {
+    name: "Slat Flip Carousel",
+    description:
+      "The image is split into horizontal louver slats that flip 180° about their own axis in a stagger — the new slide rides in on the back of each slat like rotating window blinds.",
+    component: <SlatFlipCarousel />,
+    registryName: "slat-flip-carousel",
+  },
+  {
+    name: "Toss Deck Carousel",
+    description:
+      "A messy pile of polaroids — flick the top one away and it flies off with your throw while the pile shuffles up and a new photo slips in underneath. Tosses itself when idle; the pile never runs out.",
+    component: <TossDeckCarousel />,
+    registryName: "toss-deck-carousel",
+  },
+  {
+    name: "Ferris Wheel Carousel",
+    description:
+      "Gondola cards hang from a slowly turning ferris wheel — they stay upright as the wheel rotates and swing like pendulums when it speeds up or brakes. Drag anywhere to spin it with momentum.",
+    component: <FerrisWheelCarousel />,
+    registryName: "ferris-wheel-carousel",
   },
 ];
 

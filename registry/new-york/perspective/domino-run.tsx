@@ -3,12 +3,14 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const DOMINO_COUNT = 6;
 const SPACING = 26;
 
 const DominoRun = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 600 }}>
       <div
@@ -31,7 +33,7 @@ const DominoRun = () => {
               className="flex h-14 w-9 flex-col justify-between rounded-sm border border-foreground/30 bg-muted p-1.5"
               style={{ transformOrigin: "bottom" }}
               initial={{ rotateX: 0 }}
-              animate={{ rotateX: -78 }}
+              animate={shouldReduceMotion ? undefined : { rotateX: -78 }}
               transition={{
                 duration: 0.5,
                 ease: "easeIn",

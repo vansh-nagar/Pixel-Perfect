@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const CARD_COUNT = 5;
 const DURATION = 6;
@@ -19,29 +19,47 @@ const CardArt = ({ index }: { index: number }) => (
 );
 
 const CoverflowMarquee = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 700 }}>
       <div
         className="relative h-48 w-56"
         style={{ transformStyle: "preserve-3d" }}
       >
-        {Array.from({ length: CARD_COUNT }, (_, i) => (
+        {Array.from({ length: CARD_COUNT }, (_, i) => {
+          const loop = {
+            duration: DURATION,
+            repeat: Infinity,
+            delay: -((i * DURATION) / CARD_COUNT),
+          };
+          return (
           <motion.div
             key={i}
             className="absolute inset-0 m-auto h-fit w-fit"
             style={{ transformStyle: "preserve-3d" }}
-            animate={{
-              x: [150, -150],
-              rotateY: [-55, -55, 0, 55, 55],
-              z: [0, 0, 70, 0, 0],
-              opacity: [0, 1, 1, 1, 0],
-            }}
-            transition={{
-              duration: DURATION,
-              ease: "linear",
-              repeat: Infinity,
-              delay: -((i * DURATION) / CARD_COUNT),
-            }}
+            animate={
+              shouldReduceMotion
+                ? { x: 0, rotateY: 0, z: 70, opacity: i === 0 ? 1 : 0 }
+                : {
+                    x: [150, -150],
+                    rotateY: [-55, -55, 0, 55, 55],
+                    z: [0, 0, 70, 0, 0],
+                    opacity: [0, 1, 1, 1, 0],
+                  }
+            }
+            // the conveyor (x) stays linear like a marquee; the swing
+            // through center eases so cards don't snap flat mechanically
+            transition={
+              shouldReduceMotion
+                ? { duration: 0 }
+                : {
+                    ...loop,
+                    ease: "linear",
+                    rotateY: { ...loop, ease: "easeInOut" },
+                    z: { ...loop, ease: "easeInOut" },
+                  }
+            }
           >
             <CardArt index={i} />
             <div
@@ -57,7 +75,8 @@ const CoverflowMarquee = () => {
               <CardArt index={i} />
             </div>
           </motion.div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

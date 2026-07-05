@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "voronoi-glass",
+  "description": "Animated stained-glass voronoi cells with dark grout lines and a soft glow at every border.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/voronoi-glass.tsx",
+      "content": "\"use client\";\n\n/**\n * Animated stained-glass voronoi cells with dark grout lines and a soft glow at every border.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // iq's edge-distance voronoi with palette-tinted cells, in the spirit\n      // of Paper Shaders' voronoi.\n      vec2 voroPoint(vec2 cell) {\n        vec2 o = vec2(hash21(cell), hash21(cell + 19.19));\n        return 0.5 + 0.38 * sin(time * 0.7 + TAU * o);\n      }\n\n      void main() {\n        vec2 p = uvCentered() * 3.2;\n        vec2 n = floor(p);\n        vec2 f = fract(p);\n\n        // pass 1: nearest cell point\n        vec2 mg = vec2(0.0);\n        vec2 mr = vec2(0.0);\n        float md = 8.0;\n        for (int j = -1; j <= 1; j++) {\n          for (int i = -1; i <= 1; i++) {\n            vec2 g = vec2(float(i), float(j));\n            vec2 r = g + voroPoint(n + g) - f;\n            float d = dot(r, r);\n            if (d < md) { md = d; mr = r; mg = g; }\n          }\n        }\n\n        // pass 2: true distance to the nearest cell border\n        float ed = 8.0;\n        for (int j = -2; j <= 2; j++) {\n          for (int i = -2; i <= 2; i++) {\n            vec2 g = mg + vec2(float(i), float(j));\n            vec2 r = g + voroPoint(n + g) - f;\n            if (dot(mr - r, mr - r) > 1e-5) {\n              ed = min(ed, dot(0.5 * (mr + r), normalize(r - mr)));\n            }\n          }\n        }\n\n        vec3 cellCol = palette(\n          hash21(n + mg) * 0.9 + time * 0.04,\n          vec3(0.5), vec3(0.45), vec3(1.0), vec3(0.0, 0.33, 0.67)\n        );\n        // shade cells toward their borders, then grout + glow\n        vec3 col = cellCol * (0.45 + 0.55 * smoothstep(0.0, 0.35, ed));\n        col = mix(vec3(0.03, 0.03, 0.06), col, smoothstep(0.02, 0.08, ed));\n        col += cellCol * smoothstep(0.16, 0.02, ed) * 0.18;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function VoronoiGlass({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/voronoi-glass.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

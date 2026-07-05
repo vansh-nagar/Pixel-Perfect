@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const SIZE = 100;
 const HALF = SIZE / 2;
@@ -18,6 +18,8 @@ const faces = [
 ];
 
 const SpinningCubeMotion = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 800 }}>
       <div style={{ transform: "rotateX(-20deg)", transformStyle: "preserve-3d" }}>
@@ -28,8 +30,12 @@ const SpinningCubeMotion = () => {
             height: SIZE,
             transformStyle: "preserve-3d",
           }}
-          animate={{ rotateY: 360 }}
-          transition={{ duration: 12, ease: "linear", repeat: Infinity }}
+          animate={shouldReduceMotion ? { rotateY: 30 } : { rotateY: 360 }}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : { duration: 12, ease: "linear", repeat: Infinity }
+          }
         >
           {faces.map((face) => (
             <div

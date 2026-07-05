@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const LAYERS = [
   { key: "base", lift: 0 },
@@ -12,12 +12,26 @@ const LAYERS = [
   { key: "badge", lift: 84 },
 ];
 
-const layerVariants = {
-  rest: { z: 0 },
-  lift: (lift: number) => ({ z: lift }),
-};
-
 const HoverLayerStack = () => {
+  const shouldReduceMotion = useReducedMotion();
+
+  const layerVariants = {
+    // settling overshoot would dip layers below the base plane, so the
+    // drop is near-critically damped
+    rest: {
+      z: 0,
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : { type: "spring" as const, stiffness: 200, damping: 28 },
+    },
+    lift: (lift: number) => ({
+      z: lift,
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : { type: "spring" as const, stiffness: 200, damping: 22 },
+    }),
+  };
+
   return (
     <motion.div
       initial="rest"
@@ -41,7 +55,6 @@ const HoverLayerStack = () => {
               key={layer.key}
               custom={layer.lift}
               variants={layerVariants}
-              transition={{ type: "spring", stiffness: 200, damping: 22 }}
               className="absolute inset-0 rounded-lg border border-foreground/30 bg-background/80"
               style={{ transformStyle: "preserve-3d" }}
             >

@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion, type Transition } from "framer-motion";
+import { motion, useReducedMotion, type Transition } from "framer-motion";
 import type { ReactNode } from "react";
 
 const PANEL_COUNT = 5;
@@ -32,6 +32,8 @@ const PanelArt = ({ index }: { index: number }) => (
 );
 
 const AccordionFold = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   // build the hinge chain from the last panel inward — each panel folds
   // relative to the previous one
   let chain: ReactNode = null;
@@ -47,13 +49,18 @@ const AccordionFold = () => {
           transformOrigin: "left center",
           transformStyle: "preserve-3d",
         }}
-        animate={{ rotateY: [0, angle, 0] }}
+        animate={shouldReduceMotion ? undefined : { rotateY: [0, angle, 0] }}
         transition={foldTransition}
       >
         <PanelArt index={i} />
         <motion.div
           className="pointer-events-none absolute inset-0 bg-black"
-          animate={{ opacity: [0, i % 2 ? 0.25 : 0.1, 0] }}
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : { opacity: [0, i % 2 ? 0.25 : 0.1, 0] }
+          }
+          initial={{ opacity: 0 }}
           transition={foldTransition}
         />
         {chain}

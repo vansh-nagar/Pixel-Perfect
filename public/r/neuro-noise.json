@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "neuro-noise",
+  "description": "A glowing neural web woven from fifteen rotated sine layers, after zozuar's algorithm.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/neuro-noise.tsx",
+      "content": "\"use client\";\n\n/**\n * A glowing neural web woven from fifteen rotated sine layers, after zozuar's algorithm.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // Neural filament web — adapted from zozuar's algorithm\n      // (x.com/zozuar/status/1625182758745128981), the one behind\n      // Paper Shaders' neuro noise.\n      float neuroShape(vec2 p, float t) {\n        vec2 sineAcc = vec2(0.0);\n        vec2 res = vec2(0.0);\n        float scale = 8.0;\n        for (int j = 0; j < 15; j++) {\n          p = rot(1.0) * p;\n          sineAcc = rot(1.0) * sineAcc;\n          vec2 layer = p * scale + float(j) + sineAcc - t;\n          sineAcc += sin(layer);\n          res += (0.5 + 0.5 * cos(layer)) / scale;\n          scale *= 1.2;\n        }\n        return res.x + res.y;\n      }\n\n      void main() {\n        vec2 uv = uvCentered() * 0.5;\n        float t = 0.5 * time;\n\n        float n = neuroShape(uv, t);\n        n = 1.4 * n * n;\n        n = pow(n, 1.8);\n        n = min(1.5, n);\n\n        float blend = smoothstep(0.7, 1.4, n);\n        vec3 filament = vec3(0.04, 0.45, 0.42);\n        vec3 highlight = vec3(0.72, 1.0, 0.92);\n        vec3 col = mix(filament, highlight, blend) * max(n, 0.0);\n        col += vec3(0.010, 0.015, 0.025);\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function NeuroNoise({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/neuro-noise.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

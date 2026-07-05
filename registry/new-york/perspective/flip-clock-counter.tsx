@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const WIDTH = 72;
@@ -26,6 +26,7 @@ const DigitHalf = ({
 
 const FlipClockCounter = () => {
   const [count, setCount] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const id = setInterval(() => setCount((c) => c + 1), 1400);
@@ -57,7 +58,11 @@ const FlipClockCounter = () => {
           style={{ transformOrigin: "bottom", transformStyle: "preserve-3d" }}
           initial={{ rotateX: 0 }}
           animate={{ rotateX: -180 }}
-          transition={{ duration: 0.55, ease: "easeInOut" }}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : { duration: 0.55, ease: "easeIn" }
+          }
         >
           <div
             className="absolute inset-0 overflow-hidden rounded-t-lg border border-b-0 border-foreground/15 bg-muted"

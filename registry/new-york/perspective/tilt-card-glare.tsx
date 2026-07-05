@@ -8,12 +8,14 @@ import {
   motion,
   useMotionTemplate,
   useMotionValue,
+  useReducedMotion,
   useSpring,
   useTransform,
 } from "framer-motion";
 
 const TiltCardGlare = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
 
@@ -26,6 +28,7 @@ const TiltCardGlare = () => {
   const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.25), transparent 60%)`;
 
   const handlePointerMove = (e: React.PointerEvent) => {
+    if (shouldReduceMotion) return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     px.set((e.clientX - rect.left) / rect.width);

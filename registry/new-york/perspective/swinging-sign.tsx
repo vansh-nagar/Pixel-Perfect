@@ -3,9 +3,11 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const SwingingSign = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 700 }}>
       <div className="flex flex-col items-center">
@@ -17,13 +19,17 @@ const SwingingSign = () => {
             transformStyle: "preserve-3d",
           }}
           initial={{ rotateX: 32 }}
-          animate={{ rotateX: -32 }}
-          transition={{
-            duration: 1.5,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
+          animate={{ rotateX: shouldReduceMotion ? 0 : -32 }}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : {
+                  duration: 1.5,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                }
+          }
         >
           <div className="flex w-16 justify-between">
             <div className="h-9 w-px bg-foreground/40" />

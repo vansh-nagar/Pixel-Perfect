@@ -3,14 +3,28 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
-
-const doorVariants = {
-  rest: { rotateY: 0 },
-  open: { rotateY: -105 },
-};
+import { motion, useReducedMotion } from "framer-motion";
 
 const SwingDoorReveal = () => {
+  const shouldReduceMotion = useReducedMotion();
+
+  const doorVariants = {
+    // closing overshoot would poke the door through its frame, so the
+    // return spring is near-critically damped
+    rest: {
+      rotateY: 0,
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : { type: "spring" as const, stiffness: 170, damping: 26 },
+    },
+    open: {
+      rotateY: -105,
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : { type: "spring" as const, stiffness: 150, damping: 13 },
+    },
+  };
+
   return (
     <motion.div
       initial="rest"
@@ -27,7 +41,11 @@ const SwingDoorReveal = () => {
         <div className="absolute inset-[3px] flex flex-col items-center justify-center gap-1.5 overflow-hidden rounded-[1px]">
           <motion.div
             className="size-6 rounded-full bg-foreground blur-md"
-            animate={{ scale: [1, 1.35, 1], opacity: [0.5, 0.9, 0.5] }}
+            animate={
+              shouldReduceMotion
+                ? undefined
+                : { scale: [1, 1.35, 1], opacity: [0.5, 0.9, 0.5] }
+            }
             transition={{ duration: 2.4, ease: "easeInOut", repeat: Infinity }}
           />
           <span className="text-[8px] uppercase tracking-widest text-foreground/70">
@@ -38,7 +56,6 @@ const SwingDoorReveal = () => {
         {/* the door */}
         <motion.div
           variants={doorVariants}
-          transition={{ type: "spring", stiffness: 150, damping: 13 }}
           className="absolute inset-[3px] flex items-center justify-center rounded-[1px] border border-foreground/25 bg-muted"
           style={{ transformOrigin: "left center" }}
         >

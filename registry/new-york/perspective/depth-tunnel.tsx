@@ -3,12 +3,14 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const FRAME_COUNT = 6;
 const DURATION = 6;
 
 const DepthTunnel = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div
       className="relative"
@@ -19,17 +21,29 @@ const DepthTunnel = () => {
         <motion.div
           key={i}
           className="absolute inset-0 m-auto size-32 rounded-xl border-2 border-foreground/40"
-          animate={{
-            z: [-700, 300],
-            rotate: [i * 15, i * 15 + 90],
-            opacity: [0, 1, 1, 0],
-          }}
-          transition={{
-            duration: DURATION,
-            ease: "linear",
-            repeat: Infinity,
-            delay: -((i * DURATION) / FRAME_COUNT),
-          }}
+          animate={
+            shouldReduceMotion
+              ? {
+                  z: -60 - i * 90,
+                  rotate: i * 15,
+                  opacity: 1 - i / FRAME_COUNT,
+                }
+              : {
+                  z: [-700, 300],
+                  rotate: [i * 15, i * 15 + 90],
+                  opacity: [0, 1, 1, 0],
+                }
+          }
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : {
+                  duration: DURATION,
+                  ease: "linear",
+                  repeat: Infinity,
+                  delay: -((i * DURATION) / FRAME_COUNT),
+                }
+          }
         />
       ))}
     </div>

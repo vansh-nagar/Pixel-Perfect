@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 
 const SIZE = 88;
@@ -31,6 +31,7 @@ const PIP_CELLS: Record<number, number[]> = {
 
 const ExplodingDiceCube = () => {
   const [hovered, setHovered] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <div
@@ -52,7 +53,7 @@ const ExplodingDiceCube = () => {
             height: SIZE,
             transformStyle: "preserve-3d",
           }}
-          animate={{ rotateY: 360 }}
+          animate={shouldReduceMotion ? undefined : { rotateY: 360 }}
           transition={{ duration: 10, ease: "linear", repeat: Infinity }}
         >
           {FACES.map((face) => (
@@ -64,7 +65,15 @@ const ExplodingDiceCube = () => {
               <motion.div
                 className="absolute inset-0 grid grid-cols-3 place-items-center rounded-lg border border-foreground/30 bg-background/80 p-3"
                 animate={{ z: hovered ? EXPLODE : HALF }}
-                transition={{ type: "spring", stiffness: 180, damping: 16 }}
+                // collapse is near-critically damped — an undershoot would
+                // sink the faces inside the cube
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0 }
+                    : hovered
+                      ? { type: "spring", stiffness: 180, damping: 16 }
+                      : { type: "spring", stiffness: 180, damping: 26 }
+                }
               >
                 {Array.from({ length: 9 }, (_, cell) => (
                   <div

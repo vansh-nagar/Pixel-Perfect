@@ -364,6 +364,289 @@ export const SHADERS: Shader[] = [
       }
     `,
   },
+  {
+    id: "mesh-gradient",
+    name: "Mesh Gradient shader",
+    title: "Mesh Gradient",
+    description:
+      "Six color spots drifting on sine paths, blended by inverse-distance weights under a center swirl.",
+    fragmentShader: /* glsl */ `
+      // In the style of Paper Shaders' mesh gradient (shaders.paper.design):
+      // color spots on sine trajectories, inverse-distance-power blending.
+      vec2 spotPos(float i, float t) {
+        float a = i * 0.37;
+        float b = 0.6 + fract(i / 3.0) * 0.9;
+        float c = 0.8 + fract((i + 1.0) / 4.0);
+        return 0.5 + 0.5 * vec2(sin(t * b + a), cos(t * c + a * 1.5));
+      }
+
+      vec3 spotColor(int i) {
+        if (i == 0) return vec3(0.99, 0.42, 0.33);
+        if (i == 1) return vec3(0.99, 0.80, 0.38);
+        if (i == 2) return vec3(0.30, 0.72, 0.98);
+        if (i == 3) return vec3(0.58, 0.36, 0.98);
+        if (i == 4) return vec3(0.99, 0.55, 0.76);
+        return vec3(0.28, 0.92, 0.71);
+      }
+
+      void main() {
+        vec2 uv = uv01();
+        float t = time * 0.4 + 20.0;
+
+        // center-weighted organic warp
+        float radius = smoothstep(0.0, 1.0, length(uv - 0.5));
+        float center = 1.0 - radius;
+        for (float i = 1.0; i <= 2.0; i += 1.0) {
+          uv.x += 0.4 * center / i * sin(t + i * 0.4 * uv.y) * cos(0.2 * t + i * 2.4 * uv.y);
+          uv.y += 0.4 * center / i * cos(t + i * 2.0 * uv.x);
+        }
+
+        // swirl that strengthens toward the rim
+        vec2 p = uv - 0.5;
+        p = rot(-1.4 * radius) * p;
+        uv = p + 0.5;
+
+        vec3 col = vec3(0.0);
+        float totalW = 0.0;
+        for (int i = 0; i < 6; i++) {
+          vec2 pos = spotPos(float(i), t);
+          float d = pow(length(uv - pos), 3.5);
+          float w = 1.0 / (d + 1e-3);
+          col += spotColor(i) * w;
+          totalW += w;
+        }
+        col /= totalW;
+
+        // fine grain hides banding in the soft blends
+        col += (hash21(gl_FragCoord.xy) - 0.5) * 0.02;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "neuro-noise",
+    name: "Neuro Noise shader",
+    title: "Neuro Noise",
+    description:
+      "A glowing neural web woven from fifteen rotated sine layers, after zozuar's algorithm.",
+    fragmentShader: /* glsl */ `
+      // Neural filament web — adapted from zozuar's algorithm
+      // (x.com/zozuar/status/1625182758745128981), the one behind
+      // Paper Shaders' neuro noise.
+      float neuroShape(vec2 p, float t) {
+        vec2 sineAcc = vec2(0.0);
+        vec2 res = vec2(0.0);
+        float scale = 8.0;
+        for (int j = 0; j < 15; j++) {
+          p = rot(1.0) * p;
+          sineAcc = rot(1.0) * sineAcc;
+          vec2 layer = p * scale + float(j) + sineAcc - t;
+          sineAcc += sin(layer);
+          res += (0.5 + 0.5 * cos(layer)) / scale;
+          scale *= 1.2;
+        }
+        return res.x + res.y;
+      }
+
+      void main() {
+        vec2 uv = uvCentered() * 0.5;
+        float t = 0.5 * time;
+
+        float n = neuroShape(uv, t);
+        n = 1.4 * n * n;
+        n = pow(n, 1.8);
+        n = min(1.5, n);
+
+        float blend = smoothstep(0.7, 1.4, n);
+        vec3 filament = vec3(0.04, 0.45, 0.42);
+        vec3 highlight = vec3(0.72, 1.0, 0.92);
+        vec3 col = mix(filament, highlight, blend) * max(n, 0.0);
+        col += vec3(0.010, 0.015, 0.025);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "smoke-ring",
+    name: "Smoke Ring shader",
+    title: "Smoke Ring",
+    description:
+      "A wispy torus of smoke — polar fbm streams outward and breathes the ring into drifting tendrils.",
+    fragmentShader: /* glsl */ `
+      // In the spirit of Paper Shaders' smoke ring: fbm in polar space
+      // displaces a ring while its coordinates stream radially over time.
+      float smokeNoise(vec2 uv, float flow) {
+        float a = atan(uv.y, uv.x);
+        // two angle parameterizations blended across the wrap seam
+        vec2 p1 = vec2(a * 1.5, flow);
+        vec2 p2 = vec2(fract(a / TAU) * TAU * 1.5, flow);
+        return mix(fbm(p2), fbm(p1), smoothstep(-0.25, 0.25, uv.x));
+      }
+
+      void main() {
+        vec2 uv = uvCentered();
+        float t = time * 0.35;
+
+        float r = length(uv);
+        float radialOffset = 0.5 * r - inversesqrt(max(1e-4, r));
+        float n = smokeNoise(uv, 2.0 * (t - radialOffset));
+
+        // the noise breathes the ring in and out into wisps
+        vec2 suv = uv * (0.72 + 1.15 * n);
+        float d = length(suv);
+        float ring = (1.0 - smoothstep(0.5, 0.95, d)) * smoothstep(0.22, 0.5, d);
+
+        vec3 col = vec3(0.015, 0.02, 0.05);
+        vec3 inner = vec3(0.45, 0.65, 1.0);
+        vec3 outer = vec3(0.95, 0.97, 1.0);
+        col = mix(col, mix(inner, outer, ring), ring);
+        col += pow(ring, 3.0) * 0.3;
+        col += (hash21(gl_FragCoord.xy) - 0.5) * 0.015;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "god-rays",
+    name: "God Rays shader",
+    title: "God Rays",
+    description:
+      "Warm volumetric rays streaming from a glowing core, carved from angular value noise.",
+    fragmentShader: /* glsl */ `
+      // In the spirit of Paper Shaders' god rays: rays are value noise
+      // sampled along the angle, sharpened with pow and layered in tints.
+      float rayShape(vec2 uv, float rr, float freq, float sharp) {
+        float a = atan(uv.y, uv.x);
+        vec2 left = vec2(a * freq, rr);
+        vec2 right = vec2(fract(a / TAU) * TAU * freq, rr);
+        float nl = pow(vnoise(left), sharp);
+        float nr = pow(vnoise(right), sharp);
+        return mix(nr, nl, smoothstep(-0.15, 0.15, uv.x));
+      }
+
+      void main() {
+        vec2 uv = uvCentered();
+        float t = time * 0.2;
+        float r = length(uv);
+
+        vec3 col = vec3(0.02, 0.025, 0.06);
+
+        for (int i = 0; i < 3; i++) {
+          float fi = float(i);
+          vec2 ruv = rot(fi + 1.0) * uv;
+          float r1 = r * (1.0 + 0.4 * fi) - 3.0 * t;
+          float r2 = 0.5 * r - 2.0 * t;
+          float ray = rayShape(ruv, r1, 5.0 + fi, 3.0);
+          ray *= rayShape(ruv, r2, 4.0, 3.0);
+          ray *= 0.35 + 0.65 * exp(-r * 1.3);
+          vec3 tint = (i == 0) ? vec3(1.0, 0.85, 0.55)
+                    : (i == 1) ? vec3(1.0, 0.65, 0.35)
+                               : vec3(0.95, 0.90, 0.75);
+          col += tint * ray * 0.85;
+        }
+
+        col += vec3(1.0, 0.92, 0.72) * exp(-r * 4.0);
+        col += (hash21(gl_FragCoord.xy) - 0.5) * 0.015;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "metaballs",
+    name: "Metaballs shader",
+    title: "Metaballs",
+    description:
+      "Gooey blobs orbiting the center and merging through a classic inverse-square field.",
+    fragmentShader: /* glsl */ `
+      // In the spirit of Paper Shaders' metaballs: an inverse-square field
+      // summed over moving centers, thresholded into a gooey surface.
+      void main() {
+        vec2 uv = uvCentered();
+        float t = time * 0.6;
+
+        float field = 0.0;
+        for (int i = 0; i < 6; i++) {
+          float fi = float(i);
+          vec2 c = 0.55 * vec2(
+            sin(t * (0.5 + 0.13 * fi) + fi * 1.7),
+            cos(t * (0.4 + 0.11 * fi) + fi * 2.3)
+          );
+          float rad = 0.15 + 0.05 * sin(fi * 2.1 + t);
+          vec2 d = uv - c;
+          field += rad * rad / (dot(d, d) + 1e-4);
+        }
+
+        float body = smoothstep(0.95, 1.05, field);
+        vec3 bg = vec3(0.04, 0.03, 0.08);
+        // hotter color where the field is denser (cores and merges)
+        vec3 col = palette(
+          clamp(field * 0.35, 0.0, 1.2) - 0.15,
+          vec3(0.55, 0.25, 0.35), vec3(0.45), vec3(1.0), vec3(0.0, 0.15, 0.25)
+        );
+        col = mix(bg, col, body);
+        // bright rim right at the gooey surface
+        float rim = smoothstep(0.95, 1.0, field) * (1.0 - smoothstep(1.05, 1.6, field));
+        col += rim * vec3(0.9, 0.6, 0.8) * 0.6;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
+  {
+    id: "voronoi-glass",
+    name: "Voronoi Glass shader",
+    title: "Voronoi Glass",
+    description:
+      "Animated stained-glass voronoi cells with dark grout lines and a soft glow at every border.",
+    fragmentShader: /* glsl */ `
+      // iq's edge-distance voronoi with palette-tinted cells, in the spirit
+      // of Paper Shaders' voronoi.
+      vec2 voroPoint(vec2 cell) {
+        vec2 o = vec2(hash21(cell), hash21(cell + 19.19));
+        return 0.5 + 0.38 * sin(time * 0.7 + TAU * o);
+      }
+
+      void main() {
+        vec2 p = uvCentered() * 3.2;
+        vec2 n = floor(p);
+        vec2 f = fract(p);
+
+        // pass 1: nearest cell point
+        vec2 mg = vec2(0.0);
+        vec2 mr = vec2(0.0);
+        float md = 8.0;
+        for (int j = -1; j <= 1; j++) {
+          for (int i = -1; i <= 1; i++) {
+            vec2 g = vec2(float(i), float(j));
+            vec2 r = g + voroPoint(n + g) - f;
+            float d = dot(r, r);
+            if (d < md) { md = d; mr = r; mg = g; }
+          }
+        }
+
+        // pass 2: true distance to the nearest cell border
+        float ed = 8.0;
+        for (int j = -2; j <= 2; j++) {
+          for (int i = -2; i <= 2; i++) {
+            vec2 g = mg + vec2(float(i), float(j));
+            vec2 r = g + voroPoint(n + g) - f;
+            if (dot(mr - r, mr - r) > 1e-5) {
+              ed = min(ed, dot(0.5 * (mr + r), normalize(r - mr)));
+            }
+          }
+        }
+
+        vec3 cellCol = palette(
+          hash21(n + mg) * 0.9 + time * 0.04,
+          vec3(0.5), vec3(0.45), vec3(1.0), vec3(0.0, 0.33, 0.67)
+        );
+        // shade cells toward their borders, then grout + glow
+        vec3 col = cellCol * (0.45 + 0.55 * smoothstep(0.0, 0.35, ed));
+        col = mix(vec3(0.03, 0.03, 0.06), col, smoothstep(0.02, 0.08, ed));
+        col += cellCol * smoothstep(0.16, 0.02, ed) * 0.18;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  },
 ];
 
 export const getShader = (id: string): Shader | undefined =>

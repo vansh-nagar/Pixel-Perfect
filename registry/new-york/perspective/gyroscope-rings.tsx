@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const RINGS = [
   { tilt: 0, duration: 4.5, opacity: "border-foreground/70" },
@@ -12,6 +12,8 @@ const RINGS = [
 ];
 
 const GyroscopeRings = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 800 }}>
       <div
@@ -30,7 +32,7 @@ const GyroscopeRings = () => {
             <motion.div
               className={`absolute inset-2 rounded-full border-2 ${ring.opacity}`}
               style={{ transformStyle: "preserve-3d" }}
-              animate={{ rotateX: 360 }}
+              animate={shouldReduceMotion ? undefined : { rotateX: 360 }}
               transition={{
                 duration: ring.duration,
                 ease: "linear",
@@ -45,7 +47,7 @@ const GyroscopeRings = () => {
         <motion.div
           className="absolute left-1/2 top-1/2 size-3 rounded-full bg-foreground/80"
           style={{ x: "-50%", y: "-50%" }}
-          animate={{ scale: [1, 1.4, 1] }}
+          animate={shouldReduceMotion ? undefined : { scale: [1, 1.4, 1] }}
           transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
         />
       </div>

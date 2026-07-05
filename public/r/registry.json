@@ -5008,6 +5008,102 @@
           "target": "components/pixel-perfect/swinging-sign.tsx"
         }
       ]
+    },
+    {
+      "name": "god-rays",
+      "description": "Warm volumetric rays streaming from a glowing core, carved from angular value noise.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/god-rays.tsx",
+          "target": "components/pixel-perfect/god-rays.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "mesh-gradient",
+      "description": "Six color spots drifting on sine paths, blended by inverse-distance weights under a center swirl.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/mesh-gradient.tsx",
+          "target": "components/pixel-perfect/mesh-gradient.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "metaballs",
+      "description": "Gooey blobs orbiting the center and merging through a classic inverse-square field.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/metaballs.tsx",
+          "target": "components/pixel-perfect/metaballs.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "neuro-noise",
+      "description": "A glowing neural web woven from fifteen rotated sine layers, after zozuar's algorithm.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/neuro-noise.tsx",
+          "target": "components/pixel-perfect/neuro-noise.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "smoke-ring",
+      "description": "A wispy torus of smoke — polar fbm streams outward and breathes the ring into drifting tendrils.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/smoke-ring.tsx",
+          "target": "components/pixel-perfect/smoke-ring.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
+    },
+    {
+      "name": "voronoi-glass",
+      "description": "Animated stained-glass voronoi cells with dark grout lines and a soft glow at every border.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/voronoi-glass.tsx",
+          "target": "components/pixel-perfect/voronoi-glass.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://www.pixel-perfect.space/r/shader-canvas.json"
+      ]
     }
   ]
 }

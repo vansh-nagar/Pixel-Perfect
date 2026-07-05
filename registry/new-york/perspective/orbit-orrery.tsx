@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const PLANE_TILT = 64;
 
@@ -14,6 +14,8 @@ const ORBITS = [
 ];
 
 const OrbitOrrery = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 800 }}>
       <div
@@ -41,7 +43,7 @@ const OrbitOrrery = () => {
             />
             <motion.div
               className="absolute inset-0"
-              animate={{ rotate: 360 }}
+              animate={shouldReduceMotion ? undefined : { rotate: 360 }}
               transition={{
                 duration: orbit.duration,
                 ease: "linear",
@@ -66,7 +68,11 @@ const OrbitOrrery = () => {
         >
           <motion.div
             className="size-3.5 rounded-full bg-foreground"
-            animate={{ scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}
+            animate={
+              shouldReduceMotion
+                ? undefined
+                : { scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }
+            }
             transition={{ duration: 2.2, ease: "easeInOut", repeat: Infinity }}
           />
         </div>

@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const PAGE_WIDTH = 72;
 const PAGE_HEIGHT = 96;
@@ -17,6 +17,8 @@ const PageLines = ({ widths }: { widths: string[] }) => (
 );
 
 const PageFlipBook = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 1000 }}>
       <div
@@ -52,7 +54,7 @@ const PageFlipBook = () => {
               transformOrigin: "left center",
               transformStyle: "preserve-3d",
             }}
-            animate={{ rotateY: [0, -180] }}
+            animate={shouldReduceMotion ? undefined : { rotateY: [0, -180] }}
             transition={{
               duration: 1.4,
               ease: "easeInOut",

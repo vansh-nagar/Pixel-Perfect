@@ -3,12 +3,14 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const GRID_SIZE = 4;
 const TILE = 30;
 
 const FlipTileWave = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 600 }}>
       <div
@@ -30,7 +32,7 @@ const FlipTileWave = () => {
                 height: TILE,
                 transformStyle: "preserve-3d",
               }}
-              animate={{ rotateY: 180 }}
+              animate={shouldReduceMotion ? undefined : { rotateY: 180 }}
               transition={{
                 duration: 0.7,
                 ease: "easeInOut",

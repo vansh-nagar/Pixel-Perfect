@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const CrawlCopy = () => (
   <div className="flex flex-col items-center gap-3 pb-10 text-center">
@@ -27,6 +27,8 @@ const CrawlCopy = () => (
 );
 
 const PerspectiveTextCrawl = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 300 }}>
       <div
@@ -40,7 +42,7 @@ const PerspectiveTextCrawl = () => {
         }}
       >
         <motion.div
-          animate={{ y: ["0%", "-50%"] }}
+          animate={shouldReduceMotion ? undefined : { y: ["0%", "-50%"] }}
           transition={{ duration: 16, ease: "linear", repeat: Infinity }}
         >
           <CrawlCopy />

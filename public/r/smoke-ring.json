@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "smoke-ring",
+  "description": "A wispy torus of smoke — polar fbm streams outward and breathes the ring into drifting tendrils.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/smoke-ring.tsx",
+      "content": "\"use client\";\n\n/**\n * A wispy torus of smoke — polar fbm streams outward and breathes the ring into drifting tendrils.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // In the spirit of Paper Shaders' smoke ring: fbm in polar space\n      // displaces a ring while its coordinates stream radially over time.\n      float smokeNoise(vec2 uv, float flow) {\n        float a = atan(uv.y, uv.x);\n        // two angle parameterizations blended across the wrap seam\n        vec2 p1 = vec2(a * 1.5, flow);\n        vec2 p2 = vec2(fract(a / TAU) * TAU * 1.5, flow);\n        return mix(fbm(p2), fbm(p1), smoothstep(-0.25, 0.25, uv.x));\n      }\n\n      void main() {\n        vec2 uv = uvCentered();\n        float t = time * 0.35;\n\n        float r = length(uv);\n        float radialOffset = 0.5 * r - inversesqrt(max(1e-4, r));\n        float n = smokeNoise(uv, 2.0 * (t - radialOffset));\n\n        // the noise breathes the ring in and out into wisps\n        vec2 suv = uv * (0.72 + 1.15 * n);\n        float d = length(suv);\n        float ring = (1.0 - smoothstep(0.5, 0.95, d)) * smoothstep(0.22, 0.5, d);\n\n        vec3 col = vec3(0.015, 0.02, 0.05);\n        vec3 inner = vec3(0.45, 0.65, 1.0);\n        vec3 outer = vec3(0.95, 0.97, 1.0);\n        col = mix(col, mix(inner, outer, ring), ring);\n        col += pow(ring, 3.0) * 0.3;\n        col += (hash21(gl_FragCoord.xy) - 0.5) * 0.015;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function SmokeRing({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/smoke-ring.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mesh-gradient",
+  "description": "Six color spots drifting on sine paths, blended by inverse-distance weights under a center swirl.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://www.pixel-perfect.space/r/shader-canvas.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/mesh-gradient.tsx",
+      "content": "\"use client\";\n\n/**\n * Six color spots drifting on sine paths, blended by inverse-distance weights under a center swirl.\n */\n\nimport ShaderCanvas from \"./shader-canvas\";\n\nconst FRAGMENT_SHADER = /* glsl */ `\n      // In the style of Paper Shaders' mesh gradient (shaders.paper.design):\n      // color spots on sine trajectories, inverse-distance-power blending.\n      vec2 spotPos(float i, float t) {\n        float a = i * 0.37;\n        float b = 0.6 + fract(i / 3.0) * 0.9;\n        float c = 0.8 + fract((i + 1.0) / 4.0);\n        return 0.5 + 0.5 * vec2(sin(t * b + a), cos(t * c + a * 1.5));\n      }\n\n      vec3 spotColor(int i) {\n        if (i == 0) return vec3(0.99, 0.42, 0.33);\n        if (i == 1) return vec3(0.99, 0.80, 0.38);\n        if (i == 2) return vec3(0.30, 0.72, 0.98);\n        if (i == 3) return vec3(0.58, 0.36, 0.98);\n        if (i == 4) return vec3(0.99, 0.55, 0.76);\n        return vec3(0.28, 0.92, 0.71);\n      }\n\n      void main() {\n        vec2 uv = uv01();\n        float t = time * 0.4 + 20.0;\n\n        // center-weighted organic warp\n        float radius = smoothstep(0.0, 1.0, length(uv - 0.5));\n        float center = 1.0 - radius;\n        for (float i = 1.0; i <= 2.0; i += 1.0) {\n          uv.x += 0.4 * center / i * sin(t + i * 0.4 * uv.y) * cos(0.2 * t + i * 2.4 * uv.y);\n          uv.y += 0.4 * center / i * cos(t + i * 2.0 * uv.x);\n        }\n\n        // swirl that strengthens toward the rim\n        vec2 p = uv - 0.5;\n        p = rot(-1.4 * radius) * p;\n        uv = p + 0.5;\n\n        vec3 col = vec3(0.0);\n        float totalW = 0.0;\n        for (int i = 0; i < 6; i++) {\n          vec2 pos = spotPos(float(i), t);\n          float d = pow(length(uv - pos), 3.5);\n          float w = 1.0 / (d + 1e-3);\n          col += spotColor(i) * w;\n          totalW += w;\n        }\n        col /= totalW;\n\n        // fine grain hides banding in the soft blends\n        col += (hash21(gl_FragCoord.xy) - 0.5) * 0.02;\n        gl_FragColor = vec4(col, 1.0);\n      }\n    `;\n\nexport default function MeshGradient({\n  className,\n  dpr,\n  controls,\n}: {\n  className?: string;\n  dpr?: number;\n  controls?: boolean;\n}) {\n  return (\n    <ShaderCanvas\n      fragmentShader={FRAGMENT_SHADER}\n      className={className}\n      dpr={dpr}\n      controls={controls}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/mesh-gradient.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

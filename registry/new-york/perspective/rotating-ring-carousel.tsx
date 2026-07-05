@@ -3,7 +3,7 @@
  */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const PANEL_COUNT = 8;
 const PANEL_WIDTH = 56;
@@ -13,6 +13,8 @@ const RADIUS = Math.round(
 );
 
 const RotatingRingCarousel = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div style={{ perspective: 900 }}>
       <div
@@ -25,7 +27,7 @@ const RotatingRingCarousel = () => {
             height: PANEL_HEIGHT,
             transformStyle: "preserve-3d",
           }}
-          animate={{ rotateY: -360 }}
+          animate={shouldReduceMotion ? undefined : { rotateY: -360 }}
           transition={{ duration: 18, ease: "linear", repeat: Infinity }}
         >
           {Array.from({ length: PANEL_COUNT }, (_, i) => (

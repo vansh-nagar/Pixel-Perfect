@@ -3,13 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import {
-  BookOpen,
-  FlaskConical,
-  Gamepad2,
-  GithubIcon,
-  Menu,
-} from "lucide-react";
+import { BookOpen, Gamepad2, GithubIcon, Menu } from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { StarsCount } from "@/components/mine/landing-page/stars-count";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -21,7 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const NAV_LINKS = [
-  { href: "/tools", label: "Tools", icon: FlaskConical },
   { href: "/playground", label: "Playground", icon: Gamepad2 },
   { href: "/tutorial", label: "Tutorial", icon: BookOpen },
 ] as const;

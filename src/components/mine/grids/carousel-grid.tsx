@@ -37,14 +37,14 @@ const CarouselGridArr = [
   {
     name: "Infinite Carousel",
     description:
-      "A seamless infinite carousel: drifts on its own, speeds up and reverses with scroll velocity, and can be dragged to scrub — one GSAP timeline drives all three.",
+      "A seamless infinite carousel: drifts on its own, speeds up and reverses with scroll velocity, and can be dragged to scrub. One GSAP timeline drives all three.",
     component: <InfiniteCarousel />,
     registryName: "infinite-carousel",
   },
   {
     name: "Cards Slider",
     description:
-      "An infinite deck of product cards: the active card sits front-and-centre while the rest fan out behind with less scale and a soft blur. Drag, click a peeking card, or let it auto-advance — the index wraps forever.",
+      "An infinite deck of product cards: the active card sits front-and-centre while the rest fan out behind with less scale and a soft blur. Drag, click a peeking card, or let it auto-advance; the index wraps forever.",
     component: <CardsSlider />,
     registryName: "cards-slider",
   },
@@ -72,49 +72,49 @@ const CarouselGridArr = [
   {
     name: "Sliced Reveal Carousel",
     description:
-      "Slide transitions slice the photo into vertical strips that cascade in one column at a time — the new image sweeps up while the old sweeps away, offset by a per-strip stagger.",
+      "Slide transitions slice the photo into vertical strips that cascade in one column at a time: the new image sweeps up while the old sweeps away, offset by a per-strip stagger.",
     component: <SlicedRevealCarousel />,
     registryName: "sliced-reveal-carousel",
   },
   {
     name: "Accordion Carousel",
     description:
-      "An accordion of vertical image panels — the active panel springs wide to reveal its photo and caption while the rest compress into slim slivers with sideways titles. Click to expand; auto-advances until hovered.",
+      "An accordion of vertical image panels: the active panel springs wide to reveal its photo and caption while the rest compress into slim slivers with sideways titles. Click to expand; auto-advances until hovered.",
     component: <AccordionCarousel />,
     registryName: "accordion-carousel",
   },
   {
     name: "Orbit Carousel",
     description:
-      "Cards orbit an ellipse in faux-3D — swinging to the front they scale up and stack forward; passing behind they shrink, dim and blur. Drag to spin with momentum; it drifts on its own when idle.",
+      "Cards orbit an ellipse in faux-3D. Swinging to the front they scale up and stack forward; passing behind they shrink, dim and blur. Drag to spin with momentum; it drifts on its own when idle.",
     component: <OrbitCarousel />,
     registryName: "orbit-carousel",
   },
   {
     name: "Cube Carousel",
     description:
-      "Slides live on the faces of a 3D prism that rotates to advance, dipping back in scale mid-turn like it needs room to swing. Drag to spin it freely with snap, or let it auto-rotate — faces are reassigned on the fly so any number of slides fits on four faces.",
+      "Slides live on the faces of a 3D prism that rotates to advance, dipping back in scale mid-turn like it needs room to swing. Drag to spin it freely with snap, or let it auto-rotate; faces are reassigned on the fly so any number of slides fits on four faces.",
     component: <CubeCarousel />,
     registryName: "cube-carousel",
   },
   {
     name: "Slat Flip Carousel",
     description:
-      "The image is split into horizontal louver slats that flip 180° about their own axis in a stagger — the new slide rides in on the back of each slat like rotating window blinds.",
+      "The image is split into horizontal louver slats that flip 180° about their own axis in a stagger: the new slide rides in on the back of each slat like rotating window blinds.",
     component: <SlatFlipCarousel />,
     registryName: "slat-flip-carousel",
   },
   {
     name: "Toss Deck Carousel",
     description:
-      "A messy pile of polaroids — flick the top one away and it flies off with your throw while the pile shuffles up and a new photo slips in underneath. Tosses itself when idle; the pile never runs out.",
+      "A messy pile of polaroids: flick the top one away and it flies off with your throw while the pile shuffles up and a new photo slips in underneath. Tosses itself when idle; the pile never runs out.",
     component: <TossDeckCarousel />,
     registryName: "toss-deck-carousel",
   },
   {
     name: "Ferris Wheel Carousel",
     description:
-      "Gondola cards hang from a slowly turning ferris wheel — they stay upright as the wheel rotates and swing like pendulums when it speeds up or brakes. Drag anywhere to spin it with momentum.",
+      "Gondola cards hang from a slowly turning ferris wheel: they stay upright as the wheel rotates and swing like pendulums when it speeds up or brakes. Drag anywhere to spin it with momentum.",
     component: <FerrisWheelCarousel />,
     registryName: "ferris-wheel-carousel",
   },
@@ -154,15 +154,18 @@ const CarouselGrid = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute left-1.5 top-1.5 z-40 h-6 w-6 rounded-none text-muted-foreground hover:bg-transparent hover:text-foreground"
+              aria-label={`Restart ${item.name}`}
+              className="absolute left-1.5 top-1.5 z-40 h-6 w-6 rounded-none border border-dashed border-transparent bg-background/70 text-muted-foreground backdrop-blur-sm transition-colors hover:border-border hover:bg-background/90 hover:text-foreground"
               onClick={() => handleRefresh(startIndex + index)}
             >
               <RefreshCcw className="size-3" />
             </Button>
 
-            <div className=" leading-1 absolute left-1.5  bottom-1.5">
-              <p className="text-xs ">{item.name}</p>
-              <p className="text-[8px] text-muted-foreground">
+            <div className="absolute bottom-0 left-0 z-40 max-w-md border-t border-r border-dashed bg-background/80 px-2.5 py-2 backdrop-blur-sm">
+              <p className="text-xs font-medium tracking-tight text-foreground">
+                {item.name}
+              </p>
+              <p className="mt-0.5 text-[11px] leading-snug text-pretty text-muted-foreground">
                 {item.description}
               </p>
             </div>
@@ -183,6 +186,7 @@ const CarouselGrid = () => {
             size="icon"
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
+            aria-label="Previous page"
             className="border-dashed rounded-none"
           >
             <ChevronLeft className="size-4" />
@@ -211,6 +215,7 @@ const CarouselGrid = () => {
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
             disabled={currentPage === totalPages}
+            aria-label="Next page"
             className="border-dashed rounded-none"
           >
             <ChevronRight className="size-4" />

@@ -16,6 +16,8 @@ import TextEditorItalic from "registry/new-york/motion-framer/text-editor-italic
 import ActivityWheelMotion from "registry/new-york/motion-framer/activity-wheel-motion";
 import CarLockDriveMotion from "registry/new-york/motion-framer/car-lock-drive-motion";
 import DialKnobMotion from "registry/new-york/motion-framer/dial-knob-motion";
+import HoverExpandPlayer from "registry/new-york/motion-framer/hover-expand-player";
+import FisheyeFaq from "registry/new-york/motion-framer/fisheye-faq";
 import CopyDropdown from "../copy-dropdown";
 
 const MotionComponentArr: {
@@ -24,6 +26,20 @@ const MotionComponentArr: {
   Component: React.ComponentType;
   registryName: string;
 }[] = [
+  {
+    name: "Fisheye FAQ",
+    description:
+      "Dock-style fisheye FAQ — rows magnify by cursor distance and the nearest springs open from blur.",
+    Component: FisheyeFaq,
+    registryName: "fisheye-faq",
+  },
+  {
+    name: "Hover Expand Player",
+    description:
+      "Compact pill springs open on hover — corners morph, art grows, controls reveal from blur.",
+    Component: HoverExpandPlayer,
+    registryName: "hover-expand-player",
+  },
   {
     name: "Dial Knob",
     description:

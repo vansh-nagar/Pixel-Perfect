@@ -34,6 +34,7 @@ const GsapStaggerGridArr: GridItem[] = [
       "Repeated text glides endlessly around a curved SVG path, looped seamlessly with a GSAP timeline.",
     component: <TextAlongPath />,
     registryName: "text-along-path",
+    span: 2,
   },
   {
     name: "Inertia Arrow Card",

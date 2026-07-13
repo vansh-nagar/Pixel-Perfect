@@ -38,8 +38,8 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="grid h-72 w-72 place-items-center">
-      <svg viewBox="0 0 250 90" className="w-[92%] text-foreground">
+    <div className="grid h-full w-full place-items-center">
+      <svg viewBox="0 0 250 90" className="w-full text-foreground">
         <path
           id="text-along-path-curve"
           fill="none"

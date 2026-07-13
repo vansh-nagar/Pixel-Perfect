@@ -5104,6 +5104,37 @@
       "registryDependencies": [
         "https://www.pixel-perfect.space/r/shader-canvas.json"
       ]
+    },
+    {
+      "name": "hover-expand-player",
+      "description": "A compact player pill that springs open on hover — the corners morph, the album art grows into place, and the full controls resolve out of blur.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/hover-expand-player.tsx",
+          "target": "components/pixel-perfect/hover-expand-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "fisheye-faq",
+      "description": "A vertical FAQ list with macOS-Dock fisheye magnification — rows scale by their distance from the cursor and the nearest one springs open, its answer resolving out of blur.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/fisheye-faq.tsx",
+          "target": "components/pixel-perfect/fisheye-faq.tsx"
+        }
+      ]
     }
   ]
 }

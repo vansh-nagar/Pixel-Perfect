@@ -15,6 +15,8 @@ import {
   PenTool,
   Move3d,
   Layers,
+  GalleryHorizontalEnd,
+  Aperture,
   ChevronDown,
   ArrowLeft,
   BookOpen,
@@ -35,6 +37,10 @@ import VisitButtonTutorial from "./tutorials/visit-button/visit-button-tutorial"
 import GlassButtonTutorial from "./tutorials/glass-button/glass-button-tutorial";
 import BookDemoButtonTutorial from "./tutorials/book-demo-button/book-demo-button-tutorial";
 import SoftPillButtonTutorial from "./tutorials/soft-pill-button/soft-pill-button-tutorial";
+import FisheyeFaqTutorial from "./tutorials/fisheye-faq/fisheye-faq-tutorial";
+import CubeCarouselTutorial from "./tutorials/cube-carousel/cube-carousel-tutorial";
+import ClockMaskRevealTutorial from "./tutorials/clock-mask-reveal/clock-mask-reveal-tutorial";
+import TextMatrixRainTutorial from "./tutorials/text-matrix-rain/text-matrix-rain-tutorial";
 
 type TutorialItem = {
   name: string;
@@ -227,6 +233,15 @@ const categories: Category[] = [
       "Framer Motion-powered animations for cards, logos, tabs, and image interactions.",
     items: [
       {
+        name: "Fisheye FAQ",
+        description:
+          "macOS Dock-style fisheye magnification — rows scale by cursor distance and spring open.",
+        category: "Motion Animations",
+        tags: ["motion", "fisheye", "spring", "hover"],
+        registryName: "fisheye-faq",
+        tutorial: FisheyeFaqTutorial,
+      },
+      {
         name: "Card Animation",
         description:
           "Staggered card stack with cursor follower using Framer Motion variants.",
@@ -281,6 +296,42 @@ const categories: Category[] = [
         category: "GSAP Animations",
         tags: ["gsap", "flip", "text", "reveal"],
         registryName: "flip-text-reveal",
+      },
+    ],
+  },
+  {
+    name: "Carousels",
+    icon: <GalleryHorizontalEnd className="size-4" />,
+    slug: "carousels",
+    description:
+      "Sliders and 3D carousels — cubes, decks, orbits, and flip transitions.",
+    items: [
+      {
+        name: "Cube Carousel",
+        description:
+          "Slides on the faces of a 3D prism that rotates to advance, dipping in scale mid-turn.",
+        category: "Carousels",
+        tags: ["3d", "perspective", "drag", "raf"],
+        registryName: "cube-carousel",
+        tutorial: CubeCarouselTutorial,
+      },
+    ],
+  },
+  {
+    name: "Mask Reveals",
+    icon: <Aperture className="size-4" />,
+    slug: "masks",
+    description:
+      "Image reveals driven by animated CSS masks — wipes, irises, blinds, and sweeps.",
+    items: [
+      {
+        name: "Clock Mask Reveal",
+        description:
+          "A conic-gradient mask sweeps a wedge around the center like a clock hand.",
+        category: "Mask Reveals",
+        tags: ["mask", "conic", "gsap", "reveal"],
+        registryName: "clock-mask-reveal",
+        tutorial: ClockMaskRevealTutorial,
       },
     ],
   },
@@ -364,6 +415,7 @@ const categories: Category[] = [
         category: "Text Animations",
         tags: ["gsap", "matrix", "scramble", "decode"],
         registryName: "text-matrix-rain",
+        tutorial: TextMatrixRainTutorial,
       },
       {
         name: "Glitch Portal",
@@ -775,6 +827,10 @@ const TutorialPage = () => {
       "glass-button",
       "book-demo-button",
       "soft-pill-button",
+      "fisheye-faq",
+      "cube-carousel",
+      "clock-mask-reveal",
+      "text-matrix-rain",
     ]);
 
     return categories

@@ -62,11 +62,13 @@ export default async function CategoryPage({
         />
       ))}
       <TabsNavigation initialTab={cat.slug} showCategoryHeader />
-      <section className="mt-10 border-t border-dashed pt-4">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          All {items.length} {cat.name.toLowerCase()} components
-        </h2>
-        <ul className="mt-2 grid gap-x-8 gap-y-1.5 text-xs sm:grid-cols-2 lg:grid-cols-3">
+      {/* Collapsed by default — indexable, but no visible wall of text. */}
+      <details className="mt-10 border-t border-dashed pt-3">
+        <summary className="cursor-pointer text-xs text-muted-foreground/70 transition-colors hover:text-foreground">
+          What&apos;s inside — {items.length} {cat.name.toLowerCase()}{" "}
+          components
+        </summary>
+        <ul className="mt-3 grid gap-x-8 gap-y-1.5 text-xs sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <li key={item.name} className="text-muted-foreground">
               <strong className="font-medium text-foreground">
@@ -76,7 +78,7 @@ export default async function CategoryPage({
             </li>
           ))}
         </ul>
-      </section>
+      </details>
       <CategoryLinks current={cat.slug} />
     </>
   );

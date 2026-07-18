@@ -150,13 +150,10 @@ export function TabsNavigation({
   return (
     <Tabs value={active} onValueChange={handleChange} className="w-full ">
       {showCategoryHeader && activeCategory && (
-        <header className="mb-3 max-w-3xl">
-          <h1 className="text-lg font-semibold tracking-tight">
-            {activeCategory.title}
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {activeCategory.description}
-          </p>
+        // Screen-reader/crawler only — Vansh doesn't want visible SEO copy.
+        <header className="sr-only">
+          <h1>{activeCategory.title}</h1>
+          <p>{activeCategory.description}</p>
         </header>
       )}
       <TabsList

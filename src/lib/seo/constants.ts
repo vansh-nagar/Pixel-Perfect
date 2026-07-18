@@ -1,15 +1,14 @@
 export const SEO_CONSTANTS = {
   siteUrl:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "https://pixelperfect.dev",
+    "https://www.pixel-perfect.space",
   siteName: "Pixel Perfect UI",
   defaultTitle: "Pixel Perfect UI — Lightweight UI Library for React",
   titleTemplate: "%s | Pixel Perfect UI",
   defaultDescription:
     "A lightweight, documentation-first UI library for React with bespoke components, animations, and effects you can copy, paste, and ship.",
-  defaultOgImage:
-    "https://res.cloudinary.com/dz12pywzs/image/upload/v1766372535/Copy_of_Copy_of_Webinar_Keynote_Presentation_1_ljemzi.jpg",
-  twitterHandle: "@pixelperfect",
+  defaultOgImage: "/og-card.jpg",
+  twitterHandle: "@vansh1029",
   locale: "en_US",
 } as const;
 

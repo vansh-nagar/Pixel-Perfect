@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SEO_CONSTANTS } from "@/lib/seo/constants";
+import { CATEGORY_SLUGS } from "@/lib/blocks/categories";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -9,9 +10,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: url("/"),           lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
     { url: url("/blocks"),     lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
-    { url: url("/playground"), lastModified: now, changeFrequency: "weekly",  priority: 0.6 },
     { url: url("/pixel-tool"), lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
     { url: url("/tutorial"),   lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: url("/chat-ui"),    lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: url("/donate"),     lastModified: now, changeFrequency: "yearly",  priority: 0.4 },
+    ...CATEGORY_SLUGS.map((slug) => ({
+      url: url(`/blocks/${slug}`),
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
   ];
 }

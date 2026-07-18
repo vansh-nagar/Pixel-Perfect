@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
+import { BLOCK_CATEGORIES } from "@/lib/blocks/categories";
 
 function GridSkeleton() {
   return (
@@ -37,120 +38,73 @@ function GridSkeleton() {
 const lazyGrid = (loader: () => Promise<{ default: ComponentType }>) =>
   dynamic(loader, { ssr: false, loading: () => <GridSkeleton /> });
 
-const navItems = [
-  {
-    name: "Buttons",
-    slug: "buttons",
-    Component: lazyGrid(() => import("../grids/button-grid")),
-  },
-  {
-    name: "SVG Animations",
-    slug: "svg-animations",
-    Component: lazyGrid(() => import("../grids/svg-animations-grid")),
-  },
-  {
-    name: "Motion Animations",
-    slug: "motion",
-    Component: lazyGrid(() => import("../grids/motion-animations-grid")),
-  },
-  {
-    name: "GSAP Animations",
-    slug: "gsap",
-    Component: lazyGrid(() => import("../grids/gsap-grid")),
-  },
-  {
-    name: "Carousels",
-    slug: "carousels",
-    Component: lazyGrid(() => import("../grids/carousel-grid")),
-  },
-  {
-    name: "SVG Assets",
-    slug: "svg-assets",
-    Component: lazyGrid(() => import("../grids/svg-grid")),
-  },
-  {
-    name: "Text Animations",
-    slug: "text",
-    Component: lazyGrid(() => import("../grids/text-grid")),
-  },
-  {
-    name: "Scroll Animations",
-    slug: "scroll",
-    Component: lazyGrid(() => import("../grids/scroll-grid")),
-  },
-  {
-    name: "Borders & Intersections",
-    slug: "borders",
-    Component: lazyGrid(() => import("../grids/border-grid")),
-  },
-  {
-    name: "Background Gradients, Patterns & Masks",
-    slug: "backgrounds",
-    Component: lazyGrid(() => import("../grids/background-grid")),
-  },
-  {
-    name: "Mask Animation",
-    slug: "masks",
-    Component: lazyGrid(() => import("../grids/mask-grid")),
-  },
-  {
-    name: "Image Gradients",
-    slug: "image-gradients",
-    Component: lazyGrid(() => import("../grids/image-gradient-grid")),
-  },
-  {
-    name: "Mouse Followers",
-    slug: "mouse-followers",
-    Component: lazyGrid(() => import("../grids/mouse-follower-grid")),
-  },
-  {
-    name: "SVG Path Effects",
-    slug: "svg-path",
-    Component: lazyGrid(() => import("../grids/svg-path-effect-grid")),
-  },
-  {
-    name: "Bento Cards",
-    slug: "bento",
-    Component: lazyGrid(() => import("../grids/bento-cards-grid")),
-  },
-  {
-    name: "Sidebars",
-    slug: "sidebars",
-    Component: lazyGrid(() => import("../grids/sidebar-grid")),
-  },
-  {
-    name: "Shaders",
-    slug: "shaders",
-    Component: lazyGrid(() => import("../grids/shader-grid")),
-  },
-  {
-    name: "Image Shaders",
-    slug: "image-shaders",
-    Component: lazyGrid(() => import("../grids/image-shaders-grid")),
-  },
-  {
-    name: "Perspective",
-    slug: "perspective",
-    Component: lazyGrid(() => import("../grids/perspective-grid")),
-  },
-  {
-    name: "3J",
-    slug: "3j",
-    Component: lazyGrid(() => import("../grids/three-js-grid")),
-  },
-];
+// Labels/slugs live in BLOCK_CATEGORIES (shared with routes + sitemap); only the
+// grid loaders stay here so the imports remain statically analyzable.
+const GRID_COMPONENTS: Record<string, ComponentType> = {
+  buttons: lazyGrid(() => import("../grids/button-grid")),
+  "svg-animations": lazyGrid(() => import("../grids/svg-animations-grid")),
+  motion: lazyGrid(() => import("../grids/motion-animations-grid")),
+  gsap: lazyGrid(() => import("../grids/gsap-grid")),
+  carousels: lazyGrid(() => import("../grids/carousel-grid")),
+  "svg-assets": lazyGrid(() => import("../grids/svg-grid")),
+  text: lazyGrid(() => import("../grids/text-grid")),
+  scroll: lazyGrid(() => import("../grids/scroll-grid")),
+  borders: lazyGrid(() => import("../grids/border-grid")),
+  backgrounds: lazyGrid(() => import("../grids/background-grid")),
+  masks: lazyGrid(() => import("../grids/mask-grid")),
+  "image-gradients": lazyGrid(() => import("../grids/image-gradient-grid")),
+  "mouse-followers": lazyGrid(() => import("../grids/mouse-follower-grid")),
+  "svg-path": lazyGrid(() => import("../grids/svg-path-effect-grid")),
+  bento: lazyGrid(() => import("../grids/bento-cards-grid")),
+  sidebars: lazyGrid(() => import("../grids/sidebar-grid")),
+  shaders: lazyGrid(() => import("../grids/shader-grid")),
+  "image-shaders": lazyGrid(() => import("../grids/image-shaders-grid")),
+  perspective: lazyGrid(() => import("../grids/perspective-grid")),
+  "3j": lazyGrid(() => import("../grids/three-js-grid")),
+};
 
-export function TabsNavigation() {
-  const [active, setActive] = useState(navItems[0].slug);
+const navItems = BLOCK_CATEGORIES.map((category) => ({
+  name: category.name,
+  slug: category.slug,
+  Component: GRID_COMPONENTS[category.slug],
+}));
+
+interface TabsNavigationProps {
+  /** Slug of the category route rendering this instance; omit on /blocks. */
+  initialTab?: string;
+  /** Render the active category's h1 + intro (used on /blocks/[category]). */
+  showCategoryHeader?: boolean;
+}
+
+export function TabsNavigation({
+  initialTab,
+  showCategoryHeader = false,
+}: TabsNavigationProps) {
+  const [active, setActive] = useState(
+    initialTab && navItems.some((item) => item.slug === initialTab)
+      ? initialTab
+      : navItems[0].slug,
+  );
   const listRef = useRef<HTMLDivElement>(null);
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   useEffect(() => {
+    if (initialTab) {
+      // Tidy the ?tab= that Next's 308 redirect passes through on legacy links.
+      if (new URLSearchParams(window.location.search).has("tab")) {
+        window.history.replaceState(null, "", `/blocks/${initialTab}`);
+      }
+      return;
+    }
+    // Legacy links: /blocks?tab=x → activate and normalize the URL to the route.
+    // One-shot sync from an external input (the URL) — allowed setState-in-effect.
     const tab = new URLSearchParams(window.location.search).get("tab");
     if (tab && navItems.some((item) => item.slug === tab)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActive(tab);
+      window.history.replaceState(null, "", `/blocks/${tab}`);
     }
-  }, []);
+  }, [initialTab]);
 
   useEffect(() => {
     const list = listRef.current;
@@ -176,9 +130,9 @@ export function TabsNavigation() {
 
   const handleChange = (slug: string) => {
     setActive(slug);
-    const url = new URL(window.location.href);
-    url.searchParams.set("tab", slug);
-    window.history.replaceState(null, "", url);
+    // replaceState (not router navigation): the root template replays its
+    // transition on every Next navigation, which would remount the grid.
+    window.history.replaceState(null, "", `/blocks/${slug}`);
 
     requestAnimationFrame(() => {
       const focused = document.activeElement;
@@ -191,8 +145,20 @@ export function TabsNavigation() {
     });
   };
 
+  const activeCategory = BLOCK_CATEGORIES.find((c) => c.slug === active);
+
   return (
     <Tabs value={active} onValueChange={handleChange} className="w-full ">
+      {showCategoryHeader && activeCategory && (
+        <header className="mb-3 max-w-3xl">
+          <h1 className="text-lg font-semibold tracking-tight">
+            {activeCategory.title}
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {activeCategory.description}
+          </p>
+        </header>
+      )}
       <TabsList
         ref={listRef}
         className="flex gap-4 overflow-x-auto overflow-y-hidden w-full mask-r-from-98% dark:bg-black [scrollbar-width:thin] [&::-webkit-scrollbar]:h-[3px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25 hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 [&::-webkit-scrollbar-thumb]:transition-colors"

@@ -46,3 +46,42 @@ export const jsonLdSchemas = [
   websiteSchema,
   softwareApplicationSchema,
 ];
+
+export function buildCategoryCollectionSchema(
+  category: { slug: string; title: string; description: string },
+  items: { name: string; description: string }[],
+) {
+  const pageUrl = `${SEO_CONSTANTS.siteUrl}/blocks/${category.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${pageUrl}#collection`,
+    url: pageUrl,
+    name: category.title,
+    description: category.description,
+    isPartOf: { "@id": siteId },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: items.length,
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        description: item.description,
+      })),
+    },
+  };
+}
+
+export function buildBreadcrumbSchema(crumbs: { name: string; url: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  };
+}

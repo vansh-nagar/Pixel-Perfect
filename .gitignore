@@ -43,3 +43,7 @@ next-env.d.ts
 .agents
 # local skill (not committed)
 .claude/skills/emil-design-eng
+
+# local claude state
+.claude/settings.local.json
+.claude/worktrees/

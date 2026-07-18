@@ -62,23 +62,20 @@ export default async function CategoryPage({
         />
       ))}
       <TabsNavigation initialTab={cat.slug} showCategoryHeader />
-      {/* Collapsed by default — indexable, but no visible wall of text. */}
-      <details className="mt-10 border-t border-dashed pt-3">
-        <summary className="cursor-pointer text-xs text-muted-foreground/70 transition-colors hover:text-foreground">
-          What&apos;s inside — {items.length} {cat.name.toLowerCase()}{" "}
-          components
-        </summary>
-        <ul className="mt-3 grid gap-x-8 gap-y-1.5 text-xs sm:grid-cols-2 lg:grid-cols-3">
+      {/* sr-only: describes what the client-only grid renders, for crawlers
+          and screen readers — no visible SEO copy anywhere on the page. */}
+      <section className="sr-only">
+        <h2>
+          All {items.length} {cat.name.toLowerCase()} components
+        </h2>
+        <ul>
           {items.map((item) => (
-            <li key={item.name} className="text-muted-foreground">
-              <strong className="font-medium text-foreground">
-                {item.name}
-              </strong>{" "}
-              — {item.description}
+            <li key={item.name}>
+              {item.name} — {item.description}
             </li>
           ))}
         </ul>
-      </details>
+      </section>
       <CategoryLinks current={cat.slug} />
     </>
   );

@@ -1159,22 +1159,6 @@
       ]
     },
     {
-      "name": "activity-wheel-motion",
-      "description": "Scrollable arc-curved vibe picker with violet active fill and a dark indicator pill.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/motion-framer/activity-wheel-motion.tsx",
-          "target": "components/pixel-perfect/activity-wheel-motion.tsx"
-        }
-      ]
-    },
-    {
       "name": "car-lock-drive-motion",
       "description": "Side-view car with a clean lock/drive pill switch that springs the car forward on drive.",
       "type": "registry:block",
@@ -1423,19 +1407,6 @@
       ]
     },
     {
-      "name": "intersection-grid-svg",
-      "description": "Intersection Grid Svg component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/borders/intersection-grid-svg.tsx",
-          "target": "components/pixel-perfect/intersection-grid-svg.tsx"
-        }
-      ]
-    },
-    {
       "name": "intersection1",
       "description": "Intersection1 component.",
       "type": "registry:block",
@@ -1474,21 +1445,6 @@
           "type": "registry:component",
           "path": "registry/new-york/buttons/learn-more-buttion.tsx",
           "target": "components/pixel-perfect/learn-more-buttion.tsx"
-        }
-      ]
-    },
-    {
-      "name": "liquid-glass-button",
-      "description": "Liquid Glass Button component.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/buttons/liquid-glass-button.tsx",
-          "target": "components/pixel-perfect/liquid-glass-button.tsx"
         }
       ]
     },
@@ -1817,21 +1773,6 @@
       ]
     },
     {
-      "name": "paper-plane-animation",
-      "description": "Paper Plane Animation component.",
-      "type": "registry:block",
-      "dependencies": [
-        "motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/svg/paper-plane-animation.tsx",
-          "target": "components/pixel-perfect/paper-plane-animation.tsx"
-        }
-      ]
-    },
-    {
       "name": "bounce-smiley-animation",
       "description": "Bounce Smiley Animation component.",
       "type": "registry:block",
@@ -2081,23 +2022,6 @@
       ]
     },
     {
-      "name": "bend-zoom-reveal",
-      "description": "A pixel-art frame that flies in, then zooms to fill the box as you scroll inside it, warping with an air-friction bend on a WebGL plane.",
-      "type": "registry:block",
-      "dependencies": [
-        "@react-three/fiber",
-        "gsap",
-        "three"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/gsap/bend-zoom-reveal.tsx",
-          "target": "components/pixel-perfect/bend-zoom-reveal.tsx"
-        }
-      ]
-    },
-    {
       "name": "bend-mouse-follower",
       "description": "A pixel-art frame that smoothly chases the cursor and warps with an air-friction bend on a WebGL plane.",
       "type": "registry:block",
@@ -2124,21 +2048,6 @@
           "type": "registry:component",
           "path": "registry/new-york/mouse-follower/bend-button-follower.tsx",
           "target": "components/pixel-perfect/bend-button-follower.tsx"
-        }
-      ]
-    },
-    {
-      "name": "magnetic-button",
-      "description": "A magnetic button that eases toward the cursor inside its zone, demonstrating GSAP's overwrite modes (true / false / \"auto\") against an idle CustomWiggle loop.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/buttons/magnetic-button.tsx",
-          "target": "components/pixel-perfect/magnetic-button.tsx"
         }
       ]
     },
@@ -4859,19 +4768,6 @@
           "type": "registry:component",
           "path": "registry/new-york/mask/wave-mask-reveal.tsx",
           "target": "components/pixel-perfect/wave-mask-reveal.tsx"
-        }
-      ]
-    },
-    {
-      "name": "cube-carousel",
-      "description": "Slides live on the faces of a 3D prism that rotates to advance, dipping back in scale mid-turn like it needs room to swing. Drag to spin it freely with snap, or let it auto-rotate; faces are reassigned on the fly so any number of slides fits on four faces.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/carousel/cube-carousel.tsx",
-          "target": "components/pixel-perfect/cube-carousel.tsx"
         }
       ]
     },

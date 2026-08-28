@@ -40,7 +40,6 @@ import { useState, useEffect } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CopyDropdown from "../copy-dropdown";
-import LiquidGlassButton from "registry/new-york/buttons/liquid-glass-button";
 import FramerCtaButton from "../../../../registry/new-york/buttons/framer-cta-button";
 import SoftPillButton from "../../../../registry/new-york/buttons/soft-pill-button";
 import BookDemoButton from "../../../../registry/new-york/buttons/book-demo-button";
@@ -52,9 +51,6 @@ import type { RainbowColors } from "../../../../registry/new-york/buttons/rainbo
 import BevelButton from "../../../../registry/new-york/buttons/bevel-button";
 import SilverButton from "../../../../registry/new-york/buttons/silver-button";
 import RefractionGlassButton from "../../../../registry/new-york/buttons/refraction-glass-button";
-import MagneticButton, {
-  type MagneticMode,
-} from "../../../../registry/new-york/buttons/magnetic-button";
 import {
   Home,
   Heart,
@@ -534,40 +530,6 @@ const BookDemoButtonWrapper = () => {
   );
 };
 
-const magneticModes: MagneticMode[] = ["plain", "false", "true", "auto"];
-const magneticLabels: Record<MagneticMode, string> = {
-  plain: "dynamic",
-  false: "false",
-  true: "true",
-  auto: "auto",
-};
-
-const MagneticButtonWrapper = () => {
-  const [mode, setMode] = useState<MagneticMode>("auto");
-  return (
-    <>
-      <div className="absolute left-1.5 top-1.5 z-40">
-        <Select value={mode} onValueChange={(v) => setMode(v as MagneticMode)}>
-          <SelectTrigger
-            size="sm"
-            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
-          >
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent align="start" className="min-w-28">
-            {magneticModes.map((m) => (
-              <SelectItem key={m} value={m} className="text-xs">
-                {magneticLabels[m]}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-      <MagneticButton mode={mode}>{magneticLabels[mode]}</MagneticButton>
-    </>
-  );
-};
-
 export const ButtonsArr = [
   {
     name: "Refraction Glass Button",
@@ -652,13 +614,6 @@ export const ButtonsArr = [
       <FramerCtaButton variant="light">Send a message</FramerCtaButton>
     ),
     registryName: "framer-cta-button",
-  },
-  {
-    name: "Liquid Glass Button",
-    description:
-      "A frosted glass button with conic gradient border and layered shadows.",
-    component: <LiquidGlassButton />,
-    registryName: "liquid-glass-button",
   },
   {
     name: "Pixel Credits Button",
@@ -793,13 +748,6 @@ export const ButtonsArr = [
       "Premium gradient button with image overlay and 8 color variants.",
     component: <LiquidGradientButtonWrapper />,
     registryName: "liquid-gradient-button",
-  },
-  {
-    name: "Magnetic Button",
-    description:
-      'Magnetic pull toward the cursor — pick a GSAP overwrite mode (true / false / "auto") from the dropdown to compare against an idle wiggle.',
-    component: <MagneticButtonWrapper />,
-    registryName: "magnetic-button",
   },
 ];
 

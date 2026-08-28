@@ -63,7 +63,7 @@ const RadialCarousel = () => {
       {SLIDES.map((s, i) => (
         <div
           key={i}
-          className="radial-card absolute left-1/2 -ml-[120px] flex h-40 w-60 items-end rounded-2xl p-4 text-white shadow-lg"
+          className="radial-card absolute left-1/2 -ml-[120px] flex h-40 w-60 items-end rounded-2xl p-4 text-white"
           style={{ top: CARD_TOP, backgroundColor: s.color }}
         >
           <span className="text-sm font-medium text-white/90">{s.label}</span>

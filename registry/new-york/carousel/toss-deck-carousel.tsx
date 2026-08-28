@@ -81,7 +81,7 @@ const TossDeckCarousel = () => {
                 exit="exit"
                 transition={{ type: "spring", stiffness: 240, damping: 26 }}
                 style={{ zIndex: STACK - p }}
-                className={`absolute inset-0 bg-white p-3 pb-12 shadow-[0_18px_40px_-12px_rgba(0,0,0,0.35)] ring-1 ring-black/5 ${
+                className={`absolute inset-0 bg-white p-3 pb-12 ring-1 ring-black/5 ${
                   isTop ? "cursor-grab active:cursor-grabbing" : ""
                 }`}
                 drag={isTop}

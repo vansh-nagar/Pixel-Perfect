@@ -35,7 +35,35 @@ export const BackgroudArr: BackgroundItem[] = [
   {
     name: "Progressive Blur",
     description: "Layered backdrop-blur fade",
-    component: <ProgressiveBlur />,
+    // Demo-only content sits behind the overlay so the blur ramp is visible.
+    component: (
+      <div className="absolute inset-0 overflow-hidden">
+        <img
+          src="/img-gradient/gradient-8.png"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-x-3 top-2 flex flex-col gap-1 text-white">
+          <p className="text-[11px] font-medium">Read the top, lose the rest</p>
+          <p className="text-[8px] leading-[1.6] text-white/85">
+            Eight backdrop-filter layers stack over this text, each masked to
+            its own horizontal slice of the frame. The blur radius climbs from
+            0.5px on the first line to 16px on the last, so the paragraph
+            dissolves gradually as your eye travels down rather than hitting one
+            hard edge where a single blurred panel would start. Because every
+            layer only blurs the slice its mask exposes, the falloff reads as a
+            smooth ramp instead of eight visible bands. The grain in the
+            gradient behind the text smooths out along exactly the same curve,
+            which is the easiest way to see where each layer takes over. Drop
+            this over an image, a long scrolling list, or a sticky header and
+            the content underneath fades out of legibility on its own — no
+            solid scrim needed, and whatever is behind it keeps its colour.
+          </p>
+        </div>
+        <ProgressiveBlur />
+      </div>
+    ),
     registryName: "progressive-blur",
   },
   {

@@ -215,9 +215,9 @@ const RefractionGlassButton = ({
     overflow: "hidden",
     boxShadow: [
       `inset 0 1px 1px rgba(255,255,255,${0.5 * SETTINGS.edgeHighlight})`,
-      `inset 0 0 0 1px rgba(255,255,255,${0.35 * SETTINGS.edgeHighlight})`,
+      `inset 0 0 0 1px var(--glass-ring)`,
       `inset 0 -1px 2px rgba(0,0,0,${0.12 * SETTINGS.edgeHighlight})`,
-      `0 6px 24px rgba(0,0,0,${0.28 * SETTINGS.glow})`,
+      `0 6px 24px var(--glass-drop)`,
       `0 0 24px rgba(255,255,255,${0.5 * SETTINGS.glow})`,
     ].join(", "),
     pointerEvents: "none",
@@ -235,7 +235,7 @@ const RefractionGlassButton = ({
     }) 100%)`,
     filter:
       SETTINGS.specularBlur > 0 ? `blur(${SETTINGS.specularBlur}px)` : undefined,
-    mixBlendMode: "screen",
+    mixBlendMode: "var(--glass-sheen-blend)" as CSSProperties["mixBlendMode"],
   };
 
   return (
@@ -244,7 +244,9 @@ const RefractionGlassButton = ({
       drag
       dragMomentum={false}
       className={
-        "relative isolate inline-flex cursor-grab select-none items-center justify-center rounded-full px-8 py-3 text-base font-medium text-white active:cursor-grabbing" +
+        "relative isolate inline-flex cursor-grab select-none items-center justify-center rounded-full px-8 py-3 text-base font-medium text-neutral-900 active:cursor-grabbing dark:text-white " +
+        "[--glass-drop:rgba(0,0,0,0.16)] [--glass-ring:rgba(0,0,0,0.14)] [--glass-sheen-blend:overlay] " +
+        "dark:[--glass-drop:rgba(0,0,0,0.55)] dark:[--glass-ring:rgba(255,255,255,0.16)] dark:[--glass-sheen-blend:screen]" +
         (className ? ` ${className}` : "")
       }
       style={{ touchAction: "none", ...style }}
@@ -338,7 +340,7 @@ const RefractionGlassButton = ({
       )}
       <span style={lensStyle} />
       <span style={sheenStyle} />
-      <span className="relative z-10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
+      <span className="relative z-10 drop-shadow-[0_1px_2px_rgba(255,255,255,0.65)] dark:drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
         {children}
       </span>
     </motion.button>

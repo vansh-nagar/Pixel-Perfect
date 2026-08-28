@@ -144,7 +144,7 @@ const CoverFlowCarousel = () => {
               willChange: "transform, opacity",
             }}
           >
-            <div className="overflow-hidden rounded-md shadow-[0_25px_50px_-12px_rgba(0,0,0,0.45)] ring-1 ring-white/20">
+            <div className="overflow-hidden rounded-md ring-1 ring-white/20">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`https://picsum.photos/seed/${cover.seed}/500/500`}

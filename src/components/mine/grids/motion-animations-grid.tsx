@@ -13,7 +13,6 @@ import CoinSpinAnimation from "registry/new-york/motion-framer/coin-spin-animati
 import FreePremiumToggle from "registry/new-york/motion-framer/free-premium-toggle";
 import MilestoneOdometer from "registry/new-york/motion-framer/milestone-odometer";
 import TextEditorItalic from "registry/new-york/motion-framer/text-editor-italic";
-import ActivityWheelMotion from "registry/new-york/motion-framer/activity-wheel-motion";
 import CarLockDriveMotion from "registry/new-york/motion-framer/car-lock-drive-motion";
 import DialKnobMotion from "registry/new-york/motion-framer/dial-knob-motion";
 import HoverExpandPlayer from "registry/new-york/motion-framer/hover-expand-player";
@@ -53,13 +52,6 @@ const MotionComponentArr: {
       "Pill switch toggles lock and drive; the car gently shifts forward on drive.",
     Component: CarLockDriveMotion,
     registryName: "car-lock-drive-motion",
-  },
-  {
-    name: "Vibe Wheel",
-    description:
-      "Scrollable arc-curved mood picker with violet active fill and dark indicator.",
-    Component: ActivityWheelMotion,
-    registryName: "activity-wheel-motion",
   },
   {
     name: "Text Editor Italic",

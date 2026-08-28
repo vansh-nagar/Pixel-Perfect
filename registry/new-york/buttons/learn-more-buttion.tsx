@@ -14,7 +14,7 @@ const LearnMoreButtion = () => {
         damping: 20,
         mass: 10,
       }}
-      className="flex items-center gap-2 relative cursor-pointer"
+      className="group flex items-center gap-2 relative cursor-pointer"
     >
       <motion.div
         variants={{
@@ -69,23 +69,9 @@ const LearnMoreButtion = () => {
           <path d="m12 5 7 7-7 7"></path>
         </motion.svg>
       </motion.div>
-      <motion.span
-        transition={{
-          delay: 0.1,
-          duration: 1,
-        }}
-        variants={{
-          rest: {
-            color: "black",
-          },
-          hover: {
-            color: "white",
-          },
-        }}
-        className=" font-medium z-20"
-      >
+      <span className="z-20 font-medium text-neutral-900 transition-colors delay-100 duration-500 group-hover:text-white dark:text-neutral-100">
         WATCH MORE
-      </motion.span>
+      </span>
     </motion.div>
   );
 };

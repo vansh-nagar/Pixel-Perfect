@@ -134,7 +134,7 @@ const FannedDeckCarousel = () => {
               ref={(el) => {
                 cardRefs.current[i] = el;
               }}
-              className="absolute overflow-hidden rounded-xl bg-neutral-200 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.35)] ring-1 ring-white/40"
+              className="absolute overflow-hidden rounded-xl bg-neutral-200 ring-1 ring-white/40"
               style={{
                 width: C.cw,
                 height: C.ch,
@@ -152,7 +152,7 @@ const FannedDeckCarousel = () => {
                 className="h-full w-full object-cover"
               />
               <div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-black/30 via-transparent to-white/15" />
-              <p className="pointer-events-none absolute bottom-3 left-4 text-[11px] font-medium uppercase tracking-widest text-white/90 drop-shadow">
+              <p className="pointer-events-none absolute bottom-3 left-4 text-[11px] font-medium uppercase tracking-widest text-white/90">
                 {card.title}
               </p>
             </div>

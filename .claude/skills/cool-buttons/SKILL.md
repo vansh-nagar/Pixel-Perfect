@@ -24,7 +24,7 @@ technique from memory.
 
    | Category | Already built |
    |---|---|
-   | Materials | neumorphic (`premium`, `orange-premium`), metal/chrome (`metal`, `blue-chrome`, `silver`), glass (`glass`, `glassy`, `soft-pill`, `liquid-glass`, `prism-glass`), matte (`matte-dark`, `matte-shadow`), bevel/inset (`bevel`, `stripe`) |
+   | Materials | neumorphic (`premium`, `orange-premium`), metal/chrome (`metal`, `blue-chrome`, `silver`), glass (`glass`, `glassy`, `soft-pill`, `prism-glass`), matte (`matte-dark`, `matte-shadow`), bevel/inset (`bevel`, `stripe`) |
    | Motion | label/icon swap (`visit`, `learn-more-buttion`), toggles (`toggle-buttion`, `blur-toggle`, `pearl-toggle`), magnetic/cursor (`magnetic`, `mouse-follower`), morph (`morph`, `morph-image`), shine sweep (`shiny`, `liquid`) |
    | Borders/glow | gradient border (`border-gradient`), rainbow glow (`rainbow-glowing`) |
    | Filters | gooey (`goe`), refraction lens (`refraction-glass`) |
@@ -100,7 +100,7 @@ GSAP beats SVG filters — each step up costs bundle size and complexity.
   `type: "spring"`; tune `stiffness`/`damping` for overshoot.
   Exemplar: `toggle-buttion.tsx` (yes, filename has the typo — keep it).
 - **Draggable buttons**: `drag dragMomentum={false}` on `motion.button`.
-  Exemplar: `liquid-glass-button.tsx`.
+  Exemplar: `refraction-glass-button.tsx`.
 - Props extend `HTMLMotionProps<"button">` (not `ButtonHTMLAttributes`) so callers can
   pass motion props; forward the caller's `onHoverStart`/handlers before your own logic.
 

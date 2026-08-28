@@ -156,7 +156,7 @@ const FerrisWheelCarousel = () => {
               style={{ height: C.strut }}
             />
             <div
-              className="relative overflow-hidden rounded-lg bg-neutral-900 shadow-[0_16px_32px_-12px_rgba(0,0,0,0.4)] ring-1 ring-white/20"
+              className="relative overflow-hidden rounded-lg bg-neutral-900 ring-1 ring-white/20"
               style={{ width: C.cw, height: C.ch }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

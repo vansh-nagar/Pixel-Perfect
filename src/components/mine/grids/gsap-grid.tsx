@@ -5,7 +5,6 @@ import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import FlipTextReveal from "registry/new-york/gsap/flip-text-reveal";
 import Stagger1 from "registry/new-york/gsap/stagger1";
-import BendZoomReveal from "registry/new-york/gsap/bend-zoom-reveal";
 import TextAlongPath from "registry/new-york/gsap/text-along-path";
 import ColorFlairButton from "registry/new-york/motion-framer/color-flair-button";
 import InertiaArrowCard from "registry/new-york/motion-framer/inertia-arrow-card";
@@ -20,14 +19,6 @@ type GridItem = {
 };
 
 const GsapStaggerGridArr: GridItem[] = [
-  {
-    name: "Bend Zoom",
-    description:
-      "A frame flies in, then zooms to fill the box as you scroll inside it, warping with an air-friction bend on a WebGL plane.",
-    component: <BendZoomReveal columns={2} />,
-    registryName: "bend-zoom-reveal",
-    span: 2,
-  },
   {
     name: "Text Along Path",
     description:

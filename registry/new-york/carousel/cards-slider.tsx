@@ -77,7 +77,7 @@ const CardsSlider = () => {
           return (
             <motion.div
               key={card.title}
-              className={`absolute inset-0 overflow-hidden rounded-3xl shadow-2xl ${
+              className={`absolute inset-0 overflow-hidden rounded-3xl ${
                 isActive ? "cursor-grab active:cursor-grabbing" : ""
               }`}
               onClick={() => !hidden && !isActive && setActive((a) => a + offset)}

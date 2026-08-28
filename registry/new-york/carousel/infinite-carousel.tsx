@@ -134,7 +134,7 @@ const InfiniteCarousel = () => {
           {[...SLIDES, ...SLIDES].map((s, i) => (
             <article
               key={`${s.title}-${i}`}
-              className="mr-6 flex h-96 w-72 shrink-0 flex-col justify-end rounded-3xl p-6 text-white shadow-xl"
+              className="mr-6 flex h-96 w-72 shrink-0 flex-col justify-end rounded-3xl p-6 text-white"
               style={{ backgroundImage: s.gradient }}
             >
               <span className="text-sm font-medium text-white/70">{s.tag}</span>

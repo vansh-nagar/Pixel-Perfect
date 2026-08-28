@@ -12,7 +12,6 @@ import LiquidButton from "registry/new-york/buttons/liquid-button";
 import BookDemoButton from "registry/new-york/buttons/book-demo-button";
 import SoftPillButton from "registry/new-york/buttons/soft-pill-button";
 import FramerCtaButton from "registry/new-york/buttons/framer-cta-button";
-import LiquidGlassButton from "registry/new-york/buttons/liquid-glass-button";
 import PixelCreditsButton from "@/components/pixel-perfect/pixel-credits-button";
 import MorphButton from "registry/new-york/buttons/morph-button";
 import MorphImageButton from "registry/new-york/buttons/morph-image-button";
@@ -30,7 +29,6 @@ import MatteShadowButton from "registry/new-york/buttons/matte-shadow-button";
 import MetalButton from "registry/new-york/buttons/metal-button";
 import GlassButton from "registry/new-york/buttons/glass-button";
 import LiquidGradientButton from "registry/new-york/buttons/liquid-gradient-button";
-import MagneticButton from "registry/new-york/buttons/magnetic-button";
 
 const DONATE_URL =
   "https://buy.polar.sh/polar_cl_f2wnG1ytyvuNI3PIlhnvmlIm3Z7IKK25YZeqR49IQbB";
@@ -52,7 +50,6 @@ const styles = [
   { name: "Soft Pill Primary", node: <SoftPillButton variant="primary">{LABEL}</SoftPillButton> },
   { name: "Framer CTA", node: <FramerCtaButton variant="dark">{LABEL}</FramerCtaButton> },
   { name: "Framer Light", node: <FramerCtaButton variant="light">{LABEL}</FramerCtaButton> },
-  { name: "Liquid Glass", node: <LiquidGlassButton>{LABEL}</LiquidGlassButton> },
   { name: "Pixel Credits", node: <PixelCreditsButton>{LABEL}</PixelCreditsButton> },
   { name: "Morph", node: <MorphButton>{LABEL}</MorphButton> },
   { name: "Morph Image", node: <MorphImageButton>{LABEL}</MorphImageButton> },
@@ -70,7 +67,6 @@ const styles = [
   { name: "Metal", node: <MetalButton metal="silver">{LABEL}</MetalButton> },
   { name: "Glass", node: <GlassButton variant="blue">{LABEL}</GlassButton> },
   { name: "Master", node: <LiquidGradientButton variant="violet">{LABEL}</LiquidGradientButton> },
-  { name: "Magnetic", node: <MagneticButton mode="auto">{LABEL}</MagneticButton> },
 ];
 
 const SupportShowcase = () => {

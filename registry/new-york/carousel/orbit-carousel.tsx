@@ -106,7 +106,7 @@ const OrbitCarousel = () => {
             ref={(el) => {
               cardRefs.current[i] = el;
             }}
-            className="absolute overflow-hidden rounded-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] ring-1 ring-white/25"
+            className="absolute overflow-hidden rounded-xl ring-1 ring-white/25"
             style={{
               width: C.cw,
               height: C.ch,

@@ -13,7 +13,6 @@ import CoverFlowCarousel from "registry/new-york/carousel/cover-flow-carousel";
 import SlicedRevealCarousel from "registry/new-york/carousel/sliced-reveal-carousel";
 import AccordionCarousel from "registry/new-york/carousel/accordion-carousel";
 import OrbitCarousel from "registry/new-york/carousel/orbit-carousel";
-import CubeCarousel from "registry/new-york/carousel/cube-carousel";
 import SlatFlipCarousel from "registry/new-york/carousel/slat-flip-carousel";
 import TossDeckCarousel from "registry/new-york/carousel/toss-deck-carousel";
 import FerrisWheelCarousel from "registry/new-york/carousel/ferris-wheel-carousel";
@@ -89,13 +88,6 @@ const CarouselGridArr = [
       "Cards orbit an ellipse in faux-3D. Swinging to the front they scale up and stack forward; passing behind they shrink, dim and blur. Drag to spin with momentum; it drifts on its own when idle.",
     component: <OrbitCarousel />,
     registryName: "orbit-carousel",
-  },
-  {
-    name: "Cube Carousel",
-    description:
-      "Slides live on the faces of a 3D prism that rotates to advance, dipping back in scale mid-turn like it needs room to swing. Drag to spin it freely with snap, or let it auto-rotate; faces are reassigned on the fly so any number of slides fits on four faces.",
-    component: <CubeCarousel />,
-    registryName: "cube-carousel",
   },
   {
     name: "Slat Flip Carousel",

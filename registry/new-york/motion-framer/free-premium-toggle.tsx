@@ -44,7 +44,7 @@ const FreePremiumToggle = () => {
       <button
         type="button"
         onClick={() => setSelected("premium")}
-        className="relative z-10 flex h-12 flex-1 flex-col items-center justify-center rounded-full leading-tight transition-colors"
+        className="relative z-10 flex h-12 flex-1 items-center justify-center rounded-full transition-colors"
       >
         <span
           className={`text-sm font-semibold tracking-tight transition-colors ${
@@ -52,13 +52,6 @@ const FreePremiumToggle = () => {
           }`}
         >
           Premium
-        </span>
-        <span
-          className={`text-[10px] transition-colors ${
-            selected === "premium" ? "text-neutral-300" : "text-neutral-400/80"
-          }`}
-        >
-          Monthly · Annual
         </span>
       </button>
     </div>

@@ -15,7 +15,6 @@ import {
   PenTool,
   Move3d,
   Layers,
-  GalleryHorizontalEnd,
   Aperture,
   ChevronDown,
   ArrowLeft,
@@ -38,7 +37,6 @@ import GlassButtonTutorial from "./tutorials/glass-button/glass-button-tutorial"
 import BookDemoButtonTutorial from "./tutorials/book-demo-button/book-demo-button-tutorial";
 import SoftPillButtonTutorial from "./tutorials/soft-pill-button/soft-pill-button-tutorial";
 import FisheyeFaqTutorial from "./tutorials/fisheye-faq/fisheye-faq-tutorial";
-import CubeCarouselTutorial from "./tutorials/cube-carousel/cube-carousel-tutorial";
 import ClockMaskRevealTutorial from "./tutorials/clock-mask-reveal/clock-mask-reveal-tutorial";
 import TextMatrixRainTutorial from "./tutorials/text-matrix-rain/text-matrix-rain-tutorial";
 
@@ -296,24 +294,6 @@ const categories: Category[] = [
         category: "GSAP Animations",
         tags: ["gsap", "flip", "text", "reveal"],
         registryName: "flip-text-reveal",
-      },
-    ],
-  },
-  {
-    name: "Carousels",
-    icon: <GalleryHorizontalEnd className="size-4" />,
-    slug: "carousels",
-    description:
-      "Sliders and 3D carousels — cubes, decks, orbits, and flip transitions.",
-    items: [
-      {
-        name: "Cube Carousel",
-        description:
-          "Slides on the faces of a 3D prism that rotates to advance, dipping in scale mid-turn.",
-        category: "Carousels",
-        tags: ["3d", "perspective", "drag", "raf"],
-        registryName: "cube-carousel",
-        tutorial: CubeCarouselTutorial,
       },
     ],
   },
@@ -828,7 +808,6 @@ const TutorialPage = () => {
       "book-demo-button",
       "soft-pill-button",
       "fisheye-faq",
-      "cube-carousel",
       "clock-mask-reveal",
       "text-matrix-rain",
     ]);

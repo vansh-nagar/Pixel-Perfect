@@ -40,12 +40,12 @@ const Page = () => {
   return (
     <div className="grid h-full w-full place-items-center">
       <svg viewBox="0 0 250 90" className="w-full text-foreground">
+        {/* Invisible guide: only defines the curve the text rides on. */}
         <path
           id="text-along-path-curve"
           fill="none"
+          stroke="none"
           d="m0,88.5c61.37,0,61.5-68,126.5-68,58,0,51,68,123,68"
-          className="stroke-foreground/15"
-          strokeWidth={0.4}
         />
         <text fill="currentColor" className="text-[6px] uppercase">
           {Array.from({ length: COPIES }).map((_, i) => (

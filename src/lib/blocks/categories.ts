@@ -127,29 +127,6 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     source: { type: "registry", folder: "mask" },
   },
   {
-    slug: "image-gradients",
-    name: "Image Gradients",
-    title: "Mesh Gradient Images",
-    description:
-      "Curated mesh gradients rendered as ready-to-use image backgrounds — from soft pastel blends to deep aurora darks. Preview each palette and pull it straight into your design.",
-    source: {
-      type: "manual",
-      // Mirrors GRADIENTS in src/components/mine/grids/image-gradient-grid.tsx
-      // (unexported inside a "use client" file) — keep the two lists in sync.
-      items: [
-        { name: "Subpixel", description: "Soft blue-lavender mesh gradient." },
-        { name: "Hot Pixel", description: "Warm pink-to-magenta mesh gradient." },
-        { name: "Full Spectrum", description: "Multi-hue pastel mesh gradient." },
-        { name: "Vector Tide", description: "Cool cyan-to-indigo mesh gradient." },
-        { name: "Dark Mode", description: "Deep navy aurora with teal & magenta." },
-        { name: "Anti-Alias", description: "Lavender & mint with a poppy-red bloom." },
-        { name: "Frame Buffer", description: "Midnight navy into dodger blue & cyan." },
-        { name: "Hue Shift", description: "Electric blue-violet bleeding into red." },
-        { name: "Wireframe", description: "Gunmetal slate mesh in greys & greens." },
-      ],
-    },
-  },
-  {
     slug: "mouse-followers",
     name: "Mouse Followers",
     title: "Mouse Follower Components",
@@ -164,14 +141,6 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     description:
       "SVG path techniques for React — text flowing along curves and path-driven motion that plain CSS can't reach. Small focused components demonstrating the raw SVG APIs.",
     source: { type: "registry", folder: "svg-path-effects" },
-  },
-  {
-    slug: "bento",
-    name: "Bento Cards",
-    title: "Bento Grid Components",
-    description:
-      "Bento-style grid cards for React landing pages — dense, magazine-like layouts with hover depth and animated content slots. Tailwind-first markup you can reshape for any content.",
-    source: { type: "registry", folder: "bento-cards" },
   },
   {
     slug: "sidebars",

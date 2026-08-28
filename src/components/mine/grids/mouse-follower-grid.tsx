@@ -7,29 +7,6 @@ import GravityImageTrail from "../../../../registry/new-york/mouse-follower/grav
 import ScaleImageTrail from "../../../../registry/new-york/mouse-follower/scale-image-trail";
 import ImageTrailEffects from "../../../../registry/new-york/mouse-follower/image-trail-effects";
 import MotionTrailClassic from "../../../../registry/new-york/mouse-follower/motion-trail-classic";
-import MotionTrailInnerscape from "../../../../registry/new-york/mouse-follower/motion-trail-innerscape";
-import MotionTrailExiting from "../../../../registry/new-york/mouse-follower/motion-trail-exiting";
-import MotionTrailFlow from "../../../../registry/new-york/mouse-follower/motion-trail-flow";
-import MotionTrailSpin from "../../../../registry/new-york/mouse-follower/motion-trail-spin";
-import MotionTrailVelocity from "../../../../registry/new-york/mouse-follower/motion-trail-velocity";
-import MotionTrailPersistence from "../../../../registry/new-york/mouse-follower/motion-trail-persistence";
-import MotionTrailTile from "../../../../registry/new-york/mouse-follower/motion-trail-tile";
-import MotionTrailPerspective from "../../../../registry/new-york/mouse-follower/motion-trail-perspective";
-import ImageTrailFade from "../../../../registry/new-york/mouse-follower/image-trail-fade";
-import ImageTrailScaleUp from "../../../../registry/new-york/mouse-follower/image-trail-scaleup";
-import ImageTrailDrop from "../../../../registry/new-york/mouse-follower/image-trail-drop";
-import ImageTrailSlide from "../../../../registry/new-york/mouse-follower/image-trail-slide";
-import ImageTrailSqueeze from "../../../../registry/new-york/mouse-follower/image-trail-squeeze";
-import ImageTrailDirection from "../../../../registry/new-york/mouse-follower/image-trail-direction";
-import MaskTrailIris from "../../../../registry/new-york/mouse-follower/mask-trail-iris";
-import MaskTrailClock from "../../../../registry/new-york/mouse-follower/mask-trail-clock";
-import MaskTrailPinwheel from "../../../../registry/new-york/mouse-follower/mask-trail-pinwheel";
-import MaskTrailBlinds from "../../../../registry/new-york/mouse-follower/mask-trail-blinds";
-import MaskTrailSonar from "../../../../registry/new-york/mouse-follower/mask-trail-sonar";
-import MaskTrailRect from "../../../../registry/new-york/mouse-follower/mask-trail-rect";
-import MaskTrailSplit from "../../../../registry/new-york/mouse-follower/mask-trail-split";
-import MaskTrailWipe from "../../../../registry/new-york/mouse-follower/mask-trail-wipe";
-import MaskTrailStar from "../../../../registry/new-york/mouse-follower/mask-trail-star";
 import IconFall from "@/components/rune-landing/icon-fall";
 import CopyDropdown from "../copy-dropdown";
 import { useState } from "react";
@@ -94,166 +71,6 @@ export const MouseFollowerArr = [
     registryName: "motion-trail-classic",
   },
   {
-    name: "Motion Trail · Innerscape",
-    description:
-      "The outer image grows in while its inner layer un-zooms from a bright over-scale. (GSAP)",
-    component: <MotionTrailInnerscape />,
-    registryName: "motion-trail-innerscape",
-  },
-  {
-    name: "Motion Trail · Exiting",
-    description:
-      "Each image pops in at the cursor, then exits upward with a random sideways drift. (GSAP)",
-    component: <MotionTrailExiting />,
-    registryName: "motion-trail-exiting",
-  },
-  {
-    name: "Motion Trail · Flow",
-    description:
-      "Images flare with brightness/contrast tied to speed, then drift off in the travel direction. (GSAP)",
-    component: <MotionTrailFlow />,
-    registryName: "motion-trail-flow",
-  },
-  {
-    name: "Motion Trail · Spin",
-    description:
-      "Images rotate to follow the cursor's heading and fling off along its path. (GSAP)",
-    component: <MotionTrailSpin />,
-    registryName: "motion-trail-spin",
-  },
-  {
-    name: "Motion Trail · Velocity",
-    description:
-      "Images grow, brighten, blur and desaturate in proportion to cursor speed. (GSAP)",
-    component: <MotionTrailVelocity />,
-    registryName: "motion-trail-velocity",
-  },
-  {
-    name: "Motion Trail · Persistence",
-    description:
-      "Blend-mode images linger in a stack and the oldest fades out as new ones arrive. (GSAP)",
-    component: <MotionTrailPersistence />,
-    registryName: "motion-trail-persistence",
-  },
-  {
-    name: "Motion Trail · Tile",
-    description:
-      "Each image lands as a 3x3 grid of tiles that scatter and fade apart. (GSAP)",
-    component: <MotionTrailTile />,
-    registryName: "motion-trail-tile",
-  },
-  {
-    name: "Motion Trail · Perspective",
-    description:
-      "Images tilt in 3D and shift in depth based on the cursor's distance from center. (GSAP)",
-    component: <MotionTrailPerspective />,
-    registryName: "motion-trail-perspective",
-  },
-  {
-    name: "Image Trail · Fade",
-    description: "Images ease toward the cursor, then fade and shrink away. (GSAP)",
-    component: <ImageTrailFade />,
-    registryName: "image-trail-fade",
-  },
-  {
-    name: "Image Trail · Scale Up",
-    description:
-      "Images trail the cursor on a long ease, then fade while scaling up and out. (GSAP)",
-    component: <ImageTrailScaleUp />,
-    registryName: "image-trail-scaleup",
-  },
-  {
-    name: "Image Trail · Drop",
-    description:
-      "Images chase the cursor, then fade and fall off the bottom edge. (GSAP)",
-    component: <ImageTrailDrop />,
-    registryName: "image-trail-drop",
-  },
-  {
-    name: "Image Trail · Slide",
-    description:
-      "Images follow the cursor, then scatter off in random directions with a spin. (GSAP)",
-    component: <ImageTrailSlide />,
-    registryName: "image-trail-slide",
-  },
-  {
-    name: "Image Trail · Squeeze",
-    description:
-      "Each image fades, squeezes thin and stretches tall as it drops away. (GSAP)",
-    component: <ImageTrailSqueeze />,
-    registryName: "image-trail-squeeze",
-  },
-  {
-    name: "Image Trail · Direction",
-    description:
-      "Each image slides in from the side the cursor is moving toward, then fades out. (GSAP)",
-    component: <ImageTrailDirection />,
-    registryName: "image-trail-direction",
-  },
-  {
-    name: "Mask Trail · Iris",
-    description:
-      "Each image irises open from a growing circular clip-path, then fades. (GSAP)",
-    component: <MaskTrailIris />,
-    registryName: "mask-trail-iris",
-  },
-  {
-    name: "Mask Trail · Clock",
-    description:
-      "Each image sweeps in like a clock hand via a conic-gradient mask, then fades. (GSAP)",
-    component: <MaskTrailClock />,
-    registryName: "mask-trail-clock",
-  },
-  {
-    name: "Mask Trail · Pinwheel",
-    description:
-      "Each image blooms open through spinning windmill wedges via a conic-gradient mask, then fades. (GSAP)",
-    component: <MaskTrailPinwheel />,
-    registryName: "mask-trail-pinwheel",
-  },
-  {
-    name: "Mask Trail · Blinds",
-    description:
-      "Each image opens through venetian-blind slats cut from a repeating-linear-gradient mask, then fades. (GSAP)",
-    component: <MaskTrailBlinds />,
-    registryName: "mask-trail-blinds",
-  },
-  {
-    name: "Mask Trail · Sonar",
-    description:
-      "Each image resolves from the center outward through concentric rings, then fades. (GSAP)",
-    component: <MaskTrailSonar />,
-    registryName: "mask-trail-sonar",
-  },
-  {
-    name: "Mask Trail · Rect",
-    description:
-      "Each image grows open from a centered clip-path rectangle, then fades. (GSAP)",
-    component: <MaskTrailRect />,
-    registryName: "mask-trail-rect",
-  },
-  {
-    name: "Mask Trail · Split",
-    description:
-      "Each image splits open from a centered seam via a clip-path inset, then fades. (GSAP)",
-    component: <MaskTrailSplit />,
-    registryName: "mask-trail-split",
-  },
-  {
-    name: "Mask Trail · Wipe",
-    description:
-      "Each image wipes upward from its bottom edge via a clip-path inset, then fades. (GSAP)",
-    component: <MaskTrailWipe />,
-    registryName: "mask-trail-wipe",
-  },
-  {
-    name: "Mask Trail · Star",
-    description:
-      "Each image bursts open from a growing, spinning sparkle clip-path, then fades. (GSAP)",
-    component: <MaskTrailStar />,
-    registryName: "mask-trail-star",
-  },
-  {
     name: "Icon Fall",
     description: "Icon trail mouse follower using GSAP.",
     component: <IconFall />,
@@ -275,7 +92,7 @@ const MouseFollower = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-1 gap-2">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {paginatedItems.map((item, index) => (
           <div
             key={startIndex + index}

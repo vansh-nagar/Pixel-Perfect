@@ -225,19 +225,6 @@
       ]
     },
     {
-      "name": "event-timeline-bento-card",
-      "description": "A bento-style event timeline summary card.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/bento-cards/event-timeline-bento-card.tsx",
-          "target": "components/pixel-perfect/event-timeline-bento-card.tsx"
-        }
-      ]
-    },
-    {
       "name": "goe-button",
       "description": "A gooey SVG filter button effect using Framer Motion.",
       "type": "registry:block",
@@ -2392,96 +2379,6 @@
       ]
     },
     {
-      "name": "image-trail-direction",
-      "description": "A GSAP cursor trail where each image slides in from the side the cursor is moving toward, then fades out.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/image-trail-direction.tsx",
-          "target": "components/pixel-perfect/image-trail-direction.tsx"
-        }
-      ]
-    },
-    {
-      "name": "image-trail-drop",
-      "description": "A GSAP cursor trail where images chase the cursor, then fade and fall off the bottom edge.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/image-trail-drop.tsx",
-          "target": "components/pixel-perfect/image-trail-drop.tsx"
-        }
-      ]
-    },
-    {
-      "name": "image-trail-fade",
-      "description": "A GSAP cursor trail where images ease toward the cursor, then fade and shrink away.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/image-trail-fade.tsx",
-          "target": "components/pixel-perfect/image-trail-fade.tsx"
-        }
-      ]
-    },
-    {
-      "name": "image-trail-scaleup",
-      "description": "A GSAP cursor trail where images trail the cursor on a long ease, then fade while scaling up and out.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/image-trail-scaleup.tsx",
-          "target": "components/pixel-perfect/image-trail-scaleup.tsx"
-        }
-      ]
-    },
-    {
-      "name": "image-trail-slide",
-      "description": "A GSAP cursor trail where images follow the cursor, then scatter off in random directions with a spin.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/image-trail-slide.tsx",
-          "target": "components/pixel-perfect/image-trail-slide.tsx"
-        }
-      ]
-    },
-    {
-      "name": "image-trail-squeeze",
-      "description": "A GSAP cursor trail where each image fades, squeezes thin and stretches tall as it drops away.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/image-trail-squeeze.tsx",
-          "target": "components/pixel-perfect/image-trail-squeeze.tsx"
-        }
-      ]
-    },
-    {
       "name": "motion-trail-classic",
       "description": "A GSAP cursor trail where images appear at the cursor, glide to it, then scale and fade out.",
       "type": "registry:block",
@@ -2493,261 +2390,6 @@
           "type": "registry:component",
           "path": "registry/new-york/mouse-follower/motion-trail-classic.tsx",
           "target": "components/pixel-perfect/motion-trail-classic.tsx"
-        }
-      ]
-    },
-    {
-      "name": "motion-trail-exiting",
-      "description": "A GSAP cursor trail where each image pops in at the cursor, then exits upward with a random sideways drift.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/motion-trail-exiting.tsx",
-          "target": "components/pixel-perfect/motion-trail-exiting.tsx"
-        }
-      ]
-    },
-    {
-      "name": "motion-trail-flow",
-      "description": "A GSAP cursor trail where images flare with brightness/contrast tied to speed, then drift off in the travel direction.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/motion-trail-flow.tsx",
-          "target": "components/pixel-perfect/motion-trail-flow.tsx"
-        }
-      ]
-    },
-    {
-      "name": "motion-trail-innerscape",
-      "description": "A GSAP cursor trail where the outer image grows in while its inner layer un-zooms from a bright over-scale.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/motion-trail-innerscape.tsx",
-          "target": "components/pixel-perfect/motion-trail-innerscape.tsx"
-        }
-      ]
-    },
-    {
-      "name": "motion-trail-persistence",
-      "description": "A GSAP cursor trail where blend-mode images linger in a stack and the oldest fades out as new ones arrive.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/motion-trail-persistence.tsx",
-          "target": "components/pixel-perfect/motion-trail-persistence.tsx"
-        }
-      ]
-    },
-    {
-      "name": "motion-trail-perspective",
-      "description": "A GSAP cursor trail where images tilt in 3D and shift in depth based on the cursor's distance from center.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/motion-trail-perspective.tsx",
-          "target": "components/pixel-perfect/motion-trail-perspective.tsx"
-        }
-      ]
-    },
-    {
-      "name": "motion-trail-spin",
-      "description": "A GSAP cursor trail where images rotate to follow the cursor's heading and fling off along its path.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/motion-trail-spin.tsx",
-          "target": "components/pixel-perfect/motion-trail-spin.tsx"
-        }
-      ]
-    },
-    {
-      "name": "motion-trail-tile",
-      "description": "A GSAP cursor trail where each image lands as a 3x3 grid of tiles that scatter and fade apart.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/motion-trail-tile.tsx",
-          "target": "components/pixel-perfect/motion-trail-tile.tsx"
-        }
-      ]
-    },
-    {
-      "name": "motion-trail-velocity",
-      "description": "A GSAP cursor trail whose images grow, brighten, blur and desaturate in proportion to cursor speed.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/motion-trail-velocity.tsx",
-          "target": "components/pixel-perfect/motion-trail-velocity.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mask-trail-blinds",
-      "description": "A cursor trail where each image opens through venetian-blind slats cut from a repeating-linear-gradient mask, then fades.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mask-trail-blinds.tsx",
-          "target": "components/pixel-perfect/mask-trail-blinds.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mask-trail-clock",
-      "description": "A cursor trail where each image sweeps in like a clock hand via a conic-gradient mask, then fades.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mask-trail-clock.tsx",
-          "target": "components/pixel-perfect/mask-trail-clock.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mask-trail-iris",
-      "description": "A cursor trail where each image irises open from a growing circular clip-path, then fades.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mask-trail-iris.tsx",
-          "target": "components/pixel-perfect/mask-trail-iris.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mask-trail-pinwheel",
-      "description": "A cursor trail where each image blooms open through spinning windmill wedges via a conic-gradient mask, then fades.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mask-trail-pinwheel.tsx",
-          "target": "components/pixel-perfect/mask-trail-pinwheel.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mask-trail-rect",
-      "description": "A cursor trail where each image grows open from a centered clip-path rectangle, then fades.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mask-trail-rect.tsx",
-          "target": "components/pixel-perfect/mask-trail-rect.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mask-trail-sonar",
-      "description": "A cursor trail where each image resolves from the center outward through concentric rings cut from a repeating-radial-gradient mask, then fades.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mask-trail-sonar.tsx",
-          "target": "components/pixel-perfect/mask-trail-sonar.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mask-trail-split",
-      "description": "A cursor trail where each image splits open from a centered seam via an animated clip-path inset, then fades.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mask-trail-split.tsx",
-          "target": "components/pixel-perfect/mask-trail-split.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mask-trail-star",
-      "description": "A cursor trail where each image bursts open from a growing, spinning sparkle clip-path, then fades.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mask-trail-star.tsx",
-          "target": "components/pixel-perfect/mask-trail-star.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mask-trail-wipe",
-      "description": "A cursor trail where each image wipes upward from its bottom edge via an animated clip-path inset, then fades.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mask-trail-wipe.tsx",
-          "target": "components/pixel-perfect/mask-trail-wipe.tsx"
         }
       ]
     },
@@ -4652,51 +4294,6 @@
       ]
     },
     {
-      "name": "gyroscope-rings",
-      "description": "Three rings spinning on tilted axes around a pulsing core, forming a 3D gyroscope with orbiting beads.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/perspective/gyroscope-rings.tsx",
-          "target": "components/pixel-perfect/gyroscope-rings.tsx"
-        }
-      ]
-    },
-    {
-      "name": "swing-door-reveal",
-      "description": "A door that swings open on hover with a springy 3D hinge, revealing a glowing light behind it.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/perspective/swing-door-reveal.tsx",
-          "target": "components/pixel-perfect/swing-door-reveal.tsx"
-        }
-      ]
-    },
-    {
-      "name": "page-flip-book",
-      "description": "An open book lying in perspective, endlessly turning its pages with a 3D flip around the spine.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/perspective/page-flip-book.tsx",
-          "target": "components/pixel-perfect/page-flip-book.tsx"
-        }
-      ]
-    },
-    {
       "name": "aperture-mask-reveal",
       "description": "A camera-aperture mask reveal — six shutter blades twist open around the center, dilating a hexagonal iris cut from an inline SVG mask.",
       "type": "registry:block",
@@ -4827,21 +4424,6 @@
           "type": "registry:component",
           "path": "registry/new-york/perspective/coverflow-marquee.tsx",
           "target": "components/pixel-perfect/coverflow-marquee.tsx"
-        }
-      ]
-    },
-    {
-      "name": "domino-run",
-      "description": "A receding row of dominoes toppling toward the camera one by one, then standing back up in a wave.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/perspective/domino-run.tsx",
-          "target": "components/pixel-perfect/domino-run.tsx"
         }
       ]
     },
@@ -5029,6 +4611,21 @@
           "type": "registry:component",
           "path": "registry/new-york/motion-framer/fisheye-faq.tsx",
           "target": "components/pixel-perfect/fisheye-faq.tsx"
+        }
+      ]
+    },
+    {
+      "name": "swing-door-reveal",
+      "description": "A door that swings open on hover with a springy 3D hinge, revealing the room behind it.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/swing-door-reveal.tsx",
+          "target": "components/pixel-perfect/swing-door-reveal.tsx"
         }
       ]
     }

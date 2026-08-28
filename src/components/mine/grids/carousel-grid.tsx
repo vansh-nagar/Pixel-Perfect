@@ -153,7 +153,7 @@ const CarouselGrid = () => {
               <RefreshCcw className="size-3" />
             </Button>
 
-            <div className="absolute bottom-0 left-0 z-40 max-w-md border-t border-r border-dashed bg-background/80 px-2.5 py-2 backdrop-blur-sm">
+            <div className="absolute bottom-0 left-0 z-40 max-w-md px-2.5 py-2">
               <p className="text-xs font-medium tracking-tight text-foreground">
                 {item.name}
               </p>

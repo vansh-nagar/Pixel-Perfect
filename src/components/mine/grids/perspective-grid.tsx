@@ -10,14 +10,11 @@ import HoverLayerStack from "registry/new-york/perspective/hover-layer-stack";
 import HelixSpinner from "registry/new-york/perspective/helix-spinner";
 import FlipTileWave from "registry/new-york/perspective/flip-tile-wave";
 import FlipClockCounter from "registry/new-york/perspective/flip-clock-counter";
-import GyroscopeRings from "registry/new-york/perspective/gyroscope-rings";
 import AccordionFold from "registry/new-york/perspective/accordion-fold";
 import DepthTunnel from "registry/new-york/perspective/depth-tunnel";
 import SwingDoorReveal from "registry/new-york/perspective/swing-door-reveal";
-import PageFlipBook from "registry/new-york/perspective/page-flip-book";
 import ExplodingDiceCube from "registry/new-york/perspective/exploding-dice-cube";
 import CoverflowMarquee from "registry/new-york/perspective/coverflow-marquee";
-import DominoRun from "registry/new-york/perspective/domino-run";
 import OrbitOrrery from "registry/new-york/perspective/orbit-orrery";
 import PerspectiveTextCrawl from "registry/new-york/perspective/perspective-text-crawl";
 import SwingingSign from "registry/new-york/perspective/swinging-sign";
@@ -79,13 +76,6 @@ const PerspectiveComponentArr: {
     registryName: "flip-clock-counter",
   },
   {
-    name: "Gyroscope",
-    description:
-      "Three rings spinning on tilted axes around a pulsing core, with beads orbiting each ring.",
-    Component: GyroscopeRings,
-    registryName: "gyroscope-rings",
-  },
-  {
     name: "Accordion Fold",
     description:
       "A paper map of hinged panels that folds itself up like an accordion and flattens back out.",
@@ -102,16 +92,9 @@ const PerspectiveComponentArr: {
   {
     name: "Door Reveal",
     description:
-      "A door that swings open on hover with a springy 3D hinge, revealing a glowing light behind.",
+      "A door that swings open on hover with a springy 3D hinge, revealing the room behind.",
     Component: SwingDoorReveal,
     registryName: "swing-door-reveal",
-  },
-  {
-    name: "Page Flip",
-    description:
-      "An open book lying in perspective, endlessly turning its pages with a 3D flip around the spine.",
-    Component: PageFlipBook,
-    registryName: "page-flip-book",
   },
   {
     name: "Exploding Dice",
@@ -126,13 +109,6 @@ const PerspectiveComponentArr: {
       "An endless coverflow: cards glide across the stage, swinging flat as they pass center, with reflections.",
     Component: CoverflowMarquee,
     registryName: "coverflow-marquee",
-  },
-  {
-    name: "Domino Run",
-    description:
-      "A receding row of dominoes toppling toward the camera one by one, then standing back up in a wave.",
-    Component: DominoRun,
-    registryName: "domino-run",
   },
   {
     name: "Orrery",
@@ -183,7 +159,10 @@ const PerspectiveGrid = () => {
               key={startIndex + index}
               className="relative w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
             >
-              <div className="z-30" key={refreshKeys[startIndex + index] || 0}>
+              <div
+                className="z-30 flex h-full w-full items-center justify-center"
+                key={refreshKeys[startIndex + index] || 0}
+              >
                 <Component />
               </div>
 

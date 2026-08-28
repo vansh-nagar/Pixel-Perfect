@@ -2,9 +2,6 @@
   "2069443974935302223": {
     "__typename": "Tweet",
     "favorite_count": 1,
-    "in_reply_to_screen_name": "vansh1029",
-    "in_reply_to_status_id_str": "2069412660857180484",
-    "in_reply_to_user_id_str": "1895655751169032192",
     "lang": "en",
     "created_at": "2026-06-23T15:34:26.000Z",
     "display_text_range": [
@@ -19,7 +16,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -45,169 +42,6 @@
     },
     "conversation_count": 1,
     "news_action_type": "conversation",
-    "parent": {
-      "favorite_count": 260,
-      "lang": "en",
-      "possibly_sensitive": false,
-      "reply_count": 6,
-      "retweet_count": 3,
-      "created_at": "2026-06-23T13:30:00.000Z",
-      "display_text_range": [
-        0,
-        58
-      ],
-      "entities": {
-        "media": [
-          {
-            "display_url": "pic.x.com/6yNITnpZIc",
-            "expanded_url": "https://x.com/vansh1029/status/2069412660857180484/video/1",
-            "indices": [
-              59,
-              82
-            ],
-            "url": "https://t.co/6yNITnpZIc"
-          }
-        ]
-      },
-      "id_str": "2069412660857180484",
-      "text": "Fixed pagination across multiple grids in Pixel Perfect :) https://t.co/6yNITnpZIc",
-      "user": {
-        "id_str": "1895655751169032192",
-        "name": "Vansh N.",
-        "screen_name": "vansh1029",
-        "is_blue_verified": true,
-        "profile_image_shape": "Circle",
-        "verified": false,
-        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
-      },
-      "edit_control": {
-        "edit_tweet_ids": [
-          "2069412660857180484"
-        ],
-        "editable_until_msecs": "1782225000000",
-        "edits_remaining": "5",
-        "is_edit_eligible": false
-      },
-      "mediaDetails": [
-        {
-          "additional_media_info": {},
-          "display_url": "pic.x.com/6yNITnpZIc",
-          "expanded_url": "https://x.com/vansh1029/status/2069412660857180484/video/1",
-          "ext_media_availability": {
-            "status": "Available"
-          },
-          "indices": [
-            59,
-            82
-          ],
-          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2067195036836773888/img/REQDmmTKAkatPeBQ.jpg",
-          "original_info": {
-            "focus_rects": [],
-            "height": 1058,
-            "width": 1920
-          },
-          "sizes": {
-            "large": {
-              "h": 1058,
-              "resize": "fit",
-              "w": 1920
-            },
-            "medium": {
-              "h": 661,
-              "resize": "fit",
-              "w": 1200
-            },
-            "small": {
-              "h": 375,
-              "resize": "fit",
-              "w": 680
-            },
-            "thumb": {
-              "h": 150,
-              "resize": "crop",
-              "w": 150
-            }
-          },
-          "type": "video",
-          "url": "https://t.co/6yNITnpZIc",
-          "video_info": {
-            "aspect_ratio": [
-              960,
-              529
-            ],
-            "duration_millis": 15208,
-            "variants": [
-              {
-                "content_type": "application/x-mpegURL",
-                "url": "https://video.twimg.com/amplify_video/2067195036836773888/pl/CVRg8RhLmdGy0qNO.m3u8?v=cfc"
-              },
-              {
-                "bitrate": 256000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/488x270/zOBmfQyRAk7hwvy5.mp4"
-              },
-              {
-                "bitrate": 832000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/652x360/__eZ9Plmy5K5ekn7.mp4"
-              },
-              {
-                "bitrate": 2176000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1306x720/E2t_EV13wxpwFvTd.mp4"
-              },
-              {
-                "bitrate": 10368000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1920x1058/4YtefoaA3Zw2VnQN.mp4"
-              }
-            ]
-          }
-        }
-      ],
-      "photos": [],
-      "video": {
-        "aspectRatio": [
-          960,
-          529
-        ],
-        "contentType": "media_entity",
-        "durationMs": 15208,
-        "mediaAvailability": {
-          "status": "available"
-        },
-        "poster": "https://pbs.twimg.com/amplify_video_thumb/2067195036836773888/img/REQDmmTKAkatPeBQ.jpg",
-        "variants": [
-          {
-            "type": "application/x-mpegURL",
-            "src": "https://video.twimg.com/amplify_video/2067195036836773888/pl/CVRg8RhLmdGy0qNO.m3u8?v=cfc"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/488x270/zOBmfQyRAk7hwvy5.mp4"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/652x360/__eZ9Plmy5K5ekn7.mp4"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1306x720/E2t_EV13wxpwFvTd.mp4"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2067195036836773888/vid/avc1/1920x1058/4YtefoaA3Zw2VnQN.mp4"
-          }
-        ],
-        "videoId": {
-          "type": "tweet",
-          "id": "2069412660857180484"
-        },
-        "viewCount": 0
-      },
-      "isEdited": false,
-      "isStaleEdit": false
-    },
     "isEdited": false,
     "isStaleEdit": false
   },
@@ -231,7 +65,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -258,11 +92,11 @@
     "conversation_count": 1,
     "news_action_type": "conversation",
     "parent": {
-      "favorite_count": 260,
+      "favorite_count": 289,
       "lang": "en",
       "possibly_sensitive": false,
-      "reply_count": 6,
-      "retweet_count": 3,
+      "reply_count": 8,
+      "retweet_count": 5,
       "created_at": "2026-06-23T13:30:00.000Z",
       "display_text_range": [
         0,
@@ -285,7 +119,7 @@
       "text": "Fixed pagination across multiple grids in Pixel Perfect :) https://t.co/6yNITnpZIc",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -443,7 +277,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -454,10 +288,10 @@
       "id_str": "1480846102496747520",
       "name": "terzicc",
       "screen_name": "terzicdsgn",
-      "is_blue_verified": true,
+      "is_blue_verified": false,
       "profile_image_shape": "Circle",
       "verified": false,
-      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2055724991346302977/6h-gFU1J_normal.jpg"
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2074136332574523392/9SbINLtB_normal.jpg"
     },
     "edit_control": {
       "edit_tweet_ids": [
@@ -470,11 +304,11 @@
     "conversation_count": 1,
     "news_action_type": "conversation",
     "parent": {
-      "favorite_count": 260,
+      "favorite_count": 289,
       "lang": "en",
       "possibly_sensitive": false,
-      "reply_count": 6,
-      "retweet_count": 3,
+      "reply_count": 8,
+      "retweet_count": 5,
       "created_at": "2026-06-23T13:30:00.000Z",
       "display_text_range": [
         0,
@@ -497,7 +331,7 @@
       "text": "Fixed pagination across multiple grids in Pixel Perfect :) https://t.co/6yNITnpZIc",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -655,7 +489,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -664,8 +498,8 @@
     "text": "@vansh1029 looks cleannn man",
     "user": {
       "id_str": "1917637884967792640",
-      "name": "Daniel",
-      "screen_name": "DanielWhit21874",
+      "name": "Daniel White",
+      "screen_name": "dwhitedesign",
       "is_blue_verified": true,
       "profile_image_shape": "Circle",
       "verified": false,
@@ -709,7 +543,7 @@
       "text": "New batch dropped :D\n\nOnly on Pixel Perfect some of these are experimental built just for learning and pushing ideas. https://t.co/KLJ70oMk6k",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -869,7 +703,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -923,7 +757,7 @@
       "text": "New batch dropped :D\n\nOnly on Pixel Perfect some of these are experimental built just for learning and pushing ideas. https://t.co/KLJ70oMk6k",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -1083,7 +917,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -1137,7 +971,7 @@
       "text": "New batch dropped :D\n\nOnly on Pixel Perfect some of these are experimental built just for learning and pushing ideas. https://t.co/KLJ70oMk6k",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -1280,9 +1114,6 @@
   "2065509234616193260": {
     "__typename": "Tweet",
     "favorite_count": 1,
-    "in_reply_to_screen_name": "vansh1029",
-    "in_reply_to_status_id_str": "2065426392020607233",
-    "in_reply_to_user_id_str": "1895655751169032192",
     "lang": "qme",
     "created_at": "2026-06-12T18:59:11.000Z",
     "display_text_range": [
@@ -1297,7 +1128,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -1323,178 +1154,12 @@
     },
     "conversation_count": 1,
     "news_action_type": "conversation",
-    "parent": {
-      "favorite_count": 28,
-      "lang": "en",
-      "possibly_sensitive": false,
-      "reply_count": 4,
-      "retweet_count": 1,
-      "created_at": "2026-06-12T13:30:00.000Z",
-      "display_text_range": [
-        0,
-        48
-      ],
-      "entities": {
-        "media": [
-          {
-            "display_url": "pic.x.com/lOVpDz8QKA",
-            "expanded_url": "https://x.com/vansh1029/status/2065426392020607233/video/1",
-            "indices": [
-              49,
-              72
-            ],
-            "url": "https://t.co/lOVpDz8QKA"
-          }
-        ]
-      },
-      "id_str": "2065426392020607233",
-      "text": "Another banger button :)\nOnly on Pixel Perfect ↓ https://t.co/lOVpDz8QKA",
-      "user": {
-        "id_str": "1895655751169032192",
-        "name": "Vansh N.",
-        "screen_name": "vansh1029",
-        "is_blue_verified": true,
-        "profile_image_shape": "Circle",
-        "verified": false,
-        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
-      },
-      "edit_control": {
-        "edit_tweet_ids": [
-          "2065426392020607233"
-        ],
-        "editable_until_msecs": "1781274600000",
-        "edits_remaining": "5",
-        "is_edit_eligible": false
-      },
-      "mediaDetails": [
-        {
-          "additional_media_info": {},
-          "display_url": "pic.x.com/lOVpDz8QKA",
-          "expanded_url": "https://x.com/vansh1029/status/2065426392020607233/video/1",
-          "ext_media_availability": {
-            "status": "Available"
-          },
-          "indices": [
-            49,
-            72
-          ],
-          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2062917225951227904/img/ENZ0yKAfKea4rnhp.jpg",
-          "original_info": {
-            "focus_rects": [],
-            "height": 1080,
-            "width": 1080
-          },
-          "sizes": {
-            "large": {
-              "h": 1080,
-              "resize": "fit",
-              "w": 1080
-            },
-            "medium": {
-              "h": 1080,
-              "resize": "fit",
-              "w": 1080
-            },
-            "small": {
-              "h": 680,
-              "resize": "fit",
-              "w": 680
-            },
-            "thumb": {
-              "h": 150,
-              "resize": "crop",
-              "w": 150
-            }
-          },
-          "type": "video",
-          "url": "https://t.co/lOVpDz8QKA",
-          "video_info": {
-            "aspect_ratio": [
-              1,
-              1
-            ],
-            "duration_millis": 19776,
-            "variants": [
-              {
-                "content_type": "application/x-mpegURL",
-                "url": "https://video.twimg.com/amplify_video/2062917225951227904/pl/kN3hfKXtTtdNk8jo.m3u8?v=cfc"
-              },
-              {
-                "bitrate": 432000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/320x320/XQmZAGq5Hz1x4mTD.mp4"
-              },
-              {
-                "bitrate": 832000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/540x540/ZBhrYXgExRvnp4YC.mp4"
-              },
-              {
-                "bitrate": 1280000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/720x720/vrQj197sxYUPDHK1.mp4"
-              },
-              {
-                "bitrate": 8768000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/1080x1080/VlHVzND8ToWo-mLh.mp4"
-              }
-            ]
-          }
-        }
-      ],
-      "photos": [],
-      "video": {
-        "aspectRatio": [
-          1,
-          1
-        ],
-        "contentType": "media_entity",
-        "durationMs": 19776,
-        "mediaAvailability": {
-          "status": "available"
-        },
-        "poster": "https://pbs.twimg.com/amplify_video_thumb/2062917225951227904/img/ENZ0yKAfKea4rnhp.jpg",
-        "variants": [
-          {
-            "type": "application/x-mpegURL",
-            "src": "https://video.twimg.com/amplify_video/2062917225951227904/pl/kN3hfKXtTtdNk8jo.m3u8?v=cfc"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/320x320/XQmZAGq5Hz1x4mTD.mp4"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/540x540/ZBhrYXgExRvnp4YC.mp4"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/720x720/vrQj197sxYUPDHK1.mp4"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2062917225951227904/vid/avc1/1080x1080/VlHVzND8ToWo-mLh.mp4"
-          }
-        ],
-        "videoId": {
-          "type": "tweet",
-          "id": "2065426392020607233"
-        },
-        "viewCount": 0
-      },
-      "isEdited": false,
-      "isStaleEdit": false
-    },
     "isEdited": false,
     "isStaleEdit": false
   },
   "2064951392968872192": {
     "__typename": "Tweet",
     "favorite_count": 0,
-    "in_reply_to_screen_name": "vansh1029",
-    "in_reply_to_status_id_str": "2064701615970357365",
-    "in_reply_to_user_id_str": "1895655751169032192",
     "lang": "en",
     "created_at": "2026-06-11T06:02:31.000Z",
     "display_text_range": [
@@ -1509,7 +1174,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -1520,7 +1185,7 @@
       "id_str": "2029183032385781760",
       "name": "Emily Ritter",
       "screen_name": "emilyrtter1",
-      "is_blue_verified": true,
+      "is_blue_verified": false,
       "profile_image_shape": "Circle",
       "verified": false,
       "profile_image_url_https": "https://pbs.twimg.com/profile_images/2034244596621062144/YmJQRL_v_normal.jpg"
@@ -1535,169 +1200,6 @@
     },
     "conversation_count": 0,
     "news_action_type": "conversation",
-    "parent": {
-      "favorite_count": 30,
-      "lang": "en",
-      "possibly_sensitive": false,
-      "reply_count": 4,
-      "retweet_count": 1,
-      "created_at": "2026-06-10T13:30:00.000Z",
-      "display_text_range": [
-        0,
-        73
-      ],
-      "entities": {
-        "media": [
-          {
-            "display_url": "pic.x.com/d8Dhx9cHeN",
-            "expanded_url": "https://x.com/vansh1029/status/2064701615970357365/video/1",
-            "indices": [
-              74,
-              97
-            ],
-            "url": "https://t.co/d8Dhx9cHeN"
-          }
-        ]
-      },
-      "id_str": "2064701615970357365",
-      "text": "Cooked up a cool button with some gradient magic :)\nOnly on pixel-perfect https://t.co/d8Dhx9cHeN",
-      "user": {
-        "id_str": "1895655751169032192",
-        "name": "Vansh N.",
-        "screen_name": "vansh1029",
-        "is_blue_verified": true,
-        "profile_image_shape": "Circle",
-        "verified": false,
-        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q_normal.png"
-      },
-      "edit_control": {
-        "edit_tweet_ids": [
-          "2064701615970357365"
-        ],
-        "editable_until_msecs": "1781101800000",
-        "edits_remaining": "5",
-        "is_edit_eligible": false
-      },
-      "mediaDetails": [
-        {
-          "additional_media_info": {},
-          "display_url": "pic.x.com/d8Dhx9cHeN",
-          "expanded_url": "https://x.com/vansh1029/status/2064701615970357365/video/1",
-          "ext_media_availability": {
-            "status": "Available"
-          },
-          "indices": [
-            74,
-            97
-          ],
-          "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2062914964873232385/img/DyZcOJbpMrcSmHya.jpg",
-          "original_info": {
-            "focus_rects": [],
-            "height": 1080,
-            "width": 1080
-          },
-          "sizes": {
-            "large": {
-              "h": 1080,
-              "resize": "fit",
-              "w": 1080
-            },
-            "medium": {
-              "h": 1080,
-              "resize": "fit",
-              "w": 1080
-            },
-            "small": {
-              "h": 680,
-              "resize": "fit",
-              "w": 680
-            },
-            "thumb": {
-              "h": 150,
-              "resize": "crop",
-              "w": 150
-            }
-          },
-          "type": "video",
-          "url": "https://t.co/d8Dhx9cHeN",
-          "video_info": {
-            "aspect_ratio": [
-              1,
-              1
-            ],
-            "duration_millis": 14074,
-            "variants": [
-              {
-                "content_type": "application/x-mpegURL",
-                "url": "https://video.twimg.com/amplify_video/2062914964873232385/pl/lzu4pydVvFX04BZe.m3u8?v=cfc"
-              },
-              {
-                "bitrate": 432000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/320x320/3A5QffB0-StOinWU.mp4"
-              },
-              {
-                "bitrate": 832000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/540x540/xRZlR3qFz5jfm-hN.mp4"
-              },
-              {
-                "bitrate": 1280000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/720x720/iskHnp1gruZDo03B.mp4"
-              },
-              {
-                "bitrate": 8768000,
-                "content_type": "video/mp4",
-                "url": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/1080x1080/u6vPf8mFEocMbpiK.mp4"
-              }
-            ]
-          }
-        }
-      ],
-      "photos": [],
-      "video": {
-        "aspectRatio": [
-          1,
-          1
-        ],
-        "contentType": "media_entity",
-        "durationMs": 14074,
-        "mediaAvailability": {
-          "status": "available"
-        },
-        "poster": "https://pbs.twimg.com/amplify_video_thumb/2062914964873232385/img/DyZcOJbpMrcSmHya.jpg",
-        "variants": [
-          {
-            "type": "application/x-mpegURL",
-            "src": "https://video.twimg.com/amplify_video/2062914964873232385/pl/lzu4pydVvFX04BZe.m3u8?v=cfc"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/320x320/3A5QffB0-StOinWU.mp4"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/540x540/xRZlR3qFz5jfm-hN.mp4"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/720x720/iskHnp1gruZDo03B.mp4"
-          },
-          {
-            "type": "video/mp4",
-            "src": "https://video.twimg.com/amplify_video/2062914964873232385/vid/avc1/1080x1080/u6vPf8mFEocMbpiK.mp4"
-          }
-        ],
-        "videoId": {
-          "type": "tweet",
-          "id": "2064701615970357365"
-        },
-        "viewCount": 0
-      },
-      "isEdited": false,
-      "isStaleEdit": false
-    },
     "isEdited": false,
     "isStaleEdit": false
   },
@@ -1733,7 +1235,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -1789,7 +1291,7 @@
               44,
               54
             ],
-            "name": "Vansh N.",
+            "name": "Vansh",
             "screen_name": "vansh1029"
           }
         ]
@@ -1957,22 +1459,6 @@
       "name": "summary_large_image",
       "url": "https://t.co/qUcyUOWL4T",
       "binding_values": {
-        "photo_image_full_size_large": {
-          "image_value": {
-            "height": 419,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=800x419",
-            "width": 800
-          },
-          "type": "IMAGE"
-        },
-        "thumbnail_image": {
-          "image_value": {
-            "height": 150,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=280x150",
-            "width": 267
-          },
-          "type": "IMAGE"
-        },
         "description": {
           "string_value": "Pixel Perfect UI is a documentation-first React component library designed for building beautiful, responsive interfaces quickly. What it does: This lightwei...",
           "type": "STRING"
@@ -1981,216 +1467,19 @@
           "string_value": "uiroot.com",
           "type": "STRING"
         },
-        "thumbnail_image_large": {
-          "image_value": {
-            "height": 320,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=800x320_1",
-            "width": 569
-          },
-          "type": "IMAGE"
-        },
-        "summary_photo_image_small": {
-          "image_value": {
-            "height": 202,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=386x202",
-            "width": 386
-          },
-          "type": "IMAGE"
-        },
-        "thumbnail_image_original": {
-          "image_value": {
-            "height": 1080,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=orig",
-            "width": 1920
-          },
-          "type": "IMAGE"
-        },
-        "photo_image_full_size_small": {
-          "image_value": {
-            "height": 202,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=386x202",
-            "width": 386
-          },
-          "type": "IMAGE"
-        },
-        "summary_photo_image_large": {
-          "image_value": {
-            "height": 419,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=800x419",
-            "width": 800
-          },
-          "type": "IMAGE"
-        },
-        "thumbnail_image_small": {
-          "image_value": {
-            "height": 81,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=144x144",
-            "width": 144
-          },
-          "type": "IMAGE"
-        },
-        "thumbnail_image_x_large": {
-          "image_value": {
-            "height": 1080,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=png&name=2048x2048_2_exp",
-            "width": 1920
-          },
-          "type": "IMAGE"
-        },
-        "photo_image_full_size_original": {
-          "image_value": {
-            "height": 1080,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=orig",
-            "width": 1920
-          },
-          "type": "IMAGE"
-        },
         "vanity_url": {
           "scribe_key": "vanity_url",
           "string_value": "uiroot.com",
           "type": "STRING"
         },
-        "photo_image_full_size": {
-          "image_value": {
-            "height": 314,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=600x314",
-            "width": 600
-          },
-          "type": "IMAGE"
-        },
-        "thumbnail_image_color": {
-          "image_color_value": {
-            "palette": [
-              {
-                "percentage": 53.1,
-                "rgb": {
-                  "blue": 254,
-                  "green": 254,
-                  "red": 254
-                }
-              },
-              {
-                "percentage": 40.02,
-                "rgb": {
-                  "blue": 32,
-                  "green": 32,
-                  "red": 32
-                }
-              },
-              {
-                "percentage": 8.91,
-                "rgb": {
-                  "blue": 121,
-                  "green": 121,
-                  "red": 121
-                }
-              }
-            ]
-          },
-          "type": "IMAGE_COLOR"
-        },
         "title": {
           "string_value": "Pixel Perfect UI - Bespoke React components for stunning, modern web apps. | UI root",
           "type": "STRING"
-        },
-        "summary_photo_image_color": {
-          "image_color_value": {
-            "palette": [
-              {
-                "percentage": 53.1,
-                "rgb": {
-                  "blue": 254,
-                  "green": 254,
-                  "red": 254
-                }
-              },
-              {
-                "percentage": 40.02,
-                "rgb": {
-                  "blue": 32,
-                  "green": 32,
-                  "red": 32
-                }
-              },
-              {
-                "percentage": 8.91,
-                "rgb": {
-                  "blue": 121,
-                  "green": 121,
-                  "red": 121
-                }
-              }
-            ]
-          },
-          "type": "IMAGE_COLOR"
-        },
-        "summary_photo_image_x_large": {
-          "image_value": {
-            "height": 1080,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=png&name=2048x2048_2_exp",
-            "width": 1920
-          },
-          "type": "IMAGE"
-        },
-        "summary_photo_image": {
-          "image_value": {
-            "height": 314,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=600x314",
-            "width": 600
-          },
-          "type": "IMAGE"
-        },
-        "photo_image_full_size_color": {
-          "image_color_value": {
-            "palette": [
-              {
-                "percentage": 53.1,
-                "rgb": {
-                  "blue": 254,
-                  "green": 254,
-                  "red": 254
-                }
-              },
-              {
-                "percentage": 40.02,
-                "rgb": {
-                  "blue": 32,
-                  "green": 32,
-                  "red": 32
-                }
-              },
-              {
-                "percentage": 8.91,
-                "rgb": {
-                  "blue": 121,
-                  "green": 121,
-                  "red": 121
-                }
-              }
-            ]
-          },
-          "type": "IMAGE_COLOR"
-        },
-        "photo_image_full_size_x_large": {
-          "image_value": {
-            "height": 1080,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=png&name=2048x2048_2_exp",
-            "width": 1920
-          },
-          "type": "IMAGE"
         },
         "card_url": {
           "scribe_key": "card_url",
           "string_value": "https://t.co/qUcyUOWL4T",
           "type": "STRING"
-        },
-        "summary_photo_image_original": {
-          "image_value": {
-            "height": 1080,
-            "url": "https://pbs.twimg.com/card_img/2069280111078100992/as5hhQ5N?format=jpg&name=orig",
-            "width": 1920
-          },
-          "type": "IMAGE"
         }
       }
     },
@@ -2217,7 +1506,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -2271,7 +1560,7 @@
       "text": "Made keyboard keys using some shadow magic ❇︎\nAvailable on pixel perfect :) https://t.co/sJ75JgHXFA",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -2429,7 +1718,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -2438,12 +1727,12 @@
     "text": "@vansh1029 This looks so pixel perfect and realistic",
     "user": {
       "id_str": "2039230081537572864",
-      "name": "Sammy",
+      "name": "Sam",
       "screen_name": "Sammyykm_",
       "is_blue_verified": false,
       "profile_image_shape": "Circle",
       "verified": false,
-      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2054060696821018624/CEOzHNuW_normal.jpg"
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2093019014549368832/zHF6ufkz_normal.png"
     },
     "edit_control": {
       "edit_tweet_ids": [
@@ -2483,7 +1772,7 @@
       "text": "Made keyboard keys using some shadow magic ❇︎\nAvailable on pixel perfect :) https://t.co/sJ75JgHXFA",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -2641,7 +1930,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -2668,7 +1957,7 @@
     "conversation_count": 1,
     "news_action_type": "conversation",
     "parent": {
-      "favorite_count": 211,
+      "favorite_count": 208,
       "lang": "en",
       "possibly_sensitive": false,
       "reply_count": 11,
@@ -2695,7 +1984,7 @@
       "text": "Recreated this sick button by LueStudio :)\nAvailable on Pixel Perfect ↓ https://t.co/pcQ1H6qN3p",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -2853,7 +2142,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -2880,7 +2169,7 @@
     "conversation_count": 1,
     "news_action_type": "conversation",
     "parent": {
-      "favorite_count": 211,
+      "favorite_count": 208,
       "lang": "en",
       "possibly_sensitive": false,
       "reply_count": 11,
@@ -2907,7 +2196,7 @@
       "text": "Recreated this sick button by LueStudio :)\nAvailable on Pixel Perfect ↓ https://t.co/pcQ1H6qN3p",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -3065,7 +2354,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -3086,7 +2375,7 @@
         },
         "description": "Axiom",
         "url": {
-          "url": "https://twitter.com/AxiomFM",
+          "url": "https://twitter.com/axiomhq",
           "url_type": "DeepLink"
         },
         "user_label_display_type": "Badge",
@@ -3104,7 +2393,7 @@
     "conversation_count": 1,
     "news_action_type": "conversation",
     "parent": {
-      "favorite_count": 38,
+      "favorite_count": 37,
       "lang": "en",
       "possibly_sensitive": false,
       "reply_count": 3,
@@ -3131,7 +2420,7 @@
       "text": "Added 3 new buttons to Pixel Perfect \nPixel Perfect have some of the most unique CSS button styles I’ve made. https://t.co/4ohOX1DNgq",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",
@@ -3289,7 +2578,7 @@
             0,
             10
           ],
-          "name": "Vansh N.",
+          "name": "Vansh",
           "screen_name": "vansh1029"
         }
       ]
@@ -3303,7 +2592,7 @@
       "is_blue_verified": true,
       "profile_image_shape": "Circle",
       "verified": false,
-      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1749381900538413056/jD72QyUF_normal.jpg"
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2070480018384326656/DBnRup3M_normal.jpg"
     },
     "edit_control": {
       "edit_tweet_ids": [
@@ -3343,7 +2632,7 @@
       "text": "Cooked this text animation a while ago.\nFeel free to use it in your portfolio if it fits your theme.\nOnly on Pixel Perfect :) https://t.co/7RQmMMK0om",
       "user": {
         "id_str": "1895655751169032192",
-        "name": "Vansh N.",
+        "name": "Vansh",
         "screen_name": "vansh1029",
         "is_blue_verified": true,
         "profile_image_shape": "Circle",

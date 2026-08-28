@@ -745,7 +745,7 @@ export const ButtonsArr = [
 
 const ButtonGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 8;
   const totalPages = Math.ceil(ButtonsArr.length / itemsPerPage);
   usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -756,7 +756,7 @@ const ButtonGrid = () => {
 
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
         {paginatedItems.map((item, index) => (
           <div
             key={index}

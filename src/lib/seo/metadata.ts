@@ -45,7 +45,7 @@ export const baseMetadata: Metadata = {
     description: SEO_CONSTANTS.defaultDescription,
     images: [SEO_CONSTANTS.defaultOgImage],
   },
-  icons: { icon: "/logo/static/logo.svg" },
+  icons: { icon: "/logo/static/logo-white.svg" },
   robots: {
     index: true,
     follow: true,

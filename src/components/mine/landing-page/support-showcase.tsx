@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { motion, useAnimationControls } from "motion/react";
 import { Heart, Shuffle } from "lucide-react";
 
-import RefractionGlassButton from "registry/new-york/buttons/refraction-glass-button";
 import SilverButton from "registry/new-york/buttons/silver-button";
 import BevelButton from "registry/new-york/buttons/bevel-button";
 import RainbowGlowingButton from "registry/new-york/buttons/rainbow-glowing-button";
@@ -39,7 +38,6 @@ const CHECKOUT_URL = `${DONATE_URL}?amount=${DEFAULT_AMOUNT_CENTS}`;
 const LABEL = "Donate Now";
 
 const styles = [
-  { name: "Refraction Glass", node: <RefractionGlassButton>{LABEL}</RefractionGlassButton> },
   { name: "Steel Pill", node: <SilverButton variant="steel">{LABEL}</SilverButton> },
   { name: "Pearl Pill", node: <SilverButton variant="pearl">{LABEL}</SilverButton> },
   { name: "Bevel", node: <BevelButton>{LABEL}</BevelButton> },

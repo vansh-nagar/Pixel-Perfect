@@ -24,10 +24,10 @@ technique from memory.
 
    | Category | Already built |
    |---|---|
-   | Materials | neumorphic (`premium`, `orange-premium`), metal/chrome (`metal`, `blue-chrome`, `silver`), glass (`glass`, `glassy`, `soft-pill`, `prism-glass`), matte (`matte-dark`, `matte-shadow`), bevel/inset (`bevel`, `stripe`) |
-   | Motion | label/icon swap (`visit`, `learn-more-buttion`), toggles (`toggle-buttion`, `blur-toggle`, `pearl-toggle`), magnetic/cursor (`magnetic`, `mouse-follower`), morph (`morph`, `morph-image`), shine sweep (`shiny`, `liquid`) |
+   | Materials | neumorphic (`premium`, `orange-premium`), metal/chrome (`metal`, `blue-chrome`, `silver`), glass (`glass`, `glassy`, `soft-pill`), matte (`matte-dark`, `matte-shadow`), bevel/inset (`bevel`, `stripe`) |
+   | Motion | label/icon swap (`visit`, `learn-more-buttion`), toggles (`toggle-buttion`, `blur-toggle`, `pearl-toggle`), magnetic/cursor (`mouse-follower`), morph (`morph`, `morph-image`), shine sweep (`shiny`, `liquid`) |
    | Borders/glow | gradient border (`border-gradient`), rainbow glow (`rainbow-glowing`) |
-   | Filters | gooey (`goe`), refraction lens (`refraction-glass`) |
+   | Filters | gooey (`goe`), refraction lens (`prism-glass`) |
    | 3D / press | depth push (`3d-button`), stepper (`recessed-stepper`) |
 
 3. If the request is vague ("make something cool"), pick from the idea bank below —
@@ -100,7 +100,7 @@ GSAP beats SVG filters — each step up costs bundle size and complexity.
   `type: "spring"`; tune `stiffness`/`damping` for overshoot.
   Exemplar: `toggle-buttion.tsx` (yes, filename has the typo — keep it).
 - **Draggable buttons**: `drag dragMomentum={false}` on `motion.button`.
-  Exemplar: `refraction-glass-button.tsx`.
+  Exemplar: `prism-glass-button.tsx`.
 - Props extend `HTMLMotionProps<"button">` (not `ButtonHTMLAttributes`) so callers can
   pass motion props; forward the caller's `onHoverStart`/handlers before your own logic.
 
@@ -108,7 +108,7 @@ GSAP beats SVG filters — each step up costs bundle size and complexity.
 
 - **Magnetic / cursor-driven**: map cursor position into a tween range with
   `gsap.utils.mapRange`, parallax the label at a different strength, elastic return on
-  leave, optional `CustomWiggle` idle loop. Exemplar: `magnetic-button.tsx`.
+  leave, optional `CustomWiggle` idle loop.
 - **Shape morphs**: `MorphSVGPlugin` between two paths inside `useGSAP`.
   Exemplars: `morph-button.tsx`, `morph-image-button.tsx` (image-mask variant).
 - Register plugins at module scope (`gsap.registerPlugin(...)`), run setup in
@@ -122,7 +122,7 @@ GSAP beats SVG filters — each step up costs bundle size and complexity.
 - **Refraction / lens**: generate a displacement map on a canvas (SDF math → data URL),
   feed it through `feImage` + `feDisplacementMap` — three displacement passes at
   slightly different scales for RGB chromatic split, then `feBlend`.
-  Exemplar: `refraction-glass-button.tsx` (also shows `ResizeObserver` + `useMemo`
+  Exemplar: `prism-glass-button.tsx` (also shows `ResizeObserver` + `useMemo`
   regeneration when the button resizes).
 - Reach for this tier only when the idea is *about* the filter (goo, glass, distortion).
   Test in Chrome AND Safari — SVG filter support diverges.
@@ -140,7 +140,7 @@ GSAP beats SVG filters — each step up costs bundle size and complexity.
   ```
 - Component shape (dominant pattern — see `premium-button.tsx`):
   `React.forwardRef<HTMLButtonElement, Props>` + `.displayName` + `export default`.
-  Simple GSAP demos may use a plain function component (see `magnetic-button.tsx`).
+  Simple GSAP demos may use a plain function component.
 - Props: `extends React.ButtonHTMLAttributes<HTMLButtonElement>` (CSS buttons) or
   `HTMLMotionProps<"button">` (motion buttons). Always accept `className` (merge via
   `cn` from `@/lib/utils` — NOT `@/lib/cn`, which is legacy) and `children` with a

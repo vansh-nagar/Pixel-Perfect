@@ -50,7 +50,6 @@ import RainbowGlowingButton from "../../../../registry/new-york/buttons/rainbow-
 import type { RainbowColors } from "../../../../registry/new-york/buttons/rainbow-glowing-button";
 import BevelButton from "../../../../registry/new-york/buttons/bevel-button";
 import SilverButton from "../../../../registry/new-york/buttons/silver-button";
-import RefractionGlassButton from "../../../../registry/new-york/buttons/refraction-glass-button";
 import {
   Home,
   Heart,
@@ -531,13 +530,6 @@ const BookDemoButtonWrapper = () => {
 };
 
 export const ButtonsArr = [
-  {
-    name: "Refraction Glass Button",
-    description:
-      "Real glass lens that refracts the content behind it via feDisplacementMap, with chromatic edge and specular sheen.",
-    component: <RefractionGlassButton>Glass</RefractionGlassButton>,
-    registryName: "refraction-glass-button",
-  },
   {
     name: "Steel Pill Button",
     description:

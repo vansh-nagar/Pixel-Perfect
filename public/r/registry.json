@@ -4162,21 +4162,6 @@
       ]
     },
     {
-      "name": "tilt-card-glare",
-      "description": "A mouse-tracked 3D tilt card with parallax depth layers and a moving glare highlight.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/perspective/tilt-card-glare.tsx",
-          "target": "components/pixel-perfect/tilt-card-glare.tsx"
-        }
-      ]
-    },
-    {
       "name": "accordion-carousel",
       "description": "An accordion of vertical image panels — the active panel springs wide to reveal its photo and caption while the rest compress into slim slivers with sideways titles. Click a panel to expand it; it auto-advances until hovered.",
       "type": "registry:block",
@@ -4611,6 +4596,21 @@
           "type": "registry:component",
           "path": "registry/new-york/perspective/swing-door-reveal.tsx",
           "target": "components/pixel-perfect/swing-door-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tilt-card-glare",
+      "description": "A mouse-tracked 3D tilt card with parallax depth layers.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/perspective/tilt-card-glare.tsx",
+          "target": "components/pixel-perfect/tilt-card-glare.tsx"
         }
       ]
     }

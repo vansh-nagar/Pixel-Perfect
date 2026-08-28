@@ -1,12 +1,11 @@
 /**
- * A mouse-tracked 3D tilt card with parallax depth layers and a moving glare highlight.
+ * A mouse-tracked 3D tilt card with parallax depth layers.
  */
 "use client";
 
 import { useRef } from "react";
 import {
   motion,
-  useMotionTemplate,
   useMotionValue,
   useReducedMotion,
   useSpring,
@@ -22,10 +21,6 @@ const TiltCardGlare = () => {
   const spring = { stiffness: 200, damping: 20 };
   const rotateX = useSpring(useTransform(py, [0, 1], [14, -14]), spring);
   const rotateY = useSpring(useTransform(px, [0, 1], [-14, 14]), spring);
-
-  const glareX = useTransform(px, [0, 1], [0, 100]);
-  const glareY = useTransform(py, [0, 1], [0, 100]);
-  const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.25), transparent 60%)`;
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (shouldReduceMotion) return;
@@ -49,10 +44,6 @@ const TiltCardGlare = () => {
         className="relative h-52 w-40 rounded-xl border border-foreground/20 bg-foreground/5 p-4"
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       >
-        <motion.div
-          className="pointer-events-none absolute inset-0 rounded-xl"
-          style={{ background: glare }}
-        />
         <div
           className="flex h-full flex-col justify-between"
           style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }}

@@ -36,7 +36,7 @@ const PerspectiveComponentArr: {
   {
     name: "Tilt Card",
     description:
-      "Mouse-tracked 3D tilt card with parallax depth layers and a moving glare highlight.",
+      "Mouse-tracked 3D tilt card with parallax depth layers.",
     Component: TiltCardGlare,
     registryName: "tilt-card-glare",
   },

@@ -286,20 +286,21 @@ body,
   height: 0;
 }
 
-/* Sleek minimal scrollbar */
+/* The page itself scrolls without a visible bar. Element-level scroll areas
+ * (sidebar, message scroller, code blocks) keep the sleek thumb defined below —
+ * only the document scrollbar is hidden, and scrolling itself is untouched. */
 html,
 body,
 #__next {
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: oklch(0 0 0 / 0.18) transparent;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
 }
 
-.dark html,
-.dark body,
-.dark #__next,
-html.dark,
-body.dark {
-  scrollbar-color: oklch(1 0 0 / 0.18) transparent;
+/* Element-specific, so it beats the generic ::-webkit-scrollbar rule below. */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#__next::-webkit-scrollbar {
+  display: none;
 }
 
 ::-webkit-scrollbar {

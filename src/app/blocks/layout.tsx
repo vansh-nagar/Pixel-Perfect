@@ -2,13 +2,17 @@ import { Navbar } from "@/components/mine/landing-page/navbar";
 
 // Shared decorative shell for /blocks and /blocks/[category]; layouts persist
 // across navigations so the frame never remounts.
+// NOTE: no `overflow-y-scroll` here. This element never scrolls (it grows to
+// fit its content — the document scrolls), but an overflow value still makes
+// it the nearest scrolling ancestor for `position: sticky` descendants, which
+// silently breaks the sticky category sidebar in tabs-navigation.tsx.
 export default function BlocksLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative w-full grid min-h-dvh overflow-y-scroll grid-cols-[1fr_1rem_auto_1rem_1fr] grid-rows-[auto_auto_1px_1fr] [--pattern-fg:var(--color-gray-950)]/5 dark:bg-black dark:[--pattern-fg:var(--color-white)]/10">
+    <div className="relative w-full grid min-h-dvh grid-cols-[1fr_1rem_auto_1rem_1fr] grid-rows-[auto_auto_1px_1fr] [--pattern-fg:var(--color-gray-950)]/5 dark:bg-black dark:[--pattern-fg:var(--color-white)]/10">
       <div className="col-start-3 row-start-1 flex w-[90vw] px-4  py-3 flex-col relative">
         <Navbar />
       </div>

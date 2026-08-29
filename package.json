@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@assistant-ui/react": "^0.14.24",
-    "@assistant-ui/react-markdown": "^0.14.5",
+    "@assistant-ui/react-markdown": "0.14.5",
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
     "@hugeicons/core-free-icons": "^4.1.1",

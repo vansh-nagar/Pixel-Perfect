@@ -1,0 +1,113 @@
+.scene {
+  --blue: #3158ed;
+  --ink: #172147;
+  --ease: cubic-bezier(.215, .61, .355, 1);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: calc(100svh - 64px);
+  padding: 30px 40px 24px;
+  overflow: clip;
+  color: var(--ink);
+  background: #f3f3ef;
+  transition: background-color 500ms var(--ease), color 300ms ease;
+}
+.scene[data-expanded="true"] { background-color: var(--blue); }
+.stage { position: relative; z-index: 1; display: grid; place-items: center; width: min(100%, 900px); padding: 56px 0; flex: 1; }
+.particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; opacity: 0; transition: opacity 200ms ease; }
+.scene[data-expanded="true"] .particles { opacity: 1; transition-duration: 450ms; }
+.particle { position: absolute; top: -40px; width: var(--size); height: var(--size); animation: fall var(--duration) var(--delay) linear infinite; }
+.particle svg { display: block; width: 100%; height: 100%; animation: tumble 5s var(--delay) linear infinite; }
+@keyframes fall {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(var(--drift), calc(100vh + 400px), 0); }
+}
+@keyframes tumble {
+  from { transform: rotate(0deg) rotateY(0deg); }
+  to { transform: rotate(var(--spin)) rotateY(180deg); }
+}
+.card {
+  position: relative;
+  display: block;
+  width: 380px;
+  max-width: 100%;
+  padding: 24px;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #1721471a;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px #18204803, 0 18px 50px -22px #18204830;
+  transition: width 500ms var(--ease), transform 500ms var(--ease), box-shadow 500ms var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.scene[data-expanded="true"] .card { width: 520px; transform: scale(1.1); box-shadow: 0 12px 14px -10px #18368b1f, 0 32px 70px -28px #18368b55; }
+.card:focus-visible { outline: 3px solid var(--blue); outline-offset: 7px; }
+.scene[data-expanded="true"] .card:focus-visible { outline-color: #fffef9; }
+.card:active { transform: scale(.985); }
+.media { position: relative; display: block; height: 430px; border-radius: 12px; background: var(--blue); }
+.portraitBounds { position: absolute; inset: 0; z-index: 2; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.portrait { position: absolute; bottom: 0; left: 50%; width: auto; height: 100%; aspect-ratio: 1086 / 1448; max-width: 100%; opacity: 0; transform: translate(-50%, 0) scale(.855); transform-origin: 50% 90%; pointer-events: none; transition: transform 550ms var(--ease), opacity 180ms ease; clip-path: polygon(39% 3%, 52% 0%, 65% 2%, 71% 9%, 68% 24%, 64% 32%, 81% 36%, 92% 46%, 98% 64%, 95% 68%, 78% 70%, 78% 84%, 79% 100%, 19% 100%, 15% 86%, 8% 74%, 7% 68%, 3% 64%, 11% 46%, 21% 37%, 36% 32%, 38% 25%, 35% 15%); }
+.portrait img { object-fit: contain; }
+.maskDefinitions { position: absolute; pointer-events: none; }
+.scene[data-expanded="true"] .portrait { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.prop { position: absolute; display: block; opacity: 0; pointer-events: none; transition: transform 260ms var(--ease), opacity 140ms ease; transform: translate(var(--from-x, 0px), var(--from-y, 35px)) rotate(var(--from-r, -12deg)) scale(var(--from-scale, .85)); z-index: 3; }
+.scene[data-expanded="true"] .prop { opacity: 1; transform: translate(0, 0) rotate(var(--rotation, 0deg)) scale(1); transition-duration: var(--enter-duration, 600ms), 100ms; transition-delay: var(--delay, 0ms); }
+.prop img { object-fit: contain; }
+.laptop { width: 192px; height: 163px; left: -66px; bottom: -22px; --from-x: 175%; --from-y: 75%; --from-r: -45deg; --from-scale: .7; --rotation: -12deg; --delay: 20ms; --enter-duration: 650ms; }
+.pen { width: 142px; height: 165px; right: -56px; top: -43px; --from-x: -150%; --from-y: 90%; --from-r: -65deg; --from-scale: .6; --rotation: 12deg; --delay: 45ms; --enter-duration: 700ms; }
+.browserWindow { z-index: 1; width: 123px; height: 100px; left: -28px; top: 38px; border: 2px solid var(--ink); border-radius: 9px; background: #fffdf7; box-shadow: 5px 5px 0 #172147; --rotation: -12deg; --from-x: 100%; --from-y: -50%; --from-r: 25deg; --from-scale: .7; --enter-duration: 550ms; }
+.windowBar { display: flex; gap: 4px; height: 21px; padding: 7px; border-bottom: 2px solid var(--ink); }
+.windowBar i { width: 5px; height: 5px; background: #c4cdf1; border-radius: 50%; }
+.windowBody { display: grid; grid-template-columns: 20px 1fr; gap: 6px; padding: 10px; }
+.windowBody > i { height: 7px; border-radius: 3px; background: #c2cfff; }
+.windowBody > i:first-child { grid-row: span 3; height: 45px; background: #c0efd2; }
+.windowBody b { height: 15px; background: var(--blue); border-radius: 4px; }
+.curve { top: -43px; left: -59px; width: 150px; color: #172147; --from-x: 100%; --from-y: -100%; --from-r: 25deg; --rotation: -8deg; --enter-duration: 500ms; }
+.cursor { width: 63px; height: 75px; right: -23px; bottom: 21px; --from-x: -190%; --from-y: 120%; --from-r: -45deg; --from-scale: .5; --rotation: 10deg; --delay: 100ms; --enter-duration: 700ms; }
+.codeToken { right: -36px; top: 143px; padding: 9px 12px; border: 2px solid var(--ink); border-radius: 12px; background: #fffef9; box-shadow: 3px 4px 0 #172147; font: 700 27px ui-monospace, monospace; --from-x: -180%; --from-y: 50%; --from-r: 90deg; --rotation: 12deg; --delay: 75ms; --enter-duration: 500ms; }
+.swatches { display: flex; gap: 0; top: 171px; left: -29px; --from-x: 100%; --from-y: 90%; --from-r: -30deg; --from-scale: .7; --rotation: -16deg; --delay: 60ms; --enter-duration: 600ms; }
+.swatches i { width: 28px; height: 39px; margin-left: -6px; border: 2px solid var(--ink); border-radius: 5px; background: #bff0d3; }
+.swatches i:nth-child(2) { background: #a6b6ff; transform: rotate(9deg); }
+.swatches i:nth-child(3) { background: #fffef9; transform: rotate(18deg); }
+.details { display: block; padding: 24px 0 5px; }
+.title { display: block; margin-top: 8px; font-family: Impact, Haettenschweiler, "Arial Narrow", sans-serif; font-size: 48px; font-weight: 400; letter-spacing: -.8px; line-height: 1.05; }
+.title > span { color: var(--blue); }
+.photoFrame { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; opacity: 1; transition: opacity 200ms ease; }
+.scene[data-expanded="true"] .photoFrame { opacity: 0; transition-duration: 100ms; }
+.photo { width: 690px !important; height: 920px !important; max-width: none; left: calc(50% - 226px) !important; top: calc(100% - 685px) !important; object-fit: fill; }
+
+.scene[data-expanded="true"] .codeToken svg { animation: rock 2.3s .65s ease-in-out infinite alternate; }
+.scene[data-expanded="true"] .curve svg { animation: drift 3.1s .6s ease-in-out infinite alternate; }
+
+/* Separate the reveal transform from each asset's gentle idle motion. */
+.scene[data-expanded="true"] .laptop img { animation: drift 2.4s .6s ease-in-out infinite alternate; }
+.scene[data-expanded="true"] .pen img { animation: rock 1.8s .65s ease-in-out infinite alternate; }
+.scene[data-expanded="true"] .cursor svg { animation: drift 2s .7s ease-in-out infinite alternate; }
+@keyframes drift { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+@keyframes rock { from { transform: rotate(0deg); } to { transform: rotate(-7deg); } }
+@media (max-width: 700px) {
+  .scene { padding: 24px 24px 25px; }
+  .stage { padding: 76px 0 36px; }
+  .card, .scene[data-expanded="true"] .card { width: min(100%, 360px); padding: 18px; }
+  .scene[data-expanded="true"] .card { transform: scale(1.025); }
+  .media { height: 350px; }
+  .photo { width: 570px !important; height: 760px !important; left: calc(50% - 187px) !important; top: calc(100% - 566px) !important; }
+  .laptop { width: 148px; height: 129px; left: -31px; bottom: -13px; }
+  .pen { width: 102px; height: 134px; right: -29px; top: -39px; }
+  .browserWindow { width: 99px; left: -12px; top: 29px; }
+  .cursor { right: -5px; width: 47px; bottom: 7px; }
+  .codeToken { right: -16px; font-size: 20px; }
+  .curve { left: -24px; width: 115px; }
+  .swatches { left: -12px; }
+  .title { font-size: 39px; }
+  .details { padding: 24px 0 5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .particles { display: none; }
+  .scene, .scene *, .scene::before { transition: none !important; animation: none !important; }
+}

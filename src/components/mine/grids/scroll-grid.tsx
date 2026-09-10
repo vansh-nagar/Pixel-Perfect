@@ -9,7 +9,6 @@ import StackingCardsParallax from "../../../../registry/new-york/scroll/stacking
 import TextClipMaskReveal from "../../../../registry/new-york/scroll/text-clip-mask-reveal";
 import FluidCubeScroll from "../../../../registry/new-york/scroll/fluid-cube-scroll";
 import ScrollWarpGallery from "../../../../registry/new-york/scroll/scroll-warp-gallery";
-import WarpHero from "../../../../registry/new-york/scroll/warp-hero";
 
 type ScrollItem = {
   name: string;
@@ -21,14 +20,6 @@ type ScrollItem = {
 };
 
 const ScrollArr: ScrollItem[] = [
-  {
-    name: "Warp Hero",
-    description:
-      "Images scattered around a headline, each bending on its own vertices as you scroll past and lensing outward under the cursor. Scroll to play.",
-    component: <WarpHero />,
-    registryName: "warp-hero",
-    isFull: true,
-  },
   {
     name: "Scroll Warp Gallery",
     description:
@@ -104,7 +95,7 @@ const ScrollGrid = () => {
     const item = itemRefs.current[activeId];
     if (!aside || !item) return;
 
-    const lookAhead = 150; // px of neighbouring items to surface beyond the active one
+    const lookAhead = 80; // px of neighbouring items to surface beyond the active one
     const asideRect = aside.getBoundingClientRect();
     const itemRect = item.getBoundingClientRect();
 
@@ -143,47 +134,34 @@ const ScrollGrid = () => {
       style={{ height: panelHeight }}
       className="flex w-full items-stretch overflow-hidden"
     >
+      {/* Matches the category sidebar in blocks/tabs-navigation.tsx: same width,
+          dashed left rail that fills in on the active item, name only. */}
       <aside
         ref={asideRef}
         data-lenis-prevent
-        className="hidden h-full min-h-0 w-[244px] shrink-0 flex-col overflow-y-auto overscroll-contain border-r border-dashed pr-2 md:flex [scrollbar-width:thin] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25"
+        aria-label="Scroll animations"
+        className="hidden h-full min-h-0 w-52 shrink-0 flex-col overflow-y-auto overscroll-contain border-r border-dashed pr-3 pb-2 md:flex [scrollbar-width:thin] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25 [&::-webkit-scrollbar-thumb]:transition-colors hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50"
       >
-        <div className="sticky top-0 z-10 bg-background px-3 pb-2 pt-1">
-          <p className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-            {ScrollArr.length} Animations
-          </p>
-        </div>
-        <nav className="flex flex-col">
+        <nav className="flex flex-col gap-0.5">
           {ScrollArr.map((item) => {
             const active = activeId === item.registryName;
             return (
               <button
                 key={item.registryName}
                 type="button"
+                title={item.name}
                 ref={(el) => {
                   itemRefs.current[item.registryName] = el;
                 }}
                 onClick={() => scrollTo(item.registryName)}
                 className={cn(
-                  "group flex flex-col items-start gap-0.5 border-l-2 px-3 py-2 text-left transition-colors",
+                  "w-full cursor-pointer truncate border-l border-dashed px-2 py-1.5 text-left text-xs transition-colors",
                   active
-                    ? "border-foreground bg-muted/60"
-                    : "border-transparent hover:bg-muted/30",
+                    ? "border-l-foreground bg-muted text-foreground"
+                    : "border-l-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground",
                 )}
               >
-                <span
-                  className={cn(
-                    "text-sm leading-tight transition-colors",
-                    active
-                      ? "text-foreground"
-                      : "text-muted-foreground group-hover:text-foreground",
-                  )}
-                >
-                  {item.name}
-                </span>
-                <span className="line-clamp-1 text-[10px] text-muted-foreground/70">
-                  {item.description}
-                </span>
+                {item.name}
               </button>
             );
           })}
@@ -205,9 +183,6 @@ const ScrollGrid = () => {
             <div className="pointer-events-none sticky top-0 z-80 -mb-16 flex items-start justify-between gap-3 p-3">
               <div className="pointer-events-auto leading-tight">
                 <p className="text-sm font-medium">{activeItem.name}</p>
-                <p className="max-w-md text-xs text-muted-foreground">
-                  {activeItem.description}
-                </p>
               </div>
               <div className="pointer-events-auto">
                 <CopyDropdown registryName={activeItem.registryName} />
@@ -231,9 +206,6 @@ const ScrollGrid = () => {
             <div className="pointer-events-none sticky top-0 z-70 flex items-start justify-between gap-3 px-3 pb-10 pt-3">
               <div className="pointer-events-auto leading-tight">
                 <p className="text-sm font-medium">{activeItem.name}</p>
-                <p className="max-w-md text-xs text-muted-foreground">
-                  {activeItem.description}
-                </p>
               </div>
               <div className="pointer-events-auto">
                 <CopyDropdown registryName={activeItem.registryName} />
@@ -263,9 +235,6 @@ const ScrollGrid = () => {
 
             <div className="absolute bottom-3 left-3 z-30 leading-tight">
               <p className="text-sm font-medium">{activeItem.name}</p>
-              <p className="max-w-md text-xs text-muted-foreground">
-                {activeItem.description}
-              </p>
             </div>
 
             <div className="absolute right-3 top-3 z-30 flex items-center gap-2">

@@ -4726,23 +4726,6 @@
           "target": "components/pixel-perfect/scroll-warp-gallery.tsx"
         }
       ]
-    },
-    {
-      "name": "warp-hero",
-      "description": "A hero of scattered WebGL images around a headline, each bending on its own vertices with scroll velocity and lensing outward under the cursor.",
-      "type": "registry:block",
-      "dependencies": [
-        "@studio-freight/lenis",
-        "gsap",
-        "three"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/scroll/warp-hero.tsx",
-          "target": "components/pixel-perfect/warp-hero.tsx"
-        }
-      ]
     }
   ]
 }

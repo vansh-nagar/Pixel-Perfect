@@ -511,7 +511,7 @@ const ScrollWarpGallery = () => {
   }, []);
 
   return (
-    <div ref={rootRef} className="relative w-full bg-black">
+    <div ref={rootRef} className="relative w-full bg-background">
       {/* Pinned to the top of the scroll viewport and pulled back out of flow, so
           the canvas covers the frame while the tiles below set the scroll length. */}
       <div

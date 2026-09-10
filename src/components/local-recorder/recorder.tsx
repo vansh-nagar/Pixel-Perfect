@@ -124,18 +124,15 @@ export function LocalRecorder({ enabled = true }: { enabled?: boolean }) {
 
   if (!enabled) return null;
   const controls = <section className={styles.panel} aria-label="Recording controls">
-    <header><strong>local recorder</strong><span>on your device</span></header>
-    <p>Choose the app’s browser tab, then interact with any page. These controls stay in this separate window.</p>
+    <header><strong>recorder</strong></header>
     <div className={styles.timer} role="timer">{String(Math.floor(elapsed / 60)).padStart(2, "0")}:{String(elapsed % 60).padStart(2, "0")}</div>
     <p role="status">{status === "recording" ? "Recording" : status === "paused" ? "Paused" : status === "choosing" ? "Choose the app tab…" : "Ready"}{resolution && ` · ${resolution}`}</p>
-    {!active ? <button disabled={status === "choosing"} onClick={popup ? start : openControls}>{popup ? "Start recording" : "Open recording controls"}</button> : <div className={styles.actions}>
+    {!active ? <button disabled={status === "choosing"} onClick={popup ? start : openControls}>{popup ? "Start" : "Open controls"}</button> : <div className={styles.actions}>
       <button onClick={() => { if (recorder.current?.state === "recording") { recorder.current.pause(); setStatus("paused"); } else if (recorder.current?.state === "paused") { recorder.current.resume(); setStatus("recording"); } }}>{status === "paused" ? "Resume" : "Pause"}</button>
-      <button onClick={stop}>Stop recording</button>
+      <button onClick={stop}>Stop</button>
     </div>}
-    <small>Stop anytime with ⌥/Alt + Shift + R or the browser’s stop-sharing button. No automatic time limit. No audio.</small>
     {error && <p role="alert" className={styles.error}>{error}</p>}
-    {result && <div className={styles.result}><video src={result.url} controls /><a href={result.url} download={`recording-${new Date().toISOString().slice(0,10)}.${result.extension}`}>Download {result.extension.toUpperCase()} · {(result.size / 1024 / 1024).toFixed(1)} MB</a><button className={styles.secondary} onClick={() => setResult(undefined)}>Discard recording</button></div>}
-    <small>Captures at the tab’s available resolution, up to 1080p. MP4 when supported, otherwise WebM. Download before refreshing.</small>
+    {result && <div className={styles.result}><video src={result.url} controls /><a href={result.url} download={`recording-${new Date().toISOString().slice(0,10)}.${result.extension}`}>Download {result.extension.toUpperCase()} · {(result.size / 1024 / 1024).toFixed(1)} MB</a><button className={styles.secondary} onClick={() => setResult(undefined)}>Discard</button></div>}
   </section>;
   return <>
     {!active && status !== "choosing" && <div className={styles.dock} data-local-recorder>

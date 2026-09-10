@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { createPortal, flushSync } from "react-dom";
 import styles from "./recorder.module.css";
 
 /** Drop into a React app's root layout. No Next.js APIs or server required. */
@@ -69,12 +69,15 @@ export function LocalRecorder({ enabled = true }: { enabled?: boolean }) {
   async function start() {
     if (status !== "idle") return;
     setError("");
-    if (!navigator.mediaDevices?.getDisplayMedia || typeof MediaRecorder === "undefined") {
+    // Capture must originate in the focused window that received the click.
+    const captureWindow = popupRef.current;
+    if (!captureWindow || captureWindow.closed) { setError("Reopen the recording controls and try again."); return; }
+    if (!captureWindow.navigator.mediaDevices?.getDisplayMedia || typeof MediaRecorder === "undefined") {
       setError("Open this local site in Chrome or Edge to record a browser tab."); return;
     }
     setStatus("choosing");
     try {
-      const capture = await navigator.mediaDevices.getDisplayMedia({
+      const capture = await captureWindow.navigator.mediaDevices.getDisplayMedia({
         video: { displaySurface: "browser", width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 60 } },
         audio: false,
       });
@@ -101,16 +104,21 @@ export function LocalRecorder({ enabled = true }: { enabled?: boolean }) {
       recorder.current = recording;
       setResult(undefined); setElapsed(0);
       setResolution(`${settings.width} × ${settings.height} · ${Math.round(settings.frameRate || 30)} fps`);
-      setStatus("recording");
-      // Flush the hidden launcher before the first captured frame.
-      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+      // Hide controls synchronously; background-window animation frames can stall.
+      flushSync(() => setStatus("recording"));
       if (!capture.active || popupRef.current?.closed) { capture.getTracks().forEach(track => track.stop()); setStatus("idle"); return; }
       recording.start(1000);
     } catch (cause) {
       stream.current?.getTracks().forEach(track => track.stop()); stream.current = null;
       if (!alive.current) return;
       setStatus("idle");
-      setError(cause instanceof DOMException && cause.name === "NotAllowedError" ? "Capture cancelled. Click Start when you're ready." : cause instanceof Error ? cause.message : "Could not start recording.");
+      // Popup exceptions belong to another realm, so instanceof DOMException is unreliable.
+      const failure = cause as { name?: string; message?: string } | null;
+      setError(failure?.name === "NotAllowedError"
+        ? "Capture cancelled or blocked. Click Start to choose the app tab again."
+        : failure?.name === "InvalidStateError"
+          ? "The browser could not start capture from this window. Click Start again with these controls focused. If you’re in the embedded preview, open the site in Chrome or Edge."
+          : failure?.message || "Could not start recording. Try opening the local site in Chrome or Edge.");
     }
   }
 

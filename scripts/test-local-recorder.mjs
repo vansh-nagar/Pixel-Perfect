@@ -4,8 +4,9 @@ import { chromium } from 'playwright';
 const browser = await chromium.launch({headless:true});
 try {
  const page = await browser.newPage();
- await page.addInitScript(() => {
+ await page.context().addInitScript(() => {
   Object.defineProperty(navigator.mediaDevices, 'getDisplayMedia', {value: async () => {
+   if (!window.opener) throw new DOMException('Capture requested from the unfocused app instead of controls', 'InvalidStateError');
    const canvas=document.createElement('canvas');canvas.width=1280;canvas.height=720;
    const ctx=canvas.getContext('2d'); let i=0;
    const timer=setInterval(()=>{ctx.fillStyle=`hsl(${i++%360} 60% 50%)`;ctx.fillRect(0,0,1280,720)},30);

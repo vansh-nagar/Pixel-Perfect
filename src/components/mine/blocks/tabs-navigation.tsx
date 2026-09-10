@@ -47,6 +47,7 @@ const GRID_COMPONENTS: Record<string, ComponentType> = {
   gsap: lazyGrid(() => import("../grids/gsap-grid")),
   carousels: lazyGrid(() => import("../grids/carousel-grid")),
   "svg-assets": lazyGrid(() => import("../grids/svg-grid")),
+  "image-animations": lazyGrid(() => import("../grids/image-animations-grid")),
   text: lazyGrid(() => import("../grids/text-grid")),
   scroll: lazyGrid(() => import("../grids/scroll-grid")),
   borders: lazyGrid(() => import("../grids/border-grid")),

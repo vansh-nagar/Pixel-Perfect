@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "photo-ring-orbit",
+  "description": "Photos evenly spaced on a circle that expands open, then turns forever.",
+  "dependencies": [
+    "@gsap/react",
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/image-animations/photo-ring-orbit.tsx",
+      "content": "/**\n * Photos evenly spaced on a circle that expands open, then turns forever.\n */\n\"use client\";\n\nimport { useRef } from \"react\";\nimport gsap from \"gsap\";\nimport { useGSAP } from \"@gsap/react\";\n\nconst PHOTOS = [1, 2, 3, 4, 5, 6].map((n) => `/image-animations/photo-${n}.jpg`);\n\n/** How far out the ring opens, as a percentage of the frame. */\nconst RADIUS = 30;\n/** One full turn, in seconds. Slow enough to read as drift, not as a spin. */\nconst TURN = 8;\n\nconst PhotoRingOrbit = () => {\n  const scope = useRef<HTMLDivElement>(null);\n\n  useGSAP(\n    () => {\n      const cards = gsap.utils.toArray<HTMLElement>(\"[data-ring-item]\");\n      if (cards.length < 2) return;\n\n      // Both tweens write through this one object, so the open and the turn\n      // compose into a single position rather than fighting over transforms.\n      const ring = { angle: 0, radius: 0 };\n\n      const place = () => {\n        cards.forEach((card, i) => {\n          const a = (2 * Math.PI * i) / cards.length + ring.angle;\n          gsap.set(card, {\n            left: `${50 + ring.radius * Math.sin(a)}%`,\n            top: `${50 - ring.radius * Math.cos(a)}%`,\n            // The card nearest the viewer is the one at the bottom of the\n            // circle, so depth follows cos and the overlap always reads right.\n            zIndex: Math.round((1 - Math.cos(a)) * 500),\n          });\n        });\n      };\n\n      place();\n\n      const tl = gsap.timeline();\n      tl.to(ring, {\n        radius: RADIUS,\n        duration: 0.55,\n        ease: \"power3.out\",\n        onUpdate: place,\n      });\n      tl.to(\n        ring,\n        {\n          angle: Math.PI * 2,\n          duration: TURN,\n          ease: \"none\",\n          repeat: -1,\n          onUpdate: place,\n        },\n        0,\n      );\n\n      // A reader who asked for less motion gets the ring open and stop there.\n      if (window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) {\n        tl.pause();\n        ring.radius = RADIUS;\n        place();\n      }\n    },\n    { scope },\n  );\n\n  return (\n    <div\n      ref={scope}\n      className=\"relative aspect-square w-full max-w-[min(90%,26rem)]\"\n    >\n      {PHOTOS.map((src) => (\n        <img\n          key={src}\n          src={src}\n          alt=\"\"\n          data-ring-item\n          className=\"absolute size-[28%] -translate-x-1/2 -translate-y-1/2 rounded-2xl object-cover will-change-transform\"\n        />\n      ))}\n    </div>\n  );\n};\n\nexport default PhotoRingOrbit;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/photo-ring-orbit.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

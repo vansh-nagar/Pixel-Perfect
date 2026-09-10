@@ -4613,6 +4613,102 @@
           "target": "components/pixel-perfect/tilt-card-glare.tsx"
         }
       ]
+    },
+    {
+      "name": "photo-coverflow-cycle",
+      "description": "A cover-flow of photos that steps forward one at a time, the back of the deck blurred and dimmed.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-coverflow-cycle.tsx",
+          "target": "components/pixel-perfect/photo-coverflow-cycle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "photo-ring-orbit",
+      "description": "Photos evenly spaced on a circle that expands open, then turns forever.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-ring-orbit.tsx",
+          "target": "components/pixel-perfect/photo-ring-orbit.tsx"
+        }
+      ]
+    },
+    {
+      "name": "photo-sphere-drift",
+      "description": "Photos scattered over a sphere by the golden angle, tumbling on two axes at once.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-sphere-drift.tsx",
+          "target": "components/pixel-perfect/photo-sphere-drift.tsx"
+        }
+      ]
+    },
+    {
+      "name": "photo-lemniscate-flight",
+      "description": "Photos flying a figure-eight through real depth, swapping which lobe is in front.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-lemniscate-flight.tsx",
+          "target": "components/pixel-perfect/photo-lemniscate-flight.tsx"
+        }
+      ]
+    },
+    {
+      "name": "photo-spiral-vortex",
+      "description": "Photos spiralling endlessly inward, shrinking away as they are drawn into the centre.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-spiral-vortex.tsx",
+          "target": "components/pixel-perfect/photo-spiral-vortex.tsx"
+        }
+      ]
+    },
+    {
+      "name": "photo-trefoil-weave",
+      "description": "Photos threading a trefoil knot, weaving through their own trail as it turns.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-trefoil-weave.tsx",
+          "target": "components/pixel-perfect/photo-trefoil-weave.tsx"
+        }
+      ]
     }
   ]
 }

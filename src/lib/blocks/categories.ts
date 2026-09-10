@@ -159,6 +159,14 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     source: { type: "shader-data", set: "shaders" },
   },
   {
+    slug: "image-animations",
+    name: "Image Animations",
+    title: "React Image Animation Components",
+    description:
+      "Photo clusters that move — a ring that opens and turns, a sphere tumbling on two axes, a cover-flow deck that steps forward one card at a time. GSAP-driven, copy-paste, and yours to point at your own images.",
+    source: { type: "registry", folder: "image-animations" },
+  },
+  {
     slug: "image-shaders",
     name: "Image Shaders",
     title: "WebGL Image Effect Shaders",

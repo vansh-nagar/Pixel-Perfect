@@ -342,9 +342,12 @@ const MaskGrid = () => {
       {MaskGridArr.map((item, index) => (
         <div
           key={index}
-          className="relative flex aspect-square w-full items-center justify-center border-b border-l border-dashed"
+          className="relative flex aspect-square w-full items-center justify-center overflow-hidden border-b border-l border-dashed"
         >
-          <div className="z-30">{item.component}</div>
+          {/* w-full gives the component's own max-w-[92%] a box to resolve against */}
+          <div className="z-30 flex w-full min-w-0 items-center justify-center">
+            {item.component}
+          </div>
 
           <div className="leading-1 absolute bottom-1.5 left-1.5">
             <p className="text-xs">{item.name}</p>

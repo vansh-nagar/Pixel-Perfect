@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "photo-lemniscate-flight",
+  "description": "Photos flying a figure-eight through real depth, swapping which lobe is in front.",
+  "dependencies": [
+    "@gsap/react",
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/image-animations/photo-lemniscate-flight.tsx",
+      "content": "/**\n * Photos flying a figure-eight through real depth, swapping which lobe is in front.\n */\n\"use client\";\n\nimport { useRef } from \"react\";\nimport gsap from \"gsap\";\nimport { useGSAP } from \"@gsap/react\";\n\nconst PHOTOS = [1, 2, 3, 4, 5, 6].map((n) => `/image-animations/photo-${n}.jpg`);\n\n/** How wide and tall the eight is drawn, as a fraction of the frame. */\nconst REACH = 0.32;\n/** How deep the two lobes sit apart. The whole trick is in this number. */\nconst DEPTH = 0.55;\n/** One full circuit, in seconds. */\nconst LAP = 11;\n/** Perspective, in px. Sets how hard the near lobe blows up as it passes. */\nconst PERSPECTIVE = 640;\n\nconst PhotoLemniscateFlight = () => {\n  const scope = useRef<HTMLDivElement>(null);\n\n  useGSAP(\n    () => {\n      const view = scope.current;\n      const cards = gsap.utils.toArray<HTMLElement>(\"[data-eight-item]\");\n      if (!view || !cards.length) return;\n\n      const state = { t: 0 };\n\n      const place = () => {\n        const w = view.clientWidth;\n        const reach = REACH * w;\n        const depth = DEPTH * w;\n\n        cards.forEach((card, i) => {\n          // Every card rides the same curve, just further along it.\n          const t = state.t + (i * Math.PI * 2) / cards.length;\n\n          // A Gerono lemniscate: sin for the sweep, sin(2t) for the crossing.\n          // The half on y is what closes the loop into a figure eight instead\n          // of an ellipse — it completes two cycles for every one of x.\n          const x = reach * Math.sin(t);\n          const y = (reach / 2) * Math.sin(2 * t);\n          // cos on z puts one lobe of the eight behind the other, so the paths\n          // cross in the picture but never collide in space.\n          const z = depth * Math.cos(t);\n\n          const near = (z / depth + 1) / 2;\n\n          gsap.set(card, {\n            x,\n            y,\n            // No scale here on purpose — the perspective on the frame already\n            // does it, and doing both would double-count the depth.\n            z,\n            filter: `blur(${gsap.utils.interpolate(3.5, 0, near)}px) brightness(${gsap.utils.interpolate(0.5, 1, near)})`,\n            zIndex: Math.round(near * 1000),\n          });\n        });\n      };\n\n      place();\n\n      if (window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n\n      gsap.to(state, {\n        t: Math.PI * 2,\n        duration: LAP,\n        ease: \"none\",\n        repeat: -1,\n        onUpdate: place,\n      });\n    },\n    { scope },\n  );\n\n  return (\n    <div\n      ref={scope}\n      className=\"relative aspect-square w-full max-w-[min(90%,26rem)]\"\n      style={{ perspective: `${PERSPECTIVE}px`, transformStyle: \"preserve-3d\" }}\n    >\n      {PHOTOS.map((src) => (\n        <img\n          key={src}\n          src={src}\n          alt=\"\"\n          data-eight-item\n          className=\"absolute top-1/2 left-1/2 size-[24%] -translate-x-1/2 -translate-y-1/2 rounded-xl object-cover will-change-transform [backface-visibility:hidden]\"\n        />\n      ))}\n    </div>\n  );\n};\n\nexport default PhotoLemniscateFlight;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/photo-lemniscate-flight.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

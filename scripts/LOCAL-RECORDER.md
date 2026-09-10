@@ -1,11 +1,32 @@
-# Local component recorder
+# App-wide local recorder
 
-Run `bun install`, `bunx playwright install chromium`, and install FFmpeg (`brew install ffmpeg` on macOS). Start `bun dev`, then open `/playground` on localhost.
+The floating **record** button is mounted once in `src/app/layout.tsx`, only in development. It is available on every page, including `/blocks` and `/playground`.
 
-Choose 1080 × 1080 or 1920 × 1080 and click **Record component**. The preview and **Download MP4** link appear when rendering finishes. Cancel stops an in-progress render. Nothing is uploaded.
+1. Click **record → Open recording controls**. Allow the small controls popup.
+2. In that window, click **Start recording** and select the app's **browser tab** in the browser sharing picker.
+3. Interact, scroll, and navigate through the app. Pause/resume whenever needed.
+4. Click **Stop recording**, press **Alt/Option + Shift + R** in the app, or use the browser's stop-sharing button.
+5. Preview and download the video. MP4 is preferred when the browser supports it; WebM is the fallback. Discard releases the previous video.
 
-The eight-second sequence shows the default card for 1.5 seconds, reveals it for 4.5 seconds, then resets for two seconds. A separate headless Chromium renders the component at the selected resolution. Its CSS animations and transitions are paused and sampled at 30 fps, then FFmpeg encodes H.264 MP4 with CRF 18, yuv420p and fast-start metadata. It records no audio. Recorder controls, navigation, development overlays and cursor are excluded.
+The floating launcher disappears while recording; the controls live in a separate window. Window/whole-screen captures are rejected when the browser reports the source type, because they could include those controls. Choose the app tab even on browsers that do not report a source type. Closing the controls window stops recording and makes the preview available in the app's panel.
 
-The UI and capture page are development-only. The API additionally requires a loopback hostname and matching Origin header; it returns 404 in production. Only one export runs at a time, with a three-minute limit and temporary-file cleanup. The script requires Node 20 or newer.
+Capture requests 1920×1080 at 60 fps and 12 Mbps. Actual resolution/frame rate are determined by the tab and browser and shown in the panel; it does not upscale a smaller tab and call it HD. No audio, no server, no upload, and no automatic duration limit. Video is held in memory, so download before refreshing or navigating away with a full page load. Client-side route changes preserve the recording. Long recordings consume memory.
 
-To record a different component, replace the component in `capture-stage.tsx` and connect its interaction to `recorder-state`. This recorder samples CSS animation timelines; components driven by JavaScript timers, WebGL or video require their own deterministic time control.
+Use a desktop browser with tab capture support, such as Chrome or Edge. The embedded preview browser may not expose screen capture. Browser permission is required each time.
+
+## Reuse in another project
+
+Copy `src/components/local-recorder/recorder.tsx` and `recorder.module.css` together. They depend only on React and React DOM, with no Next.js APIs, icon package, API route, Playwright, or FFmpeg dependency.
+
+```tsx
+import { LocalRecorder } from "./recorder";
+
+// Mount once at the app root so navigation preserves recording.
+{process.env.NODE_ENV === "development" && <LocalRecorder />}
+```
+
+For Vite use `import.meta.env.DEV` as the development guard. The optional `enabled` prop also controls visibility. This is a reusable component, not a published npm package.
+
+## Existing scripted card renderer
+
+The earlier eight-second deterministic card export remains available through the development-only `/api/local-recorder` endpoint and `scripts/record-component.mjs`. It requires Playwright Chromium and FFmpeg. It is independent of the global manual recorder and is not needed when copying the reusable component.

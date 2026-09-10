@@ -1,51 +1,139 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Download, Video, X } from "lucide-react";
+import { createPortal } from "react-dom";
+import styles from "./recorder.module.css";
 
-export function LocalRecorder() {
-  const [format, setFormat] = useState("square");
-  const [busy, setBusy] = useState(false);
+/** Drop into a React app's root layout. No Next.js APIs or server required. */
+export function LocalRecorder({ enabled = true }: { enabled?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [popup, setPopup] = useState<Window | null>(null);
+  const [status, setStatus] = useState<"idle" | "choosing" | "recording" | "paused">("idle");
   const [error, setError] = useState("");
-  const [video, setVideo] = useState<string>();
-  const controller = useRef<AbortController | null>(null);
-  useEffect(() => () => controller.current?.abort(), []);
-  useEffect(() => () => { if (video) URL.revokeObjectURL(video); }, [video]);
+  const [elapsed, setElapsed] = useState(0);
+  const [result, setResult] = useState<{ url: string; extension: string; size: number }>();
+  const [resolution, setResolution] = useState("");
+  const recorder = useRef<MediaRecorder | null>(null);
+  const stream = useRef<MediaStream | null>(null);
+  const popupRef = useRef<Window | null>(null);
+  const alive = useRef(true);
+  const active = status === "recording" || status === "paused";
 
-  async function record() {
+  function stop() { if (recorder.current && recorder.current.state !== "inactive") recorder.current.stop(); }
+  useEffect(() => {
+    alive.current = true;
+    return () => {
+      alive.current = false;
+      if (recorder.current?.state !== "inactive") recorder.current?.stop();
+      stream.current?.getTracks().forEach(track => track.stop());
+      popupRef.current?.close();
+    };
+  }, []);
+  useEffect(() => () => { if (result) URL.revokeObjectURL(result.url); }, [result]);
+  useEffect(() => {
+    if (status !== "recording") return;
+    const timer = setInterval(() => setElapsed(value => value + 1), 1000);
+    return () => clearInterval(timer);
+  }, [status]);
+  useEffect(() => {
+    if (!popup) return;
+    const timer = setInterval(() => {
+      if (!popup.closed) return;
+      stop(); setPopup(null); popupRef.current = null; setOpen(true);
+    }, 400);
+    return () => clearInterval(timer);
+  }, [popup]);
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => {
+      if (event.altKey && event.shiftKey && event.code === "KeyR") { event.preventDefault(); stop(); }
+    };
+    window.addEventListener("keydown", key);
+    return () => window.removeEventListener("keydown", key);
+  }, []);
+
+  function openControls() {
     setError("");
-    setVideo(undefined);
-    setBusy(true);
-    controller.current = new AbortController();
-    try {
-      const response = await fetch("/api/local-recorder", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ format }), signal: controller.current.signal,
-      });
-      if (!response.ok) throw new Error((await response.json()).error || "Recording failed.");
-      setVideo(URL.createObjectURL(await response.blob()));
-    } catch (cause) {
-      if (!(cause instanceof DOMException && cause.name === "AbortError")) {
-        setError(cause instanceof Error ? cause.message : "Recording failed.");
-      }
-    } finally { setBusy(false); controller.current = null; }
+    if (popup && !popup.closed) { popup.focus(); return; }
+    const next = window.open("", "local-video-recorder", "popup,width=390,height=640");
+    if (!next) { setError("Allow popups for this local site to open the recording controls."); return; }
+    next.document.title = "Local recorder";
+    next.document.body.style.cssText = "margin:0;background:#fafafa;color:#18181b;font:14px system-ui,sans-serif;";
+    // Copy only styles, not the app or its controls, into this independent window.
+    next.document.head.querySelectorAll("style,link[rel=stylesheet]").forEach(node => node.remove());
+    document.querySelectorAll("style,link[rel=stylesheet]").forEach(node => next.document.head.appendChild(node.cloneNode(true)));
+    popupRef.current = next;
+    setPopup(next);
+    setOpen(false);
   }
 
-  return (
-    <aside className="fixed right-5 bottom-5 z-50 w-80 rounded-2xl border border-black/10 bg-white p-4 text-sm text-zinc-900 shadow-xl" aria-label="Local video recorder">
-      <div className="mb-3 flex items-center gap-2 font-medium"><Video size={16} /> local recorder <span className="ml-auto text-xs text-zinc-400">development only</span></div>
-      <label className="flex items-center justify-between gap-3">Video size
-        <select value={format} onChange={event => setFormat(event.target.value)} disabled={busy} className="rounded-lg border p-1.5">
-          <option value="square">1080 × 1080</option>
-          <option value="landscape">1920 × 1080</option>
-        </select>
-      </label>
-      <p className="my-3 text-xs leading-relaxed text-zinc-500">8-second hover loop · 30 fps · MP4<br />Only the component stage is recorded.</p>
-      <button onClick={record} disabled={busy} className="w-full rounded-lg bg-zinc-900 px-3 py-2 text-white disabled:opacity-50">{busy ? "Rendering HD frames…" : "Record component"}</button>
-      {busy && <button className="mt-2 flex items-center gap-1 text-xs" onClick={() => controller.current?.abort()}><X size={12} /> Cancel</button>}
-      {error && <p role="alert" className="mt-3 text-xs text-red-700">{error}</p>}
-      {video && <div className="mt-3"><video src={video} controls className="w-full rounded-lg" /><a href={video} download={`design-engineer-${format}.mp4`} className="mt-2 flex items-center justify-center gap-2 rounded-lg border p-2"><Download size={14} /> Download MP4</a></div>}
-      <span className="sr-only" role="status">{busy ? "Rendering video locally" : video ? "Video ready to download" : ""}</span>
-    </aside>
-  );
+  async function start() {
+    if (status !== "idle") return;
+    setError("");
+    if (!navigator.mediaDevices?.getDisplayMedia || typeof MediaRecorder === "undefined") {
+      setError("Open this local site in Chrome or Edge to record a browser tab."); return;
+    }
+    setStatus("choosing");
+    try {
+      const capture = await navigator.mediaDevices.getDisplayMedia({
+        video: { displaySurface: "browser", width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 60 } },
+        audio: false,
+      });
+      stream.current = capture;
+      if (!alive.current || popupRef.current?.closed) { capture.getTracks().forEach(track => track.stop()); if (alive.current) setStatus("idle"); return; }
+      const settings = capture.getVideoTracks()[0].getSettings();
+      if (settings.displaySurface && settings.displaySurface !== "browser") {
+        throw new Error("Choose a browser tab, not a window or entire screen, to keep the controls out of your recording.");
+      }
+      const mimeType = ["video/mp4;codecs=avc1.42001E", "video/mp4", "video/webm;codecs=vp9", "video/webm"].find(type => MediaRecorder.isTypeSupported(type));
+      if (!mimeType) throw new Error("This browser has no supported video encoder. Try Chrome or Edge.");
+      const recording = new MediaRecorder(capture, { mimeType, videoBitsPerSecond: 12_000_000 });
+      const chunks: Blob[] = [];
+      recording.ondataavailable = event => { if (event.data.size) chunks.push(event.data); };
+      recording.onstop = () => {
+        capture.getTracks().forEach(track => track.stop()); stream.current = null;
+        if (!alive.current) return;
+        const blob = new Blob(chunks, { type: recording.mimeType });
+        if (blob.size) setResult({ url: URL.createObjectURL(blob), extension: recording.mimeType.includes("mp4") ? "mp4" : "webm", size: blob.size });
+        setStatus("idle");
+      };
+      recording.onerror = () => { setError("The browser stopped recording. Any available footage is kept below."); stop(); };
+      capture.getVideoTracks()[0].onended = stop;
+      recorder.current = recording;
+      setResult(undefined); setElapsed(0);
+      setResolution(`${settings.width} × ${settings.height} · ${Math.round(settings.frameRate || 30)} fps`);
+      setStatus("recording");
+      // Flush the hidden launcher before the first captured frame.
+      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+      if (!capture.active || popupRef.current?.closed) { capture.getTracks().forEach(track => track.stop()); setStatus("idle"); return; }
+      recording.start(1000);
+    } catch (cause) {
+      stream.current?.getTracks().forEach(track => track.stop()); stream.current = null;
+      if (!alive.current) return;
+      setStatus("idle");
+      setError(cause instanceof DOMException && cause.name === "NotAllowedError" ? "Capture cancelled. Click Start when you're ready." : cause instanceof Error ? cause.message : "Could not start recording.");
+    }
+  }
+
+  if (!enabled) return null;
+  const controls = <section className={styles.panel} aria-label="Recording controls">
+    <header><strong>local recorder</strong><span>on your device</span></header>
+    <p>Choose the app’s browser tab, then interact with any page. These controls stay in this separate window.</p>
+    <div className={styles.timer} role="timer">{String(Math.floor(elapsed / 60)).padStart(2, "0")}:{String(elapsed % 60).padStart(2, "0")}</div>
+    <p role="status">{status === "recording" ? "Recording" : status === "paused" ? "Paused" : status === "choosing" ? "Choose the app tab…" : "Ready"}{resolution && ` · ${resolution}`}</p>
+    {!active ? <button disabled={status === "choosing"} onClick={popup ? start : openControls}>{popup ? "Start recording" : "Open recording controls"}</button> : <div className={styles.actions}>
+      <button onClick={() => { if (recorder.current?.state === "recording") { recorder.current.pause(); setStatus("paused"); } else if (recorder.current?.state === "paused") { recorder.current.resume(); setStatus("recording"); } }}>{status === "paused" ? "Resume" : "Pause"}</button>
+      <button onClick={stop}>Stop recording</button>
+    </div>}
+    <small>Stop anytime with ⌥/Alt + Shift + R or the browser’s stop-sharing button. No automatic time limit. No audio.</small>
+    {error && <p role="alert" className={styles.error}>{error}</p>}
+    {result && <div className={styles.result}><video src={result.url} controls /><a href={result.url} download={`recording-${new Date().toISOString().slice(0,10)}.${result.extension}`}>Download {result.extension.toUpperCase()} · {(result.size / 1024 / 1024).toFixed(1)} MB</a><button className={styles.secondary} onClick={() => setResult(undefined)}>Discard recording</button></div>}
+    <small>Captures at the tab’s available resolution, up to 1080p. MP4 when supported, otherwise WebM. Download before refreshing.</small>
+  </section>;
+  return <>
+    {!active && status !== "choosing" && <div className={styles.dock} data-local-recorder>
+      {open && !popup && controls}
+      <button className={styles.launcher} aria-label="Open local recorder" aria-expanded={open || !!popup} onClick={() => popup ? popup.focus() : setOpen(value => !value)}><span /> record</button>
+    </div>}
+    {popup && createPortal(controls, popup.document.body)}
+  </>;
 }

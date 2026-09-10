@@ -1,0 +1,17 @@
+.dock { position: fixed; bottom: 20px; right: 82px; z-index: 2147483646; font: 13px system-ui, sans-serif; color: #18181b; }
+.launcher { display: flex; align-items: center; gap: 8px; margin-left: auto; padding: 11px 15px; border: 1px solid #e4e4e7; border-radius: 999px; background: #fff; color: #18181b; box-shadow: 0 4px 20px #0001; cursor: pointer; }
+.launcher span { width: 9px; height: 9px; border-radius: 50%; background: #ee4b42; }
+.panel { box-sizing: border-box; width: min(360px, 100vw - 24px); padding: 20px; margin: 12px auto; border: 1px solid #e4e4e7; border-radius: 18px; background: #fff; color: #18181b; box-shadow: 0 8px 30px #0001; font: 13px/1.5 system-ui, sans-serif; }
+.panel header { display: flex; justify-content: space-between; align-items: center; }
+.panel header span, .panel small { color: #71717a; font-size: 11px; }
+.panel p { margin: 14px 0; color: #52525b; }
+.panel small { display: block; margin-top: 12px; }
+.panel button, .result a { display: block; width: 100%; box-sizing: border-box; border: 0; border-radius: 9px; background: #18181b; color: white; padding: 10px 14px; cursor: pointer; text-align: center; font: inherit; text-decoration: none; }
+.panel button:disabled { opacity: .5; cursor: wait; }
+.panel button:focus-visible, .result a:focus-visible, .launcher:focus-visible { outline: 2px solid #3158ed; outline-offset: 3px; }
+.timer { font-size: 40px; font-variant-numeric: tabular-nums; margin-top: 20px; letter-spacing: -2px; }
+.actions { display: flex; gap: 8px; }
+.panel .error { color: #b42318; }
+.result { margin-top: 16px; }
+.result video { display: block; width: 100%; border-radius: 8px; margin-bottom: 10px; }
+.panel .secondary { background: #f4f4f5; color: #52525b; margin-top: 8px; }

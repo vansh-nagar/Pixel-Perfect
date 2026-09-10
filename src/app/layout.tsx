@@ -1,4 +1,5 @@
 import "./globals.css";
+import { LocalRecorder } from "@/components/local-recorder/recorder";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { Inter_Tight, Pixelify_Sans } from "next/font/google";
@@ -51,6 +52,7 @@ export default function RootLayout({
             {children}
             <Toaster />
             {process.env.NODE_ENV === "development" && <Agentation />}
+            {process.env.NODE_ENV === "development" && <LocalRecorder />}
             {process.env.NODE_ENV === "development" && (
               <DialRoot position="top-right" />
             )}

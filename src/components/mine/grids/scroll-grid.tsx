@@ -8,6 +8,8 @@ import FooterReveal from "../../../../registry/new-york/scroll/footer-reveal";
 import StackingCardsParallax from "../../../../registry/new-york/scroll/stacking-cards-parallax";
 import TextClipMaskReveal from "../../../../registry/new-york/scroll/text-clip-mask-reveal";
 import FluidCubeScroll from "../../../../registry/new-york/scroll/fluid-cube-scroll";
+import ScrollWarpGallery from "../../../../registry/new-york/scroll/scroll-warp-gallery";
+import WarpHero from "../../../../registry/new-york/scroll/warp-hero";
 
 type ScrollItem = {
   name: string;
@@ -19,6 +21,22 @@ type ScrollItem = {
 };
 
 const ScrollArr: ScrollItem[] = [
+  {
+    name: "Warp Hero",
+    description:
+      "Images scattered around a headline, each bending on its own vertices as you scroll past and lensing outward under the cursor. Scroll to play.",
+    component: <WarpHero />,
+    registryName: "warp-hero",
+    isFull: true,
+  },
+  {
+    name: "Scroll Warp Gallery",
+    description:
+      "Scroll velocity bends each image's own vertices in WebGL, smearing it into an RGB-split motion blur, and the cursor lenses it outward. Scroll to play.",
+    component: <ScrollWarpGallery />,
+    registryName: "scroll-warp-gallery",
+    isFull: true,
+  },
   {
     name: "Fluid Cube",
     description:

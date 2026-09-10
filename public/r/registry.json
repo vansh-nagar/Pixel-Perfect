@@ -4709,6 +4709,40 @@
           "target": "components/pixel-perfect/photo-trefoil-weave.tsx"
         }
       ]
+    },
+    {
+      "name": "scroll-warp-gallery",
+      "description": "A gallery rendered in WebGL where scroll velocity bends each image's own vertices, smears it into an RGB-split motion blur, and the cursor lenses it outward.",
+      "type": "registry:block",
+      "dependencies": [
+        "@studio-freight/lenis",
+        "gsap",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/scroll-warp-gallery.tsx",
+          "target": "components/pixel-perfect/scroll-warp-gallery.tsx"
+        }
+      ]
+    },
+    {
+      "name": "warp-hero",
+      "description": "A hero of scattered WebGL images around a headline, each bending on its own vertices with scroll velocity and lensing outward under the cursor.",
+      "type": "registry:block",
+      "dependencies": [
+        "@studio-freight/lenis",
+        "gsap",
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/warp-hero.tsx",
+          "target": "components/pixel-perfect/warp-hero.tsx"
+        }
+      ]
     }
   ]
 }

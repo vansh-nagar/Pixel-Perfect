@@ -1,7 +1,7 @@
 # Clean portfolios
 
 The collection is part of the Blocks browser at `/blocks/clean-portfolios`.
-Select Folio, Index, or Letter in the same preview surface; `?template=letter`
+Select Folio or Index in the same preview surface; `?template=index`
 selects a template on direct entry. Old `/clean-portfolios` URLs redirect here.
 
 ## Customize
@@ -17,7 +17,7 @@ frame width. Adding a template requires a catalog entry and a generated HTML fil
 
 ## Current design
 
-Following the request for more distinct designs, Folio now has a side rail and compact work list; Index uses a ruled project ledger; Letter uses an editorial spread. Mobile layouts collapse to one column. This supersedes the earlier section-reconstruction geometry below.
+Following the request for more distinct designs, Folio now has a side rail and compact work list; Index uses a ruled project ledger. Mobile layouts collapse to one column. This supersedes the earlier section-reconstruction geometry below.
 
 ## Earlier reference study
 

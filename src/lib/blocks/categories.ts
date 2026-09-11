@@ -198,7 +198,6 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     source: { type: "manual", items: [
       { name: "Folio", description: "A side rail, selected work, and personal notes." },
       { name: "Index", description: "A compact project ledger with expandable entries." },
-      { name: "Letter", description: "An editorial spread for projects and writing." },
     ] },
   },
 

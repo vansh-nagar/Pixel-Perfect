@@ -10,6 +10,8 @@ import TextClipMaskReveal from "../../../../registry/new-york/scroll/text-clip-m
 import FluidCubeScroll from "../../../../registry/new-york/scroll/fluid-cube-scroll";
 import ScrollWarpGallery from "../../../../registry/new-york/scroll/scroll-warp-gallery";
 
+import GlassScrollNavbar from "../../../../registry/new-york/scroll/glass-scroll-navbar";
+
 type ScrollItem = {
   name: string;
   description: string;
@@ -20,6 +22,13 @@ type ScrollItem = {
 };
 
 const ScrollArr: ScrollItem[] = [
+  {
+    name: "Glass Scroll Navbar",
+    description: "A curved glass lens refracts the images passing behind the fixed navigation, with spectral color edges.",
+    component: <GlassScrollNavbar />,
+    registryName: "glass-scroll-navbar",
+    isFull: true,
+  },
   {
     name: "Scroll Warp Gallery",
     description:
@@ -180,7 +189,7 @@ const ScrollGrid = () => {
             data-id={activeItem.registryName}
             className="relative border-b border-dashed"
           >
-            <div className="pointer-events-none sticky top-0 z-80 -mb-16 flex items-start justify-between gap-3 p-3">
+            <div className={cn("pointer-events-none z-80 flex items-start justify-between gap-3 p-3", activeItem.registryName === "glass-scroll-navbar" ? "relative h-12 bg-background" : "sticky top-0 -mb-16") }>
               <div className="pointer-events-auto leading-tight">
                 <p className="text-sm font-medium">{activeItem.name}</p>
               </div>

@@ -2484,240 +2484,6 @@
       ]
     },
     {
-      "name": "gradient-bottom-bloom",
-      "description": "A radial bloom rising from the bottom of the frame.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-bottom-bloom.tsx",
-          "target": "components/pixel-perfect/gradient-bottom-bloom.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-chrome",
-      "description": "A chrome metallic reflection built from a multi-stop conic gradient.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-chrome.tsx",
-          "target": "components/pixel-perfect/gradient-chrome.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-conic-sweep",
-      "description": "A layered multi-conic sweep blending black and grey.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-conic-sweep.tsx",
-          "target": "components/pixel-perfect/gradient-conic-sweep.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-cool-aurora",
-      "description": "A cool aurora of layered blue and cyan radial glows.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-cool-aurora.tsx",
-          "target": "components/pixel-perfect/gradient-cool-aurora.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-coral-blur",
-      "description": "A coral linear gradient with a faint backdrop blur.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-coral-blur.tsx",
-          "target": "components/pixel-perfect/gradient-coral-blur.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-diagonal-pattern",
-      "description": "A fine diagonal repeating-line micro pattern.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-diagonal-pattern.tsx",
-          "target": "components/pixel-perfect/gradient-diagonal-pattern.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-dot-mesh",
-      "description": "A fixed radial dot-mesh texture with a subtle inset ring.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-dot-mesh.tsx",
-          "target": "components/pixel-perfect/gradient-dot-mesh.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-dual-grid",
-      "description": "A dual-scale grid system with light and dark variants.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-dual-grid.tsx",
-          "target": "components/pixel-perfect/gradient-dual-grid.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-fiery-aurora",
-      "description": "A fiery aurora of layered orange and yellow radial glows.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-fiery-aurora.tsx",
-          "target": "components/pixel-perfect/gradient-fiery-aurora.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-glow-fade",
-      "description": "Radial glow that fades from a blue bloom at the top into white.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-glow-fade.tsx",
-          "target": "components/pixel-perfect/gradient-glow-fade.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-gold-sheen",
-      "description": "A gold metallic sheen sweeping across the frame.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-gold-sheen.tsx",
-          "target": "components/pixel-perfect/gradient-gold-sheen.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-purple-blue",
-      "description": "A purple-to-blue angled linear gradient.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-purple-blue.tsx",
-          "target": "components/pixel-perfect/gradient-purple-blue.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-purple-metal",
-      "description": "A purple brushed-metal sheen via hard-light blended gradients.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-purple-metal.tsx",
-          "target": "components/pixel-perfect/gradient-purple-metal.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-steel-metal",
-      "description": "A steel brushed-metal sheen via hard-light blended gradients.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-steel-metal.tsx",
-          "target": "components/pixel-perfect/gradient-steel-metal.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gradient-sunset-glow",
-      "description": "A warm sunset glow with a soft red inner shadow.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/gradient-sunset-glow.tsx",
-          "target": "components/pixel-perfect/gradient-sunset-glow.tsx"
-        }
-      ]
-    },
-    {
-      "name": "nexvyn-gradient",
-      "description": "A soft purple-and-orange radial gradient.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/nexvyn-gradient.tsx",
-          "target": "components/pixel-perfect/nexvyn-gradient.tsx"
-        }
-      ]
-    },
-    {
-      "name": "progressive-blur",
-      "description": "A progressive (layered) backdrop-blur fade, stacking eight masked blur layers.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/progressive-blur.tsx",
-          "target": "components/pixel-perfect/progressive-blur.tsx"
-        }
-      ]
-    },
-    {
-      "name": "silver-metallic",
-      "description": "A soft silver metallic gradient with a faint backdrop blur.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/silver-metallic.tsx",
-          "target": "components/pixel-perfect/silver-metallic.tsx"
-        }
-      ]
-    },
-    {
       "name": "aurora-curtain",
       "description": "Drifting ribbons of green and violet light over a deep night sky.",
       "type": "registry:block",
@@ -4724,6 +4490,90 @@
           "type": "registry:component",
           "path": "registry/new-york/scroll/scroll-warp-gallery.tsx",
           "target": "components/pixel-perfect/scroll-warp-gallery.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dither-cursor-trail",
+      "description": "A pale blue Bayer-dithered cursor trail with a softly tapered tail that fades at rest.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/dither-cursor-trail.tsx",
+          "target": "components/pixel-perfect/dither-cursor-trail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dither-wave-background",
+      "description": "Slowly drifting blue-and-paper Bayer bands with a gently pointer-warped halftone texture.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/dither-wave-background.tsx",
+          "target": "components/pixel-perfect/dither-wave-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "currency-sky-background",
+      "description": "A dark flowing terrain of currency glyphs, with layered waves and bright contour bands.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/currency-sky-background.tsx",
+          "target": "components/pixel-perfect/currency-sky-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "orbit-to-fullscreen",
+      "description": "Graphic images orbit through a tilted ribbon, then rotate forward and expand to cover the viewport.",
+      "type": "registry:block",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/orbit-to-fullscreen.tsx",
+          "target": "components/pixel-perfect/orbit-to-fullscreen.tsx"
+        }
+      ]
+    },
+    {
+      "name": "glass-scroll-navbar",
+      "description": "A fixed glass navbar refracts scrolling editorial images through a curved lens with spectral color separation.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/glass-scroll-navbar.tsx",
+          "target": "components/pixel-perfect/glass-scroll-navbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "creative-space-gallery",
+      "description": "A draggable constellation of image planes rotates in three dimensions with inertia while every image faces the viewer.",
+      "type": "registry:block",
+      "dependencies": [
+        "three"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/creative-space-gallery.tsx",
+          "target": "components/pixel-perfect/creative-space-gallery.tsx"
         }
       ]
     }

@@ -1,4 +1,6 @@
 "use client";
+import CreativeSpaceGallery from "../../../../registry/new-york/image-animations/creative-space-gallery";
+import OrbitToFullscreen from "../../../../registry/new-york/image-animations/orbit-to-fullscreen";
 import PhotoRingOrbit from "../../../../registry/new-york/image-animations/photo-ring-orbit";
 import PhotoSphereDrift from "../../../../registry/new-york/image-animations/photo-sphere-drift";
 import PhotoCoverflowCycle from "../../../../registry/new-york/image-animations/photo-coverflow-cycle";
@@ -8,6 +10,18 @@ import PhotoTrefoilWeave from "../../../../registry/new-york/image-animations/ph
 import CopyDropdown from "../copy-dropdown";
 
 export const ImageAnimationsArr = [
+  {
+    name: "Orbit to Fullscreen",
+    description: "Select an orbiting image to rotate it forward and fill the entire screen.",
+    component: <OrbitToFullscreen />,
+    registryName: "orbit-to-fullscreen",
+  },
+  {
+    name: "Creative Space",
+    description: "Drag the image field to turn it in three dimensions, then release to coast.",
+    component: <CreativeSpaceGallery />,
+    registryName: "creative-space-gallery",
+  },
   {
     name: "Ring Orbit",
     description:
@@ -64,16 +78,16 @@ const ImageAnimationsGrid = () => {
             {item.component}
           </div>
 
-          <div className="leading-1 absolute bottom-1.5 left-1.5 z-40">
+          <div className="pointer-events-none leading-1 absolute bottom-1.5 left-1.5 z-40 text-foreground">
             <p className="text-xs">{item.name}</p>
             <p className="text-[8px] text-muted-foreground">
               {item.description}
             </p>
           </div>
 
-          <div className="absolute inset-x-0 top-0 grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-2">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-50 grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-2">
             <div className="border-t border-dashed" />
-            <CopyDropdown registryName={item.registryName} variant="ghost" />
+            <div className="pointer-events-auto"><CopyDropdown registryName={item.registryName} variant="ghost" /></div>
             <div />
             <div className="h-full border-r border-dashed -mr-[0.5px]" />
           </div>

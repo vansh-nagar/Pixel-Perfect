@@ -81,10 +81,26 @@ function arrayEq(a = [], b = []) {
   return JSON.stringify(a) === JSON.stringify(b);
 }
 
-function sync({ build = true, quiet = false } = {}) {
+function sync({ build = true, quiet = false, pruneMissing = false } = {}) {
   const raw = fs.readFileSync(REGISTRY_PATH, "utf8");
   const registry = JSON.parse(raw);
   const byName = new Map(registry.items.map((it) => [it.name, it]));
+
+  // Opt-in pruning only affects entries wholly owned by the canonical source folder.
+  // Legacy/custom entries outside that folder are left alone.
+  if (pruneMissing) {
+    for (const [name, entry] of byName) {
+      if (entry.files?.length && entry.files.every((file) =>
+        file.path.startsWith("registry/new-york/") &&
+        !fs.existsSync(path.join(ROOT, file.path))
+      )) {
+        byName.delete(name);
+        const output = path.join(ROOT, "public/r", `${name}.json`);
+        if (fs.existsSync(output)) fs.unlinkSync(output);
+        if (!quiet) console.log(`  - ${name}`);
+      }
+    }
+  }
 
   const files = walk(COMPONENTS_DIR);
   let added = 0;
@@ -170,9 +186,10 @@ function sync({ build = true, quiet = false } = {}) {
 const args = process.argv.slice(2);
 const watch = args.includes("--watch");
 const noBuild = args.includes("--no-build");
+const pruneMissing = args.includes("--prune");
 
 if (watch) {
-  sync({ build: !noBuild });
+  sync({ build: !noBuild, pruneMissing });
   console.log(
     `\n👀 Watching ${path.relative(ROOT, COMPONENTS_DIR).replace(/\\/g, "/")}/ for changes...`,
   );
@@ -183,12 +200,12 @@ if (watch) {
     timer = setTimeout(() => {
       console.log(`\n[${new Date().toLocaleTimeString()}] change → syncing`);
       try {
-        sync({ build: !noBuild, quiet: false });
+        sync({ build: !noBuild, quiet: false, pruneMissing });
       } catch (err) {
         console.error("✗ sync failed:", err.message);
       }
     }, 300);
   });
 } else {
-  sync({ build: !noBuild });
+  sync({ build: !noBuild, pruneMissing });
 }

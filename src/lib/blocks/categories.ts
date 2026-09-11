@@ -112,10 +112,10 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
   },
   {
     slug: "backgrounds",
-    name: "Background Gradients, Patterns & Masks",
-    title: "Background Gradients & Patterns",
+    name: "Backgrounds",
+    title: "Backgrounds",
     description:
-      "Backgrounds worth shipping — mesh gradients, dot grids, noise textures and masked patterns for React and Tailwind. Each one is a small copyable component with zero image dependencies.",
+      "Animated currency skies and drifting dither waves for React. Two reusable backgrounds with copyable source and configurable effects.",
     source: { type: "registry", folder: "backgrounds" },
   },
   {

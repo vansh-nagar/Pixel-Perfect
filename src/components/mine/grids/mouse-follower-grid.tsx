@@ -2,6 +2,7 @@
 import MouseFollower1 from "../../../../registry/new-york/mouse-follower/mouse-follower1";
 import BendMouseFollower from "../../../../registry/new-york/mouse-follower/bend-mouse-follower";
 import BendButtonFollower from "../../../../registry/new-york/mouse-follower/bend-button-follower";
+import DitherCursorTrail from "../../../../registry/new-york/mouse-follower/dither-cursor-trail";
 import PixelCursorTrail from "../../../../registry/new-york/mouse-follower/pixel-cursor-trail";
 import GravityImageTrail from "../../../../registry/new-york/mouse-follower/gravity-image-trail";
 import ScaleImageTrail from "../../../../registry/new-york/mouse-follower/scale-image-trail";
@@ -76,6 +77,14 @@ export const MouseFollowerArr = [
     component: <IconFall />,
     registryName: "mouse-follower-2",
   },
+  {
+    name: "Dither Cursor Trail",
+    description: "A pale blue pixel cloud follows the pointer and softly fades at rest.",
+    component: (
+      <DitherCursorTrail color="#818cf8" opacity={0.3} radius={0.075} />
+    ),
+    registryName: "dither-cursor-trail",
+  },
 ];
 
 const itemsPerPage = 4;
@@ -96,7 +105,7 @@ const MouseFollower = () => {
         {paginatedItems.map((item, index) => (
           <div
             key={startIndex + index}
-            className="relative max-h-[90vh] w-full border-b border-l border-dashed  aspect-square flex justify-center items-center "
+            className="relative max-h-[90vh] w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
           >
             {item.component}
 

@@ -13,7 +13,7 @@ const nextConfig = {
             type: "query",
             key: "tab",
             value:
-              "(?<tab>buttons|svg-animations|motion|gsap|carousels|svg-assets|text|scroll|borders|backgrounds|masks|image-gradients|mouse-followers|svg-path|bento|sidebars|shaders|image-shaders|perspective|3j)",
+              "(?<tab>clean-portfolios|buttons|svg-animations|motion|gsap|carousels|svg-assets|text|scroll|borders|backgrounds|masks|image-gradients|mouse-followers|svg-path|bento|sidebars|shaders|image-shaders|perspective|3j)",
           },
         ],
         destination: "/blocks/:tab",

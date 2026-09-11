@@ -41,6 +41,7 @@ const lazyGrid = (loader: () => Promise<{ default: ComponentType }>) =>
 // Labels/slugs live in BLOCK_CATEGORIES (shared with routes + sitemap); only the
 // grid loaders stay here so the imports remain statically analyzable.
 const GRID_COMPONENTS: Record<string, ComponentType> = {
+  "clean-portfolios": lazyGrid(() => import("../grids/portfolio-grid")),
   buttons: lazyGrid(() => import("../grids/button-grid")),
   "svg-animations": lazyGrid(() => import("../grids/svg-animations-grid")),
   motion: lazyGrid(() => import("../grids/motion-animations-grid")),

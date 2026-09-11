@@ -64,6 +64,7 @@ export function Navbar({ className = "" }: { className?: string }) {
                     variant={"outline"}
                     className="border-dashed rounded-none"
                     size={"icon"}
+                    aria-label={label}
                   >
                     <Icon />
                   </Button>

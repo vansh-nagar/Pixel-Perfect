@@ -6,15 +6,26 @@
 
 import { useEffect, useRef } from "react";
 
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
+
+// Eight cards on six swatches: the two repeats sit opposite each other on the orbit, and light and dark fills alternate.
 const CARDS = [
-  { seed: "orbit-01", title: "Meridian" },
-  { seed: "orbit-02", title: "Sable" },
-  { seed: "orbit-03", title: "Juniper" },
-  { seed: "orbit-04", title: "Cobalt" },
-  { seed: "orbit-05", title: "Marrow" },
-  { seed: "orbit-06", title: "Fenn" },
-  { seed: "orbit-07", title: "Isohel" },
-  { seed: "orbit-08", title: "Vesper" },
+  { title: "Meridian", swatch: 0 },
+  { title: "Sable", swatch: 4 },
+  { title: "Juniper", swatch: 2 },
+  { title: "Cobalt", swatch: 1 },
+  { title: "Marrow", swatch: 3 },
+  { title: "Fenn", swatch: 4 },
+  { title: "Isohel", swatch: 5 },
+  { title: "Vesper", swatch: 1 },
 ];
 
 const C = {
@@ -100,34 +111,34 @@ const OrbitCarousel = () => {
       className="relative flex h-[80vh] w-full cursor-grab select-none items-center justify-center overflow-hidden active:cursor-grabbing"
     >
       <div className="relative">
-        {CARDS.map((card, i) => (
-          <div
-            key={card.seed}
-            ref={(el) => {
-              cardRefs.current[i] = el;
-            }}
-            className="absolute overflow-hidden rounded-xl ring-1 ring-white/25"
-            style={{
-              width: C.cw,
-              height: C.ch,
-              marginLeft: -C.cw / 2,
-              marginTop: -C.ch / 2,
-              willChange: "transform, opacity, filter",
-            }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`https://picsum.photos/seed/${card.seed}/400/520`}
-              alt={card.title}
-              draggable={false}
-              className="h-full w-full object-cover"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/55 via-transparent to-transparent" />
-            <p className="pointer-events-none absolute bottom-3 left-4 text-[11px] font-medium uppercase tracking-widest text-white/90">
-              {card.title}
-            </p>
-          </div>
-        ))}
+        {CARDS.map((card, i) => {
+          const swatch = SWATCHES[card.swatch];
+          return (
+            <div
+              key={card.title}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              className="absolute overflow-hidden rounded-xl ring-1 ring-white/25"
+              style={{
+                width: C.cw,
+                height: C.ch,
+                marginLeft: -C.cw / 2,
+                marginTop: -C.ch / 2,
+                willChange: "transform, opacity, filter",
+                background: `${swatch.motif}, ${swatch.bg}`,
+                color: swatch.ink,
+              }}
+            >
+              <p
+                className="pointer-events-none absolute bottom-2 left-2 rounded-md px-2 py-1 text-[11px] font-medium uppercase tracking-widest"
+                style={{ backgroundColor: swatch.bg }}
+              >
+                {card.title}
+              </p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

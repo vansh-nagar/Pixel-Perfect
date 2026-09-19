@@ -1,24 +1,34 @@
 "use client";
 
 /**
- * A tall row of image cards fanned along a flat diagonal (no depth recede); each card is angled about Y. It auto-slides, loops infinitely with no seam, and can be dragged to scrub.
+ * A tall row of flat colour cards fanned along a flat diagonal (no depth recede); each card is angled about Y. It auto-slides, loops infinitely with no seam, and can be dragged to scrub.
  */
 
 import { useEffect, useRef } from "react";
 
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
+
 const CARDS = [
-  { seed: "veil-01", title: "Axee Muned" },
-  { seed: "veil-02", title: "Solace" },
-  { seed: "veil-03", title: "The Leading Web3 Marketing" },
-  { seed: "veil-04", title: "Nocturne" },
-  { seed: "veil-05", title: "Halo Studio" },
-  { seed: "veil-06", title: "Drift" },
-  { seed: "veil-07", title: "Monolith" },
-  { seed: "veil-08", title: "Aurora Labs" },
-  { seed: "veil-09", title: "Pulse" },
-  { seed: "veil-10", title: "Verdant" },
-  { seed: "veil-11", title: "Ember" },
-  { seed: "veil-12", title: "Cascade" },
+  { title: "Axee Muned" },
+  { title: "Solace" },
+  { title: "The Leading Web3 Marketing" },
+  { title: "Nocturne" },
+  { title: "Halo Studio" },
+  { title: "Drift" },
+  { title: "Monolith" },
+  { title: "Aurora Labs" },
+  { title: "Pulse" },
+  { title: "Verdant" },
+  { title: "Ember" },
+  { title: "Cascade" },
 ];
 
 const C = {
@@ -128,35 +138,35 @@ const FannedDeckCarousel = () => {
             transformStyle: "preserve-3d",
           }}
         >
-          {CARDS.map((card, i) => (
-            <div
-              key={card.seed}
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
-              className="absolute overflow-hidden rounded-xl bg-neutral-200 ring-1 ring-white/40"
-              style={{
-                width: C.cw,
-                height: C.ch,
-                marginLeft: -C.cw / 2,
-                marginTop: -C.ch / 2,
-                willChange: "transform, opacity",
-                backfaceVisibility: "hidden",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://picsum.photos/seed/${card.seed}/720/500`}
-                alt={card.title}
-                draggable={false}
-                className="h-full w-full object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-black/30 via-transparent to-white/15" />
-              <p className="pointer-events-none absolute bottom-3 left-4 text-[11px] font-medium uppercase tracking-widest text-white/90">
-                {card.title}
-              </p>
-            </div>
-          ))}
+          {CARDS.map((card, i) => {
+            const swatch = SWATCHES[i % SWATCHES.length];
+            return (
+              <div
+                key={card.title}
+                ref={(el) => {
+                  cardRefs.current[i] = el;
+                }}
+                className="absolute overflow-hidden rounded-xl ring-1 ring-white/40"
+                style={{
+                  width: C.cw,
+                  height: C.ch,
+                  marginLeft: -C.cw / 2,
+                  marginTop: -C.ch / 2,
+                  willChange: "transform, opacity",
+                  backfaceVisibility: "hidden",
+                  background: `${swatch.motif}, ${swatch.bg}`,
+                  color: swatch.ink,
+                }}
+              >
+                <p
+                  className="pointer-events-none absolute bottom-2 left-2 rounded-md px-2 py-1 text-[11px] font-medium uppercase tracking-widest"
+                  style={{ backgroundColor: swatch.bg }}
+                >
+                  {card.title}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

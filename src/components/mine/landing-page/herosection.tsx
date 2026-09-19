@@ -120,7 +120,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="w-full h-[calc(100vh-100px)] relative  md:overflow-clip overscroll-none flex flex-col items-center justify-center  px-4 sm:px-6 md:px-8"
+      className="w-full min-h-[560px] h-[calc(100svh-100px)] relative overflow-clip overscroll-none flex flex-col items-center justify-center  px-4 sm:px-6 md:px-8"
     >
       <HeroGrid />
       <DebugOverlay
@@ -131,19 +131,19 @@ export function HeroSection() {
         ms={ms}
       />
 
-      <div className="flex flex-col justify-center items-center w-full max-w-[280px] sm:max-w-[350px] md:max-w-[550px] lg:max-w-[750px] xl:max-w-[850px] z-10 relative pointer-events-auto mb-[6vh]">
-        <h1 className="text-3xl font-mono  sm:text-4xl md:text-6xl lg:text-8xl   text-center w-full justify-center items-center flex-col flex whitespace-pre leading-tight tracking-tight font-medium">
-          <span> Build Stunning </span>
+      <div className="flex flex-col justify-center items-center w-full max-w-[1100px] z-10 relative pointer-events-auto mb-[6vh]">
+        <h1 style={{ fontSize: "clamp(1.35rem, 4.8vw, 5rem)" }} className="font-mono text-center w-full flex flex-col items-center leading-[1.15] tracking-tight font-medium">
+          <span>Build Stunning</span>
           <span className="flex whitespace-pre">
             <span className="flex  transition-all   duration-200">
               Websites in minutes
             </span>
           </span>
         </h1>
-        <div className="text-xs  sm:text-sm md:text-md lg:text-lg xl:text-xl text-center mt-2 sm:mt-3 md:mt-4 px-2 sm:px-4 leading-relaxed">
+        <div className="text-sm md:text-base lg:text-lg text-muted-foreground text-center mt-5 sm:mt-6 px-2 sm:px-4 leading-relaxed max-w-xl">
           A pixel-perfect React component library for{" "}
           <div className=" hidden md:block" />
-          <div className="flex items-center">
+          <div className="flex flex-wrap justify-center items-center gap-y-1">
             modern web apps. And
             <TextTypewriterGlitch className="mx-1  p-0.5 px-1 bg-muted rounded-none ">
               It's also open source.
@@ -153,7 +153,7 @@ export function HeroSection() {
 
         <div className="flex  flex-row flex-wrap  justify-center   gap-3 sm:gap-4 items-center mt-10 w-full ">
           <Link href="/blocks">
-            <Button className="rounded-none" size="default">
+            <Button className="rounded-none h-10 px-5" size="default">
               Browse Components
             </Button>
           </Link>
@@ -163,7 +163,7 @@ export function HeroSection() {
           >
             <Button
               variant={"secondary"}
-              className="rounded-none cursor-crosshair"
+              className="rounded-none h-10 px-5 cursor-crosshair"
               size="default"
             >
               Star On Github <FaGithub />

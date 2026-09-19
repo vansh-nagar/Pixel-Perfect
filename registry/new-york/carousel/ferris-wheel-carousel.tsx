@@ -6,15 +6,26 @@
 
 import { useEffect, useRef } from "react";
 
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
+
+// Eight gondolas on six swatches: the two repeats hang opposite each other, and light and dark fills alternate round the rim.
 const CARDS = [
-  { seed: "wheel-01", title: "Arcade" },
-  { seed: "wheel-02", title: "Boardwalk" },
-  { seed: "wheel-03", title: "Funhouse" },
-  { seed: "wheel-04", title: "Midway" },
-  { seed: "wheel-05", title: "Carny" },
-  { seed: "wheel-06", title: "Big Top" },
-  { seed: "wheel-07", title: "Tilt-a-Whirl" },
-  { seed: "wheel-08", title: "Last Ride" },
+  { title: "Arcade", swatch: 0 },
+  { title: "Boardwalk", swatch: 1 },
+  { title: "Funhouse", swatch: 2 },
+  { title: "Midway", swatch: 4 },
+  { title: "Carny", swatch: 3 },
+  { title: "Big Top", swatch: 1 },
+  { title: "Tilt-a-Whirl", swatch: 5 },
+  { title: "Last Ride", swatch: 4 },
 ];
 
 const C = {
@@ -125,7 +136,7 @@ const FerrisWheelCarousel = () => {
         >
           {CARDS.map((card, i) => (
             <div
-              key={card.seed}
+              key={card.title}
               className="absolute left-1/2 top-1/2 w-px origin-top bg-border"
               style={{
                 height: C.r,
@@ -137,42 +148,47 @@ const FerrisWheelCarousel = () => {
         </div>
 
         {/* gondolas stay upright and swing about their attach point */}
-        {CARDS.map((card, i) => (
-          <div
-            key={card.seed}
-            ref={(el) => {
-              cardRefs.current[i] = el;
-            }}
-            className="absolute left-1/2 top-1/2"
-            style={{
-              width: C.cw,
-              marginLeft: -C.cw / 2,
-              transformOrigin: "50% 0px",
-              willChange: "transform",
-            }}
-          >
+        {CARDS.map((card, i) => {
+          const swatch = SWATCHES[card.swatch];
+          return (
             <div
-              className="mx-auto w-px bg-border"
-              style={{ height: C.strut }}
-            />
-            <div
-              className="relative overflow-hidden rounded-lg bg-neutral-900 ring-1 ring-white/20"
-              style={{ width: C.cw, height: C.ch }}
+              key={card.title}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              className="absolute left-1/2 top-1/2"
+              style={{
+                width: C.cw,
+                marginLeft: -C.cw / 2,
+                transformOrigin: "50% 0px",
+                willChange: "transform",
+              }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://picsum.photos/seed/${card.seed}/260/320`}
-                alt={card.title}
-                draggable={false}
-                className="h-full w-full object-cover"
+              <div
+                className="mx-auto w-px bg-border"
+                style={{ height: C.strut }}
               />
-              <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent" />
-              <p className="pointer-events-none absolute bottom-2 left-0 right-0 text-center text-[9px] font-medium uppercase tracking-widest text-white/90">
-                {card.title}
-              </p>
+              <div
+                className="relative overflow-hidden rounded-lg ring-1 ring-white/20"
+                style={{
+                  width: C.cw,
+                  height: C.ch,
+                  background: `${swatch.motif}, ${swatch.bg}`,
+                  color: swatch.ink,
+                }}
+              >
+                <p className="pointer-events-none absolute bottom-2 left-0 right-0 flex justify-center text-[9px] font-medium uppercase tracking-widest">
+                  <span
+                    className="rounded-md px-2 py-1"
+                    style={{ backgroundColor: swatch.bg }}
+                  >
+                    {card.title}
+                  </span>
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

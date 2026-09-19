@@ -38,7 +38,7 @@ const ComponentsShowcase = () => {
             className="text-muted-foreground/30"
           />
         </div>
-        <div className="text-xs text-muted-foreground/30">COMPONENTS</div>
+        <div className="text-xs tracking-wider text-muted-foreground">COMPONENTS</div>
         <StarBorder />
       </div>
       <div className="grid grid-cols-[50px_1fr_50px] max-sm:grid-cols-[30px_1fr_30px] ">
@@ -46,7 +46,7 @@ const ComponentsShowcase = () => {
           <StarBorder />
         </div>
         <div className=" overflow-hidden">
-          <div className="relative h-10 text-xs text-muted-foreground/30">
+          <div className="relative h-10 text-xs tracking-wider text-muted-foreground">
             <StarBorder />
           </div>
           <div className="border-y border-muted grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
@@ -75,7 +75,7 @@ const ComponentsShowcase = () => {
               className="  border  border-muted"
             />
           </div>{" "}
-          <div className="relative h-10 text-xs text-muted-foreground/30">
+          <div className="relative h-10 text-xs tracking-wider text-muted-foreground">
             <StarBorder />
           </div>
         </div>

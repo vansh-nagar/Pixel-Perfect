@@ -9,16 +9,27 @@ import gsap from "gsap";
 
 gsap.registerPlugin(useGSAP);
 
-type Slide = { title: string; tag: string; gradient: string };
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
 
+type Slide = { title: string; tag: string; swatch: number };
+
+// Seven slides on six swatches, picked so no two neighbours match, including Sahara → Nebula at the wrap.
 const SLIDES: Slide[] = [
-  { title: "Nebula", tag: "01", gradient: "linear-gradient(135deg,#6366f1,#a855f7)" },
-  { title: "Ember", tag: "02", gradient: "linear-gradient(135deg,#f97316,#ef4444)" },
-  { title: "Lagoon", tag: "03", gradient: "linear-gradient(135deg,#06b6d4,#3b82f6)" },
-  { title: "Meadow", tag: "04", gradient: "linear-gradient(135deg,#22c55e,#84cc16)" },
-  { title: "Blossom", tag: "05", gradient: "linear-gradient(135deg,#ec4899,#f43f5e)" },
-  { title: "Dusk", tag: "06", gradient: "linear-gradient(135deg,#8b5cf6,#6366f1)" },
-  { title: "Sahara", tag: "07", gradient: "linear-gradient(135deg,#eab308,#f97316)" },
+  { title: "Nebula", tag: "01", swatch: 4 },
+  { title: "Ember", tag: "02", swatch: 0 },
+  { title: "Lagoon", tag: "03", swatch: 1 },
+  { title: "Meadow", tag: "04", swatch: 5 },
+  { title: "Blossom", tag: "05", swatch: 2 },
+  { title: "Dusk", tag: "06", swatch: 1 },
+  { title: "Sahara", tag: "07", swatch: 3 },
 ];
 
 const SPEED = 90; // px per second the strip drifts at rest
@@ -131,16 +142,29 @@ const InfiniteCarousel = () => {
         }}
       >
         <div ref={trackRef} className="flex w-max will-change-transform">
-          {[...SLIDES, ...SLIDES].map((s, i) => (
-            <article
-              key={`${s.title}-${i}`}
-              className="mr-6 flex h-96 w-72 shrink-0 flex-col justify-end rounded-3xl p-6 text-white"
-              style={{ backgroundImage: s.gradient }}
-            >
-              <span className="text-sm font-medium text-white/70">{s.tag}</span>
-              <h3 className="text-3xl font-bold">{s.title}</h3>
-            </article>
-          ))}
+          {[...SLIDES, ...SLIDES].map((s, i) => {
+            const swatch = SWATCHES[s.swatch];
+            return (
+              <article
+                key={`${s.title}-${i}`}
+                className="mr-6 flex h-96 w-72 shrink-0 flex-col justify-end rounded-3xl p-6"
+                style={{
+                  background: `${swatch.motif}, ${swatch.bg}`,
+                  color: swatch.ink,
+                }}
+              >
+                <div
+                  className="self-start rounded-2xl px-3 py-2"
+                  style={{ backgroundColor: swatch.bg }}
+                >
+                  <span className="block text-sm font-medium opacity-70">
+                    {s.tag}
+                  </span>
+                  <h3 className="text-3xl font-bold">{s.title}</h3>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </div>

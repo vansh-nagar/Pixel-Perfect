@@ -1,19 +1,29 @@
 "use client";
 
 /**
- * A messy pile of polaroids — flick the top one away and it flies off with your throw while the pile shuffles up and a new photo slips in underneath. Tosses itself when you leave it alone; the pile never runs out.
+ * A messy pile of polaroids with flat colour prints — flick the top one away and it flies off with your throw while the pile shuffles up and a new one slips in underneath. Tosses itself when you leave it alone; the pile never runs out.
  */
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
+
 const PHOTOS = [
-  { seed: "toss-01", caption: "summer, somewhere" },
-  { seed: "toss-02", caption: "the blue hour" },
-  { seed: "toss-03", caption: "left the map at home" },
-  { seed: "toss-04", caption: "3pm, no plans" },
-  { seed: "toss-05", caption: "last one of the roll" },
-  { seed: "toss-06", caption: "don't ask" },
+  { swatch: SWATCHES[0], caption: "summer, somewhere" },
+  { swatch: SWATCHES[1], caption: "the blue hour" },
+  { swatch: SWATCHES[2], caption: "left the map at home" },
+  { swatch: SWATCHES[3], caption: "3pm, no plans" },
+  { swatch: SWATCHES[4], caption: "last one of the roll" },
+  { swatch: SWATCHES[5], caption: "don't ask" },
 ];
 
 const STACK = 4; // photos visible in the pile
@@ -95,12 +105,11 @@ const TossDeckCarousel = () => {
                   if (flung) toss(info.offset.x + info.velocity.x > 0 ? 1 : -1);
                 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`https://picsum.photos/seed/${photo.seed}/520/560`}
-                  alt={photo.caption}
-                  draggable={false}
-                  className="pointer-events-none h-full w-full object-cover"
+                <div
+                  role="img"
+                  aria-label={photo.caption}
+                  className="pointer-events-none h-full w-full"
+                  style={{ background: `${photo.swatch.motif}, ${photo.swatch.bg}` }}
                 />
                 <p className="pointer-events-none absolute bottom-3.5 left-0 right-0 text-center font-serif text-sm italic text-neutral-600">
                   {photo.caption}
@@ -112,7 +121,7 @@ const TossDeckCarousel = () => {
       </div>
 
       <p className="pointer-events-none absolute bottom-8 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-        flick the top photo
+        flick the top card
       </p>
     </div>
   );

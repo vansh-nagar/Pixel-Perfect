@@ -16,6 +16,7 @@ import OrbitCarousel from "registry/new-york/carousel/orbit-carousel";
 import SlatFlipCarousel from "registry/new-york/carousel/slat-flip-carousel";
 import TossDeckCarousel from "registry/new-york/carousel/toss-deck-carousel";
 import FerrisWheelCarousel from "registry/new-york/carousel/ferris-wheel-carousel";
+import CylinderCarousel from "registry/new-york/carousel/cylinder-carousel";
 import CopyDropdown from "../copy-dropdown";
 
 const CarouselGridArr = [
@@ -50,14 +51,14 @@ const CarouselGridArr = [
   {
     name: "Perspective Deck Carousel",
     description:
-      "Image cards fanned along a 3D diagonal that recedes up-and-to-the-right. It auto-slides and loops infinitely with no seam, and can be dragged to scrub through the deck.",
+      "Flat colour cards fanned along a 3D diagonal that recedes up-and-to-the-right. It auto-slides and loops infinitely with no seam, and can be dragged to scrub through the deck.",
     component: <PerspectiveDeckCarousel />,
     registryName: "perspective-deck-carousel",
   },
   {
     name: "Fanned Deck Carousel",
     description:
-      "Image cards fanned along a flat diagonal (no depth recede), each angled about Y. Auto-slides, loops infinitely with no seam, and can be dragged to scrub.",
+      "Flat colour cards fanned along a flat diagonal (no depth recede), each angled about Y. Auto-slides, loops infinitely with no seam, and can be dragged to scrub.",
     component: <FannedDeckCarousel />,
     registryName: "fanned-deck-carousel",
   },
@@ -71,14 +72,14 @@ const CarouselGridArr = [
   {
     name: "Sliced Reveal Carousel",
     description:
-      "Slide transitions slice the photo into vertical strips that cascade in one column at a time: the new image sweeps up while the old sweeps away, offset by a per-strip stagger.",
+      "Slide transitions cut the slide into vertical strips that cascade in one column at a time: the new slide sweeps up while the old sweeps away, offset by a per-strip stagger.",
     component: <SlicedRevealCarousel />,
     registryName: "sliced-reveal-carousel",
   },
   {
     name: "Accordion Carousel",
     description:
-      "An accordion of vertical image panels: the active panel springs wide to reveal its photo and caption while the rest compress into slim slivers with sideways titles. Click to expand; auto-advances until hovered.",
+      "An accordion of flat colour panels: the active panel springs wide to reveal its pattern and caption while the rest compress into slim slivers with sideways titles. Click to expand; auto-advances until hovered.",
     component: <AccordionCarousel />,
     registryName: "accordion-carousel",
   },
@@ -92,14 +93,14 @@ const CarouselGridArr = [
   {
     name: "Slat Flip Carousel",
     description:
-      "The image is split into horizontal louver slats that flip 180° about their own axis in a stagger: the new slide rides in on the back of each slat like rotating window blinds.",
+      "The slide is split into horizontal louver slats that flip 180° about their own axis in a stagger: the new slide rides in on the back of each slat like rotating window blinds.",
     component: <SlatFlipCarousel />,
     registryName: "slat-flip-carousel",
   },
   {
     name: "Toss Deck Carousel",
     description:
-      "A messy pile of polaroids: flick the top one away and it flies off with your throw while the pile shuffles up and a new photo slips in underneath. Tosses itself when idle; the pile never runs out.",
+      "A messy pile of polaroids with flat colour prints: flick the top one away and it flies off with your throw while the pile shuffles up and a new one slips in underneath. Tosses itself when idle; the pile never runs out.",
     component: <TossDeckCarousel />,
     registryName: "toss-deck-carousel",
   },
@@ -110,6 +111,13 @@ const CarouselGridArr = [
     component: <FerrisWheelCarousel />,
     registryName: "ferris-wheel-carousel",
   },
+  {
+    name: "Cylinder Carousel",
+    description:
+      "Flat, high-contrast discs line the inside wall of a 3D cylinder, seen from its rim: they fly in from a wide spin, bob gently in place, and the ring turns as you drag. The whole scene leans toward the cursor.",
+    component: <CylinderCarousel />,
+    registryName: "cylinder-carousel",
+  },
 ];
 
 const CarouselGrid = () => {
@@ -119,7 +127,7 @@ const CarouselGrid = () => {
   const handleRefresh = (index: number) => {
     setRefreshKeys((prev) => ({ ...prev, [index]: (prev[index] || 0) + 1 }));
   };
-  const itemsPerPage = CarouselGridArr.length;
+  const itemsPerPage = 4;
   const totalPages = Math.ceil(CarouselGridArr.length / itemsPerPage);
   usePaginationKeys(totalPages, setCurrentPage);
   const startIndex = (currentPage - 1) * itemsPerPage;

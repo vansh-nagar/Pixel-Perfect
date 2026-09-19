@@ -11,6 +11,7 @@ import FluidCubeScroll from "../../../../registry/new-york/scroll/fluid-cube-scr
 import ScrollWarpGallery from "../../../../registry/new-york/scroll/scroll-warp-gallery";
 
 import GlassScrollNavbar from "../../../../registry/new-york/scroll/glass-scroll-navbar";
+import ProjectSliceScroll from "../../../../registry/new-york/scroll/project-slice-scroll";
 
 type ScrollItem = {
   name: string;
@@ -22,6 +23,14 @@ type ScrollItem = {
 };
 
 const ScrollArr: ScrollItem[] = [
+  {
+    name: "Project Slice Scroll",
+    description:
+      "Each project wipes up over the last while its title and preview card stay pinned, so the seam slices through both. Scroll to play.",
+    component: <ProjectSliceScroll />,
+    registryName: "project-slice-scroll",
+    isFull: true,
+  },
   {
     name: "Glass Scroll Navbar",
     description: "A curved glass lens refracts the images passing behind the fixed navigation, with spectral color edges.",

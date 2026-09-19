@@ -10,34 +10,24 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-type Card = { title: string; image: string };
+type Card = { title: string };
+
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
 
 const CARDS: Card[] = [
-  {
-    title: "ZV210",
-    image:
-      "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    title: "AX90",
-    image:
-      "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    title: "NOVA",
-    image:
-      "https://images.unsplash.com/photo-1620421680010-0766ff230392?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    title: "DRIFT",
-    image:
-      "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    title: "PULSE",
-    image:
-      "https://images.unsplash.com/photo-1557672172-298e090bd0f1?q=80&w=800&auto=format&fit=crop",
-  },
+  { title: "ZV210" },
+  { title: "AX90" },
+  { title: "NOVA" },
+  { title: "DRIFT" },
+  { title: "PULSE" },
 ];
 
 const VISIBLE = 2; // cards shown on each side of the active one
@@ -73,6 +63,7 @@ const CardsSlider = () => {
           const abs = Math.abs(offset);
           const hidden = abs > VISIBLE;
           const isActive = offset === 0;
+          const swatch = SWATCHES[i % SWATCHES.length];
 
           return (
             <motion.div
@@ -94,6 +85,8 @@ const CardsSlider = () => {
               style={{
                 zIndex: 100 - abs,
                 pointerEvents: hidden ? "none" : "auto",
+                background: `${swatch.motif}, ${swatch.bg}`,
+                color: swatch.ink,
               }}
               drag={isActive ? "x" : false}
               dragSnapToOrigin
@@ -104,21 +97,17 @@ const CardsSlider = () => {
                 else if (info.offset.x > DRAG_THRESHOLD) setActive((a) => a - 1);
               }}
             >
-              <img
-                src={card.image}
-                alt={card.title}
-                draggable={false}
-                className="pointer-events-none h-full w-full object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20" />
-
-              <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 p-6 text-white">
-                <h3 className="text-4xl font-bold tracking-tight">
+              <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 p-6">
+                <h3
+                  className="rounded-xl px-3 py-1 text-4xl font-bold tracking-tight"
+                  style={{ backgroundColor: swatch.bg }}
+                >
                   {card.title}
                 </h3>
                 <button
                   type="button"
-                  className="w-full rounded-full bg-black/70 py-3 text-xs font-medium backdrop-blur-sm transition-colors hover:bg-black"
+                  className="w-full rounded-full py-3 text-xs font-medium transition-opacity hover:opacity-80"
+                  style={{ backgroundColor: swatch.ink, color: swatch.bg }}
                 >
                   Get this product
                 </button>

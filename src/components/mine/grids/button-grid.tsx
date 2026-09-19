@@ -50,6 +50,8 @@ import RainbowGlowingButton from "../../../../registry/new-york/buttons/rainbow-
 import type { RainbowColors } from "../../../../registry/new-york/buttons/rainbow-glowing-button";
 import BevelButton from "../../../../registry/new-york/buttons/bevel-button";
 import SilverButton from "../../../../registry/new-york/buttons/silver-button";
+import AntinomyButton from "../../../../registry/new-york/buttons/antinomy-button";
+import MitosisButton from "../../../../registry/new-york/buttons/mitosis-button";
 import {
   Home,
   Heart,
@@ -740,6 +742,24 @@ export const ButtonsArr = [
       "Premium gradient button with image overlay and 8 color variants.",
     component: <LiquidGradientButtonWrapper />,
     registryName: "liquid-gradient-button",
+  },
+  {
+    name: "Antinomy Button",
+    description:
+      "Text label that slides right on hover as two gooey pills fill in and merge behind an action word.",
+    component: (
+      <AntinomyButton size="lg" revealLabel="Open">
+        Portfolio
+      </AntinomyButton>
+    ),
+    registryName: "antinomy-button",
+  },
+  {
+    name: "Mitosis Button",
+    description:
+      "Share pill that buds gooey drops on hover; they stretch, split and settle into icon buttons.",
+    component: <MitosisButton size="lg" />,
+    registryName: "mitosis-button",
   },
 ];
 

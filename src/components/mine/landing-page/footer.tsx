@@ -52,7 +52,7 @@ export function Footer() {
             className="text-muted-foreground/30"
           />
         </div>
-        <div className="text-xs text-muted-foreground/30">FOOTER</div>
+        <div className="text-xs tracking-wider text-muted-foreground">FOOTER</div>
         <StarBorder />
       </div>
       <div className="flex-col w-full justify-between grid grid-cols-[auto_1fr]  grid-col-1  ">

@@ -9,29 +9,40 @@ import gsap from "gsap";
 
 gsap.registerPlugin(useGSAP);
 
-type Slide = { title: string; tag: string; color: string };
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
 
+type Slide = { title: string; tag: string; swatch: number };
+
+// Seven slides on six swatches, picked so no two neighbours match, including Indigo → Azure at the wrap.
 const SLIDES: Slide[] = [
-  { title: "Azure", tag: "01", color: "#3B82F6" },
-  { title: "Violet", tag: "02", color: "#8B5CF6" },
-  { title: "Emerald", tag: "03", color: "#10B981" },
-  { title: "Amber", tag: "04", color: "#F59E0B" },
-  { title: "Rose", tag: "05", color: "#F43F5E" },
-  { title: "Teal", tag: "06", color: "#14B8A6" },
-  { title: "Indigo", tag: "07", color: "#6366F1" },
+  { title: "Azure", tag: "01", swatch: 5 },
+  { title: "Violet", tag: "02", swatch: 4 },
+  { title: "Tangerine", tag: "03", swatch: 0 },
+  { title: "Amber", tag: "04", swatch: 3 },
+  { title: "Rose", tag: "05", swatch: 2 },
+  { title: "Coral", tag: "06", swatch: 0 },
+  { title: "Indigo", tag: "07", swatch: 1 },
 ];
 
 const SPEED = 90; // px per second at idle drift
 const IDLE = 1; // timeScale magnitude when no scrolling
 
-const Arrow = () => (
+const Arrow = ({ color }: { color: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     width="26"
     height="26"
     fill="none"
-    stroke="#FFFFFF"
+    stroke={color}
     strokeWidth="3"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -108,22 +119,38 @@ const ScrollDirectionCarousel = () => {
         }}
       >
         <div ref={trackRef} className="flex w-max will-change-transform">
-          {[...SLIDES, ...SLIDES].map((s, i) => (
-            <div key={`${s.title}-${i}`} className="relative mr-6 shrink-0">
-              <div
-                className="flex aspect-square h-96 flex-col justify-end p-6 text-white"
-                style={{ clipPath: "url(#sdc-notch)", backgroundColor: s.color }}
-              >
-                <span className="text-sm font-medium text-white/70">
-                  {s.tag}
-                </span>
-                <h3 className="text-3xl font-bold">{s.title}</h3>
+          {[...SLIDES, ...SLIDES].map((s, i) => {
+            const swatch = SWATCHES[s.swatch];
+            return (
+              <div key={`${s.title}-${i}`} className="relative mr-6 shrink-0">
+                <div
+                  className="flex aspect-square h-96 flex-col justify-end p-6"
+                  style={{
+                    clipPath: "url(#sdc-notch)",
+                    background: `${swatch.motif}, ${swatch.bg}`,
+                    color: swatch.ink,
+                  }}
+                >
+                  <div
+                    className="self-start rounded-2xl px-3 py-2"
+                    style={{ backgroundColor: swatch.bg }}
+                  >
+                    <span className="block text-sm font-medium opacity-70">
+                      {s.tag}
+                    </span>
+                    <h3 className="text-3xl font-bold">{s.title}</h3>
+                  </div>
+                </div>
+                {/* the arrow button sits in the notch as a solid chip of the card's own colour */}
+                <div
+                  className="absolute bottom-0 right-0 flex h-16 w-28 items-center justify-center rounded-full"
+                  style={{ backgroundColor: swatch.bg }}
+                >
+                  <Arrow color={swatch.ink} />
+                </div>
               </div>
-              <div className="absolute bottom-0 right-0 flex h-16 w-28 items-center justify-center rounded-full bg-white/25">
-                <Arrow />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

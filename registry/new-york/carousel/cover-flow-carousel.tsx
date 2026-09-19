@@ -6,17 +6,27 @@
 
 import { useEffect, useRef } from "react";
 
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
+
 const COVERS = [
-  { seed: "flow-01", title: "Midnight Drive" },
-  { seed: "flow-02", title: "Glasshouse" },
-  { seed: "flow-03", title: "Low Tide" },
-  { seed: "flow-04", title: "Neon Fields" },
-  { seed: "flow-05", title: "Palerose" },
-  { seed: "flow-06", title: "Static Bloom" },
-  { seed: "flow-07", title: "Vantablack" },
-  { seed: "flow-08", title: "Golden Hour" },
-  { seed: "flow-09", title: "Undertow" },
-  { seed: "flow-10", title: "Northern Line" },
+  { title: "Midnight Drive" },
+  { title: "Glasshouse" },
+  { title: "Low Tide" },
+  { title: "Neon Fields" },
+  { title: "Palerose" },
+  { title: "Static Bloom" },
+  { title: "Vantablack" },
+  { title: "Golden Hour" },
+  { title: "Undertow" },
+  { title: "Northern Line" },
 ];
 
 const C = {
@@ -128,58 +138,49 @@ const CoverFlowCarousel = () => {
         className="relative -mt-10"
         style={{ transformStyle: "preserve-3d" }}
       >
-        {COVERS.map((cover, i) => (
-          <div
-            key={cover.seed}
-            ref={(el) => {
-              cardRefs.current[i] = el;
-            }}
-            onClick={() => bringToFront(i)}
-            className="absolute"
-            style={{
-              width: C.cw,
-              height: C.ch * 1.55,
-              marginLeft: -C.cw / 2,
-              marginTop: -C.ch / 2,
-              willChange: "transform, opacity",
-            }}
-          >
-            <div className="overflow-hidden rounded-md ring-1 ring-white/20">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://picsum.photos/seed/${cover.seed}/500/500`}
-                alt={cover.title}
-                draggable={false}
-                style={{ width: C.cw, height: C.ch }}
-                className="object-cover"
-              />
-            </div>
-            {/* floor reflection — a flipped copy fading out under the cover */}
+        {COVERS.map((cover, i) => {
+          const swatch = SWATCHES[i % SWATCHES.length];
+          const fill = `${swatch.motif}, ${swatch.bg}`;
+          return (
             <div
-              className="mt-1 overflow-hidden rounded-md opacity-40"
+              key={cover.title}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              onClick={() => bringToFront(i)}
+              className="absolute"
               style={{
-                transform: "scaleY(-1)",
-                maskImage:
-                  "linear-gradient(to top, rgba(0,0,0,0.5), transparent 55%)",
-                WebkitMaskImage:
-                  "linear-gradient(to top, rgba(0,0,0,0.5), transparent 55%)",
+                width: C.cw,
+                height: C.ch * 1.55,
+                marginLeft: -C.cw / 2,
+                marginTop: -C.ch / 2,
+                willChange: "transform, opacity",
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://picsum.photos/seed/${cover.seed}/500/500`}
-                alt=""
-                aria-hidden
-                draggable={false}
-                style={{ width: C.cw, height: C.ch }}
-                className="object-cover"
+              <div
+                className="rounded-md ring-1 ring-white/20"
+                style={{ width: C.cw, height: C.ch, background: fill }}
               />
+              {/* floor reflection — a flipped copy fading out under the cover */}
+              <div
+                className="mt-1 rounded-md opacity-40"
+                style={{
+                  width: C.cw,
+                  height: C.ch,
+                  background: fill,
+                  transform: "scaleY(-1)",
+                  maskImage:
+                    "linear-gradient(to top, rgba(0,0,0,0.5), transparent 55%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to top, rgba(0,0,0,0.5), transparent 55%)",
+                }}
+              />
+              <p className="pointer-events-none absolute -bottom-2 left-0 right-0 text-center text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
+                {cover.title}
+              </p>
             </div>
-            <p className="pointer-events-none absolute -bottom-2 left-0 right-0 text-center text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-              {cover.title}
-            </p>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

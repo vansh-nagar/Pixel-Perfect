@@ -1,30 +1,42 @@
 "use client";
 
 /**
- * The image is split into horizontal louver slats that flip 180° about their own axis in a stagger — the new slide rides in on the back of each slat like rotating window blinds. Auto-advances; arrows flip the louvers in either direction.
+ * The flat colour card is split into horizontal louver slats that flip 180° about their own axis in a stagger — the new slide rides in on the back of each slat like rotating window blinds. Auto-advances; arrows flip the louvers in either direction.
  */
 
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
+
+type Swatch = (typeof SWATCHES)[number];
+
+// The loop wraps (5 → 1), so no two neighbours share a swatch.
 const SLIDES = [
-  { seed: "louver-01", title: "Ridge Line" },
-  { seed: "louver-02", title: "Tidal Glass" },
-  { seed: "louver-03", title: "Copper Canyon" },
-  { seed: "louver-04", title: "Still Water" },
-  { seed: "louver-05", title: "Pine Static" },
+  { swatch: SWATCHES[3], title: "Ridge Line" },
+  { swatch: SWATCHES[1], title: "Tidal Glass" },
+  { swatch: SWATCHES[0], title: "Copper Canyon" },
+  { swatch: SWATCHES[5], title: "Still Water" },
+  { swatch: SWATCHES[4], title: "Pine Static" },
 ];
 
 const SLATS = 6;
 
-const imageUrl = (seed: string) =>
-  `https://picsum.photos/seed/${seed}/1300/860`;
-
-const stripStyle = (seed: string, s: number): React.CSSProperties => ({
-  backgroundImage: `url(${imageUrl(seed)})`,
-  backgroundSize: `100% ${SLATS * 100}%`,
-  backgroundPosition: `50% ${(s / (SLATS - 1)) * 100}%`,
+// Each slat face is a window onto one card-tall swatch, shifted up by `s` slats, so the
+// motif runs on from slat to slat once they land.
+const sliceStyle = (swatch: Swatch, s: number): React.CSSProperties => ({
+  top: `${-s * 100}%`,
+  height: `${SLATS * 100}%`,
+  background: `${swatch.motif}, ${swatch.bg}`,
 });
 
 const SlatFlipCarousel = () => {
@@ -79,28 +91,38 @@ const SlatFlipCarousel = () => {
               onAnimationComplete={s === SLATS - 1 ? land : undefined}
             >
               <div
-                className="absolute inset-0 rounded-[3px]"
-                style={{
-                  ...stripStyle(SLIDES[current].seed, s),
-                  backfaceVisibility: "hidden",
-                }}
-              />
+                className="absolute inset-0 overflow-hidden rounded-[3px]"
+                style={{ backfaceVisibility: "hidden" }}
+              >
+                <div
+                  className="absolute inset-x-0"
+                  style={sliceStyle(SLIDES[current].swatch, s)}
+                />
+              </div>
               <div
-                className="absolute inset-0 rounded-[3px]"
+                className="absolute inset-0 overflow-hidden rounded-[3px]"
                 style={{
-                  ...stripStyle(backSlide.seed, s),
                   backfaceVisibility: "hidden",
                   transform: "rotateX(180deg)",
                 }}
-              />
+              >
+                <div
+                  className="absolute inset-x-0"
+                  style={sliceStyle(backSlide.swatch, s)}
+                />
+              </div>
             </motion.div>
           </div>
         ))}
 
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
-
-        <div className="absolute bottom-5 left-6 text-white">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-white/60">
+        <div
+          className="absolute bottom-5 left-6 rounded-lg px-3 py-2"
+          style={{
+            backgroundColor: SLIDES[current].swatch.bg,
+            color: SLIDES[current].swatch.ink,
+          }}
+        >
+          <p className="text-[10px] uppercase tracking-[0.3em] opacity-60">
             {String(current + 1).padStart(2, "0")} /{" "}
             {String(SLIDES.length).padStart(2, "0")}
           </p>
@@ -114,7 +136,7 @@ const SlatFlipCarousel = () => {
             type="button"
             aria-label="Previous slide"
             onClick={() => advance(-1)}
-            className="grid size-9 place-items-center rounded-full border border-white/25 text-white/80 backdrop-blur-sm transition-colors hover:bg-white hover:text-black"
+            className="grid size-9 place-items-center rounded-full bg-[#151515] text-white transition-colors hover:bg-white hover:text-black"
           >
             <ChevronLeft className="size-4" />
           </button>
@@ -122,19 +144,11 @@ const SlatFlipCarousel = () => {
             type="button"
             aria-label="Next slide"
             onClick={() => advance(1)}
-            className="grid size-9 place-items-center rounded-full border border-white/25 text-white/80 backdrop-blur-sm transition-colors hover:bg-white hover:text-black"
+            className="grid size-9 place-items-center rounded-full bg-[#151515] text-white transition-colors hover:bg-white hover:text-black"
           >
             <ChevronRight className="size-4" />
           </button>
         </div>
-      </div>
-
-      {/* warm the cache so the slat backs never flash while flipping */}
-      <div className="hidden">
-        {SLIDES.map((s) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img key={s.seed} src={imageUrl(s.seed)} alt="" aria-hidden />
-        ))}
       </div>
     </div>
   );

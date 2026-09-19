@@ -24,7 +24,7 @@ const SocialProof = () => {
             className="text-muted-foreground/30"
           />
         </div>
-        <div className="text-xs text-muted-foreground/30">LOVED BY MANY</div>
+        <div className="text-xs tracking-wider text-muted-foreground">LOVED BY MANY</div>
         <StarBorder />
       </div>
       <div className="overflow-hidden border-t border-muted">

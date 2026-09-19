@@ -4576,6 +4576,263 @@
           "target": "components/pixel-perfect/creative-space-gallery.tsx"
         }
       ]
+    },
+    {
+      "name": "photo-depth-field",
+      "description": "A cloud of photos hanging at different depths; the cursor steers a gentle parallax, dragging flies you forward through it, and photos stream past to loop back into the distance.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-depth-field.tsx",
+          "target": "components/pixel-perfect/photo-depth-field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "photo-flip-wall",
+      "description": "A wall of cubes tiled with one photo; sweep the cursor across it and each cube flips to reveal the next photo piece by piece, until the whole wall has turned over.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-flip-wall.tsx",
+          "target": "components/pixel-perfect/photo-flip-wall.tsx"
+        }
+      ]
+    },
+    {
+      "name": "photo-magnet-grid",
+      "description": "A tidy grid of photos that scatters away from the cursor like same-pole magnets, each tile leaning away in 3D as it flees, then springing back into place.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-magnet-grid.tsx",
+          "target": "components/pixel-perfect/photo-magnet-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "photo-shatter-assemble",
+      "description": "One photo tiled into a mosaic that shatters into a drifting 3D cloud on click, parallaxes with the cursor, and reassembles as the next photo.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-shatter-assemble.tsx",
+          "target": "components/pixel-perfect/photo-shatter-assemble.tsx"
+        }
+      ]
+    },
+    {
+      "name": "braille-terrain-background",
+      "description": "A slowly drifting terrain drawn in Unicode braille, so every character carries its own 2×4 dither cell.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/braille-terrain-background.tsx",
+          "target": "components/pixel-perfect/braille-terrain-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "circuit-traces-background",
+      "description": "A seeded circuit board of Manhattan traces and vias, with bright pulses travelling along the copper.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/circuit-traces-background.tsx",
+          "target": "components/pixel-perfect/circuit-traces-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "contour-map-background",
+      "description": "Animated topographic contour lines over a slowly morphing landscape, with a bolder index line every fifth level.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/contour-map-background.tsx",
+          "target": "components/pixel-perfect/contour-map-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "halftone-blobs-background",
+      "description": "A print-style halftone screen whose dots swell and shrink as unseen blobs drift beneath it — ink on paper.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/halftone-blobs-background.tsx",
+          "target": "components/pixel-perfect/halftone-blobs-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ridge-lines-background",
+      "description": "Stacked pulse lines that rise into a ridge across the middle and occlude the lines behind them, breathing slowly.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/ridge-lines-background.tsx",
+          "target": "components/pixel-perfect/ridge-lines-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hyperspace-background",
+      "description": "Stars streak past from a vanishing point at warp speed, surging and easing like a ship that can't quite hold a steady throttle.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/hyperspace-background.tsx",
+          "target": "components/pixel-perfect/hyperspace-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "lightning-storm-background",
+      "description": "A night sky where lightning forks down at random moments, each bolt flashing the clouds and branching as it falls.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/lightning-storm-background.tsx",
+          "target": "components/pixel-perfect/lightning-storm-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radar-sweep-background",
+      "description": "A phosphor radar scope: the sweep turns with a fading wake, and contacts ping and decay each time it passes over them.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/radar-sweep-background.tsx",
+          "target": "components/pixel-perfect/radar-sweep-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "synthwave-horizon-background",
+      "description": "A striped sun sinking behind a neon perspective grid that streams toward you, under a sky of slow-twinkling stars.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/synthwave-horizon-background.tsx",
+          "target": "components/pixel-perfect/synthwave-horizon-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "warp-tunnel-background",
+      "description": "A demoscene warp tunnel: checkered rings rush out of a dark centre that drifts as if the camera can't hold still.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/warp-tunnel-background.tsx",
+          "target": "components/pixel-perfect/warp-tunnel-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "wireframe-terrain-background",
+      "description": "A flyover of wireframe mountains: a 3D mesh streams toward the viewer with near ridges hiding the far ones, like an 80s vector display.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/wireframe-terrain-background.tsx",
+          "target": "components/pixel-perfect/wireframe-terrain-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "antinomy-button",
+      "description": "Text label that slides right on hover as two gooey pills bloom and merge behind an action word, in subtle and solid variants.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/antinomy-button.tsx",
+          "target": "components/pixel-perfect/antinomy-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cylinder-carousel",
+      "description": "Orbs line the inside wall of a 3D cylinder, seen from its rim: they fly in from a wide spin, bob gently in place, and the ring turns as you drag. The whole scene leans toward the cursor.",
+      "type": "registry:block",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/carousel/cylinder-carousel.tsx",
+          "target": "components/pixel-perfect/cylinder-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "project-slice-scroll",
+      "description": "A pinned project showcase where each next project wipes up over the last, slicing the title and preview card along the seam.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/project-slice-scroll.tsx",
+          "target": "components/pixel-perfect/project-slice-scroll.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mitosis-button",
+      "description": "Share pill that buds gooey drops from its underside on hover, which stretch, split apart and settle into a row of icon buttons.",
+      "type": "registry:block",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/buttons/mitosis-button.tsx",
+          "target": "components/pixel-perfect/mitosis-button.tsx"
+        }
+      ]
     }
   ]
 }

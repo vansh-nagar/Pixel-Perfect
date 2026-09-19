@@ -15,11 +15,20 @@ const RADIUS = 760; // px from the circle center up to each card's top edge
 const CARD_TOP = "22%"; // where the top-of-arc card sits vertically
 const SPEED = 8; // degrees per second of automatic rotation
 
-const PALETTE = ["#6366F1", "#10B981", "#F59E0B", "#F43F5E", "#3B82F6", "#8B5CF6"];
+// Flat, high-contrast swatches: a solid fill, one hard-edged motif, and a text colour that reads on it.
+const SWATCHES = [
+  { bg: "#ff5f1f", ink: "#151515", motif: "conic-gradient(at 62.5% 37.5%, #f6a8f2 25%, transparent 0) 0 0 / 32px 32px" },
+  { bg: "#2d4bff", ink: "#ffffff", motif: "linear-gradient(90deg, #9dbbff 2px, transparent 0) 0 0 / 44px 44px, linear-gradient(#9dbbff 2px, transparent 0) 0 0 / 44px 44px" },
+  { bg: "#f6a8f2", ink: "#151515", motif: "repeating-radial-gradient(circle at 30% 70%, #ff5f1f 0 12px, transparent 12px 34px)" },
+  { bg: "#ffb000", ink: "#151515", motif: "repeating-linear-gradient(45deg, #151515 0 9px, transparent 9px 30px)" },
+  { bg: "#6b3ce6", ink: "#ffffff", motif: "radial-gradient(circle, #ffb000 0 7px, transparent 7.5px) 0 0 / 36px 36px" },
+  { bg: "#9dbbff", ink: "#151515", motif: "repeating-linear-gradient(0deg, #2d4bff 0 6px, transparent 6px 22px)" },
+];
 
+// 15 cards over 6 swatches: the wrap (card 15 → card 1) never repeats a colour.
 const SLIDES = Array.from({ length: COUNT }, (_, i) => ({
   label: `Slide ${String(i + 1).padStart(2, "0")}`,
-  color: PALETTE[i % PALETTE.length],
+  swatch: SWATCHES[i % SWATCHES.length],
 }));
 
 const RadialCarousel = () => {
@@ -63,10 +72,19 @@ const RadialCarousel = () => {
       {SLIDES.map((s, i) => (
         <div
           key={i}
-          className="radial-card absolute left-1/2 -ml-[120px] flex h-40 w-60 items-end rounded-2xl p-4 text-white"
-          style={{ top: CARD_TOP, backgroundColor: s.color }}
+          className="radial-card absolute left-1/2 -ml-[120px] flex h-40 w-60 items-end rounded-2xl p-4"
+          style={{
+            top: CARD_TOP,
+            background: `${s.swatch.motif}, ${s.swatch.bg}`,
+            color: s.swatch.ink,
+          }}
         >
-          <span className="text-sm font-medium text-white/90">{s.label}</span>
+          <span
+            className="rounded-md px-2 py-1 text-sm font-medium"
+            style={{ backgroundColor: s.swatch.bg }}
+          >
+            {s.label}
+          </span>
         </div>
       ))}
     </div>

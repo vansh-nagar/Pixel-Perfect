@@ -1,0 +1,40 @@
+{
+  "skill_name": "spring-gooey",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "make me a gooey toggle switch for pixel-perfect \u2014 when you flip it the knob should stretch like liquid across the track and then settle with a spring. motion/react, one self-contained registry-style file (same conventions as registry/new-york/buttons/*.tsx), light + dark. Don't add it to any grid or the registry, just write the component file.",
+      "expected_output": "A single .tsx file exporting a toggle whose knob visibly stretches (via a goo filter + a lagging ghost shape) while moving, with spring settle, keyboard/aria support, reduced-motion handling, and theme tokens.",
+      "files": [],
+      "expectations": [
+        "A goo filter (SVG feGaussianBlur followed by an alpha-threshold feColorMatrix, or blur()+contrast()) is applied to an element that contains only shape elements \u2014 every text, link, icon or label element is outside the filtered element",
+        "The leading shape moves on a spring (type 'spring' / useSpring / animate(..., spring) with stiffness and damping) and a second shape or ghost uses a different, slower timing so the two are visibly apart mid-motion",
+        "The two shapes stay within about two blur radii of each other during the motion (a neck or bridge shape, a lag bounded relative to blur, or a screenshot showing the merged blob mid-travel) so the blob does not read as two separate pieces",
+        "The filtered element has room for the blur: a stage padded by at least 3\u00d7 the blur stdDeviation with matching negative margins, or a filter region extended beyond the shapes; and no overflow-hidden on the filtered element or its stage",
+        "The filter id is unique per instance (React.useId or equivalent), and the <svg> holding it is rendered (not display:none)",
+        "Reduced motion is respected via useReducedMotion or prefers-reduced-motion, and nothing animates on first mount (initial={false} or an equivalent jump)",
+        "Shapes inside the filtered element have opaque fills from theme tokens (bg-foreground / bg-primary / bg-background etc., not raw palette colours with dark: overrides); any tint is opacity on the filtered element",
+        "'use client' appears before any import; a one-line JSDoc description is present near the top; the component has a default export; imports are limited to react, motion/react and @/lib/utils",
+        "The toggle exposes role='switch' with aria-checked (or a native checkbox), toggles on click and keyboard, and has an accessible name (aria-label prop, children, or documented requirement)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "build a segmented nav (Home / Work / About / Contact) for pixel-perfect where the active pill blobs over to whichever item you hover \u2014 it should stretch between the old and new item as it travels and settle with a spring, then go back to the selected item when you leave. motion/react, single self-contained file in the registry style. Just write the component, don't wire it into a grid.",
+      "expected_output": "A single .tsx file exporting a nav whose active indicator is a gooey pill (indicator + lagging clone under a goo filter) that measures item positions, springs to the hovered item, and returns on leave, with reduced-motion handling and theme tokens.",
+      "files": [],
+      "expectations": [
+        "A goo filter (SVG feGaussianBlur followed by an alpha-threshold feColorMatrix, or blur()+contrast()) is applied to an element that contains only shape elements \u2014 every text, link, icon or label element is outside the filtered element",
+        "The leading shape moves on a spring (type 'spring' / useSpring / animate(..., spring) with stiffness and damping) and a second shape or ghost uses a different, slower timing so the two are visibly apart mid-motion",
+        "The two shapes stay within about two blur radii of each other during the motion (a neck or bridge shape, a lag bounded relative to blur, or a screenshot showing the merged blob mid-travel) so the blob does not read as two separate pieces",
+        "The filtered element has room for the blur: a stage padded by at least 3\u00d7 the blur stdDeviation with matching negative margins, or a filter region extended beyond the shapes; and no overflow-hidden on the filtered element or its stage",
+        "The filter id is unique per instance (React.useId or equivalent), and the <svg> holding it is rendered (not display:none)",
+        "Reduced motion is respected via useReducedMotion or prefers-reduced-motion, and nothing animates on first mount (initial={false} or an equivalent jump)",
+        "Shapes inside the filtered element have opaque fills from theme tokens (bg-foreground / bg-primary / bg-background etc., not raw palette colours with dark: overrides); any tint is opacity on the filtered element",
+        "'use client' appears before any import; a one-line JSDoc description is present near the top; the component has a default export; imports are limited to react, motion/react and @/lib/utils",
+        "Item positions and widths are measured at runtime (getBoundingClientRect, offsetLeft/offsetWidth, or ResizeObserver) rather than hard-coded",
+        "Hovering an item moves the indicator to it and leaving the nav returns the indicator to the selected item"
+      ]
+    }
+  ]
+}

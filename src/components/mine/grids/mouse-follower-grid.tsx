@@ -3,6 +3,7 @@ import MouseFollower1 from "../../../../registry/new-york/mouse-follower/mouse-f
 import BendMouseFollower from "../../../../registry/new-york/mouse-follower/bend-mouse-follower";
 import BendButtonFollower from "../../../../registry/new-york/mouse-follower/bend-button-follower";
 import DitherCursorTrail from "../../../../registry/new-york/mouse-follower/dither-cursor-trail";
+import PixelDisplaceField from "../../../../registry/new-york/mouse-follower/pixel-displace-field";
 import PixelCursorTrail from "../../../../registry/new-york/mouse-follower/pixel-cursor-trail";
 import GravityImageTrail from "../../../../registry/new-york/mouse-follower/gravity-image-trail";
 import ScaleImageTrail from "../../../../registry/new-york/mouse-follower/scale-image-trail";
@@ -84,6 +85,13 @@ export const MouseFollowerArr = [
       <DitherCursorTrail color="#818cf8" opacity={0.3} radius={0.075} />
     ),
     registryName: "dither-cursor-trail",
+  },
+  {
+    name: "Pixel Displace Field",
+    description:
+      "A pixelated spiral of grid-locked squares that scatter away from the cursor and spring back.",
+    component: <PixelDisplaceField />,
+    registryName: "pixel-displace-field",
   },
 ];
 

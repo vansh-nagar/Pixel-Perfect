@@ -4,6 +4,7 @@ import { useState, type ReactNode } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import FlipTextReveal from "registry/new-york/gsap/flip-text-reveal";
+import ParticleShapeMorph from "registry/new-york/gsap/particle-shape-morph";
 import Stagger1 from "registry/new-york/gsap/stagger1";
 import TextAlongPath from "registry/new-york/gsap/text-along-path";
 import ColorFlairButton from "registry/new-york/motion-framer/color-flair-button";
@@ -53,6 +54,13 @@ const GsapStaggerGridArr: GridItem[] = [
       "A GSAP Flip orb transition followed by a staggered text reveal.",
     component: <FlipTextReveal />,
     registryName: "flip-text-reveal",
+  },
+  {
+    name: "Particle Shape Morph",
+    description:
+      "A field of dots flies between six generated forms on every click, swept around the axis by a staggered GSAP tween.",
+    component: <ParticleShapeMorph />,
+    registryName: "particle-shape-morph",
   },
 ];
 

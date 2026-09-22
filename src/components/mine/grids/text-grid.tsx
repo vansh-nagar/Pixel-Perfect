@@ -30,6 +30,8 @@ import TextBrokenGlass from "../../../../registry/new-york/text/text-broken-glas
 import TextMatrixRain from "../../../../registry/new-york/text/text-matrix-rain";
 import TextGlitchPortal from "../../../../registry/new-york/text/text-glitch-portal";
 import TextTypewriterGlitch from "../../../../registry/new-york/text/text-typewriter-glitch";
+import TextHighlightWave from "../../../../registry/new-york/text/text-highlight-wave";
+import TextInlineChipReveal from "../../../../registry/new-york/text/text-inline-chip-reveal";
 import { AnimateText } from "../../../../registry/new-york/text/animate-text/engine";
 import {
   ANIMATE_TEXT_SPECS,
@@ -456,6 +458,24 @@ const TextGrid = () => {
       ),
       registryName: "text-burn-neon",
       hasStagger: false,
+    },
+    {
+      name: "Highlight Wave",
+      description:
+        "A highlight colour washes across a headline character by character, lifting each glyph out of a dimmed rest state.",
+      component: <TextHighlightWave className="px-3 text-4xl sm:text-5xl" />,
+      registryName: "text-highlight-wave",
+      hasStagger: false,
+      isScroll: true,
+    },
+    {
+      name: "Inline Chip Reveal",
+      description:
+        "Words resolve from a hue-shifting glow into solid ink, sweeping past inline chips set in the text flow.",
+      component: <TextInlineChipReveal className="px-3 text-2xl sm:text-3xl" />,
+      registryName: "text-inline-chip-reveal",
+      hasStagger: false,
+      isScroll: true,
     },
   ];
 

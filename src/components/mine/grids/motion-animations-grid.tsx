@@ -17,6 +17,7 @@ import CarLockDriveMotion from "registry/new-york/motion-framer/car-lock-drive-m
 import DialKnobMotion from "registry/new-york/motion-framer/dial-knob-motion";
 import HoverExpandPlayer from "registry/new-york/motion-framer/hover-expand-player";
 import FisheyeFaq from "registry/new-york/motion-framer/fisheye-faq";
+import CdEnvelopePlayer from "registry/new-york/motion-framer/cd-envelope-player";
 import CopyDropdown from "../copy-dropdown";
 
 const MotionComponentArr: {
@@ -25,6 +26,13 @@ const MotionComponentArr: {
   Component: React.ComponentType;
   registryName: string;
 }[] = [
+  {
+    name: "CD Envelope Player",
+    description:
+      "A CD slides out of its paper sleeve, spins up and plays in a now-playing card.",
+    Component: CdEnvelopePlayer,
+    registryName: "cd-envelope-player",
+  },
   {
     name: "Fisheye FAQ",
     description:

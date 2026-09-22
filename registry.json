@@ -4643,19 +4643,6 @@
       ]
     },
     {
-      "name": "circuit-traces-background",
-      "description": "A seeded circuit board of Manhattan traces and vias, with bright pulses travelling along the copper.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/circuit-traces-background.tsx",
-          "target": "components/pixel-perfect/circuit-traces-background.tsx"
-        }
-      ]
-    },
-    {
       "name": "contour-map-background",
       "description": "Animated topographic contour lines over a slowly morphing landscape, with a bolder index line every fifth level.",
       "type": "registry:block",
@@ -4678,97 +4665,6 @@
           "type": "registry:component",
           "path": "registry/new-york/backgrounds/halftone-blobs-background.tsx",
           "target": "components/pixel-perfect/halftone-blobs-background.tsx"
-        }
-      ]
-    },
-    {
-      "name": "ridge-lines-background",
-      "description": "Stacked pulse lines that rise into a ridge across the middle and occlude the lines behind them, breathing slowly.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/ridge-lines-background.tsx",
-          "target": "components/pixel-perfect/ridge-lines-background.tsx"
-        }
-      ]
-    },
-    {
-      "name": "hyperspace-background",
-      "description": "Stars streak past from a vanishing point at warp speed, surging and easing like a ship that can't quite hold a steady throttle.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/hyperspace-background.tsx",
-          "target": "components/pixel-perfect/hyperspace-background.tsx"
-        }
-      ]
-    },
-    {
-      "name": "lightning-storm-background",
-      "description": "A night sky where lightning forks down at random moments, each bolt flashing the clouds and branching as it falls.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/lightning-storm-background.tsx",
-          "target": "components/pixel-perfect/lightning-storm-background.tsx"
-        }
-      ]
-    },
-    {
-      "name": "radar-sweep-background",
-      "description": "A phosphor radar scope: the sweep turns with a fading wake, and contacts ping and decay each time it passes over them.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/radar-sweep-background.tsx",
-          "target": "components/pixel-perfect/radar-sweep-background.tsx"
-        }
-      ]
-    },
-    {
-      "name": "synthwave-horizon-background",
-      "description": "A striped sun sinking behind a neon perspective grid that streams toward you, under a sky of slow-twinkling stars.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/synthwave-horizon-background.tsx",
-          "target": "components/pixel-perfect/synthwave-horizon-background.tsx"
-        }
-      ]
-    },
-    {
-      "name": "warp-tunnel-background",
-      "description": "A demoscene warp tunnel: checkered rings rush out of a dark centre that drifts as if the camera can't hold still.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/warp-tunnel-background.tsx",
-          "target": "components/pixel-perfect/warp-tunnel-background.tsx"
-        }
-      ]
-    },
-    {
-      "name": "wireframe-terrain-background",
-      "description": "A flyover of wireframe mountains: a 3D mesh streams toward the viewer with near ridges hiding the far ones, like an 80s vector display.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/backgrounds/wireframe-terrain-background.tsx",
-          "target": "components/pixel-perfect/wireframe-terrain-background.tsx"
         }
       ]
     },
@@ -4831,6 +4727,111 @@
           "type": "registry:component",
           "path": "registry/new-york/buttons/mitosis-button.tsx",
           "target": "components/pixel-perfect/mitosis-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dither-field-background",
+      "description": "A woven field of hard-edged dashes on flat colour, switched on and off by a drifting noise field so the blobs flow while every mark stays in its cell.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/dither-field-background.tsx",
+          "target": "components/pixel-perfect/dither-field-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cd-envelope-player",
+      "description": "A CD slides out of a paper sleeve and spins up into a now-playing card — grooved disc, moving sheen and a play/pause that eases the spin in and out.",
+      "type": "registry:block",
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/motion-framer/cd-envelope-player.tsx",
+          "target": "components/pixel-perfect/cd-envelope-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "logo-lockup-scroll",
+      "description": "A pinned camera pulls back from deep inside the logo mark, sweeps the wordmark past in hairline outline, then settles on the lockup and fills it in.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/scroll/logo-lockup-scroll.tsx",
+          "target": "components/pixel-perfect/logo-lockup-scroll.tsx"
+        }
+      ]
+    },
+    {
+      "name": "particle-shape-morph",
+      "description": "A field of dots that flies between six generated forms — sphere, torus, helix, knot, cube, wave — on every click, swept around the axis by a staggered GSAP tween.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/gsap/particle-shape-morph.tsx",
+          "target": "components/pixel-perfect/particle-shape-morph.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pixel-displace-field",
+      "description": "A pixelated spiral of grid-locked squares that scatter away from the cursor and spring back.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/mouse-follower/pixel-displace-field.tsx",
+          "target": "components/pixel-perfect/pixel-displace-field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-highlight-wave",
+      "description": "A highlight colour washes across a headline character by character, lifting each glyph out of a dimmed rest state as it passes, line after line.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-highlight-wave.tsx",
+          "target": "components/pixel-perfect/text-highlight-wave.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-inline-chip-reveal",
+      "description": "A headline whose words resolve from a hue-shifting glow into solid ink, around inline chips that sit in the text flow.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/text/text-inline-chip-reveal.tsx",
+          "target": "components/pixel-perfect/text-inline-chip-reveal.tsx"
         }
       ]
     }

@@ -1,12 +1,5 @@
-import { DesignEngineerCard } from "@/components/pixel-perfect/design-engineer/design-engineer-card";
-
-
 const Page = () => {
-  return (
-    <main className="pt-16">
-      <DesignEngineerCard />
-    </main>
-  );
+  return <div className="grid min-h-screen place-items-center">Playground</div>;
 };
 
 export default Page;

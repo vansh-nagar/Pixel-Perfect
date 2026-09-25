@@ -6,7 +6,7 @@ import LiquidPauseAnimation from "registry/new-york/svg/liquid-pause-animation";
 import OrbitSmileyAnimation from "registry/new-york/svg/orbit-smiley-animation";
 import SmileyOrbAnimation from "registry/new-york/svg/smiley-orb-animation";
 import CopyDropdown from "../copy-dropdown";
-import { BorderDecorator } from "./svg-grid";
+import BorderDecorator from "./_shared/border-decorator";
 
 export const SvgAnimationsArr = [
   {
@@ -55,7 +55,7 @@ const SvgAnimationsGrid = () => {
           key={index}
           className="relative border-b  border-l border-dashed  aspect-square flex items-center justify-center "
         >
-          <BorderDecorator />
+          <BorderDecorator notch />
           <div className=" z-30 flex flex-col items-center gap-2 w-full h-full p-8">
             {item.component}
           </div>

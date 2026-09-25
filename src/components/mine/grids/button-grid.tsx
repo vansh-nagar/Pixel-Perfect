@@ -53,6 +53,7 @@ import SilverButton from "../../../../registry/new-york/buttons/silver-button";
 import AntinomyButton from "../../../../registry/new-york/buttons/antinomy-button";
 import MitosisButton from "../../../../registry/new-york/buttons/mitosis-button";
 import GridPagination from "./_shared/grid-pagination";
+import BorderDecorator from "./_shared/border-decorator";
 import {
   Home, Heart, Star, Settings, Search, Bell, Camera, Music, type LucideIcon } from "lucide-react";
 
@@ -774,7 +775,7 @@ const ButtonGrid = () => {
             key={index}
             className="relative group border-b border-l border-dashed  aspect-square flex items-center justify-center "
           >
-            <BorderDecorator />
+            <BorderDecorator notch spinOnHover />
             <div className=" z-30">{item.component}</div>
 
             <div className=" leading-1 absolute left-1.5  bottom-1.5 p-0.5">
@@ -803,22 +804,3 @@ const ButtonGrid = () => {
 };
 
 export default ButtonGrid;
-
-export const BorderDecorator = () => {
-  return (
-    <>
-      <span className="border-muted-foreground absolute -left-[0.5px] top-0 block size-6   border-dashed border-l border-t z-30"></span>
-      <span className="border-muted-foreground absolute -right-px -top-px block size-6 border-dashed border-r border-t z-30"></span>
-      <span className="border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-dashed border-b border-l z-30 "></span>
-      <span className="border-muted-foreground absolute -bottom-px -right-px block size-6 border-b border-r border-dashed z-30"></span>
-
-      <span className="absolute -top-px -right-[0.5px] z-30 border-b border-l block size-2 px-[38px] py-[20px] mt-px  border-dashed"></span>
-
-      <div className="absolute group-hover:animate-spin top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>
-
-      <div className="absolute top-1/2 left-0 right-0 h-px bg-linear-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-y-1/2 z-10 pointer-events-none"></div>
-
-      <div className="absolute top-0 bottom-0 left-1/2 w-px bg-linear-to-b from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-x-1/2 z-10 pointer-events-none"></div>
-    </>
-  );
-};

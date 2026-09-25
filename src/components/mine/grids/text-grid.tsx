@@ -66,6 +66,7 @@ import {
 } from "../../../../registry/new-york/text/gooey-text";
 import CopyDropdown from "../copy-dropdown";
 import { GradientBlur } from "../landing-page/gradient-blur";
+import BorderDecorator from "./_shared/border-decorator";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
 
@@ -671,20 +672,3 @@ const TextGrid = () => {
 };
 
 export default TextGrid;
-
-export const BorderDecorator = () => {
-  return (
-    <>
-      <span className="border-muted-foreground absolute -left-[0.5px] -top-[0px] block size-6   border-dashed border-l-1 border-t-1 z-30"></span>
-      <span className="border-muted-foreground absolute -right-px -top-px block size-6 border-dashed border-r-1 border-t-1 z-30"></span>
-      <span className="border-muted-foreground absolute -bottom-px -left-[0.5px] block size-6 border-dashed border-b-1 border-l-1 z-30 "></span>
-      <span className="border-muted-foreground absolute -bottom-px -right-px block size-6 border-b-1 border-r-1 border-dashed z-30"></span>
-
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-dashed border-gray-300 dark:border-gray-700 rounded-full z-10 pointer-events-none"></div>
-
-      <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-y-1/2 z-10 pointer-events-none"></div>
-
-      <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-700 to-transparent -translate-x-1/2 z-10 pointer-events-none"></div>
-    </>
-  );
-};

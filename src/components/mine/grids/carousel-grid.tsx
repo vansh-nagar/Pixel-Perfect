@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
-import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
 import InfiniteCarousel from "registry/new-york/carousel/infinite-carousel";
 import ScrollDirectionCarousel from "registry/new-york/carousel/scroll-direction-carousel";
 import RadialCarousel from "registry/new-york/carousel/radial-carousel";
@@ -18,6 +18,7 @@ import TossDeckCarousel from "registry/new-york/carousel/toss-deck-carousel";
 import FerrisWheelCarousel from "registry/new-york/carousel/ferris-wheel-carousel";
 import CylinderCarousel from "registry/new-york/carousel/cylinder-carousel";
 import CopyDropdown from "../copy-dropdown";
+import GridPagination from "./_shared/grid-pagination";
 
 const CarouselGridArr = [
   {
@@ -179,49 +180,11 @@ const CarouselGrid = () => {
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 py-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            aria-label="Previous page"
-            className="border-dashed rounded-none"
-          >
-            <ChevronLeft className="size-4" />
-          </Button>
-
-          <div className="flex items-center gap-1">
-            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-              (page) => (
-                <Button
-                  key={page}
-                  variant={currentPage === page ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setCurrentPage(page)}
-                  className="h-8 w-8 rounded-none border-dashed"
-                >
-                  {page}
-                </Button>
-              ),
-            )}
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            aria-label="Next page"
-            className="border-dashed rounded-none"
-          >
-            <ChevronRight className="size-4" />
-          </Button>
-        </div>
-      )}
+      <GridPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onChange={setCurrentPage}
+      />
     </div>
   );
 };

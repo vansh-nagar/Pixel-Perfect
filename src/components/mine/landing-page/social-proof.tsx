@@ -1,32 +1,13 @@
-import { Circle } from "lucide-react";
+
 import StarBorder from "./star-border";
 import { TweetCard } from "@/components/ui/tweet-card";
 import TweetId from "@/data/tweets/ids.json";
+import SectionChrome from "./section-chrome";
 
 const SocialProof = () => {
   return (
     <div>
-      <div className="flex justify-between relative overflow-hidden px-6 py-3">
-        <div className="flex gap-2">
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-        </div>
-        <div className="text-xs tracking-wider text-muted-foreground">LOVED BY MANY</div>
-        <StarBorder />
-      </div>
+      <SectionChrome label="LOVED BY MANY" bordered={false} />
       <div className="overflow-hidden border-t border-muted">
         <div className="overflow-hidden grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3   ">
           {TweetId.map((id) => (

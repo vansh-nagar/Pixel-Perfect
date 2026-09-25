@@ -464,8 +464,8 @@
       "description": "Image trail mouse follower using GSAP.",
       "type": "registry:block",
       "dependencies": [
-        "gsap",
-        "@gsap/react"
+        "@gsap/react",
+        "gsap"
       ],
       "files": [
         {
@@ -480,8 +480,8 @@
       "description": "Mouse follower image trail with pure DOM.",
       "type": "registry:block",
       "dependencies": [
-        "gsap",
-        "@gsap/react"
+        "@gsap/react",
+        "gsap"
       ],
       "files": [
         {
@@ -489,6 +489,9 @@
           "path": "registry/new-york/mouse-follower/mouse-follower2.tsx",
           "target": "components/pixel-perfect/mouse-follower2.tsx"
         }
+      ],
+      "registryDependencies": [
+        "button"
       ]
     },
     {
@@ -923,8 +926,8 @@
       "description": "Animated SVG asset.",
       "type": "registry:block",
       "dependencies": [
-        "gsap",
-        "@gsap/react"
+        "@gsap/react",
+        "gsap"
       ],
       "files": [
         {
@@ -939,8 +942,8 @@
       "description": "Animated SVG asset.",
       "type": "registry:block",
       "dependencies": [
-        "gsap",
-        "@gsap/react"
+        "@gsap/react",
+        "gsap"
       ],
       "files": [
         {
@@ -955,8 +958,8 @@
       "description": "Animated SVG asset.",
       "type": "registry:block",
       "dependencies": [
-        "gsap",
-        "@gsap/react"
+        "@gsap/react",
+        "gsap"
       ],
       "files": [
         {
@@ -987,8 +990,8 @@
       "description": "GSAP stagger animation component.",
       "type": "registry:block",
       "dependencies": [
-        "gsap",
-        "@gsap/react"
+        "@gsap/react",
+        "gsap"
       ],
       "files": [
         {
@@ -1164,8 +1167,8 @@
       "description": "Guitar SVG path effect animation.",
       "type": "registry:block",
       "dependencies": [
-        "gsap",
-        "@gsap/react"
+        "@gsap/react",
+        "gsap"
       ],
       "files": [
         {
@@ -1322,21 +1325,6 @@
       ]
     },
     {
-      "name": "barwave-svg-animation",
-      "description": "A bar wave SVG animation with interactive hover, using Framer Motion.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/svg/bar-wave-animation.tsx",
-          "target": "components/pixel-perfect/bar-wave-animation.tsx"
-        }
-      ]
-    },
-    {
       "name": "claude-sidebar",
       "description": "Claude-style sidebar built on shadcn/ui's <Sidebar> primitives. Smooth icon-rail collapse animation, playful icon micro-interactions on hover, starred & recent chat lists, user card with auto-tooltips when collapsed. Customizable via props (navItems, starred, recents, user).",
       "type": "registry:block",
@@ -1349,74 +1337,6 @@
           "type": "registry:component",
           "path": "registry/new-york/sidebars/claude-sidebar.tsx",
           "target": "components/pixel-perfect/claude-sidebar.tsx"
-        }
-      ]
-    },
-    {
-      "name": "border1",
-      "description": "Border1 component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/borders/border1.tsx",
-          "target": "components/pixel-perfect/border1.tsx"
-        }
-      ]
-    },
-    {
-      "name": "border2",
-      "description": "Border2 component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/borders/border2.tsx",
-          "target": "components/pixel-perfect/border2.tsx"
-        }
-      ]
-    },
-    {
-      "name": "intersection1",
-      "description": "Intersection1 component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/borders/intersection1.tsx",
-          "target": "components/pixel-perfect/intersection1.tsx"
-        }
-      ]
-    },
-    {
-      "name": "intersection2",
-      "description": "Intersection2 component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/borders/intersection2.tsx",
-          "target": "components/pixel-perfect/intersection2.tsx"
-        }
-      ]
-    },
-    {
-      "name": "learn-more-buttion",
-      "description": "Learn More Buttion component.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/buttons/learn-more-buttion.tsx",
-          "target": "components/pixel-perfect/learn-more-buttion.tsx"
         }
       ]
     },
@@ -1464,49 +1384,6 @@
       ]
     },
     {
-      "name": "toggle-buttion",
-      "description": "Toggle Buttion component.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/buttons/toggle-buttion.tsx",
-          "target": "components/pixel-perfect/toggle-buttion.tsx"
-        }
-      ]
-    },
-    {
-      "name": "gsap-flip.d",
-      "description": "Gsap Flip.d component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/gsap/gsap-flip.d.ts",
-          "target": "components/pixel-perfect/gsap-flip.d.ts"
-        }
-      ]
-    },
-    {
-      "name": "stagger1",
-      "description": "Stagger1 component.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/gsap/stagger1.tsx",
-          "target": "components/pixel-perfect/stagger1.tsx"
-        }
-      ]
-    },
-    {
       "name": "free-premium-toggle",
       "description": "Free Premium Toggle component.",
       "type": "registry:block",
@@ -1537,37 +1414,6 @@
       ]
     },
     {
-      "name": "mouse-follower1",
-      "description": "Mouse Follower1 component.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mouse-follower1.tsx",
-          "target": "components/pixel-perfect/mouse-follower1.tsx"
-        }
-      ]
-    },
-    {
-      "name": "mouse-follower2",
-      "description": "Mouse Follower2 component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "registryDependencies": [
-        "button"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/mouse-follower/mouse-follower2.tsx",
-          "target": "components/pixel-perfect/mouse-follower2.tsx"
-        }
-      ]
-    },
-    {
       "name": "bar-wave-animation",
       "description": "Bar Wave Animation component.",
       "type": "registry:block",
@@ -1579,64 +1425,6 @@
           "type": "registry:component",
           "path": "registry/new-york/svg/bar-wave-animation.tsx",
           "target": "components/pixel-perfect/bar-wave-animation.tsx"
-        }
-      ]
-    },
-    {
-      "name": "svg5",
-      "description": "Svg5 component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/svg/svg5.tsx",
-          "target": "components/pixel-perfect/svg5.tsx"
-        }
-      ]
-    },
-    {
-      "name": "svg6",
-      "description": "Svg6 component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/svg/svg6.tsx",
-          "target": "components/pixel-perfect/svg6.tsx"
-        }
-      ]
-    },
-    {
-      "name": "svg8",
-      "description": "Svg8 component.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/svg/svg8.tsx",
-          "target": "components/pixel-perfect/svg8.tsx"
-        }
-      ]
-    },
-    {
-      "name": "guitar",
-      "description": "Guitar component.",
-      "type": "registry:block",
-      "dependencies": [
-        "@gsap/react",
-        "gsap"
-      ],
-      "registryDependencies": [
-        "button"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/svg-path-effects/guitar.tsx",
-          "target": "components/pixel-perfect/guitar.tsx"
         }
       ]
     },

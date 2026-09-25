@@ -3,8 +3,8 @@
   "name": "stagger-1",
   "description": "GSAP stagger animation component.",
   "dependencies": [
-    "gsap",
-    "@gsap/react"
+    "@gsap/react",
+    "gsap"
   ],
   "files": [
     {

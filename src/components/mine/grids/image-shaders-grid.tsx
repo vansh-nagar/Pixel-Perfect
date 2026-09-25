@@ -1,32 +1,33 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import CopyDropdown from "../copy-dropdown";
-import ImageShaderCanvas from "@/components/pixel-perfect/shaders/image-shader-canvas";
-import FluidImage from "@/components/pixel-perfect/shaders/fluid-image";
-import PaintReveal from "@/components/pixel-perfect/shaders/paint-reveal";
-import CursorReveal from "@/components/pixel-perfect/shaders/cursor-reveal";
-import BeforeAfter from "@/components/pixel-perfect/shaders/before-after";
-import ImageParticles from "@/components/pixel-perfect/shaders/image-particles";
-import InertiaParticles from "@/components/pixel-perfect/shaders/inertia-particles";
-import MagneticSwarm from "@/components/pixel-perfect/shaders/magnetic-swarm";
-import FlowField from "@/components/pixel-perfect/shaders/flow-field";
-import RippleTouch from "@/components/pixel-perfect/shaders/ripple-touch";
-import PixelDistortion from "@/components/pixel-perfect/shaders/pixel-distortion";
-import MagneticWarp from "@/components/pixel-perfect/shaders/magnetic-warp";
-import CursorTrailSmear from "@/components/pixel-perfect/shaders/cursor-trail-smear";
-import LiquidMelt from "@/components/pixel-perfect/shaders/liquid-melt";
-import VortexPull from "@/components/pixel-perfect/shaders/vortex-pull";
-import JellyBulge from "@/components/pixel-perfect/shaders/jelly-bulge";
+import ImageShaderCanvas from "registry/new-york/shaders/image-shader-canvas";
+import FluidImage from "registry/new-york/shaders/fluid-image";
+import PaintReveal from "registry/new-york/shaders/paint-reveal";
+import CursorReveal from "registry/new-york/shaders/cursor-reveal";
+import BeforeAfter from "registry/new-york/shaders/before-after";
+import ImageParticles from "registry/new-york/shaders/image-particles";
+import InertiaParticles from "registry/new-york/shaders/inertia-particles";
+import MagneticSwarm from "registry/new-york/shaders/magnetic-swarm";
+import FlowField from "registry/new-york/shaders/flow-field";
+import RippleTouch from "registry/new-york/shaders/ripple-touch";
+import PixelDistortion from "registry/new-york/shaders/pixel-distortion";
+import MagneticWarp from "registry/new-york/shaders/magnetic-warp";
+import CursorTrailSmear from "registry/new-york/shaders/cursor-trail-smear";
+import LiquidMelt from "registry/new-york/shaders/liquid-melt";
+import VortexPull from "registry/new-york/shaders/vortex-pull";
+import JellyBulge from "registry/new-york/shaders/jelly-bulge";
 import LazyVisible from "@/components/mine/lazy-visible";
 import {
   IMAGE_SHADERS,
   type ImageShader,
 } from "@/components/pixel-perfect/shaders/image-registry";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
+import GridPagination from "./_shared/grid-pagination";
 
 const FLUID_IMAGE = "/bend-image-reveal.gif";
 const FLUID_IMAGE_B = "/fluid-transition.gif";
@@ -791,45 +792,11 @@ const ImageShadersGrid = () => {
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 py-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="border-dashed rounded-none"
-          >
-            <ChevronLeft className="size-4" />
-          </Button>
-
-          <div className="flex items-center gap-1">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <Button
-                key={page}
-                variant={currentPage === page ? "default" : "outline"}
-                size="sm"
-                onClick={() => setCurrentPage(page)}
-                className="w-8 h-8 rounded-none border-dashed"
-              >
-                {page}
-              </Button>
-            ))}
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className="border-dashed rounded-none"
-          >
-            <ChevronRight className="size-4" />
-          </Button>
-        </div>
-      )}
+      <GridPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onChange={setCurrentPage}
+      />
 
       {active &&
         typeof document !== "undefined" &&

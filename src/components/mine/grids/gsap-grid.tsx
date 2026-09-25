@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useState, type ReactNode } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
-import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
 import FlipTextReveal from "registry/new-york/gsap/flip-text-reveal";
 import ParticleShapeMorph from "registry/new-york/gsap/particle-shape-morph";
 import Stagger1 from "registry/new-york/gsap/stagger1";
@@ -10,6 +10,7 @@ import TextAlongPath from "registry/new-york/gsap/text-along-path";
 import ColorFlairButton from "registry/new-york/motion-framer/color-flair-button";
 import InertiaArrowCard from "registry/new-york/motion-framer/inertia-arrow-card";
 import CopyDropdown from "../copy-dropdown";
+import GridPagination from "./_shared/grid-pagination";
 
 type GridItem = {
   name: string;
@@ -20,6 +21,13 @@ type GridItem = {
 };
 
 const GsapStaggerGridArr: GridItem[] = [
+  {
+    name: "Particle Shape Morph",
+    description:
+      "A field of dots flies between six generated forms on every click, swept around the axis by a staggered GSAP tween.",
+    component: <ParticleShapeMorph />,
+    registryName: "particle-shape-morph",
+  },
   {
     name: "Text Along Path",
     description:
@@ -54,13 +62,6 @@ const GsapStaggerGridArr: GridItem[] = [
       "A GSAP Flip orb transition followed by a staggered text reveal.",
     component: <FlipTextReveal />,
     registryName: "flip-text-reveal",
-  },
-  {
-    name: "Particle Shape Morph",
-    description:
-      "A field of dots flies between six generated forms on every click, swept around the axis by a staggered GSAP tween.",
-    component: <ParticleShapeMorph />,
-    registryName: "particle-shape-morph",
   },
 ];
 
@@ -122,47 +123,11 @@ const GsapGrid = () => {
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 py-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="border-dashed rounded-none"
-          >
-            <ChevronLeft className="size-4" />
-          </Button>
-
-          <div className="flex items-center gap-1">
-            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-              (page) => (
-                <Button
-                  key={page}
-                  variant={currentPage === page ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setCurrentPage(page)}
-                  className="h-8 w-8 rounded-none border-dashed"
-                >
-                  {page}
-                </Button>
-              ),
-            )}
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className="border-dashed rounded-none"
-          >
-            <ChevronRight className="size-4" />
-          </Button>
-        </div>
-      )}
+      <GridPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onChange={setCurrentPage}
+      />
     </div>
   );
 };

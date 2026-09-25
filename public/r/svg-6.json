@@ -3,8 +3,8 @@
   "name": "svg-6",
   "description": "Animated SVG asset.",
   "dependencies": [
-    "gsap",
-    "@gsap/react"
+    "@gsap/react",
+    "gsap"
   ],
   "files": [
     {

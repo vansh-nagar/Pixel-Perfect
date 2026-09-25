@@ -1,17 +1,17 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import CopyDropdown from "../copy-dropdown";
 
-import ShaderCanvas from "@/components/pixel-perfect/shaders/shader-canvas";
-import BlobSphere from "@/components/pixel-perfect/shaders/blob-sphere";
-import TwistedBlob from "@/components/pixel-perfect/shaders/twisted-blob";
-import DayNightSky from "@/components/pixel-perfect/shaders/day-night-sky";
+import ShaderCanvas from "registry/new-york/shaders/shader-canvas";
+import BlobSphere from "registry/new-york/shaders/blob-sphere";
+import TwistedBlob from "registry/new-york/shaders/twisted-blob";
+import DayNightSky from "registry/new-york/shaders/day-night-sky";
 import { SHADERS, type Shader } from "@/components/pixel-perfect/shaders/registry";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
+import GridPagination from "./_shared/grid-pagination";
 
 const ShaderGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -205,45 +205,11 @@ const ShaderGrid = () => {
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 py-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="border-dashed rounded-none"
-          >
-            <ChevronLeft className="size-4" />
-          </Button>
-
-          <div className="flex items-center gap-1">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <Button
-                key={page}
-                variant={currentPage === page ? "default" : "outline"}
-                size="sm"
-                onClick={() => setCurrentPage(page)}
-                className="w-8 h-8 rounded-none border-dashed"
-              >
-                {page}
-              </Button>
-            ))}
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className="border-dashed rounded-none"
-          >
-            <ChevronRight className="size-4" />
-          </Button>
-        </div>
-      )}
+      <GridPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onChange={setCurrentPage}
+      />
 
       {active &&
         typeof document !== "undefined" &&

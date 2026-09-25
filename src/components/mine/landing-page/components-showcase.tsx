@@ -1,7 +1,7 @@
 import { ComponentTransition } from "@/components/ui/infinite-moving-components";
 import { ButtonsArr } from "../grids/button-grid";
 import StarBorder from "./star-border";
-import { Circle } from "lucide-react";
+
 import { BorderArr } from "../grids/border-grid";
 import { MouseFollowerArr } from "../grids/mouse-follower-grid";
 import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
@@ -14,33 +14,16 @@ import TextZRotate from "registry/new-york/text/text-z-rotate";
 import TextReveal2 from "registry/new-york/text/text-reveal2";
 import TextBlackHole from "registry/new-york/text/text-black-hole";
 import TextBurnNeon from "registry/new-york/text/text-burn-neon";
+import TextHighlightWave from "registry/new-york/text/text-highlight-wave";
+import TextInlineChipReveal from "registry/new-york/text/text-inline-chip-reveal";
 import { BackgroudArr } from "../grids/background-grid";
 import { SvgArr } from "../grids/svg-grid";
+import SectionChrome from "./section-chrome";
 
 const ComponentsShowcase = () => {
   return (
     <>
-      <div className="flex justify-between relative overflow-hidden px-6 py-3 max-sm:px-3 border-b border-muted">
-        <div className="flex gap-2">
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-        </div>
-        <div className="text-xs tracking-wider text-muted-foreground">COMPONENTS</div>
-        <StarBorder />
-      </div>
+      <SectionChrome label="COMPONENTS" />
       <div className="grid grid-cols-[50px_1fr_50px] max-sm:grid-cols-[30px_1fr_30px] ">
         <div className=" border-r border-muted relative overflow-hidden">
           <StarBorder />
@@ -90,6 +73,20 @@ const ComponentsShowcase = () => {
 export default ComponentsShowcase;
 
 const TextArr = [
+  {
+    name: "Highlight Wave",
+    description: "A highlight colour washes across a headline character by character.",
+    component: <TextHighlightWave className="text-2xl" />,
+    registryName: "text-highlight-wave",
+    hasStagger: false,
+  },
+  {
+    name: "Inline Chip Reveal",
+    description: "Words resolve from a hue-shifting glow into ink, past inline chips.",
+    component: <TextInlineChipReveal className="text-base" />,
+    registryName: "text-inline-chip-reveal",
+    hasStagger: false,
+  },
   {
     name: "Matrix Rain Decode",
     description: "Columns of random symbols fall → lock into real text.",

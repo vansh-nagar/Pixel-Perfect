@@ -1,32 +1,13 @@
-import { Circle } from "lucide-react";
+
 import StarBorder from "./mine/landing-page/star-border";
 import SupportShowcase from "./mine/landing-page/support-showcase";
+import SectionChrome from "./mine/landing-page/section-chrome";
 
 export default function Pricing() {
   return (
     <div className="relative overflow-hidden">
       <StarBorder />
-      <div className="flex justify-between relative overflow-hidden px-6 py-3 max-sm:px-3 border-b border-muted">
-        <div className="flex gap-2">
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-        </div>
-        <div className="text-xs text-muted-foreground/30">SUPPORT</div>
-        <StarBorder />
-      </div>
+      <SectionChrome label="SUPPORT" />
       <div className="mx-auto grid grid-rows-[auto_auto]">
         <div className=" text-center relative overflow-hidden w-full py-10">
           <StarBorder />

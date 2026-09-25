@@ -47,3 +47,4 @@ next-env.d.ts
 # local claude state
 .claude/settings.local.json
 .claude/worktrees/
+package-lock.json

@@ -16,6 +16,25 @@ const BUILTIN_DEPS = new Set(["react", "react-dom", "next"]);
 // Map a local `@/components/ui/<name>` import to the external registry id it
 // must resolve to in a consumer project (when the component was itself added
 // from a third-party registry rather than the default one).
+// Registry names that don't match their filename. Without these the sync would
+// mint a second entry per component (e.g. `border1` alongside the `border-1`
+// the grids install), leaving two ids pointing at one source file.
+const NAME_OVERRIDES = {
+  border1: "border-1",
+  border2: "border-2",
+  intersection1: "intersection-1",
+  intersection2: "intersection-2",
+  "mouse-follower1": "mouse-follower-1",
+  "mouse-follower2": "mouse-follower-2",
+  svg5: "svg-5",
+  svg6: "svg-6",
+  svg8: "svg-8",
+  stagger1: "stagger-1",
+  "learn-more-buttion": "learn-more-button",
+  "toggle-buttion": "toggle-button",
+  guitar: "guitar-svg",
+};
+
 const REGISTRY_ALIASES = {
   "dotm-square-11": "@dotmatrix/dotm-square-11",
 };
@@ -26,7 +45,7 @@ function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) out.push(...walk(full));
-    else if (/\.tsx?$/.test(entry.name)) out.push(full);
+    else if (/\.tsx?$/.test(entry.name) && !/\.d\.ts$/.test(entry.name)) out.push(full);
   }
   return out;
 }
@@ -108,7 +127,8 @@ function sync({ build = true, quiet = false, pruneMissing = false } = {}) {
 
   for (const file of files) {
     const rel = path.relative(ROOT, file).replace(/\\/g, "/");
-    const name = path.basename(file, path.extname(file));
+    const base = path.basename(file, path.extname(file));
+    const name = NAME_OVERRIDES[base] ?? base;
     const content = fs.readFileSync(file, "utf8");
 
     const inferredDesc = extractDescription(content);

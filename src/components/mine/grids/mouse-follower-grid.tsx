@@ -12,11 +12,18 @@ import MotionTrailClassic from "../../../../registry/new-york/mouse-follower/mot
 import IconFall from "@/components/rune-landing/icon-fall";
 import CopyDropdown from "../copy-dropdown";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import GridPagination from "./_shared/grid-pagination";
 
 export const MouseFollowerArr = [
+  {
+    name: "Pixel Displace Field",
+    description:
+      "A pixelated spiral of grid-locked squares that scatter away from the cursor and spring back.",
+    component: <PixelDisplaceField />,
+    registryName: "pixel-displace-field",
+  },
   {
     name: "Bend Follower",
     description:
@@ -86,13 +93,6 @@ export const MouseFollowerArr = [
     ),
     registryName: "dither-cursor-trail",
   },
-  {
-    name: "Pixel Displace Field",
-    description:
-      "A pixelated spiral of grid-locked squares that scatter away from the cursor and spring back.",
-    component: <PixelDisplaceField />,
-    registryName: "pixel-displace-field",
-  },
 ];
 
 const itemsPerPage = 4;
@@ -137,45 +137,11 @@ const MouseFollower = () => {
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 py-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="border-dashed rounded-none"
-          >
-            <ChevronLeft className="size-4" />
-          </Button>
-
-          <div className="flex items-center gap-1">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <Button
-                key={page}
-                variant={currentPage === page ? "default" : "outline"}
-                size="sm"
-                onClick={() => setCurrentPage(page)}
-                className="h-8 w-8 rounded-none border-dashed"
-              >
-                {page}
-              </Button>
-            ))}
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className="border-dashed rounded-none"
-          >
-            <ChevronRight className="size-4" />
-          </Button>
-        </div>
-      )}
+      <GridPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onChange={setCurrentPage}
+      />
     </div>
   );
 };

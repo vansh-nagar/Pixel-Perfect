@@ -1,27 +1,32 @@
 "use client";
 
 /**
- * Move your cursor to smear the image pixels along a relaxing grid.
+ * Move your cursor to smear the image pixels along a relaxing grid — grid, strength, relax and force are tunable.
  */
-
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import GUI from "lil-gui";
 import { createAnimatedTexture } from "./animated-texture";
 
-const GRID = 40; // grid cells per axis — fewer = bigger "pixels"
-
 const PixelDistortion = ({
   image,
   className,
   dpr = 2,
   controls = false,
+  grid = 40,
+  strength = 0.045,
+  relax = 0.9,
+  force = 70,
 }: {
   image: string;
   className?: string;
   dpr?: number;
   controls?: boolean;
+  grid?: number;
+  strength?: number;
+  relax?: number;
+  force?: number;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +34,8 @@ const PixelDistortion = ({
     const container = containerRef.current;
     if (!container) return;
 
-    const config = { strength: 0.045, relax: 0.9 };
+    const GRID = grid;
+    const config = { strength, relax };
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -146,8 +152,8 @@ const PixelDistortion = ({
           if (dist < r2) {
             const idx = 4 * (i + GRID * j);
             const power = Math.min(RADIUS / Math.sqrt(dist + 0.0001), 8);
-            data[idx] += 70 * mouse.vx * power;
-            data[idx + 1] -= 70 * mouse.vy * power;
+            data[idx] += force * mouse.vx * power;
+            data[idx + 1] -= force * mouse.vy * power;
           }
         }
       }
@@ -214,7 +220,7 @@ const PixelDistortion = ({
       renderer.forceContextLoss();
       renderer.dispose();
     };
-  }, [image, dpr, controls]);
+  }, [image, dpr, controls, grid, strength, relax, force]);
 
   return (
     <div

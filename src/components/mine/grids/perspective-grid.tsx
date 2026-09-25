@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
-import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
 import SpinningCubeMotion from "registry/new-york/perspective/spinning-cube-motion";
 import TiltCardGlare from "registry/new-york/perspective/tilt-card-glare";
 import RotatingRingCarousel from "registry/new-york/perspective/rotating-ring-carousel";
@@ -19,6 +19,7 @@ import OrbitOrrery from "registry/new-york/perspective/orbit-orrery";
 import PerspectiveTextCrawl from "registry/new-york/perspective/perspective-text-crawl";
 import SwingingSign from "registry/new-york/perspective/swinging-sign";
 import CopyDropdown from "../copy-dropdown";
+import GridPagination from "./_shared/grid-pagination";
 
 const PerspectiveComponentArr: {
   name: string;
@@ -197,47 +198,11 @@ const PerspectiveGrid = () => {
         })}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 py-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="border-dashed rounded-none"
-          >
-            <ChevronLeft className="size-4" />
-          </Button>
-
-          <div className="flex items-center gap-1">
-            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-              (page) => (
-                <Button
-                  key={page}
-                  variant={currentPage === page ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setCurrentPage(page)}
-                  className="h-8 w-8 rounded-none border-dashed"
-                >
-                  {page}
-                </Button>
-              ),
-            )}
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className="border-dashed rounded-none"
-          >
-            <ChevronRight className="size-4" />
-          </Button>
-        </div>
-      )}
+      <GridPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onChange={setCurrentPage}
+      />
     </div>
   );
 };

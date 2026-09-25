@@ -1,60 +1,17 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Circle, GithubIcon, LucideGithub } from "lucide-react";
+import { GithubIcon, LucideGithub } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaDiscord, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import StarBorder from "./star-border";
 import { StarsCount } from "./stars-count";
-
-const socialLinks = [
-  {
-    icon: LucideGithub,
-    label: "GitHub",
-    href: "#",
-  },
-  {
-    icon: FaXTwitter,
-    label: "Twitter",
-    href: "#",
-  },
-  {
-    icon: FaLinkedinIn,
-    label: "LinkedIn",
-    href: "#",
-  },
-  {
-    icon: FaDiscord,
-    label: "Discord",
-    href: "#",
-  },
-];
+import SectionChrome from "./section-chrome";
 
 export function Footer() {
   return (
     <>
-      <div className="flex justify-between relative overflow-hidden px-6 py-3 max-sm:px-3 border-b border-muted">
-        <div className="flex gap-2">
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-          <Circle
-            strokeWidth={1}
-            size={15}
-            className="text-muted-foreground/30"
-          />
-        </div>
-        <div className="text-xs tracking-wider text-muted-foreground">FOOTER</div>
-        <StarBorder />
-      </div>
+      <SectionChrome label="FOOTER" />
       <div className="flex-col w-full justify-between grid grid-cols-[auto_1fr]  grid-col-1  ">
         <div className="border-r  border-muted grid grid-rows-[auto_auto]">
           <div className="p-3 relative overflow-hidden">

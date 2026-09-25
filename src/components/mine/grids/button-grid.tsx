@@ -38,7 +38,7 @@ import LiquidGradientButton from "../../../../registry/new-york/buttons/liquid-g
 import type { LiquidGradientVariant } from "../../../../registry/new-york/buttons/liquid-gradient-button";
 import { useState, useEffect } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import CopyDropdown from "../copy-dropdown";
 import FramerCtaButton from "../../../../registry/new-york/buttons/framer-cta-button";
 import SoftPillButton from "../../../../registry/new-york/buttons/soft-pill-button";
@@ -52,17 +52,9 @@ import BevelButton from "../../../../registry/new-york/buttons/bevel-button";
 import SilverButton from "../../../../registry/new-york/buttons/silver-button";
 import AntinomyButton from "../../../../registry/new-york/buttons/antinomy-button";
 import MitosisButton from "../../../../registry/new-york/buttons/mitosis-button";
+import GridPagination from "./_shared/grid-pagination";
 import {
-  Home,
-  Heart,
-  Star,
-  Settings,
-  Search,
-  Bell,
-  Camera,
-  Music,
-  type LucideIcon,
-} from "lucide-react";
+  Home, Heart, Star, Settings, Search, Bell, Camera, Music, type LucideIcon } from "lucide-react";
 
 const threedVariants: ThreedVariant[] = [
   "amber",
@@ -533,6 +525,13 @@ const BookDemoButtonWrapper = () => {
 
 export const ButtonsArr = [
   {
+    name: "Mitosis Button",
+    description:
+      "Share pill that buds gooey drops on hover; they stretch, split and settle into icon buttons.",
+    component: <MitosisButton size="lg" />,
+    registryName: "mitosis-button",
+  },
+  {
     name: "Steel Pill Button",
     description:
       "Glossy silver pill with a white-to-gray gradient stroke and faint letterpress label.",
@@ -754,13 +753,6 @@ export const ButtonsArr = [
     ),
     registryName: "antinomy-button",
   },
-  {
-    name: "Mitosis Button",
-    description:
-      "Share pill that buds gooey drops on hover; they stretch, split and settle into icon buttons.",
-    component: <MitosisButton size="lg" />,
-    registryName: "mitosis-button",
-  },
 ];
 
 const ButtonGrid = () => {
@@ -801,47 +793,11 @@ const ButtonGrid = () => {
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 py-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="border-dashed rounded-none"
-          >
-            <ChevronLeft className="size-4" />
-          </Button>
-
-          <div className="flex items-center gap-1">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <Button
-                key={page}
-                variant={currentPage === page ? "default" : "outline"}
-                size="sm"
-                onClick={() => setCurrentPage(page)}
-                className={`w-8 h-8 rounded-none border-dashed ${
-                  currentPage === page ? "" : ""
-                }`}
-              >
-                {page}
-              </Button>
-            ))}
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-            className="border-dashed rounded-none"
-          >
-            <ChevronRight className="size-4" />
-          </Button>
-        </div>
-      )}
+      <GridPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onChange={setCurrentPage}
+      />
     </div>
   );
 };

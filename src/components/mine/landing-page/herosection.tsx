@@ -59,9 +59,9 @@ export function HeroSection() {
   const [, forceRender] = useState(0);
   const [fps, setFps] = useState<number>(0);
   const [ms, setMs] = useState<number>(0);
-  const lastFrameTime = useRef<number>(
-    typeof performance !== "undefined" ? performance.now() : 0
-  );
+  // 0 means "not started yet"; the rAF loop seeds it on its first tick, which
+  // keeps the render itself pure.
+  const lastFrameTime = useRef<number>(0);
   const sectionRef = useRef<HTMLElement | null>(null);
   const isActive = useRef<boolean>(true);
 
@@ -106,6 +106,13 @@ export function HeroSection() {
     const measureFrame = () => {
       const currentTime =
         typeof performance !== "undefined" ? performance.now() : 0;
+      // First tick only seeds the clock — measuring against 0 would report the
+      // whole page uptime as one frame.
+      if (lastFrameTime.current === 0) {
+        lastFrameTime.current = currentTime;
+        animationFrameId = requestAnimationFrame(measureFrame);
+        return;
+      }
       const deltaTime = currentTime - lastFrameTime.current;
       const currentFps = deltaTime > 0 ? Math.round(1000 / deltaTime) : 0;
       setFps(currentFps);
@@ -146,7 +153,7 @@ export function HeroSection() {
           <div className="flex flex-wrap justify-center items-center gap-y-1">
             modern web apps. And
             <TextTypewriterGlitch className="mx-1  p-0.5 px-1 bg-muted rounded-none ">
-              It's also open source.
+              It&apos;s also open source.
             </TextTypewriterGlitch>
           </div>
         </div>

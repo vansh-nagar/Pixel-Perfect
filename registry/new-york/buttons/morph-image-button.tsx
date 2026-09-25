@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import MorphSVGPlugin from "gsap/MorphSVGPlugin";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(MorphSVGPlugin);
 

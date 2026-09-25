@@ -3,8 +3,8 @@
   "name": "mouse-follower-1",
   "description": "Image trail mouse follower using GSAP.",
   "dependencies": [
-    "gsap",
-    "@gsap/react"
+    "@gsap/react",
+    "gsap"
   ],
   "files": [
     {

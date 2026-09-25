@@ -1,19 +1,23 @@
 "use client";
+import PhotoSweepConveyor from "../../../../registry/new-york/image-animations/photo-sweep-conveyor";
 import CreativeSpaceGallery from "../../../../registry/new-york/image-animations/creative-space-gallery";
-import OrbitToFullscreen from "../../../../registry/new-york/image-animations/orbit-to-fullscreen";
 import PhotoMagnetGrid from "../../../../registry/new-york/image-animations/photo-magnet-grid";
-import PhotoShatterAssemble from "../../../../registry/new-york/image-animations/photo-shatter-assemble";
 import PhotoFlipWall from "../../../../registry/new-york/image-animations/photo-flip-wall";
-import PhotoDepthField from "../../../../registry/new-york/image-animations/photo-depth-field";
 import PhotoRingOrbit from "../../../../registry/new-york/image-animations/photo-ring-orbit";
 import PhotoSphereDrift from "../../../../registry/new-york/image-animations/photo-sphere-drift";
 import PhotoCoverflowCycle from "../../../../registry/new-york/image-animations/photo-coverflow-cycle";
 import PhotoLemniscateFlight from "../../../../registry/new-york/image-animations/photo-lemniscate-flight";
 import PhotoSpiralVortex from "../../../../registry/new-york/image-animations/photo-spiral-vortex";
-import PhotoTrefoilWeave from "../../../../registry/new-york/image-animations/photo-trefoil-weave";
 import CopyDropdown from "../copy-dropdown";
 
 export const ImageAnimationsArr = [
+  {
+    name: "Sweep Conveyor",
+    description:
+      "Photos sweep across a pinned stage on scroll, blooming at random heights before collapsing. Scroll inside the card to play.",
+    component: <PhotoSweepConveyor />,
+    registryName: "photo-sweep-conveyor",
+  },
   {
     name: "Magnet Grid",
     description: "Move over the grid and the photos flee the cursor like same-pole magnets, then spring back.",
@@ -21,28 +25,10 @@ export const ImageAnimationsArr = [
     registryName: "photo-magnet-grid",
   },
   {
-    name: "Shatter & Assemble",
-    description: "Click to shatter the photo into a 3D cloud that drifts with the cursor, then reassembles as the next one.",
-    component: <PhotoShatterAssemble />,
-    registryName: "photo-shatter-assemble",
-  },
-  {
     name: "Flip Wall",
     description: "Sweep across a wall of cubes and each one flips to reveal the next photo, piece by piece.",
     component: <PhotoFlipWall />,
     registryName: "photo-flip-wall",
-  },
-  {
-    name: "Depth Field",
-    description: "Drag down to fly forward through a cloud of photos hanging at different depths.",
-    component: <PhotoDepthField />,
-    registryName: "photo-depth-field",
-  },
-  {
-    name: "Orbit to Fullscreen",
-    description: "Select an orbiting image to rotate it forward and fill the entire screen.",
-    component: <OrbitToFullscreen />,
-    registryName: "orbit-to-fullscreen",
   },
   {
     name: "Creative Space",
@@ -84,13 +70,6 @@ export const ImageAnimationsArr = [
       "Photos spiralling endlessly inward, shrinking away as they reach the centre.",
     component: <PhotoSpiralVortex />,
     registryName: "photo-spiral-vortex",
-  },
-  {
-    name: "Trefoil Weave",
-    description:
-      "Photos threading a trefoil knot, weaving through their own trail as it turns.",
-    component: <PhotoTrefoilWeave />,
-    registryName: "photo-trefoil-weave",
   },
 ];
 

@@ -15,7 +15,6 @@ import DepthTunnel from "registry/new-york/perspective/depth-tunnel";
 import SwingDoorReveal from "registry/new-york/perspective/swing-door-reveal";
 import ExplodingDiceCube from "registry/new-york/perspective/exploding-dice-cube";
 import CoverflowMarquee from "registry/new-york/perspective/coverflow-marquee";
-import OrbitOrrery from "registry/new-york/perspective/orbit-orrery";
 import PerspectiveTextCrawl from "registry/new-york/perspective/perspective-text-crawl";
 import SwingingSign from "registry/new-york/perspective/swinging-sign";
 import CopyDropdown from "../copy-dropdown";
@@ -110,13 +109,6 @@ const PerspectiveComponentArr: {
       "An endless coverflow: cards glide across the stage, swinging flat as they pass center, with reflections.",
     Component: CoverflowMarquee,
     registryName: "coverflow-marquee",
-  },
-  {
-    name: "Orrery",
-    description:
-      "A miniature orrery: planets circling a pulsing sun on a tilted orbital plane seen in perspective.",
-    Component: OrbitOrrery,
-    registryName: "orbit-orrery",
   },
   {
     name: "Text Crawl",

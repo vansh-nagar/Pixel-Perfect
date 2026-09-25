@@ -12,7 +12,6 @@ import ScrollWarpGallery from "../../../../registry/new-york/scroll/scroll-warp-
 
 import GlassScrollNavbar from "../../../../registry/new-york/scroll/glass-scroll-navbar";
 import ProjectSliceScroll from "../../../../registry/new-york/scroll/project-slice-scroll";
-import LogoLockupScroll from "../../../../registry/new-york/scroll/logo-lockup-scroll";
 import BorderDecorator from "./_shared/border-decorator";
 
 type ScrollItem = {
@@ -25,14 +24,6 @@ type ScrollItem = {
 };
 
 const ScrollArr: ScrollItem[] = [
-  {
-    name: "Logo Lockup Scroll",
-    description:
-      "The camera pulls back from deep inside the logo mark, tracks right so the wordmark sweeps past in hairline outline, then settles on the lockup and fills it in. Scroll to play.",
-    component: <LogoLockupScroll />,
-    registryName: "logo-lockup-scroll",
-    isFull: true,
-  },
   {
     name: "Project Slice Scroll",
     description:

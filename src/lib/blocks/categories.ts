@@ -190,16 +190,6 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
       "Three.js scenes packaged as React components — real-time 3D models, lighting and camera work embedded straight into your page. WebGL power with a copyable component API.",
     source: { type: "registry", folder: "three-js" },
   },
-  {
-    slug: "clean-portfolios",
-    name: "Clean Portfolios",
-    title: "Clean Portfolio Templates",
-    description: "Minimal portfolio templates with interactive previews.",
-    source: { type: "manual", items: [
-      { name: "Folio", description: "A side rail, selected work, and personal notes." },
-      { name: "Index", description: "A compact project ledger with expandable entries." },
-    ] },
-  },
 
 ];
 

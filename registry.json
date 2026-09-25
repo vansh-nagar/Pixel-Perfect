@@ -3967,21 +3967,6 @@
       ]
     },
     {
-      "name": "orbit-orrery",
-      "description": "A miniature orrery: planets circling a pulsing sun on a tilted orbital plane seen in perspective.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/perspective/orbit-orrery.tsx",
-          "target": "components/pixel-perfect/orbit-orrery.tsx"
-        }
-      ]
-    },
-    {
       "name": "perspective-text-crawl",
       "description": "An opening-crawl of text scrolling up a tilted plane and fading into the distance, movie-style.",
       "type": "registry:block",
@@ -4249,22 +4234,6 @@
       ]
     },
     {
-      "name": "photo-trefoil-weave",
-      "description": "Photos threading a trefoil knot, weaving through their own trail as it turns.",
-      "type": "registry:block",
-      "dependencies": [
-        "@gsap/react",
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/image-animations/photo-trefoil-weave.tsx",
-          "target": "components/pixel-perfect/photo-trefoil-weave.tsx"
-        }
-      ]
-    },
-    {
       "name": "scroll-warp-gallery",
       "description": "A gallery rendered in WebGL where scroll velocity bends each image's own vertices, smears it into an RGB-split motion blur, and the cursor lenses it outward.",
       "type": "registry:block",
@@ -4323,21 +4292,6 @@
       ]
     },
     {
-      "name": "orbit-to-fullscreen",
-      "description": "Graphic images orbit through a tilted ribbon, then rotate forward and expand to cover the viewport.",
-      "type": "registry:block",
-      "dependencies": [
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/image-animations/orbit-to-fullscreen.tsx",
-          "target": "components/pixel-perfect/orbit-to-fullscreen.tsx"
-        }
-      ]
-    },
-    {
       "name": "glass-scroll-navbar",
       "description": "A fixed glass navbar refracts scrolling editorial images through a curved lens with spectral color separation.",
       "type": "registry:block",
@@ -4366,19 +4320,6 @@
       ]
     },
     {
-      "name": "photo-depth-field",
-      "description": "A cloud of photos hanging at different depths; the cursor steers a gentle parallax, dragging flies you forward through it, and photos stream past to loop back into the distance.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/image-animations/photo-depth-field.tsx",
-          "target": "components/pixel-perfect/photo-depth-field.tsx"
-        }
-      ]
-    },
-    {
       "name": "photo-flip-wall",
       "description": "A wall of cubes tiled with one photo; sweep the cursor across it and each cube flips to reveal the next photo piece by piece, until the whole wall has turned over.",
       "type": "registry:block",
@@ -4401,19 +4342,6 @@
           "type": "registry:component",
           "path": "registry/new-york/image-animations/photo-magnet-grid.tsx",
           "target": "components/pixel-perfect/photo-magnet-grid.tsx"
-        }
-      ]
-    },
-    {
-      "name": "photo-shatter-assemble",
-      "description": "One photo tiled into a mosaic that shatters into a drifting 3D cloud on click, parallaxes with the cursor, and reassembles as the next photo.",
-      "type": "registry:block",
-      "dependencies": [],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/image-animations/photo-shatter-assemble.tsx",
-          "target": "components/pixel-perfect/photo-shatter-assemble.tsx"
         }
       ]
     },
@@ -4548,22 +4476,6 @@
       ]
     },
     {
-      "name": "logo-lockup-scroll",
-      "description": "A pinned camera pulls back from deep inside the logo mark, sweeps the wordmark past in hairline outline, then settles on the lockup and fills it in.",
-      "type": "registry:block",
-      "dependencies": [
-        "@gsap/react",
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/scroll/logo-lockup-scroll.tsx",
-          "target": "components/pixel-perfect/logo-lockup-scroll.tsx"
-        }
-      ]
-    },
-    {
       "name": "particle-shape-morph",
       "description": "A field of dots that flies between six generated forms — sphere, torus, helix, knot, cube, wave — on every click, swept around the axis by a staggered GSAP tween.",
       "type": "registry:block",
@@ -4620,6 +4532,22 @@
           "type": "registry:component",
           "path": "registry/new-york/text/text-inline-chip-reveal.tsx",
           "target": "components/pixel-perfect/text-inline-chip-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "photo-sweep-conveyor",
+      "description": "Photos sweep across a pinned stage on scroll, blooming to full size at random heights before collapsing back to nothing, with a live count of what is on screen.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-sweep-conveyor.tsx",
+          "target": "components/pixel-perfect/photo-sweep-conveyor.tsx"
         }
       ]
     }

@@ -38,11 +38,6 @@ import {
   ANIMATE_TEXT_ORDER,
 } from "../../../../registry/new-york/text/animate-text/specs";
 import {
-  SharedSlideText,
-  KineticCenterText,
-  KineticStackText,
-} from "../../../../registry/new-york/text/animate-text/custom";
-import {
   DecodeCursor,
   DecodeBar,
   DecodeColor,
@@ -69,6 +64,9 @@ import { GradientBlur } from "../landing-page/gradient-blur";
 import BorderDecorator from "./_shared/border-decorator";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
+
+/** Every demo renders the same words at the same size, so only the motion differs. */
+const DEMO_TEXT_CLASS = "text-3xl font-semibold tracking-tight";
 
 type TextItem = {
   name: string;
@@ -127,7 +125,7 @@ const TextGrid = () => {
       name: "Terminal Cursor Decode",
       description:
         "Per-character scramble with a block cursor flashing as each letter locks in.",
-      component: <DecodeCursor className="text-xl" />,
+      component: <DecodeCursor className={DEMO_TEXT_CLASS} />,
       registryName: "text-decode-cursor",
       registrySlug: "line-hover",
       hasStagger: false,
@@ -136,7 +134,7 @@ const TextGrid = () => {
       name: "Difference Bar Decode",
       description:
         "Scramble decode with a white highlight bar wiping across in blend-difference.",
-      component: <DecodeBar className="text-xl" />,
+      component: <DecodeBar className={DEMO_TEXT_CLASS} />,
       registryName: "text-decode-bar",
       registrySlug: "line-hover",
       hasStagger: false,
@@ -145,7 +143,7 @@ const TextGrid = () => {
       name: "Chromatic Decode",
       description:
         "Scramble where each glyph flashes a random color before settling.",
-      component: <DecodeColor className="text-xl" />,
+      component: <DecodeColor className={DEMO_TEXT_CLASS} />,
       registryName: "text-decode-color",
       registrySlug: "line-hover",
       hasStagger: false,
@@ -154,7 +152,7 @@ const TextGrid = () => {
       name: "Box Reveal Decode",
       description:
         "Scramble decode with a rounded blurred box growing up from the bottom.",
-      component: <DecodeBox className="text-xl" />,
+      component: <DecodeBox className={DEMO_TEXT_CLASS} />,
       registryName: "text-decode-box",
       registrySlug: "line-hover",
       hasStagger: false,
@@ -183,33 +181,6 @@ const TextGrid = () => {
         hasStagger: stagger,
       } satisfies TextItem;
     }),
-    {
-      name: "Kinetic Center Build",
-      description:
-        "A word appears in the center; each new word enters from the right and pushes the line until the phrase locks centered.",
-      component: <KineticCenterText className="text-2xl font-semibold" />,
-      registryName: "text-kinetic-center-build",
-      registrySlug: "custom",
-      hasStagger: false,
-    },
-    {
-      name: "Short Slide Right",
-      description:
-        "The whole phrase glides in from the left as one move, while the words are revealed in sequence through opacity.",
-      component: <SharedSlideText className="text-2xl font-semibold" />,
-      registryName: "text-short-slide-right",
-      registrySlug: "custom",
-      hasStagger: false,
-    },
-    {
-      name: "Short Slide Down",
-      description:
-        "Each new word drops in from above into its own line and pushes the stack downward until a centered composition locks.",
-      component: <KineticStackText className="text-2xl font-semibold" />,
-      registryName: "text-short-slide-down",
-      registrySlug: "custom",
-      hasStagger: false,
-    },
     ...ANIMATE_TEXT_ORDER.slice(17).map((id) => {
       const s = ANIMATE_TEXT_SPECS[id];
       const stagger = s.target !== "whole";
@@ -219,7 +190,7 @@ const TextGrid = () => {
         component: (
           <AnimateText
             spec={s}
-            className="text-2xl font-semibold"
+            className={DEMO_TEXT_CLASS}
             {...(stagger ? { staggerFrom } : {})}
           />
         ),
@@ -235,7 +206,7 @@ const TextGrid = () => {
       name: t.display_name,
       description: t.description,
       component: (
-        <TextBlockTransition variant={id} className="text-2xl font-semibold" />
+        <TextBlockTransition variant={id} className={DEMO_TEXT_CLASS} />
       ),
       registryName: `text-block-${id}`,
       hasStagger: false,
@@ -252,7 +223,7 @@ const TextGrid = () => {
           <ScrollTypography
             effect={fx}
             text={info.sample}
-            className="text-4xl font-semibold tracking-tight sm:text-6xl"
+            className={DEMO_TEXT_CLASS}
           />
         ),
         registryName: `text-scroll-${fx}`,
@@ -267,8 +238,8 @@ const TextGrid = () => {
       name: "Matrix Rain Decode",
       description: "Columns of random symbols fall → lock into real text.",
       component: (
-        <TextMatrixRain className="text-2xl font-bold font-mono">
-          JUST GIVE IT A STAR
+        <TextMatrixRain className={DEMO_TEXT_CLASS}>
+          hey vansh
         </TextMatrixRain>
       ),
       registryName: "text-matrix-rain",
@@ -283,8 +254,8 @@ const TextGrid = () => {
       name: "Broken Glass Assemble",
       description: "Letters start shattered & rotated → snap into place.",
       component: (
-        <TextBrokenGlass className="text-2xl font-bold">
-          JUST GIVE IT A STAR
+        <TextBrokenGlass className={DEMO_TEXT_CLASS}>
+          hey vansh
         </TextBrokenGlass>
       ),
       registryName: "text-broken-glass",
@@ -294,8 +265,8 @@ const TextGrid = () => {
       name: "Glitch Warp Portal",
       description: "RGB split + scale blur → collapse into clean text.",
       component: (
-        <TextGlitchPortal className="text-2xl font-bold">
-          JUST GIVE IT A STAR
+        <TextGlitchPortal className={DEMO_TEXT_CLASS}>
+          hey vansh
         </TextGlitchPortal>
       ),
       registryName: "text-glitch-portal",
@@ -305,8 +276,8 @@ const TextGrid = () => {
       name: "Typewriter Malfunction",
       description: "Types → deletes → types wrong → finally correct.",
       component: (
-        <TextTypewriterGlitch className="text-2xl font-bold font-mono">
-          JUST GIVE IT A STAR
+        <TextTypewriterGlitch className={DEMO_TEXT_CLASS}>
+          hey vansh
         </TextTypewriterGlitch>
       ),
       registryName: "text-typewriter-glitch",
@@ -316,7 +287,7 @@ const TextGrid = () => {
       name: "Text Reveal",
       description: "Text reveal animation effect.",
       component: (
-        <TextReveal className="text-xl">JUST GIVE IT A STAR</TextReveal>
+        <TextReveal className={DEMO_TEXT_CLASS}>hey vansh</TextReveal>
       ),
       registryName: "text-reveal",
       hasStagger: false,
@@ -324,7 +295,7 @@ const TextGrid = () => {
     {
       name: "Text Video",
       description: "Video masked text effect.",
-      component: <TextVideo>JUST GIVE IT A STAR</TextVideo>,
+      component: <TextVideo>hey vansh</TextVideo>,
       registryName: "text-video",
       hasStagger: false,
     },
@@ -346,7 +317,7 @@ const TextGrid = () => {
       name: "Text Reveal 2",
       description: "Text reveal animation variant.",
       component: (
-        <TextReveal2 className="text-xl">JUST GIVE IT A STAR</TextReveal2>
+        <TextReveal2 className={DEMO_TEXT_CLASS}>hey vansh</TextReveal2>
       ),
       registryName: "text-reveal2",
       hasStagger: false,
@@ -370,8 +341,8 @@ const TextGrid = () => {
       description: "Text fades in/out on scroll using GSAP.",
       component: (
         <TextFade
-          className="text-2xl"
-          textContent="I design and build pixel-perfect digital experiences where precision, performance, and aesthetics work together seamlessly."
+          className={DEMO_TEXT_CLASS}
+          textContent="hey vansh"
         />
       ),
       registryName: "text-fade",
@@ -383,8 +354,8 @@ const TextGrid = () => {
       description: "Text follows mouse with inertia using GSAP.",
       component: (
         <TextInertia
-          className="text-2xl"
-          text="Crafting refined, pixel-perfect web experiences that balance design clarity with technical excellence."
+          className={DEMO_TEXT_CLASS}
+          text="hey vansh"
         />
       ),
       registryName: "text-inertia",
@@ -394,11 +365,7 @@ const TextGrid = () => {
       name: "Text Gradient Effect",
       description: "Gradient text effect using CSS.",
       component: (
-        <TextGradient>
-          Labore excepteur est et Lorem mollit duis ea esse officia. Irure
-          incididunt incididunt nostrud esse cillum enim. Nisi excepteur dolor
-          incididunt cupidatat.
-        </TextGradient>
+        <TextGradient>hey vansh</TextGradient>
       ),
       registryName: "text-gradient",
       hasStagger: false,
@@ -442,8 +409,8 @@ const TextGrid = () => {
       name: "Black Hole Reveal",
       description: "Letters come from center, stretched & sucked outward.",
       component: (
-        <TextBlackHole className="text-2xl font-bold">
-          JUST GIVE IT A STAR
+        <TextBlackHole className={DEMO_TEXT_CLASS}>
+          hey vansh
         </TextBlackHole>
       ),
       registryName: "text-black-hole",
@@ -453,8 +420,8 @@ const TextGrid = () => {
       name: "Burn-In Neon",
       description: "Random flicker → letters glow red → turn white.",
       component: (
-        <TextBurnNeon className="text-2xl font-bold">
-          JUST GIVE IT A STAR
+        <TextBurnNeon className={DEMO_TEXT_CLASS}>
+          hey vansh
         </TextBurnNeon>
       ),
       registryName: "text-burn-neon",
@@ -464,7 +431,7 @@ const TextGrid = () => {
       name: "Highlight Wave",
       description:
         "A highlight colour washes across a headline character by character, lifting each glyph out of a dimmed rest state.",
-      component: <TextHighlightWave className="px-3 text-4xl sm:text-5xl" />,
+      component: <TextHighlightWave className={DEMO_TEXT_CLASS} />,
       registryName: "text-highlight-wave",
       hasStagger: false,
       isScroll: true,
@@ -472,8 +439,8 @@ const TextGrid = () => {
     {
       name: "Inline Chip Reveal",
       description:
-        "Words resolve from a hue-shifting glow into solid ink, sweeping past inline chips set in the text flow.",
-      component: <TextInlineChipReveal className="px-3 text-2xl sm:text-3xl" />,
+        "Words resolve one by one from a hue-shifting glow into solid ink.",
+      component: <TextInlineChipReveal className={DEMO_TEXT_CLASS} />,
       registryName: "text-inline-chip-reveal",
       hasStagger: false,
       isScroll: true,

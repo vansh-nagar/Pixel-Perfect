@@ -16,7 +16,7 @@ interface TextXRotateProps {
 
 const TextZRotate2 = ({
   staggerFrom = "start",
-  text = "JUST GIVE IT A STAR",
+  text = "hey vansh",
   className,
 }: TextXRotateProps) => {
   const containerRef = useRef<HTMLDivElement>(null);

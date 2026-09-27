@@ -56,7 +56,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(900, 25, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, y_px: 16, blur_px: 12 }), f({ opacity: 1, y_px: 0, blur_px: 0 })),
     exit: phase(600, 15, "cubic-bezier(0.64, 0, 0.78, 0)", f({ opacity: 1, y_px: 0, blur_px: 0 }), f({ opacity: 0, y_px: -16, blur_px: 12 })),
     micro_delay_ms: 0,
-    samples: ["Think different.", "Built to flow.", "Motion with intent."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "per-character-rise": spec({
@@ -68,7 +68,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(700, 24, "cubic-bezier(0.2, 0.8, 0.2, 1)", f({ opacity: 0, y_px: 32 }), f({ opacity: 1, y_px: 0 })),
     exit: phase(420, 14, "cubic-bezier(0.7, 0, 0.84, 0)", f({ opacity: 1, y_px: 0 }), f({ opacity: 0, y_px: -24 })),
     micro_delay_ms: 0,
-    samples: ["One more thing.", "Fast and fluid.", "Sharp by design."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "per-word-crossfade": spec({
@@ -80,7 +80,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(700, 70, "cubic-bezier(0.16, 1, 0.3, 1)", f({ opacity: 0, y_px: 8 }), f({ opacity: 1, y_px: 0 })),
     exit: phase(500, 40, "cubic-bezier(0.7, 0, 0.84, 0)", f({ opacity: 1, y_px: 0 }), f({ opacity: 0, y_px: -6 })),
     micro_delay_ms: 70,
-    samples: ["Beautifully simple.", "Designed for focus.", "Built for people."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "spring-scale-in": spec({
@@ -92,7 +92,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(360, 95, "cubic-bezier(0.34, 1.56, 0.64, 1)", f({ opacity: 0, scale: 0.7 }), f({ opacity: 1, scale: 1 })),
     exit: phase(200, 80, "cubic-bezier(0.7, 0, 0.84, 0)", f({ opacity: 1, scale: 1 }), f({ opacity: 0, scale: 0.8 })),
     micro_delay_ms: 35,
-    samples: ["Fast. Crisp. Fluid.", "Pop into place.", "Smooth by default."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "mask-reveal-up": spec({
@@ -103,11 +103,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(760, 90, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, y_px: 30, blur_px: 6 }), f({ opacity: 1, y_px: 0, blur_px: 0 })),
     exit: phase(520, 70, "cubic-bezier(0.64, 0, 0.78, 0)", f({ opacity: 1, y_px: 0, blur_px: 0 }), f({ opacity: 0, y_px: -22, blur_px: 6 })),
     micro_delay_ms: 35,
-    samples: [
-      "Designed to move.\nBuilt to focus.",
-      "Quiet motion.\nStrong hierarchy.",
-      "Premium feel.\nEvery frame.",
-    ],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "line-by-line-slide": spec({
@@ -119,11 +115,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(900, 120, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, x_px: -48 }), f({ opacity: 1, x_px: 0 })),
     exit: phase(600, 80, "cubic-bezier(0.64, 0, 0.78, 0)", f({ opacity: 1, x_px: 0 }), f({ opacity: 0, x_px: 48 })),
     micro_delay_ms: 20,
-    samples: [
-      "Think different.\nDo more.",
-      "Built for speed.\nMade to last.",
-      "Clear ideas.\nClean motion.",
-    ],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   typewriter: spec({
@@ -134,7 +126,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(240, 46, "steps(1, end)", f({ opacity: 0, y_px: 0 }), f({ opacity: 1, y_px: 0 })),
     exit: phase(260, 10, "cubic-bezier(0.7, 0, 0.84, 0)", f({ opacity: 1, y_px: 0 }), f({ opacity: 0, y_px: -4 })),
     micro_delay_ms: 85,
-    samples: ["Precision in motion.", "Write. Pause. Continue."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "micro-scale-fade": spec({
@@ -145,7 +137,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(600, 0, "cubic-bezier(0.32, 0.72, 0, 1)", f({ opacity: 0, scale: 0.96 }), f({ opacity: 1, scale: 1 })),
     exit: phase(400, 0, "cubic-bezier(0.7, 0, 0.84, 0)", f({ opacity: 1, scale: 1 }), f({ opacity: 0, scale: 0.96 })),
     micro_delay_ms: 20,
-    samples: ["Welcome to motion.", "Small details matter.", "Quietly premium."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "shimmer-sweep": spec({
@@ -156,7 +148,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(850, 0, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, x_px: -22, blur_px: 8 }), f({ opacity: 1, x_px: 0, blur_px: 0 })),
     exit: phase(650, 0, "cubic-bezier(0.7, 0, 0.84, 0)", f({ opacity: 1, x_px: 0, blur_px: 0 }), f({ opacity: 0, x_px: 22, blur_px: 8 })),
     micro_delay_ms: 36,
-    samples: ["Shiny details.", "Glide with intent.", "Soft and precise."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "fade-through": spec({
@@ -167,7 +159,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(420, 0, "cubic-bezier(0.2, 0, 0, 1)", f({ opacity: 0, y_px: 6, scale: 0.99, blur_px: 2 }), f({ opacity: 1, y_px: 0, scale: 1, blur_px: 0 })),
     exit: phase(260, 0, "cubic-bezier(0.4, 0, 1, 1)", f({ opacity: 1, y_px: 0, scale: 1, blur_px: 0 }), f({ opacity: 0, y_px: -4, scale: 1, blur_px: 0 })),
     micro_delay_ms: 60,
-    samples: ["Calm transitions.", "Fade through content.", "Focus shifts smoothly."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "shared-axis-y": spec({
@@ -178,7 +170,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(180, 78, "steps(1, end)", f({ opacity: 0, y_px: 0, scale: 1 }), f({ opacity: 1, y_px: 0, scale: 1 })),
     exit: phase(140, 78, "steps(1, end)", f({ opacity: 1, y_px: 0, scale: 1 }), f({ opacity: 0, y_px: 0, scale: 1 })),
     micro_delay_ms: 28,
-    samples: ["Layered navigation.", "Hierarchy made clear.", "Depth with restraint."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "shared-axis-z": spec({
@@ -189,7 +181,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(520, 0, "cubic-bezier(0.2, 0, 0, 1)", f({ opacity: 0, scale: 0.9, blur_px: 2 }), f({ opacity: 1, scale: 1, blur_px: 0 })),
     exit: phase(360, 0, "cubic-bezier(0.4, 0, 1, 1)", f({ opacity: 1, scale: 1, blur_px: 0 }), f({ opacity: 0, scale: 1.06, blur_px: 1 })),
     micro_delay_ms: 20,
-    samples: ["Zooming between states.", "Elevate and settle.", "Scale with purpose."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "blur-out-up": spec({
@@ -200,7 +192,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(560, 28, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, y_px: 10, blur_px: 6 }), f({ opacity: 1, y_px: 0, blur_px: 0 })),
     exit: phase(480, 24, "cubic-bezier(0.64, 0, 0.78, 0)", f({ opacity: 1, y_px: 0, blur_px: 0 }), f({ opacity: 0, y_px: -14, blur_px: 8 })),
     micro_delay_ms: 35,
-    samples: ["Clear in, airy out.", "Lightweight typography.", "Exit with grace."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "scale-down-fade": spec({
@@ -211,7 +203,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(520, 0, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, y_px: 8, scale: 1.04 }), f({ opacity: 1, y_px: 0, scale: 1 })),
     exit: phase(380, 0, "cubic-bezier(0.64, 0, 0.78, 0)", f({ opacity: 1, y_px: 0, scale: 1 }), f({ opacity: 0, y_px: -8, scale: 0.94 })),
     micro_delay_ms: 20,
-    samples: ["Quietly refined.", "Polished transitions.", "A soft close."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "focus-blur-resolve": spec({
@@ -222,7 +214,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(760, 0, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, y_px: 14, blur_px: 14, scale: 1.01 }), f({ opacity: 1, y_px: 0, blur_px: 0, scale: 1 })),
     exit: phase(520, 0, "cubic-bezier(0.64, 0, 0.78, 0)", f({ opacity: 1, y_px: 0, blur_px: 0, scale: 1 }), f({ opacity: 0, y_px: -10, blur_px: 10, scale: 1 })),
     micro_delay_ms: 35,
-    samples: ["Focus resolves clearly.", "Detail emerges.", "Then softly recedes."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "bottom-up-letters": spec({
@@ -233,7 +225,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(400, 88, "cubic-bezier(0.18, 1, 0.32, 1)", f({ opacity: 0, y_px: 46 }), f({ opacity: 1, y_px: 0 })),
     exit: phase(280, 28, "cubic-bezier(0.7, 0, 0.84, 0)", f({ opacity: 1, y_px: 0 }), f({ opacity: 0, y_px: -14 })),
     micro_delay_ms: 35,
-    samples: ["Shift", "Stage", "Letter"],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "top-down-letters": spec({
@@ -244,7 +236,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(400, 88, "cubic-bezier(0.18, 1, 0.32, 1)", f({ opacity: 0, y_px: -46 }), f({ opacity: 1, y_px: 0 })),
     exit: phase(280, 28, "cubic-bezier(0.7, 0, 0.84, 0)", f({ opacity: 1, y_px: 0 }), f({ opacity: 0, y_px: 14 })),
     micro_delay_ms: 35,
-    samples: ["Signal", "Header", "Vector"],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "depth-parallax-words": spec({
@@ -255,7 +247,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(700, 70, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, y_px: 18, scale: 0.92, blur_px: 3 }), f({ opacity: 1, y_px: 0, scale: 1, blur_px: 0 })),
     exit: phase(500, 45, "cubic-bezier(0.64, 0, 0.78, 0)", f({ opacity: 1, y_px: 0, scale: 1, blur_px: 0 }), f({ opacity: 0, y_px: -10, scale: 1.05, blur_px: 2 })),
     micro_delay_ms: 35,
-    samples: ["Layers in motion.", "Depth and drift.", "Read with rhythm."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "shared-axis-x": spec({
@@ -266,7 +258,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(500, 0, "cubic-bezier(0.2, 0, 0, 1)", f({ opacity: 0, x_px: 24, scale: 0.98 }), f({ opacity: 1, x_px: 0, scale: 1 })),
     exit: phase(360, 0, "cubic-bezier(0.4, 0, 1, 1)", f({ opacity: 1, x_px: 0, scale: 1 }), f({ opacity: 0, x_px: -20, scale: 0.98 })),
     micro_delay_ms: 20,
-    samples: ["Slide across.", "Sibling views.", "Move sideways."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "stagger-from-center": spec({
@@ -278,7 +270,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(620, 22, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, y_px: 12, blur_px: 3 }), f({ opacity: 1, y_px: 0, blur_px: 0 })),
     exit: phase(420, 16, "cubic-bezier(0.64, 0, 0.78, 0)", f({ opacity: 1, y_px: 0, blur_px: 0 }), f({ opacity: 0, y_px: -8, blur_px: 3 })),
     micro_delay_ms: 28,
-    samples: ["From the center.", "Core outward.", "Keyword first."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 
   "stagger-from-edges": spec({
@@ -290,7 +282,7 @@ export const ANIMATE_TEXT_SPECS: Record<string, AnimateTextSpec> = {
     enter: phase(620, 22, "cubic-bezier(0.22, 1, 0.36, 1)", f({ opacity: 0, y_px: 12, blur_px: 3 }), f({ opacity: 1, y_px: 0, blur_px: 0 })),
     exit: phase(420, 16, "cubic-bezier(0.64, 0, 0.78, 0)", f({ opacity: 1, y_px: 0, blur_px: 0 }), f({ opacity: 0, y_px: -8, blur_px: 3 })),
     micro_delay_ms: 28,
-    samples: ["Edges inward.", "Meet at center.", "Converge clean."],
+    samples: ["hey vansh", "hey vansh", "hey vansh"],
   }),
 };
 

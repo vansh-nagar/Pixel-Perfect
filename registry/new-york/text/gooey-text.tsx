@@ -43,8 +43,8 @@ const VARIANTS: Record<
     blurHalf: 0.8,
     fade: 1.6,
     slide: null,
-    textA: "PIXEL",
-    textB: "PERFECT",
+    textA: "hey",
+    textB: "vansh",
   },
   "slide-x": {
     matrix: "1 0 0 0 0  0 1 0 0 0  1 0 1 0 0  0 0 0 16 -7",
@@ -52,8 +52,8 @@ const VARIANTS: Record<
     blurHalf: 0.5,
     fade: 1,
     slide: { axis: "x", amount: 8, ease: "power2.inOut" },
-    textA: "GIVE A",
-    textB: "STAR ★",
+    textA: "hey",
+    textB: "vansh",
   },
   "slide-y": {
     matrix: "1 0 0 0 0  0 1 0 0 0  1 0 1 0 0  0 0 0 18 -8",
@@ -61,8 +61,8 @@ const VARIANTS: Record<
     blurHalf: 0.4,
     fade: 0.8,
     slide: { axis: "y", amount: -5, ease: "power1.inOut" },
-    textA: "HOVER ME",
-    textB: "★ STAR ★",
+    textA: "hey",
+    textB: "vansh",
   },
 };
 

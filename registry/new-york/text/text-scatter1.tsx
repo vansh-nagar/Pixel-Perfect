@@ -16,7 +16,7 @@ interface TextScatter1Props {
 
 const TextScatter1 = ({
   staggerFrom = "start",
-  text = "JUST GIVE IT A STAR",
+  text = "hey vansh",
   className,
 }: TextScatter1Props) => {
   const containerRef = useRef<HTMLDivElement>(null);

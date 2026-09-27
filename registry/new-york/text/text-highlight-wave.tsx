@@ -52,7 +52,7 @@ interface TextHighlightWaveProps {
 }
 
 const TextHighlightWave = ({
-  text = "Light travels\nleft to right",
+  text = "hey vansh",
   highlightColor = "oklch(0.82 0.17 83)",
   charStagger = 0.04,
   lineStagger = 0.15,

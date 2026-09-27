@@ -6,9 +6,8 @@
 import gsap from "gsap";
 
 export type FxId =
-  | "fx1" | "fx2" | "fx3" | "fx4" | "fx5" | "fx6" | "fx7" | "fx8" | "fx9" | "fx10"
-  | "fx11" | "fx12" | "fx13" | "fx14" | "fx15" | "fx16" | "fx17" | "fx18" | "fx19" | "fx20"
-  | "fx21" | "fx22" | "fx23" | "fx24" | "fx25" | "fx26" | "fx27" | "fx28" | "fx29";
+  | "fx1" | "fx2" | "fx3" | "fx8" | "fx9" | "fx10" | "fx13" | "fx18" | "fx19" | "fx20"
+  | "fx21" | "fx22" | "fx27" | "fx28";
 
 export type EffectCtx = {
   root: HTMLElement;
@@ -35,20 +34,6 @@ const perspectiveOnParents = (els: HTMLElement[], value: number) => {
   const parents = new Set<HTMLElement>();
   els.forEach((el) => el.parentElement && parents.add(el.parentElement));
   parents.forEach((p) => gsap.set(p, { perspective: value }));
-};
-
-const wrapCharsForMask = (chars: HTMLElement[]) => {
-  chars.forEach((char) => {
-    const parent = char.parentElement;
-    if (!parent) return;
-    const wrap = document.createElement("span");
-    wrap.className = "st-char-wrap";
-    wrap.style.display = "inline-block";
-    wrap.style.position = "relative";
-    wrap.style.overflow = "hidden";
-    parent.appendChild(wrap);
-    wrap.appendChild(char);
-  });
 };
 
 const mirrorIndex = (position: number, total: number) =>
@@ -94,60 +79,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
         scrollTrigger: makeST({ trigger: root, start: "center bottom-=5%", end: "top top-=20%", scrub: true }),
       }
     );
-  },
-
-  fx4: ({ words, makeST }) => {
-    words.forEach((word) => {
-      gsap.fromTo(
-        wordChars(word),
-        { willChange: "opacity, transform", x: (pos: number, _t: HTMLElement, arr: HTMLElement[]) => 150 * (pos - arr.length / 2) },
-        {
-          ease: "power1.inOut", x: 0, stagger: { grid: "auto", from: "center" },
-          scrollTrigger: makeST({ trigger: word, start: "center bottom+=30%", end: "top top+=15%", scrub: true }),
-        }
-      );
-    });
-  },
-
-  fx5: ({ chars, root, makeST }) => {
-    gsap.fromTo(
-      chars,
-      { willChange: "opacity, transform", opacity: 0, xPercent: () => gsap.utils.random(-200, 200), yPercent: () => gsap.utils.random(-150, 150) },
-      {
-        ease: "power1.inOut", opacity: 1, xPercent: 0, yPercent: 0, stagger: { each: 0.05, grid: "auto", from: "random" },
-        scrollTrigger: makeST({ trigger: root, start: "center bottom+=10%", end: "bottom center", scrub: 0.9 }),
-      }
-    );
-  },
-
-  fx6: ({ words, makeST }) => {
-    words.forEach((word) => {
-      const chars = wordChars(word);
-      perspectiveOnParents(chars, 2000);
-      gsap.fromTo(
-        chars,
-        { willChange: "opacity, transform", opacity: 0, rotationX: -90, yPercent: 50 },
-        {
-          ease: "power1.inOut", opacity: 1, rotationX: 0, yPercent: 0, stagger: { each: 0.03, from: 0 },
-          scrollTrigger: makeST({ trigger: word, start: "center bottom+=40%", end: "bottom center-=30%", scrub: 0.9 }),
-        }
-      );
-    });
-  },
-
-  fx7: ({ words, makeST }) => {
-    words.forEach((word) => {
-      const chars = wordChars(word);
-      perspectiveOnParents(chars, 2000);
-      gsap.fromTo(
-        chars,
-        { willChange: "opacity, transform", transformOrigin: "100% 50%", opacity: 0, rotationY: -90, z: -300 },
-        {
-          ease: "expo", opacity: 1, rotationY: 0, z: 0, stagger: { each: 0.06, from: "end" },
-          scrollTrigger: makeST({ trigger: word, start: "bottom bottom+=20%", end: "bottom top", scrub: 1 }),
-        }
-      );
-    });
   },
 
   fx8: ({ chars, root, makeST }) => {
@@ -212,30 +143,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     );
   },
 
-  fx11: ({ chars, root, makeST }) => {
-    wrapCharsForMask(chars);
-    gsap.fromTo(
-      chars,
-      { willChange: "transform", transformOrigin: "0% 50%", xPercent: 105 },
-      {
-        duration: 1, ease: "expo", xPercent: 0, stagger: 0.042,
-        scrollTrigger: makeST({ trigger: root, start: "top bottom", end: "top top+=10%", toggleActions: "play resume resume reset" }),
-      }
-    );
-  },
-
-  fx12: ({ chars, root, makeST }) => {
-    wrapCharsForMask(chars);
-    gsap.fromTo(
-      chars,
-      { willChange: "transform", xPercent: -250, rotationZ: 45, scaleX: 6, transformOrigin: "100% 50%" },
-      {
-        duration: 1, ease: "power2", xPercent: 0, rotationZ: 0, scaleX: 1, stagger: -0.06,
-        scrollTrigger: makeST({ trigger: root, start: "top bottom+=10%", end: "bottom top+=10%", scrub: true }),
-      }
-    );
-  },
-
   fx13: ({ chars, root, makeST }) => {
     perspectiveOnParents(chars, 2000);
     gsap.fromTo(
@@ -244,76 +151,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
       {
         ease: "power4.inOut", opacity: 1, rotationY: 0, xPercent: 0, yPercent: 0, stagger: { each: -0.03, from: 0 },
         scrollTrigger: makeST({ trigger: root, start: "center bottom", end: "bottom center-=30%", scrub: 0.9 }),
-      }
-    );
-  },
-
-  fx14: ({ chars, root, stage, makeST }) => {
-    gsap.fromTo(
-      root,
-      { willChange: "transform", xPercent: 100 },
-      {
-        ease: "none", xPercent: 0,
-        scrollTrigger: makeST({ trigger: root, scrub: true, start: "center center", end: "+=100%", pin: stage }),
-      }
-    );
-    gsap.fromTo(
-      chars,
-      { willChange: "transform", scale: 3, yPercent: -900 },
-      {
-        ease: "back(2)", scale: 1, yPercent: 0, stagger: 0.05,
-        scrollTrigger: makeST({ trigger: root, start: "center center", end: "+=100%", scrub: 1.9 }),
-      }
-    );
-  },
-
-  fx15: ({ chars, root, stage, makeST }) => {
-    perspectiveOnParents(chars, 2000);
-    gsap.fromTo(
-      root,
-      { willChange: "transform", xPercent: -80 },
-      {
-        ease: "none", xPercent: 0,
-        scrollTrigger: makeST({ trigger: root, scrub: true, start: "center center", end: "+=100%", pin: stage }),
-      }
-    );
-    gsap.fromTo(
-      chars,
-      { willChange: "opacity, transform", transformOrigin: "50% 50% -200px", rotationX: 380, opacity: 0 },
-      {
-        ease: "expo.inOut", rotationX: 0, z: 0, opacity: 1, stagger: -0.03,
-        scrollTrigger: makeST({ trigger: root, start: "center center", end: "+=140%", scrub: 1.2 }),
-      }
-    );
-  },
-
-  fx16: ({ root, words, makeST }) => {
-    gsap.fromTo(
-      root,
-      { transformOrigin: "0% 50%", rotate: 3 },
-      {
-        ease: "none", rotate: 0,
-        scrollTrigger: makeST({ trigger: root, start: "top bottom", end: "top top", scrub: true }),
-      }
-    );
-    gsap.fromTo(
-      words,
-      { willChange: "opacity", opacity: 0.1 },
-      {
-        ease: "none", opacity: 1, stagger: 0.05,
-        scrollTrigger: makeST({ trigger: root, start: "top bottom-=20%", end: "center top+=20%", scrub: true }),
-      }
-    );
-  },
-
-  fx17: ({ chars, root, makeST }) => {
-    perspectiveOnParents(chars, 1000);
-    gsap.fromTo(
-      chars,
-      { willChange: "opacity, transform", opacity: 0, rotateX: () => gsap.utils.random(-120, 120), z: () => gsap.utils.random(-200, 200) },
-      {
-        ease: "none", opacity: 1, rotateX: 0, z: 0, stagger: 0.02,
-        scrollTrigger: makeST({ trigger: root, start: "top bottom", end: "bottom top", scrub: true }),
       }
     );
   },
@@ -403,64 +240,6 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  fx23: ({ words, makeST }) => {
-    words.forEach((word, wordPosition) => {
-      gsap.fromTo(
-        wordChars(word),
-        {
-          willChange: "transform",
-          scale: 0.01,
-          x: (pos: number, _t: HTMLElement, arr: HTMLElement[]) => (wordPosition % 2 ? pos * 50 : (arr.length - pos - 1) * -50),
-        },
-        {
-          ease: "power4", scale: 1, x: 0,
-          scrollTrigger: makeST({ trigger: word, start: "center bottom", end: "bottom top-=40%", scrub: true }),
-        }
-      );
-    });
-  },
-
-  fx24: ({ chars, root, makeST }) => {
-    const charsTotal = chars.length;
-    gsap.fromTo(
-      chars,
-      { willChange: "transform", y: (position: number) => (charsTotal / 2 - mirrorIndex(position, charsTotal) + 6) * 130 },
-      {
-        ease: "elastic.out(.4)", y: 0, stagger: { amount: 0.1, from: "center" },
-        scrollTrigger: makeST({ trigger: root, start: "top bottom", end: "bottom top-=50%", scrub: true }),
-      }
-    );
-  },
-
-  fx25: ({ chars, root, stage, makeST }) => {
-    gsap.fromTo(
-      chars,
-      { willChange: "transform", transformOrigin: "50% 100%", scaleY: 0 },
-      {
-        ease: "power3.in", opacity: 1, scaleY: 1, stagger: 0.05,
-        scrollTrigger: makeST({ trigger: root, start: "center center", end: "+=500%", scrub: true, pin: stage }),
-      }
-    );
-  },
-
-  fx26: ({ words, root, stage, makeST }) => {
-    const tl = gsap.timeline({
-      scrollTrigger: makeST({ trigger: root, start: "center center", end: "+=100%", scrub: true, pin: stage }),
-    });
-    words.forEach((word, wordPosition) => {
-      tl.fromTo(
-        wordChars(word),
-        {
-          willChange: "transform",
-          transformOrigin: wordPosition === 0 ? "50% 0%" : "50% 100%",
-          scaleY: 0,
-        },
-        { ease: "power1.inOut", scaleY: 1, stagger: { amount: 0.3, from: "center" } },
-        0
-      );
-    });
-  },
-
   fx27: ({ words, root, stage, makeST }) => {
     perspectiveOnParents(words, 1000);
     gsap.fromTo(
@@ -507,54 +286,26 @@ export const EFFECTS: Record<FxId, EffectBuilder> = {
     });
   },
 
-  fx29: ({ words, makeST }) => {
-    words.forEach((word, pos) => {
-      gsap.fromTo(
-        wordChars(word),
-        { willChange: "transform", transformOrigin: `${pos % 2 ? 0 : 100}% ${pos % 2 ? 100 : 0}%`, scale: 0 },
-        {
-          ease: "power4", scale: 1, stagger: { each: 0.03, from: pos % 2 ? "end" : "start" },
-          scrollTrigger: makeST({ trigger: word, start: "top bottom-=10%", end: "top top", scrub: true }),
-        }
-      );
-    });
-  },
 };
 
 export const EFFECT_ORDER: FxId[] = [
-  "fx1", "fx2", "fx3", "fx4", "fx5", "fx6", "fx7", "fx8", "fx9", "fx10",
-  "fx11", "fx12", "fx13", "fx14", "fx15", "fx16", "fx17", "fx18", "fx19", "fx20",
-  "fx21", "fx22", "fx23", "fx24", "fx25", "fx26", "fx27", "fx28", "fx29",
-];
+  "fx1", "fx2", "fx3", "fx8", "fx9", "fx10",
+  "fx13", "fx18", "fx19", "fx20",
+  "fx21", "fx22", "fx27", "fx28", ];
 
 export const EFFECT_INFO: Record<FxId, EffectInfo> = {
-  fx1: { name: "Spin & Scale In", description: "Letters spin upright and scale up to settle.", pinned: false, sample: "Beyond Meaning" },
-  fx2: { name: "Stretch Rise", description: "Stretched letters squash-rise into place.", pinned: false, sample: "Heavenly Pleasure" },
-  fx3: { name: "Vertical Unfold", description: "Letters unfold upward from a flat top edge.", pinned: false, sample: "Blossoms Have Fallen" },
-  fx4: { name: "Word Spread", description: "Each word's letters fan out from its centre.", pinned: false, sample: "Human Gratitude" },
-  fx5: { name: "Scatter Assemble", description: "Letters fly in from random offsets and lock together.", pinned: false, sample: "Intentionally Dramatic" },
-  fx6: { name: "Flip Up 3D", description: "Letters flip up around the X axis, per word.", pinned: false, sample: "Blooming Flowers" },
-  fx7: { name: "Swing In 3D", description: "Letters swing in around the Y axis from the word's end.", pinned: false, sample: "Unfolding\nElegantly\nNaturally" },
-  fx8: { name: "Scramble Decode", description: "Characters scramble through symbols, then resolve.", pinned: false, sample: "Midnight" },
-  fx9: { name: "Centre Fan-Out", description: "Letters start stacked at centre and fan out to place.", pinned: false, sample: "Moon Transportation" },
-  fx10: { name: "Blur Focus", description: "Letters resolve from heavy blur in random order.", pinned: false, sample: "Lucid Dreaming" },
-  fx11: { name: "Mask Slide In", description: "Letters slide up from behind a mask, left to right.", pinned: false, sample: "The Routine" },
-  fx12: { name: "Skew Streak In", description: "Stretched, skewed letters streak in from the left.", pinned: false, sample: "Night Time" },
-  fx13: { name: "Flip & Tumble 3D", description: "Letters tumble and flip 180° into place.", pinned: false, sample: "Megascrapers" },
-  fx14: { name: "Pinned Rise Build", description: "Pinned line slides in as letters rise and scale down.", pinned: true, sample: "Futuristic" },
-  fx15: { name: "Pinned 3D Flip", description: "Pinned line slides in with a deep 3D letter flip.", pinned: true, sample: "Unintelligible" },
-  fx16: { name: "Tilt & Brighten", description: "The line levels out while words brighten in sequence.", pinned: false, sample: "Out of Place" },
-  fx17: { name: "Random 3D Settle", description: "Letters tumble in from random depth and rotation.", pinned: false, sample: "Stubborn Naivety" },
-  fx18: { name: "Depth Push-In", description: "Letters push forward from far away with an overshoot.", pinned: false, sample: "Step Into the Light" },
-  fx19: { name: "Top-Down Flip", description: "Letters flip down from above into place.", pinned: false, sample: "Intense Nature" },
-  fx20: { name: "Bottom-Up Flip", description: "Letters flip up from below in random order.", pinned: false, sample: "Waking Life" },
-  fx21: { name: "Multi-Axis Depth", description: "Letters converge from deep 3D space, centre out.", pinned: false, sample: "Beauty Remains" },
-  fx22: { name: "Spiral Converge", description: "Letters spiral inward from a fanned arc.", pinned: false, sample: "Dance Into Existence" },
-  fx23: { name: "Scale Spread", description: "Letters scale up from nothing, spreading per word.", pinned: false, sample: "Deeper Love Light" },
-  fx24: { name: "Elastic Rebound", description: "Letters drop in and rebound elastically from centre.", pinned: false, sample: "Embrace" },
-  fx25: { name: "Pinned Vertical Grow", description: "Pinned letters grow vertically over a long scroll.", pinned: true, sample: "Have a Heart" },
-  fx26: { name: "Pinned Word Grow", description: "Pinned words grow vertically in turn from centre.", pinned: true, sample: "Cosmic Symphony" },
-  fx27: { name: "Pinned 3D Swarm", description: "Pinned words swarm in from deep space, random order.", pinned: true, sample: "Because You Have Hands" },
-  fx28: { name: "Blur Scale Settle", description: "Letters un-blur and scale down, centre-weighted.", pinned: false, sample: "Liberation" },
-  fx29: { name: "Corner Pop", description: "Letters pop from alternating corners, per word.", pinned: false, sample: "Discipline Above Motivation" },
+  fx1: { name: "Spin & Scale In", description: "Letters spin upright and scale up to settle.", pinned: false, sample: "hey vansh" },
+  fx2: { name: "Stretch Rise", description: "Stretched letters squash-rise into place.", pinned: false, sample: "hey vansh" },
+  fx3: { name: "Vertical Unfold", description: "Letters unfold upward from a flat top edge.", pinned: false, sample: "hey vansh" },
+  fx8: { name: "Scramble Decode", description: "Characters scramble through symbols, then resolve.", pinned: false, sample: "hey vansh" },
+  fx9: { name: "Centre Fan-Out", description: "Letters start stacked at centre and fan out to place.", pinned: false, sample: "hey vansh" },
+  fx10: { name: "Blur Focus", description: "Letters resolve from heavy blur in random order.", pinned: false, sample: "hey vansh" },
+  fx13: { name: "Flip & Tumble 3D", description: "Letters tumble and flip 180° into place.", pinned: false, sample: "hey vansh" },
+  fx18: { name: "Depth Push-In", description: "Letters push forward from far away with an overshoot.", pinned: false, sample: "hey vansh" },
+  fx19: { name: "Top-Down Flip", description: "Letters flip down from above into place.", pinned: false, sample: "hey vansh" },
+  fx20: { name: "Bottom-Up Flip", description: "Letters flip up from below in random order.", pinned: false, sample: "hey vansh" },
+  fx21: { name: "Multi-Axis Depth", description: "Letters converge from deep 3D space, centre out.", pinned: false, sample: "hey vansh" },
+  fx22: { name: "Spiral Converge", description: "Letters spiral inward from a fanned arc.", pinned: false, sample: "hey vansh" },
+  fx27: { name: "Pinned 3D Swarm", description: "Pinned words swarm in from deep space, random order.", pinned: true, sample: "hey vansh" },
+  fx28: { name: "Blur Scale Settle", description: "Letters un-blur and scale down, centre-weighted.", pinned: false, sample: "hey vansh" },
 };

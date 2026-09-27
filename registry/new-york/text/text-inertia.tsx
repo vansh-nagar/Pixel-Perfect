@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 gsap.registerPlugin(InertiaPlugin, SplitText);
 
 const TextInertia = ({
-  text = "hello  bro how are you",
+  text = "hey vansh",
   className,
   ...props
 }: {

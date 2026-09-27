@@ -184,36 +184,48 @@ export function TabsNavigation({
       )}
 
       <div className="flex flex-col md:flex-row md:items-start md:gap-5">
-        <TabsList
-          ref={listRef}
-          className="flex w-full gap-4 overflow-x-auto overflow-y-hidden mask-r-from-98% dark:bg-black [scrollbar-width:thin] [&::-webkit-scrollbar]:h-[3px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25 hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 [&::-webkit-scrollbar-thumb]:transition-colors md:sticky md:top-4 md:h-auto md:w-52 md:shrink-0 md:flex-col md:items-stretch md:gap-0.5 md:self-start md:overflow-x-hidden md:overflow-y-auto md:mask-none md:max-h-[calc(100dvh-7rem)] md:border-r md:border-dashed md:p-0 md:pr-3 md:pb-2 md:[&::-webkit-scrollbar]:w-[3px]"
-        >
-          {navItems.map((item) => (
-            <TabsTrigger
-              ref={(el) => {
-                triggerRefs.current[item.slug] = el;
-              }}
-              className="z-50 cursor-pointer group text-xs md:w-full md:justify-start md:truncate md:text-left md:px-2 md:py-1.5 md:border-l md:border-dashed md:border-l-transparent md:text-muted-foreground md:transition-colors md:hover:bg-muted/50 md:hover:text-foreground md:data-[state=active]:border-l-foreground md:data-[state=active]:bg-muted md:data-[state=active]:text-foreground"
-              key={item.slug}
-              value={item.slug}
-              title={item.name}
-            >
-              {item.name}
-              {/* underline marker for the mobile strip; the sidebar marks the
-                  active row with its left rule + fill instead */}
-              <div className="border-t border-dashed group-data-[state=active]:border-foreground mask-x-to-98% md:hidden" />
-            </TabsTrigger>
-          ))}
-          <a
-            href="https://www.asciistudio.space/showcase"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="z-50 cursor-pointer group text-xs px-1 py-1 font-medium text-nowrap inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors md:mt-1 md:border-t md:border-dashed md:px-2 md:pt-2.5"
+        <div className="md:sticky md:top-4 md:w-52 md:shrink-0 md:self-start">
+          {/* Sidebar rule lives outside the scrolling list so it can fade out at
+            both ends instead of stopping dead where the list ends. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 right-0 hidden border-r border-dashed mask-t-from-90% mask-b-from-40% md:block"
+          />
+          <TabsList
+            ref={listRef}
+            className="flex w-full gap-4 overflow-x-auto overflow-y-hidden mask-r-from-98% dark:bg-black [scrollbar-width:thin] [&::-webkit-scrollbar]:h-[3px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25 hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 [&::-webkit-scrollbar-thumb]:transition-colors md:h-auto md:flex-col md:items-stretch md:gap-0.5 md:overflow-x-hidden md:overflow-y-auto md:mask-none md:max-h-[calc(100dvh-7rem)] md:p-0 md:pr-3 md:pb-2 md:[&::-webkit-scrollbar]:w-[3px]"
           >
-            ASCII Animations
-            <ArrowUpRight className="size-3" />
-          </a>
-        </TabsList>
+            {navItems.map((item) => (
+              <TabsTrigger
+                ref={(el) => {
+                  triggerRefs.current[item.slug] = el;
+                }}
+                className="z-50 cursor-pointer group text-xs md:w-full md:justify-start md:truncate md:text-left md:px-2 md:py-1.5 md:border-l md:border-dashed md:border-l-transparent md:text-muted-foreground md:transition-colors md:hover:bg-muted/50 md:hover:text-foreground md:data-[state=active]:border-l-foreground md:data-[state=active]:bg-muted md:data-[state=active]:text-foreground"
+                key={item.slug}
+                value={item.slug}
+                title={item.name}
+              >
+                {item.name}
+                {/* underline marker for the mobile strip; the sidebar marks the
+                  active row with its left rule + fill instead */}
+                <div className="border-t border-dashed group-data-[state=active]:border-foreground mask-x-to-98% md:hidden" />
+              </TabsTrigger>
+            ))}
+            <div
+              aria-hidden
+              className="mt-1 hidden border-t border-dashed mask-r-from-50% md:block"
+            />
+            <a
+              href="https://www.asciistudio.space/showcase"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="z-50 cursor-pointer group text-xs px-1 py-1 font-medium text-nowrap inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors md:px-2 md:pt-2.5"
+            >
+              ASCII Animations
+              <ArrowUpRight className="size-3" />
+            </a>
+          </TabsList>
+        </div>
 
         {/* Mobile keeps the rule under the strip; on desktop the sidebar's own
             right border already separates nav from content. */}

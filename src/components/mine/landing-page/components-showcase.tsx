@@ -82,7 +82,7 @@ const TextArr = [
   },
   {
     name: "Inline Chip Reveal",
-    description: "Words resolve from a hue-shifting glow into ink, past inline chips.",
+    description: "Words resolve one by one from a hue-shifting glow into solid ink.",
     component: <TextInlineChipReveal className="text-base" />,
     registryName: "text-inline-chip-reveal",
     hasStagger: false,

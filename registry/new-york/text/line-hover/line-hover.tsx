@@ -58,7 +58,7 @@ type Line = {
   onLeave: (() => void) | null;
 };
 
-const DEFAULT_LINES = ["JUST GIVE IT A STAR", "MOUNT VESPERA", "PLANET THALASSA"];
+const DEFAULT_LINES = ["hey vansh", "hey vansh", "hey vansh"];
 
 interface LineHoverTextProps {
   variant: Variant;

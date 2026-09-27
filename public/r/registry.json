@@ -4550,6 +4550,149 @@
           "target": "components/pixel-perfect/photo-sweep-conveyor.tsx"
         }
       ]
+    },
+    {
+      "name": "bayer-sunset-background",
+      "description": "A 1-bit retro sunset: a banded sun over a scrolling perspective grid, rendered in two colours with a Bayer ordered dither.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/bayer-sunset-background.tsx",
+          "target": "components/pixel-perfect/bayer-sunset-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "op-art-stripes-background",
+      "description": "Op-art stripes in the spirit of Bridget Riley: bold bands that ripple and swell in slow waves, with a magnifying lens under the pointer.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/op-art-stripes-background.tsx",
+          "target": "components/pixel-perfect/op-art-stripes-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "truchet-weave-background",
+      "description": "A Truchet tiling of quarter-circle arcs whose tiles spin a quarter turn as slow waves sweep across, re-routing the maze as it goes.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/truchet-weave-background.tsx",
+          "target": "components/pixel-perfect/truchet-weave-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "vector-field-background",
+      "description": "A living vector-field plot: a grid of short strokes that turn to follow a drifting flow and swirl into a vortex around the pointer.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/vector-field-background.tsx",
+          "target": "components/pixel-perfect/vector-field-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sparkle-grid-background",
+      "description": "A dark grid where drifting clusters grow from dots into circles and bloom into four-point sparkles at their hearts; one cluster follows the pointer.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/sparkle-grid-background.tsx",
+          "target": "components/pixel-perfect/sparkle-grid-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "glyph-blocks-background",
+      "description": "Acid-green glyph zones — targets, rounded squares, crosses, plus signs and dots — drifting across a black grid while solid blocks snap to new places on a beat.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/glyph-blocks-background.tsx",
+          "target": "components/pixel-perfect/glyph-blocks-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pixel-map-background",
+      "description": "A pixel world map that pans slowly around the globe while live \"user\" squares pop on across the continents, ripple, and fade.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/pixel-map-background.tsx",
+          "target": "components/pixel-perfect/pixel-map-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "arrow-letter-background",
+      "description": "A field of diagonal arrows where a red letter spells out a word one character at a time, each change sweeping across in the arrows' own direction.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/arrow-letter-background.tsx",
+          "target": "components/pixel-perfect/arrow-letter-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checker-blocks-background",
+      "description": "A two-colour poster grid of solid blocks, rings, dots and checkerboards at many scales, whose cells glitch through finer checkers as they swap patterns on a beat or under the pointer.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/checker-blocks-background.tsx",
+          "target": "components/pixel-perfect/checker-blocks-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "misprint-background",
+      "description": "A misregistered risograph print: flowing brush-stroke shapes printed as offset cyan, blue, red and yellow separations, Bayer-dithered over a grey pixel checkerboard; the layers slip further apart under the pointer.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/misprint-background.tsx",
+          "target": "components/pixel-perfect/misprint-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "brick-blobs-background",
+      "description": "Toy-brick cats on a studded baseplate, outlined in purple and red-orange bricks, snapping a stud at a time as they wander; on hover the nearest cat walks to the pointer, watches it and perks up when touched.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/brick-blobs-background.tsx",
+          "target": "components/pixel-perfect/brick-blobs-background.tsx"
+        }
+      ]
     }
   ]
 }

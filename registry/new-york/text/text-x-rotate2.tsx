@@ -16,7 +16,7 @@ interface TextYAnimationProps {
 
 const TextXRotate2 = ({
   staggerFrom = "start",
-  text = "JUST GIVE IT A STAR",
+  text = "hey vansh",
   className,
 }: TextYAnimationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);

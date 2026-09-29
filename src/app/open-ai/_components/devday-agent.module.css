@@ -1,0 +1,738 @@
+/*
+ * Agent ("face") rules and keyframes, ported verbatim from openai.com's
+ * agent-animation module (DevDay 2026 recap hero). Only class names were
+ * shortened; every value, easing and keyframe stop is unchanged.
+ *
+ * Structure of one face (190x166 canvas, circle at 40,32):
+ *   agent > canvas > presence > actor > head > circle > gaze > cursorGaze > eyes > eyeCopy > eyePose (x2)
+ *                                     > expressions (hidden in the hero)
+ * Each hover/click animation adds one class to .actor (look-around, nod, hop,
+ * wiggle, spin); the descendant selectors below pick which layer moves.
+ */
+
+.agent {
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  flex: none;
+  position: relative;
+}
+.canvas {
+  transform-origin: 0 0;
+  width: 190px;
+  height: 166px;
+  font-family: var(--font-inter-tight), Arial, Helvetica, sans-serif;
+  letter-spacing: -1.84px;
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 1.1;
+  position: absolute;
+}
+.presence,
+.actor,
+.head,
+.gaze,
+.eyes,
+.eyeCopy,
+.eyePose,
+.expressions {
+  animation-duration: var(--agent-duration);
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  animation-iteration-count: var(--agent-iterations);
+  animation-play-state: var(--agent-play-state);
+  animation-fill-mode: both;
+  position: absolute;
+  inset: 0;
+}
+.presence,
+.actor,
+.head,
+.expressions {
+  transform-origin: 90px 82px;
+}
+.agent[data-agent-animation="spin-in-out"] .presence {
+  animation-name: spin-in-out-scale, in-out-visibility;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1), step-end;
+}
+.agent[data-agent-animation="roll-in-out"] .presence {
+  animation-name: in-out-visibility;
+  animation-timing-function: step-end;
+}
+@keyframes spin-in-out-scale {
+  0% {
+    animation-timing-function: cubic-bezier(0.35, 0.65, 0.65, 1);
+    transform: scale(0.22);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.35, 0, 0.65, 0.35);
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(0.22);
+  }
+}
+@keyframes in-out-visibility {
+  0%,
+  98%,
+  to {
+    visibility: hidden;
+  }
+  2% {
+    visibility: visible;
+  }
+}
+.spin-in-out .head {
+  animation-name: spin-in-out-body;
+}
+@keyframes spin-in-out-body {
+  0% {
+    animation-timing-function: cubic-bezier(0.25, 0.7, 0.5, 0.8);
+    transform: rotate(-180deg);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.5, 0.2, 0.75, 0.3);
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+.roll-in-out {
+  --agent-roll-in-easing: cubic-bezier(0.5, 1, 0.5, 1);
+  animation-name: roll-in-out-scale;
+}
+.roll-in-out .gaze {
+  animation-name: roll-in-out-gaze;
+}
+.roll-in-out .eyes {
+  animation-name: roll-in-out-eyes;
+}
+/* Custom in/out timelines: keyframes are generated per agent at runtime and
+   referenced through these custom properties. */
+.agent[data-custom-timeline][data-agent-animation="spin-in-out"] .presence {
+  animation-name: var(--agent-in-out-scale), var(--agent-in-out-visibility);
+}
+.agent[data-custom-timeline][data-agent-animation="roll-in-out"] .presence {
+  animation-name: var(--agent-in-out-visibility);
+}
+.agent[data-custom-timeline] .spin-in-out .head {
+  animation-name: var(--agent-in-out-spin);
+}
+.agent[data-custom-timeline] .roll-in-out {
+  animation-name: var(--agent-in-out-scale);
+}
+.agent[data-custom-timeline] .roll-in-out .gaze {
+  animation-name: var(--agent-roll-gaze);
+}
+.agent[data-custom-timeline] .roll-in-out .eyes {
+  animation-name: var(--agent-roll-eyes);
+}
+@keyframes roll-in-out-scale {
+  0% {
+    animation-timing-function: cubic-bezier(0.292564, 0.93431, 0.539091, 1);
+    transform: scale(0.22);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.5, 0, 0.809549, 0.206522);
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(0.22);
+  }
+}
+@keyframes roll-in-out-eyes {
+  0% {
+    animation-timing-function: var(--agent-roll-in-easing);
+    transform: translateY(0);
+  }
+  32.1795% {
+    transform: translateY(-100px);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.33, 0, 0.67, 0.33);
+    transform: translateY(-100px);
+  }
+  to {
+    transform: translateY(-200px);
+  }
+}
+@keyframes roll-in-out-gaze {
+  0% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.5, 1);
+    transform: translateY(38px);
+  }
+  35.8577% {
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    transform: translate(6px, 8px);
+  }
+  72%,
+  to {
+    transform: translate(-6px, 4px);
+  }
+}
+.circle {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 32px;
+  left: 40px;
+  overflow: hidden;
+}
+.eyes,
+.eyeCopy {
+  transform-origin: 50px 50px;
+}
+.cursorGaze {
+  transform-origin: 50px 50px;
+  position: absolute;
+  inset: 0;
+}
+.glyph {
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 54px;
+  display: flex;
+  position: absolute;
+}
+.eyePose {
+  transform: var(--agent-eye-rest);
+  inset: auto;
+}
+.agent[data-agent-animation] .eyePose {
+  animation-name: core-expression;
+}
+@keyframes core-expression {
+  0%,
+  8%,
+  90%,
+  to {
+    transform: var(--agent-eye-rest);
+  }
+  24%,
+  68% {
+    transform: var(--agent-eye-core);
+  }
+}
+.accessoryCharacter {
+  animation-name: var(--agent-accessory-animation);
+  animation-duration: var(--agent-duration);
+  animation-timing-function: step-end;
+  animation-iteration-count: var(--agent-iterations);
+  animation-play-state: var(--agent-play-state);
+  animation-fill-mode: both;
+}
+.look-around {
+  animation-name: look-body;
+}
+.look-around .gaze {
+  animation-name: look-gaze;
+}
+.look-around .expressions {
+  animation-name: look-expression;
+}
+@keyframes look-body {
+  0%,
+  10%,
+  76%,
+  to {
+    transform: rotate(0);
+  }
+  26%,
+  36% {
+    transform: rotate(-5deg);
+  }
+  52%,
+  62% {
+    transform: rotate(5deg);
+  }
+}
+@keyframes look-gaze {
+  0%,
+  10%,
+  76%,
+  to {
+    transform: translate(0);
+  }
+  26%,
+  36% {
+    transform: translate(-9px, -3px);
+  }
+  52%,
+  62% {
+    transform: translate(9px, -2px);
+  }
+}
+@keyframes look-expression {
+  0%,
+  10%,
+  76%,
+  to {
+    transform: translateY(0) rotate(0);
+  }
+  26%,
+  36% {
+    transform: translateY(-4px) rotate(-8deg);
+  }
+  52%,
+  62% {
+    transform: translateY(-2px) rotate(6deg);
+  }
+}
+.nod {
+  animation-name: nod-body;
+}
+.nod .gaze {
+  animation-name: nod-gaze;
+}
+@keyframes nod-body {
+  0%,
+  10%,
+  35%,
+  64%,
+  to {
+    transform: translateY(0);
+  }
+  23% {
+    transform: translateY(5px);
+  }
+  49% {
+    transform: translateY(3px);
+  }
+}
+@keyframes nod-gaze {
+  0%,
+  10%,
+  35%,
+  64%,
+  to {
+    transform: translateY(0);
+  }
+  23%,
+  49% {
+    transform: translateY(7px);
+  }
+}
+.hop {
+  transform-origin: 90px 132px;
+  animation-name: hop-body;
+}
+.hop .expressions {
+  animation-name: hop-expression;
+}
+@keyframes hop-body {
+  0%,
+  10%,
+  72%,
+  to {
+    transform: translateY(0);
+  }
+  22% {
+    transform: translateY(4px);
+  }
+  35% {
+    transform: translateY(-36px);
+  }
+  43% {
+    transform: translateY(-40px);
+  }
+  57% {
+    transform: translateY(0);
+  }
+  65% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes hop-expression {
+  0%,
+  22%,
+  72%,
+  to {
+    transform: translateY(0) scale(1);
+  }
+  43% {
+    transform: translateY(-10px) scale(1.08);
+  }
+  57% {
+    transform: translateY(-6px) scale(1.04);
+  }
+}
+.wiggle {
+  animation-name: wiggle-body;
+}
+.wiggle .gaze {
+  animation-name: wiggle-gaze;
+}
+.wiggle .expressions {
+  animation-name: wiggle-expression;
+}
+@keyframes wiggle-body {
+  0%,
+  10%,
+  75%,
+  to {
+    transform: rotate(0);
+  }
+  23% {
+    transform: rotate(-12deg);
+  }
+  36% {
+    transform: rotate(10deg);
+  }
+  49% {
+    transform: rotate(-7deg);
+  }
+  62% {
+    transform: rotate(4deg);
+  }
+}
+@keyframes wiggle-gaze {
+  0%,
+  10%,
+  75%,
+  to {
+    transform: translate(0);
+  }
+  23% {
+    transform: translate(5px);
+  }
+  36% {
+    transform: translate(-4px);
+  }
+  49% {
+    transform: translate(3px);
+  }
+  62% {
+    transform: translate(-2px);
+  }
+}
+@keyframes wiggle-expression {
+  0%,
+  10%,
+  80%,
+  to {
+    transform: rotate(0);
+  }
+  27% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(6deg);
+  }
+  53% {
+    transform: rotate(-4deg);
+  }
+  66% {
+    transform: rotate(2deg);
+  }
+}
+.spin .head {
+  animation-name: spin-body;
+}
+.spin .expressions {
+  animation-name: spin-expression;
+}
+@keyframes spin-body {
+  0%,
+  10% {
+    transform: rotate(0);
+  }
+  23% {
+    transform: rotate(-16deg);
+  }
+  62% {
+    transform: rotate(365deg);
+  }
+  76%,
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin-expression {
+  0%,
+  15%,
+  76%,
+  to {
+    transform: scale(1);
+  }
+  33% {
+    transform: scale(0.9);
+  }
+  62% {
+    transform: scale(1.08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .agent[data-custom-timeline][data-agent-animation]
+    :is(.presence, .actor, .head, .gaze, .eyes),
+  .agent[data-agent-animation="spin-in-out"] .presence,
+  .agent[data-agent-animation="roll-in-out"] .presence,
+  .agent .presence,
+  .agent .actor,
+  .agent .head,
+  .agent .gaze,
+  .agent .eyes,
+  .agent .eyeCopy,
+  .agent[data-agent-animation] .eyePose,
+  .agent .expressions {
+    animation: none;
+  }
+  .eyeCopy + .eyeCopy {
+    display: none;
+  }
+  .agent .accessoryCharacter {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------------
+ * Study additions for the custom faces (not from openai.com).
+ * Same motion language as the originals: every layer inherits the shared
+ * cubic-bezier(0.65, 0, 0.35, 1) timing, the "hold" stops sit on the same
+ * 10% / 62-76% beats, and the eyes still swap to their bespoke pose through
+ * core-expression (8% -> 24% ... 68% -> 90%).
+ * ---------------------------------------------------------------------- */
+
+/* heartbeat (2.2s): two quick beats, like hop's squash-and-rebound. */
+.heartbeat {
+  animation-name: heartbeat-body;
+}
+.heartbeat .eyes {
+  animation-name: heartbeat-eyes;
+}
+@keyframes heartbeat-body {
+  0%,
+  10%,
+  72%,
+  to {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.12);
+  }
+  28% {
+    transform: scale(0.97);
+  }
+  38% {
+    transform: scale(1.09);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+@keyframes heartbeat-eyes {
+  0%,
+  10%,
+  72%,
+  to {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.22);
+  }
+  28% {
+    transform: scale(0.94);
+  }
+  38% {
+    transform: scale(1.16);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+/* dizzy (2.8s): eyes spin twice on the spin beat (overshoot to 725deg, settle
+   at 720deg) while the head wobbles with a decaying wiggle. */
+.dizzy {
+  animation-name: dizzy-body;
+}
+.dizzy .gaze {
+  animation-name: dizzy-gaze;
+}
+.dizzy .eyePose > svg {
+  transform-origin: 50% 59%;
+  animation-name: dizzy-eye;
+  animation-duration: var(--agent-duration);
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  animation-iteration-count: var(--agent-iterations);
+  animation-play-state: var(--agent-play-state);
+  animation-fill-mode: both;
+}
+@keyframes dizzy-body {
+  0%,
+  10%,
+  76%,
+  to {
+    transform: rotate(0);
+  }
+  23% {
+    transform: rotate(-8deg);
+  }
+  36% {
+    transform: rotate(7deg);
+  }
+  49% {
+    transform: rotate(-5deg);
+  }
+  62% {
+    transform: rotate(3deg);
+  }
+}
+@keyframes dizzy-gaze {
+  0%,
+  10%,
+  76%,
+  to {
+    transform: translate(0);
+  }
+  23% {
+    transform: translate(6px, 0);
+  }
+  36% {
+    transform: translate(0, 5px);
+  }
+  49% {
+    transform: translate(-5px, 0);
+  }
+  62% {
+    transform: translate(0, -3px);
+  }
+}
+@keyframes dizzy-eye {
+  0%,
+  10% {
+    rotate: 0deg;
+  }
+  62% {
+    rotate: 725deg;
+  }
+  76%,
+  to {
+    rotate: 720deg;
+  }
+}
+
+/* sleepy (3.6s, look-around's length): eyes droop shut while the head nods
+   off, then snap awake on the 64% beat. */
+.sleepy {
+  animation-name: sleepy-body;
+}
+.sleepy .eyes {
+  animation-name: sleepy-eyes;
+}
+@keyframes sleepy-body {
+  0%,
+  10%,
+  76%,
+  to {
+    transform: translateY(0) rotate(0);
+  }
+  36% {
+    transform: translateY(3px) rotate(-4deg);
+  }
+  56% {
+    transform: translateY(5px) rotate(-7deg);
+  }
+  64% {
+    transform: translateY(-2px) rotate(2deg);
+  }
+}
+@keyframes sleepy-eyes {
+  0%,
+  10%,
+  76%,
+  to {
+    transform: scaleY(1);
+  }
+  30% {
+    transform: scaleY(0.5);
+  }
+  38% {
+    transform: scaleY(0.7);
+  }
+  56% {
+    transform: scaleY(0.08);
+  }
+  64% {
+    transform: scaleY(1.12);
+  }
+}
+
+/* cry (3.2s, spin-in-out's length): the face sinks and looks down while a
+   drop wells up under the left eye and falls on roll-in-out's exit curve. */
+.cry {
+  animation-name: cry-body;
+}
+.cry .gaze {
+  animation-name: cry-gaze;
+}
+.tear {
+  position: absolute;
+  top: 48px;
+  width: 8px;
+  height: 11px;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: currentColor;
+  opacity: 0;
+  animation-duration: var(--agent-duration);
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  animation-iteration-count: var(--agent-iterations);
+  animation-play-state: var(--agent-play-state);
+  animation-fill-mode: both;
+}
+.cry .tear {
+  animation-name: tear-fall;
+}
+@keyframes cry-body {
+  0%,
+  10%,
+  76%,
+  to {
+    transform: translateY(0) rotate(0);
+  }
+  26%,
+  62% {
+    transform: translateY(4px) rotate(-3deg);
+  }
+}
+@keyframes cry-gaze {
+  0%,
+  10%,
+  76%,
+  to {
+    transform: translate(0);
+  }
+  26%,
+  62% {
+    transform: translate(-2px, 6px);
+  }
+}
+@keyframes tear-fall {
+  0%,
+  22% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.3);
+  }
+  34% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.809549, 0.206522);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(46px) scale(1);
+  }
+  76%,
+  to {
+    opacity: 0;
+    transform: translateY(52px) scale(0.8);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .agent .eyePose > svg,
+  .agent .tear {
+    animation: none;
+  }
+}

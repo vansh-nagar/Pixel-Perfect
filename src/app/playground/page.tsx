@@ -1,7 +1,11 @@
-import StickerMaker from "./sticker-maker/sticker-maker";
+import TugboatScene from "./tugboat-scene";
 
 const Page = () => {
-  return <StickerMaker />;
+  return (
+    <div className="h-screen w-full">
+      <TugboatScene />
+    </div>
+  );
 };
 
 export default Page;

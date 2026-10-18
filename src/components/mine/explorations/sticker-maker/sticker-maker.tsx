@@ -1011,7 +1011,7 @@ export default function StickerMaker() {
   return (
     <div
       ref={containerRef}
-      className={`relative h-screen w-full overflow-hidden select-none ${
+      className={`relative h-full w-full overflow-hidden select-none ${
         backdrop === "dark"
           ? "bg-[#0b0b0c] bg-[radial-gradient(ellipse_at_40%_45%,#24262b_0%,#0b0b0c_65%)]"
           : "bg-[#e9e7e2] bg-[radial-gradient(ellipse_at_40%_45%,#ffffff_0%,#d9d6cf_70%)]"
@@ -1106,7 +1106,7 @@ export default function StickerMaker() {
       )}
 
       {/* Controls */}
-      <aside className="absolute top-20 right-4 bottom-4 flex w-72 flex-col gap-4 overflow-y-auto rounded-2xl border border-white/10 bg-black/60 p-4 text-sm text-white backdrop-blur-xl">
+      <aside className="absolute top-4 right-4 bottom-4 flex w-72 flex-col gap-4 overflow-y-auto rounded-2xl border border-white/10 bg-black/60 p-4 text-sm text-white backdrop-blur-xl">
         <div>
           <h2 className="font-medium">Sticker maker</h2>
           <p className="mt-1 text-xs text-white/50">

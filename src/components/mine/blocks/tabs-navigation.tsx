@@ -54,7 +54,6 @@ const GRID_COMPONENTS: Record<string, ComponentType> = {
   backgrounds: lazyGrid(() => import("../grids/background-grid")),
   masks: lazyGrid(() => import("../grids/mask-grid")),
   "mouse-followers": lazyGrid(() => import("../grids/mouse-follower-grid")),
-  "svg-path": lazyGrid(() => import("../grids/svg-path-effect-grid")),
   sidebars: lazyGrid(() => import("../grids/sidebar-grid")),
   shaders: lazyGrid(() => import("../grids/shader-grid")),
   "image-shaders": lazyGrid(() => import("../grids/image-shaders-grid")),

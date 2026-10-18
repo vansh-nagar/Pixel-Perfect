@@ -32,7 +32,6 @@ const NAME_OVERRIDES = {
   stagger1: "stagger-1",
   "learn-more-buttion": "learn-more-button",
   "toggle-buttion": "toggle-button",
-  guitar: "guitar-svg",
 };
 
 const REGISTRY_ALIASES = {

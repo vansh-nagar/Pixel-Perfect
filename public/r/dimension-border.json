@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dimension-border",
+  "description": "A redline that measures its own box: live width and height on dimension lines, with extension lines from the corners.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/borders/dimension-border.tsx",
+      "content": "\"use client\";\n\n/**\n * A redline that measures its own box: live width and height on dimension lines, with extension lines from the corners.\n */\n\nimport { cn } from \"@/lib/utils\";\nimport { useEffect, useRef, useState, type ReactNode } from \"react\";\n\n// The annotation colour; override `--dim` on the element to recolour it.\nconst LABEL =\n  \"absolute rounded-[3px] bg-(--dim) px-1 py-px font-mono text-[9px] leading-none text-white tabular-nums\";\n\nconst DimensionBorder = ({\n  children,\n  className,\n}: {\n  children?: ReactNode;\n  className?: string;\n}) => {\n  const ref = useRef<HTMLDivElement>(null);\n  const [size, setSize] = useState<{ w: number; h: number } | null>(null);\n\n  useEffect(() => {\n    const el = ref.current!;\n    const ro = new ResizeObserver(() =>\n      setSize({ w: el.offsetWidth, h: el.offsetHeight }),\n    );\n    ro.observe(el);\n    return () => ro.disconnect();\n  }, []);\n\n  return (\n    <div ref={ref} className={cn(\"relative [--dim:var(--color-rose-500)]\", className)}>\n      <div aria-hidden className=\"absolute inset-0 border border-dashed border-(--dim) opacity-50\" />\n\n      {/* width: extension lines up from the top corners, the dimension line 14px above */}\n      <span aria-hidden className=\"absolute -top-5 left-0 h-5 w-px bg-(--dim) opacity-50\" />\n      <span aria-hidden className=\"absolute -top-5 right-0 h-5 w-px bg-(--dim) opacity-50\" />\n      <span aria-hidden className=\"absolute inset-x-0 -top-3.5 h-px bg-(--dim)\" />\n\n      {/* height: extension lines out from the right corners, the dimension line 14px right */}\n      <span aria-hidden className=\"absolute top-0 -right-5 h-px w-5 bg-(--dim) opacity-50\" />\n      <span aria-hidden className=\"absolute bottom-0 -right-5 h-px w-5 bg-(--dim) opacity-50\" />\n      <span aria-hidden className=\"absolute inset-y-0 -right-3.5 w-px bg-(--dim)\" />\n\n      {size && (\n        <>\n          <span className={cn(LABEL, \"-top-3.5 left-1/2 -translate-x-1/2 -translate-y-1/2\")}>\n            {size.w}\n          </span>\n          <span className={cn(LABEL, \"top-1/2 -right-3.5 translate-x-1/2 -translate-y-1/2\")}>\n            {size.h}\n          </span>\n        </>\n      )}\n      {children}\n    </div>\n  );\n};\n\nexport default DimensionBorder;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/dimension-border.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

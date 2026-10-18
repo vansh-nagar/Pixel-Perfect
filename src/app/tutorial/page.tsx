@@ -14,7 +14,6 @@ import {
   Waypoints,
   PenTool,
   Move3d,
-  Layers,
   Aperture,
   ChevronDown,
   ArrowLeft,
@@ -631,22 +630,6 @@ const categories: Category[] = [
         category: "Mouse Followers",
         tags: ["gsap", "trail", "icon", "fall"],
         registryName: "mouse-follower-2",
-      },
-    ],
-  },
-  {
-    name: "SVG Path Effects",
-    icon: <Layers className="size-4" />,
-    slug: "svg-path-effects",
-    description:
-      "SVG path drawing and motion path animations with beam effects.",
-    items: [
-      {
-        name: "Guitar",
-        description: "SVG path drawing animation of a guitar illustration.",
-        category: "SVG Path Effects",
-        tags: ["svg", "path", "draw", "guitar"],
-        registryName: "guitar-svg",
       },
     ],
   },

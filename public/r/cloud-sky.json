@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cloud-sky",
+  "description": "A soft sky: a cloud photo blurred 12.5px, fading out toward the bottom over white, with a white glow at the edges.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/shaders/cloud-sky.tsx",
+      "content": "/**\n * A soft sky: a cloud photo blurred 12.5px, fading out toward the bottom over white, with a white glow at the edges.\n */\n\n/*\n * No WebGL, just CSS on one photo. The photo overhangs the box by 5% on every side so the blur\n * never pulls transparent edges in. The fade runs from opaque at the top to 20% two thirds of the\n * way down, then out to nothing, so the sky never ends on a line.\n */\n\nconst FADE = \"linear-gradient(to bottom, #000, rgb(0 0 0 / 0.2) 66%, transparent)\";\n\nexport default function CloudSky({ className }: { className?: string }) {\n  return (\n    <div aria-hidden className={`relative overflow-hidden bg-white ${className ?? \"\"}`}>\n      <div className=\"absolute inset-0\" style={{ maskImage: FADE, WebkitMaskImage: FADE }}>\n        {/* eslint-disable-next-line @next/next/no-img-element */}\n        <img\n          src=\"/clouds/sky.png\"\n          alt=\"\"\n          className=\"absolute -top-[5%] -left-[5%] h-[110%] w-[110%] max-w-none object-cover blur-[12.5px]\"\n        />\n      </div>\n      <div className=\"absolute inset-0 shadow-[inset_0_0_54px_0_rgba(255,255,255,0.6)]\" />\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/cloud-sky.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

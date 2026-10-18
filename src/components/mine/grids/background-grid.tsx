@@ -18,7 +18,6 @@ import GlyphBlocksBackground from "../../../../registry/new-york/backgrounds/gly
 import ArrowLetterBackground from "../../../../registry/new-york/backgrounds/arrow-letter-background";
 import MisprintBackground from "../../../../registry/new-york/backgrounds/misprint-background";
 import CheckerBlocksBackground from "../../../../registry/new-york/backgrounds/checker-blocks-background";
-import BrickBlobsBackground from "../../../../registry/new-york/backgrounds/brick-blobs-background";
 
 type BackgroundItem = {
   name: string;
@@ -124,12 +123,6 @@ export const BackgroudArr: BackgroundItem[] = [
     description: "A red-and-white poster grid of blocks, rings and checkers that glitch through finer checkers as they change; hover to reshuffle.",
     component: <CheckerBlocksBackground />,
     registryName: "checker-blocks-background",
-  },
-  {
-    name: "Brick Blobs Background",
-    description: "Toy-brick cats on a studded baseplate; hover and the nearest one walks over, watches the cursor and perks up when touched.",
-    component: <BrickBlobsBackground />,
-    registryName: "brick-blobs-background",
   },
 ];
 

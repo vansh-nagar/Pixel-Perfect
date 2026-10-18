@@ -5,6 +5,7 @@ import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 import { RefreshCcw } from "lucide-react";
 import RaycasterShapes from "registry/new-york/three-js/raycaster-shapes";
 import FloatingLogoIntro from "registry/new-york/three-js/floating-logo-intro";
+import StickerMaker from "../explorations/sticker-maker/sticker-maker";
 import CopyDropdown from "../copy-dropdown";
 import GridPagination from "./_shared/grid-pagination";
 
@@ -12,7 +13,9 @@ const ThreeJsComponentArr: {
   name: string;
   description: string;
   Component: React.ComponentType;
-  registryName: string;
+  /** Omitted for explorations: they aren't in the registry, so there's nothing to copy. */
+  registryName?: string;
+  exploration?: boolean;
 }[] = [
   {
     name: "Floating Logo Intro",
@@ -27,6 +30,13 @@ const ThreeJsComponentArr: {
       "Geometries on a 3D plane. Hover to light up a shape's edges (Fresnel rim shader, raycaster-detected); click to pop it up and spin it.",
     Component: RaycasterShapes,
     registryName: "raycaster-shapes",
+  },
+  {
+    name: "Sticker Maker",
+    description:
+      "Drop, paste or pick an image and it becomes a die-cut vinyl sticker. Fling it to spin, grab an edge to peel it off, or stick it on a pole.",
+    Component: StickerMaker,
+    exploration: true,
   },
 ];
 
@@ -74,8 +84,15 @@ const ThreeJsGrid = () => {
                 </Button>
               </div>
 
-              <div className="leading-1 absolute bottom-1.5 left-1.5 z-40">
-                <p className="text-xs">{item.name}</p>
+              <div className="leading-tight absolute bottom-1.5 left-1.5 z-40">
+                <p className="flex items-center gap-1.5 text-xs">
+                  {item.name}
+                  {item.exploration && (
+                    <span className="border border-dashed px-1 text-[8px] text-muted-foreground">
+                      Exploration
+                    </span>
+                  )}
+                </p>
                 <p className="max-w-md text-[8px] text-muted-foreground">
                   {item.description}
                 </p>
@@ -84,7 +101,9 @@ const ThreeJsGrid = () => {
               <div className="pointer-events-none absolute inset-x-0 top-0 z-40 grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-2">
                 <div className="border-t border-dashed" />
                 <div className="pointer-events-auto">
-                  <CopyDropdown registryName={item.registryName} variant="ghost" />
+                  {item.registryName && (
+                    <CopyDropdown registryName={item.registryName} variant="ghost" />
+                  )}
                 </div>
                 <div />
                 <div className="h-full border-r border-dashed -mr-[0.5px]" />

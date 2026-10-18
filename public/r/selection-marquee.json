@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "selection-marquee",
+  "description": "A design-tool selection: a marching-ants border with resize handles at the corners and edge midpoints.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/borders/selection-marquee.tsx",
+      "content": "/**\n * A design-tool selection: a marching-ants border with resize handles at the corners and edge midpoints.\n */\n\nimport { cn } from \"@/lib/utils\";\nimport type { ReactNode } from \"react\";\n\n// Four dashed edges drawn as backgrounds, each sliding one dash length per loop so the ants\n// march clockwise: top right, right down, bottom left, left up.\nconst CSS = `\n  .selection-marquee-ants {\n    background-image:\n      linear-gradient(90deg, currentColor 50%, transparent 50%),\n      linear-gradient(90deg, currentColor 50%, transparent 50%),\n      linear-gradient(0deg, currentColor 50%, transparent 50%),\n      linear-gradient(0deg, currentColor 50%, transparent 50%);\n    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;\n    background-size: 8px 1px, 8px 1px, 1px 8px, 1px 8px;\n    background-position: 0 0, 100% 100%, 0 100%, 100% 0;\n    animation: selection-marquee-march 800ms linear infinite;\n  }\n  @keyframes selection-marquee-march {\n    to {\n      background-position: 8px 0, calc(100% - 8px) 100%, 0 calc(100% - 8px), 100% 8px;\n    }\n  }\n  @media (prefers-reduced-motion: reduce) {\n    .selection-marquee-ants { animation: none; }\n  }\n`;\n\n// [left %, top %] of each handle's centre\nconst HANDLES = [\n  [0, 0],\n  [50, 0],\n  [100, 0],\n  [0, 50],\n  [100, 50],\n  [0, 100],\n  [50, 100],\n  [100, 100],\n];\n\nconst SelectionMarquee = ({\n  children,\n  className,\n}: {\n  children?: ReactNode;\n  className?: string;\n}) => (\n  <div className={cn(\"relative text-muted-foreground\", className)}>\n    <style>{CSS}</style>\n    <div aria-hidden className=\"selection-marquee-ants pointer-events-none absolute inset-0\" />\n    {HANDLES.map(([x, y]) => (\n      <span\n        key={`${x}-${y}`}\n        aria-hidden\n        className=\"absolute size-[7px] -translate-x-1/2 -translate-y-1/2 border border-current bg-background\"\n        style={{ left: `${x}%`, top: `${y}%` }}\n      />\n    ))}\n    {children}\n  </div>\n);\n\nexport default SelectionMarquee;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/selection-marquee.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

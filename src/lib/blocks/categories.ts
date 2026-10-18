@@ -135,14 +135,6 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     source: { type: "registry", folder: "mouse-follower" },
   },
   {
-    slug: "svg-path",
-    name: "SVG Path Effects",
-    title: "SVG Path Effect Components",
-    description:
-      "SVG path techniques for React — text flowing along curves and path-driven motion that plain CSS can't reach. Small focused components demonstrating the raw SVG APIs.",
-    source: { type: "registry", folder: "svg-path-effects" },
-  },
-  {
     slug: "sidebars",
     name: "Sidebars",
     title: "React Sidebar Components",
@@ -155,7 +147,7 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     name: "Shaders",
     title: "WebGL Shader Backgrounds",
     description:
-      "GPU shader backgrounds for React — plasma flows, gentle waves, spotlights and generative GLSL effects running in WebGL. Each shader ships as a component with its fragment source included.",
+      "WebGL shaders and soft skies for React — glowing wave lines, holographic light that plays like a card being read, and white cloud that breathes around a blurred sky. Each one ships as a copy-paste component.",
     source: { type: "shader-data", set: "shaders" },
   },
   {

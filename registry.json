@@ -1163,22 +1163,6 @@
       ]
     },
     {
-      "name": "guitar-svg",
-      "description": "Guitar SVG path effect animation.",
-      "type": "registry:block",
-      "dependencies": [
-        "@gsap/react",
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/svg-path-effects/guitar.tsx",
-          "target": "components/pixel-perfect/guitar.tsx"
-        }
-      ]
-    },
-    {
       "name": "cd",
       "description": "An animated ASCII CD render with responsive scaling.",
       "type": "registry:block",
@@ -1284,25 +1268,6 @@
           "path": "registry/new-york/buttons/framer-cta-button.tsx",
           "target": "components/pixel-perfect/framer-cta-button.tsx"
         }
-      ]
-    },
-    {
-      "name": "liquid-gradient-button",
-      "description": "Premium gradient button with image overlay, loading animation, and 8 color variants: pink, cyan, emerald, amber, crimson, violet, ocean, sunset.",
-      "type": "registry:block",
-      "dependencies": [
-        "framer-motion",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/buttons/liquid-gradient-button.tsx",
-          "target": "components/pixel-perfect/liquid-gradient-button.tsx"
-        }
-      ],
-      "registryDependencies": [
-        "spinner"
       ]
     },
     {
@@ -4536,22 +4501,6 @@
       ]
     },
     {
-      "name": "photo-sweep-conveyor",
-      "description": "Photos sweep across a pinned stage on scroll, blooming to full size at random heights before collapsing back to nothing, with a live count of what is on screen.",
-      "type": "registry:block",
-      "dependencies": [
-        "@gsap/react",
-        "gsap"
-      ],
-      "files": [
-        {
-          "type": "registry:component",
-          "path": "registry/new-york/image-animations/photo-sweep-conveyor.tsx",
-          "target": "components/pixel-perfect/photo-sweep-conveyor.tsx"
-        }
-      ]
-    },
-    {
       "name": "bayer-sunset-background",
       "description": "A 1-bit retro sunset: a banded sun over a scrolling perspective grid, rendered in two colours with a Bayer ordered dither.",
       "type": "registry:block",
@@ -4682,15 +4631,191 @@
       ]
     },
     {
-      "name": "brick-blobs-background",
-      "description": "Toy-brick cats on a studded baseplate, outlined in purple and red-orange bricks, snapping a stud at a time as they wander; on hover the nearest cat walks to the pointer, watches it and perks up when touched.",
+      "name": "photo-pile-sort",
+      "description": "Prints are tossed onto a loose pile as you scroll, then slide out and straighten into a tidy contact sheet.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/image-animations/photo-pile-sort.tsx",
+          "target": "components/pixel-perfect/photo-pile-sort.tsx"
+        }
+      ]
+    },
+    {
+      "name": "capsule-equalizer-background",
+      "description": "Rounded capsule bars that pulse like an audio equaliser, gathering into drifting diamond silhouettes with split segments and end dots.",
       "type": "registry:block",
       "dependencies": [],
       "files": [
         {
           "type": "registry:component",
-          "path": "registry/new-york/backgrounds/brick-blobs-background.tsx",
-          "target": "components/pixel-perfect/brick-blobs-background.tsx"
+          "path": "registry/new-york/backgrounds/capsule-equalizer-background.tsx",
+          "target": "components/pixel-perfect/capsule-equalizer-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "moire-rings-background",
+      "description": "Two sets of concentric rings drifting over each other, their overlap blooming into moiré interference; one set follows the pointer.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/moire-rings-background.tsx",
+          "target": "components/pixel-perfect/moire-rings-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ridgeline-background",
+      "description": "Stacked pulse lines that rise into restless peaks, each one hiding the lines behind it — the classic ridgeline plot, set in motion.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/backgrounds/ridgeline-background.tsx",
+          "target": "components/pixel-perfect/ridgeline-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card-scan",
+      "description": "Hover it and it turns holographic: thin-film foil that shifts as you move, light rippling out from the cursor, and a soft flash as you leave.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/card-scan.tsx",
+          "target": "components/pixel-perfect/card-scan.tsx"
+        }
+      ]
+    },
+    {
+      "name": "coin-read",
+      "description": "Glowing coins slide in under the left edge, and each one sends a wave of light and holographic foil across.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/coin-read.tsx",
+          "target": "components/pixel-perfect/coin-read.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cloud-sky",
+      "description": "A soft sky: a cloud photo blurred 12.5px, fading out toward the bottom over white, with a white glow at the edges.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/cloud-sky.tsx",
+          "target": "components/pixel-perfect/cloud-sky.tsx"
+        }
+      ]
+    },
+    {
+      "name": "crop-marks",
+      "description": "Printer's crop marks: hairlines just outside each corner, with a registration target above and below.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/crop-marks.tsx",
+          "target": "components/pixel-perfect/crop-marks.tsx"
+        }
+      ]
+    },
+    {
+      "name": "crosshair-frame",
+      "description": "Hairlines that run past a box's edges and fade out, with a plus mark where they cross at each corner.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/crosshair-frame.tsx",
+          "target": "components/pixel-perfect/crosshair-frame.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dimension-border",
+      "description": "A redline that measures its own box: live width and height on dimension lines, with extension lines from the corners.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/dimension-border.tsx",
+          "target": "components/pixel-perfect/dimension-border.tsx"
+        }
+      ]
+    },
+    {
+      "name": "focus-brackets",
+      "description": "Viewfinder brackets that close in on the corners when you hover or focus inside, with a reticle fading in at the centre.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/focus-brackets.tsx",
+          "target": "components/pixel-perfect/focus-brackets.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ruler-border",
+      "description": "Design-tool rulers along the top and left edges: a tick every 8px and a numbered major tick every 40px.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/ruler-border.tsx",
+          "target": "components/pixel-perfect/ruler-border.tsx"
+        }
+      ]
+    },
+    {
+      "name": "selection-marquee",
+      "description": "A design-tool selection: a marching-ants border with resize handles at the corners and edge midpoints.",
+      "type": "registry:block",
+      "dependencies": [],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/borders/selection-marquee.tsx",
+          "target": "components/pixel-perfect/selection-marquee.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cloud-ring",
+      "description": "A frame of white cloud that breathes in and out around a blurred sky, drawn to fit whatever box it's in.",
+      "type": "registry:block",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/shaders/cloud-ring.tsx",
+          "target": "components/pixel-perfect/cloud-ring.tsx"
         }
       ]
     }

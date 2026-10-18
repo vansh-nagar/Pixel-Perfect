@@ -1,5 +1,5 @@
 "use client";
-import PhotoSweepConveyor from "../../../../registry/new-york/image-animations/photo-sweep-conveyor";
+import PhotoPileSort from "../../../../registry/new-york/image-animations/photo-pile-sort";
 import CreativeSpaceGallery from "../../../../registry/new-york/image-animations/creative-space-gallery";
 import PhotoMagnetGrid from "../../../../registry/new-york/image-animations/photo-magnet-grid";
 import PhotoFlipWall from "../../../../registry/new-york/image-animations/photo-flip-wall";
@@ -12,11 +12,11 @@ import CopyDropdown from "../copy-dropdown";
 
 export const ImageAnimationsArr = [
   {
-    name: "Sweep Conveyor",
+    name: "Pile Sort",
     description:
-      "Photos sweep across a pinned stage on scroll, blooming at random heights before collapsing. Scroll inside the card to play.",
-    component: <PhotoSweepConveyor />,
-    registryName: "photo-sweep-conveyor",
+      "Prints get tossed onto a messy pile, then slide out into a tidy contact sheet. Scroll inside the card to play.",
+    component: <PhotoPileSort />,
+    registryName: "photo-pile-sort",
   },
   {
     name: "Magnet Grid",
@@ -85,7 +85,7 @@ const ImageAnimationsGrid = () => {
             {item.component}
           </div>
 
-          <div className="pointer-events-none leading-1 absolute bottom-1.5 left-1.5 z-40 text-foreground">
+          <div className="pointer-events-none leading-tight absolute bottom-1.5 left-1.5 z-40 text-foreground">
             <p className="text-xs">{item.name}</p>
             <p className="text-[8px] text-muted-foreground">
               {item.description}

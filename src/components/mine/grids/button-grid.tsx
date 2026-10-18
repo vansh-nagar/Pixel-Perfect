@@ -34,9 +34,7 @@ import MetalButton from "../../../../registry/new-york/buttons/metal-button";
 import type { MetalVariant } from "../../../../registry/new-york/buttons/metal-button";
 import GlassButton from "../../../../registry/new-york/buttons/glass-button";
 import type { GlassVariant } from "../../../../registry/new-york/buttons/glass-button";
-import LiquidGradientButton from "../../../../registry/new-york/buttons/liquid-gradient-button";
-import type { LiquidGradientVariant } from "../../../../registry/new-york/buttons/liquid-gradient-button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 
 import CopyDropdown from "../copy-dropdown";
@@ -303,59 +301,6 @@ const BlueChromeButtonWrapper = () => {
       <BlueChromeButton variant={variant}>
         {variant.charAt(0).toUpperCase() + variant.slice(1)}
       </BlueChromeButton>
-    </>
-  );
-};
-
-const liquidGradientVariants: LiquidGradientVariant[] = [
-  "pink",
-  "cyan",
-  "emerald",
-  "amber",
-  "crimson",
-  "violet",
-  "ocean",
-  "sunset",
-];
-
-const LiquidGradientButtonWrapper = () => {
-  const [loading, setLoading] = useState(false);
-  const [variant, setVariant] = useState<LiquidGradientVariant>("violet");
-  useEffect(() => {
-    if (loading) {
-      const timer = setTimeout(() => setLoading(false), 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [loading]);
-  return (
-    <>
-      <div className="absolute left-1.5 top-1.5 z-40">
-        <Select
-          value={variant}
-          onValueChange={(v) => setVariant(v as LiquidGradientVariant)}
-        >
-          <SelectTrigger
-            size="sm"
-            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
-          >
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent align="start" className="min-w-28">
-            {liquidGradientVariants.map((v) => (
-              <SelectItem key={v} value={v} className="text-xs capitalize">
-                {v}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-      <LiquidGradientButton
-        variant={variant}
-        loading={loading}
-        onClick={() => setLoading(true)}
-      >
-        Login
-      </LiquidGradientButton>
     </>
   );
 };
@@ -737,13 +682,6 @@ export const ButtonsArr = [
     registryName: "glass-button",
   },
   {
-    name: "Master Button",
-    description:
-      "Premium gradient button with image overlay and 8 color variants.",
-    component: <LiquidGradientButtonWrapper />,
-    registryName: "liquid-gradient-button",
-  },
-  {
     name: "Antinomy Button",
     description:
       "Text label that slides right on hover as two gooey pills fill in and merge behind an action word.",
@@ -778,7 +716,7 @@ const ButtonGrid = () => {
             <BorderDecorator notch spinOnHover />
             <div className=" z-30">{item.component}</div>
 
-            <div className=" leading-1 absolute left-1.5  bottom-1.5 p-0.5">
+            <div className=" leading-tight absolute left-1.5  bottom-1.5 p-0.5">
               <p className="text-xs ">{item.name}</p>
               <p className="text-[8px] text-muted-foreground leading-snug">
                 {item.description}

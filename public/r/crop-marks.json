@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crop-marks",
+  "description": "Printer's crop marks: hairlines just outside each corner, with a registration target above and below.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/borders/crop-marks.tsx",
+      "content": "/**\n * Printer's crop marks: hairlines just outside each corner, with a registration target above and below.\n */\n\nimport { cn } from \"@/lib/utils\";\nimport type { ReactNode } from \"react\";\n\n// Each corner gets two 16px marks on the box's edge lines, held 6px off the corner.\nconst MARKS = [\n  \"top-0 -left-[22px] h-px w-4\",\n  \"-top-[22px] left-0 h-4 w-px\",\n  \"top-0 -right-[22px] h-px w-4\",\n  \"-top-[22px] right-0 h-4 w-px\",\n  \"bottom-0 -left-[22px] h-px w-4\",\n  \"-bottom-[22px] left-0 h-4 w-px\",\n  \"bottom-0 -right-[22px] h-px w-4\",\n  \"-bottom-[22px] right-0 h-4 w-px\",\n];\n\nconst Target = ({ className }: { className: string }) => (\n  <span className={cn(\"absolute left-1/2 size-5 -translate-x-1/2\", className)}>\n    <span className=\"absolute inset-[5px] rounded-full border border-current\" />\n    <span className=\"absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-current\" />\n    <span className=\"absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-current\" />\n  </span>\n);\n\nconst CropMarks = ({\n  children,\n  className,\n}: {\n  children?: ReactNode;\n  className?: string;\n}) => (\n  <div className={cn(\"relative text-muted-foreground\", className)}>\n    {MARKS.map((mark) => (\n      <span key={mark} aria-hidden className={cn(\"absolute bg-current\", mark)} />\n    ))}\n    <Target className=\"-top-8\" />\n    <Target className=\"-bottom-8\" />\n    {children}\n  </div>\n);\n\nexport default CropMarks;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/crop-marks.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

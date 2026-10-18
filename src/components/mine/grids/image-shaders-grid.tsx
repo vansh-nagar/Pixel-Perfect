@@ -149,7 +149,7 @@ const ImageShadersGrid = () => {
               </LazyVisible>
             </div>
 
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Pixel Distortion
               </p>
@@ -189,7 +189,7 @@ const ImageShadersGrid = () => {
               </button>
             </div>
 
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Fluid Distortion
               </p>
@@ -229,7 +229,7 @@ const ImageShadersGrid = () => {
               </button>
             </div>
 
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Paint Reveal
               </p>
@@ -269,7 +269,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Cursor Paint
               </p>
@@ -308,7 +308,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Scratch to Reveal
               </p>
@@ -347,7 +347,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Before / After
               </p>
@@ -384,7 +384,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Image Particles
               </p>
@@ -422,7 +422,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Inertia Particles
               </p>
@@ -460,7 +460,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Magnetic Swarm
               </p>
@@ -498,7 +498,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Flow Field
               </p>
@@ -536,7 +536,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Ripple Touch
               </p>
@@ -574,7 +574,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Magnetic Warp
               </p>
@@ -612,7 +612,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Cursor Trail
               </p>
@@ -650,7 +650,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Liquid Melt
               </p>
@@ -688,7 +688,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Vortex Pull
               </p>
@@ -726,7 +726,7 @@ const ImageShadersGrid = () => {
                 </LazyVisible>
               </button>
             </div>
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 Jelly Bulge
               </p>
@@ -770,7 +770,7 @@ const ImageShadersGrid = () => {
               </button>
             </div>
 
-            <div className="leading-1 absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
+            <div className="leading-tight absolute left-1.5 bottom-1.5 z-40 pointer-events-none">
               <p className="text-xs text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                 {item.title}
               </p>

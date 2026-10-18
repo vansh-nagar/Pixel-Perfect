@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crosshair-frame",
+  "description": "Hairlines that run past a box's edges and fade out, with a plus mark where they cross at each corner.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/borders/crosshair-frame.tsx",
+      "content": "/**\n * Hairlines that run past a box's edges and fade out, with a plus mark where they cross at each corner.\n */\n\nimport { cn } from \"@/lib/utils\";\nimport type { ReactNode } from \"react\";\n\n// The lines run 2rem past the box and fade out over exactly that overhang.\nconst FADE_X =\n  \"linear-gradient(to right, transparent, currentColor 2rem, currentColor calc(100% - 2rem), transparent)\";\nconst FADE_Y =\n  \"linear-gradient(to bottom, transparent, currentColor 2rem, currentColor calc(100% - 2rem), transparent)\";\n\nconst LINES = [\n  { className: \"-inset-x-8 top-0 h-px\", backgroundImage: FADE_X },\n  { className: \"-inset-x-8 bottom-0 h-px\", backgroundImage: FADE_X },\n  { className: \"-inset-y-8 left-0 w-px\", backgroundImage: FADE_Y },\n  { className: \"-inset-y-8 right-0 w-px\", backgroundImage: FADE_Y },\n];\n\nconst CORNERS = [\n  \"top-0 left-0\",\n  \"top-0 left-full\",\n  \"top-full left-0\",\n  \"top-full left-full\",\n];\n\nconst CrosshairFrame = ({\n  children,\n  className,\n}: {\n  children?: ReactNode;\n  className?: string;\n}) => (\n  <div className={cn(\"relative text-muted-foreground\", className)}>\n    {LINES.map(({ className, backgroundImage }) => (\n      <span\n        key={className}\n        aria-hidden\n        className={cn(\"absolute opacity-40\", className)}\n        style={{ backgroundImage }}\n      />\n    ))}\n    {CORNERS.map((corner) => (\n      <span\n        key={corner}\n        aria-hidden\n        className={cn(\"absolute size-[15px] -translate-x-[7px] -translate-y-[7px]\", corner)}\n      >\n        <span className=\"absolute inset-x-0 top-[7px] h-px bg-current\" />\n        <span className=\"absolute inset-y-0 left-[7px] w-px bg-current\" />\n      </span>\n    ))}\n    {children}\n  </div>\n);\n\nexport default CrosshairFrame;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/crosshair-frame.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

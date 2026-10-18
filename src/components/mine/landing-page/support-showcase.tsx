@@ -27,7 +27,6 @@ import AbhinavBentoButton from "registry/new-york/buttons/abhinav-bento-button";
 import MatteShadowButton from "registry/new-york/buttons/matte-shadow-button";
 import MetalButton from "registry/new-york/buttons/metal-button";
 import GlassButton from "registry/new-york/buttons/glass-button";
-import LiquidGradientButton from "registry/new-york/buttons/liquid-gradient-button";
 
 const DONATE_URL =
   "https://buy.polar.sh/polar_cl_f2wnG1ytyvuNI3PIlhnvmlIm3Z7IKK25YZeqR49IQbB";
@@ -64,7 +63,6 @@ const styles = [
   { name: "Matte Shadow", node: <MatteShadowButton>{LABEL}</MatteShadowButton> },
   { name: "Metal", node: <MetalButton metal="silver">{LABEL}</MetalButton> },
   { name: "Glass", node: <GlassButton variant="blue">{LABEL}</GlassButton> },
-  { name: "Master", node: <LiquidGradientButton variant="violet">{LABEL}</LiquidGradientButton> },
 ];
 
 const SupportShowcase = () => {

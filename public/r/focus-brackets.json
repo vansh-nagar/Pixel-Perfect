@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "focus-brackets",
+  "description": "Viewfinder brackets that close in on the corners when you hover or focus inside, with a reticle fading in at the centre.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/borders/focus-brackets.tsx",
+      "content": "/**\n * Viewfinder brackets that close in on the corners when you hover or focus inside, with a reticle fading in at the centre.\n */\n\nimport { cn } from \"@/lib/utils\";\nimport type { ReactNode } from \"react\";\n\n// At rest each bracket sits 8px out from its corner; hover or focus pulls it home.\nconst BRACKETS = [\n  \"top-0 left-0 border-t border-l -translate-x-2 -translate-y-2\",\n  \"top-0 right-0 border-t border-r translate-x-2 -translate-y-2\",\n  \"bottom-0 left-0 border-b border-l -translate-x-2 translate-y-2\",\n  \"bottom-0 right-0 border-b border-r translate-x-2 translate-y-2\",\n];\n\nconst EASE = \"ease-[cubic-bezier(0.23,1,0.32,1)]\";\n\nconst FocusBrackets = ({\n  children,\n  className,\n}: {\n  children?: ReactNode;\n  className?: string;\n}) => (\n  <div className={cn(\"group relative text-muted-foreground\", className)}>\n    {BRACKETS.map((bracket) => (\n      <span\n        key={bracket}\n        aria-hidden\n        className={cn(\n          \"absolute size-5 border-current transition-[translate,color] duration-300 group-focus-within:translate-x-0 group-focus-within:translate-y-0 group-focus-within:text-foreground group-hover:translate-x-0 group-hover:translate-y-0 group-hover:text-foreground motion-reduce:transition-none\",\n          EASE,\n          bracket,\n        )}\n      />\n    ))}\n    <span\n      aria-hidden\n      className={cn(\n        \"absolute top-1/2 left-1/2 size-6 -translate-x-1/2 -translate-y-1/2 scale-75 text-foreground opacity-0 transition-[opacity,scale] duration-300 group-focus-within:scale-100 group-focus-within:opacity-100 group-hover:scale-100 group-hover:opacity-100 motion-reduce:transition-none\",\n        EASE,\n      )}\n    >\n      <span className=\"absolute inset-[7px] rounded-full border border-current\" />\n      <span className=\"absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-current\" />\n      <span className=\"absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-current\" />\n    </span>\n    {children}\n  </div>\n);\n\nexport default FocusBrackets;\n",
+      "type": "registry:component",
+      "target": "components/pixel-perfect/focus-brackets.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -167,7 +167,7 @@ const MotionAnimationsGrid = () => {
                 </Button>
               </div>
 
-              <div className=" leading-1 absolute left-1.5  bottom-1.5">
+              <div className=" leading-tight absolute left-1.5  bottom-1.5">
                 <p className="text-xs ">{item.name}</p>
                 <p className="text-[8px] text-muted-foreground">
                   {item.description}

@@ -1,5 +1,5 @@
 /**
- * A pixelated spiral of grid-locked squares that scatter away from the cursor and spring back.
+ * A pixelated pink-and-violet galaxy of grid-locked squares that scatter away from the cursor and spring back.
  */
 "use client";
 
@@ -15,36 +15,89 @@ export interface PixelDisplaceFieldProps {
   radius?: number;
   /** Peak push distance at the centre of the field, in CSS pixels. */
   strength?: number;
-  /** Tracked markers drawn over the field; 0 hides them. */
-  markers?: number;
 }
 
 /** Above this the grid coarsens itself so the per-frame cost stays flat. */
 const MAX_CELLS = 13000;
 const RAMP_STEPS = 64;
+/** Hue steps across the galaxy ramps; colours are pre-built, so shifting hue per frame is free. */
+const TINTS = 24;
 /** Cells dimmer than this are not drawn at all, which keeps the field sparse and cheap. */
 const FLOOR = 0.1;
 const ARMS = 2;
 const TWIST = 2.6;
+/** Radians per second the arms turn; the colour wave runs at twice this. */
+const SPIN = 0.32;
+/** Share of cells that twinkle like stars. */
+const STAR_SHARE = 0.045;
 
 type Stop = readonly [number, readonly [number, number, number]];
 
-/** Ember ramp for dark surfaces: dim maroon through orange to warm white. */
-const DARK_RAMP: readonly Stop[] = [
-  [0, [58, 13, 2]],
-  [0.3, [140, 31, 4]],
-  [0.56, [209, 73, 11]],
-  [0.8, [245, 149, 36]],
-  [1, [255, 238, 208]],
+/**
+ * Galaxy ramps for dark surfaces, ordered by hue: hot pink, violet, indigo, cyan.
+ * Each runs dim dust → saturated arm → white-hot.
+ */
+const DARK_RAMPS: readonly (readonly Stop[])[] = [
+  [
+    [0, [60, 8, 50]],
+    [0.3, [160, 24, 110]],
+    [0.56, [240, 72, 160]],
+    [0.8, [255, 150, 210]],
+    [1, [255, 240, 250]],
+  ],
+  [
+    [0, [34, 10, 78]],
+    [0.3, [95, 35, 190]],
+    [0.56, [155, 90, 250]],
+    [0.8, [205, 170, 255]],
+    [1, [246, 240, 255]],
+  ],
+  [
+    [0, [12, 18, 80]],
+    [0.3, [40, 60, 200]],
+    [0.56, [80, 120, 255]],
+    [0.8, [150, 180, 255]],
+    [1, [238, 244, 255]],
+  ],
+  [
+    [0, [4, 30, 60]],
+    [0.3, [10, 110, 170]],
+    [0.56, [30, 190, 240]],
+    [0.8, [130, 235, 255]],
+    [1, [236, 254, 255]],
+  ],
 ];
 
-/** Inverted ramp for light surfaces: pale amber through orange to burnt near-black. */
-const LIGHT_RAMP: readonly Stop[] = [
-  [0, [247, 208, 158]],
-  [0.3, [236, 139, 52]],
-  [0.56, [204, 71, 11]],
-  [0.8, [145, 35, 10]],
-  [1, [44, 11, 2]],
+/** Light-surface ramps in the same hue order: pastel dust → jewel-tone arm → deep indigo core. */
+const LIGHT_RAMPS: readonly (readonly Stop[])[] = [
+  [
+    [0, [249, 178, 222]],
+    [0.3, [246, 120, 190]],
+    [0.56, [230, 50, 150]],
+    [0.8, [170, 25, 130]],
+    [1, [90, 14, 110]],
+  ],
+  [
+    [0, [210, 192, 254]],
+    [0.3, [175, 140, 252]],
+    [0.56, [130, 70, 240]],
+    [0.8, [90, 35, 190]],
+    [1, [45, 15, 110]],
+  ],
+  [
+    [0, [188, 204, 254]],
+    [0.3, [130, 155, 250]],
+    [0.56, [70, 90, 235]],
+    [0.8, [45, 45, 175]],
+    [1, [25, 20, 100]],
+  ],
+  [
+    [0, [170, 232, 252]],
+    [0.3, [100, 215, 245]],
+    [0.56, [20, 165, 225]],
+    [0.8, [15, 100, 180]],
+    [1, [20, 40, 110]],
+  ],
 ];
 
 const hash2 = (x: number, y: number) => {
@@ -81,12 +134,21 @@ const sampleRamp = (ramp: readonly Stop[], t: number) => {
   return [...ramp[0][1]];
 };
 
+/** Blends the two ramps either side of `tint` (0 = first ramp, 1 = last) at intensity `t`. */
+const sampleGalaxy = (ramps: readonly (readonly Stop[])[], tint: number, t: number) => {
+  const pos = tint * (ramps.length - 1);
+  const lo = Math.min(ramps.length - 2, Math.floor(pos));
+  const k = pos - lo;
+  const a = sampleRamp(ramps[lo], t);
+  const b = sampleRamp(ramps[lo + 1], t);
+  return a.map((c, n) => Math.round(c + (b[n] - c) * k));
+};
+
 export default function PixelDisplaceField({
   className,
   cellSize = 9,
   radius = 150,
   strength = 46,
-  markers = 4,
 }: PixelDisplaceFieldProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -106,14 +168,9 @@ export default function PixelDisplaceField({
     const baseCell = Math.max(3, Number.isFinite(cellSize) ? cellSize : 9);
     const baseRadius = Math.max(20, Number.isFinite(radius) ? radius : 150);
     const basePush = Math.max(0, Number.isFinite(strength) ? strength : 46);
-    const markerCount = Math.max(0, Math.min(8, Math.round(markers) || 0));
 
     // --- resolved theme ------------------------------------------------
-    let ramp = DARK_RAMP;
     let lut: string[] = [];
-    let chrome = "rgba(255,255,255,0.55)";
-    let chromeFaint = "rgba(255,255,255,0.22)";
-    let backdrop = "rgba(0,0,0,0.75)";
 
     /** Paints a CSS colour into a 1x1 canvas so any notation (oklch, hex, …) comes back as rgb. */
     const readColor = (value: string): [number, number, number] | null => {
@@ -138,21 +195,18 @@ export default function PixelDisplaceField({
       background ??= [255, 255, 255];
       const light =
         (0.2126 * background[0] + 0.7152 * background[1] + 0.0722 * background[2]) / 255 > 0.5;
-      ramp = light ? LIGHT_RAMP : DARK_RAMP;
+      const ramps = light ? LIGHT_RAMPS : DARK_RAMPS;
 
+      // Flat table indexed by `tint * RAMP_STEPS + step`.
       lut = [];
-      for (let i = 0; i < RAMP_STEPS; i++) {
-        const t = i / (RAMP_STEPS - 1);
-        const [r, g, b] = sampleRamp(ramp, t);
-        const alpha = Math.min(1, Math.max(0, (t - 0.04) / 0.24));
-        lut.push(`rgba(${r},${g},${b},${alpha.toFixed(3)})`);
+      for (let s = 0; s < TINTS; s++) {
+        for (let i = 0; i < RAMP_STEPS; i++) {
+          const t = i / (RAMP_STEPS - 1);
+          const [r, g, b] = sampleGalaxy(ramps, s / (TINTS - 1), t);
+          const alpha = Math.min(1, Math.max(0, (t - 0.04) / 0.24));
+          lut.push(`rgba(${r},${g},${b},${alpha.toFixed(3)})`);
+        }
       }
-
-      const ink = readColor(getComputedStyle(host).color) ?? (light ? [10, 10, 10] : [250, 250, 250]);
-      chrome = `rgba(${ink[0]},${ink[1]},${ink[2]},0.62)`;
-      chromeFaint = `rgba(${ink[0]},${ink[1]},${ink[2]},0.24)`;
-      // Chrome is outlined in the host background so it stays readable over dense cells.
-      backdrop = `rgba(${background[0]},${background[1]},${background[2]},0.8)`;
     };
 
     // --- grid ----------------------------------------------------------
@@ -166,14 +220,12 @@ export default function PixelDisplaceField({
     let env = new Float32Array(0);
     let core = new Float32Array(0);
     let grain = new Float32Array(0);
+    let hue = new Float32Array(0);
+    let spark = new Float32Array(0);
     let ox = new Float32Array(0);
     let oy = new Float32Array(0);
     let vx = new Float32Array(0);
     let vy = new Float32Array(0);
-
-    type Marker = { cell: number; x: number; y: number; label: string; seeded: boolean };
-    let anchors: number[] = [];
-    let pins: Marker[] = [];
 
     const build = () => {
       const rect = host.getBoundingClientRect();
@@ -194,6 +246,8 @@ export default function PixelDisplaceField({
       env = new Float32Array(count);
       core = new Float32Array(count);
       grain = new Float32Array(count);
+      hue = new Float32Array(count);
+      spark = new Float32Array(count);
       ox = new Float32Array(count);
       oy = new Float32Array(count);
       vx = new Float32Array(count);
@@ -205,8 +259,6 @@ export default function PixelDisplaceField({
       const sx = Math.min(halfW, halfH * 1.55) * 0.82;
       const sy = Math.min(halfH, halfW * 1.55) * 0.82;
 
-      const bright: number[] = [];
-      const margin = 40 * dpr;
       for (let gy = 0; gy < rows; gy++) {
         for (let gx = 0; gx < cols; gx++) {
           const i = gy * cols + gx;
@@ -221,59 +273,14 @@ export default function PixelDisplaceField({
           grain[i] = hash2(gx * 1.7 + 4.3, gy * 2.3 - 1.9);
           const wisp = 0.25 + 1.05 * noise2(gx * 0.07 + 11, gy * 0.07 - 7);
           env[i] = disc * wisp;
+          // Base hue: pink heart cooling to cyan at the rim, broken into nebula patches by noise.
+          hue[i] = 0.08 + 0.5 * r + 1.1 * (noise2(gx * 0.05 - 3, gy * 0.05 + 9) - 0.5);
+          // Only a few cells get a twinkle seed; the rest stay 0 and skip the work.
+          const seed = hash2(gx * 3.1 + 7.7, gy * 5.3 - 2.9);
+          spark[i] = seed < STAR_SHARE ? 1 + seed * 997 : 0;
           core[i] = Math.exp(-(r * r) / 0.006) * 0.85 + Math.exp(-(r * r) / 0.05) * 0.25;
-          const rest = env[i] * 0.8 + core[i];
-          const px = gx * cell + cell / 2;
-          const py = gy * cell + cell / 2;
-          const framed =
-            px > margin && py > margin && px < width - margin && py < height - margin;
-          // Anchors sit on the arms: bright enough to matter, clear of the blown-out core.
-          if (framed && r > 0.4 && r < 1.15 && rest > 0.42 && rest < 0.95) bright.push(i);
         }
       }
-
-      // Marker anchors: candidates kept far apart so no two boxes crowd each other.
-      anchors = [];
-      const want = Math.max(markerCount, 6);
-      const step = Math.max(1, (bright.length / 400) | 0);
-      let sep = Math.min(width, height) * 0.36;
-      while (anchors.length < want && sep > 30 * dpr) {
-        for (let n = 0; n < bright.length && anchors.length < want; n += step) {
-          const i = bright[(n * 7919 + 13) % bright.length];
-          const px = (i % cols) * cell;
-          const py = ((i / cols) | 0) * cell;
-          const clear = anchors.every((j) => {
-            const dx = (j % cols) * cell - px;
-            const dy = ((j / cols) | 0) * cell - py;
-            return dx * dx + dy * dy > sep * sep;
-          });
-          if (clear) anchors.push(i);
-        }
-        sep *= 0.7;
-      }
-
-      const at = (i: number) => [(i % cols) * cell, ((i / cols) | 0) * cell];
-      const chosen: number[] = anchors.length ? [anchors[0]] : [];
-      while (chosen.length < Math.min(markerCount, anchors.length)) {
-        let best = -1;
-        let bestGap = -1;
-        for (const i of anchors) {
-          if (chosen.includes(i)) continue;
-          const [px, py] = at(i);
-          let near = Infinity;
-          for (const j of chosen) {
-            const [qx, qy] = at(j);
-            near = Math.min(near, (px - qx) ** 2 + (py - qy) ** 2);
-          }
-          if (near > bestGap) {
-            bestGap = near;
-            best = i;
-          }
-        }
-        if (best < 0) break;
-        chosen.push(best);
-      }
-      pins = chosen.map((i) => ({ cell: i, x: 0, y: 0, label: "", seeded: false }));
     };
 
     // --- pointer -------------------------------------------------------
@@ -315,87 +322,6 @@ export default function PixelDisplaceField({
     let last = 0;
     let phase = 0;
     let visible = true;
-    let retargetAt = 0;
-
-    const drawMarkers = (now: number) => {
-      if (!pins.length) return;
-      const box = Math.round(Math.min(26, Math.max(14, Math.min(width, height) / dpr * 0.06)) * dpr);
-      const still = reduced.matches;
-      if (!still && now > retargetAt && anchors.length > pins.length) {
-        retargetAt = now + 4200;
-        const pin = pins[(now / 4200) % pins.length | 0];
-        const taken = new Set(pins.map((p) => p.cell));
-        const free = anchors.filter((a) => !taken.has(a));
-        if (free.length) {
-          pin.cell = free[Math.floor(hash2(now, 3) * free.length) % free.length];
-          pin.label = "";
-        }
-      }
-
-      const hair = Math.max(1, Math.round(dpr));
-      ctx.font = `${Math.round(9 * dpr)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
-      ctx.textBaseline = "top";
-      ctx.lineJoin = "round";
-
-      for (const pin of pins) {
-        const i = pin.cell;
-        const hx = (i % cols) * cell + cell / 2 + ox[i];
-        const hy = ((i / cols) | 0) * cell + cell / 2 + oy[i];
-        if (!pin.seeded || still) {
-          pin.x = hx;
-          pin.y = hy;
-          pin.seeded = true;
-        } else {
-          pin.x += (hx - pin.x) * 0.08;
-          pin.y += (hy - pin.y) * 0.08;
-        }
-        if (!pin.label) pin.label = (0.08 + Math.min(0.9, env[i] * 0.55)).toFixed(4);
-      }
-
-      ctx.lineWidth = hair;
-      ctx.strokeStyle = chromeFaint;
-      ctx.setLineDash([Math.round(2 * dpr), Math.round(3 * dpr)]);
-      ctx.beginPath();
-      for (let n = 0; n < pins.length - 1; n++) {
-        ctx.moveTo(pins[n].x, pins[n].y);
-        ctx.lineTo(pins[n + 1].x, pins[n + 1].y);
-      }
-      if (pins.length > 2) {
-        ctx.moveTo(pins[0].x, pins[0].y);
-        ctx.lineTo(pins[pins.length - 1].x, pins[pins.length - 1].y);
-      }
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      for (const pin of pins) {
-        const x = Math.round(pin.x - box / 2) + 0.5;
-        const y = Math.round(pin.y - box / 2) + 0.5;
-        const tick = Math.round(box * 0.3);
-        const ly = y + box + Math.round(3 * dpr);
-        ctx.beginPath();
-        ctx.rect(x, y, box, box);
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + tick, y + tick);
-        ctx.moveTo(x + box, y + box);
-        ctx.lineTo(x + box - tick, y + box - tick);
-        ctx.moveTo(x + box, y);
-        ctx.lineTo(x + box - tick, y + tick);
-        ctx.moveTo(x, y + box);
-        ctx.lineTo(x + tick, y + box - tick);
-        ctx.lineWidth = hair * 3;
-        ctx.strokeStyle = backdrop;
-        ctx.stroke();
-        ctx.lineWidth = hair;
-        ctx.strokeStyle = chrome;
-        ctx.stroke();
-
-        ctx.lineWidth = hair * 3;
-        ctx.strokeStyle = backdrop;
-        ctx.strokeText(pin.label, x, ly);
-        ctx.fillStyle = chrome;
-        ctx.fillText(pin.label, x, ly);
-      }
-    };
 
     const render = (now: number) => {
       frame = requestAnimationFrame(render);
@@ -407,7 +333,10 @@ export default function PixelDisplaceField({
       last = now;
       const still = reduced.matches;
 
-      if (!still) phase += dt * 0.085;
+      if (!still) phase += dt * SPIN;
+      const t = now / 1000;
+      // The core breathes slowly so the galaxy never sits dead still.
+      const breath = still ? 1 : 0.88 + 0.12 * Math.sin(t * 1.3);
       pointer.on = still ? pointer.want : pointer.on + (pointer.want - pointer.on) * Math.min(1, dt * 14);
       const chase = still ? 1 : Math.min(1, dt * 18);
       pointer.x += (pointer.tx - pointer.x) * chase;
@@ -432,7 +361,20 @@ export default function PixelDisplaceField({
           const band = 0.5 + 0.5 * Math.cos(arg[i] - phase);
           const arm = band * band * band;
           // Dithering by per-cell noise breaks the falloff into scattered squares.
-          let v = (env[i] * (arm * 1.5 + 0.13) + core[i]) * (0.35 + 1.15 * grain[i]);
+          let v = (env[i] * (arm * 1.5 + 0.13) + core[i] * breath) * (0.35 + 1.15 * grain[i]);
+          // A one-armed colour wave spirals out faster than the arms, so hues flow through them;
+          // arm crests lean pink, the gaps between lean blue.
+          let h = hue[i] + 0.3 * Math.cos(arg[i] / ARMS - phase * 2) - 0.28 * arm;
+
+          if (spark[i] && !still) {
+            const s = spark[i];
+            const tw = Math.sin(t * (1.1 + (s % 1) * 2.6) + s);
+            // Short, sharp flashes: only the top of the sine counts.
+            if (tw > 0.82) {
+              const flash = (tw - 0.82) / 0.18;
+              v += flash * flash * (v < FLOOR ? 0.55 : 0.7);
+            }
+          }
 
           const dx = cx + cell / 2 - pointer.x;
           const dy = cy + cell / 2 - pointer.y;
@@ -449,6 +391,8 @@ export default function PixelDisplaceField({
             goalX = dx * amount - dy * amount * 0.34;
             goalY = dy * amount + dx * amount * 0.34;
             v += f * f * (0.2 + 0.4 * grain[i]);
+            // The cursor cools whatever it stirs toward cyan, like a wand through dust.
+            h += f * 0.8;
           }
 
           if (still) {
@@ -465,7 +409,8 @@ export default function PixelDisplaceField({
           if (v > 1) v = 1;
           if (v < FLOOR) continue;
 
-          ctx.fillStyle = lut[(v * (RAMP_STEPS - 1)) | 0];
+          const tint = h <= 0 ? 0 : h >= 1 ? TINTS - 1 : (h * (TINTS - 1) + 0.5) | 0;
+          ctx.fillStyle = lut[tint * RAMP_STEPS + ((v * (RAMP_STEPS - 1)) | 0)];
           // Snapping the offset to whole cells keeps every square on the lattice.
           ctx.fillRect(
             cx + Math.round(ox[i] / cell) * cell,
@@ -475,8 +420,6 @@ export default function PixelDisplaceField({
           );
         }
       }
-
-      drawMarkers(now);
 
       // With motion off and nothing displaced there is nothing left to animate.
       if (still && settled && pointer.on < 0.01) {
@@ -554,7 +497,7 @@ export default function PixelDisplaceField({
       document.removeEventListener("visibilitychange", onVisibility);
       reduced.removeEventListener("change", wake);
     };
-  }, [cellSize, radius, strength, markers]);
+  }, [cellSize, radius, strength]);
 
   return (
     <div ref={hostRef} className={cn("relative h-full w-full overflow-hidden", className)}>

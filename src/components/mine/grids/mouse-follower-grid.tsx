@@ -20,7 +20,7 @@ export const MouseFollowerArr = [
   {
     name: "Pixel Displace Field",
     description:
-      "A pixelated spiral of grid-locked squares that scatter away from the cursor and spring back.",
+      "A pixelated pink-and-violet galaxy of grid-locked squares that scatter away from the cursor and spring back.",
     component: <PixelDisplaceField />,
     registryName: "pixel-displace-field",
   },
@@ -121,7 +121,7 @@ const MouseFollower = () => {
               {String(startIndex + index + 1).padStart(2, "0")}
             </div>
 
-            <div className=" leading-1 absolute left-1.5  bottom-1.5">
+            <div className=" leading-tight absolute left-1.5  bottom-1.5">
               <p className="text-xs ">{item.name}</p>
               <p className="text-[8px] text-muted-foreground">
                 {item.description}

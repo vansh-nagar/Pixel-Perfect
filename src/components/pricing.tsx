@@ -2,6 +2,7 @@
 import StarBorder from "./mine/landing-page/star-border";
 import SupportShowcase from "./mine/landing-page/support-showcase";
 import SectionChrome from "./mine/landing-page/section-chrome";
+import { LazyVideo } from "./mine/landing-page/lazy-video";
 
 export default function Pricing() {
   return (
@@ -39,15 +40,10 @@ export default function Pricing() {
               </div>
               <div className="relative h-full flex  justify-center items-center overflow-hidden">
                 <StarBorder />
-                <video
-                  src={
-                    "https://res.cloudinary.com/dz12pywzs/video/upload/v1768638799/Timeline_1_tykewr.mov"
-                  }
+                <LazyVideo
+                  src="https://res.cloudinary.com/dz12pywzs/video/upload/q_auto/v1768638799/Timeline_1_tykewr.mp4"
+                  poster="https://res.cloudinary.com/dz12pywzs/video/upload/so_0,q_auto/v1768638799/Timeline_1_tykewr.jpg"
                   className="w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
                 />
               </div>
             </div>

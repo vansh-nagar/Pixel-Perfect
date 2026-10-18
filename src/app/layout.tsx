@@ -1,5 +1,5 @@
 import "./globals.css";
-import { LocalRecorder } from "@/components/local-recorder/recorder";
+import dynamic from "next/dynamic";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { Inter_Tight, Pixelify_Sans } from "next/font/google";
@@ -7,10 +7,12 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import LenisProvider from "@/components/providers/lenis-provider";
 import { baseMetadata, defaultViewport } from "@/lib/seo/metadata";
 import { jsonLdSchemas } from "@/lib/seo/schemas";
-import { Agentation } from "agentation";
-import { DialRoot } from "dialkit";
-import "dialkit/styles.css";
 import { StarSprite } from "@/components/mine/landing-page/star-border";
+
+const DevTools =
+  process.env.NODE_ENV === "development"
+    ? dynamic(() => import("@/components/providers/dev-tools"))
+    : () => null;
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -51,11 +53,7 @@ export default function RootLayout({
             <StarSprite />
             {children}
             <Toaster />
-            {process.env.NODE_ENV === "development" && <Agentation />}
-            {process.env.NODE_ENV === "development" && <LocalRecorder />}
-            {process.env.NODE_ENV === "development" && (
-              <DialRoot position="top-right" />
-            )}
+            <DevTools />
           </ThemeProvider>
           <Analytics />
         </body>

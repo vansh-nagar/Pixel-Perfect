@@ -3,65 +3,33 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
-import { Model3D } from "@/components/ui/3dmodel";
 import { HeroGrid } from "./canvas/hero-grid";
 import TextTypewriterGlitch from "registry/new-york/text/text-typewriter-glitch";
 import { FaGithub } from "react-icons/fa6";
+import dynamic from "next/dynamic";
+
+const Model3D = dynamic(
+  () => import("@/components/ui/3dmodel").then((m) => m.Model3D),
+  { ssr: false },
+);
 
 function DebugOverlay({
-  mouse,
-  velocity,
-  lastVelocity,
-  fps,
-  ms,
+  sectionRef,
 }: {
-  mouse: React.RefObject<{ x: number; y: number }>;
-  velocity: React.RefObject<number>;
-  lastVelocity: React.RefObject<number>;
-  fps: number;
-  ms: number;
+  sectionRef: React.RefObject<HTMLElement | null>;
 }) {
-  const arrowX = 32;
-  const arrowY = useRef(0);
-  useEffect(() => {
-    arrowY.current = window.innerHeight - 32;
-  }, []);
-  const angle =
-    Math.atan2(mouse.current.y - arrowY.current, mouse.current.x - arrowX) *
-      (180 / Math.PI) +
-    90;
-  const gx = Math.floor(mouse.current.x / 153.5);
-  const gy = Math.floor(mouse.current.y / 153.5);
-  return (
-    <>
-      <div className="absolute sm:top-8 sm:left-8 top-4 left-4 text-xs text-muted-foreground font-mono">
-        x:{mouse.current.x}, y:{mouse.current.y}
-        <br /> fps: {fps} | ms: {ms}
-      </div>
-      <div className="absolute sm:bottom-8 sm:right-8 right-4 bottom-4 text-xs text-muted-foreground font-mono">
-        cell:{gx},{gy}
-      </div>
-      <div className="absolute sm:top-8 sm:right-8 right-4 top-4 text-xs text-gray-400 font-mono">
-        v:{velocity.current.toFixed(1)} a:
-        {velocity.current - lastVelocity.current > 0 ? "↑" : "↓"}
-      </div>
-      <div className="absolute sm:bottom-8 sm:left-8 left-4 bottom-4 text-xs font-mono text-muted-foreground">
-        θ:{angle.toFixed(1)}°
-      </div>
-    </>
-  );
-}
-
-export function HeroSection() {
-  const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const velocity = useRef<number>(0);
-  const lastVelocity = useRef<number>(0);
-  const [, forceRender] = useState(0);
+  const [pointer, setPointer] = useState({ x: 0, y: 0, v: 0, lastV: 0 });
+  const [arrowY, setArrowY] = useState(0);
   const [fps, setFps] = useState<number>(0);
   const [ms, setMs] = useState<number>(0);
   const lastFrameTime = useRef<number>(0);
-  const sectionRef = useRef<HTMLElement | null>(null);
   const isActive = useRef<boolean>(true);
+  const arrowX = 32;
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setArrowY(window.innerHeight - 32));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   useEffect(() => {
     let raf = 0;
@@ -69,12 +37,12 @@ export function HeroSection() {
       if (!isActive.current) return;
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        const dx = e.clientX - mouse.current.x;
-        const dy = e.clientY - mouse.current.y;
-        lastVelocity.current = velocity.current;
-        velocity.current = Math.hypot(dx, dy);
-        mouse.current = { x: e.clientX, y: e.clientY };
-        forceRender((v) => v + 1);
+        setPointer((prev) => ({
+          x: e.clientX,
+          y: e.clientY,
+          v: Math.hypot(e.clientX - prev.x, e.clientY - prev.y),
+          lastV: prev.v,
+        }));
       });
     };
     const handleMouseEnter = () => {
@@ -97,7 +65,7 @@ export function HeroSection() {
       }
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [sectionRef]);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -120,19 +88,40 @@ export function HeroSection() {
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
+  const angle =
+    Math.atan2(pointer.y - arrowY, pointer.x - arrowX) * (180 / Math.PI) + 90;
+  const gx = Math.floor(pointer.x / 153.5);
+  const gy = Math.floor(pointer.y / 153.5);
+  return (
+    <>
+      <div className="absolute sm:top-8 sm:left-8 top-4 left-4 text-xs text-muted-foreground font-mono">
+        x:{pointer.x}, y:{pointer.y}
+        <br /> fps: {fps} | ms: {ms}
+      </div>
+      <div className="absolute sm:bottom-8 sm:right-8 right-4 bottom-4 text-xs text-muted-foreground font-mono">
+        cell:{gx},{gy}
+      </div>
+      <div className="absolute sm:top-8 sm:right-8 right-4 top-4 text-xs text-gray-400 font-mono">
+        v:{pointer.v.toFixed(1)} a:
+        {pointer.v - pointer.lastV > 0 ? "↑" : "↓"}
+      </div>
+      <div className="absolute sm:bottom-8 sm:left-8 left-4 bottom-4 text-xs font-mono text-muted-foreground">
+        θ:{angle.toFixed(1)}°
+      </div>
+    </>
+  );
+}
+
+export function HeroSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
   return (
     <section
       ref={sectionRef}
       className="w-full min-h-[560px] h-[calc(100svh-100px)] relative overflow-clip overscroll-none flex flex-col items-center justify-center  px-4 sm:px-6 md:px-8"
     >
       <HeroGrid />
-      <DebugOverlay
-        mouse={mouse}
-        velocity={velocity}
-        lastVelocity={lastVelocity}
-        fps={fps}
-        ms={ms}
-      />
+      <DebugOverlay sectionRef={sectionRef} />
 
       <div className="flex flex-col justify-center items-center w-full max-w-[1100px] z-10 relative pointer-events-auto mb-[6vh]">
         <h1 style={{ fontSize: "clamp(1.35rem, 4.8vw, 5rem)" }} className="font-mono text-center w-full flex flex-col items-center leading-[1.15] tracking-tight font-medium">
@@ -155,23 +144,22 @@ export function HeroSection() {
         </div>
 
         <div className="flex  flex-row flex-wrap  justify-center   gap-3 sm:gap-4 items-center mt-10 w-full ">
-          <Link href="/blocks">
-            <Button className="rounded-none h-10 px-5" size="default">
-              Browse Components
-            </Button>
-          </Link>
-          <Link
-            target="_blank"
-            href={"https://github.com/vansh-nagar/Pixel-Perfect"}
+          <Button asChild className="rounded-none h-10 px-5" size="default">
+            <Link href="/blocks">Browse Components</Link>
+          </Button>
+          <Button
+            asChild
+            variant={"secondary"}
+            className="rounded-none h-10 px-5 cursor-crosshair"
+            size="default"
           >
-            <Button
-              variant={"secondary"}
-              className="rounded-none h-10 px-5 cursor-crosshair"
-              size="default"
+            <Link
+              target="_blank"
+              href={"https://github.com/vansh-nagar/Pixel-Perfect"}
             >
               Star On Github <FaGithub />
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </div>
 

@@ -85,11 +85,7 @@ export interface DotMatrixCommonProps {
   className?: string;
   pattern?: MatrixPattern;
   muted?: boolean;
-  /**
-   * Adds a glow on dots from opacity 0.6 (weakest) through 1 (strongest), after remapping.
-   */
   bloom?: boolean;
-  /** Uniform glow on every active dot (0…1); slightly wider falloff than selective `bloom`. */
   halo?: number;
   animated?: boolean;
   hoverAnimated?: boolean;
@@ -588,7 +584,6 @@ export function remapOpacityToTriplet(
   return Math.min(1, Math.max(0, lerpDmx(targetPeak, 1, progress)));
 }
 
-/** Remapped opacity where bloom begins (weakest glow); scales linearly to full bloom at 1. */
 export const DMX_BLOOM_OPACITY_MIN = 0.6;
 
 export function opacityToBloomLevel(remappedOpacity: number): number {
@@ -610,15 +605,10 @@ export function dmxBloomRootActive(bloom: boolean, halo: number | undefined): bo
   return bloom || clampHalo(halo) > 0;
 }
 
-/** Root class when `halo` > 0 — CSS widens drop-shadow falloff for a softer, more diffuse glow. */
 export function dmxBloomHaloSpreadClass(halo: number | undefined): "dmx-bloom-halo" | false {
   return clampHalo(halo) > 0 ? "dmx-bloom-halo" : false;
 }
 
-/**
- * Bloom level and dot class for one cell. `curveOpacity` is the loader’s logical opacity **before**
- * `remapOpacityToTriplet` (same as `bloom` uses today).
- */
 export function dmxDotBloomParts(
   isActive: boolean,
   curveOpacity: number,

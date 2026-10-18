@@ -59,8 +59,6 @@ export function HeroSection() {
   const [, forceRender] = useState(0);
   const [fps, setFps] = useState<number>(0);
   const [ms, setMs] = useState<number>(0);
-  // 0 means "not started yet"; the rAF loop seeds it on its first tick, which
-  // keeps the render itself pure.
   const lastFrameTime = useRef<number>(0);
   const sectionRef = useRef<HTMLElement | null>(null);
   const isActive = useRef<boolean>(true);
@@ -106,8 +104,6 @@ export function HeroSection() {
     const measureFrame = () => {
       const currentTime =
         typeof performance !== "undefined" ? performance.now() : 0;
-      // First tick only seeds the clock — measuring against 0 would report the
-      // whole page uptime as one frame.
       if (lastFrameTime.current === 0) {
         lastFrameTime.current = currentTime;
         animationFrameId = requestAnimationFrame(measureFrame);

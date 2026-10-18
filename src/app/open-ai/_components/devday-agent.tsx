@@ -1,12 +1,5 @@
 "use client";
 
-/**
- * One face: a coloured circle with two glyph eyes that follow the cursor on a
- * spring and can play a CSS keyframe animation. Port of openai.com's
- * agent-animation component (DevDay 2026 recap). A face is plain data
- * (`FaceSpec`), so the six originals and the custom faces share this component.
- */
-
 import { memo, useEffect, useId, useRef, type CSSProperties } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { EyeSvg, type EyeGlyph } from "./face-glyphs";
@@ -23,7 +16,6 @@ export const AGENT_MODES = [
 export type AgentMode = (typeof AGENT_MODES)[number];
 
 export type AgentAnimation =
-  // from openai.com
   | "look-around"
   | "nod"
   | "hop"
@@ -31,7 +23,6 @@ export type AgentAnimation =
   | "spin"
   | "spin-in-out"
   | "roll-in-out"
-  // study additions (custom faces)
   | "heartbeat"
   | "dizzy"
   | "sleepy"
@@ -49,19 +40,11 @@ export type Glyph = {
 
 export type EyeSpec = Glyph & { character: EyeGlyph };
 
-/** Everything that makes one face: colours, eyes, and optional accessories. */
 export type FaceSpec = {
   color: string;
   eyeColor: string;
-  /**
-   * Eye glyphs and the "bespoke" pose (x, y, rotation inside the 100px circle)
-   * they move to while an animation plays. At rest the eyes sit centred,
-   * 50.0855px apart, 22.5px from the top.
-   */
   eyes: [EyeSpec, EyeSpec];
-  /** Punctuation "accessories" around the face (hidden unless showExtras). */
   expressions: Glyph[];
-  /** Colour of the drop in the "cry" animation. */
   tearColor?: string;
 };
 
@@ -128,7 +111,6 @@ export const AGENT_STATES: Record<AgentMode, FaceSpec> = {
   },
 };
 
-/** Seconds per animation at speed 1. */
 export const AGENT_DURATIONS: Record<AgentAnimation, number> = {
   "look-around": 3.6,
   nod: 2,
@@ -137,17 +119,12 @@ export const AGENT_DURATIONS: Record<AgentAnimation, number> = {
   spin: 2.8,
   "spin-in-out": 3.2,
   "roll-in-out": 3.25,
-  // Study additions: same duration family as the originals.
   heartbeat: 2.2,
   dizzy: 2.8,
   sleepy: 3.6,
   cry: 3.2,
 };
 
-/**
- * Eye positions. "cursor" = the resting pose: both eyes centred on the face,
- * 50.0855px apart, 22.5px from the top. "bespoke" = the face's own pose.
- */
 function getAgentEyes(face: FaceSpec, positioning: "cursor" | "bespoke") {
   return face.eyes.map((eye, index) => ({
     ...eye,
@@ -175,7 +152,6 @@ const Circle = memo(function Circle({ color }: { color: string }) {
   );
 });
 
-/** Optional timing overrides for the in/out animations (seconds). */
 export type AgentTimeline = {
   duration?: number;
   scale: {
@@ -204,7 +180,6 @@ const finite = (value: number | undefined, fallback: number) =>
 const bezier = (value: number[] | undefined, fallback: number[]) =>
   fallback.map((f, i) => clamp(finite(value?.[i], f), 0, 1));
 
-/** Clamps every stop so the generated keyframes are always well ordered. */
 function resolveTimeline(t: AgentTimeline) {
   const duration = clamp(finite(t.duration, AGENT_DURATIONS["roll-in-out"]), 0.5, 10);
   const scaleStart = clamp(finite(t.scale.start, 0), 0, duration - 0.1);
@@ -248,7 +223,6 @@ function resolveTimeline(t: AgentTimeline) {
   };
 }
 
-/** The built-in roll-in/out timing (3.25s), as authored on openai.com. */
 function defaultRollTimeline(duration: number): AgentTimeline {
   return {
     duration,
@@ -270,7 +244,6 @@ function defaultRollTimeline(duration: number): AgentTimeline {
   };
 }
 
-/** Keyframes for a custom in/out timeline, named `${id}-scale`, `${id}-eyes`, ... */
 function timelineKeyframes(id: string, timeline: AgentTimeline) {
   const { duration, scale, rollIn, rollOut, gazeIn, gaze } = resolveTimeline(timeline);
   const ease = (b: number[]) => `cubic-bezier(${b.join(",")})`;
@@ -322,10 +295,6 @@ function timelineKeyframes(id: string, timeline: AgentTimeline) {
   ].join("\n");
 }
 
-/**
- * Accessory characters ("</>", "=3", ...) fade in one by one, left to right,
- * and out in reverse. Each character gets a step-end opacity keyframe.
- */
 function accessoryKeyframes(id: string, timeline: ResolvedTimeline, count: number) {
   const { duration, accessoriesIn, accessoriesOut } = timeline;
   const pct = (time: number) => Number(((time / duration) * 100).toFixed(5));
@@ -395,15 +364,8 @@ function GlyphSpan({
   );
 }
 
-/** Spring the eyes use to chase the cursor. */
 const GAZE_SPRING = { stiffness: 140, damping: 24, mass: 0.55 };
 
-/**
- * Cursor gaze. The target is 20% of the pointer's offset from the face
- * centre (90,82 in the 190x166 canvas), clamped to a 12px radius. Two springs
- * chase the target; the rendered transform re-clamps to 12px and tilts the
- * eyes up to 6deg in the direction of horizontal travel.
- */
 function useCursorGaze(enabled: boolean, track: boolean, headTilt: number) {
   const ref = useRef<HTMLDivElement>(null);
   const pointer = useRef<{ x: number; y: number } | null>(null);
@@ -472,7 +434,6 @@ function useCursorGaze(enabled: boolean, track: boolean, headTilt: number) {
 }
 
 export type DevdayAgentProps = {
-  /** Label written to data-mode; also picks a built-in face when `face` is omitted. */
   mode?: string;
   face?: FaceSpec;
   animation?: AgentAnimation;
@@ -513,13 +474,11 @@ export function DevdayAgent({
   const bespokeEyes = getAgentEyes(state, "bespoke");
   const restingEyes = getAgentEyes(state, "cursor");
   const scale = size / 100;
-  // While an animation plays the gaze target is pinned to the centre.
   const { ref, transform } = useCursorGaze(mouseControl, !animationEnabled, headTilt);
   const rate = Number.isFinite(speed) && speed > 0 ? speed : 1;
   const id = `agent-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   const inOut = animation === "roll-in-out" || animation === "spin-in-out";
   const custom = timeline && inOut ? resolveTimeline(timeline) : undefined;
-  // Accessory keyframes exist only for roll-in-out (custom or built-in timing).
   const rollTiming =
     animation === "roll-in-out"
       ? (custom ?? resolveTimeline(defaultRollTimeline(AGENT_DURATIONS["roll-in-out"])))
@@ -558,7 +517,6 @@ export function DevdayAgent({
         </style>
       )}
       <div className={styles.canvas} style={{ transform: `scale(${scale})` }}>
-        {/* Keyed so every new animation remounts the tree and restarts the CSS keyframes. */}
         <div
           key={`${mode}:${animation}:${animationEnabled}:${rate}:${loop}:${replayKey}`}
           aria-hidden="true"

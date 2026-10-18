@@ -1,9 +1,3 @@
-/**
- * MSDF text layout, ported line for line from igloo.inc's `msdfworker` (it runs in a worker
- * there; here it runs inline, the strings are tiny). Produces the same attributes:
- * position, uv, uvMask, textWeights, lineWeights, centr.
- */
-
 import * as THREE from "three";
 
 type Glyph = {
@@ -34,7 +28,6 @@ export type TextOptions = {
   baseOffset?: number;
 };
 
-/** Same post-processing as their font loader (`AR`): glyph array → map keyed by character. */
 export async function loadMsdfFont(url: string): Promise<MsdfFont> {
   const raw = (await fetch(url).then((r) => r.json())) as Omit<MsdfFont, "glyphs" | "placeholderChar"> & {
     glyphs: Omit<Glyph, "isWhitespace">[];

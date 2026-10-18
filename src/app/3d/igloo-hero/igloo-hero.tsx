@@ -54,14 +54,12 @@ export default function IglooHero() {
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(el);
 
-    // The site tracks the pointer across the whole page, relative to the canvas.
     const onPointerMove = (e: PointerEvent) => {
       const rect = el.getBoundingClientRect();
       hero?.setPointer(((e.clientX - rect.left) / rect.width) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1);
     };
     window.addEventListener("pointermove", onPointerMove);
 
-    // Render only while on screen; play the intro the first time it's mostly visible.
     const observer = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;

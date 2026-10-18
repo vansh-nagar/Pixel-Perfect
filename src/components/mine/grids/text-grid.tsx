@@ -65,7 +65,6 @@ import BorderDecorator from "./_shared/border-decorator";
 
 type StaggerFrom = "start" | "center" | "edges" | "random" | "end";
 
-/** Every demo renders the same words at the same size, so only the motion differs. */
 const DEMO_TEXT_CLASS = "text-3xl font-semibold tracking-tight";
 
 type TextItem = {
@@ -73,9 +72,6 @@ type TextItem = {
   description: string;
   component: React.ReactNode;
   registryName: string;
-  // Some variants share a single registry source file (e.g. all gooey variants
-  // live in `gooey-text.tsx`). `registrySlug` is the file the Copy dropdown
-  // installs/copies; it falls back to `registryName` when they're the same.
   registrySlug?: string;
   hasStagger: boolean;
   isScroll?: boolean;
@@ -462,7 +458,7 @@ const TextGrid = () => {
     const item = itemRefs.current[activeId];
     if (!aside || !item) return;
 
-    const lookAhead = 150; // px of neighbouring items to surface beyond the active one
+    const lookAhead = 150;
     const asideRect = aside.getBoundingClientRect();
     const itemRect = item.getBoundingClientRect();
 

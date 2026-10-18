@@ -1,6 +1,3 @@
-// Shader sources copied verbatim from igloo.inc's App3D bundle (entry scene, class UF).
-// `GLOBAL` replaces their `uniform Global {...}` UBO with plain uniforms.
-
 import { GLOBAL, aastep, bitangentNoise, colorUtils, easings, falloff, fit, fpsHelpers, imagefit, linearstep, matrix, msdf, noiseTex, rotations, sinenoise } from "./chunks";
 
 export const roomRingVert = /* glsl */ `

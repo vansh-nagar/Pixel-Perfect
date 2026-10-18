@@ -1,7 +1,3 @@
-// Fluid sim shaders copied verbatim from igloo.inc ($U: a WebGL stable-fluids sim).
-// Build-time options are resolved: highp/mediump precision, LINE splats, no borders,
-// linear filtering supported.
-
 export const clearVert = /* glsl */ `
 precision highp float;
 

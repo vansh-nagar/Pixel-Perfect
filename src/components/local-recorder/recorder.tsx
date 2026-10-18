@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal, flushSync } from "react-dom";
 import styles from "./recorder.module.css";
 
-/** Drop into a React app's root layout. No Next.js APIs or server required. */
 export function LocalRecorder({ enabled = true }: { enabled?: boolean }) {
   const [open, setOpen] = useState(false);
   const [popup, setPopup] = useState<Window | null>(null);
@@ -58,7 +57,6 @@ export function LocalRecorder({ enabled = true }: { enabled?: boolean }) {
     if (!next) { setError("Allow popups for this local site to open the recording controls."); return; }
     next.document.title = "Local recorder";
     next.document.body.style.cssText = "margin:0;background:#fafafa;color:#18181b;font:14px system-ui,sans-serif;";
-    // Copy only styles, not the app or its controls, into this independent window.
     next.document.head.querySelectorAll("style,link[rel=stylesheet]").forEach(node => node.remove());
     document.querySelectorAll("style,link[rel=stylesheet]").forEach(node => next.document.head.appendChild(node.cloneNode(true)));
     popupRef.current = next;
@@ -69,7 +67,6 @@ export function LocalRecorder({ enabled = true }: { enabled?: boolean }) {
   async function start() {
     if (status !== "idle") return;
     setError("");
-    // Capture must originate in the focused window that received the click.
     const captureWindow = popupRef.current;
     if (!captureWindow || captureWindow.closed) { setError("Reopen the recording controls and try again."); return; }
     if (!captureWindow.navigator.mediaDevices?.getDisplayMedia || typeof MediaRecorder === "undefined") {
@@ -104,7 +101,6 @@ export function LocalRecorder({ enabled = true }: { enabled?: boolean }) {
       recorder.current = recording;
       setResult(undefined); setElapsed(0);
       setResolution(`${settings.width} × ${settings.height} · ${Math.round(settings.frameRate || 30)} fps`);
-      // Hide controls synchronously; background-window animation frames can stall.
       flushSync(() => setStatus("recording"));
       if (!capture.active || popupRef.current?.closed) { capture.getTracks().forEach(track => track.stop()); setStatus("idle"); return; }
       recording.start(1000);
@@ -112,7 +108,6 @@ export function LocalRecorder({ enabled = true }: { enabled?: boolean }) {
       stream.current?.getTracks().forEach(track => track.stop()); stream.current = null;
       if (!alive.current) return;
       setStatus("idle");
-      // Popup exceptions belong to another realm, so instanceof DOMException is unreliable.
       const failure = cause as { name?: string; message?: string } | null;
       setError(failure?.name === "NotAllowedError"
         ? "Capture cancelled or blocked. Click Start to choose the app tab again."

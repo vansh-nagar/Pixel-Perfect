@@ -49,3 +49,6 @@ next-env.d.ts
 .claude/worktrees/
 package-lock.json
 /public/_study/
+
+# finish-up measurements
+.optimizer/

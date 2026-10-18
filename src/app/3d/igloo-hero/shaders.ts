@@ -1,6 +1,3 @@
-// Shader sources copied verbatim from igloo.inc's App3D bundle (hero scene, class F3).
-// `GLOBAL` replaces their `uniform Global {...}` UBO with plain uniforms.
-
 import { aastep, easings, falloff, matrix, msdf, normals, rotateUV } from "./chunks";
 
 export const GLOBAL = /* glsl */ `uniform vec2 resolution;\nuniform vec2 resolutionUI;\nuniform float aspect;\nuniform float time;\nuniform float dtRatio;`;

@@ -3,10 +3,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-/**
- * Prev / numbered / next pager shared by every paginated block grid. Renders
- * nothing for a single page, so callers can drop it in unconditionally.
- */
 export const GridPagination = ({
   currentPage,
   totalPages,

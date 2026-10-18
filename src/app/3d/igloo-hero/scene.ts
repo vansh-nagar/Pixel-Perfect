@@ -25,16 +25,11 @@ import { loadDrc } from "./draco";
 import * as S from "./shaders";
 
 const ASSETS = "/_study/igloo";
-const DEG = 3.14 / 180; // the original converts degrees with 3.14, not Math.PI
+const DEG = 3.14 / 180;
 const HALF_PI = Math.PI * 0.5;
 
-/** The hero sits at this scroll progress once the intro has autocentred the page. */
 const HERO_PROGRESS = 0.495;
 const INITIAL_SCROLL_AUTOCENTER = 0.495;
-
-// ---------------------------------------------------------------------------
-// Frame-rate-independent helpers (their `ie` utils)
-// ---------------------------------------------------------------------------
 
 type Clock = { time: number; ratio: number };
 
@@ -75,10 +70,6 @@ function registerEases() {
   easesRegistered = true;
 }
 
-// ---------------------------------------------------------------------------
-// Shared uniforms (their `Global` uniform block)
-// ---------------------------------------------------------------------------
-
 function createGlobals() {
   return {
     resolution: { value: new THREE.Vector2(1, 1) },
@@ -91,11 +82,6 @@ function createGlobals() {
 type Globals = ReturnType<typeof createGlobals>;
 type Uniforms = Record<string, THREE.IUniform>;
 
-// ---------------------------------------------------------------------------
-// Asset loading
-// ---------------------------------------------------------------------------
-
-/** Mirrors `le.load(url, mode)`: mode words set wrap, filtering and colour space. */
 function applyMode(texture: THREE.Texture, mode: string) {
   if (mode.includes("repeat")) texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
   if (mode.includes("data")) texture.magFilter = texture.minFilter = THREE.LinearFilter;
@@ -152,11 +138,6 @@ function shaderMaterial(
   return new THREE.ShaderMaterial({ uniforms: { ...globals, ...uniforms }, vertexShader, fragmentShader, ...params });
 }
 
-// ---------------------------------------------------------------------------
-// Parts (one per original class)
-// ---------------------------------------------------------------------------
-
-/** g3 — the sky dome: a screen-space diagonal gradient with an intro colour. */
 function createSky(globals: Globals) {
   const material = shaderMaterial(
     globals,
@@ -179,7 +160,6 @@ function createSky(globals: Globals) {
   return { meshes: [mesh], material };
 }
 
-/** v3 — two wind-noise smoke sheets drifting across the background. */
 function createSmoke(globals: Globals, tex: Textures) {
   const material = shaderMaterial(globals, { tWind: { value: tex.windSrgb }, uAlpha: { value: 1 } }, S.smokeVert, S.smokeFrag, {
     transparent: true,
@@ -198,7 +178,6 @@ function createSmoke(globals: Globals, tex: Textures) {
   return { meshes: [mesh1, mesh2], material };
 }
 
-/** y3 — the ground under the igloo, with a mouse-following glow. */
 async function createIglooBase(globals: Globals, tex: Textures) {
   const mousePosition = new THREE.Vector3();
   const material = shaderMaterial(
@@ -226,10 +205,6 @@ async function createIglooBase(globals: Globals, tex: Textures) {
   return { meshes: [mesh], material, mousePosition };
 }
 
-/**
- * Shared setup for the cage (_3) and outline (E3): additive LineBasicMaterial whose fragment
- * alpha is replaced by a custom expression. Both draw their geometry as LineSegments.
- */
 function createLineMaterial(globals: Globals, key: string, uniforms: Uniforms, worldPosFrom: "centr" | "position", alphaCode: string) {
   const material = new THREE.LineBasicMaterial({ color: "#a7b2d6", opacity: 0.3, transparent: true });
   material.depthTest = false;
@@ -260,12 +235,10 @@ function createLineMaterial(globals: Globals, key: string, uniforms: Uniforms, w
         .join("\n")}
       ${shader.fragmentShader}`.replace("#include <dithering_fragment>", alphaCode);
   };
-  // PORT: both materials share onBeforeCompile source text, so give each its own program.
   material.customProgramCacheKey = () => key;
   return material;
 }
 
-/** _3 — the wireframe cage that flashes during the intro shockwave. */
 async function createIglooCage(globals: Globals) {
   const uniforms = { uProgress: { value: 1 }, uAlpha: { value: 0.185 } };
   const material = createLineMaterial(
@@ -288,7 +261,6 @@ async function createIglooCage(globals: Globals) {
   return { meshes: [mesh], uniforms, mesh };
 }
 
-/** E3 — the glowing outline that materialises top-down before the igloo appears. */
 async function createIglooOutline(globals: Globals) {
   const uniforms = {
     uProgress: { value: 1 },
@@ -314,7 +286,6 @@ async function createIglooOutline(globals: Globals) {
   mesh.frustumCulled = false;
   mesh.name = "igloo_outline";
   mesh.renderOrder = 999;
-  // uScrollAlpha = ease(fit(progress, 0, 0.35, 1, 0), "sine.in") * 2, which is 0 at the hero.
   uniforms.uScrollAlpha.value = ease(fit(HERO_PROGRESS, 0, 0.35, 1, 0), "sine.in") * 2;
   return { meshes: [mesh], uniforms };
 }
@@ -334,7 +305,6 @@ function place(geometry: THREE.BufferGeometry, material: THREE.Material, list: P
   });
 }
 
-/** S3 — five instances of one mountain, fogged by distance and height. */
 async function createMountains(globals: Globals, tex: Textures) {
   const material = shaderMaterial(
     globals,
@@ -363,7 +333,6 @@ async function createMountains(globals: Globals, tex: Textures) {
   return { meshes, material };
 }
 
-/** M3 — five instances of the snowy terrain around the igloo. */
 async function createTerrain(globals: Globals, tex: Textures) {
   const material = shaderMaterial(
     globals,
@@ -391,7 +360,6 @@ async function createTerrain(globals: Globals, tex: Textures) {
   return { meshes, material };
 }
 
-/** b3 — two flat patches that fill gaps in the foreground terrain. */
 async function createTerrainPatches(globals: Globals, tex: Textures) {
   const material = shaderMaterial(
     globals,
@@ -416,7 +384,6 @@ async function createTerrainPatches(globals: Globals, tex: Textures) {
   return { meshes, material };
 }
 
-/** T3 — sprite-sheet digits that ripple outwards with the intro shockwave. */
 async function createIntroParticles(globals: Globals, tex: Textures) {
   const material = shaderMaterial(
     globals,
@@ -432,12 +399,6 @@ async function createIntroParticles(globals: Globals, tex: Textures) {
   return { meshes: [mesh], material, mesh };
 }
 
-/**
- * B3 — 1200 tumbling snow flakes.
- * PORT: the original steps positions in a GPGPU ping-pong sim (accelerate, 0.9 friction per
- * 60fps frame, wrap in a 50×20×50 box). Velocity reaches its steady state (9× the per-frame
- * acceleration) within a few frames, so the motion is integrated in closed form instead.
- */
 function createSnow(globals: Globals) {
   const count = 1200;
   const base = new THREE.PlaneGeometry(0.075, 0.15);
@@ -499,10 +460,6 @@ function createSnow(globals: Globals) {
   return { meshes: [mesh], material };
 }
 
-// ---------------------------------------------------------------------------
-// U3 — the igloo: ~hundreds of ice shards in one draw call
-// ---------------------------------------------------------------------------
-
 type Piece = {
   object: THREE.Object3D;
   centroid: THREE.Vector3;
@@ -516,7 +473,6 @@ type Piece = {
   bounce: number;
   scrollDisplacement1: number;
   scrollDisplacement2: number;
-  // plexus state
   plexusDistance: number;
   plexusDistReal: boolean;
   plexusConnections: Piece[];
@@ -527,12 +483,6 @@ type Piece = {
 
 const dataTextureSize = (n: number) => Math.max(Math.ceil(Math.sqrt(n) / 4) * 4, 4);
 
-/**
- * PORT: the original splits igloo.drc by `batchId` into per-shard geometries and feeds them
- * to a THREE.BatchedMesh whose matrix texture the shader reads by hand. Newer three no longer
- * exposes a `batchId` attribute, so the shards stay in one geometry with a remapped `batchId`
- * and a matrix DataTexture laid out exactly like BatchedMesh's (4 RGBA texels per shard).
- */
 async function createIgloo(globals: Globals, tex: Textures) {
   const source = await loadGeometry("igloo.drc");
   const index = source.index!.array;
@@ -540,7 +490,6 @@ async function createIgloo(globals: Globals, tex: Textures) {
   const centr = source.attributes.centr.array;
   const randAttr = source.attributes.rand.array;
 
-  // Shard order = first appearance while walking the index, same as the original split.
   const order = new Map<number, number>();
   const firstVertex: number[] = [];
   for (let i = 0; i < index.length; i++) {
@@ -558,7 +507,6 @@ async function createIgloo(globals: Globals, tex: Textures) {
   const pieceId = new Float32Array(vertexCount);
   for (let v = 0; v < vertexCount; v++) {
     pieceId[v] = order.get(batchIds[v]) ?? 0;
-    // Shard vertices are stored relative to their own centroid.
     position[v * 3 + 0] -= centr[v * 3 + 0];
     position[v * 3 + 1] -= centr[v * 3 + 1];
     position[v * 3 + 2] -= centr[v * 3 + 2];
@@ -710,10 +658,6 @@ function updateIgloo(igloo: Igloo, clock: Clock, mouseOnPlane: THREE.Vector3 | n
   igloo.options.needsUpdate = true;
 }
 
-// ---------------------------------------------------------------------------
-// R3 / P3 / D3 — the hover "plexus": lines, squares and distance readouts between shards
-// ---------------------------------------------------------------------------
-
 const MAX_PLEXUS_POINTS = 5;
 const MAX_PLEXUS_CONNECTIONS = 2;
 
@@ -733,7 +677,6 @@ function createPlexus(globals: Globals, tex: Textures) {
   lineMesh.name = "plexus lines";
   lineMesh.renderOrder = 999;
 
-  // P3: rotating squares at each connected shard.
   const pointGeometry = new THREE.BufferGeometry();
   pointGeometry.setAttribute("position", new THREE.BufferAttribute(new Float32Array(MAX_PLEXUS_POINTS * 3), 3));
   pointGeometry.setAttribute("progress", new THREE.BufferAttribute(new Float32Array(MAX_PLEXUS_POINTS), 1));
@@ -751,7 +694,6 @@ function createPlexus(globals: Globals, tex: Textures) {
   pointMesh.name = "plexus points";
   pointMesh.renderOrder = lineMesh.renderOrder + 1;
 
-  // D3: two-digit MSDF readouts, billboarded beside each point.
   const left = new THREE.PlaneGeometry();
   left.scale(0.77777, 1, 1);
   left.translate(-0.5 - -0.1, 0, 0);
@@ -917,7 +859,6 @@ function updatePlexus(plexus: Plexus, igloo: Igloo, camera: THREE.Camera, viewpo
       .toArray() as [number, number, number];
   });
 
-  // Lines: each connection drawn once, growing from the more-animated end.
   const segments: number[] = [];
   const seen: number[][] = [];
   for (const f of plexus.closest) {
@@ -938,7 +879,6 @@ function updatePlexus(plexus: Plexus, igloo: Igloo, camera: THREE.Camera, viewpo
   lineAttr.needsUpdate = true;
   plexus.lineMesh.visible = segments.length > 0;
 
-  // Points
   const pointPos = plexus.pointMesh.geometry.attributes.position as THREE.BufferAttribute;
   const pointProgress = plexus.pointMesh.geometry.attributes.progress as THREE.BufferAttribute;
   for (let s = 0; s < MAX_PLEXUS_POINTS; s++) {
@@ -950,7 +890,6 @@ function updatePlexus(plexus: Plexus, igloo: Igloo, camera: THREE.Camera, viewpo
   pointPos.needsUpdate = true;
   pointProgress.needsUpdate = true;
 
-  // Numbers
   const numberGeometry = plexus.numberMesh.geometry;
   const progress = numberGeometry.attributes.progress as THREE.InstancedBufferAttribute;
   const nums = numberGeometry.attributes.nums as THREE.InstancedBufferAttribute;
@@ -970,10 +909,6 @@ function updatePlexus(plexus: Plexus, igloo: Igloo, camera: THREE.Camera, viewpo
   nums.needsUpdate = true;
   plexus.numberMesh.instanceMatrix.needsUpdate = true;
 }
-
-// ---------------------------------------------------------------------------
-// Camera (their `Jo`): base position/target plus mouse parallax and sine-noise shake
-// ---------------------------------------------------------------------------
 
 class CameraRig {
   camera: THREE.PerspectiveCamera;
@@ -1043,10 +978,6 @@ class CameraRig {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Post-processing: LUT grade → intro fade → bloom → SMAA (+ sRGB encode)
-// ---------------------------------------------------------------------------
-
 function createLutEffect(lutTexture: THREE.Texture) {
   return new Effect(
     "IglooColorCorrection",
@@ -1092,12 +1023,7 @@ function createIntroFadeEffect() {
   );
 }
 
-// ---------------------------------------------------------------------------
-// Scene assembly
-// ---------------------------------------------------------------------------
-
 export type IglooHero = {
-  /** Plays the load fade + 5s intro. Safe to call once. */
   playIntro(): void;
   setSize(width: number, height: number): void;
   setPointer(ndcX: number, ndcY: number): void;
@@ -1139,7 +1065,6 @@ export async function createIglooHero(canvas: HTMLCanvasElement, options: { redu
     part.meshes.forEach((m) => scene.add(m));
   }
 
-  // Post-processing chain
   const composer = new EffectComposer(renderer, { frameBufferType: THREE.HalfFloatType });
   composer.addPass(new RenderPass(scene, rig.camera));
   const lutEffect = createLutEffect(tex.lut);
@@ -1149,8 +1074,6 @@ export async function createIglooHero(canvas: HTMLCanvasElement, options: { redu
   composer.addPass(new EffectPass(rig.camera, bloom));
   composer.addPass(new EffectPass(rig.camera, new SMAAEffect({ preset: SMAAPreset.HIGH })));
 
-  // Camera path: the scroll timeline frozen at the hero's progress, blended in from the intro view.
-  // Set again in onStart, like the original; seeded here so the pre-intro camera is valid.
   const introPosition = new THREE.Vector3(-14, 21, 14);
   const introTarget = new THREE.Vector3(0, 0.5, 0);
   const introWeight = { value: 0 };
@@ -1162,7 +1085,6 @@ export async function createIglooHero(canvas: HTMLCanvasElement, options: { redu
   scrollTimeline.fromTo(timelinePosition, { x: -13.25, z: 13.25 }, { x: -15.25, z: 23.25, duration: 14, ease: "power1.inOut" }, 7);
   scrollTimeline.progress(1).progress(0).progress(HERO_PROGRESS);
 
-  // createIntroTimeline — same targets, start times, durations and eases.
   const lutUniforms = lutEffect.uniforms;
   const intro = gsap.timeline({
     paused: true,
@@ -1209,7 +1131,6 @@ export async function createIglooHero(canvas: HTMLCanvasElement, options: { redu
   let introStarted = false;
   let needsReset = true;
 
-  // Pointer + interaction plane (their `Si.planeInteraction`)
   const pointer = new THREE.Vector2();
   const raycaster = new THREE.Raycaster();
   const plane = new THREE.Plane();
@@ -1262,16 +1183,13 @@ export async function createIglooHero(canvas: HTMLCanvasElement, options: { redu
       globals.time.value = clock.time;
       globals.dtRatio.value = clock.ratio;
 
-      // F3.update: camera base from intro view → frozen scroll timeline.
       rig.camera.updateMatrixWorld();
       rig.basePosition.lerpVectors(introPosition, timelinePosition, introWeight.value);
       rig.baseTarget.lerpVectors(introTarget, timelineTarget, introWeight.value);
 
-      // y3: ground glow follows the pointer on a plane 19.25 units in front of the camera.
       const glowTarget = pointerOnPlane(19.25);
       if (glowTarget) base.mousePosition.lerp(glowTarget, lerpCoef(0.03, clock.ratio));
 
-      // U3: shard displacement + plexus.
       const iglooTarget = pointerOnPlane(19.25);
       updateIgloo(igloo, clock, iglooTarget ? iglooPointer.copy(iglooTarget) : null, needsReset);
       if (igloo.introDisplacementModulator.value === 1) updatePlexus(plexus, igloo, rig.camera, viewportHeight);

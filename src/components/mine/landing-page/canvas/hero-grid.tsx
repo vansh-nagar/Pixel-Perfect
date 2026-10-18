@@ -66,7 +66,7 @@ export function HeroGrid() {
       ) => {
         const points = 4;
         let rot = (Math.PI / 2) * 3;
-        let step = Math.PI / points;
+        const step = Math.PI / points;
 
         ctx.beginPath();
         ctx.moveTo(cx, cy - outerRadius);
@@ -143,9 +143,9 @@ export function HeroGrid() {
           ctx.fillRect(2, 0, logoSize / 2, logoSize);
 
           ctx.beginPath();
-          ctx.moveTo(2, logoSize); // bottom-left corner
-          ctx.lineTo(2 + logoSize / 2, logoSize + 1); // bottom-right
-          ctx.lineTo(2, logoSize - 2 + logoSize / 2); // vertical down
+          ctx.moveTo(2, logoSize);
+          ctx.lineTo(2 + logoSize / 2, logoSize + 1);
+          ctx.lineTo(2, logoSize - 2 + logoSize / 2);
           ctx.closePath();
           ctx.fill();
 

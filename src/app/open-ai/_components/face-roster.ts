@@ -1,16 +1,9 @@
-/**
- * Every flat face on the avatar carousel: the six DevDay originals (openai.com's
- * agent faces, eyes redrawn as SVG) and eight custom faces in the same style.
- * Tapping a face plays its next animation.
- */
-
 import { AGENT_MODES, AGENT_STATES, type AgentAnimation, type FaceSpec } from "./devday-agent";
 
 export type RosterFace = { name: string; face: FaceSpec; animations: AgentAnimation[] };
 
 const EMPTY = { character: "", x: 50, y: 25 };
 
-/** The originals cycle through these, each starting at its own index. */
 const ORIGINAL_ANIMATIONS: AgentAnimation[] = ["look-around", "nod", "hop", "wiggle", "spin"];
 
 const ORIGINALS: RosterFace[] = AGENT_MODES.map((mode, index) => ({
@@ -19,11 +12,6 @@ const ORIGINALS: RosterFace[] = AGENT_MODES.map((mode, index) => ({
   animations: [...ORIGINAL_ANIMATIONS.slice(index % 5), ...ORIGINAL_ANIMATIONS.slice(0, index % 5)],
 }));
 
-/*
- * Eye widths drive the resting layout (centred, 50.0855px apart). The x/y/
- * rotation values are each face's "bespoke" pose, the one the eyes swing to
- * while an animation plays.
- */
 const CUSTOM: RosterFace[] = [
   {
     name: "love",

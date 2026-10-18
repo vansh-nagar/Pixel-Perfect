@@ -1,6 +1,3 @@
-// Server-only resolver for category component lists. Bundles registry.json —
-// never import this from a "use client" file; use categories.ts there instead.
-
 import registry from "../../../registry.json";
 import { SHADERS } from "@/components/pixel-perfect/shaders/registry";
 import { IMAGE_SHADERS } from "@/components/pixel-perfect/shaders/image-registry";

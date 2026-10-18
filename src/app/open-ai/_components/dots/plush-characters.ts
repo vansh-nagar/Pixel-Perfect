@@ -1,16 +1,3 @@
-/**
- * Four original plush characters in the dots style, built from primitives in code.
- * They share everything else with the dots cast: the fur (./fur), the pose clips and
- * blending (createPosePlayer), the light rig and the colour grade.
- *
- *  - Mochi: a squishy cream bun with bead eyes, blush and a small smile.
- *  - Pip: an orange egg with one big eye and a sprout that pops off on the hop. Spins.
- *  - Bolt: a cherry rounded cube wearing headphones that jump when it does.
- *  - Nimbus: a lilac-white cloud with happy closed eyes and a floating star.
- *
- * Each character is built once as a template and cloned per use, so clones share
- * geometry and the fur is baked once per character.
- */
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { mergeGeometries, mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
@@ -20,7 +7,6 @@ import type { Character } from "./face-renderer";
 export const PLUSH_NAMES = ["Mochi", "Pip", "Bolt", "Nimbus"] as const;
 export type PlushName = (typeof PLUSH_NAMES)[number];
 
-// Names follow the dots materials, which is how the fur finds bodies, eyes and accessories.
 const materials = {
   body: (name: string, color: string) =>
     new THREE.MeshStandardMaterial({ name: `${name} · soft matte silicone`, color, roughness: 0.52, metalness: 0 }),
@@ -32,7 +18,6 @@ const materials = {
 const charcoal = () => materials.accessory("soft charcoal", "#2d2e2f");
 const blush = () => materials.accessory("blush", "#ff9db4", 0.6);
 
-/** Smooth, seamless normals for a deformed primitive (drops the UV seam first). */
 function sealed(geometry: THREE.BufferGeometry) {
   geometry.deleteAttribute("uv");
   const merged = mergeVertices(geometry, 1e-4);
@@ -40,7 +25,6 @@ function sealed(geometry: THREE.BufferGeometry) {
   return merged;
 }
 
-/** Moves a geometry so its lowest point sits on y = 0. */
 function standOnGround(geometry: THREE.BufferGeometry) {
   geometry.computeBoundingBox();
   geometry.translate(0, -geometry.boundingBox!.min.y, 0);
@@ -50,7 +34,6 @@ function standOnGround(geometry: THREE.BufferGeometry) {
 const raycaster = new THREE.Raycaster();
 const FORWARD = new THREE.Vector3(0, 0, 1);
 
-/** Sets `part` onto the front of `body` at (x, y), facing out along the surface normal. */
 function placeOn(part: THREE.Object3D, body: THREE.Mesh, x: number, y: number, embed = 0) {
   body.updateMatrixWorld(true);
   raycaster.set(new THREE.Vector3(x, y, 5), new THREE.Vector3(0, 0, -1));
@@ -68,7 +51,6 @@ const mesh = (geometry: THREE.BufferGeometry, material: THREE.Material, name = "
   return m;
 };
 
-/** A group that rotates and scales about `at`; add children in character space. */
 function pivot(name: string, at: THREE.Vector3) {
   const outer = new THREE.Group();
   outer.name = name;
@@ -86,16 +68,12 @@ type Blueprint = {
   excite: ExciteConfig;
 };
 
-// ---------------------------------------------------------------------------
-// The cast
-// ---------------------------------------------------------------------------
-
 function mochi(): Blueprint {
   const shape = new THREE.SphereGeometry(0.5, 72, 48);
   const p = shape.getAttribute("position");
   for (let i = 0; i < p.count; i++) {
     const y = p.getY(i);
-    if (y < -0.3) p.setY(i, -0.3 + (y + 0.3) * 0.25); // sit flat
+    if (y < -0.3) p.setY(i, -0.3 + (y + 0.3) * 0.25);
   }
   shape.scale(1.2, 0.84, 1.04);
   const body = mesh(standOnGround(sealed(shape)), materials.body("Mochi", "#fff1dc"), "Mochi_body");
@@ -122,7 +100,6 @@ function pip(): Blueprint {
   });
   const body = mesh(standOnGround(sealed(new THREE.LatheGeometry(profile, 72))), materials.body("Pip", "#ff7a2f"), "Pip_body");
 
-  // One big eye: sclera, pupil and a highlight, blinking as a unit.
   const eye = new THREE.Group();
   eye.add(mesh(new THREE.SphereGeometry(0.135, 32, 24).scale(1, 1, 0.5), materials.ivory(), "sclera"));
   const pupil = mesh(new THREE.SphereGeometry(0.072, 24, 16).scale(1, 1, 0.5), materials.eye(), "pupil");
@@ -231,19 +208,9 @@ function nimbus(): Blueprint {
 
 const BLUEPRINTS: Record<PlushName, () => Blueprint> = { Mochi: mochi, Pip: pip, Bolt: bolt, Nimbus: nimbus };
 
-// ---------------------------------------------------------------------------
-// Template -> character
-// ---------------------------------------------------------------------------
-
 type Template = { object: THREE.Object3D; excite: ExciteConfig };
 const templates = new Map<PlushName, Template>();
 
-/**
- * root (x, lift, z, pitch/yaw/roll)
- *   turn: body turns and bends about the body centre
- *     squash: scales from the ground up
- *       body, face (eye offsets, blink), top (hat lift/tilt)
- */
 function template(name: PlushName): Template {
   const cached = templates.get(name);
   if (cached) return cached;
@@ -316,7 +283,6 @@ export function buildPlush(name: PlushName): Character {
         top.rotation.z = p.hatTilt;
       }
     },
-    // Geometry and materials belong to the shared template.
     dispose() {},
   };
 }

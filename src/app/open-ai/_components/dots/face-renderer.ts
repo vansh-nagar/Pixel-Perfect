@@ -1,14 +1,3 @@
-/**
- * Draws dots characters onto plain 2D canvases, so they can live inside CSS 3D scenes.
- *
- * One WebGL renderer is shared by every face. Each face has its own scene (the dots
- * hero's lights, one furry character) and, per frame, renders into the shared canvas
- * and is copied onto its own 2D canvas with drawImage. The 2D canvas is ordinary DOM,
- * so CSS transforms (perspective, rotateY, bob) apply to the character too.
- *
- * Rendering matches the dots hero: 4x MSAA half-float target, then a resolve pass with
- * ACES tone mapping (exposure 0.8) and the site's saturation grade.
- */
 import * as THREE from "three";
 import { RectAreaLightUniformsLib } from "three/examples/jsm/lights/RectAreaLightUniformsLib.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -29,20 +18,16 @@ const MODEL_URLS: Record<CharacterName, string> = {
   Todd: "/open-ai/dots/todd.glb",
 };
 
-/** Character height and vertical offset in the face's [-1, 1] frame. Leaves headroom for the hop. */
 const FRAMING = { height: 0.96, y: -0.12 };
 
 export type CharacterModels = Record<CharacterName, THREE.Object3D>;
 export type Look = { x: number; y: number };
 
-/** Anything a face can draw: the GLB cast (via dotsCharacter) or the custom plush cast. */
 export type Character = {
   scene: THREE.Object3D;
   center: THREE.Vector3;
   size: THREE.Vector3;
-  /** Plays the hop (Todd: a look-around). The ambient idle loops after it. */
   excite(): void;
-  /** Advances motion by `delta` seconds and poses the character, eyes toward `look`. */
   update(delta: number, look: Look): void;
   dispose(): void;
 };
@@ -54,7 +39,6 @@ export async function loadCharacterModels(): Promise<CharacterModels> {
   return { Alfred, Felipe, Iggy, Todd };
 }
 
-// The dots hero light rig, at viewport scale 1.
 function addLights(scene: THREE.Scene) {
   const aim = (light: THREE.Object3D) => light.lookAt(0, 0, 0);
   scene.add(new THREE.AmbientLight(0xffffff, 1.8));
@@ -144,7 +128,6 @@ function createResolver(gl: THREE.WebGLRenderer, samples: number) {
   };
 }
 
-/** Wraps one of the four openai.com characters as a `Character`. */
 export function dotsCharacter(source: THREE.Object3D, name: CharacterName): Character {
   const character = buildCharacter(source, name);
   let revealClock: number | null = null;
@@ -172,9 +155,7 @@ export function dotsCharacter(source: THREE.Object3D, name: CharacterName): Char
 }
 
 export type Face = {
-  /** Plays the character's hop (Todd: a look-around). Ambient idle loops after it. */
   excite(): void;
-  /** Advances motion by `delta` seconds and draws the character onto `ctx`. */
   draw(ctx: CanvasRenderingContext2D, delta: number, look: Look): void;
   dispose(): void;
 };

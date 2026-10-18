@@ -11,15 +11,10 @@ gsap.registerPlugin(useGSAP);
 const IDLE_MS = 5000;
 const LIFT = 14, STEP = 0.05;
 
-// A wizard's tower on a floating island. Hovering a floor lifts every floor above it, staggered upwards
-// (Linear's lift stack); the hovered floor keeps its white edge and the rest dim. A click switches the
-// windows' lights. The hit areas are the floors' rest silhouettes, so a lifting floor never moves out from
-// under the pointer.
 export function TowerScene() {
   const scene = useScene({ playOnView: true });
   const { rootRef, sectionRef, introRef } = scene;
 
-  // ── Intro: the stage rises, then the tower is stacked floor by floor onto the island.
   useGSAP(
     () => {
       const el = rootRef.current;
@@ -65,7 +60,6 @@ export function TowerScene() {
       svgs.forEach((s) => s.classList.toggle("night"));
     });
 
-    // idle ghost: walk up the floors, then let go
     kit.ghost(async () => {
       for (const i of [0, 1, 2]) {
         if (!kit.idle()) break;

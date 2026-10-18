@@ -1,11 +1,5 @@
 import { Navbar } from "@/components/mine/landing-page/navbar";
 
-// Shared decorative shell for /blocks and /blocks/[category]; layouts persist
-// across navigations so the frame never remounts.
-// NOTE: no `overflow-y-scroll` here. This element never scrolls (it grows to
-// fit its content — the document scrolls), but an overflow value still makes
-// it the nearest scrolling ancestor for `position: sticky` descendants, which
-// silently breaks the sticky category sidebar in tabs-navigation.tsx.
 export default function BlocksLayout({
   children,
 }: {

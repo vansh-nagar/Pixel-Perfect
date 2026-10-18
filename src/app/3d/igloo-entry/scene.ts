@@ -35,9 +35,7 @@ import * as S from "./shaders";
 
 const ASSETS = "/_study/igloo";
 
-/** Resting scroll progress of this section (their `finalScrollAutocenter`). */
 const FINAL_PROGRESS = 0.76;
-/** PORT: the section arrives from here when it scrolls into view (stands in for the page scroll). */
 const ARRIVAL_PROGRESS = 0.58;
 
 const LINKS = [
@@ -61,17 +59,12 @@ const LINKS = [
   },
 ];
 
-// Layout constants from their config (`Be`).
 const BREAKPOINT_W = 1600;
 const BREAKPOINT_H = 800;
 const BREAKPOINT_MOBILE = 640;
 const TOP_MARGIN = 90;
 const TOP_MARGIN_LOW = 45;
 const TOP_MARGIN_MOBILE = 25;
-
-// ---------------------------------------------------------------------------
-// Helpers (their `ie` utils)
-// ---------------------------------------------------------------------------
 
 type Clock = { time: number; ratio: number; deltaMs: number };
 
@@ -150,7 +143,6 @@ function shaderMaterial(
   });
 }
 
-/** Mirrors `le.load(url, mode)`. */
 function applyMode(texture: THREE.Texture, mode: string) {
   if (mode.includes("repeat"))
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
@@ -200,11 +192,6 @@ type Textures = Awaited<ReturnType<typeof loadTextures>>;
 const loadGeometry = (file: string) =>
   loadDrc(`${ASSETS}/geometries/${file}`).then((g) => g.clone());
 
-// ---------------------------------------------------------------------------
-// Room parts
-// ---------------------------------------------------------------------------
-
-/** oF — glowing ring on the ceiling above the pedestal. */
 function createRoomRing(globals: Globals) {
   const geometry = new THREE.PlaneGeometry(1, 1);
   geometry.rotateX(Math.PI * 0.5);
@@ -222,7 +209,6 @@ function createRoomRing(globals: Globals) {
   return { mesh };
 }
 
-/** hF — the shattered stone pedestal floor. */
 async function createFloor(globals: Globals, tex: Textures) {
   const material = shaderMaterial(
     globals,
@@ -249,7 +235,6 @@ async function createFloor(globals: Globals, tex: Textures) {
   return { mesh, material, state: { additionalTime: 0 } };
 }
 
-/** uF — the triangle-patterned force field cylinder around the character. */
 function createForceField(globals: Globals, tex: Textures) {
   const geometry = new THREE.CylinderGeometry(1, 1, 3, 64, 6, true);
   geometry.translate(0, 3 * 0.5, 0);
@@ -278,7 +263,6 @@ function createForceField(globals: Globals, tex: Textures) {
   return { mesh, material };
 }
 
-/** dF — the inside of a huge sphere: the foggy gradient walls with twinkling dots. */
 function createLightRoom(globals: Globals, tex: Textures) {
   const material = shaderMaterial(
     globals,
@@ -302,7 +286,6 @@ function createLightRoom(globals: Globals, tex: Textures) {
   return { mesh };
 }
 
-/** fF — four cylinders of blurry scrolling text around the room. */
 async function createTextCylinder(globals: Globals, tex: Textures) {
   const geometry = await loadGeometry("blurrytext_cylinder.drc");
   const inner = shaderMaterial(
@@ -360,7 +343,6 @@ async function createTextCylinder(globals: Globals, tex: Textures) {
   };
 }
 
-/** TF — the smoke ring under the ceiling. */
 async function createCeilingSmoke(globals: Globals, tex: Textures) {
   const material = shaderMaterial(
     globals,
@@ -382,7 +364,6 @@ async function createCeilingSmoke(globals: Globals, tex: Textures) {
   return { mesh };
 }
 
-/** IF — the smoke ring hugging the floor. */
 async function createGroundSmoke(globals: Globals, tex: Textures) {
   const material = shaderMaterial(
     globals,
@@ -406,7 +387,6 @@ async function createGroundSmoke(globals: Globals, tex: Textures) {
   return { mesh, material };
 }
 
-/** BF — 60 drifting, flickering light motes. */
 function createAmbientParticles(globals: Globals) {
   const count = 60;
   const scale = [2.5, 0.5, 2.5];
@@ -441,10 +421,6 @@ function createAmbientParticles(globals: Globals) {
   mesh.frustumCulled = false;
   return { mesh, material };
 }
-
-// ---------------------------------------------------------------------------
-// wF — 150k GPU particles attracted to a signed-distance volume
-// ---------------------------------------------------------------------------
 
 const textureSizeParticles = (n: number) =>
   Math.max(Math.ceil(Math.sqrt(n) / 4) * 4, 4);
@@ -501,7 +477,6 @@ function createVolumeParticles(
   const orig = dataTexture(start.slice());
   const lightPos = new THREE.Vector3(-0.75, 1, -0.1);
 
-  // `n3("points", count)`: empty positions + per-particle rand and texel uv.
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute(
     "position",
@@ -556,7 +531,6 @@ function createVolumeParticles(
   mesh.position.set(0, -9.785, 0);
   mesh.updateMatrixWorld();
 
-  // Ping-pong MRT targets: texture 0 = position (+shadow in w), texture 1 = velocity (+speed in w).
   const rtOptions = {
     count: 2,
     wrapS: THREE.ClampToEdgeWrapping,
@@ -576,7 +550,6 @@ function createVolumeParticles(
   quad.frustumCulled = false;
   quadScene.add(quad);
 
-  // Seed both targets with the initial textures (their generated MRT copy shader).
   const copy = new THREE.ShaderMaterial({
     uniforms: {
       tTexture1: { value: initialPos },
@@ -622,7 +595,6 @@ function createVolumeParticles(
 
   let current = 0;
   const clearColor = new THREE.Color();
-  /** `compute()`: one sim step into the other target, then hand both textures to the renderer. */
   const compute = (camera: THREE.Camera) => {
     sim.uniforms.uModelMatrix.value.copy(mesh.matrixWorld);
     sim.uniforms.uViewMatrix.value.copy(camera.matrixWorldInverse);
@@ -664,10 +636,6 @@ function createVolumeParticles(
     },
   };
 }
-
-// ---------------------------------------------------------------------------
-// yF — link carousel UI: arrows (gF), bracket box (xF), link titles (vF)
-// ---------------------------------------------------------------------------
 
 function createArrows(group: THREE.Group) {
   const s = 0.065;
@@ -726,7 +694,6 @@ function createArrows(group: THREE.Group) {
   mesh.frustumCulled = false;
   group.add(mesh);
 
-  // Invisible hover targets.
   const plane = new THREE.PlaneGeometry(s, s).rotateY(Math.PI);
   const planeRight = new THREE.Mesh(plane.clone().translate(-s * 0.5, 0, 0));
   const planeLeft = new THREE.Mesh(plane.clone().translate(s * 0.5, 0, 0));
@@ -780,7 +747,6 @@ function createArrows(group: THREE.Group) {
   };
 }
 
-/** Si.positionUI: place a mesh at screen pixel (x, y), sized in pixels, on a plane facing the camera. */
 const uiVec = new THREE.Vector3();
 const viewSize = new THREE.Vector2();
 function positionUI(
@@ -880,10 +846,6 @@ function createLinkTexts(globals: Globals, tex: Textures, font: MsdfFont) {
   });
   return { group, meshes };
 }
-
-// ---------------------------------------------------------------------------
-// Camera (their `Jo`, with this scene's lerps, roll displacement and baseUp path)
-// ---------------------------------------------------------------------------
 
 class CameraRig {
   camera = new THREE.PerspectiveCamera(25, 1, 0.1, 1000);
@@ -1005,19 +967,13 @@ class CameraRig {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Scene assembly
-// ---------------------------------------------------------------------------
-
 export type IglooEntry = {
-  /** Plays the arrival into the room. Safe to call once. */
   arrive(): void;
   setSize(width: number, height: number): void;
   setPointer(clientX: number, clientY: number, rect: DOMRect): void;
   click(clientX: number, clientY: number, rect: DOMRect): void;
   key(key: string): void;
   render(deltaMs: number): void;
-  /** Cursor the canvas should show for the current hover. */
   cursor(): string;
   dispose(): void;
 };
@@ -1065,7 +1021,6 @@ export async function createIglooEntry(
   ]);
   const particles = createVolumeParticles(globals, tex, fluid, renderer);
 
-  // UI hangs off the particle mesh (arrows) or is placed in screen space (box, texts).
   const uiGroup = new THREE.Group();
   uiGroup.name = "ui";
   particles.mesh.add(uiGroup);
@@ -1087,7 +1042,6 @@ export async function createIglooEntry(
     texts.group,
   );
 
-  // Composite (DF) → bloom (the hero's settings: the site adds one bloom pass, first scene wins) → SMAA.
   const compositeMaterial = new THREE.ShaderMaterial({
     uniforms: {
       ...globals,
@@ -1125,7 +1079,6 @@ export async function createIglooEntry(
     new EffectPass(rig.camera, new SMAAEffect({ preset: SMAAPreset.HIGH })),
   );
 
-  // createTimeline — kept for the parts that exist; rings/plasma/tunnel/snow are hidden past 0.53.
   const state = {
     progress: ARRIVAL_PROGRESS,
     timelinePosition: new THREE.Vector3(0, 1.5, -2),
@@ -1256,7 +1209,6 @@ export async function createIglooEntry(
     { value: 1, duration: 3, ease: "power2.out" },
     4.4,
   );
-  // Portal flashes as the camera passes each ring (all finished before the resting state).
   const squareAttr = (force?: number) =>
     compositeMaterial.uniforms.uSquareAttr.value.set(
       Math.random() * 25.424,
@@ -1269,7 +1221,6 @@ export async function createIglooEntry(
     [2.95, 0.4],
     [3.8, 0.6],
   ] as const) {
-    // s() → force 1, s(true) while scrolling forward → 0.5
     tl.call(() => squareAttr(at === 3.8 ? 0.5 : 1), undefined, at);
     tl.fromTo(
       ring,
@@ -1287,7 +1238,6 @@ export async function createIglooEntry(
   tl.call(() => squareAttr(0.5), undefined, 4.9);
   tl.progress(1).progress(0).progress(state.progress);
 
-  // Input state (their `$t`): pointer in -1..1 and 0..1, plus decaying velocity.
   const pointer11 = new THREE.Vector2();
   const velocity = new THREE.Vector2();
   const lastPointer01 = new THREE.Vector2(0.5, 0.5);
@@ -1490,7 +1440,6 @@ export async function createIglooEntry(
         .clampScalar(-1, 1);
       if (velocity.length() < 0.001) velocity.set(0, 0);
 
-      // UF.update
       tl.progress(state.progress);
       textCylinder.mesh4.rotation.y =
         state.timelineAdditional.upRotation * 0.65;
@@ -1519,7 +1468,6 @@ export async function createIglooEntry(
         Math.random() * 12.5,
       );
 
-      // wF.update: fluid, slow spin, interaction strength by progress.
       fluid.update(
         renderer,
         clock.time,
@@ -1530,7 +1478,6 @@ export async function createIglooEntry(
       particles.sim.uniforms.uInteractForce.value =
         smoothstep(0.45, 0.65, state.progress) *
         (1 - smoothstep(0.8, 0.93, state.progress));
-      // initializeShape: an extra sim step per frame for the first second, then reveal.
       if (particles.warmupMs <= 1000) {
         particles.warmupMs += deltaMs;
         particles.compute(rig.camera);
@@ -1539,7 +1486,6 @@ export async function createIglooEntry(
       }
       particles.compute(rig.camera);
 
-      // yF.update: UI enabled between 0.64 and 0.9, laid out from the screen size.
       if (state.progress > 0.64 && state.progress < 0.9) enableUI();
       else disableUI();
       const small = screen.w < BREAKPOINT_W || screen.h < BREAKPOINT_H;

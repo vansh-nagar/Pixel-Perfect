@@ -42,7 +42,7 @@ const COLOR_SWATCHES = [
 const computeView = (size: number, pad: number) =>
   (size - 1) * STEP + pad * 2;
 
-type Cell = 0 | 1 | 2; // 0 = empty, 1 = solid, 2 = semi (40% alpha)
+type Cell = 0 | 1 | 2;
 
 const TOOLS: { id: "paint" | "semi" | "erase"; label: string; hint: string }[] =
   [
@@ -131,7 +131,7 @@ export default function PixelIconToolPage() {
     if (/^<\?xml|^<svg/i.test(t)) {
       return `data:image/svg+xml;utf8,${encodeURIComponent(t)}`;
     }
-    return t; // treat as URL (http(s):, data:, blob:, /path)
+    return t;
   }, [overlay]);
 
   const drawing = useRef(false);

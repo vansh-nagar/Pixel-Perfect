@@ -1,17 +1,12 @@
 import { Circle } from "lucide-react";
 import StarBorder from "./star-border";
 
-/**
- * The window-chrome bar that titles each landing-page section: three dots on
- * the left, the section label centred, and the corner stars.
- */
 export const SectionChrome = ({
   label,
   bordered = true,
   className = "",
 }: {
   label: string;
-  /** Draws the divider under the bar. Off for sections that own their own. */
   bordered?: boolean;
   className?: string;
 }) => {

@@ -1,17 +1,7 @@
-/**
- * Decoder for igloo.inc's raw `.drc` geometry files.
- *
- * These aren't glTF. Each file is a bare Draco buffer whose metadata holds an `info` JSON
- * entry: `{ type, attributes: [[name, typedArrayIndex], ...] }`. Attribute i in that list
- * has Draco unique id i, so names like `centr`, `rand`, `emission` and `batchId` survive.
- * three's DRACOLoader can't read this, so this mirrors the site's own decoder worker.
- */
-
 import * as THREE from "three";
 
 const DECODER_PATH = "/_study/libs/draco/";
 
-/** Typed-array constructors, indexed exactly like the site's worker. */
 const ARRAY_TYPES = [
   Int8Array,
   Uint8Array,
@@ -155,7 +145,6 @@ function decode(draco: DracoModule, bytes: ArrayBuffer): THREE.BufferGeometry {
 
 const cache = new Map<string, Promise<THREE.BufferGeometry>>();
 
-/** Loads and decodes one `.drc` file. Results are cached by URL; clone before mutating. */
 export function loadDrc(url: string): Promise<THREE.BufferGeometry> {
   let promise = cache.get(url);
   if (!promise) {

@@ -12,7 +12,6 @@ export async function POST(request: Request) {
   if (process.env.NODE_ENV !== "development" || !localHosts.includes(url.hostname)) {
     return new Response(null, { status: 404 });
   }
-  // A remote page must never be able to launch a browser on the developer's machine.
   if (request.headers.get("origin") !== url.origin) {
     return Response.json({ error: "Use the recorder from the local playground." }, { status: 403 });
   }

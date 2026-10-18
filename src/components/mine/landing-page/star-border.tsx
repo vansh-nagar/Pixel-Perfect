@@ -3,12 +3,6 @@ import { cn } from "@/lib/utils";
 const STAR_PATH =
   "M15 0 C19 9 21 11 30 15 C21 19 19 21 15 30 C11 21 9 19 0 15 C9 11 11 9 15 0 Z";
 
-/**
- * Hidden sprite that holds the corner-star geometry once for the whole page.
- * Render a single <StarSprite /> near the root (it's in the root layout) so
- * every <StarBorder /> can reference it via <use> instead of re-declaring the
- * path on each of its four corners.
- */
 export const StarSprite = () => (
   <svg
     aria-hidden

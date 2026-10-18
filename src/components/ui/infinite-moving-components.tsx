@@ -30,7 +30,7 @@ export const ComponentTransition = ({
 
         setCurrentIdx(nextIdx);
         setFade(true);
-      }, 300); // fade out duration
+      }, 300);
     }, interval);
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);

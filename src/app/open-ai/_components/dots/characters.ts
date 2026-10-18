@@ -1,13 +1,3 @@
-/**
- * Character setup and procedural motion for the dots hero, ported 1:1 from openai.com.
- *
- * The GLBs ship with rigs but no animation clips. Every movement is computed here:
- *  - Alfred, Felipe and Iggy share a pose-channel rig (lift, yaw, squash, bend, eye
- *    offset, accessory tilt...) driven by two clips: "excite" (a 2.2-2.4 s hop that
- *    plays when the character is revealed) and "ambient" (a 6 s loop it settles into).
- *  - Todd has his own simpler rig and a 2.5 s look-around on reveal, then holds still.
- *  - "O" is the dots logo: a plain torus.
- */
 import * as THREE from "three";
 import { clone as cloneSkinned } from "three/examples/jsm/utils/SkeletonUtils.js";
 
@@ -19,10 +9,6 @@ export type SelectableName = (typeof SELECTABLE_CHARACTER_NAMES)[number];
 export const nextSelectable = (name: SelectableName): SelectableName =>
   SELECTABLE_CHARACTER_NAMES[(SELECTABLE_CHARACTER_NAMES.indexOf(name) + 1) % SELECTABLE_CHARACTER_NAMES.length];
 
-/**
- * Saturation boost appended after tone mapping. Pushes low-saturation colours
- * outward along the HSL chroma axis: gain = (1 - (1 - s)^2) / s.
- */
 export const COLOR_GRADE = /* glsl */ `
   float dotsHi = max(max(gl_FragColor.r, gl_FragColor.g), gl_FragColor.b);
   float dotsLo = min(min(gl_FragColor.r, gl_FragColor.g), gl_FragColor.b);
@@ -36,10 +22,6 @@ export const COLOR_GRADE = /* glsl */ `
   }
 `;
 
-// ---------------------------------------------------------------------------
-// Easing / keyframe helpers
-// ---------------------------------------------------------------------------
-
 type Keys = [number, number][];
 
 const smooth = (x: number) => {
@@ -50,16 +32,12 @@ const smoother = (x: number) => {
   const t = Math.max(0, Math.min(1, x));
   return Math.max(0, Math.min(1, t * t * t * (t * (6 * t - 15) + 10)));
 };
-/** Damped spring settle used to hand Felipe's flip back to rest. */
 const settle = (t: number, from: number, decay = 12, freq = 21) =>
   t < 0 ? from : from * Math.exp(-decay * t) * (Math.cos(freq * t) + (decay / freq) * Math.sin(freq * t));
-/** 0 → 1 over [a, b], held, then 1 → 0 over [c, d]. */
 const window4 = (t: number, a: number, b: number, c: number, d: number) =>
   smooth((t - a) / (b - a)) * (1 - smooth((t - c) / (d - c)));
-/** Triangle-ish bump: 0 at a, 1 at b, 0 at c (smoothstep sides). */
 const bump = (t: number, a: number, b: number, c: number) =>
   t < a || t > c ? 0 : t < b ? smooth((t - a) / (b - a)) : 1 - smooth((t - b) / (c - b));
-/** Smoothstep between keyframes. */
 const eased = (t: number, keys: Keys) => {
   if (t <= keys[0][0]) return keys[0][1];
   for (let i = 1; i < keys.length; i++)
@@ -70,7 +48,6 @@ const eased = (t: number, keys: Keys) => {
     }
   return keys[keys.length - 1][1];
 };
-/** Monotone cubic Hermite (Fritsch-Carlson style harmonic tangents). */
 const hermite = (t: number, keys: Keys) => {
   if (t <= keys[0][0]) return keys[0][1];
   const tangent = (i: number) => {
@@ -91,12 +68,7 @@ const hermite = (t: number, keys: Keys) => {
     }
   return keys[keys.length - 1][1];
 };
-/** Shortest signed angle from a to b. */
 const angleDelta = (a: number, b: number) => Math.atan2(Math.sin(b - a), Math.cos(b - a));
-
-// ---------------------------------------------------------------------------
-// Materials
-// ---------------------------------------------------------------------------
 
 function createMaterialCloner(character: CharacterName) {
   const cache = new Map<THREE.Material, THREE.Material>();
@@ -125,7 +97,6 @@ function createMaterialCloner(character: CharacterName) {
           if (material instanceof THREE.MeshPhysicalMaterial) material.specularIntensity = 1;
         }
         if (source.name === "Eyes · deep charcoal" || /^Eyes/.test(source.name)) material.roughness = 0.55;
-        // Grade only applies when the material tone maps itself (direct-to-screen path).
         material.onBeforeCompile = (shader) => {
           shader.fragmentShader = shader.fragmentShader.replace(
             "#include <colorspace_fragment>",
@@ -146,10 +117,6 @@ function createMaterialCloner(character: CharacterName) {
 const isBone = (o: THREE.Object3D): o is THREE.Bone => (o as THREE.Bone).isBone === true;
 const isMesh = (o: THREE.Object3D): o is THREE.Mesh => (o as THREE.Mesh).isMesh === true;
 const isSkinned = (o: THREE.Object3D): o is THREE.SkinnedMesh => (o as THREE.SkinnedMesh).isSkinnedMesh === true;
-
-// ---------------------------------------------------------------------------
-// Pose channels
-// ---------------------------------------------------------------------------
 
 const DEFAULT_POSE = Object.freeze({
   x: 0,
@@ -180,7 +147,6 @@ type Channel = keyof Pose;
 const ANGULAR = new Set<Channel>(["yaw", "pitch", "roll", "bodyYaw", "bodyPitch", "hatTilt", "glassesTilt", "bowtieTilt"]);
 
 type RigName = "alfred" | "felipe" | "jojo";
-/** Shape of the "excite" hop: seconds, jump height (model units), squash, lean, extra spin (rad). */
 export type ExciteConfig = { duration: number; jump: number; squash: number; lean: number; spin: number };
 const EXCITE: Record<RigName, ExciteConfig> = {
   alfred: { duration: 2.2, jump: 0.22, squash: 0.06, lean: 0.11, spin: 0 },
@@ -193,7 +159,6 @@ const AXIS_X = new THREE.Vector3(1, 0, 0);
 const AXIS_Y = new THREE.Vector3(0, 1, 0);
 const AXIS_Z = new THREE.Vector3(0, 0, 1);
 
-/** Applies pose channels to the bones. Accessories and the face stay rigid. */
 function createRig(root: THREE.Object3D, name: RigName) {
   root.updateWorldMatrix(true, true);
   const bonesByName = new Map<string, THREE.Bone>();
@@ -245,7 +210,6 @@ function createRig(root: THREE.Object3D, name: RigName) {
   const stretch = new THREE.Matrix4();
   const back = new THREE.Matrix4();
 
-  // Rigid accessory placement: follow the (un-scaled) control, then nudge/tilt it.
   function placeAccessory(
     boneName: string,
     { x = 0, y = 0, z = 0, tilt = 0, height = 1 }: { x?: number; y?: number; z?: number; tilt?: number; height?: number } = {},
@@ -352,7 +316,6 @@ type Clip = {
   preserve?: Channel[];
 };
 
-/** "plush" = the generic clips (no per-character overrides), used by the custom characters. */
 function createClips(name: RigName | "plush", cfg: ExciteConfig): Record<"ambient" | "excite", Clip> {
   const clips: Record<"ambient" | "excite", Clip> = {
     ambient: {
@@ -398,7 +361,6 @@ function createClips(name: RigName | "plush", cfg: ExciteConfig): Record<"ambien
           bowtieTilt: 0.15 * eased(a, [[0, 0], [0.4, -1], [0.76, 0.8], [1.18, -0.4], [1.76, 0], [2.2, 0]]),
         };
         if (name === "felipe") {
-          // Felipe's reveal is a hand-keyed backflip (degrees for bodyRoll).
           pose.bodyRoll =
             (Math.PI / 180) *
             hermite(r, [[0, 0], [0.133333, 0], [0.3, -13.8789], [0.4, -8.6567], [0.5, 14.1311], [0.633333, 97.4998], [0.766667, 151.2584], [0.866667, 166.273], [1, 175.8093], [1.133333, 179.8524], [1.266667, 180.9174], [1.433333, 180.5718], [1.666667, 180], [2.4, 180]]);
@@ -436,7 +398,6 @@ function createClips(name: RigName | "plush", cfg: ExciteConfig): Record<"ambien
           pose.hatTilt = hermite(r, [[0, 0], [0.3, 0.01472], [0.4, 0.01745], [0.5, -0.26054], [0.633333, -0.52484], [0.766667, -0.48741], [0.866667, -0.3229], [1, -0.05369], [1.133333, -0.01945], [1.266667, -0.05307], [1.433333, -0.0194], [1.666667, 0]]);
         }
         if (name === "alfred") {
-          // Alfred's eyes are closed at rest; they pop open for the hop only.
           pose.eyeOpen = smoother((r - 0.04) / 0.28) * (1 - smoother((r - 1.52) / 0.30000000000000004));
           pose.blink = 0;
         }
@@ -454,7 +415,6 @@ function createClips(name: RigName | "plush", cfg: ExciteConfig): Record<"ambien
   return clips;
 }
 
-/** Clip player with an 0.18 s smoothstep cross-blend between clips. Produces pose channels only. */
 export function createPosePlayer(name: RigName | "plush", cfg: ExciteConfig = EXCITE[name as RigName]) {
   const clips = createClips(name, cfg);
   const values: Pose = { ...DEFAULT_POSE };
@@ -519,7 +479,6 @@ export function createPosePlayer(name: RigName | "plush", cfg: ExciteConfig = EX
   };
 }
 
-/** The pose player driving a GLB character's bones. */
 function createMotion(root: THREE.Object3D, name: RigName) {
   const rig = createRig(root, name);
   const player = createPosePlayer(name);
@@ -535,10 +494,6 @@ function createMotion(root: THREE.Object3D, name: RigName) {
     },
   };
 }
-
-// ---------------------------------------------------------------------------
-// Todd: separate rig, one-shot look-around on reveal
-// ---------------------------------------------------------------------------
 
 const TODD_REST = { rootNod: 0, eyeX: 0, rootRoll: 0, rootYaw: 0, eyeOpenLeft: 1, eyeOpenRight: 1 };
 type ToddPose = typeof TODD_REST;
@@ -572,10 +527,6 @@ export function sampleToddReveal(seconds: number): ToddPose {
   for (const [channel, curve] of TODD_REVEAL) pose[channel] = curve(t);
   return pose;
 }
-
-// ---------------------------------------------------------------------------
-// Public character objects
-// ---------------------------------------------------------------------------
 
 type BaseCharacter = {
   scene: THREE.Object3D;
@@ -686,7 +637,6 @@ export function buildCharacter(source: THREE.Object3D, character: CharacterName)
     center,
     size,
     motion,
-    // Cursor look: shift the face toward the pointer on top of the clip pose.
     poseHero(look) {
       const eyeX = values.eyeX;
       const eyeY = values.eyeY;
@@ -709,7 +659,6 @@ export function buildCharacter(source: THREE.Object3D, character: CharacterName)
   };
 }
 
-/** The dots logo "O": a flat-shaded torus with the logo's ring proportions. */
 export function buildLogo(): LogoCharacter {
   const thickness = (28 - 16.9227) / 56;
   const geometry = new THREE.TorusGeometry((0.5 + thickness) / 2, (0.5 - thickness) / 2, 16, 96);

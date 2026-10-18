@@ -1,6 +1,5 @@
 import { generatePageMetadata } from "@/lib/seo/metadata";
 
-// Server wrapper: the tutorial page is a client component and can't export metadata.
 export const metadata = generatePageMetadata({
   title: "Component Tutorials",
   description:

@@ -1,19 +1,8 @@
 "use client";
 
-/**
- * Eye glyphs for the faces, drawn as plain SVG geometry.
- *
- * Every glyph lives in a 55-unit-tall box (the height of one line of the
- * original's 46px type) and has an `advance` width. The first seven redraw
- * the original DevDay eyes (which openai.com renders from its proprietary
- * typeface); the rest are glyphs for the custom faces, drawn to the same
- * weight (~4-5 unit strokes) and centred on the same x-height line (y≈32.5).
- */
-
 import { memo, type ReactNode } from "react";
 
 export type EyeGlyph =
-  // originals
   | "^"
   | "o"
   | "+"
@@ -21,7 +10,6 @@ export type EyeGlyph =
   | "<"
   | "–"
   | "*"
-  // custom
   | "heart"
   | "$"
   | "x"
@@ -79,7 +67,6 @@ export const EYE_GLYPHS: Record<EyeGlyph, { advance: number; shape: ReactNode }>
     ),
   },
 
-  // --- custom faces ---
   heart: {
     advance: 28,
     shape: (
@@ -154,7 +141,6 @@ export const EYE_GLYPHS: Record<EyeGlyph, { advance: number; shape: ReactNode }>
   },
 };
 
-/** One eye: an SVG the width of the eye box, glyph centred by its advance. */
 export const EyeSvg = memo(function EyeSvg({
   character,
   width,

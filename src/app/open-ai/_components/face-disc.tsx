@@ -1,10 +1,5 @@
 "use client";
 
-/**
- * A flat face as a carousel disc: the face's circle is the disc, its eyes follow the
- * cursor, and the play action registered with the carousel runs one of its animations.
- */
-
 import { useEffect, useRef, useState } from "react";
 import { DevdayAgent, type AgentAnimation } from "./devday-agent";
 import type { RosterFace } from "./face-roster";
@@ -19,11 +14,8 @@ export function FaceDisc({
   register,
 }: {
   entry: RosterFace;
-  /** Disc diameter in px; the face circle is drawn this size. */
   diameter: number;
-  /** Distance from the card edge to the disc. */
   inset: number;
-  /** False while off-screen: pauses the keyframes and the cursor gaze. */
   active: boolean;
   register: (play: PlayFace | null) => void;
 }) {
@@ -40,7 +32,6 @@ export function FaceDisc({
     return () => register(null);
   }, [register, entry]);
 
-  // The agent canvas is 190x166 per 100px of face, with the circle at (40, 32).
   const scale = diameter / 100;
   return (
     <DevdayAgent

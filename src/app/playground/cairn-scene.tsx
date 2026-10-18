@@ -1,36 +1,19 @@
 "use client";
 
-/**
- * Cairn: a scroll-driven scene on a snowfield, in the style of 3D studio sites.
- *
- * Scroll timeline (0 → 1 across a 500vh section, canvas pinned):
- *  0.00–0.22  Blueprint: the tower as glowing wireframe inside a drifting constellation.
- *  0.12–0.45  Assembly: bricks fly in from the sky, course by course, bottom up.
- *  0.45–0.75  Breath: the tower swells apart and light pours through every seam.
- *  0.75–1.00  Rest: the bricks close, the glow sinks, the crystal keeps turning.
- * The camera orbits and dollies along the same timeline; the pointer adds parallax.
- */
-
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Sparkles } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
 const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
 const smooth = (a: number, b: number, x: number) => {
   const t = clamp01((x - a) / (b - a));
   return t * t * (3 - 2 * t);
 };
-/** 0 → 1 over [a, b], held, back to 0 over [c, d]. */
 const bump = (x: number, a: number, b: number, c: number, d: number) => smooth(a, b, x) * (1 - smooth(c, d, x));
 const easeOutBack = (t: number) => 1 + 2.2 * Math.pow(t - 1, 3) + 1.2 * Math.pow(t - 1, 2);
 
-/** Writes a shared ref from inside a frame loop. */
 function write<T>(ref: React.RefObject<T>, value: T) {
   ref.current = value;
 }
@@ -40,7 +23,6 @@ function seeded(seed: number) {
   return () => (s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296;
 }
 
-// Value-noise fbm, enough for rolling snow drifts and far ridges.
 const hash = (x: number, y: number) => {
   const h = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
   return h - Math.floor(h);
@@ -72,15 +54,11 @@ function fbm(x: number, y: number, octaves = 5) {
 
 const PALETTE = { sky: "#cdd1dc", snow: "#e6e8ef", stone: "#9ea3b0", glow: "#f4f7ff" };
 
-// ---------------------------------------------------------------------------
-// Terrain
-// ---------------------------------------------------------------------------
-
 function terrainHeight(x: number, z: number) {
   const d = Math.hypot(x, z);
   const drifts = (fbm(x * 0.11, z * 0.11, 6) - 0.5) * 3.2;
   const ridges = Math.pow(fbm(x * 0.04 + 11, z * 0.04 - 7, 6), 1.6) * 26 * smooth(9, 30, d);
-  const mound = 0.55 * (1 - smooth(1.5, 6, d)); // the tower stands on a low rise
+  const mound = 0.55 * (1 - smooth(1.5, 6, d));
   return drifts * smooth(2.5, 8, d) + ridges + mound;
 }
 
@@ -102,10 +80,6 @@ function Terrain({ progress }: { progress: React.RefObject<number> }) {
     </mesh>
   );
 }
-
-// ---------------------------------------------------------------------------
-// Tower
-// ---------------------------------------------------------------------------
 
 type Brick = {
   home: THREE.Vector3;
@@ -132,7 +106,6 @@ function makeBricks(): Brick[] {
     const offset = c % 2 ? step / 2 : 0;
     for (let k = 0; k < count; k++) {
       const angle = offset + k * step;
-      // A doorway on the camera side for the lower three courses.
       if (c < 3 && Math.abs(Math.atan2(Math.sin(angle - Math.PI / 2), Math.cos(angle - Math.PI / 2))) < 0.36) continue;
       const home = new THREE.Vector3(r * Math.cos(angle), BRICK.height * (c + 0.5), r * Math.sin(angle));
       const out = new THREE.Vector3(Math.cos(angle), 0, Math.sin(angle));
@@ -158,7 +131,6 @@ function Tower({ progress }: { progress: React.RefObject<number> }) {
   const crystal = useRef<THREE.Mesh>(null);
   const crystalLight = useRef<THREE.PointLight>(null);
 
-  // Unit box scaled per brick; the wireframe ghost is the same bricks at home, as edges.
   const box = useMemo(() => new RoundedBoxGeometry(1, BRICK.height - BRICK.gap, BRICK.depth, 3, 0.06), []);
   const ghost = useMemo(() => {
     const edges = new THREE.EdgesGeometry(box);
@@ -175,7 +147,6 @@ function Tower({ progress }: { progress: React.RefObject<number> }) {
     return g;
   }, [box, bricks]);
 
-  // Each stone a slightly different grey, the upper courses frosted lighter.
   useEffect(() => {
     const random = seeded(3);
     const color = new THREE.Color();
@@ -196,13 +167,11 @@ function Tower({ progress }: { progress: React.RefObject<number> }) {
     const t = progress.current;
     const breath = bump(t, 0.45, 0.6, 0.66, 0.78);
     bricks.forEach((b, i) => {
-      // Courses land bottom-up; each brick has its own small lag.
       const start = 0.12 + (b.course / COURSES) * 0.2 + b.delay * 0.05;
       const land = clamp01((t - start) / 0.12);
       const eased = easeOutBack(land);
       position.lerpVectors(b.scatter.clone().add(b.home), b.home, Math.min(1, eased));
-      if (eased > 1) position.y -= (eased - 1) * 0.3; // a small settle past home
-      // Breath: push out along the wall normal and lift with height.
+      if (eased > 1) position.y -= (eased - 1) * 0.3;
       position.x += Math.cos(b.angle) * breath * 0.38;
       position.z += Math.sin(b.angle) * breath * 0.38;
       position.y += breath * b.course * 0.07;
@@ -232,7 +201,6 @@ function Tower({ progress }: { progress: React.RefObject<number> }) {
       <instancedMesh ref={mesh} args={[box, undefined, bricks.length]} frustumCulled={false}>
         <meshStandardMaterial roughness={0.9} />
       </instancedMesh>
-      {/* The light inside: only visible through the seams between bricks. */}
       <mesh position={[0, TOWER_HEIGHT / 2, 0]}>
         <cylinderGeometry args={[1.0, 1.65, TOWER_HEIGHT * 0.98, 32, 1, true]} />
         <meshBasicMaterial ref={core} side={THREE.DoubleSide} toneMapped={false} />
@@ -248,10 +216,6 @@ function Tower({ progress }: { progress: React.RefObject<number> }) {
     </group>
   );
 }
-
-// ---------------------------------------------------------------------------
-// Blueprint constellation
-// ---------------------------------------------------------------------------
 
 function Constellation({ progress }: { progress: React.RefObject<number> }) {
   const geometry = useMemo(() => {
@@ -286,10 +250,6 @@ function Constellation({ progress }: { progress: React.RefObject<number> }) {
   );
 }
 
-// ---------------------------------------------------------------------------
-// Camera + atmosphere
-// ---------------------------------------------------------------------------
-
 function Rig({ progress, target }: { progress: React.RefObject<number>; target: React.RefObject<number> }) {
   const look = useMemo(() => new THREE.Vector3(), []);
   const sky = useMemo(() => new THREE.Color(), []);
@@ -298,7 +258,6 @@ function Rig({ progress, target }: { progress: React.RefObject<number>; target: 
   const parallax = useRef({ x: 0, y: 0 });
 
   useFrame(({ camera, scene, pointer }, delta) => {
-    // Damp the scroll so the scene glides.
     write(progress, THREE.MathUtils.damp(progress.current, target.current, 3.2, delta));
     const t = progress.current;
     parallax.current.x = THREE.MathUtils.damp(parallax.current.x, pointer.x, 2.5, delta);
@@ -334,10 +293,6 @@ function Scene({ target }: { target: React.RefObject<number> }) {
     </>
   );
 }
-
-// ---------------------------------------------------------------------------
-// Page section: 500vh of scroll, canvas pinned
-// ---------------------------------------------------------------------------
 
 const CHAPTERS = [
   { at: 0, title: "Blueprint", body: "Every structure starts as a drawing of light." },
@@ -391,7 +346,6 @@ export default function CairnScene() {
           <Scene target={target} />
         </Canvas>
 
-        {/* Overlay */}
         <div className="pointer-events-none absolute inset-0 p-6 font-mono text-[11px] leading-snug text-white md:p-10">
           <div className="flex items-start justify-between">
             <div>

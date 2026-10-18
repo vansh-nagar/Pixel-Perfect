@@ -1,13 +1,5 @@
-/**
- * The dashed corner brackets, crosshair rules and circle that frame a grid
- * card. Previously copy-pasted into five grids, which had drifted apart:
- * two kept Tailwind v3 `bg-gradient-*` names and only the button grid spun the
- * circle on hover.
- */
 export const BorderDecorator = ({
-  /** `notch` adds the small bracket in the top-right corner (svg + button grids). */
   notch = false,
-  /** Spins the centre circle while the card is hovered. Needs `group` on the card. */
   spinOnHover = false,
 }: {
   notch?: boolean;

@@ -62,8 +62,6 @@ export default async function CategoryPage({
         />
       ))}
       <TabsNavigation initialTab={cat.slug} showCategoryHeader />
-      {/* sr-only: describes what the client-only grid renders, for crawlers
-          and screen readers — no visible SEO copy anywhere on the page. */}
       <section className="sr-only">
         <h2>
           All {items.length} {cat.name.toLowerCase()} components

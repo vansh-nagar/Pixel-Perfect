@@ -58,10 +58,6 @@ const VIEW = {
 
 const clamp = (x: number, min: number, max: number) => Math.min(max, Math.max(min, x));
 
-// ---------------------------------------------------------------------------
-// Room: built imperatively, like the original Level1 class
-// ---------------------------------------------------------------------------
-
 type Looker = {
   model: THREE.Object3D;
   target: THREE.Vector3;
@@ -91,7 +87,6 @@ function buildRoom({ gltf, tex }: Assets): Room {
       if (n instanceof THREE.Mesh) n.material = bakedMaterial;
     });
 
-  // Clone so rebuilding (strict mode, HMR) never finds nodes already moved out of the cached scenes.
   const scenes = Object.fromEntries(
     Object.entries(gltf).map(([key, g]) => [key, g.scene.clone(true)]),
   ) as Record<keyof typeof MODELS, THREE.Group>;
@@ -121,7 +116,6 @@ function buildRoom({ gltf, tex }: Assets): Room {
   if (earsOutside instanceof THREE.Mesh) earsOutside.material = new THREE.MeshMatcapMaterial({ matcap: tex.whiteOnPurple });
   group.add(sudoHeadModel);
 
-  // Cactus: baked material plus a vertex sway that grows with height (log(|z| + 1) is 0 at the base).
   const cactusTime = { value: 0 };
   const cactusModel = scenes.cactus.children[0];
   applyBaked(cactusModel);
@@ -172,11 +166,9 @@ function buildRoom({ gltf, tex }: Assets): Room {
   };
 }
 
-/** Starts the idle prop loops with the original timings. Returns a cleanup. */
 function startRoomLoops(room: Room, reducedMotion: boolean) {
   const { group, cameraHead, sudoHead, cube, pyramid } = room;
 
-  // Rise from below the floor.
   if (!reducedMotion) {
     group.position.y = -2;
     gsap.to(group.position, { y: 0, duration: 1, ease: "power4.out" });
@@ -245,7 +237,6 @@ function startRoomLoops(room: Room, reducedMotion: boolean) {
   };
 }
 
-/** Per-frame: heads ease toward their targets, cactus clock advances. */
 function stepRoom(room: Room, deltaMs: number, elapsedMs: number) {
   const { cameraHead, sudoHead } = room;
   cameraHead.eased.lerp(cameraHead.target, Math.min(1, 0.005 * deltaMs));
@@ -296,10 +287,6 @@ function Level1({ reducedMotion }: { reducedMotion: boolean }) {
   return <primitive object={room.group} />;
 }
 
-// ---------------------------------------------------------------------------
-// Camera rig + environment (same values as the original Navigation class)
-// ---------------------------------------------------------------------------
-
 type Eased = { value: number; eased: number };
 type Rig = {
   mix: { value: number };
@@ -345,7 +332,6 @@ function CameraRig({ rig }: { rig: React.RefObject<Rig> }) {
   return null;
 }
 
-/** Lathed bowl: flat floor curving into walls, gradient by distance from the origin. */
 function Bowl() {
   const geometry = useMemo(() => {
     const points: THREE.Vector2[] = [];
@@ -388,10 +374,6 @@ function Bowl() {
     </mesh>
   );
 }
-
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
 
 export default function JourneyRoom() {
   const rig = useRef<Rig>(createRig());
@@ -510,7 +492,6 @@ export default function JourneyRoom() {
         </Suspense>
       </Canvas>
 
-      {/* Idle hint pill: arrow · hand · arrow */}
       <div
         aria-hidden
         className="journey-hand pointer-events-none absolute bottom-[45px] left-[calc(50%-77px)] z-[3] flex h-[52px] w-[154px] items-center justify-center rounded-[29px] bg-white text-[#202020]"
@@ -534,7 +515,6 @@ export default function JourneyRoom() {
         </svg>
       </div>
 
-      {/* Close: pops in with an overshoot, spins on hover */}
       <button
         type="button"
         aria-label="Close"

@@ -1,21 +1,4 @@
-/**
- * Plush fur for the dots characters, ported 1:1 from openai.com.
- *
- * Two layers make the fuzzy look:
- *  1. "Pile": the body keeps its mesh but gets a MeshStandardMaterial patched with a
- *     triplanar fiber texture (colour variation + normal relief). No extra geometry.
- *  2. "Cards": up to 8192 instanced hair cards scattered over the body surface. They
- *     are skinned to the same skeleton, fade in by on-screen size, and turn into wide
- *     tufts along the silhouette. That rim of cards is the soft edge.
- *
- * Both textures and the card scatter are generated procedurally with seeded LCGs, so
- * every visit (and this rebuild) produces the same fur.
- */
 import * as THREE from "three";
-
-// ---------------------------------------------------------------------------
-// Surface detection
-// ---------------------------------------------------------------------------
 
 type AnyMesh = THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[]>;
 
@@ -47,8 +30,6 @@ export function isFurSurface(o: THREE.Object3D): o is THREE.Mesh<THREE.BufferGeo
   );
 }
 
-// Keeps cards away from Todd's inset eyes (1 = full length, 0 = no card).
-// Custom bodies opt in with `userData.eyeClearance`.
 function createEyeClearance(mesh: AnyMesh, root: THREE.Object3D, scale: number) {
   const position = mesh.geometry.getAttribute("position");
   const clearance = new Float32Array(position.count).fill(1);
@@ -82,7 +63,6 @@ function createEyeClearance(mesh: AnyMesh, root: THREE.Object3D, scale: number) 
 
 export const MAX_CARDS = 8192;
 
-/** How many cards to draw for a body that is `pixels` tall on screen. */
 export function getCardBudget(pixels: number, density: number) {
   if (!Number.isFinite(pixels) || pixels <= 0) return 0;
   const d = Number.isFinite(density) ? Math.max(20, Math.min(320, density)) : 180;
@@ -90,7 +70,6 @@ export function getCardBudget(pixels: number, density: number) {
   return Math.min(MAX_CARDS, ((160 + pixels * pixels * 0.027) * d) / 180) * fadeIn;
 }
 
-// Cache key: the body plus every eye/accessory placed relative to it.
 function groomKey(mesh: AnyMesh, root: THREE.Object3D) {
   root.updateMatrixWorld(true);
   const inverse = new THREE.Matrix4().copy(mesh.matrixWorld).invert();
@@ -105,7 +84,6 @@ function groomKey(mesh: AnyMesh, root: THREE.Object3D) {
   return parts.join("|");
 }
 
-// Tangential push away from eyes/accessories so cards comb around them.
 function computeGroom(mesh: AnyMesh, root: THREE.Object3D, scale: number) {
   const position = mesh.geometry.getAttribute("position");
   const normal = mesh.geometry.getAttribute("normal");
@@ -195,7 +173,6 @@ type BakedCards = {
 
 const CARD_INDEX = [0, 1, 2, 1, 3, 2, 2, 3, 4, 3, 5, 4];
 
-// Scatter MAX_CARDS roots uniformly by area with a fixed-seed LCG.
 function bakeCards(mesh: AnyMesh, root: THREE.Object3D) {
   const geometry = mesh.geometry;
   const position = geometry.getAttribute("position");
@@ -332,7 +309,6 @@ type LiveCards = { geometry: THREE.InstancedBufferGeometry; scale: number; refer
 const liveCards = new WeakMap<THREE.BufferGeometry, Map<string, LiveCards>>();
 const bakedCards = new WeakMap<THREE.BufferGeometry, Map<string, BakedCards>>();
 
-// Ref-counted so StrictMode remounts and character switches never re-bake.
 function acquireCardGeometry(mesh: AnyMesh, root: THREE.Object3D) {
   const source = mesh.geometry;
   const key = groomKey(mesh, root);
@@ -368,10 +344,6 @@ function acquireCardGeometry(mesh: AnyMesh, root: THREE.Object3D) {
   };
 }
 
-// ---------------------------------------------------------------------------
-// Procedural fiber textures (512x512 RGBA each)
-// ---------------------------------------------------------------------------
-
 const TAU = 2 * Math.PI;
 
 function lcg(seed: number) {
@@ -390,7 +362,6 @@ function dataTexture(data: Uint8Array, repeat: boolean) {
   return texture;
 }
 
-// Pile: R = fiber height, GB = pre-baked slope for normal relief. Tiles.
 function bakePile() {
   const random = lcg(0x70696c65);
   const height = new Float32Array(512 * 512).fill(0.3);
@@ -456,8 +427,6 @@ function bakePile() {
   return data;
 }
 
-// Card atlas: 4x4 tiles of hair strands. R/B = brightness, A = long hairs,
-// G = dense short root fibers.
 function bakeCardAtlas() {
   const random = lcg(0x68616972);
   const data = new Uint8Array(512 * 512 * 4);
@@ -567,10 +536,6 @@ function acquireFurTextures() {
     },
   };
 }
-
-// ---------------------------------------------------------------------------
-// Shader chunks (verbatim)
-// ---------------------------------------------------------------------------
 
 const BRUSH = /* glsl */ `
 uniform sampler2D plushBrushField;
@@ -741,10 +706,6 @@ float rootShade = mix(1. - plushShading * .85, 1. + plushShading * .65, smoothst
 diffuseColor.rgb *= mix(.78, 1.15, fibers.r) * rootShade * vPlushVariation;
 `;
 
-// ---------------------------------------------------------------------------
-// Attaching fur to a character
-// ---------------------------------------------------------------------------
-
 const FUR_SETTINGS = { length: 3.2, density: 202, thickness: 0.35, comb: 0.65, shading: 0.3 };
 
 function attachFur(mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>, root: THREE.Object3D) {
@@ -752,7 +713,6 @@ function attachFur(mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMate
   const originalBeforeRender = mesh.onBeforeRender;
   const cards = acquireCardGeometry(mesh, root);
 
-  // Fiber scale: tallest fur body in this character, in this surface's space.
   root.updateMatrixWorld(true);
   const inverse = new THREE.Matrix4().copy(mesh.matrixWorld).invert();
   const relative = new THREE.Matrix4();
@@ -860,7 +820,6 @@ function attachFur(mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMate
     cardMaterial.opacity = original.opacity;
   };
 
-  // Settings pass (same as the original's `update(settings)`).
   uniforms.plushLength.value = (FUR_SETTINGS.length * fiberScale) / 100;
   uniforms.plushWidth.value = fiberScale * (0.009 + 0.0022 * FUR_SETTINGS.length);
   uniforms.plushDensity.value = FUR_SETTINGS.density;
@@ -889,7 +848,6 @@ function attachFur(mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMate
   };
 }
 
-/** Adds pile + card fur to every fur surface in `root`. Returns a cleanup. */
 export function applyFur(root: THREE.Object3D) {
   const surfaces: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>[] = [];
   root.traverse((o) => {

@@ -3,18 +3,11 @@
 import { memo, useEffect, useMemo, useRef, type ReactNode, type RefObject } from "react";
 import gsap from "gsap";
 
-// Shared pieces for the illustration scenes: the SVG host, the section frame, the scene refs, and the
-// live-interaction kit (hover press, timers, idle ghost) every scene wires the same way.
-
 export const prefersReducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const isTypingTarget = (t: EventTarget | null) =>
   t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || (t instanceof HTMLElement && t.isContentEditable);
 
-// The SVG host must never re-render: React would re-inject the markup and orphan every node that GSAP and
-// the listeners hold. memo + stable props keep it mounted once.
-// The art is a stack of same-viewBox SVG layers (see scripts/illustrations-svg.mjs): static layers paint once
-// and sit on their own compositor layer; only a layer whose contents move gets repainted.
 export const IllArt = memo(function IllArt({
   hostRef,
   label,
@@ -44,7 +37,6 @@ export const IllArt = memo(function IllArt({
   );
 });
 
-/** The page frame every figure sits in: the art, and an optional control under it. */
 export function Figure({ sectionRef, children, footer }: { sectionRef: RefObject<HTMLElement | null>; children: ReactNode; footer?: ReactNode }) {
   return (
     <section
@@ -65,11 +57,6 @@ export function FooterButton({ onClick, children }: { onClick: () => void; child
   );
 }
 
-/**
- * The refs every scene needs. `active` is true while the section fills at least half the screen: only that
- * section answers the real keyboard and runs its idle ghost. With `playOnView`, the intro timeline (built
- * paused) plays the first time the section scrolls into view.
- */
 export function useScene({ playOnView }: { playOnView: boolean }) {
   const root = useRef<HTMLDivElement>(null);
   const section = useRef<HTMLElement>(null);
@@ -96,12 +83,10 @@ export function useScene({ playOnView }: { playOnView: boolean }) {
     return () => io.disconnect();
   }, [playOnView]);
 
-  // one stable object, so scenes can list it as an effect dependency
   return useMemo(() => ({ rootRef: root, sectionRef: section, introRef: intro, introDoneRef: introDone, lastUserRef: lastUser, activeRef: active }), []);
 }
 export type Scene = ReturnType<typeof useScene>;
 
-/** Reduced motion: show the art as is and skip the intro. Returns true when it did. */
 export function skipIntro(el: HTMLElement, scene: Scene) {
   if (!prefersReducedMotion()) return false;
   gsap.set(el, { autoAlpha: 1 });
@@ -109,10 +94,6 @@ export function skipIntro(el: HTMLElement, scene: Scene) {
   return true;
 }
 
-/**
- * End of an intro: hand the parts' transforms back to CSS (so `.key.down` works) and clear the named props
- * on the stage and layers. The idle ghost then waits a full idle period before it starts.
- */
 export function finishIntro(scene: Scene, parts: SVGElement[], wholes: (HTMLElement | null)[]) {
   parts.forEach((p) => p.removeAttribute("transform"));
   gsap.set(parts, { clearProps: "transform,visibility" });
@@ -121,12 +102,6 @@ export function finishIntro(scene: Scene, parts: SVGElement[], wholes: (HTMLElem
   scene.lastUserRef.current = performance.now();
 }
 
-/**
- * Live wiring shared by every scene, bound to the layer stack `el`: hover presses `.key` parts, `later`
- * timers, `press` (a short tap), `onKey` (the real keyboard, only while this section is in view), and
- * `ghost(run)`, a loop that runs `run` whenever the section is in view and idle for `idleMs`.
- * `dispose()` removes all of it.
- */
 export function liveKit(el: HTMLElement, scene: Scene, idleMs: number) {
   const reduce = prefersReducedMotion();
   const timers = new Set<number>();
@@ -186,7 +161,6 @@ export function liveKit(el: HTMLElement, scene: Scene, idleMs: number) {
   return { reduce, later, sleep, touch, idle, press, on, onKey, ghost, dispose };
 }
 
-/** Convex hull of screen points as a closed path (monotone chain): clips for parts that slide out of a body. */
 export function hullPath(points: [number, number][]) {
   const p = [...points].sort((a, b) => a[0] - b[0] || a[1] - b[1]);
   const cross = (o: number[], a: number[], b: number[]) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);

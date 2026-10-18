@@ -11,15 +11,11 @@ gsap.registerPlugin(useGSAP);
 const IDLE_MS = 5000;
 const START = "2021";
 
-// A clamshell macropad: three caps (2 · 0 · 2) and a bare switch. Dropping the fourth cap onto the switch
-// rolls the year on the display from 2021 to 2022.
 export function MacropadScene() {
   const scene = useScene({ playOnView: true });
   const { rootRef, sectionRef, introRef } = scene;
   const api = useRef<{ drop: () => void; reset: () => void } | null>(null);
 
-  // ── Intro: the stage rises, the display unit drops onto its ribbon, the three caps drop in order, then the
-  //    fourth cap lands and the year rolls.
   useGSAP(
     () => {
       const el = rootRef.current;
@@ -44,7 +40,6 @@ export function MacropadScene() {
     { scope: rootRef },
   );
 
-  // ── Live: hover press, click or type to write on the display, drop the last cap, idle ghost.
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
@@ -114,7 +109,6 @@ export function MacropadScene() {
       kit.touch();
     });
 
-    // Idle ghost: lift the last cap off (back to 2021), then drop it again so the year rolls over.
     kit.ghost(async () => {
       if (!capOff()) {
         reset();

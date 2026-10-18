@@ -13,17 +13,12 @@ const IDLE_MS = 5000;
 const REST_YAW = -0.3;
 const [OX, OY] = ORIGIN;
 const P = (x: number, y: number, z: number): [number, number] => [OX + x - y, OY + (x + y) / 2 - z];
-/** A viewBox point → the desk point under it (z = 0). */
 const desk = (x: number, y: number) => { const a = x - OX, b = 2 * (y - OY); return [(a + b) / 2, (b - a) / 2]; };
 
-// A beige desktop computer. Its head turns on the stand toward the pointer (rebuilt from the 3D model every
-// frame, on a spring) and its eyes finish the look; clicking the case ejects the floppy; hovering the mouse
-// presses it.
 export function ComputerScene() {
   const scene = useScene({ playOnView: true });
   const { rootRef, sectionRef, introRef } = scene;
 
-  // ── Intro: the stage rises, the head drops onto its stand.
   useGSAP(
     () => {
       const el = rootRef.current;
@@ -50,7 +45,6 @@ export function ComputerScene() {
       return pt.matrixTransform(svg.getScreenCTM()!.inverse());
     };
 
-    // ── head: one spring on the yaw; every path rebuilt from the model when it moves
     const headG = $<SVGGElement>("#head"), decal = $<SVGGElement>(".eyes-decal"), eyes = $<SVGGElement>(".eyes");
     const els: Record<string, Element> = Object.fromEntries([...headG.querySelectorAll<SVGElement>("[data-k]")].map((e) => [e.dataset.k!, e]));
     let yaw = REST_YAW, yv = 0, yt = REST_YAW, raf = 0;
@@ -67,7 +61,7 @@ export function ComputerScene() {
       const tick = (now: number) => {
         const dt = Math.min(0.032, (now - t0) / 1000);
         t0 = now;
-        yv += (100 * (yt - yaw) - 18 * yv) * dt; // k 100, c 18
+        yv += (100 * (yt - yaw) - 18 * yv) * dt;
         yaw += yv * dt;
         const moving = Math.abs(yv) > 0.002 || Math.abs(yt - yaw) > 0.002;
         if (!moving) yaw = yt;
@@ -76,7 +70,6 @@ export function ComputerScene() {
       };
       raf = requestAnimationFrame(tick);
     };
-    // eyes: the offset to the target in screen space, clamped inside the screen; the head takes the angle
     const C = P(PIVOT[0] + 24, PIVOT[1], 49);
     const look = (x: number, y: number) => {
       const dx = x - C[0], dy = y - C[1], d = Math.hypot(dx, dy) || 1, k = Math.min(1, d / 60);
@@ -90,7 +83,6 @@ export function ComputerScene() {
     const blinkLoop = () => kit.later(() => { if (!kit.reduce) blink(); blinkLoop(); }, 2600 + Math.random() * 2600);
     blinkLoop();
 
-    // ── mouse: press on hover, the head looks at it
     const mouse = $<SVGGElement>("#mouse");
     let onMouse = false;
     kit.on(el, "pointermove", (e) => {
@@ -103,7 +95,6 @@ export function ComputerScene() {
     kit.on(mouse, "pointerenter", () => { onMouse = true; mouse.classList.add("down", "on"); look(+mouse.dataset.cx!, +mouse.dataset.cy!); });
     kit.on(mouse, "pointerleave", () => { onMouse = false; mouse.classList.remove("down", "on"); });
 
-    // ── floppy: one spring on the eject distance; world +x by s is screen (s, s/2), clipped to what has left the case
     const fl = $<SVGGElement>("#floppy"), disk = fl.querySelector(".disk")!, clip = fl.querySelector(".floppy-clip")!;
     const D = Object.fromEntries(["y0", "y1", "z0", "z1", "face"].map((k) => [k, Number(fl.dataset[k])]));
     const OUT = 11;
@@ -123,7 +114,7 @@ export function ComputerScene() {
       const tick = (now: number) => {
         const dt = Math.min(0.032, (now - t0) / 1000);
         t0 = now;
-        v += (170 * (target - s) - 22 * v) * dt; // stiffness 170, damping 22
+        v += (170 * (target - s) - 22 * v) * dt;
         s = Math.max(0, s + v * dt);
         const moving = Math.abs(v) > 0.03 || Math.abs(target - s) > 0.03;
         if (!moving) s = target;
@@ -140,7 +131,6 @@ export function ComputerScene() {
       look(x, y);
     });
 
-    // ── idle: the head looks around: the plant, the mouse, the reader
     const spots = [P(66, -34, 18), [+mouse.dataset.cx!, +mouse.dataset.cy!], [C[0] + 40, C[1] + 20], C];
     let si = 0;
     kit.ghost(async () => {

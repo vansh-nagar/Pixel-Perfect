@@ -7,7 +7,6 @@ import styles from "./design-engineer-card.module.css";
 
 const assets = "/playground/design-engineer";
 
-// Stable variation keeps hydration deterministic and the fall loosely scattered.
 const particles = Array.from({ length: 32 }, (_, index) => ({
   left: `${(index * 37.7 + 3) % 100}%`,
   "--size": `${14 + (index % 4) * 4}px`,

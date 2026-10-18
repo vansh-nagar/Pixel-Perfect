@@ -1,19 +1,5 @@
 "use client";
 
-/**
- * A staircase of isometric diorama rooms you step through like levels: drag to orbit,
- * prev/next (or click a room) to glide the camera up to it.
- *
- * Motion is modelled on the threejs-journey.com hero (mechanics only, all geometry is
- * original):
- *  - Two camera views blended by `mix`: a low, idle view and a draggable orbit view.
- *    `mix` tweens 0 → 1 on interaction (1s, delay 0.3s, power4.inOut) and back on close.
- *  - Rooms sit on a staircase, each offset by (±2, +2, ±2). Changing level tweens a camera
- *    offset (1s, custom overshoot ease), then a per-frame lerp smooths it a second time.
- *  - Orbit/zoom values are eased per frame with `value += (target - value) * easing * dtMs`.
- *  - On mount every room rises from below the floor (power4.out, 0.5s per unit dropped).
- */
-
 import { RoundedBox, Sparkles } from "@react-three/drei";
 import { Canvas, useFrame, type ThreeElements, type ThreeEvent } from "@react-three/fiber";
 import gsap from "gsap";
@@ -21,10 +7,6 @@ import { CustomEase } from "gsap/CustomEase";
 import { ChevronLeft, ChevronRight, Hand, HandGrab } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-
-// ---------------------------------------------------------------------------
-// Config
-// ---------------------------------------------------------------------------
 
 type V3 = [number, number, number];
 
@@ -47,7 +29,6 @@ const LEVELS: Level[] = [
   { title: "React", offset: [-6, 12, -6], left: "#b5ecff", right: "#3aa8e0", floor: "#e6f8ff", rug: "#ff6f91" },
 ];
 
-/** Top of each room's floor slab, in room space. */
 const F = 0.12;
 
 const VIEW = {
@@ -68,7 +49,6 @@ const clamp = (x: number, min: number, max: number) => Math.min(max, Math.max(mi
 const pad = (n: number) => String(n + 1).padStart(2, "0");
 
 let glideEase: string | null = null;
-/** The level-change curve: a slow start, then a fast settle with a 1.4% overshoot. */
 function getGlideEase() {
   if (!glideEase) {
     gsap.registerPlugin(CustomEase);
@@ -77,10 +57,6 @@ function getGlideEase() {
   }
   return glideEase;
 }
-
-// ---------------------------------------------------------------------------
-// Camera rig — all mutable camera state lives here, read by <CameraRig /> each frame
-// ---------------------------------------------------------------------------
 
 type Eased = { value: number; eased: number };
 
@@ -115,7 +91,6 @@ function createRig(): Rig {
   };
 }
 
-/** Advances the rig one frame and writes the blended view into `camera`. */
 function stepRig(r: Rig, camera: THREE.Camera, delta: number) {
   const ms = Math.min(delta * 1000, 100);
   const k = (easing: number) => Math.min(1, easing * ms);
@@ -141,11 +116,6 @@ function CameraRig({ rig }: { rig: React.RefObject<Rig> }) {
   return null;
 }
 
-// ---------------------------------------------------------------------------
-// Environment
-// ---------------------------------------------------------------------------
-
-/** A lathed bowl: flat floor that curves up into walls, shaded by distance from origin. */
 function Bowl() {
   const geometry = useMemo(() => {
     const points: THREE.Vector2[] = [];
@@ -189,10 +159,6 @@ function Bowl() {
     </mesh>
   );
 }
-
-// ---------------------------------------------------------------------------
-// Primitives
-// ---------------------------------------------------------------------------
 
 type GroupProps = ThreeElements["group"];
 
@@ -245,7 +211,6 @@ function Cyl({ r, h, color, ...props }: { r: number; h: number; color: string } 
   );
 }
 
-/** A wireframe cube built from 12 thin bars (GL lines are always 1px). */
 function FrameCube({ size, bar = 0.022, color, ...props }: { size: number; bar?: number; color: string } & GroupProps) {
   const h = size / 2;
   const bars: { p: V3; s: V3 }[] = [];
@@ -275,7 +240,6 @@ const UV_VERTEX = /* glsl */ `
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }`;
 
-/** A plane running a time-driven fragment shader. */
 function ShaderPlane({ size, fragment, ...props }: { size: [number, number]; fragment: string } & GroupProps) {
   const material = useRef<THREE.ShaderMaterial>(null);
   const uniforms = useMemo(() => ({ uTime: { value: 0 } }), []);
@@ -316,10 +280,6 @@ const SWIRL = /* glsl */ `
     gl_FragColor = vec4(color, 1.0);
   }`;
 
-// ---------------------------------------------------------------------------
-// Room contents
-// ---------------------------------------------------------------------------
-
 function BasicsProps() {
   const balls: { p: V3; c: string }[] = [];
   const colors = ["#ff6fa8", "#7d6bf2", "#ffb35c"];
@@ -330,7 +290,6 @@ function BasicsProps() {
   }
   return (
     <>
-      {/* Shelf on the left wall */}
       <Block size={[0.28, 0.04, 1.1]} color="#f4ecff" position={[-0.74, F + 0.75, -0.15]} />
       <Block size={[0.28, 0.04, 1.1]} color="#f4ecff" position={[-0.74, F + 1.2, -0.15]} />
       <FrameCube size={0.2} color="#ef6fa6" position={[-0.74, F + 0.89, -0.45]} />
@@ -342,7 +301,6 @@ function BasicsProps() {
         <Ball key={i} r={0.04} color={b.c} position={b.p} />
       ))}
 
-      {/* Desk, monitor, chair */}
       <Block size={[0.75, 0.04, 0.42]} color="#fdf7ff" position={[0.25, F + 0.5, -0.66]} />
       {[-0.33, 0.33].flatMap((x) =>
         [-0.17, 0.17].map((z) => (
@@ -357,7 +315,6 @@ function BasicsProps() {
       <Block size={[0.3, 0.05, 0.3]} color="#ff8a5c" position={[0.3, F + 0.3, -0.22]} />
       <Block size={[0.3, 0.32, 0.05]} color="#ff8a5c" position={[0.3, F + 0.48, -0.07]} />
 
-      {/* Cactus */}
       <Cyl r={0.1} h={0.16} color="#f5b52e" position={[-0.55, F + 0.08, -0.66]} />
       <mesh position={[-0.55, F + 0.42, -0.66]} castShadow>
         <capsuleGeometry args={[0.07, 0.35, 6, 16]} />
@@ -368,7 +325,6 @@ function BasicsProps() {
         <meshStandardMaterial color="#5fd0b8" roughness={0.7} />
       </mesh>
 
-      {/* Skateboard */}
       <group position={[0.35, F, 0.45]} rotation={[0, 0.4, 0]}>
         <Block size={[0.5, 0.025, 0.15]} color="#8f7bff" position={[0, 0.06, 0]} />
         {[-0.17, 0.17].flatMap((x) =>
@@ -405,13 +361,11 @@ function Orbs() {
 function LightProps() {
   return (
     <>
-      {/* Sofa */}
       <Block size={[0.9, 0.18, 0.36]} color="#ffb35c" position={[-0.1, F + 0.12, -0.7]} />
       <Block size={[0.9, 0.32, 0.12]} color="#ffb35c" position={[-0.1, F + 0.3, -0.86]} />
       <Block size={[0.12, 0.28, 0.36]} color="#f59f3d" position={[-0.6, F + 0.17, -0.7]} />
       <Block size={[0.12, 0.28, 0.36]} color="#f59f3d" position={[0.4, F + 0.17, -0.7]} />
 
-      {/* Floor lamp */}
       <Cyl r={0.12} h={0.03} color="#2f7f75" position={[0.62, F + 0.015, -0.62]} />
       <Cyl r={0.015} h={1} color="#2f7f75" position={[0.62, F + 0.5, -0.62]} />
       <mesh position={[0.62, F + 1.02, -0.62]}>
@@ -431,7 +385,6 @@ function BouncingBall() {
     if (!ball.current) return;
     const s = Math.abs(Math.sin(clock.elapsedTime * 3));
     ball.current.position.y = F + 0.1 + s * 0.55;
-    // Squash on contact, stretch in flight.
     const squash = s < 0.12 ? 1 - (0.12 - s) * 2 : 1 + s * 0.06;
     ball.current.scale.set(1 / Math.sqrt(squash), squash, 1 / Math.sqrt(squash));
   });
@@ -536,10 +489,6 @@ function ReactProps() {
 
 const ROOM_PROPS = [BasicsProps, LightProps, PhysicsProps, ShadersProps, ParticlesProps, PortalProps, ReactProps];
 
-// ---------------------------------------------------------------------------
-// Room
-// ---------------------------------------------------------------------------
-
 function useLabelTexture(index: number, title: string) {
   return useMemo(() => {
     const canvas = document.createElement("canvas");
@@ -578,7 +527,6 @@ function Room({
   const label = useLabelTexture(index, level.title);
   const Contents = ROOM_PROPS[index];
 
-  // Rise from below the floor, taking 0.5s per unit of drop.
   useEffect(() => {
     const g = group.current;
     if (!g || reducedMotion) return;
@@ -604,7 +552,6 @@ function Room({
         <Contents />
       </group>
 
-      {/* Invisible hit box for clicking a room to travel to it */}
       <mesh
         position={[0, 1, 0]}
         onClick={(e: ThreeEvent<MouseEvent>) => {
@@ -623,10 +570,6 @@ function Room({
     </group>
   );
 }
-
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
 
 function useReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -679,13 +622,11 @@ export default function LevelStack() {
     setLevel(index);
   };
 
-  // Latest handlers for the long-lived listeners below.
   const handlers = useRef({ start, end, goTo });
   useEffect(() => {
     handlers.current = { start, end, goTo };
   });
 
-  // Keyboard: Escape closes, arrows step levels while interacting.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const { end, goTo } = handlers.current;
@@ -698,7 +639,6 @@ export default function LevelStack() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Wheel zoom while interacting (non-passive so it can stop the page scrolling).
   useEffect(() => {
     const el = container.current;
     if (!el) return;
@@ -713,7 +653,6 @@ export default function LevelStack() {
     return () => el.removeEventListener("wheel", onWheel);
   }, []);
 
-  // Drag: left button orbits, shift/other buttons pan the look-at target.
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if ((e.target as HTMLElement).tagName !== "CANVAS") return;
     start();
@@ -822,7 +761,6 @@ export default function LevelStack() {
         ))}
       </Canvas>
 
-      {/* Idle hint: "drag me" pill */}
       <div
         aria-hidden
         className="level-stack-hand pointer-events-none absolute bottom-[45px] left-[calc(50%-77px)] z-[3] flex h-[52px] w-[154px] items-center justify-center rounded-[29px] bg-white text-[#202020]"
@@ -842,7 +780,6 @@ export default function LevelStack() {
         <ChevronRight size={16} strokeWidth={3} />
       </div>
 
-      {/* Level navigation */}
       <div
         className="absolute bottom-[45px] left-[calc(50%-131px)] z-[3] h-[58px] w-[262px] cursor-default rounded-[29px] bg-white"
         style={{
@@ -895,7 +832,6 @@ export default function LevelStack() {
         </button>
       </div>
 
-      {/* Close: pops in with an overshoot, spins on hover */}
       <button
         type="button"
         aria-label="Close"

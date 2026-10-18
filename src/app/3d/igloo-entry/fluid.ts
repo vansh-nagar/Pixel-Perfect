@@ -1,13 +1,3 @@
-/**
- * Port of igloo.inc's screen-space fluid sim (`$U`), as configured by the entry scene's
- * particle volume: 128² sim, splat radius 0.22, force 35, no curl, LINE splats.
- *
- * PORT: only the velocity field is simulated. The dye/density pass only feeds `dyeUniform`,
- * which this scene never reads, so it's skipped. Everything velocity-related is unchanged,
- * including the 3 pressure iterations (the scene passes `pressureIterations: 2`, but the
- * constructor reads `pressureIteration`, so the site actually runs the default 3).
- */
-
 import * as THREE from "three";
 import * as F from "./fluid-shaders";
 
@@ -39,7 +29,6 @@ function raw(vertexShader: string, fragmentShader: string, uniforms: Record<stri
   return new THREE.RawShaderMaterial({ vertexShader, fragmentShader, uniforms, depthTest: false, depthWrite: false });
 }
 
-/** Fullscreen triangle with uvs (their `Si.triangle`). */
 export function fullscreenTriangle() {
   const g = new THREE.BufferGeometry();
   g.setAttribute("position", new THREE.BufferAttribute(new Float32Array([-1, -1, 0, 3, -1, 0, -1, 3, 0]), 3));
@@ -49,7 +38,6 @@ export function fullscreenTriangle() {
 
 export class FluidSim {
   readonly velUniform: THREE.IUniform<THREE.Texture | null> = { value: null };
-  /** Pointer in 0..1 screen space, y up (their `position01`). */
   readonly pointer = new THREE.Vector2(0.5, 0.5);
 
   private velocity = doubleRT(THREE.LinearFilter);
@@ -121,7 +109,6 @@ export class FluidSim {
     renderer.render(this.scene, this.camera);
   }
 
-  /** `_update(time, delta)`; `ratio` is their 60fps-normalised delta. */
   update(renderer: THREE.WebGLRenderer, time: number, ratio: number, aspect: number) {
     const autoClear = renderer.autoClear;
     const previousTarget = renderer.getRenderTarget();

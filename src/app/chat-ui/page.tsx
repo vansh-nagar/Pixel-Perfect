@@ -15,28 +15,13 @@ import {
   MessageScrollerViewport,
 } from "@/components/ui/message-scroller";
 
-/* ─────────────────────────────────────────────────────────
- * A normal vertical chat (no backend, all motion) built on MessageScroller:
- *   • each user turn is a scrollAnchor — it's pinned near the top so the new
- *     turn can be read from the start, with a peek of the previous turn above
- *   • autoScroll follows the streamed reply only while at the live edge
- *   • the floating arrow (MessageScrollerButton) jumps back to the latest
- *   • scroll-fade-b masks the bottom edge so messages dissolve into the composer
- *
- * Per send: user bubble springs in (anchored) → dot-matrix thinking indicator
- * → assistant bubble streams in word-by-word. Honors prefers-reduced-motion.
- * ───────────────────────────────────────────────────────── */
-
 const TIMING = {
-  thinkDelay: 2200, // ms the dot-matrix thinking indicator shows before streaming
-  wordInterval: 55, // ms between each streamed word
+  thinkDelay: 2200,
+  wordInterval: 55,
 };
 
-/* Snappy-but-soft spring used for every row entrance. */
 const ENTRANCE_SPRING = { type: "spring" as const, stiffness: 420, damping: 30 };
 
-/* Animate the transcript row itself (transform + opacity only — never height/
- * margin, which would fight the scroller's positioning). */
 const MotionItem = motion.create(MessageScrollerItem);
 
 type Role = "user" | "assistant";
@@ -45,7 +30,7 @@ interface Message {
   id: number;
   role: Role;
   text: string;
-  streaming?: boolean; // assistant bubble currently revealing word-by-word
+  streaming?: boolean;
 }
 
 const INITIAL_MESSAGES: Message[] = [
@@ -56,7 +41,6 @@ const INITIAL_MESSAGES: Message[] = [
   },
 ];
 
-/* Canned replies cycle on each send — they only exist to drive the animation. */
 const CANNED_REPLIES = [
   "Good motion is mostly timing and restraint: animate a property or two, keep it under 300ms, and let the easing do the talking.",
   "The magic in a chat UI is the small stuff — a thinking indicator, a word-by-word reveal, and a scroller that never fights the reader's place.",
@@ -74,7 +58,6 @@ const Page = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const reduceMotion = useReducedMotion();
 
-  // Auto-grow the composer textarea up to a max height (collapses back on send).
   useEffect(() => {
     const el = textareaRef.current;
     if (!el) return;
@@ -95,7 +78,6 @@ const Page = () => {
     setMessages((prev) => [...prev, { id: idRef.current++, role: "user", text }]);
     setInput("");
 
-    // Dot-matrix thinking indicator first, then the assistant bubble streams in.
     setIsThinking(true);
     const reply = CANNED_REPLIES[replyRef.current % CANNED_REPLIES.length];
     replyRef.current += 1;
@@ -112,7 +94,6 @@ const Page = () => {
   return (
     <div className="chat-light grid min-h-screen place-items-center bg-background p-4 text-foreground">
       <div className="flex h-[600px] max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
-        {/* Header */}
         <div className="flex items-center gap-3 border-b border-border px-5 py-4">
           <BotAvatar />
           <div className="leading-tight">
@@ -124,11 +105,8 @@ const Page = () => {
           </div>
         </div>
 
-        {/* Transcript — MessageScroller owns scroll, anchoring, and follow-output */}
         <MessageScrollerProvider autoScroll scrollPreviousItemPeek={56}>
           <MessageScroller className="min-h-0 flex-1">
-            {/* opt out of the global Lenis smooth-scroll so the transcript
-                scrolls natively (Lenis otherwise hijacks the wheel) */}
             <MessageScrollerViewport data-lenis-prevent className="px-5 py-5">
               <MessageScrollerContent className="gap-4">
                 {messages.map((message) => (
@@ -165,7 +143,6 @@ const Page = () => {
           </MessageScroller>
         </MessageScrollerProvider>
 
-        {/* Composer */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -224,8 +201,6 @@ interface MessageRowProps {
   onStreamDone: (id: number) => void;
 }
 
-/* One transcript row: the animated MessageScrollerItem holding a chat bubble.
- * User rows are scroll anchors, so a new turn pins near the top of the view. */
 function MessageRow({ message, reduceMotion, onStreamDone }: MessageRowProps) {
   const isUser = message.role === "user";
   const handleDone = useCallback(
@@ -271,8 +246,6 @@ interface StreamingTextProps {
   onDone: () => void;
 }
 
-/* Reveals text one word at a time; each new word fades in, a caret blinks at
- * the tail until the last word lands. autoScroll follows the growth. */
 function StreamingText({ text, reduceMotion, onDone }: StreamingTextProps) {
   const words = useMemo(() => text.split(" "), [text]);
   const [count, setCount] = useState(reduceMotion ? words.length : 0);

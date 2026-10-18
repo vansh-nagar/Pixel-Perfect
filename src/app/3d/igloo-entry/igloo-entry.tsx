@@ -63,7 +63,6 @@ export default function IglooEntry() {
     const onPointerMove = (e: PointerEvent) => entry?.setPointer(e.clientX, e.clientY, el.getBoundingClientRect());
     window.addEventListener("pointermove", onPointerMove);
 
-    // A click is a press + release without much drag (their touch_click).
     let down: { x: number; y: number } | null = null;
     const onPointerDown = (e: PointerEvent) => (down = { x: e.clientX, y: e.clientY });
     const onPointerUp = (e: PointerEvent) => {

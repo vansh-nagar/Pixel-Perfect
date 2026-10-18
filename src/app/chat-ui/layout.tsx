@@ -1,6 +1,5 @@
 import { generatePageMetadata } from "@/lib/seo/metadata";
 
-// Server wrapper: the chat-ui page is a client component and can't export metadata.
 export const metadata = generatePageMetadata({
   title: "Animated Chat UI",
   description:

@@ -14,17 +14,13 @@ const IDLE_MS = 5000;
 const PAPER = DATA.paper as PaperCfg;
 const LMAX = (PAPER.curve.length - 1) * PAPER.step;
 const ROW_W = PAPER.x1 - PAPER.x0;
-const ROW = 4.5; // paper fed per printed row
+const ROW = 4.5;
 
-// A toy cash register: grey keys ring up items onto the receipt, the orange total key springs the drawer,
-// the feed key (front row, col 2) feeds paper and the key behind it tears the receipt off.
 export function RegisterScene() {
   const scene = useScene({ playOnView: true });
   const { rootRef, sectionRef, introRef } = scene;
   const printIntro = useRef<(() => void) | null>(null);
 
-  // ── Intro: the stage rises and the keys drop in left to right; then the register prints its receipt and
-  //    the drawer springs open, as in the reference.
   useGSAP(
     () => {
       const el = rootRef.current;
@@ -52,7 +48,6 @@ export function RegisterScene() {
     const $ = <T extends Element>(s: string) => el.querySelector<T>(s)!;
     const items = [...el.querySelectorAll<SVGGElement>('.key[data-role="item"]')];
 
-    // ── receipt: printed rows ride along as the paper feeds out of the slot
     const fill = $(".receipt-fill"), edge = $(".receipt-edge"), ink = $(".receipt-ink");
     let L = DATA.paperL;
     let lines: PrintedRow[] = DATA.lines.map((l) => ({ ...l }));
@@ -64,7 +59,6 @@ export function RegisterScene() {
       ink.setAttribute("d", p.ink);
     };
     let queue = Promise.resolve();
-    /** Queue a feed of `amount`, optionally printing a row first; each feed eases out over `dur` ms. */
     const feed = (amount: number, segs?: number[][], dur = 200) => {
       queue = queue.then(
         () =>
@@ -98,7 +92,6 @@ export function RegisterScene() {
       feed(8);
     };
 
-    // ── drawer: one spring on the pull; world +y is screen (−s, s/2)
     const dr = DATA.drawer;
     const tray = $<SVGGElement>('[data-layer="drawer"] .tray'), clip = $(".out-clip");
     const P = (x: number, y: number, z: number): [number, number] => [PAPER.ox + x - y, PAPER.oy + (x + y) / 2 - z];
@@ -118,10 +111,10 @@ export function RegisterScene() {
       const tick = (now: number) => {
         const dt = Math.min(0.032, (now - t0) / 1000);
         t0 = now;
-        v += (170 * (target - s) - 22 * v) * dt; // stiffness 170, damping 22
+        v += (170 * (target - s) - 22 * v) * dt;
         s += v * dt;
         if (target === 0 && s < 0) {
-          s = 0; // stops against the back of the body
+          s = 0;
           v = -v * 0.3;
         }
         const moving = Math.abs(v) > 0.05 || Math.abs(target - s) > 0.05;
@@ -148,8 +141,6 @@ export function RegisterScene() {
       actions[k.dataset.role!]();
     };
 
-    // The intro prints the reference's receipt row by row, then pops the drawer; until then the slot is
-    // empty and the drawer shut.
     if (!kit.reduce) {
       clearPaper();
       s = target = 0;
@@ -180,7 +171,6 @@ export function RegisterScene() {
       act(k);
     });
 
-    // Idle ghost: rings up three items and totals; tears the receipt off once it reaches the end.
     kit.ghost(async () => {
       if (L > LMAX - 20) {
         act($<SVGGElement>("#key-clear"));

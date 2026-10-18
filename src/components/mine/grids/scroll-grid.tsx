@@ -114,7 +114,7 @@ const ScrollGrid = () => {
     const item = itemRefs.current[activeId];
     if (!aside || !item) return;
 
-    const lookAhead = 80; // px of neighbouring items to surface beyond the active one
+    const lookAhead = 80;
     const asideRect = aside.getBoundingClientRect();
     const itemRect = item.getBoundingClientRect();
 
@@ -153,8 +153,6 @@ const ScrollGrid = () => {
       style={{ height: panelHeight }}
       className="flex w-full items-stretch overflow-hidden"
     >
-      {/* Matches the category sidebar in blocks/tabs-navigation.tsx: same width,
-          dashed left rail that fills in on the active item, name only. */}
       <aside
         ref={asideRef}
         data-lenis-prevent

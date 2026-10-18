@@ -1,21 +1,5 @@
 "use client";
 
-/**
- * Every avatar on the Cylinder Carousel: the four dots characters, four custom plush
- * characters in the same style, the six DevDay faces and eight custom faces.
- *
- * Ring, fly-in, bob, drag and cursor lean are the registry's cylinder-carousel
- * (registry/new-york/carousel/cylinder-carousel.tsx). With 22 cards instead of 10 the
- * ring grows so neighbouring discs keep the original spacing and size, and the camera
- * stays on the rim.
- *
- * 3D characters are drawn per disc by one shared WebGL renderer (./dots/face-renderer).
- * Flat faces are the DevDay face component with its circle as the disc. Everything
- * hops in a wave from the front as the ring settles, and tapping a disc plays it again.
- *
- * Lives here, not in the registry: the dots models and DevDay faces are openai.com's.
- */
-
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
 import type { CharacterName } from "./dots/characters";
@@ -34,7 +18,6 @@ import { FACE_ROSTER, type RosterFace } from "./face-roster";
 
 type World = { base: string; motif: string; spin: string };
 
-// Flat, high-contrast discs behind the 3D characters (the carousel's worlds plus four more).
 const WORLDS = {
   cobaltGrid: {
     base: "#2d4bff",
@@ -93,7 +76,6 @@ const dots = (name: CharacterName, world: World): Item => ({
 const plush = (name: PlushName, world: World): Item => ({ kind: "3d", label: name, world, build: () => buildPlush(name) });
 const face = (name: string): Item => ({ kind: "face", label: name, face: FACE_ROSTER[name] });
 
-// Ring order. The first item faces the viewer once the ring settles.
 const LIST: Item[] = [
   dots("Alfred", WORLDS.cobaltGrid),
   face("thinking"),
@@ -120,27 +102,25 @@ const LIST: Item[] = [
 ];
 
 const COUNT = LIST.length;
-// At spin 180° the card at index COUNT / 2 sits at the far wall, facing the viewer.
 const FRONT = Math.round(COUNT / 2);
 const CARDS = Array.from({ length: COUNT }, (_, i) => LIST[(i - FRONT + COUNT) % COUNT]);
 
-// The original ring: 10 cards on an 800px radius, camera on the rim.
 const ORIGINAL = { cards: 10, radius: 800 };
 const RING = (COUNT / ORIGINAL.cards) * ORIGINAL.radius;
 
 const C = {
-  radius: RING, // ring radius (px), grown so card spacing matches the original
-  perspective: RING, // camera distance (px); puts the viewer on the ring's rim
-  ball: (800 * 800) / 1200, // card size (px), the original's ballSize * perspective / 1200
-  orbSize: 0.8, // disc diameter as a share of its card, leaving a gap between neighbours
-  dragSensitivity: 0.5 * (ORIGINAL.radius / RING), // degrees of spin per px dragged
-  flyInSwing: 90 * (ORIGINAL.radius / RING), // degrees the ring swings in from
-  entryDelay: 0.3, // s before the fly-in starts
-  stageWidth: 1440, // container width the numbers above were tuned at
-  facePixels: 640, // backing size of each character canvas
-  waveDelay: 0.9, // s after the fly-in starts that the front disc hops
-  waveStagger: 0.09, // s between neighbouring hops
-  tapSlop: 6, // px a tap may move before it counts as a drag
+  radius: RING,
+  perspective: RING,
+  ball: (800 * 800) / 1200,
+  orbSize: 0.8,
+  dragSensitivity: 0.5 * (ORIGINAL.radius / RING),
+  flyInSwing: 90 * (ORIGINAL.radius / RING),
+  entryDelay: 0.3,
+  stageWidth: 1440,
+  facePixels: 640,
+  waveDelay: 0.9,
+  waveStagger: 0.09,
+  tapSlop: 6,
 };
 
 const IS_TOUCH = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
@@ -155,7 +135,6 @@ const LAYER: CSSProperties = {
   transformStyle: "preserve-3d",
 };
 
-/** Shortest distance around the ring between two card indices. */
 const ringDistance = (a: number, b: number) => {
   const d = Math.abs(a - b) % COUNT;
   return Math.min(d, COUNT - d);
@@ -176,7 +155,6 @@ export function AvatarCarousel() {
   const [paused, setPaused] = useState(false);
   const [scale, setScale] = useState(1);
 
-  // Targets are set directly; springs chase them.
   const spinTarget = useMotionValue(180 + C.flyInSwing);
   const spreadTarget = useMotionValue(1.8);
   const tiltXTarget = useMotionValue(0);
@@ -187,9 +165,7 @@ export function AvatarCarousel() {
   const tiltY = useSpring(tiltYTarget, TILT_SPRING);
   const radius = useTransform(spread, (s) => s * C.radius);
 
-  // Fly-in: swing the ring in and pull it in from 1.8x radius.
   useEffect(() => {
-    // Reduced motion: snap straight to the settled ring.
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const delay = reduce ? 0 : C.entryDelay * 1000;
     const start = setTimeout(() => {
@@ -207,7 +183,6 @@ export function AvatarCarousel() {
     };
   }, [spinTarget, spreadTarget, spin, spread]);
 
-  // 3D characters: load, hop everything in a wave from the front, draw the visible discs each frame.
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mountedAt = performance.now();
@@ -242,7 +217,6 @@ export function AvatarCarousel() {
       l.y += (l.targetY - l.y) * k;
       const eased: Look = { x: l.x, y: l.y };
 
-      // From the rim, a card at ring angle θ from the far wall appears θ/2 off-centre.
       const halfView = Math.atan(stageWidth.current / 2 / C.perspective) + 0.14;
       const ring = (spin.get() * Math.PI) / 180;
       faces.current.forEach((face, i) => {
@@ -266,7 +240,6 @@ export function AvatarCarousel() {
     };
   }, [spin]);
 
-  // Shrink the whole scene uniformly when the container is narrower than the stage.
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
@@ -281,7 +254,6 @@ export function AvatarCarousel() {
     return () => ro.disconnect();
   }, []);
 
-  // Pause the bob, disc, face and character loops while off-screen.
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
@@ -335,7 +307,6 @@ export function AvatarCarousel() {
       const ny = ((y - r.top) / r.height) * 2 - 1;
       tiltXTarget.set(-ny * 5);
       tiltYTarget.set(-nx * 3);
-      // 3D characters look the same way the scene leans.
       look.current.targetX = nx;
       look.current.targetY = -ny;
     });
@@ -347,7 +318,6 @@ export function AvatarCarousel() {
     d.active = false;
     e.currentTarget.releasePointerCapture(e.pointerId);
     setCursor("grab");
-    // A tap, not a drag: play the tapped disc.
     if (d.card < 0 || Math.hypot(e.clientX - d.x0, e.clientY - d.y0) >= C.tapSlop) return;
     if (CARDS[d.card].kind === "3d") faces.current[d.card]?.excite();
     else plays.current[d.card]?.();
@@ -385,7 +355,6 @@ export function AvatarCarousel() {
         }
       `}</style>
 
-      {/* Stage at the tuned size, scaled down as one flat image to fit the container. */}
       <div
         className="absolute left-0 top-0"
         style={{
@@ -459,7 +428,6 @@ const Card = ({
   radius: MotionValue<number>;
   children: React.ReactNode;
 }) => {
-  // Pivot sits `radius` px in front of the card, so rotateY swings it around the ring's centre.
   const z = useTransform(radius, (r) => -r);
 
   return (

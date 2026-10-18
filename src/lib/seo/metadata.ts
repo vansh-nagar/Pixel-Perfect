@@ -31,8 +31,8 @@ export const baseMetadata: Metadata = {
     images: [
       {
         url: SEO_CONSTANTS.defaultOgImage,
-        width: 1200,
-        height: 630,
+        width: 1920,
+        height: 1080,
         alt: SEO_CONSTANTS.siteName,
       },
     ],
@@ -84,7 +84,7 @@ export function generatePageMetadata({
       url,
       title,
       description,
-      images: [{ url: image, width: 1200, height: 630, alt: title }],
+      images: [{ url: image, width: 1920, height: 1080, alt: title }],
     },
     twitter: {
       ...baseMetadata.twitter,

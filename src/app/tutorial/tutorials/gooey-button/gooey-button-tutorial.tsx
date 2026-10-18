@@ -388,7 +388,7 @@ export const GooeyButtonTutorial = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
-                className=" relative"
+                className="relative overflow-x-clip"
               >
                 <GooeyPreview blur={blur} colorMatrix={colorMatrix} composite={composite} />
               </motion.div>

@@ -35,6 +35,7 @@ export function Navbar({ className = "" }: { className?: string }) {
               alt="Pixel Perfect Logo"
               width={50}
               height={50}
+              loading="eager"
               className="w-12 sm:w-8 aspect-square dark:invert -mr-1"
             />
             <span className="hidden sm:inline">ixel Perfect</span>
@@ -42,33 +43,34 @@ export function Navbar({ className = "" }: { className?: string }) {
         </Link>{" "}
       </div>
       <div className="flex items-center gap-2">
-        <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>
-          <Button
-            variant="outline"
-            className="border-dashed rounded-none relative overflow-hidden group animate-rainbow bg-[linear-gradient(45deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] active:scale-[0.95]  group"
-            aria-label="GitHub"
-          >
-            <div className="z-0 absolute inset-[1.5px] bg-foreground/95 group-hover:bg-foreground/40  backdrop-blur-lg transition-all saturate-200" />
+        <Button
+          asChild
+          variant="outline"
+          className="border-dashed rounded-none relative overflow-hidden group animate-rainbow bg-[linear-gradient(45deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] active:scale-[0.95]  group"
+        >
+          <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>
+            <span className="z-0 absolute inset-[1.5px] bg-foreground/95 group-hover:bg-foreground/40  backdrop-blur-lg transition-all saturate-200" />
             <span className="z-10 text-background pointer-events-none flex gap-2 justify-center items-center">
-              <GithubIcon className="text-background" />
+              <GithubIcon className="text-background" aria-hidden="true" />
+              <span className="sr-only">GitHub stars</span>
               <StarsCount />
             </span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         <div className="hidden items-center gap-2 sm:flex">
           {NAV_LINKS.map(({ href, label, icon: Icon }) => (
             <Tooltip key={href}>
               <TooltipTrigger asChild>
-                <Link href={href}>
-                  <Button
-                    variant={"outline"}
-                    className="border-dashed rounded-none"
-                    size={"icon"}
-                    aria-label={label}
-                  >
+                <Button
+                  asChild
+                  variant={"outline"}
+                  className="border-dashed rounded-none"
+                  size={"icon"}
+                >
+                  <Link href={href} aria-label={label}>
                     <Icon />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </TooltipTrigger>
               <TooltipContent className="font-sans border-dashed rounded-none text-xs px-2 py-1">
                 {label}

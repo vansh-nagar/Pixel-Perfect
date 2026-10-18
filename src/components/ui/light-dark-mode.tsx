@@ -17,6 +17,7 @@ export function LightDarkMode() {
       className="border-dashed rounded-none"
       size="icon"
       onClick={handleThemeToggle}
+      aria-label="Toggle theme"
     >
       <Sun className=" dark:hidden block" />
       <Moon className=" hidden dark:block" />

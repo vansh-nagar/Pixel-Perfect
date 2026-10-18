@@ -10,7 +10,7 @@ export default function BlocksLayout({
       <div className="col-start-3 row-start-1 flex w-[90vw] px-4  py-3 flex-col relative">
         <Navbar />
       </div>
-      <div className="col-start-3 row-start-2 w-[90vw] p-3">{children}</div>
+      <main className="col-start-3 row-start-2 w-[90vw] p-3">{children}</main>
       <div className="pointer-events-none -right-px col-start-2 row-span-full row-start-1 border-x mask-y-from-93% bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed"></div>
       <div className="pointer-events-none relative -left-px col-start-4 row-span-full row-start-1 border-x border-x-[--pattern-fg] mask-y-from-93% bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed"></div>
       <div className="pointer-events-none relative -bottom-px col-span-full col-start-1 row-start-2 mask-x-from-97% border-t border-dashed"></div>

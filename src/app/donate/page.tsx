@@ -10,8 +10,8 @@ export const metadata = generatePageMetadata({
 
 export default function DonatePage() {
     return (
-        <div>
+        <main>
             <h1>Donate</h1>
-        </div>
+        </main>
     );
 }

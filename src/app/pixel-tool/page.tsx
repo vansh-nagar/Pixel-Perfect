@@ -394,7 +394,7 @@ ${lines.join("\n")}
 
   return (
     <TooltipProvider delayDuration={200}>
-      <div
+      <main
         className="min-h-screen w-full bg-neutral-950 text-neutral-100"
         onPointerUp={stop}
         onPointerLeave={stop}
@@ -402,7 +402,7 @@ ${lines.join("\n")}
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 flex flex-col gap-8">
           <header className="flex items-end justify-between gap-4 flex-wrap">
             <div>
-              <div className="text-[11px] uppercase tracking-[0.18em] text-neutral-500 mb-1.5">
+              <div className="text-[11px] uppercase tracking-[0.18em] text-neutral-400/80 mb-1.5">
                 Pixel Perfect · Tools
               </div>
               <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
@@ -413,7 +413,7 @@ ${lines.join("\n")}
                 to draw, shift-click or right-click to erase.
               </p>
             </div>
-            <div className="flex items-center gap-2 text-xs text-neutral-500">
+            <div className="flex items-center gap-2 text-xs text-neutral-400/80">
               <span className="rounded-md border border-neutral-800 bg-neutral-900/60 px-2 py-1">
                 {filledCount} px filled
               </span>
@@ -533,6 +533,7 @@ ${lines.join("\n")}
                     <textarea
                       value={overlay}
                       onChange={(e) => setOverlay(e.target.value)}
+                      aria-label="Trace overlay source"
                       placeholder="Paste an SVG (<svg ...>...</svg>) or an image URL to trace over"
                       spellCheck={false}
                       className="w-full h-20 bg-neutral-950 border border-neutral-800 rounded-md p-2.5 text-[11px] font-mono resize-none leading-tight text-neutral-200 placeholder:text-neutral-600 focus-visible:outline-none focus-visible:border-neutral-600"
@@ -582,7 +583,7 @@ ${lines.join("\n")}
                       </div>
                     </div>
 
-                    <p className="text-[11px] text-neutral-500 leading-snug">
+                    <p className="text-[11px] text-neutral-400/80 leading-snug">
                       Traces the source as a single-pixel outline on the current
                       {" "}
                       {size}×{size} grid (filled interiors are dropped). Tweak
@@ -685,6 +686,7 @@ ${lines.join("\n")}
                     type="text"
                     value={color}
                     onChange={(e) => setColor(e.target.value)}
+                    aria-label="Hex color"
                     className="w-24 h-8 font-mono text-xs bg-neutral-950 border-neutral-800"
                   />
                   <div className="flex items-center gap-1">
@@ -721,6 +723,7 @@ ${lines.join("\n")}
                     min={MIN_SIZE}
                     max={MAX_SIZE}
                     value={sizeInput}
+                    aria-label="Grid size"
                     onChange={(e) => setSizeInput(e.target.value)}
                     onBlur={() => applySize(parseInt(sizeInput, 10))}
                     onKeyDown={(e) => {
@@ -795,6 +798,7 @@ ${lines.join("\n")}
                         step={1}
                         value={[pad]}
                         onValueChange={(v) => setPad(v[0])}
+                        aria-label="Padding"
                         className="flex-1"
                       />
                       <span className="text-xs text-neutral-300 font-mono tabular-nums w-6 text-right">
@@ -805,7 +809,7 @@ ${lines.join("\n")}
                           type="button"
                           onClick={() => setPad(DEFAULT_PAD)}
                           title="Reset padding"
-                          className="text-xs text-neutral-500 hover:text-neutral-200"
+                          className="text-xs text-neutral-400/80 hover:text-neutral-200"
                         >
                           ↺
                         </button>
@@ -819,6 +823,7 @@ ${lines.join("\n")}
                         step={0.25}
                         value={[gap]}
                         onValueChange={(v) => setGap(v[0])}
+                        aria-label="Gap"
                         className="flex-1"
                       />
                       <span className="text-xs text-neutral-300 font-mono tabular-nums w-8 text-right">
@@ -829,7 +834,7 @@ ${lines.join("\n")}
                           type="button"
                           onClick={() => setGap(DEFAULT_GAP)}
                           title="Reset gap"
-                          className="text-xs text-neutral-500 hover:text-neutral-200"
+                          className="text-xs text-neutral-400/80 hover:text-neutral-200"
                         >
                           ↺
                         </button>
@@ -844,7 +849,7 @@ ${lines.join("\n")}
               <div>
                 <div className="flex items-center justify-between mb-2.5">
                   <SectionLabel>Preview</SectionLabel>
-                  <span className="text-[11px] text-neutral-500 font-mono">
+                  <span className="text-[11px] text-neutral-400/80 font-mono">
                     {view}×{view}
                   </span>
                 </div>
@@ -898,13 +903,14 @@ ${lines.join("\n")}
               <div className="flex flex-col min-h-0">
                 <div className="flex items-center justify-between mb-2">
                   <SectionLabel>SVG output</SectionLabel>
-                  <span className="text-[10px] text-neutral-500">
+                  <span className="text-[10px] text-neutral-400/80">
                     read-only
                   </span>
                 </div>
                 <textarea
                   value={svgString}
                   readOnly
+                  aria-label="SVG output"
                   spellCheck={false}
                   className="w-full h-48 bg-neutral-950 border border-neutral-800 rounded-md p-2.5 text-[11px] font-mono resize-none leading-tight text-neutral-300 focus-visible:outline-none focus-visible:border-neutral-600"
                 />
@@ -912,14 +918,14 @@ ${lines.join("\n")}
             </aside>
           </div>
         </div>
-      </div>
+      </main>
     </TooltipProvider>
   );
 }
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="text-[11px] uppercase tracking-[0.14em] text-neutral-500 font-medium">
+    <span className="text-[11px] uppercase tracking-[0.14em] text-neutral-400/80 font-medium">
       {children}
     </span>
   );
@@ -985,7 +991,7 @@ function SliderField({
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex items-center justify-between">
-        <span className="text-[11px] uppercase tracking-wider text-neutral-500">
+        <span className="text-[11px] uppercase tracking-wider text-neutral-400/80">
           {label}
         </span>
         <div className="flex items-center gap-2">
@@ -997,7 +1003,7 @@ function SliderField({
               type="button"
               onClick={onReset}
               title="Reset"
-              className="text-xs text-neutral-500 hover:text-neutral-200"
+              className="text-xs text-neutral-400/80 hover:text-neutral-200"
             >
               ↺
             </button>
@@ -1010,6 +1016,7 @@ function SliderField({
         step={step}
         value={[value]}
         onValueChange={(v) => onChange(v[0])}
+        aria-label={label}
       />
     </div>
   );
@@ -1026,17 +1033,11 @@ function Toggle({
 }) {
   return (
     <label className="flex items-center gap-2 text-sm text-neutral-300 cursor-pointer select-none">
-      <span
+      <button
+        type="button"
         role="switch"
         aria-checked={checked}
-        tabIndex={0}
         onClick={() => onChange(!checked)}
-        onKeyDown={(e) => {
-          if (e.key === " " || e.key === "Enter") {
-            e.preventDefault();
-            onChange(!checked);
-          }
-        }}
         className={`relative inline-flex h-4 w-7 shrink-0 items-center rounded-full transition-colors ${
           checked ? "bg-neutral-100" : "bg-neutral-700"
         }`}
@@ -1046,7 +1047,7 @@ function Toggle({
             checked ? "translate-x-3.5" : "translate-x-0.5"
           }`}
         />
-      </span>
+      </button>
       <span className="text-neutral-400">{label}</span>
     </label>
   );

@@ -47,16 +47,14 @@ export const InfiniteMovingStack = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    addAnimation();
-  }, []);
   const [start, setStart] = useState(false);
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
       scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
+        const duplicatedItem = item.cloneNode(true) as HTMLElement;
+        duplicatedItem.setAttribute("aria-hidden", "true");
         if (scrollerRef.current) {
           scrollerRef.current.appendChild(duplicatedItem);
         }
@@ -93,6 +91,9 @@ export const InfiniteMovingStack = ({
       }
     }
   };
+  useEffect(() => {
+    addAnimation();
+  }, []);
   return (
     <div
       ref={containerRef}
@@ -107,18 +108,18 @@ export const InfiniteMovingStack = ({
         )}
       >
         {logos.map((item, idx) => (
-          <div
+          <li
             key={idx}
             className="w-[200px] max-sm:w-[100px] h-32 max-sm:h-20 border-r border-muted flex items-center justify-center shrink-0"
           >
-            <li className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center">
               <img
                 src={item.src}
                 alt={item.alt}
                 className="aspect-square w-12 max-sm:w-8 object-contain dark:invert"
               />
-            </li>
-          </div>
+            </div>
+          </li>
         ))}
       </ul>
     </div>

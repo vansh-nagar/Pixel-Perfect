@@ -92,7 +92,7 @@ const Page = () => {
   }, [input, isThinking]);
 
   return (
-    <div className="chat-light grid min-h-screen place-items-center bg-background p-4 text-foreground">
+    <main className="chat-light grid min-h-screen place-items-center bg-background p-4 text-foreground">
       <div className="flex h-[600px] max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
         <div className="flex items-center gap-3 border-b border-border px-5 py-4">
           <BotAvatar />
@@ -178,7 +178,7 @@ const Page = () => {
           </div>
         </form>
       </div>
-    </div>
+    </main>
   );
 };
 

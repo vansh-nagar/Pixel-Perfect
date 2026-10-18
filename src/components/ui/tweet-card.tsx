@@ -86,9 +86,11 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
     <div className="flex items-center space-x-3">
       <img
         title={`Profile picture of ${tweet.user.name}`}
-        alt={tweet.user.screen_name}
+        alt=""
         height={48}
         width={48}
+        loading="lazy"
+        decoding="async"
         src={tweet.user.profile_image_url_https}
         className="border-border/50 overflow-hidden rounded-full border z-20 relative"
       />
@@ -121,7 +123,7 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
       rel="noopener noreferrer"
       title="View original post on X"
       aria-label={`View @${tweet.user.screen_name}'s original post on X`}
-      className="text-muted-foreground hover:text-foreground relative z-20 shrink-0 transition-colors"
+      className="text-muted-foreground hover:text-foreground relative z-20 shrink-0 transition-colors after:absolute after:-inset-3 after:content-['']"
     >
       <ArrowUpRight className="size-4" />
     </a>

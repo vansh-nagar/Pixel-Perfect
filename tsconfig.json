@@ -32,5 +32,11 @@
     "**/*.mts",
     "next.config.mjs"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "src/app/keyboard/cabinet-scene.tsx",
+    "src/app/keyboard/car-scene.tsx",
+    "src/app/keyboard/turntable-scene.tsx",
+    "src/app/open-ai/_components/dots-carousel.tsx"
+  ]
 }

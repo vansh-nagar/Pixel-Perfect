@@ -15,7 +15,7 @@ export default function PlaygroundLayout({
 }) {
   return (
     <>
-      <Navbar className="fixed top-0 px-1" />
+      <Navbar className="fixed top-0 px-1" showStars={false} />
       {children}
     </>
   );

@@ -6,7 +6,11 @@ import Link from "next/link";
 import { BookOpen, Gamepad2, GithubIcon, Menu } from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { StarsCount } from "@/components/mine/landing-page/stars-count";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,7 +23,13 @@ const NAV_LINKS = [
   { href: "/tutorial", label: "Tutorial", icon: BookOpen },
 ] as const;
 
-export function Navbar({ className = "" }: { className?: string }) {
+export function Navbar({
+  className = "",
+  showStars = true,
+}: {
+  className?: string;
+  showStars?: boolean;
+}) {
   return (
     <header
       className={` font-pixelify w-full flex items-center justify-between  z-50 h-12 ${className}`}
@@ -43,20 +53,22 @@ export function Navbar({ className = "" }: { className?: string }) {
         </Link>{" "}
       </div>
       <div className="flex items-center gap-2">
-        <Button
-          asChild
-          variant="outline"
-          className="border-dashed rounded-none relative overflow-hidden group animate-rainbow bg-[linear-gradient(45deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] active:scale-[0.95]  group"
-        >
-          <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>
-            <span className="z-0 absolute inset-[1.5px] bg-foreground/95 group-hover:bg-foreground/40  backdrop-blur-lg transition-all saturate-200" />
-            <span className="z-10 text-background pointer-events-none flex gap-2 justify-center items-center">
-              <GithubIcon className="text-background" aria-hidden="true" />
-              <span className="sr-only">GitHub stars</span>
-              <StarsCount />
-            </span>
-          </Link>
-        </Button>
+        {showStars && (
+          <Button
+            asChild
+            variant="outline"
+            className="border-dashed rounded-none relative overflow-hidden group animate-rainbow bg-[linear-gradient(45deg,var(--color-1),var(--color-5),var(--color-3),var(--color-4),var(--color-2))] bg-[length:200%] active:scale-[0.95]  group"
+          >
+            <Link href={"https://github.com/vansh-nagar/Pixel-Perfect"}>
+              <span className="z-0 absolute inset-[1.5px] bg-foreground/95 group-hover:bg-foreground/40  backdrop-blur-lg transition-all saturate-200" />
+              <span className="z-10 text-background pointer-events-none flex gap-2 justify-center items-center">
+                <GithubIcon className="text-background" aria-hidden="true" />
+                <span className="sr-only">GitHub stars</span>
+                <StarsCount />
+              </span>
+            </Link>
+          </Button>
+        )}
         <div className="hidden items-center gap-2 sm:flex">
           {NAV_LINKS.map(({ href, label, icon: Icon }) => (
             <Tooltip key={href}>

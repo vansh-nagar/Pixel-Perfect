@@ -1,9 +1,10 @@
-import TugboatScene from "./tugboat-scene";
+import ShelfGallery from "./shelf-gallery";
 
-const Page = () => {
+const Page = async ({ searchParams }: { searchParams: Promise<{ loop?: string }> }) => {
+  const loop = (await searchParams).loop !== undefined;
   return (
-    <div className="h-screen w-full">
-      <TugboatScene />
+    <div className="h-dvh w-full">
+      <ShelfGallery loop={loop} />
     </div>
   );
 };

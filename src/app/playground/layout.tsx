@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/mine/landing-page/navbar";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { PlaygroundPager } from "./_shared/playground-pager";
 
 export const metadata = generatePageMetadata({
   title: "Playground",
@@ -17,6 +18,7 @@ export default function PlaygroundLayout({
     <>
       <Navbar className="fixed top-0 px-1" showStars={false} />
       {children}
+      <PlaygroundPager />
     </>
   );
 }

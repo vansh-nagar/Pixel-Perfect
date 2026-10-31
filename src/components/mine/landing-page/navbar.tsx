@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BookOpen, Gamepad2, GithubIcon, Menu } from "lucide-react";
+import { BookOpen, Box, Gamepad2, GithubIcon, Menu } from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { StarsCount } from "@/components/mine/landing-page/stars-count";
 import {
@@ -21,6 +21,7 @@ import {
 const NAV_LINKS = [
   { href: "/playground", label: "Playground", icon: Gamepad2 },
   { href: "/tutorial", label: "Tutorial", icon: BookOpen },
+  { href: "/isometric", label: "Isometric", icon: Box },
 ] as const;
 
 export function Navbar({

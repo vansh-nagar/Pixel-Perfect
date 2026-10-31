@@ -4,10 +4,10 @@ import { generatePageMetadata } from "@/lib/seo/metadata";
 export const metadata = generatePageMetadata({
   title: "Illustrations",
   description: "Animated isometric line illustrations: a compact keyboard, a macropad, a cash register, a desktop computer and a wizard's tower.",
-  path: "/keyboard",
+  path: "/isometric",
 });
 
-export default function KeyboardLayout({ children }: { children: React.ReactNode }) {
+export default function IsometricLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navbar className="fixed top-0 px-1" />

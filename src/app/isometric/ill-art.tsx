@@ -1,12 +1,16 @@
 "use client";
 
-import { memo, useEffect, useMemo, useRef, type ReactNode, type RefObject } from "react";
+import { createContext, memo, useContext, useEffect, useMemo, useRef, type ReactNode, type RefObject } from "react";
 import gsap from "gsap";
 
 export const prefersReducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const isTypingTarget = (t: EventTarget | null) =>
   t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || (t instanceof HTMLElement && t.isContentEditable);
+
+// Set by the carousel: `visible` slides play their intro, only the `active` (centred) one takes input and idles.
+// Without it, scenes fall back to scroll position.
+export const SlideContext = createContext<{ active: boolean; visible: boolean } | null>(null);
 
 export const IllArt = memo(function IllArt({
   hostRef,
@@ -38,13 +42,24 @@ export const IllArt = memo(function IllArt({
 });
 
 export function Figure({ sectionRef, children, footer }: { sectionRef: RefObject<HTMLElement | null>; children: ReactNode; footer?: ReactNode }) {
+  const slide = useContext(SlideContext);
   return (
     <section
       ref={sectionRef}
-      className="grid min-h-screen grid-rows-[1fr_auto] px-6 pt-20 pb-6 font-mono text-xs tracking-[0.12em] text-[#62666d] uppercase"
+      className="grid min-h-screen grid-rows-[1fr_auto] px-6 pt-20 pb-6 font-mono text-xs tracking-[0.12em] text-[#8a8f98] uppercase select-none"
     >
-      {children}
-      <footer className="flex min-h-4 items-end justify-end">{footer}</footer>
+      {slide ? (
+        // The carousel animates --slide-scale on the slide; only the art scales, the footer stays put.
+        // Side slides clip to their box so long parts (the macropad cable) don't run across the stage.
+        <div className="grid place-items-center place-self-center" style={{ scale: "var(--slide-scale)", clipPath: slide.active ? undefined : "inset(0)" }}>
+          {children}
+        </div>
+      ) : (
+        children
+      )}
+      <footer className={`flex min-h-4 items-end justify-end transition-opacity ${slide && !slide.active ? "pointer-events-none opacity-0" : ""}`}>
+        {footer}
+      </footer>
     </section>
   );
 }
@@ -64,16 +79,28 @@ export function useScene({ playOnView }: { playOnView: boolean }) {
   const introDone = useRef(false);
   const lastUser = useRef(0);
   const active = useRef(false);
+  const entered = useRef(false);
+  const slide = useContext(SlideContext);
+  const slideActive = slide?.active;
+  const slideVisible = slide?.visible;
+
+  useEffect(() => {
+    if (slideActive === undefined) return;
+    active.current = slideActive;
+    if (playOnView && slideVisible && !entered.current) {
+      entered.current = true;
+      intro.current?.play();
+    }
+  }, [playOnView, slideActive, slideVisible]);
 
   useEffect(() => {
     const el = section.current;
-    if (!el) return;
-    let entered = false;
+    if (!el || slideActive !== undefined) return;
     const io = new IntersectionObserver(
       ([e]) => {
         active.current = e.intersectionRatio >= 0.5 || (e.isIntersecting && e.intersectionRect.height >= innerHeight * 0.5);
-        if (playOnView && !entered && e.isIntersecting && e.intersectionRatio >= 0.25) {
-          entered = true;
+        if (playOnView && !entered.current && e.isIntersecting && e.intersectionRatio >= 0.25) {
+          entered.current = true;
           intro.current?.play();
         }
       },
@@ -81,7 +108,7 @@ export function useScene({ playOnView }: { playOnView: boolean }) {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [playOnView]);
+  }, [playOnView, slideActive]);
 
   return useMemo(() => ({ rootRef: root, sectionRef: section, introRef: intro, introDoneRef: introDone, lastUserRef: lastUser, activeRef: active }), []);
 }

@@ -1,7 +1,7 @@
 // Copy of ~/.claude/skills/illustrations/examples/iso-computer.head.mjs — keep the two in sync.
 // The computer's head (neck, CRT tube, bezel, screen, eyes) as a function of its yaw: rebuilt from the 3D model
 // at any angle, so it can turn on its stand and still occlude correctly. Self-contained (no imports) so the
-// same file runs in the generator, the demo page and the Next page (copied to src/app/keyboard/art/).
+// same file runs in the generator, the demo page and the Next page (copied to src/app/isometric/art/).
 // Yaw turns the head about the stand's pivot; 0 faces +x (down-right on screen).
 
 export const ORIGIN = [80, 86];

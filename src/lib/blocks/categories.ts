@@ -95,6 +95,14 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     source: { type: "registry", folder: "text" },
   },
   {
+    slug: "typography",
+    name: "Typography",
+    title: "React Typography Components",
+    description:
+      "Typography components for React — type specimens, font pairings and expressive lettering you can copy straight into your project. Built with Tailwind CSS, Motion and GSAP.",
+    source: { type: "registry", folder: "typography" },
+  },
+  {
     slug: "scroll",
     name: "Scroll Animations",
     title: "React Scroll Animation Components",

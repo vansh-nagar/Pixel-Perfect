@@ -4818,6 +4818,22 @@
           "target": "components/pixel-perfect/cloud-ring.tsx"
         }
       ]
+    },
+    {
+      "name": "circle-credits",
+      "description": "Two credit columns that wrap a round hole, easing in from the centre and scrambling into symbols on hover.",
+      "type": "registry:block",
+      "dependencies": [
+        "@gsap/react",
+        "gsap"
+      ],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/new-york/typography/circle-credits.tsx",
+          "target": "components/pixel-perfect/circle-credits.tsx"
+        }
+      ]
     }
   ]
 }

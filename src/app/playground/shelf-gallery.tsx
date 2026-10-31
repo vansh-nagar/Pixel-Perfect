@@ -6,6 +6,7 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { CELLS, createCellsMaterial } from "./_shared/voronoi-cells";
 
 // `src` ending in .mp4/.webm plays as a muted looping video.
 type Item = { title: string; src: string };
@@ -45,9 +46,6 @@ const THEMES = {
   light: { background: "#f2f0ec", gap: "#dbd8d2", ink: "#1d1c1a", muted: "#8a8781", accent: "#e8552f" },
   dark: { background: "#1a1a19", gap: "#0f0f0e", ink: "#ecebe8", muted: "#75736e", accent: "#f0643c" },
 };
-
-// Background: rounded Voronoi cells separated by even gaps (sizes in CSS px).
-const CELLS = { size: 260, gap: 12, smooth: 0.22, drift: 0.12, parallax: 0.25 };
 
 type MotionParams = {
   dragSensitivity: number;
@@ -292,72 +290,6 @@ class GalleryMotion {
   }
 }
 
-const CELLS_VERTEX = /* glsl */ `
-  void main() {
-    gl_Position = vec4(position.xy, 0.0, 1.0);
-  }
-`;
-
-const CELLS_FRAGMENT = /* glsl */ `
-  uniform vec3 uCell;
-  uniform vec3 uGap;
-  uniform float uPixelRatio;
-  uniform float uTime;
-  uniform float uOffset;
-  uniform float uDrift;
-
-  vec2 hash2(vec2 p) {
-    p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
-    return fract(sin(p) * 43758.5453);
-  }
-
-  // Seeds wander inside their grid square so the cells slowly reshape.
-  vec2 seed(vec2 cell) {
-    vec2 h = hash2(cell);
-    return 0.5 + 0.38 * sin(uTime * uDrift + 6.2831 * h);
-  }
-
-  float smin(float a, float b, float k) {
-    float h = max(k - abs(a - b), 0.0) / k;
-    return min(a, b) - h * h * k * 0.25;
-  }
-
-  void main() {
-    vec2 px = gl_FragCoord.xy / uPixelRatio + vec2(uOffset, 0.0);
-    vec2 x = px / ${CELLS.size.toFixed(1)};
-    vec2 n = floor(x);
-    vec2 f = fract(x);
-
-    // Nearest seed.
-    vec2 mg = vec2(0.0);
-    vec2 mr = vec2(0.0);
-    float md = 8.0;
-    for (int j = -1; j <= 1; j++)
-    for (int i = -1; i <= 1; i++) {
-      vec2 g = vec2(float(i), float(j));
-      vec2 r = g + seed(n + g) - f;
-      float d = dot(r, r);
-      if (d < md) { md = d; mr = r; mg = g; }
-    }
-
-    // Distance to the cell border; smooth-min across neighbours rounds the corners.
-    float edge = 8.0;
-    for (int j = -2; j <= 2; j++)
-    for (int i = -2; i <= 2; i++) {
-      vec2 g = mg + vec2(float(i), float(j));
-      vec2 r = g + seed(n + g) - f;
-      vec2 diff = r - mr;
-      if (dot(diff, diff) > 1e-5) edge = smin(edge, dot(0.5 * (mr + r), normalize(diff)), ${CELLS.smooth.toFixed(3)});
-    }
-
-    float edgePx = edge * ${CELLS.size.toFixed(1)};
-    float aa = 0.75;
-    float fill = smoothstep(${(CELLS.gap / 2).toFixed(2)} - aa, ${(CELLS.gap / 2).toFixed(2)} + aa, edgePx);
-    gl_FragColor = vec4(mix(uGap, uCell, fill), 1.0);
-    #include <colorspace_fragment>
-  }
-`;
-
 const CARD_VERTEX = /* glsl */ `
   uniform float uLean;
   varying vec2 vUv;
@@ -514,20 +446,8 @@ export default function ShelfGallery({
     const muted = new THREE.Color();
     const gapColor = new THREE.Color();
 
-    const cellsMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        uCell: { value: background },
-        uGap: { value: gapColor },
-        uPixelRatio: { value: renderer.getPixelRatio() },
-        uTime: { value: 0 },
-        uOffset: { value: 0 },
-        uDrift: { value: loop ? (Math.PI * 2) / SCRIPT_SECONDS : CELLS.drift },
-      },
-      vertexShader: CELLS_VERTEX,
-      fragmentShader: CELLS_FRAGMENT,
-      depthTest: false,
-      depthWrite: false,
-    });
+    const cellsMaterial = createCellsMaterial({ cell: background, gap: gapColor });
+    if (loop) cellsMaterial.uniforms.uDrift.value = (Math.PI * 2) / SCRIPT_SECONDS;
     const cells = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), cellsMaterial);
     cells.frustumCulled = false;
     cells.renderOrder = -1;
@@ -700,6 +620,7 @@ export default function ShelfGallery({
       const height = Math.max(1, container.clientHeight);
       renderer.setSize(width, height, false);
       cellsMaterial.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+      cellsMaterial.uniforms.uViewport.value.set(width, height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
 

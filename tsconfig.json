@@ -34,9 +34,9 @@
   ],
   "exclude": [
     "node_modules",
-    "src/app/keyboard/cabinet-scene.tsx",
-    "src/app/keyboard/car-scene.tsx",
-    "src/app/keyboard/turntable-scene.tsx",
+    "src/app/isometric/cabinet-scene.tsx",
+    "src/app/isometric/car-scene.tsx",
+    "src/app/isometric/turntable-scene.tsx",
     "src/app/open-ai/_components/dots-carousel.tsx"
   ]
 }

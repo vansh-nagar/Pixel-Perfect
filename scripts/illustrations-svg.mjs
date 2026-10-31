@@ -1,5 +1,5 @@
-// Inlines the isometric illustrations in public/illustrations/ into src/app/keyboard/art/*-svg.ts for the
-// /keyboard page, each split into stacked layers. Run after regenerating any SVG:
+// Inlines the isometric illustrations in public/illustrations/ into src/app/isometric/art/*-svg.ts for the
+// /isometric page, each split into stacked layers. Run after regenerating any SVG:
 //   node scripts/illustrations-svg.mjs
 //
 // Why layers: one big SVG repaints entirely (masks, clips, every stroke and legend) on each frame that ANY
@@ -12,7 +12,7 @@
 // rewritten to `.ill-<name>`, and every clip/mask id gets a `<name>-` prefix so url(#…) refs can't collide.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 
-const OUT = "src/app/keyboard/art";
+const OUT = "src/app/isometric/art";
 
 // painter's order; `live` layers receive pointer events
 const ILLUSTRATIONS = [

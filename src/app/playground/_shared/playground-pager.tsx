@@ -5,6 +5,8 @@
  * bottom-right corner. The current page is the one accent.
  */
 
+import { ArrowLeft02Icon, ArrowRight02Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,8 +14,13 @@ import { usePathname } from "next/navigation";
 const PAGES = [
   { href: "/playground", name: "Shelf gallery" },
   { href: "/playground/2", name: "Pixel emblem" },
-  { href: "/playground/3", name: "Halftone moths" },
+  { href: "/playground/3", name: "Halftone butterflies" },
   { href: "/playground/4", name: "Drift spiral" },
+  { href: "/playground/5", name: "Prism light" },
+  { href: "/playground/6", name: "Light funnel" },
+  { href: "/playground/7", name: "Street drive" },
+  { href: "/playground/8", name: "Car showroom" },
+  { href: "/playground/9", name: "Untitled" },
 ];
 
 export function PlaygroundPager() {
@@ -34,7 +41,7 @@ export function PlaygroundPager() {
       className="fixed right-4 bottom-4 z-50 flex items-center gap-0.5 rounded-[6px] border border-foreground/10 bg-background/85 p-1 text-sm font-medium backdrop-blur"
     >
       <Link href={prev.href} aria-label={`Previous: ${prev.name}`} title={prev.name} className={step}>
-        ←
+        <HugeiconsIcon icon={ArrowLeft02Icon} size={16} strokeWidth={1.75} />
       </Link>
       {PAGES.map((page, i) => {
         const active = i === current;
@@ -54,7 +61,7 @@ export function PlaygroundPager() {
         );
       })}
       <Link href={next.href} aria-label={`Next: ${next.name}`} title={next.name} className={step}>
-        →
+        <HugeiconsIcon icon={ArrowRight02Icon} size={16} strokeWidth={1.75} />
       </Link>
     </nav>
   );

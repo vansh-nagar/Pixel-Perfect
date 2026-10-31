@@ -42,6 +42,54 @@ const SPLIT = { perSpeed: 0.012, max: 0.45 };
 const GLOW = { blur: 0.55, alpha: 0.55 };
 const IDLE = { after: 4, every: 5 };
 
+const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2);
+const easeInOutQuart = (t: number) => (t < 0.5 ? 8 * t ** 4 : 1 - (-2 * t + 2) ** 4 / 2);
+
+// Loop mode: a scripted cursor (grid cells from the centre) that sweeps through
+// the emblem, orbits it, charges a hold in the middle and leaves where it started.
+type Move = { seconds: number; to?: [number, number]; orbit?: number; ease?: (t: number) => number; press?: boolean };
+const SCRIPT: Move[] = [
+  { seconds: 0.6 },
+  { seconds: 1.1, to: [3.5, 2.5], ease: easeInOutCubic },
+  { seconds: 0.3 },
+  { seconds: 0.75, to: [-6, -3.2], ease: easeInOutQuart },
+  { seconds: 0.25 },
+  { seconds: 2.2, orbit: Math.PI * 2, ease: easeInOutCubic },
+  { seconds: 0.2 },
+  { seconds: 0.7, to: [0.2, 0.3], ease: easeInOutCubic },
+  { seconds: 0.8, press: true },
+  { seconds: 0.7 },
+  { seconds: 0.6, to: [5.5, -5.5], ease: easeInOutQuart },
+  { seconds: 0.55, to: [-4.5, 6], ease: easeInOutQuart },
+  { seconds: 0.25 },
+  { seconds: 1.3, to: [13, 8], ease: easeInOutCubic },
+  { seconds: 0.6 },
+];
+const SCRIPT_START: [number, number] = [13, 8];
+const SCRIPT_SECONDS = SCRIPT.reduce((sum, m) => sum + m.seconds, 0);
+
+const cursorAt = (time: number) => {
+  let t = ((time % SCRIPT_SECONDS) + SCRIPT_SECONDS) % SCRIPT_SECONDS;
+  let [x, y] = SCRIPT_START;
+  for (const m of SCRIPT) {
+    const k = t < m.seconds ? (m.ease ?? ((v: number) => v))(t / m.seconds) : 1;
+    let nx = x;
+    let ny = y;
+    if (m.to) {
+      nx = x + (m.to[0] - x) * k;
+      ny = y + (m.to[1] - y) * k;
+    } else if (m.orbit) {
+      const a = m.orbit * k;
+      nx = x * Math.cos(a) - y * Math.sin(a);
+      ny = x * Math.sin(a) + y * Math.cos(a);
+    }
+    if (t < m.seconds) return { x: nx, y: ny, pressed: !!m.press };
+    t -= m.seconds;
+    [x, y] = [nx, ny];
+  }
+  return { x, y, pressed: false };
+};
+
 type Wave = { x: number; y: number; t0: number; sonic: boolean; strength: number };
 type Sprite = {
   x: number;
@@ -67,8 +115,13 @@ type Engine = { morph: (p: Pattern) => void; idleFor: () => number };
 const centre = (v: number) => v + 0.5 - GRID / 2;
 const polarKey = (x: number, y: number) => ((Math.atan2(centre(y), centre(x)) + Math.PI * 2) % (Math.PI * 2)) * 100 + Math.hypot(centre(x), centre(y));
 
-export default function PixelEmblem() {
+/**
+ * `loop` turns on a seamless recording mode: a drawn cursor follows SCRIPT and
+ * the controls, auto-advance and real input are off.
+ */
+export default function PixelEmblem({ loop }: { loop?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
   const cellsRef = useRef<HTMLCanvasElement>(null);
   const engineRef = useRef<Engine | null>(null);
   const [selection, setSelection] = useState<{ index: number } | { seed: number }>({ index: 0 });
@@ -97,6 +150,7 @@ export default function PixelEmblem() {
     const accentColor = new THREE.Color();
     const cellsRenderer = new THREE.WebGLRenderer({ canvas: cellsCanvas, antialias: false });
     const cellsMaterial = createCellsMaterial({ cell: cellColor, gap: gapColor, accent: accentColor });
+    if (loop) cellsMaterial.uniforms.uDrift.value = (Math.PI * 2) / SCRIPT_SECONDS;
     const cellsQuad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), cellsMaterial);
     cellsQuad.frustumCulled = false;
     const cellsCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -122,6 +176,7 @@ export default function PixelEmblem() {
     let raf = 0;
     let last = 0;
     let sleeping = true;
+    let loopClock = 0;
 
     const toPx = (gx: number, gy: number) => [width / 2 + gx * unit, height / 2 + gy * unit] as const;
 
@@ -140,7 +195,7 @@ export default function PixelEmblem() {
       const rect = canvas.getBoundingClientRect();
       width = Math.max(1, rect.width);
       height = Math.max(1, rect.height);
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = loop ? window.devicePixelRatio || 1 : Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = glowCanvas.width = Math.round(width * dpr);
       canvas.height = glowCanvas.height = Math.round(height * dpr);
       unit = Math.min(Math.min(width, height) * 0.64, 540) / GRID;
@@ -210,7 +265,25 @@ export default function PixelEmblem() {
       wake();
     };
 
+    // Drives the same pointer / hold / release paths that real input uses.
+    const followScript = (dt: number) => {
+      loopClock += dt;
+      const c = cursorAt(loopClock);
+      Object.assign(pointer, { x: c.x, y: c.y, active: true });
+      if (c.pressed && !hold.active) Object.assign(hold, { x: c.x, y: c.y, active: true, charge: 0 });
+      if (!c.pressed && hold.active) {
+        hold.active = false;
+        waves.push({ x: hold.x, y: hold.y, t0: clock, sonic: false, strength: 1 });
+      }
+      const cursor = cursorRef.current;
+      if (cursor) {
+        const [px, py] = toPx(c.x, c.y);
+        cursor.style.transform = `translate(${px}px, ${py}px) scale(${c.pressed ? 0.86 : 1})`;
+      }
+    };
+
     const update = (dt: number) => {
+      if (loop) followScript(dt);
       // Charge builds while held and drains quickly after.
       hold.charge = hold.active
         ? Math.min(1, hold.charge + dt / CHARGE.seconds)
@@ -453,7 +526,7 @@ export default function PixelEmblem() {
       const { moving, energy, charge } = update(dt);
       drawCells(charge);
       draw(energy, charge);
-      if (moving) raf = requestAnimationFrame(frame);
+      if (moving || loop) raf = requestAnimationFrame(frame);
       else sleeping = true;
     };
     function wake() {
@@ -469,6 +542,7 @@ export default function PixelEmblem() {
       return { x: (e.clientX - r.left - width / 2) / unit, y: (e.clientY - r.top - height / 2) / unit };
     };
     const onMove = (e: PointerEvent) => {
+      if (loop) return;
       const p = toGrid(e);
       Object.assign(pointer, p, { active: true });
       if (hold.active) Object.assign(hold, p);
@@ -476,7 +550,7 @@ export default function PixelEmblem() {
       wake();
     };
     const onDown = (e: PointerEvent) => {
-      if (!e.isPrimary || reducedMotion) return;
+      if (!e.isPrimary || reducedMotion || loop) return;
       try {
         canvas.setPointerCapture(e.pointerId);
       } catch {}
@@ -485,7 +559,7 @@ export default function PixelEmblem() {
       wake();
     };
     const onUp = () => {
-      if (!hold.active) return;
+      if (!hold.active || loop) return;
       hold.active = false;
       lastInput = clock;
       const strength = 1 - (1 - hold.charge) ** 2;
@@ -498,6 +572,7 @@ export default function PixelEmblem() {
       wake();
     };
     const onLeave = () => {
+      if (loop) return;
       pointer.active = false;
       wake();
     };
@@ -514,6 +589,7 @@ export default function PixelEmblem() {
     theme = document.documentElement.classList.contains("dark") ? THEMES.dark : THEMES.light;
     setColors();
     resize();
+    if (loop) wake();
 
     engineRef.current = { morph, idleFor: () => (performance.now() - start) / 1000 - lastInput };
 
@@ -531,7 +607,7 @@ export default function PixelEmblem() {
       cellsMaterial.dispose();
       cellsRenderer.dispose();
     };
-  }, []);
+  }, [loop]);
 
   useEffect(() => {
     engineRef.current?.morph(pattern);
@@ -545,12 +621,12 @@ export default function PixelEmblem() {
 
   // Auto-advance through the curated set while nobody is interacting.
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (loop || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = window.setInterval(() => {
       if ((engineRef.current?.idleFor() ?? 0) > IDLE.after) step(1);
     }, IDLE.every * 1000);
     return () => window.clearInterval(id);
-  }, [step]);
+  }, [step, loop]);
 
   const button =
     "grid size-9 place-items-center rounded-[6px] text-[#8a8781] transition-[scale,color] duration-150 ease-out hover:text-[#1d1c1a] active:scale-[0.96] dark:text-[#75736e] dark:hover:text-[#ecebe8]";
@@ -564,7 +640,20 @@ export default function PixelEmblem() {
         role="img"
         aria-label={`${pattern.name} pixel emblem. Hold and release to scramble it into a new pattern.`}
       />
-      <div className="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-3">
+      {loop && (
+        <div ref={cursorRef} className="pointer-events-none absolute top-0 left-0 origin-top-left" aria-hidden>
+          <svg width="40" height="40" viewBox="0 0 24 24" className="-mt-[4px] -ml-[8px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.45)]">
+            <path
+              d="M5 2.5v17.2l4.3-4.1 2.8 6.4 3-1.3-2.8-6.3h6.1L5 2.5Z"
+              fill="#fff"
+              stroke="#111"
+              strokeWidth="1.3"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      )}
+      <div className={`pointer-events-none absolute inset-x-0 bottom-8 ${loop ? "hidden" : "flex"} flex-col items-center gap-3`}>
         <p className="text-sm text-[#8a8781] dark:text-[#75736e]">Hold, then let go</p>
         <div className="pointer-events-auto flex items-center gap-1 text-sm">
           <button type="button" className={button} onClick={() => step(-1)} aria-label="Previous pattern">

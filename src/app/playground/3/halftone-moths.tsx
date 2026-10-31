@@ -1,8 +1,12 @@
 "use client";
 
 /**
- * A specimen plate of halftone moths that you can scramble with a sonic wave.
+ * A carousel of halftone butterflies that you can scramble with a sonic wave.
  *
+ *  Browse   the centred specimen is large, its neighbours shrink to the sides and the
+ *           outer ring fades out. Click a neighbour, use the arrows, ← / → or a sideways
+ *           swipe to move; every specimen sits on the same dot grid, so a small one is
+ *           just drawn with fewer dots
  *  Idle     every specimen breathes; hovering one makes it flap and the dots under the
  *           pointer swell like a loupe
  *  Hold     the field charges: dots tremble, get pulled toward the press point and a ring
@@ -11,9 +15,9 @@
  *           (random weight, pushed outward, full colour); behind it each specimen
  *           settles back, blooms in colour and flaps once as the wave passes
  *
- * Species are rasters from `buildSpecies(seed)`. Each frame a dot samples its specimen's
- * raster at (u / wingScale, v), so flapping is just a horizontal squash of the lookup and
- * the body stays put.
+ * Species are rasters from `buildSpecies(seed)`. Each frame a dot finds the front-most
+ * specimen whose box covers it and samples that raster at (u / wingScale, v), so flapping
+ * is just a horizontal squash of the lookup and the body stays put.
  *
  * Colour is iridescence, like real wing scales: the plate rests in plain ink, and a
  * purple-pink sheen only shows where something happens — a slow band of light sweeping
@@ -26,7 +30,9 @@
  * also drawn into a quarter-resolution canvas that is blurred on top as a glow.
  */
 
-import { useRef } from "react";
+import { ArrowLeft02Icon, ArrowRight02Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { useRef, type PointerEvent as ReactPointerEvent } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { buildSpecies, sample } from "./species";
@@ -37,6 +43,11 @@ const BAND = 160; // px, width of the scramble band
 const TAU = Math.PI * 2;
 const HUES = 16;
 const LEVELS = 5;
+// Carousel pose by distance from the centre slot: scale relative to the centre specimen
+// and the fade that hides the outer ring.
+const SCALE_AT = [1, 0.42, 0.24, 0.18];
+const SPRING_K = 140;
+const SPRING_C = 2 * Math.sqrt(SPRING_K); // critically damped
 // Cyclic palette: violet → fuchsia → pink → lavender → indigo → back.
 const PALETTE = [
   [124, 58, 237],
@@ -67,10 +78,17 @@ const smooth = (a: number, b: number, v: number) => {
   return t * t * (3 - 2 * t);
 };
 
+const scaleAt = (d: number) => {
+  const i = Math.min(SCALE_AT.length - 2, Math.floor(d));
+  return SCALE_AT[i] + (SCALE_AT[i + 1] - SCALE_AT[i]) * Math.min(1, d - i);
+};
+
 export default function HalftoneMoths() {
   const boxRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hintRef = useRef<HTMLParagraphElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
+  const api = useRef<{ go: (step: number) => void } | null>(null);
 
   useGSAP(() => {
     const box = boxRef.current!;
@@ -80,19 +98,21 @@ export default function HalftoneMoths() {
 
     let seed = Math.floor(Math.random() * 1000);
     const seeds = Array.from({ length: COUNT }, () => seed++);
-    let current = seeds.map((s) => buildSpecies(s));
+    let current = seeds.map((s) => buildSpecies(s, { butterfly: true }));
     let next: Float32Array[] | null = null;
 
-    // Layout: dot positions and specimen-space coordinates, rebuilt on resize.
+    // Layout: the dot grid and the carousel geometry, rebuilt on resize. Specimen poses
+    // are computed per frame from the carousel position.
     let W = 0;
     let H = 0;
     let gap = 6;
+    let S0 = 100; // px per specimen unit for the centred specimen
+    let midX = 0;
+    let midY = 0;
+    let step1 = 0; // centre → first neighbour
+    let step2 = 0; // first → second neighbour
     let dx = new Float32Array(0);
     let dy = new Float32Array(0);
-    let du = new Float32Array(0);
-    let dv = new Float32Array(0);
-    let dc = new Uint8Array(0);
-    const cells: { x0: number; y0: number; x1: number; y1: number; cx: number; cy: number }[] = [];
 
     const layout = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -103,51 +123,26 @@ export default function HalftoneMoths() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const top = 72;
-      const bottom = 48;
-      const side = 16;
-      const cols = W < 720 ? 2 : 4;
-      const rows = COUNT / cols;
-      const cw = (W - side * 2) / cols;
-      const ch = (H - top - bottom) / rows;
-      const S = Math.min(cw * 0.44, ch * 0.52); // px per specimen unit
-      gap = Math.min(8, Math.max(3.5, S / 21));
-
-      // Specimen centres snap to the dot grid so every specimen samples symmetrically.
-      cells.length = 0;
-      for (let c = 0; c < COUNT; c++) {
-        const col = c % cols;
-        const row = Math.floor(c / cols);
-        const x0 = side + cw * col;
-        const y0 = top + ch * row;
-        const cx = Math.round((x0 + cw / 2) / gap) * gap;
-        const cy = Math.round((y0 + ch / 2 + S * 0.08) / gap) * gap;
-        cells.push({ x0, y0, x1: x0 + cw, y1: y0 + ch, cx, cy });
-      }
+      const bottom = 96;
+      S0 = Math.min(W * (W < 720 ? 0.36 : 0.24), (H - top - bottom) * 0.46);
+      gap = Math.min(8, Math.max(3.5, S0 / 54));
+      step1 = S0 * (W < 720 ? 1.3 : 1.55);
+      step2 = S0 * 0.85;
+      // The centre slot snaps to the dot grid so the resting specimen samples symmetrically.
+      midX = Math.round(W / 2 / gap) * gap;
+      midY = Math.round((top + (H - top - bottom) / 2 + S0 * 0.08) / gap) * gap;
 
       // One grid over the whole screen, so the charge ring and shockwave run everywhere.
-      // Each dot reads from the specimen whose cell it falls in.
       const xs: number[] = [];
       const ys: number[] = [];
-      const us: number[] = [];
-      const vs: number[] = [];
-      const cs: number[] = [];
       for (let gy = 0; gy < H + gap; gy += gap) {
-        const row = Math.min(rows - 1, Math.max(0, Math.floor((gy - top) / ch)));
         for (let gx = 0; gx < W + gap; gx += gap) {
-          const col = Math.min(cols - 1, Math.max(0, Math.floor((gx - side) / cw)));
-          const c = row * cols + col;
           xs.push(gx);
           ys.push(gy);
-          us.push((gx - cells[c].cx) / S);
-          vs.push((gy - cells[c].cy) / S);
-          cs.push(c);
         }
       }
       dx = Float32Array.from(xs);
       dy = Float32Array.from(ys);
-      du = Float32Array.from(us);
-      dv = Float32Array.from(vs);
-      dc = Uint8Array.from(cs);
     };
     layout();
     const ro = new ResizeObserver(layout);
@@ -162,6 +157,36 @@ export default function HalftoneMoths() {
     const phase = new Float32Array(COUNT);
     const kicked = new Uint8Array(COUNT);
     const scale = new Float32Array(COUNT);
+
+    // Carousel: `target` counts whole steps without wrapping, `pos` springs toward it and
+    // each specimen's slot is its wrapped distance from `pos`.
+    const nav = { target: 0, pos: 0, vel: 0 };
+    const sx = new Float32Array(COUNT); // specimen centre x
+    const sS = new Float32Array(COUNT); // px per unit
+    const sA = new Float32Array(COUNT); // fade, 0 hidden
+    const order: number[] = []; // visible specimens, front-most first
+    const wrapOffset = (c: number) => {
+      let o = (((c - nav.pos) % COUNT) + COUNT) % COUNT;
+      if (o > COUNT / 2) o -= COUNT;
+      return o;
+    };
+    const go = (step: number) => {
+      if (!step) return;
+      nav.target += step;
+      if (reduce) {
+        nav.pos = nav.target;
+        nav.vel = 0;
+      }
+      const i = ((nav.target % COUNT) + COUNT) % COUNT;
+      if (counterRef.current) counterRef.current.textContent = `${String(i + 1).padStart(2, "0")} / ${String(COUNT).padStart(2, "0")}`;
+    };
+    api.current = { go };
+    const specimenAt = (x: number, y: number) => {
+      for (const c of order) {
+        if (Math.abs(x - sx[c]) <= sS[c] && Math.abs(y - midY) <= sS[c]) return c;
+      }
+      return -1;
+    };
 
     const local = (e: PointerEvent) => {
       const r = box.getBoundingClientRect();
@@ -194,9 +219,20 @@ export default function HalftoneMoths() {
       gsap.to(hintRef.current, { autoAlpha: 0, duration: 0.6 });
     };
 
+    const swipe = { x: 0, y: 0, touch: false };
     const onDown = (e: PointerEvent) => {
-      box.setPointerCapture(e.pointerId);
       const p = local(e);
+      // A press on a neighbour brings it to the centre instead of charging.
+      const c = specimenAt(p.x, p.y);
+      const o = c < 0 ? 0 : Math.round(wrapOffset(c));
+      if (o !== 0) {
+        go(o);
+        return;
+      }
+      box.setPointerCapture(e.pointerId);
+      swipe.x = p.x;
+      swipe.y = p.y;
+      swipe.touch = e.pointerType === "touch";
       startHold(p.x, p.y);
     };
     const onMove = (e: PointerEvent) => {
@@ -204,11 +240,33 @@ export default function HalftoneMoths() {
       pointer.x = p.x;
       pointer.y = p.y;
       pointer.inside = true;
+      // A sideways touch drag browses and drops the charge.
+      const ddx = p.x - swipe.x;
+      if (swipe.touch && press.holding && Math.abs(ddx) > 40 && Math.abs(ddx) > Math.abs(p.y - swipe.y) * 1.5) {
+        press.holding = false;
+        press.charge = 0;
+        swipe.touch = false;
+        go(ddx < 0 ? 1 : -1);
+      }
+    };
+    let wheelLock = 0;
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) < 24 || Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      const now = performance.now();
+      if (now < wheelLock) return;
+      wheelLock = now + 650;
+      go(Math.sign(e.deltaX));
     };
     const onLeave = () => {
       pointer.inside = false;
     };
     const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+        go(e.key === "ArrowLeft" ? -1 : 1);
+        return;
+      }
       if ((e.key === " " || e.key === "Enter") && !e.repeat) {
         e.preventDefault();
         startHold(W / 2, H / 2);
@@ -224,6 +282,7 @@ export default function HalftoneMoths() {
     box.addEventListener("pointerleave", onLeave);
     box.addEventListener("keydown", onKeyDown);
     box.addEventListener("keyup", onKeyUp);
+    box.addEventListener("wheel", onWheel, { passive: false });
 
     // Resolve the theme's ink colour (any CSS colour syntax) to RGB through a 1px canvas,
     // then build the tinted bucket colours from it. Rebuilt only when the theme changes.
@@ -275,13 +334,30 @@ export default function HalftoneMoths() {
         }
       }
 
-      // Per-specimen wing scale: idle breath, hover flap, one flap as the wave passes.
+      // Carousel spring, then each specimen's slot: position, size and fade.
+      nav.vel += ((nav.target - nav.pos) * SPRING_K - nav.vel * SPRING_C) * dt;
+      nav.pos += nav.vel * dt;
+      if (Math.abs(nav.target - nav.pos) < 1e-3 && Math.abs(nav.vel) < 1e-3) {
+        nav.pos = nav.target;
+        nav.vel = 0;
+      }
+      order.length = 0;
       for (let c = 0; c < COUNT; c++) {
-        const cell = cells[c];
-        const over =
-          pointer.inside && pointer.x > cell.x0 && pointer.x < cell.x1 && pointer.y > cell.y0 && pointer.y < cell.y1;
-        hover[c] += ((over ? 1 : 0) - hover[c]) * Math.min(1, dt * 6);
-        if (wave.active && !kicked[c] && wave.r > Math.hypot(cell.cx - wave.x, cell.cy - wave.y)) {
+        const o = wrapOffset(c);
+        const d = Math.abs(o);
+        const reach = d <= 1 ? d * step1 : step1 + (d - 1) * step2;
+        sx[c] = midX + Math.sign(o) * reach;
+        sS[c] = S0 * scaleAt(d);
+        sA[c] = 1 - smooth(1.4, 2.2, d);
+        if (sA[c] > 0.01) order.push(c);
+      }
+      order.sort((a, b) => sS[b] - sS[a]);
+
+      // Per-specimen wing scale: idle breath, hover flap, one flap as the wave passes.
+      const hovered = pointer.inside ? specimenAt(pointer.x, pointer.y) : -1;
+      for (let c = 0; c < COUNT; c++) {
+        hover[c] += ((hovered === c ? 1 : 0) - hover[c]) * Math.min(1, dt * 6);
+        if (wave.active && !kicked[c] && sA[c] > 0.01 && wave.r > Math.hypot(sx[c] - wave.x, midY - wave.y)) {
           kicked[c] = 1;
           kick[c] = 1;
           phase[c] = 0;
@@ -306,12 +382,23 @@ export default function HalftoneMoths() {
       const lensOn = pointer.inside && !press.holding;
 
       for (let k = 0; k < dx.length; k++) {
-        const c = dc[k];
-        const u = du[k] / scale[c];
-        const v = dv[k];
         let x = dx[k];
         let y = dy[k];
-        let p = sample(current[c], u, v);
+        // Front-most specimen whose box covers this dot; -1 for open plate.
+        let c = -1;
+        let u = 0;
+        let v = 0;
+        for (const s of order) {
+          const su = (x - sx[s]) / sS[s];
+          const sv = (y - midY) / sS[s];
+          if (su >= -1 && su <= 1 && sv >= -1 && sv <= 1) {
+            c = s;
+            u = su / scale[s];
+            v = sv;
+            break;
+          }
+        }
+        let p = c < 0 ? 0 : sample(current[c], u, v) * sA[c];
         let hot = 0;
 
         if (wave.active && next) {
@@ -319,7 +406,7 @@ export default function HalftoneMoths() {
           const oy = y - wave.y;
           const d = Math.hypot(ox, oy) || 1;
           const front = wave.r - d;
-          const pB = sample(next[c], u, v);
+          const pB = c < 0 ? 0 : sample(next[c], u, v) * sA[c];
           p += (pB - p) * smooth(-BAND * 0.15, BAND * 0.35, front);
           const s = Math.exp(-((front / (BAND * 0.5)) ** 2)) * wave.strength;
           if (s > 0.01) {
@@ -359,7 +446,8 @@ export default function HalftoneMoths() {
         // activity, weighted toward heavy dots; the pointer light and hot dots override.
         const weight = smooth(0.12, 0.6, p);
         const sweep = smooth(0.72, 1, 0.5 + 0.5 * Math.sin(x * 0.0045 + y * 0.0025 - t * 0.7));
-        let a = (sweep * 0.5 + flapNow[c] * 0.8 + bloom[c] * 0.9) * weight + light * 0.9;
+        const own = c < 0 ? 0 : flapNow[c] * 0.8 + bloom[c] * 0.9;
+        let a = (sweep * 0.5 + own) * weight + light * 0.9;
         a = Math.min(1, Math.max(a, hot));
 
         if (a < 0.08) {
@@ -426,8 +514,14 @@ export default function HalftoneMoths() {
       box.removeEventListener("pointerleave", onLeave);
       box.removeEventListener("keydown", onKeyDown);
       box.removeEventListener("keyup", onKeyUp);
+      box.removeEventListener("wheel", onWheel);
     };
   });
+
+  // Keep presses on the arrows from charging a wave on the plate underneath.
+  const stop = (e: ReactPointerEvent) => e.stopPropagation();
+  const navStep =
+    "grid size-7 place-items-center rounded-[6px] transition-colors hover:bg-foreground/5 hover:text-foreground";
 
   return (
     <div
@@ -438,15 +532,30 @@ export default function HalftoneMoths() {
       <canvas
         ref={canvasRef}
         role="img"
-        aria-label="Plate of halftone moths. Hold anywhere and let go to send a wave through them."
+        aria-label="Carousel of halftone butterflies. Hold anywhere and let go to send a wave through them; use the arrow keys to browse."
         className="absolute inset-0 size-full text-foreground"
       />
       <p
         ref={hintRef}
-        className="pointer-events-none absolute inset-x-0 bottom-5 text-center text-sm text-muted-foreground"
+        className="pointer-events-none absolute inset-x-0 bottom-14 text-center text-sm text-muted-foreground"
       >
         Hold anywhere, then let go
       </p>
+      <nav
+        aria-label="Butterflies"
+        onPointerDown={stop}
+        className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-0.5 text-sm font-medium text-muted-foreground"
+      >
+        <button type="button" onClick={() => api.current?.go(-1)} aria-label="Previous butterfly" className={navStep}>
+          <HugeiconsIcon icon={ArrowLeft02Icon} size={16} strokeWidth={1.75} />
+        </button>
+        <span ref={counterRef} aria-live="polite" className="px-1.5 tabular-nums">
+          01 / {String(COUNT).padStart(2, "0")}
+        </span>
+        <button type="button" onClick={() => api.current?.go(1)} aria-label="Next butterfly" className={navStep}>
+          <HugeiconsIcon icon={ArrowRight02Icon} size={16} strokeWidth={1.75} />
+        </button>
+      </nav>
     </div>
   );
 }

@@ -70,12 +70,13 @@ function segDist(px: number, py: number, ax: number, ay: number, bx: number, by:
   return Math.hypot(px - (ax + s * dx), py - (ay + s * dy));
 }
 
-export function buildSpecies(seed: number): Float32Array {
+export function buildSpecies(seed: number, { butterfly = false } = {}): Float32Array {
   const r = rng(seed * 9973 + 17);
   const pick = (a: number, b: number) => lerp(a, b, r());
   const chance = (p: number) => r() < p;
 
-  const moth = chance(0.45);
+  // The roll is always taken so a seed's pattern doesn't change when butterflies are forced.
+  const moth = chance(0.45) && !butterfly;
   const fore: Wing = moth
     ? { x: pick(0.42, 0.5), y: pick(-0.12, 0.0), a: pick(0.5, 0.62), b: pick(0.17, 0.25), rot: pick(-0.16, 0.06), n: pick(2, 2.8) }
     : { x: pick(0.42, 0.5), y: pick(-0.36, -0.26), a: pick(0.48, 0.58), b: pick(0.27, 0.36), rot: pick(-0.62, -0.3), n: pick(2.2, 3.4) };

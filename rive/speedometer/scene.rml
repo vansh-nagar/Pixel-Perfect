@@ -1,0 +1,279 @@
+<Rive version="1" kind="fragment">
+  <Artboard styleId="0:3" defaultStateMachineId="0:4" viewModelId="0:100" viewModelInstanceId="0:104" width="280" height="250" name="Speedometer" id="0:2">
+    <LayoutComponentStyle name="Artboard Style" id="0:3"/>
+
+    <!-- The fill arc's trim lives in one group, shared by the arc and its glow. -->
+    <GroupEffect name="Fill Trim" id="0:120">
+      <TrimPath start="0" end="0.3" offset="0.625" name="Trim">
+        <DataBindContext sourcePathIds="0:100-0:101" propertyKey="115" converterId="0:111"/>
+      </TrimPath>
+    </GroupEffect>
+
+    <!-- Readouts first: the first declared paints on top. -->
+    <Text x="140" y="124" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Gear">
+      <TextStylePaint fontSize="22" fontAssetId="0:7" name="T" id="0:21">
+        <Fill name="F"><SolidColor colorValue="FFFFFFFF" name="C"/></Fill>
+        <Stroke thickness="0.9" name="Weight"><SolidColor colorValue="FFFFFFFF" name="C"/></Stroke>
+      </TextStylePaint>
+      <TextValueRun styleId="0:21" text="N" name="Run">
+        <DataBindContext sourcePathIds="0:100-0:103" propertyKey="268"/>
+      </TextValueRun>
+    </Text>
+
+    <Shape x="140" y="124" name="Hub">
+      <Ellipse width="44" height="44" name="P"/>
+      <Stroke thickness="1.5" name="Ring"><SolidColor colorValue="CCFFFFFF" name="C"/></Stroke>
+      <Fill name="F"><SolidColor colorValue="F20B0D10" name="C"/></Fill>
+    </Shape>
+
+    <Shape x="140" y="124" rotation="2.356" name="Needle">
+      <DataBindContext sourcePathIds="0:100-0:101" propertyKey="15" converterId="0:110"/>
+      <Rectangle x="0" y="0" width="88" height="3" originX="0.05" originY="0.5" cornerRadiusTL="1.5" name="P"/>
+      <Fill name="F"><SolidColor colorValue="FFFF5A1F" name="C"/></Fill>
+      <Stroke thickness="5" name="Glow">
+        <SolidColor colorValue="66FF5A1F" name="C"/>
+        <Feather strength="6" name="Soft"/>
+      </Stroke>
+    </Shape>
+
+    <Text x="140" y="194" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Speed">
+      <TextStylePaint fontSize="44" fontAssetId="0:7" name="T" id="0:22">
+        <Fill name="F"><SolidColor colorValue="FFFFFFFF" name="C"/></Fill>
+        <Stroke thickness="1.4" name="Weight"><SolidColor colorValue="FFFFFFFF" name="C"/></Stroke>
+      </TextStylePaint>
+      <TextValueRun styleId="0:22" text="0" name="Run">
+        <DataBindContext sourcePathIds="0:100-0:102" propertyKey="268"/>
+      </TextValueRun>
+    </Text>
+    <Text x="140" y="224" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Unit">
+      <TextStylePaint fontSize="11" fontAssetId="0:7" name="T" id="0:24">
+        <Fill name="F"><SolidColor colorValue="B3FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:24" text="KM/H" name="Run"/>
+    </Text>
+
+    <Text x="92.624" y="171.376" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 0">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:10">
+        <Fill name="F"><SolidColor colorValue="D9FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:10" text="0" name="Run"/>
+    </Text>
+    <Text x="76.279" y="144.704" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 1000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:11">
+        <Fill name="F"><SolidColor colorValue="D9FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:11" text="1" name="Run"/>
+    </Text>
+    <Text x="73.825" y="113.519" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 2000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:12">
+        <Fill name="F"><SolidColor colorValue="D9FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:12" text="2" name="Run"/>
+    </Text>
+    <Text x="85.796" y="84.618" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 3000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:13">
+        <Fill name="F"><SolidColor colorValue="D9FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:13" text="3" name="Run"/>
+    </Text>
+    <Text x="109.583" y="64.303" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 4000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:14">
+        <Fill name="F"><SolidColor colorValue="D9FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:14" text="4" name="Run"/>
+    </Text>
+    <Text x="140" y="57" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 5000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:15">
+        <Fill name="F"><SolidColor colorValue="D9FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:15" text="5" name="Run"/>
+    </Text>
+    <Text x="170.417" y="64.303" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 6000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:16">
+        <Fill name="F"><SolidColor colorValue="D9FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:16" text="6" name="Run"/>
+    </Text>
+    <Text x="194.204" y="84.618" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 7000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:17">
+        <Fill name="F"><SolidColor colorValue="D9FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:17" text="7" name="Run"/>
+    </Text>
+    <Text x="206.175" y="113.519" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 8000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:18">
+        <Fill name="F"><SolidColor colorValue="D9FFFFFF" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:18" text="8" name="Run"/>
+    </Text>
+    <Text x="203.721" y="144.704" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 9000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:19">
+        <Fill name="F"><SolidColor colorValue="FFFF3B30" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:19" text="9" name="Run"/>
+    </Text>
+    <Text x="187.376" y="171.376" sizingValue="autoWidth" originX="0.5" originY="0.5" name="Label 10000">
+      <TextStylePaint fontSize="13" fontAssetId="0:7" name="T" id="0:20">
+        <Fill name="F"><SolidColor colorValue="FFFF3B30" name="C"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:20" text="10" name="Run"/>
+    </Text>
+
+    <Shape x="79.542" y="184.458" rotation="2.356" name="Tick 0">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="F2FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="64.968" y="169.98" rotation="2.592" name="Tick 500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="80FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="58.685" y="150.421" rotation="2.827" name="Tick 1000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="F2FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="52.271" y="130.904" rotation="3.063" name="Tick 1500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="80FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="55.553" y="110.625" rotation="3.299" name="Tick 2000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="F2FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="58.699" y="90.324" rotation="3.534" name="Tick 2500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="80FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="70.829" y="73.744" rotation="3.77" name="Tick 3000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="F2FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="82.849" y="57.084" rotation="4.006" name="Tick 3500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="80FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="101.184" y="47.819" rotation="4.241" name="Tick 4000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="F2FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="119.457" y="38.431" rotation="4.477" name="Tick 4500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="80FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="140" y="38.5" rotation="4.712" name="Tick 5000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="F2FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="160.543" y="38.431" rotation="4.948" name="Tick 5500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="80FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="178.816" y="47.819" rotation="5.184" name="Tick 6000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="F2FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="197.151" y="57.084" rotation="5.419" name="Tick 6500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="80FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="209.171" y="73.744" rotation="5.655" name="Tick 7000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="F2FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="221.301" y="90.324" rotation="5.89" name="Tick 7500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="80FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="224.447" y="110.625" rotation="6.126" name="Tick 8000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="F2FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="227.729" y="130.904" rotation="6.362" name="Tick 8500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="80FFFFFF" name="C"/></Fill>
+    </Shape>
+    <Shape x="221.315" y="150.421" rotation="6.597" name="Tick 9000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="FFFF3B30" name="C"/></Fill>
+    </Shape>
+    <Shape x="215.032" y="169.98" rotation="6.833" name="Tick 9500">
+      <Rectangle width="6" height="1.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="FFFF3B30" name="C"/></Fill>
+    </Shape>
+    <Shape x="200.458" y="184.458" rotation="7.069" name="Tick 10000">
+      <Rectangle width="11" height="2.4" cornerRadiusTL="1" name="P"/>
+      <Fill name="F"><SolidColor colorValue="FFFF3B30" name="C"/></Fill>
+    </Shape>
+
+    
+    <Shape x="140" y="124" name="Fill">
+      <Ellipse width="200" height="200" name="P"/>
+      <Stroke thickness="6" cap="round" name="S">
+        <SolidColor colorValue="FFFF5A1F" name="C"/>
+        <TargetEffect targetId="0:120" name="Trim"/>
+        
+      </Stroke>
+    </Shape>
+    
+    <Shape x="140" y="124" name="Fill Glow">
+      <Ellipse width="200" height="200" name="P"/>
+      <Stroke thickness="14" cap="round" name="S">
+        <SolidColor colorValue="73FF5A1F" name="C"/>
+        <TargetEffect targetId="0:120" name="Trim"/>
+        <Feather strength="10" name="Soft"/>
+      </Stroke>
+    </Shape>
+    
+    <Shape x="140" y="124" name="Redline">
+      <Ellipse width="200" height="200" name="P"/>
+      <Stroke thickness="6" cap="round" name="S">
+        <SolidColor colorValue="CCFF3B30" name="C"/>
+        <TrimPath start="0.675" end="0.75" offset="0.625" name="Trim"/>
+        
+      </Stroke>
+    </Shape>
+    
+    <Shape x="140" y="124" name="Track">
+      <Ellipse width="200" height="200" name="P"/>
+      <Stroke thickness="6" cap="round" name="S">
+        <SolidColor colorValue="1FFFFFFF" name="C"/>
+        <TrimPath start="0" end="0.75" offset="0.625" name="Trim"/>
+        
+      </Stroke>
+    </Shape>
+
+    <Shape x="140" y="124" name="Face">
+      <Ellipse width="226" height="226" name="P"/>
+      <Stroke thickness="1.2" name="Rim"><SolidColor colorValue="29FFFFFF" name="C"/></Stroke>
+      <Fill name="F">
+        <RadialGradient startX="0" startY="-30" endX="0" endY="113" name="G">
+          <GradientStop colorValue="E61C2027" position="0"/>
+          <GradientStop colorValue="E60A0C0F" position="1"/>
+        </RadialGradient>
+      </Fill>
+    </Shape>
+
+    <StateMachine name="Live" id="0:4">
+      <StateMachineLayer name="Layer">
+        <EntryState><StateTransition stateToId="0:6"/></EntryState>
+        <AnimationState x="200" animationId="0:5" id="0:6"/>
+      </StateMachineLayer>
+    </StateMachine>
+    <LinearAnimation loopValue="loop" duration="60" name="Idle" id="0:5"/>
+  </Artboard>
+
+  <FontAsset file="NotoSans.ttf" name="Noto Sans" id="0:7"/>
+
+  <DataConverterRangeMapper minInput="0" maxInput="10000" minOutput="2.356" maxOutput="7.069" clampLower="true" clampUpper="true" name="RpmToAngle" id="0:110"/>
+  <DataConverterRangeMapper minInput="0" maxInput="10000" minOutput="0" maxOutput="0.75" clampLower="true" clampUpper="true" name="RpmToArc" id="0:111"/>
+
+  <ViewModel defaultInstanceId="0:104" name="Speedo" id="0:100">
+    <ViewModelPropertyNumber name="rpm" id="0:101"/>
+    <ViewModelPropertyString name="speedText" id="0:102"/>
+    <ViewModelPropertyString name="gear" id="0:103"/>
+    <ViewModelInstance exports="true" name="Default" id="0:104">
+      <ViewModelInstanceNumber propertyValue="6200" viewModelPropertyId="0:101"/>
+      <ViewModelInstanceString propertyValue="149" viewModelPropertyId="0:102"/>
+      <ViewModelInstanceString propertyValue="3" viewModelPropertyId="0:103"/>
+    </ViewModelInstance>
+  </ViewModel>
+</Rive>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { BookOpen, Box, Gamepad2, GithubIcon, Menu } from "lucide-react";
 import { LightDarkMode } from "@/components/ui/light-dark-mode";
 import { StarsCount } from "@/components/mine/landing-page/stars-count";
+import { DEV_ONLY_ROUTES, isDev } from "@/lib/dev-only";
 import {
   Tooltip,
   TooltipContent,
@@ -22,7 +23,7 @@ const NAV_LINKS = [
   { href: "/playground", label: "Playground", icon: Gamepad2 },
   { href: "/tutorial", label: "Tutorial", icon: BookOpen },
   { href: "/isometric", label: "Isometric", icon: Box },
-] as const;
+].filter(({ href }) => isDev || !(DEV_ONLY_ROUTES as readonly string[]).includes(href));
 
 export function Navbar({
   className = "",

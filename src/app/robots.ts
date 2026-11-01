@@ -4,7 +4,7 @@ import { SEO_CONSTANTS } from "@/lib/seo/constants";
 export default function robots(): MetadataRoute.Robots {
   const allowAll = {
     allow: "/",
-    disallow: ["/api/", "/_next/", "/admin/", "/preview/"],
+    disallow: ["/api/", "/_next/", "/admin/", "/preview/", "/playground/", "/isometric/"],
   };
 
   return {

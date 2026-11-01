@@ -1,4 +1,6 @@
+import { notFound } from "next/navigation";
 import { Navbar } from "@/components/mine/landing-page/navbar";
+import { isDev } from "@/lib/dev-only";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = generatePageMetadata({
@@ -8,6 +10,7 @@ export const metadata = generatePageMetadata({
 });
 
 export default function IsometricLayout({ children }: { children: React.ReactNode }) {
+  if (!isDev) notFound();
   return (
     <>
       <Navbar className="fixed top-0 px-1" />

@@ -1,4 +1,6 @@
+import { notFound } from "next/navigation";
 import { Navbar } from "@/components/mine/landing-page/navbar";
+import { isDev } from "@/lib/dev-only";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { PlaygroundPager } from "./_shared/playground-pager";
 
@@ -14,6 +16,7 @@ export default function PlaygroundLayout({
 }: {
   children: React.ReactNode;
 }) {
+  if (!isDev) notFound();
   return (
     <>
       <Navbar className="fixed top-0 px-1" showStars={false} />

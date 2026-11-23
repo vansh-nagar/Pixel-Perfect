@@ -7,6 +7,7 @@ import StackUsed from "@/components/mine/landing-page/stack-used";
 import StarBorder from "@/components/mine/landing-page/star-border";
 import Pricing from "@/components/pricing";
 import { LandingGrid } from "@/components/layout/landing-grid";
+import { LogoField } from "@/components/mine/landing-page/logo-field/logo-field";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = generatePageMetadata({
@@ -19,6 +20,7 @@ export const metadata = generatePageMetadata({
 export default function Home() {
   return (
     <LandingGrid>
+      <LogoField />
       <div className="px-3 sm:px-6 py-3 relative overflow-hidden">
         <Navbar />
         <StarBorder />

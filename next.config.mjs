@@ -17,7 +17,11 @@ if (CATEGORY_SLUGS.length === 0) {
 }
 
 const nextConfig = {
-  reactStrictMode: true,
+  // Off because @react-three/fiber 9 can't survive Strict Mode's dev-only
+  // mount → unmount → remount: the simulated unmount schedules
+  // forceContextLoss() 500ms later, so every <Canvas> dies right after it
+  // first paints (dev only; production never double-mounts).
+  reactStrictMode: false,
   devIndicators: false,
   async redirects() {
     return [

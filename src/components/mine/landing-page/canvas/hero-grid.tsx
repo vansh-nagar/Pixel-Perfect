@@ -21,15 +21,31 @@ export function HeroGrid() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const gridSize = 153.5;
-    let gridWidth = 0;
-    let gridHeight = 0;
+    // Target cell size; the real size is stretched so a whole number of
+    // cells fills the section exactly (no half-cut row/column at the edges).
+    const targetSize = 153.5;
+    let width = 0;
+    let height = 0;
+    let gridWidth = 1;
+    let gridHeight = 1;
+    let cellW = targetSize;
+    let cellH = targetSize;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      gridWidth = Math.ceil(canvas.width / gridSize);
-      gridHeight = Math.ceil(canvas.height / gridSize);
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      gridWidth = Math.max(1, Math.round(width / targetSize));
+      gridHeight = Math.max(1, Math.round(height / targetSize));
+      cellW = width / gridWidth;
+      cellH = height / gridHeight;
+      glowingTilesRef.current = glowingTilesRef.current.filter(
+        (t) => t.x < gridWidth && t.y < gridHeight
+      );
     };
 
     const drawGrid = () => {
@@ -37,22 +53,24 @@ export function HeroGrid() {
       const starColor = "rgba(200, 200, 200, 0.25)";
 
       ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0, 0, width, height);
 
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = 1;
 
-      for (let x = 0; x < canvas.width; x += gridSize) {
+      for (let i = 0; i <= gridWidth; i++) {
+        const x = Math.round(i * cellW) + 0.5;
         ctx.beginPath();
         ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
+        ctx.lineTo(x, height);
         ctx.stroke();
       }
 
-      for (let y = 0; y < canvas.height; y += gridSize) {
+      for (let j = 0; j <= gridHeight; j++) {
+        const y = Math.round(j * cellH) + 0.5;
         ctx.beginPath();
         ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
+        ctx.lineTo(width, y);
         ctx.stroke();
       }
 
@@ -84,35 +102,29 @@ export function HeroGrid() {
         ctx.fill();
       };
 
-      for (let x = 0; x < canvas.width; x += gridSize) {
-        for (let y = 0; y < canvas.height; y += gridSize) {
-          drawStar(x, y, 8, 4);
+      for (let i = 0; i <= gridWidth; i++) {
+        for (let j = 0; j <= gridHeight; j++) {
+          drawStar(i * cellW, j * cellH, 8, 4);
         }
       }
 
       for (const tile of glowingTilesRef.current) {
         const opacity = tile.opacity;
 
-        ctx.shadowColor = `rgba(0, 0, 0, ${0.3 * opacity})`;
-        ctx.shadowBlur = 30 * opacity;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-
         ctx.fillStyle = `rgba(0, 0, 0, ${0.02 * opacity})`;
-        ctx.fillRect(tile.x * gridSize, tile.y * gridSize, gridSize, gridSize);
+        const tx = Math.round(tile.x * cellW) + 0.5;
+        const ty = Math.round(tile.y * cellH) + 0.5;
+        const tw = Math.round((tile.x + 1) * cellW) - Math.round(tile.x * cellW);
+        const th = Math.round((tile.y + 1) * cellH) - Math.round(tile.y * cellH);
+        ctx.fillRect(tx, ty, tw, th);
 
         ctx.strokeStyle = `rgba(0, 0, 0, ${0.15 * opacity})`;
         ctx.lineWidth = 1;
-        ctx.strokeRect(
-          tile.x * gridSize,
-          tile.y * gridSize,
-          gridSize,
-          gridSize
-        );
+        ctx.strokeRect(tx, ty, tw, th);
 
         if (opacity > 0.5) {
-          const centerX = tile.x * gridSize + gridSize / 2;
-          const centerY = tile.y * gridSize + gridSize / 2;
+          const centerX = tile.x * cellW + cellW / 2;
+          const centerY = tile.y * cellH + cellH / 2;
           const logoSize = 10 * opacity;
 
           ctx.fillStyle = `#a3a3a3`;
@@ -160,8 +172,6 @@ export function HeroGrid() {
         }
       }
 
-      ctx.shadowColor = "transparent";
-      ctx.shadowBlur = 0;
     };
 
     const animate = () => {
@@ -202,10 +212,11 @@ export function HeroGrid() {
     resizeCanvas();
     animate();
 
-    window.addEventListener("resize", resizeCanvas);
+    const observer = new ResizeObserver(resizeCanvas);
+    observer.observe(canvas);
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
+      observer.disconnect();
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current);
       }

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { GlassAvatar } from "@/components/ui/glass-avatar";
 import { ArrowUpRight } from "lucide-react";
 import { enrichTweet, type EnrichedTweet, type TweetProps } from "react-tweet";
 import { getTweet, type Tweet } from "react-tweet/api";
@@ -84,15 +85,9 @@ export const TweetNotFound = ({
 export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
   <div className="flex flex-row items-start justify-between tracking-normal">
     <div className="flex items-center space-x-3">
-      <img
-        title={`Profile picture of ${tweet.user.name}`}
-        alt=""
-        height={48}
-        width={48}
-        loading="lazy"
-        decoding="async"
+      <GlassAvatar
         src={tweet.user.profile_image_url_https}
-        className="border-border/50 overflow-hidden rounded-full border z-20 relative"
+        title={`Profile picture of ${tweet.user.name}`}
       />
 
       <div className="flex flex-col gap-0.5">

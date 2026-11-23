@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import { HeroGrid } from "./canvas/hero-grid";
-import TextTypewriterGlitch from "registry/new-york/text/text-typewriter-glitch";
 import { FaGithub } from "react-icons/fa6";
 import dynamic from "next/dynamic";
 
@@ -136,10 +135,7 @@ export function HeroSection() {
           A pixel-perfect React component library for{" "}
           <div className=" hidden md:block" />
           <div className="flex flex-wrap justify-center items-center gap-y-1">
-            modern web apps. And
-            <TextTypewriterGlitch className="mx-1  p-0.5 px-1 bg-muted rounded-none ">
-              It&apos;s also open source.
-            </TextTypewriterGlitch>
+            modern web apps. And it&apos;s also open source.
           </div>
         </div>
 

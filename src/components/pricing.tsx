@@ -1,6 +1,4 @@
-
 import StarBorder from "./mine/landing-page/star-border";
-import SupportShowcase from "./mine/landing-page/support-showcase";
 import SectionChrome from "./mine/landing-page/section-chrome";
 import { LazyVideo } from "./mine/landing-page/lazy-video";
 
@@ -8,47 +6,14 @@ export default function Pricing() {
   return (
     <div className="relative overflow-hidden">
       <StarBorder />
-      <SectionChrome label="SUPPORT" />
-      <div className="mx-auto grid grid-rows-[auto_auto]">
-        <div className=" text-center relative overflow-hidden w-full py-10">
-          <StarBorder />
-          <h2 className="text-3xl font-medium md:text-4xl lg:text-5xl">
-            Support Pixel Perfect :D
-          </h2>
-        </div>
-        <div className="overflow-hidden relative">
-          <div className="relative border-t  border-muted">
-            <div className="grid items-center divide-y md:grid-cols-2 md:divide-x md:divide-y-0">
-              <div className=" flex flex-col p-4 justify-center items-center text-center h-full border-muted relative overflow-hidden">
-                <StarBorder />
-
-                <h3 className="text-3xl font-semibold">Support Creator</h3>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Help me keep the library free for everyone
-                </p>
-
-                <span className="mb-2 mt-6 inline-block font-medium text-6xl">
-                  <span className="  text-2xl">$</span>3
-                </span>
-
-                <SupportShowcase />
-
-                <p className="text-muted-foreground mt-6 text-xs">
-                  Your donation helps me maintain the library, <br />
-                  add new components, and keep it open source
-                </p>
-              </div>
-              <div className="relative h-full flex  justify-center items-center overflow-hidden">
-                <StarBorder />
-                <LazyVideo
-                  src="https://res.cloudinary.com/dz12pywzs/video/upload/q_auto/v1768638799/Timeline_1_tykewr.mp4"
-                  poster="https://res.cloudinary.com/dz12pywzs/video/upload/so_0,q_auto/v1768638799/Timeline_1_tykewr.jpg"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+      <SectionChrome label="DEMO" />
+      <div className="relative overflow-hidden border-t border-muted">
+        <StarBorder />
+        <LazyVideo
+          src="https://res.cloudinary.com/dz12pywzs/video/upload/q_auto/v1768638799/Timeline_1_tykewr.mp4"
+          poster="https://res.cloudinary.com/dz12pywzs/video/upload/so_0,q_auto/v1768638799/Timeline_1_tykewr.jpg"
+          className="block w-full aspect-video object-cover"
+        />
       </div>
     </div>
   );

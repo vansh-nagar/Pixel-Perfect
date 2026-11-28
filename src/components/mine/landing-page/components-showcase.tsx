@@ -16,11 +16,11 @@ const ComponentsShowcase = () => {
           </div>
           <div className="border-y border-muted grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
             <ShowcaseCell source="buttons" className="  border  border-muted" />
-            <ShowcaseCell source="svg" className="  border  border-muted" />
+            <ShowcaseCell source="motion" className="  border  border-muted" />
             <ShowcaseCell source="mouse" className="  border  border-muted" />
-            <ShowcaseCell source="border" className="  border  border-muted" />
+            <ShowcaseCell source="mask" className="  border  border-muted" />
             <ShowcaseCell source="background" className="  border  border-muted" />
-            <ShowcaseCell source="text" className="  border  border-muted" />
+            <ShowcaseCell source="gsap" className="  border  border-muted" />
           </div>{" "}
           <div className="relative h-10 text-xs tracking-wider text-muted-foreground">
             <StarBorder />

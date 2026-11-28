@@ -1,5 +1,5 @@
 /**
- * Acid-green glyph zones — targets, rounded squares, crosses, plus signs and dots — drifting across a black grid while solid blocks snap to new places on a beat.
+ * Acid-green glyph zones — targets, rounded squares, crosses, plus signs and dots — drifting across a black grid.
  */
 "use client";
 
@@ -9,13 +9,11 @@ export interface GlyphBlocksBackgroundProps {
   children?: ReactNode;
   className?: string;
   style?: CSSProperties;
-  /** Glyph and block colour. */
+  /** Glyph colour. */
   color?: string;
   backgroundColor?: string;
   /** Grid cell size in px. */
   size?: number;
-  /** Number of solid blocks. */
-  blocks?: number;
   speed?: number;
   paused?: boolean;
 }
@@ -40,11 +38,9 @@ const noise = (x: number, y: number) => {
   return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
 };
 
-type Block = { x: number; y: number; w: number; h: number };
-
 export default function GlyphBlocksBackground({
   children, className = "", style, color = "#c6ff00", backgroundColor = "#000000",
-  size = 18, blocks = 3, speed = 1, paused = false,
+  size = 18, speed = 1, paused = false,
 }: GlyphBlocksBackgroundProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -56,7 +52,6 @@ export default function GlyphBlocksBackground({
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
     const cell = Number.isFinite(size) ? Math.max(10, size) : 18;
-    const blockCount = Number.isFinite(blocks) ? Math.max(0, Math.round(blocks)) : 4;
     const rate = Number.isFinite(speed) ? Math.max(0, speed) : 1;
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     let width = 0;
@@ -67,20 +62,7 @@ export default function GlyphBlocksBackground({
     let previous = 0;
     let elapsed = 0;
     let lastStep = -1;
-    let lastBeat = -1;
     let visible = false;
-    let solids: Block[] = [];
-
-    const randomBlock = (seed: number): Block => {
-      const w = 4 + Math.floor(hash(seed, 1) * Math.max(4, columns * 0.2));
-      const h = 3 + Math.floor(hash(seed, 2) * Math.max(3, rows * 0.3));
-      return {
-        x: Math.floor(hash(seed, 3) * Math.max(1, columns - w / 2)),
-        y: Math.floor(hash(seed, 4) * Math.max(1, rows - h / 2)),
-        w,
-        h,
-      };
-    };
 
     const draw = (step: number) => {
       ctx.clearRect(0, 0, width, height);
@@ -158,7 +140,6 @@ export default function GlyphBlocksBackground({
       ctx.lineWidth = Math.max(2, cell * 0.17);
       ctx.stroke(bold);
       ctx.fill(fill);
-      for (const block of solids) ctx.fillRect(block.x * cell, block.y * cell, block.w * cell, block.h * cell);
     };
 
     const tick = (now: number) => {
@@ -166,12 +147,6 @@ export default function GlyphBlocksBackground({
       previous = now;
       // About eight refreshes a second: stepped on purpose.
       const step = Math.floor(elapsed * 8);
-      const beat = Math.floor(elapsed / 1.4);
-      if (beat !== lastBeat && solids.length) {
-        // On each beat one block snaps somewhere new; no tween, it just moves.
-        solids[beat % solids.length] = randomBlock(beat * 7.31 + 1);
-        lastBeat = beat;
-      }
       if (step !== lastStep) {
         lastStep = step;
         draw(step);
@@ -198,8 +173,6 @@ export default function GlyphBlocksBackground({
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       columns = Math.ceil(width / cell);
       rows = Math.ceil(height / cell);
-      solids = Array.from({ length: blockCount }, (_, i) => randomBlock(i * 13.7 + 0.5));
-      lastBeat = Math.floor(elapsed / 1.4);
       draw(Math.floor(elapsed * 8));
     };
     const observer = new ResizeObserver(resize);
@@ -216,7 +189,7 @@ export default function GlyphBlocksBackground({
       reducedMotion.removeEventListener("change", update);
       document.removeEventListener("visibilitychange", update);
     };
-  }, [color, size, blocks, speed, paused]);
+  }, [color, size, speed, paused]);
 
   return (
     <div ref={hostRef} className={`relative isolate h-full w-full overflow-hidden ${className}`} style={{ backgroundColor, ...style }}>

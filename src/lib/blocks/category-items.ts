@@ -1,6 +1,4 @@
 import registry from "../../../registry.json";
-import { SHADERS } from "@/components/pixel-perfect/shaders/registry";
-import { IMAGE_SHADERS } from "@/components/pixel-perfect/shaders/image-registry";
 import { getCategory, type CategoryItem } from "./categories";
 
 type RegistryItem = {
@@ -42,13 +40,6 @@ export function getCategoryItems(slug: string): CategoryItem[] {
           name: titleize(item.name),
           description: item.description ?? "",
         }));
-    case "shader-data": {
-      const shaders = source.set === "shaders" ? SHADERS : IMAGE_SHADERS;
-      return shaders.map((shader) => ({
-        name: shader.title,
-        description: shader.description,
-      }));
-    }
     case "manual":
       return source.items;
   }

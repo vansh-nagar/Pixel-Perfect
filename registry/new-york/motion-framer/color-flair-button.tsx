@@ -103,7 +103,7 @@ const ColorFlairButton = () => {
       <a
         ref={buttonRef}
         href="#"
-        className="relative inline-flex items-center overflow-hidden rounded-full border border-black px-8 py-4 text-lg font-medium text-black"
+        className="group relative inline-flex items-center overflow-hidden rounded-full border border-foreground px-8 py-4 text-lg font-medium text-foreground"
       >
         {FLAIRS.map((f) => (
           <span
@@ -112,7 +112,9 @@ const ColorFlairButton = () => {
             style={{ width: f.size, backgroundColor: f.color }}
           />
         ))}
-        <span className="relative z-10">Visit the forum</span>
+        <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
+          Visit the forum
+        </span>
       </a>
     </div>
   );

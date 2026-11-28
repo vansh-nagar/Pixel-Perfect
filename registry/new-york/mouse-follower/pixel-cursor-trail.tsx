@@ -34,15 +34,18 @@ const PixelCursorTrail = () => {
     const colorize = (cell: HTMLDivElement) => {
       cell.style.transition = "none";
       cell.style.backgroundColor = "currentColor";
-      requestAnimationFrame(() => {
-        cell.style.transition = "background-color 0.6s ease-out";
-        cell.style.backgroundColor = "transparent";
-      });
+      // Force a style flush so the lit state is committed before the fade
+      // starts; otherwise both changes land in one frame and nothing shows.
+      void cell.offsetWidth;
+      cell.style.transition = "background-color 0.6s ease-out";
+      cell.style.backgroundColor = "transparent";
     };
 
     const handleMouseMove = (e: MouseEvent) => {
       const container = containerRef.current;
       if (!container) return;
+      // Ignore synthetic (demo) moves aimed at another element.
+      if (!e.isTrusted && e.target instanceof Node && !e.target.contains(container)) return;
 
       const rect = container.getBoundingClientRect();
       const x = e.clientX - rect.left;

@@ -4,13 +4,19 @@ import { ComponentTransition } from "@/components/ui/infinite-moving-components"
 
 const loaders = {
   buttons: () => import("../grids/button-grid").then((m) => m.ButtonsArr),
-  svg: () => import("../grids/svg-grid").then((m) => m.SvgArr),
+  motion: () =>
+    import("../grids/motion-animations-grid").then((m) =>
+      m.MotionComponentArr.map(({ Component, ...item }) => ({
+        ...item,
+        component: <Component />,
+      })),
+    ),
   mouse: () =>
     import("../grids/mouse-follower-grid").then((m) => m.MouseFollowerArr),
-  border: () => import("../grids/border-grid").then((m) => m.BorderArr),
+  mask: () => import("../grids/mask-grid").then((m) => m.MaskGridArr),
   background: () =>
     import("../grids/background-grid").then((m) => m.BackgroudArr),
-  text: () => import("./showcase-text").then((m) => m.TextArr),
+  gsap: () => import("../grids/gsap-grid").then((m) => m.GsapStaggerGridArr),
 };
 
 export function ShowcaseCell({

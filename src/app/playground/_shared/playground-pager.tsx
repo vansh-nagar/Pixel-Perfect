@@ -21,6 +21,9 @@ const PAGES = [
   { href: "/playground/7", name: "Street drive" },
   { href: "/playground/8", name: "Car showroom" },
   { href: "/playground/9", name: "Untitled" },
+  { href: "/playground/10", name: "Particle social buttons" },
+  { href: "/playground/11", name: "Particle chart" },
+  { href: "/playground/12", name: "Laptop chart" },
 ];
 
 export function PlaygroundPager() {

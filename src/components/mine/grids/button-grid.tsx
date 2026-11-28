@@ -1,4 +1,5 @@
 "use client";
+import { GridCard, GridShell } from "./_shared/grid-card";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -11,14 +12,12 @@ import MorphButton from "../../../../registry/new-york/buttons/morph-button";
 import MorphImageButton from "../../../../registry/new-york/buttons/morph-image-button";
 import ThreedButton from "../../../../registry/new-york/buttons/3d-button";
 import type { ThreedVariant } from "../../../../registry/new-york/buttons/3d-button";
-import ShinyButton from "../../../../registry/new-york/buttons/shiny-button";
 import BorderGradientButton from "../../../../registry/new-york/buttons/border-gradient-button";
 import MouseFollowerButton from "../../../../registry/new-york/buttons/mouse-follower-button";
 import PremiumButton from "../../../../registry/new-york/buttons/premium-button";
 import type { PremiumVariant } from "../../../../registry/new-york/buttons/premium-button";
 import OrangePremiumButton from "../../../../registry/new-york/buttons/orange-premium-button";
 import type { OrangePremiumVariant } from "../../../../registry/new-york/buttons/orange-premium-button";
-import StripeButton from "../../../../registry/new-york/buttons/stripe-button";
 import LearnMoreButtion from "../../../../registry/new-york/buttons/learn-more-buttion";
 import ToggleButton from "../../../../registry/new-york/buttons/toggle-buttion";
 import AbhinavBentoButton from "../../../../registry/new-york/buttons/abhinav-bento-button";
@@ -30,16 +29,10 @@ import BlurToggleButton from "../../../../registry/new-york/buttons/blur-toggle-
 import BlueChromeButton from "../../../../registry/new-york/buttons/blue-chrome-button";
 import type { BlueChromeVariant } from "../../../../registry/new-york/buttons/blue-chrome-button";
 import MatteShadowButton from "../../../../registry/new-york/buttons/matte-shadow-button";
-import MetalButton from "../../../../registry/new-york/buttons/metal-button";
-import type { MetalVariant } from "../../../../registry/new-york/buttons/metal-button";
 import GlassButton from "../../../../registry/new-york/buttons/glass-button";
 import type { GlassVariant } from "../../../../registry/new-york/buttons/glass-button";
 import { useState } from "react";
-import { usePaginationKeys } from "@/hooks/use-pagination-keys";
 
-import CopyDropdown from "../copy-dropdown";
-import FramerCtaButton from "../../../../registry/new-york/buttons/framer-cta-button";
-import SoftPillButton from "../../../../registry/new-york/buttons/soft-pill-button";
 import BookDemoButton from "../../../../registry/new-york/buttons/book-demo-button";
 import type { BookDemoVariant } from "../../../../registry/new-york/buttons/book-demo-button";
 import GlassyButton from "../../../../registry/new-york/buttons/glassy-button";
@@ -48,10 +41,6 @@ import RainbowGlowingButton from "../../../../registry/new-york/buttons/rainbow-
 import type { RainbowColors } from "../../../../registry/new-york/buttons/rainbow-glowing-button";
 import BevelButton from "../../../../registry/new-york/buttons/bevel-button";
 import SilverButton from "../../../../registry/new-york/buttons/silver-button";
-import AntinomyButton from "../../../../registry/new-york/buttons/antinomy-button";
-import MitosisButton from "../../../../registry/new-york/buttons/mitosis-button";
-import GridPagination from "./_shared/grid-pagination";
-import BorderDecorator from "./_shared/border-decorator";
 import {
   Home, Heart, Star, Settings, Search, Bell, Camera, Music, type LucideIcon } from "lucide-react";
 
@@ -173,48 +162,6 @@ const OrangePremiumButtonWrapper = () => {
       <OrangePremiumButton orangeVariant={variant}>
         Hover Me
       </OrangePremiumButton>
-    </>
-  );
-};
-
-const metalVariants: MetalVariant[] = [
-  "silver",
-  "chrome",
-  "gold",
-  "copper",
-  "bronze",
-  "titanium",
-  "rose-gold",
-  "gunmetal",
-];
-
-const MetalButtonWrapper = () => {
-  const [metal, setMetal] = useState<MetalVariant>("silver");
-  return (
-    <>
-      <div className="absolute left-1.5 top-1.5 z-40">
-        <Select
-          value={metal}
-          onValueChange={(v) => setMetal(v as MetalVariant)}
-        >
-          <SelectTrigger
-            size="sm"
-            className="h-6 gap-1 rounded-none border-dashed px-1.5 text-xs"
-          >
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent align="start" className="min-w-28">
-            {metalVariants.map((v) => (
-              <SelectItem key={v} value={v} className="text-xs capitalize">
-                {v}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-      <MetalButton metal={metal}>
-        {metal.charAt(0).toUpperCase() + metal.slice(1)}
-      </MetalButton>
     </>
   );
 };
@@ -471,20 +418,6 @@ const BookDemoButtonWrapper = () => {
 
 export const ButtonsArr = [
   {
-    name: "Mitosis Button",
-    description:
-      "Share pill that buds gooey drops on hover; they stretch, split and settle into icon buttons.",
-    component: <MitosisButton size="lg" />,
-    registryName: "mitosis-button",
-  },
-  {
-    name: "Steel Pill Button",
-    description:
-      "Glossy silver pill with a white-to-gray gradient stroke and faint letterpress label.",
-    component: <SilverButton variant="steel">Generate</SilverButton>,
-    registryName: "silver-button",
-  },
-  {
     name: "Pearl Pill Button",
     description:
       "Chunky pill with a thick gradient stroke and inverted gloss body for a soft 3D lip.",
@@ -527,34 +460,6 @@ export const ButtonsArr = [
     registryName: "book-demo-button",
   },
   {
-    name: "Soft Pill Secondary",
-    description:
-      "Frosted-glass nav pill with layered highlights and gradient border.",
-    component: <SoftPillButton variant="secondary">Philosophy</SoftPillButton>,
-    registryName: "soft-pill-button",
-  },
-  {
-    name: "Soft Pill Primary",
-    description:
-      "Dark frosted-glass CTA pill with subtle inner glow and metallic border.",
-    component: <SoftPillButton variant="primary">Get in touch</SoftPillButton>,
-    registryName: "soft-pill-button",
-  },
-  {
-    name: "Book a Meeting Button",
-    description: "Dark Framer-style CTA pill with Google Meet brand icon.",
-    component: <FramerCtaButton variant="dark">Book a meeting</FramerCtaButton>,
-    registryName: "framer-cta-button",
-  },
-  {
-    name: "Send a Message Button",
-    description: "Light Framer-style CTA pill with Telegram brand icon.",
-    component: (
-      <FramerCtaButton variant="light">Send a message</FramerCtaButton>
-    ),
-    registryName: "framer-cta-button",
-  },
-  {
     name: "Pixel Credits Button",
     description: "A soft keycap-style button for Pixel Credits.",
     component: <PixelCreditsButton />,
@@ -578,12 +483,6 @@ export const ButtonsArr = [
       "3D push button with press/hover physics and 8 color variants.",
     component: <ThreedButtonWrapper />,
     registryName: "3d-button",
-  },
-  {
-    name: "Shiny Button",
-    description: "A shiny button with hover effects.",
-    component: <ShinyButton />,
-    registryName: "shiny-button",
   },
   {
     name: "Mouse Follower Button",
@@ -615,12 +514,6 @@ export const ButtonsArr = [
       "A chrome-style button with layered glow border and smooth motion.",
     component: <BlueChromeButtonWrapper />,
     registryName: "blue-chrome-button",
-  },
-  {
-    name: "Stripe Button",
-    description: "A Stripe-inspired button with inset shadow effect.",
-    component: <StripeButton>Click Me</StripeButton>,
-    registryName: "stripe-button",
   },
   {
     name: "Learn More Button",
@@ -669,75 +562,30 @@ export const ButtonsArr = [
     registryName: "matte-shadow-button",
   },
   {
-    name: "Metal Button",
-    description: "Metallic button with 8 metal variants.",
-    component: <MetalButtonWrapper />,
-    registryName: "metal-button",
-  },
-  {
     name: "Glass Button",
     description:
       "Frosted glass button with gradient border and 10 color variants.",
     component: <GlassButtonWrapper />,
     registryName: "glass-button",
   },
-  {
-    name: "Antinomy Button",
-    description:
-      "Text label that slides right on hover as two gooey pills fill in and merge behind an action word.",
-    component: (
-      <AntinomyButton size="lg" revealLabel="Open">
-        Portfolio
-      </AntinomyButton>
-    ),
-    registryName: "antinomy-button",
-  },
 ];
 
 const ButtonGrid = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
-  const totalPages = Math.ceil(ButtonsArr.length / itemsPerPage);
-  usePaginationKeys(totalPages, setCurrentPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedItems = ButtonsArr.slice(
-    startIndex,
-    startIndex + itemsPerPage,
-  );
-
   return (
-    <div className="flex flex-col gap-4 overflow-hidden">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-        {paginatedItems.map((item, index) => (
-          <div
-            key={index}
-            className="relative group border-b border-l border-dashed  aspect-square flex items-center justify-center "
-          >
-            <BorderDecorator notch spinOnHover />
-            <div className=" z-30">{item.component}</div>
-
-            <div className=" leading-tight absolute left-1.5  bottom-1.5 p-0.5">
-              <p className="text-xs ">{item.name}</p>
-              <p className="text-[8px] text-muted-foreground leading-snug">
-                {item.description}
-              </p>
-            </div>
-            <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
-              <div className=" border-t border-dashed "></div>
-              <CopyDropdown registryName={item.registryName} />
-              <div />
-              <div className=" border-r border-dashed h-full -mr-[0.5px] " />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <GridPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onChange={setCurrentPage}
-      />
-    </div>
+    <GridShell className="lg:grid-cols-3 xl:grid-cols-4">
+      {ButtonsArr.map((item) => (
+        <GridCard
+          key={item.name}
+          name={item.name}
+          description={item.description}
+          registryName={item.registryName}
+          guides
+          spinOnHover
+        >
+          {item.component}
+        </GridCard>
+      ))}
+    </GridShell>
   );
 };
 

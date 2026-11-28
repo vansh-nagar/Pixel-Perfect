@@ -9,23 +9,18 @@ import BevelButton from "registry/new-york/buttons/bevel-button";
 import RainbowGlowingButton from "registry/new-york/buttons/rainbow-glowing-button";
 import LiquidButton from "registry/new-york/buttons/liquid-button";
 import BookDemoButton from "registry/new-york/buttons/book-demo-button";
-import SoftPillButton from "registry/new-york/buttons/soft-pill-button";
-import FramerCtaButton from "registry/new-york/buttons/framer-cta-button";
 import PixelCreditsButton from "@/components/pixel-perfect/pixel-credits-button";
 import MorphButton from "registry/new-york/buttons/morph-button";
 import MorphImageButton from "registry/new-york/buttons/morph-image-button";
 import ThreedButton from "registry/new-york/buttons/3d-button";
-import ShinyButton from "registry/new-york/buttons/shiny-button";
 import MouseFollowerButton from "registry/new-york/buttons/mouse-follower-button";
 import BorderGradientButton from "registry/new-york/buttons/border-gradient-button";
 import PremiumButton from "registry/new-york/buttons/premium-button";
 import OrangePremiumButton from "registry/new-york/buttons/orange-premium-button";
 import BlueChromeButton from "registry/new-york/buttons/blue-chrome-button";
-import StripeButton from "registry/new-york/buttons/stripe-button";
 import VisitButton from "registry/new-york/buttons/visit-button";
 import AbhinavBentoButton from "registry/new-york/buttons/abhinav-bento-button";
 import MatteShadowButton from "registry/new-york/buttons/matte-shadow-button";
-import MetalButton from "registry/new-york/buttons/metal-button";
 import GlassButton from "registry/new-york/buttons/glass-button";
 
 const DONATE_URL =
@@ -37,31 +32,23 @@ const CHECKOUT_URL = `${DONATE_URL}?amount=${DEFAULT_AMOUNT_CENTS}`;
 const LABEL = "Donate Now";
 
 const styles = [
-  { name: "Steel Pill", node: <SilverButton variant="steel">{LABEL}</SilverButton> },
   { name: "Pearl Pill", node: <SilverButton variant="pearl">{LABEL}</SilverButton> },
   { name: "Bevel", node: <BevelButton>{LABEL}</BevelButton> },
   { name: "Rainbow Glow", node: <RainbowGlowingButton>{LABEL}</RainbowGlowingButton> },
   { name: "Liquid", node: <LiquidButton>{LABEL}</LiquidButton> },
   { name: "Book a Demo", node: <BookDemoButton variant="lime">{LABEL}</BookDemoButton> },
-  { name: "Soft Pill", node: <SoftPillButton variant="secondary">{LABEL}</SoftPillButton> },
-  { name: "Soft Pill Primary", node: <SoftPillButton variant="primary">{LABEL}</SoftPillButton> },
-  { name: "Framer CTA", node: <FramerCtaButton variant="dark">{LABEL}</FramerCtaButton> },
-  { name: "Framer Light", node: <FramerCtaButton variant="light">{LABEL}</FramerCtaButton> },
   { name: "Pixel Credits", node: <PixelCreditsButton>{LABEL}</PixelCreditsButton> },
   { name: "Morph", node: <MorphButton>{LABEL}</MorphButton> },
   { name: "Morph Image", node: <MorphImageButton>{LABEL}</MorphImageButton> },
   { name: "3D", node: <ThreedButton threedVariant="amber">{LABEL}</ThreedButton> },
-  { name: "Shiny", node: <ShinyButton>{LABEL}</ShinyButton> },
   { name: "Mouse Follower", node: <MouseFollowerButton>{LABEL}</MouseFollowerButton> },
   { name: "Gradient Border", node: <BorderGradientButton>{LABEL}</BorderGradientButton> },
   { name: "Premium", node: <PremiumButton premiumVariant="neutral">{LABEL}</PremiumButton> },
   { name: "Orange Premium", node: <OrangePremiumButton orangeVariant="orange">{LABEL}</OrangePremiumButton> },
   { name: "Blue Chrome", node: <BlueChromeButton variant="blue">{LABEL}</BlueChromeButton> },
-  { name: "Stripe", node: <StripeButton>{LABEL}</StripeButton> },
   { name: "Visit", node: <VisitButton label={LABEL} className="w-auto whitespace-nowrap" /> },
   { name: "Abhinav Bento", node: <AbhinavBentoButton><Heart className="size-6 fill-white text-white" /></AbhinavBentoButton> },
   { name: "Matte Shadow", node: <MatteShadowButton>{LABEL}</MatteShadowButton> },
-  { name: "Metal", node: <MetalButton metal="silver">{LABEL}</MetalButton> },
   { name: "Glass", node: <GlassButton variant="blue">{LABEL}</GlassButton> },
 ];
 

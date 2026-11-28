@@ -73,6 +73,8 @@ function MouseImage({ containerRef }: { containerRef: RefObject<HTMLDivElement |
     const el = containerRef.current;
     if (!el) return;
     const onMove = (e: PointerEvent) => {
+      // Ignore synthetic (demo) moves aimed at another element.
+      if (!e.isTrusted && e.target instanceof Node && !e.target.contains(el)) return;
       const r = el.getBoundingClientRect();
       const inside =
         e.clientX >= r.left &&

@@ -173,6 +173,8 @@ export default function DitherCursorTrail({
       stop();
     };
     const move = (event: PointerEvent) => {
+      // Ignore synthetic (demo) moves aimed at another element.
+      if (!event.isTrusted && event.target instanceof Node && !event.target.contains(host)) return;
       if (motion.matches || !pointer.matches || event.pointerType === "touch" || document.hidden) return;
       // Window listening also works through showcase controls layered over this surface.
       const rect = host.getBoundingClientRect();

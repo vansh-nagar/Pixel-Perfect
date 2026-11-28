@@ -287,6 +287,8 @@ export default function PixelDisplaceField({
     const pointer = { x: 0, y: 0, tx: 0, ty: 0, on: 0, want: 0, held: false };
 
     const engage = (event: PointerEvent) => {
+      // Ignore synthetic (demo) moves aimed at another element.
+      if (!event.isTrusted && event.target instanceof Node && !event.target.contains(host)) return;
       if (event.pointerType === "touch" && !pointer.held) return;
       const rect = host.getBoundingClientRect();
       const px = (event.clientX - rect.left) * dpr;

@@ -1,6 +1,6 @@
 // Single source of truth for /blocks categories.
 // Imported by the client tab bar, the /blocks/[category] routes, and sitemap.ts —
-// keep this module string-only (no registry.json, JSX, or shader-data imports).
+// keep this module string-only (no registry.json or JSX imports).
 
 export type CategoryItem = { name: string; description: string };
 
@@ -12,7 +12,6 @@ export type CategorySource =
       nameNotEndsWith?: string;
       exclude?: string[];
     }
-  | { type: "shader-data"; set: "shaders" | "image-shaders" }
   | { type: "manual"; items: CategoryItem[] };
 
 export type BlockCategory = {
@@ -37,19 +36,6 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     source: { type: "registry", folder: "buttons" },
   },
   {
-    slug: "svg-animations",
-    name: "SVG Animations",
-    title: "Animated SVG Components for React",
-    description:
-      "Hand-tuned SVG animations for React — stroke draws, wave loops and playful vector motion you can paste straight into your project. Lightweight, dependency-free markup animated with CSS and Motion.",
-    source: {
-      type: "registry",
-      folder: "svg",
-      nameEndsWith: "-animation",
-      exclude: ["barwave-svg-animation"],
-    },
-  },
-  {
     slug: "motion",
     name: "Motion Animations",
     title: "Framer Motion Components",
@@ -64,59 +50,6 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     description:
       "GSAP-powered React components — timeline choreography, magnetic cursors, SVG morphs and scroll-linked motion using the real GSAP plugin APIs. Each one is a copyable, self-contained lesson in imperative animation.",
     source: { type: "registry", folder: "gsap" },
-  },
-  {
-    slug: "carousels",
-    name: "Carousels",
-    title: "React Carousel Components",
-    description:
-      "React carousels and sliders beyond the basic track — 3D cubes, momentum drags, perspective decks and auto-playing marquees. Touch-friendly, Tailwind-styled, and free to copy.",
-    source: { type: "registry", folder: "carousel" },
-  },
-  {
-    slug: "svg-assets",
-    name: "SVG Assets",
-    title: "Free SVG Assets",
-    description:
-      "A growing set of free SVG assets — decorative vectors, shapes and illustrations exported clean and optimized for the web. Grab the markup and restyle every path with CSS.",
-    source: {
-      type: "registry",
-      folder: "svg",
-      nameNotEndsWith: "-animation",
-      exclude: ["svg-5", "svg-6", "svg-8"],
-    },
-  },
-  {
-    slug: "text",
-    name: "Text Animations",
-    title: "React Text Animation Components",
-    description:
-      "Text effects that make typography the hero — split reveals, scrambles, matrix rain, marquees and scroll-triggered headlines for React. Powered by Motion and GSAP with copy-paste source.",
-    source: { type: "registry", folder: "text" },
-  },
-  {
-    slug: "typography",
-    name: "Typography",
-    title: "React Typography Components",
-    description:
-      "Typography components for React — type specimens, font pairings and expressive lettering you can copy straight into your project. Built with Tailwind CSS, Motion and GSAP.",
-    source: { type: "registry", folder: "typography" },
-  },
-  {
-    slug: "scroll",
-    name: "Scroll Animations",
-    title: "React Scroll Animation Components",
-    description:
-      "Scroll-driven React components — parallax scenes, pinned sections and progress-linked reveals that respond to the user's scroll position. Built on GSAP ScrollTrigger and Motion scroll values.",
-    source: { type: "registry", folder: "scroll" },
-  },
-  {
-    slug: "borders",
-    name: "Borders & Intersections",
-    title: "Border & Intersection Effects",
-    description:
-      "Animated borders, gradient rings and intersection tricks for React — the details that frame a card or section without a single image asset. Pure CSS and Tailwind techniques you can copy.",
-    source: { type: "registry", folder: "borders" },
   },
   {
     slug: "backgrounds",
@@ -141,54 +74,6 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
     description:
       "Custom cursors and mouse followers for React — trailing blobs, magnetic dots, image reveals and physics-driven pointers that give a site personality. Copy the component, plug in your content.",
     source: { type: "registry", folder: "mouse-follower" },
-  },
-  {
-    slug: "sidebars",
-    name: "Sidebars",
-    title: "React Sidebar Components",
-    description:
-      "Animated sidebar and navigation panels for React — smooth expand-collapse motion, staggered items and mobile-friendly behavior. Ready to wire into your routes.",
-    source: { type: "registry", folder: "sidebars" },
-  },
-  {
-    slug: "shaders",
-    name: "Shaders",
-    title: "WebGL Shader Backgrounds",
-    description:
-      "WebGL shaders and soft skies for React — glowing wave lines, holographic light that plays like a card being read, and white cloud that breathes around a blurred sky. Each one ships as a copy-paste component.",
-    source: { type: "shader-data", set: "shaders" },
-  },
-  {
-    slug: "image-animations",
-    name: "Image Animations",
-    title: "React Image Animation Components",
-    description:
-      "Photo clusters that move — a ring that opens and turns, a sphere tumbling on two axes, a cover-flow deck that steps forward one card at a time. GSAP-driven, copy-paste, and yours to point at your own images.",
-    source: { type: "registry", folder: "image-animations" },
-  },
-  {
-    slug: "image-shaders",
-    name: "Image Shaders",
-    title: "WebGL Image Effect Shaders",
-    description:
-      "WebGL image effects for React — fluid distortion, particle dissolves, pixel sorting and hover-reactive shaders applied to your own images. Drop in a texture and the GLSL does the rest.",
-    source: { type: "shader-data", set: "image-shaders" },
-  },
-  {
-    slug: "perspective",
-    name: "Perspective",
-    title: "3D Perspective Components",
-    description:
-      "CSS 3D perspective components for React — tilting cards, rotating planes and depth-staged scenes built on transform-3d, no WebGL required. Copy-paste depth for flat layouts.",
-    source: { type: "registry", folder: "perspective" },
-  },
-  {
-    slug: "3j",
-    name: "3J",
-    title: "Three.js Components",
-    description:
-      "Three.js scenes packaged as React components — real-time 3D models, lighting and camera work embedded straight into your page. WebGL power with a copyable component API.",
-    source: { type: "registry", folder: "three-js" },
   },
 
 ];

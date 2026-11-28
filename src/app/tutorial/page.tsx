@@ -8,13 +8,9 @@ import {
   X,
   Sparkles,
   MousePointerClick,
-  Type,
   Palette,
-  Frame,
   Waypoints,
-  PenTool,
   Move3d,
-  Aperture,
   ChevronDown,
   ArrowLeft,
   BookOpen,
@@ -26,18 +22,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import GooeyButtonTutorial from "./tutorials/gooey-button/gooey-button-tutorial";
 import MorphButtonTutorial from "./tutorials/morph-button/morph-button-tutorial";
 import ThreedButtonTutorial from "./tutorials/3d-button/threed-button-tutorial";
-import ShinyButtonTutorial from "./tutorials/shiny-button/shiny-button-tutorial";
 import OrangePremiumButtonTutorial from "./tutorials/orange-premium-button/orange-premium-button-tutorial";
 import PremiumButtonTutorial from "./tutorials/premium-button/premium-button-tutorial";
 import BorderGradientButtonTutorial from "./tutorials/border-gradient-button/border-gradient-button-tutorial";
-import StripeButtonTutorial from "./tutorials/stripe-button/stripe-button-tutorial";
 import VisitButtonTutorial from "./tutorials/visit-button/visit-button-tutorial";
 import GlassButtonTutorial from "./tutorials/glass-button/glass-button-tutorial";
 import BookDemoButtonTutorial from "./tutorials/book-demo-button/book-demo-button-tutorial";
-import SoftPillButtonTutorial from "./tutorials/soft-pill-button/soft-pill-button-tutorial";
-import FisheyeFaqTutorial from "./tutorials/fisheye-faq/fisheye-faq-tutorial";
-import ClockMaskRevealTutorial from "./tutorials/clock-mask-reveal/clock-mask-reveal-tutorial";
-import TextMatrixRainTutorial from "./tutorials/text-matrix-rain/text-matrix-rain-tutorial";
 
 type TutorialItem = {
   name: string;
@@ -94,15 +84,6 @@ const categories: Category[] = [
         tutorial: ThreedButtonTutorial,
       },
       {
-        name: "Shiny Button",
-        description:
-          "CSS keyframe shine sweep with rotation and overflow clipping.",
-        category: "Buttons",
-        tags: ["css", "shine", "keyframe", "hover"],
-        registryName: "shiny-button",
-        tutorial: ShinyButtonTutorial,
-      },
-      {
         name: "Border Gradient Button",
         description:
           "Animated rainbow gradient border using inset mask technique.",
@@ -128,15 +109,6 @@ const categories: Category[] = [
         tags: ["gradient", "blend", "shadow", "premium"],
         registryName: "orange-premium-button",
         tutorial: OrangePremiumButtonTutorial,
-      },
-      {
-        name: "Stripe Button",
-        description:
-          "Minimalist button with inset top shadow for subtle 3D bevel.",
-        category: "Buttons",
-        tags: ["stripe", "inset", "shadow", "minimal"],
-        registryName: "stripe-button",
-        tutorial: StripeButtonTutorial,
       },
       {
         name: "Visit Button",
@@ -211,15 +183,6 @@ const categories: Category[] = [
         registryName: "book-demo-button",
         tutorial: BookDemoButtonTutorial,
       },
-      {
-        name: "Soft Pill Secondary",
-        description:
-          "Frosted-glass nav pill built from five translucent layers and a mask-composite gradient border.",
-        category: "Buttons",
-        tags: ["glass", "pill", "gradient", "mask-composite"],
-        registryName: "soft-pill-button",
-        tutorial: SoftPillButtonTutorial,
-      },
     ],
   },
   {
@@ -230,359 +193,12 @@ const categories: Category[] = [
       "Framer Motion-powered animations for cards, logos, tabs, and image interactions.",
     items: [
       {
-        name: "Fisheye FAQ",
-        description:
-          "macOS Dock-style fisheye magnification — rows scale by cursor distance and spring open.",
-        category: "Motion Animations",
-        tags: ["motion", "fisheye", "spring", "hover"],
-        registryName: "fisheye-faq",
-        tutorial: FisheyeFaqTutorial,
-      },
-      {
-        name: "Card Animation",
-        description:
-          "Staggered card stack with cursor follower using Framer Motion variants.",
-        category: "Motion Animations",
-        tags: ["framer", "card", "stagger", "hover"],
-        registryName: "card-animation",
-      },
-      {
         name: "Logo Animation",
         description:
           "Logo animation with Framer Motion and custom background effects.",
         category: "Motion Animations",
         tags: ["framer", "logo", "animation", "brand"],
         registryName: "logo-animation",
-      },
-      {
-        name: "Tab Background",
-        description:
-          "Animated tab indicator using Framer Motion layoutId for smooth transitions.",
-        category: "Motion Animations",
-        tags: ["framer", "tabs", "layoutId", "spring"],
-        registryName: "tab-background-animation",
-      },
-      {
-        name: "Image Hover",
-        description: "Image hover animation with scaling and opacity effects.",
-        category: "Motion Animations",
-        tags: ["framer", "image", "hover", "scale"],
-        registryName: "image-hover-animation",
-      },
-    ],
-  },
-  {
-    name: "GSAP Animations",
-    icon: <Sparkles className="size-4" />,
-    slug: "gsap-animations",
-    description:
-      "GSAP-powered stagger and ripple animations for dynamic UI effects.",
-    items: [
-      {
-        name: "Stagger Ripple",
-        description:
-          "Grid-based ripple animation with stagger effect using GSAP.",
-        category: "GSAP Animations",
-        tags: ["gsap", "stagger", "ripple", "grid"],
-        registryName: "stagger-1",
-      },
-      {
-        name: "Flip Text Reveal",
-        description:
-          "A GSAP Flip orb transition followed by a staggered word reveal.",
-        category: "GSAP Animations",
-        tags: ["gsap", "flip", "text", "reveal"],
-        registryName: "flip-text-reveal",
-      },
-    ],
-  },
-  {
-    name: "Mask Reveals",
-    icon: <Aperture className="size-4" />,
-    slug: "masks",
-    description:
-      "Image reveals driven by animated CSS masks — wipes, irises, blinds, and sweeps.",
-    items: [
-      {
-        name: "Clock Mask Reveal",
-        description:
-          "A conic-gradient mask sweeps a wedge around the center like a clock hand.",
-        category: "Mask Reveals",
-        tags: ["mask", "conic", "gsap", "reveal"],
-        registryName: "clock-mask-reveal",
-        tutorial: ClockMaskRevealTutorial,
-      },
-    ],
-  },
-  {
-    name: "SVG Assets",
-    icon: <PenTool className="size-4" />,
-    slug: "svg-assets",
-    description:
-      "Animated SVG assets and illustrations with GSAP-powered motion.",
-    items: [
-      {
-        name: "SVG Asset 1",
-        description: "Animated SVG asset with GSAP-powered path animations.",
-        category: "SVG Assets",
-        tags: ["svg", "gsap", "animated", "asset"],
-        registryName: "svg-1",
-      },
-      {
-        name: "SVG Asset 2",
-        description: "Animated SVG asset with path drawing effects.",
-        category: "SVG Assets",
-        tags: ["svg", "path", "draw", "asset"],
-        registryName: "svg-2",
-      },
-      {
-        name: "SVG Asset 4",
-        description: "Complex animated SVG illustration.",
-        category: "SVG Assets",
-        tags: ["svg", "complex", "illustration", "gsap"],
-        registryName: "svg-4",
-      },
-      {
-        name: "SVG Asset 5",
-        description: "Animated SVG asset with motion effects.",
-        category: "SVG Assets",
-        tags: ["svg", "motion", "animated", "asset"],
-        registryName: "svg-5",
-      },
-      {
-        name: "SVG Asset 8",
-        description: "Animated SVG asset with dynamic effects.",
-        category: "SVG Assets",
-        tags: ["svg", "dynamic", "animated", "asset"],
-        registryName: "svg-8",
-      },
-      {
-        name: "SVG Asset 9",
-        description: "Large animated SVG illustration.",
-        category: "SVG Assets",
-        tags: ["svg", "large", "animated", "illustration"],
-        registryName: "svg-9",
-      },
-      {
-        name: "SVG Asset 6",
-        description: "Animated SVG asset with stroke animations.",
-        category: "SVG Assets",
-        tags: ["svg", "stroke", "animated", "asset"],
-        registryName: "svg-6",
-      },
-    ],
-  },
-  {
-    name: "Text Animations",
-    icon: <Type className="size-4" />,
-    slug: "text-animations",
-    description:
-      "Advanced text animations like glitch, scatter, reveal, matrix rain, and more.",
-    items: [
-      {
-        name: "Broken Glass",
-        description:
-          "Letters start shattered and rotated, then snap into place using GSAP SplitText.",
-        category: "Text Animations",
-        tags: ["gsap", "splittext", "shatter", "assemble"],
-        registryName: "text-broken-glass",
-      },
-      {
-        name: "Matrix Rain",
-        description:
-          "Japanese characters scramble and resolve to final text, Matrix-style.",
-        category: "Text Animations",
-        tags: ["gsap", "matrix", "scramble", "decode"],
-        registryName: "text-matrix-rain",
-        tutorial: TextMatrixRainTutorial,
-      },
-      {
-        name: "Glitch Portal",
-        description:
-          "RGB split, scale blur, and elastic resolve using GSAP SplitText.",
-        category: "Text Animations",
-        tags: ["gsap", "glitch", "rgb", "portal"],
-        registryName: "text-glitch-portal",
-      },
-      {
-        name: "Typewriter Glitch",
-        description:
-          "Types, deletes, types wrong, then finally resolves to correct text.",
-        category: "Text Animations",
-        tags: ["gsap", "typewriter", "glitch", "error"],
-        registryName: "text-typewriter-glitch",
-      },
-      {
-        name: "Text Reveal",
-        description:
-          "Characters resolve from random symbols to final text progressively.",
-        category: "Text Animations",
-        tags: ["gsap", "reveal", "scramble", "decode"],
-        registryName: "text-reveal",
-      },
-      {
-        name: "Text Video",
-        description: "Video masked text effect using CSS clip-path.",
-        category: "Text Animations",
-        tags: ["css", "video", "mask", "clip"],
-        registryName: "text-video",
-      },
-      {
-        name: "Text Z Rotate",
-        description:
-          "Z-axis rotation animation with configurable stagger direction.",
-        category: "Text Animations",
-        tags: ["gsap", "rotation", "z-axis", "stagger"],
-        registryName: "text-z-rotate",
-      },
-      {
-        name: "Text Z Rotate 2",
-        description: "Z-axis rotation variant with different easing.",
-        category: "Text Animations",
-        tags: ["gsap", "rotation", "z-axis", "variant"],
-        registryName: "text-z-rotate2",
-      },
-      {
-        name: "Text Reveal 2",
-        description: "Text reveal animation variant with different styling.",
-        category: "Text Animations",
-        tags: ["gsap", "reveal", "variant", "animation"],
-        registryName: "text-reveal2",
-      },
-      {
-        name: "Text Scatter",
-        description:
-          "Characters scatter to random positions and reassemble with GSAP.",
-        category: "Text Animations",
-        tags: ["gsap", "scatter", "random", "yoyo"],
-        registryName: "text-scatter",
-      },
-      {
-        name: "Text Scatter 1",
-        description:
-          "Text scatter variant with different animation parameters.",
-        category: "Text Animations",
-        tags: ["gsap", "scatter", "variant", "stagger"],
-        registryName: "text-scatter1",
-      },
-      {
-        name: "Text Fade",
-        description:
-          "Text fades in and out on scroll using GSAP ScrollTrigger.",
-        category: "Text Animations",
-        tags: ["gsap", "fade", "scroll", "trigger"],
-        registryName: "text-fade",
-      },
-      {
-        name: "Text Inertia",
-        description:
-          "Text follows mouse movement with inertia physics using GSAP.",
-        category: "Text Animations",
-        tags: ["gsap", "inertia", "mouse", "physics"],
-        registryName: "text-inertia",
-      },
-      {
-        name: "Text Gradient",
-        description:
-          "Animated rainbow gradient text using CSS background-clip.",
-        category: "Text Animations",
-        tags: ["css", "gradient", "rainbow", "clip"],
-        registryName: "text-gradient",
-      },
-      {
-        name: "Text X Rotate",
-        description: "3D X-axis rotation with configurable stagger direction.",
-        category: "Text Animations",
-        tags: ["gsap", "rotation", "x-axis", "3d"],
-        registryName: "text-x-rotate",
-      },
-      {
-        name: "Text Y Animation",
-        description: "Y-axis slide animation with configurable stagger.",
-        category: "Text Animations",
-        tags: ["gsap", "slide", "y-axis", "stagger"],
-        registryName: "text-y-animation",
-      },
-      {
-        name: "Text Y Animation 2",
-        description: "Y-axis animation variant with different parameters.",
-        category: "Text Animations",
-        tags: ["gsap", "slide", "y-axis", "variant"],
-        registryName: "text-y-animation2",
-      },
-      {
-        name: "Text Y Animation 3",
-        description: "Y-axis animation variant with unique easing.",
-        category: "Text Animations",
-        tags: ["gsap", "slide", "y-axis", "easing"],
-        registryName: "text-y-animation3",
-      },
-      {
-        name: "Text Y Animation 4",
-        description: "Y-axis animation variant with custom timing.",
-        category: "Text Animations",
-        tags: ["gsap", "slide", "y-axis", "timing"],
-        registryName: "text-y-animation4",
-      },
-      {
-        name: "Black Hole Reveal",
-        description:
-          "Letters emerge from center, stretched and sucked outward.",
-        category: "Text Animations",
-        tags: ["gsap", "blackhole", "stretch", "reveal"],
-        registryName: "text-black-hole",
-      },
-      {
-        name: "Burn-In Neon",
-        description:
-          "Random flicker, glow red, then turn white using GSAP SplitText.",
-        category: "Text Animations",
-        tags: ["gsap", "neon", "flicker", "glow"],
-        registryName: "text-burn-neon",
-      },
-    ],
-  },
-  {
-    name: "Borders & Intersections",
-    icon: <Frame className="size-4" />,
-    slug: "borders",
-    description:
-      "Decorative border designs, intersection patterns, and animated corner effects.",
-    items: [
-      {
-        name: "Square Border",
-        description: "Dashed corner borders using CSS positioning.",
-        category: "Borders & Intersections",
-        tags: ["css", "dashed", "corners", "border"],
-        registryName: "border-1",
-      },
-      {
-        name: "Simple Dashed Border",
-        description: "Clean dashed border design with CSS.",
-        category: "Borders & Intersections",
-        tags: ["css", "dashed", "simple", "border"],
-        registryName: "border-2",
-      },
-      {
-        name: "Intersection Scope",
-        description: "Corner intersection design using CSS scoping.",
-        category: "Borders & Intersections",
-        tags: ["css", "intersection", "scope", "corners"],
-        registryName: "intersection-1",
-      },
-      {
-        name: "Star Borders",
-        description: "Intersection design with content wrapping.",
-        category: "Borders & Intersections",
-        tags: ["css", "intersection", "wrap", "content"],
-        registryName: "intersection-2",
-      },
-      {
-        name: "Star Border",
-        description: "Star decorations at border corners using SVG.",
-        category: "Borders & Intersections",
-        tags: ["svg", "star", "corners", "decorative"],
-        registryName: "star-border",
       },
     ],
   },
@@ -678,10 +294,6 @@ const TutorialPage = () => {
       "orange-premium-button",
       "glass-button",
       "book-demo-button",
-      "soft-pill-button",
-      "fisheye-faq",
-      "clock-mask-reveal",
-      "text-matrix-rain",
     ]);
 
     return categories

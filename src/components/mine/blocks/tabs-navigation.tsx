@@ -42,24 +42,11 @@ const lazyGrid = (loader: () => Promise<{ default: ComponentType }>) =>
 // grid loaders stay here so the imports remain statically analyzable.
 const GRID_COMPONENTS: Record<string, ComponentType> = {
   buttons: lazyGrid(() => import("../grids/button-grid")),
-  "svg-animations": lazyGrid(() => import("../grids/svg-animations-grid")),
   motion: lazyGrid(() => import("../grids/motion-animations-grid")),
   gsap: lazyGrid(() => import("../grids/gsap-grid")),
-  carousels: lazyGrid(() => import("../grids/carousel-grid")),
-  "svg-assets": lazyGrid(() => import("../grids/svg-grid")),
-  "image-animations": lazyGrid(() => import("../grids/image-animations-grid")),
-  text: lazyGrid(() => import("../grids/text-grid")),
-  typography: lazyGrid(() => import("../grids/typography-grid")),
-  scroll: lazyGrid(() => import("../grids/scroll-grid")),
-  borders: lazyGrid(() => import("../grids/border-grid")),
   backgrounds: lazyGrid(() => import("../grids/background-grid")),
   masks: lazyGrid(() => import("../grids/mask-grid")),
   "mouse-followers": lazyGrid(() => import("../grids/mouse-follower-grid")),
-  sidebars: lazyGrid(() => import("../grids/sidebar-grid")),
-  shaders: lazyGrid(() => import("../grids/shader-grid")),
-  "image-shaders": lazyGrid(() => import("../grids/image-shaders-grid")),
-  perspective: lazyGrid(() => import("../grids/perspective-grid")),
-  "3j": lazyGrid(() => import("../grids/three-js-grid")),
 };
 
 const navItems = BLOCK_CATEGORIES.map((category) => ({

@@ -1,20 +1,15 @@
 "use client";
-import MouseFollower1 from "../../../../registry/new-york/mouse-follower/mouse-follower1";
+import { GridCard, GridShell } from "./_shared/grid-card";
+import { GhostCursor } from "./_shared/ghost-cursor";
+import { useRef } from "react";
 import BendMouseFollower from "../../../../registry/new-york/mouse-follower/bend-mouse-follower";
 import BendButtonFollower from "../../../../registry/new-york/mouse-follower/bend-button-follower";
 import DitherCursorTrail from "../../../../registry/new-york/mouse-follower/dither-cursor-trail";
 import PixelDisplaceField from "../../../../registry/new-york/mouse-follower/pixel-displace-field";
 import PixelCursorTrail from "../../../../registry/new-york/mouse-follower/pixel-cursor-trail";
-import GravityImageTrail from "../../../../registry/new-york/mouse-follower/gravity-image-trail";
-import ScaleImageTrail from "../../../../registry/new-york/mouse-follower/scale-image-trail";
-import ImageTrailEffects from "../../../../registry/new-york/mouse-follower/image-trail-effects";
 import MotionTrailClassic from "../../../../registry/new-york/mouse-follower/motion-trail-classic";
 import IconFall from "@/components/rune-landing/icon-fall";
-import CopyDropdown from "../copy-dropdown";
-import { useState } from "react";
-import { usePaginationKeys } from "@/hooks/use-pagination-keys";
-
-import GridPagination from "./_shared/grid-pagination";
+import { useInfiniteItems } from "@/hooks/use-infinite-items";
 
 export const MouseFollowerArr = [
   {
@@ -46,33 +41,6 @@ export const MouseFollowerArr = [
     registryName: "pixel-cursor-trail",
   },
   {
-    name: "Image Fall",
-    description: "Image trail mouse follower using GSAP.",
-    component: <MouseFollower1 />,
-    registryName: "mouse-follower-1",
-  },
-  {
-    name: "Gravity Image Trail",
-    description:
-      "Images cascade from the cursor, fall, and bounce off the bottom edge using GSAP.",
-    component: <GravityImageTrail />,
-    registryName: "gravity-image-trail",
-  },
-  {
-    name: "Scale Image Trail",
-    description:
-      "Images pop in with a bouncy scale behind the cursor, then shrink away using GSAP.",
-    component: <ScaleImageTrail />,
-    registryName: "scale-image-trail",
-  },
-  {
-    name: "Image Trail Effects",
-    description:
-      "A cursor image trail with six switchable reveal effects — flame, venetian, curtain, hexagon, liquid and zoom split.",
-    component: <ImageTrailEffects />,
-    registryName: "image-trail-effects",
-  },
-  {
     name: "Motion Trail · Classic",
     description:
       "Images appear at the cursor, glide to it, then scale and fade out. (GSAP)",
@@ -87,7 +55,8 @@ export const MouseFollowerArr = [
   },
   {
     name: "Dither Cursor Trail",
-    description: "A pale blue pixel cloud follows the pointer and softly fades at rest.",
+    description:
+      "A pale blue pixel cloud follows the pointer and softly fades at rest.",
     component: (
       <DitherCursorTrail color="#818cf8" opacity={0.3} radius={0.075} />
     ),
@@ -95,53 +64,35 @@ export const MouseFollowerArr = [
   },
 ];
 
-const itemsPerPage = 4;
-
 const MouseFollower = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(MouseFollowerArr.length / itemsPerPage);
-  usePaginationKeys(totalPages, setCurrentPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedItems = MouseFollowerArr.slice(
-    startIndex,
-    startIndex + itemsPerPage,
+  const { visible, sentinelRef, hasMore } = useInfiniteItems(
+    MouseFollowerArr,
+    4,
   );
 
+  const gridRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-        {paginatedItems.map((item, index) => (
-          <div
-            key={startIndex + index}
-            className="relative max-h-[90vh] w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
+    <div ref={gridRef}>
+      <GhostCursor containerRef={gridRef} />
+      <GridShell
+        footer={
+          hasMore && <div ref={sentinelRef} aria-hidden className="h-px" />
+        }
+      >
+        {visible.map((item) => (
+          <GridCard
+            key={item.registryName}
+            name={item.name}
+            description={item.description}
+            registryName={item.registryName}
+            className="max-h-[90vh]"
+            fill
           >
             {item.component}
-
-            <div className="pointer-events-none absolute left-1.5 top-1.5 z-40 text-[10px] tabular-nums text-muted-foreground">
-              {String(startIndex + index + 1).padStart(2, "0")}
-            </div>
-
-            <div className=" leading-tight absolute left-1.5  bottom-1.5">
-              <p className="text-xs ">{item.name}</p>
-              <p className="text-[8px] text-muted-foreground">
-                {item.description}
-              </p>
-            </div>
-            <div className="absolute inset-x-0  top-0 grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] h-full gap-2">
-              <div className=" border-t border-dashed "></div>
-              <CopyDropdown registryName={item.registryName} variant="ghost" />
-              <div />
-              <div className=" border-r border-dashed h-full -mr-[0.5px] " />
-            </div>
-          </div>
+          </GridCard>
         ))}
-      </div>
-
-      <GridPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onChange={setCurrentPage}
-      />
+      </GridShell>
     </div>
   );
 };

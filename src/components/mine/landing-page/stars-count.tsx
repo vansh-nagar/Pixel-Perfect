@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import TextMatrixRain from "registry/new-york/text/text-matrix-rain";
 
 let starsRequest: Promise<number | null> | null = null;
 
@@ -36,9 +35,5 @@ export function StarsCount() {
     return <span>??</span>;
   }
 
-  return (
-    <TextMatrixRain repeat={false} className=" flex  gap-1 items-center">
-      {String(stars)}
-    </TextMatrixRain>
-  );
+  return <span className="flex gap-1 items-center">{stars}</span>;
 }

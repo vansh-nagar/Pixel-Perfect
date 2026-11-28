@@ -1,110 +1,22 @@
 "use client";
+import { GridCard, GridShell } from "./_shared/grid-card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { usePaginationKeys } from "@/hooks/use-pagination-keys";
+import { useInfiniteItems } from "@/hooks/use-infinite-items";
 import { RefreshCcw } from "lucide-react";
-import CardAnimation from "registry/new-york/motion-framer/card-animation";
-import ImageHoverAnimation from "registry/new-york/motion-framer/image-hover-animation";
 import LogoAnimation from "registry/new-york/motion-framer/logo-animation";
 import SuccessRippleAnimation from "registry/new-york/motion-framer/success-ripple-animation";
-import TabBackgroundAnimation from "registry/new-york/motion-framer/tab-background-animation";
 import OrbitDotMotion from "registry/new-york/motion-framer/orbit-dot-motion";
 import CoinSpinAnimation from "registry/new-york/motion-framer/coin-spin-animation";
-import FreePremiumToggle from "registry/new-york/motion-framer/free-premium-toggle";
-import MilestoneOdometer from "registry/new-york/motion-framer/milestone-odometer";
-import TextEditorItalic from "registry/new-york/motion-framer/text-editor-italic";
-import CarLockDriveMotion from "registry/new-york/motion-framer/car-lock-drive-motion";
 import DialKnobMotion from "registry/new-york/motion-framer/dial-knob-motion";
 import HoverExpandPlayer from "registry/new-york/motion-framer/hover-expand-player";
-import FisheyeFaq from "registry/new-york/motion-framer/fisheye-faq";
-import CdEnvelopePlayer from "registry/new-york/motion-framer/cd-envelope-player";
-import CopyDropdown from "../copy-dropdown";
-import GridPagination from "./_shared/grid-pagination";
 
-const MotionComponentArr: {
+export const MotionComponentArr: {
   name: string;
   description: string;
   Component: React.ComponentType;
   registryName: string;
 }[] = [
-  {
-    name: "CD Envelope Player",
-    description:
-      "A CD slides out of its paper sleeve, spins up and plays in a now-playing card.",
-    Component: CdEnvelopePlayer,
-    registryName: "cd-envelope-player",
-  },
-  {
-    name: "Fisheye FAQ",
-    description:
-      "Dock-style fisheye FAQ — rows magnify by cursor distance and the nearest springs open from blur.",
-    Component: FisheyeFaq,
-    registryName: "fisheye-faq",
-  },
-  {
-    name: "Hover Expand Player",
-    description:
-      "Compact pill springs open on hover — corners morph, art grows, controls reveal from blur.",
-    Component: HoverExpandPlayer,
-    registryName: "hover-expand-player",
-  },
-  {
-    name: "Dial Knob",
-    description:
-      "Tactile rotary knob with concentric tick rings and an amber dot-arc indicator.",
-    Component: DialKnobMotion,
-    registryName: "dial-knob-motion",
-  },
-  {
-    name: "Car Lock / Drive",
-    description:
-      "Pill switch toggles lock and drive; the car gently shifts forward on drive.",
-    Component: CarLockDriveMotion,
-    registryName: "car-lock-drive-motion",
-  },
-  {
-    name: "Text Editor Italic",
-    description:
-      "Cream neumorphic toolbar with cursor drift, tooltip and italic toggle.",
-    Component: TextEditorItalic,
-    registryName: "text-editor-italic",
-  },
-  {
-    name: "Milestone Odometer",
-    description: "Animated odometer roller with staggered digit spin reveal.",
-    Component: MilestoneOdometer,
-    registryName: "milestone-odometer",
-  },
-  {
-    name: "Free / Premium Toggle",
-    description: "Pill segmented control with spring-animated dark selector.",
-    Component: FreePremiumToggle,
-    registryName: "free-premium-toggle",
-  },
-  {
-    name: "Simple Card",
-    description: "A simple card animation using Framer Motion.",
-    Component: CardAnimation,
-    registryName: "card-animation",
-  },
-  {
-    name: "Logo Animation",
-    description: "Logo animation with Framer Motion and custom background.",
-    Component: LogoAnimation,
-    registryName: "logo-animation",
-  },
-  {
-    name: "Tab Background",
-    description: "A tab background animation using Framer Motion.",
-    Component: TabBackgroundAnimation,
-    registryName: "tab-background-animation",
-  },
-  {
-    name: "Image Hover",
-    description: "An image hover animation with scaling and opacity effects.",
-    Component: ImageHoverAnimation,
-    registryName: "image-hover-animation",
-  },
   {
     name: "Success Ripple",
     description: "Looping ripple pulses with a springy success check reveal.",
@@ -124,75 +36,70 @@ const MotionComponentArr: {
     Component: CoinSpinAnimation,
     registryName: "coin-spin-animation",
   },
+  {
+    name: "Hover Expand Player",
+    description:
+      "Compact pill springs open on hover — corners morph, art grows, controls reveal from blur.",
+    Component: HoverExpandPlayer,
+    registryName: "hover-expand-player",
+  },
+  {
+    name: "Dial Knob",
+    description:
+      "Tactile rotary knob with concentric tick rings and an amber dot-arc indicator.",
+    Component: DialKnobMotion,
+    registryName: "dial-knob-motion",
+  },
+  {
+    name: "Logo Animation",
+    description: "Logo animation with Framer Motion and custom background.",
+    Component: LogoAnimation,
+    registryName: "logo-animation",
+  },
 ];
 
+const RefreshButton = ({ onClick }: { onClick: () => void }) => (
+  <Button
+    variant="ghost"
+    size="icon"
+    className="h-6 w-6 rounded-none text-muted-foreground hover:bg-transparent hover:text-foreground"
+    onClick={onClick}
+    aria-label="Replay"
+  >
+    <RefreshCcw className="size-3" />
+  </Button>
+);
+
 const MotionAnimationsGrid = () => {
-  const [currentPage, setCurrentPage] = useState(1);
   const [refreshKeys, setRefreshKeys] = useState<Record<number, number>>({});
 
   const handleRefresh = (index: number) => {
     setRefreshKeys((prev) => ({ ...prev, [index]: (prev[index] || 0) + 1 }));
   };
-  const itemsPerPage = 6;
-  const totalPages = Math.ceil(MotionComponentArr.length / itemsPerPage);
-  usePaginationKeys(totalPages, setCurrentPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedItems = MotionComponentArr.slice(
-    startIndex,
-    startIndex + itemsPerPage,
+  const { visible, sentinelRef, hasMore } = useInfiniteItems(
+    MotionComponentArr,
+    6,
   );
 
   return (
-    <div className="flex flex-col gap-4 overflow-hidden">
-      <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
-        {paginatedItems.map((item, index) => {
-          const Component = item.Component;
-          return (
-            <div
-              key={startIndex + index}
-              className="relative w-full border-b border-l border-dashed aspect-square flex justify-center items-center"
-            >
-              <div className="z-30" key={refreshKeys[startIndex + index] || 0}>
-                <Component />
-              </div>
-
-              <div className="absolute left-1.5 top-1.5 z-40 flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6 rounded-none text-muted-foreground hover:bg-transparent hover:text-foreground"
-                  onClick={() => handleRefresh(startIndex + index)}
-                >
-                  <RefreshCcw className="size-3" />
-                </Button>
-              </div>
-
-              <div className=" leading-tight absolute left-1.5  bottom-1.5">
-                <p className="text-xs ">{item.name}</p>
-                <p className="text-[8px] text-muted-foreground">
-                  {item.description}
-                </p>
-              </div>
-              <div className="absolute inset-x-0 top-0 grid h-full grid-cols-[1fr_auto] grid-rows-[auto_1fr] gap-2">
-                <div className="border-t border-dashed" />
-                <CopyDropdown
-                  registryName={item.registryName}
-                  variant="ghost"
-                />
-                <div />
-                <div className="h-full border-r border-dashed -mr-[0.5px]" />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <GridPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onChange={setCurrentPage}
-      />
-    </div>
+    <GridShell
+      footer={hasMore && <div ref={sentinelRef} aria-hidden className="h-px" />}
+    >
+      {visible.map((item, index) => {
+        const Component = item.Component;
+        return (
+          <GridCard
+            key={item.registryName + item.name}
+            name={item.name}
+            description={item.description}
+            registryName={item.registryName}
+            topLeft={<RefreshButton onClick={() => handleRefresh(index)} />}
+          >
+            <Component key={refreshKeys[index] || 0} />
+          </GridCard>
+        );
+      })}
+    </GridShell>
   );
 };
 

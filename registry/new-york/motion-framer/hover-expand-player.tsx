@@ -12,7 +12,8 @@ const SPRING = { type: "spring", visualDuration: 0.38, bounce: 0.18 } as const; 
 const SPRING_OPEN = { type: "spring", visualDuration: 0.42, bounce: 0.24 } as const; // bounce out
 const SPRING_CLOSE = { type: "spring", visualDuration: 0.45, bounce: 0 } as const; // settle in
 
-const ART = "linear-gradient(135deg, #FF6B6B 0%, #8E7BFF 52%, #2D9CFF 100%)";
+const ART =
+  "center / cover no-repeat url(https://cdn.cosmos.so/9beb0a06-e008-4b95-a5b8-15c2d255a4c4?format=jpeg)";
 
 function Equalizer({ playing, reduce }: { playing: boolean; reduce: boolean | null }) {
   return (

@@ -15,7 +15,7 @@ const IMAGES = [
   "https://cdn.cosmos.so/39a80b7b-29fb-4079-a251-176df0fa15eb?format=jpeg",
 ];
 const POOL = [...IMAGES, ...IMAGES];
-const SIZE = 150;
+const SIZE = 90;
 const THRESHOLD = 80;
 
 const MotionTrailClassic = () => {
@@ -37,6 +37,8 @@ const MotionTrailClassic = () => {
     let z = 1;
 
     const onMove = (e: MouseEvent) => {
+      // Ignore synthetic (demo) moves aimed at another element.
+      if (!e.isTrusted && e.target instanceof Node && !e.target.contains(root)) return;
       const r = root.getBoundingClientRect();
       const x = e.clientX - r.left;
       const y = e.clientY - r.top;

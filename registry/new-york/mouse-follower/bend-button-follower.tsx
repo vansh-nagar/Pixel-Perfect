@@ -25,6 +25,8 @@ const Page = () => {
     let raf = 0;
 
     const onMove = (e: PointerEvent) => {
+      // Ignore synthetic (demo) moves aimed at another element.
+      if (!e.isTrusted && e.target instanceof Node && !e.target.contains(container)) return;
       const r = container.getBoundingClientRect();
       inside =
         e.clientX >= r.left &&
@@ -57,7 +59,7 @@ const Page = () => {
     <div ref={containerRef} className="absolute inset-0 overflow-hidden">
       <div
         ref={btnRef}
-        className="pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded-full bg-foreground px-8 py-4 text-base font-semibold tracking-wide text-background opacity-0 shadow-lg transition-opacity"
+        className="pointer-events-none absolute left-0 top-0 whitespace-nowrap rounded-full bg-foreground px-4 py-2 text-xs font-semibold tracking-wide text-background opacity-0 shadow-lg transition-opacity"
       >
         {LABEL}
       </div>

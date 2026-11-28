@@ -48,7 +48,7 @@ const IconFall = () => {
       iconName as keyof typeof Icons
     ] as React.ComponentType<any>;
     if (IconComponent) {
-      return <IconComponent size={128} strokeWidth={1.5} />;
+      return <IconComponent size={56} strokeWidth={1.5} />;
     }
     return null;
   };
@@ -58,6 +58,8 @@ const IconFall = () => {
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
+      // Ignore synthetic (demo) moves aimed at another element.
+      if (!e.isTrusted && e.target instanceof Node && !e.target.contains(containerRef.current)) return;
 
       mousePosRef.current = {
         x: e.clientX,
@@ -193,7 +195,7 @@ const IconFall = () => {
             ref={(el) => {
               if (el) flairRefs.current[i] = el;
             }}
-            className="fixed w-20 h-20 opacity-0 flex items-center justify-center"
+            className="fixed w-14 h-14 opacity-0 flex items-center justify-center"
             style={{
               pointerEvents: "none",
             }}
